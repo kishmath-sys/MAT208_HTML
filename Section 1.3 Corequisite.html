@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1.3 Corequisite: Collecting Sample Data</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 1.3</div>
+<h1>Section 1.3 Corequisite: Collecting Sample Data</h1>
+<p>Practice with the number and reading skills the Section 1.3 notes count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Large numbers, counts and positions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Equal groups, totals and what is left<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Fractions and percents of a group<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. A percent of a group as a count<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read large numbers with commas, and tell a count apart from a position such as "the 75th."</li><li>Count how many numbers are in a stretch like "41 through 100."</li><li>Find totals, equal shares and what is left when a group is split.</li><li>Write a part of a group as a fraction, a decimal and a percent, and compare them.</li><li>Find a percent of a group as a number of people, and round it the way the directions say.</li></ul>
+</div>
+<p>Section 1.3 of the notes is about how data are collected: observational studies and experiments, how experiments are designed, and several ways to choose a sample.</p>
+<p>This page builds the number and reading skills those pages lean on. It does not teach or preview any of the statistics in Section 1.3. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is not graded, and your answers stay on your own screen. When an answer is off, the feedback often names the slip. Work at your own pace. Sections you mark complete are saved on this device.</div>
+<div class="note"><strong>How to enter answers.</strong> Type decimals with a period, like <span class="m"><span aria-hidden="true">34.5</span><span class="sr">34 point 5</span></span>. You can include commas, a percent sign or extra spaces. Follow the rounding direction in each question. StatCrunch is the course calculator, and the course notes show how to use it. For practice on this page, any calculator or paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Work through it in order.</strong> Each section covers one skill with a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 1.3 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Jump to one skill.</strong> Pick any line that sounds like you.</p>
+<ul>
+<li><strong>I am not sure how many numbers are in "positions 41 through 100," or what "the 75th" tells me.</strong><br><button type="button" data-go="s2">Large numbers, counts and positions</button></li>
+<li><strong>I am not sure when to multiply, divide or subtract in a word problem about groups.</strong><br><button type="button" data-go="s3">Equal groups, totals and what is left</button></li>
+<li><strong>I mix up <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, <span class="m"><span aria-hidden="true">5%</span><span class="sr">5 percent</span></span> and <span class="m"><span aria-hidden="true">50%</span><span class="sr">50 percent</span></span>, or I am not sure which number goes on the bottom of a fraction.</strong><br><button type="button" data-go="s4">Fractions and percents of a group</button></li>
+<li><strong>I am not sure how to find a percent of a number, or how to round a number of people.</strong><br><button type="button" data-go="s5">A percent of a group as a count</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Large numbers, counts and positions</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read large numbers that contain commas.</li><li>Write a number given in words with digits.</li><li>Tell a count (75 callers) apart from a position (the 75th caller).</li><li>Count the numbers in a stretch that includes both ends.</li></ul>
+</div>
+<h3>Commas in large numbers</h3>
+<p>A comma splits the digits of a whole number into groups of three, counting from the right. It makes the number easier to read and does not change its value, so 20,416 and 20416 are the same number. A comma is not a decimal point.</p>
+<h3>A count or a position?</h3>
+<p>"300 customers" is a count: it tells how many. "The 300th customer" is a position: it tells where one customer falls in line. Endings such as -st, -nd, -rd and -th (1st, 2nd, 3rd, 300th) mark a position. "The first 300 customers" means the customers in positions 1 through 300.</p>
+<h3>Counting a stretch that includes both ends</h3>
+<p>To count the whole numbers from one number through another, subtract and then add 1. Subtracting counts the steps between the two ends, and the extra 1 puts the starting number back in. Check with a small case: 1 through 3 is three numbers, and <span class="m"><span aria-hidden="true">3 − 1 + 1 = 3</span><span class="sr">3 minus 1 plus 1 equals 3</span></span>.</p>
+<div class="worked" role="group" aria-label="Worked example: Count the tickets">
+<h3 style="margin-top:0">Worked example: Count the tickets</h3>
+<p>A raffle sells tickets numbered 1,201 through 1,250. How many tickets is that?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1,250 − 1,201 = 49</span><span class="sr">1,250 minus 1,201 equals 49</span></span></span><span class="say">Subtract the first number from the last. This counts the steps between them.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">49 + 1 = 50</span><span class="sr">49 plus 1 equals 50</span></span></span><span class="say">Add 1 so ticket 1,201 is counted too.</span></li></ol><p><strong>Answer: 50 tickets.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Count the seats">
+<h3 style="margin-top:0">Finish this one: Count the seats</h3>
+<p>A row in a stadium has seats numbered 73 through 96. How many seats are in the row?</p>
+<p>The first step is done for you. You finish it.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">96 − 73 = 23</span><span class="sr">96 minus 73 equals 23</span></span></span><span class="say">Subtract the first seat number from the last. That counts the steps between them, not yet the seats.</span></li></ol>
+</div>
+<div class="q" data-mode="num" data-answer="24" data-miss="{&quot;23&quot;: &quot;23 counts the steps from seat 73 to seat 96. Add 1 so seat 73 is counted too: 24.&quot;, &quot;25&quot;: &quot;That adds one too many. 96 minus 73 is 23, and adding 1 for the first seat gives 24.&quot;, &quot;169&quot;: &quot;That adds the two seat numbers. To count a stretch, subtract them and add 1: 96 minus 73 plus 1 is 24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: how many seats are numbered 73 through 96?</p>
+<details><summary>Hint</summary><p>Take the 23 from the first step and add 1 for seat 73.</p></details>
+<details><summary>Show answer</summary><p><strong>24 seats</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That reads the comma as a decimal point. 20.416 is about 20. The comma in 20,416 only groups the digits, so the number is 20416.&quot;, &quot;c&quot;: &quot;That drops the 0 in the thousands place. Keep every digit and remove only the comma: 20416.&quot;, &quot;d&quot;: &quot;That adds an extra 0, which makes the number about ten times as large. Remove only the comma: 20416.&quot;}" data-why="Correct. Removing the comma leaves every digit in place: 20416.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 2.</b> Which number is the same as 20,416?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>20.416</span></label><label><input type="radio" name="mc2" value="b"> <span>20416</span></label><label><input type="radio" name="mc2" value="c"> <span>2,416</span></label><label><input type="radio" name="mc2" value="d"> <span>200,416</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read it out loud: twenty thousand, four hundred sixteen. Then write those digits with no comma.</p></details>
+<details><summary>Show answer</summary><p><strong>20416</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="74" data-miss="{&quot;75&quot;: &quot;75 is the winner&#x27;s position in line. The callers before the winner are in positions 1 through 74, so 74 callers.&quot;, &quot;76&quot;: &quot;Counting before the winner means fewer than 75, not more. Positions 1 through 74 come first: 74 callers.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> A radio station gives a prize to the 75th caller. How many callers got through <strong>before</strong> the winner?</p>
+<details><summary>Hint</summary><p>If you are 3rd in line, 2 people are ahead of you. Use the same idea for 75th.</p></details>
+<details><summary>Show answer</summary><p><strong>74 callers</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="121" data-miss="{&quot;120&quot;: &quot;The 120th customer is the last one who gets free coffee. The next customer, the 121st, is the first to pay.&quot;, &quot;119&quot;: &quot;Customers in positions 1 through 120 get free coffee. The first to pay comes right after position 120: the 121st.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> A coffee shop gives free coffee to the first 120 customers of the day. What position in line is the <strong>first customer who pays</strong>?</p>
+<details><summary>Hint</summary><p>"The first 120" means positions 1 through 120. Who comes next?</p></details>
+<details><summary>Show answer</summary><p><strong>The 121st customer (type 121)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3060" data-miss="{&quot;3600&quot;: &quot;That is three thousand six hundred. Sixty belongs in the tens and ones places: 3,060.&quot;, &quot;360&quot;: &quot;That is three hundred sixty. Three thousand needs four digits: 3,060.&quot;, &quot;30060&quot;: &quot;That writes 3,000 and 60 side by side. Three thousand sixty is 3,000 plus 60, which is 3,060.&quot;, &quot;300060&quot;: &quot;That writes 3,000 and 60 side by side. Three thousand sixty is 3,000 plus 60, which is 3,060.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> A news story says a library owns "three thousand sixty" audiobooks. Write this number with digits.</p>
+<details><summary>Hint</summary><p>Start with 3,000 and add 60.</p></details>
+<details><summary>Show answer</summary><p><strong>3,060 (typing 3060 is also fine)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="88" data-miss="{&quot;87&quot;: &quot;87 counts the steps from page 318 to page 405. Add 1 so page 318 is counted too: 88.&quot;, &quot;89&quot;: &quot;That adds one too many. 405 minus 318 is 87, and adding 1 gives 88.&quot;, &quot;723&quot;: &quot;That adds the two page numbers. Subtract them and add 1: 405 minus 318 plus 1 is 88.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> A reading assignment covers pages 318 through 405 of a book. How many pages is that?</p>
+<details><summary>Hint</summary><p>Subtract 318 from 405, then add 1.</p></details>
+<details><summary>Show answer</summary><p><strong>88 pages</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 1.3</h3>
+<p>The notes use large numbers and positions throughout: an allergy medication tested on 1,000 participants in the example for item 4 (Replication) on page 1, every 1,000th bottle in the example for item 8 (Systematic Sampling) on page 2, the first 500 names on the taxpayer list in Classroom Example 1.3.1 on page 3, and 1465 Internet users in Classroom Example 1.3.4 on page 4.</p>
+<p><strong>Watch for this:</strong> a number ending in -th names a position, while the same number without it is a count. The notes write 1465 with no comma, and the captions for the video "Classroom Example 1.3.4" write 1,465. Both are the same number.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Equal groups, totals and what is left</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find a total when there are equal groups.</li><li>Split a total into equal groups.</li><li>Find what is left after part of a group is taken out.</li><li>Decide whether an answer about people or vehicles should be rounded up.</li></ul>
+</div>
+<h3>Which operation?</h3>
+<ul>
+<li><strong>Equal groups to a total: multiply.</strong> 6 boxes with 12 eggs in each box hold <span class="m"><span aria-hidden="true">6 × 12 = 72</span><span class="sr">6 times 12 equals 72</span></span> eggs.</li>
+<li><strong>A total into equal groups: divide.</strong> 72 eggs packed equally into 6 boxes is <span class="m"><span aria-hidden="true">72 ÷ 6 = 12</span><span class="sr">72 divided by 6 equals 12</span></span> eggs in each box.</li>
+<li><strong>What is left: subtract.</strong> If 72 eggs arrive and 20 are used, <span class="m"><span aria-hidden="true">72 − 20 = 52</span><span class="sr">72 minus 20 equals 52</span></span> are left. Words such as "the remaining," "the rest" and "left over" point to subtraction.</li>
+<li><strong>Another group of the same size: add.</strong> "12 eggs, and another 12" is <span class="m"><span aria-hidden="true">12 + 12 = 24</span><span class="sr">12 plus 12 equals 24</span></span>.</li>
+</ul>
+<p>Check a division by multiplying back: if 72 split into 6 groups gives 12, then <span class="m"><span aria-hidden="true">6 × 12</span><span class="sr">6 times 12</span></span> should be 72.</p>
+<h3>Does the answer make sense?</h3>
+<p>A count of people, buses or boxes is a whole number. If a division leaves a remainder and everyone needs a spot, round <strong>up</strong> to the next whole number, even if the decimal part is small.</p>
+<div class="worked" role="group" aria-label="Worked example: Split a total, then check">
+<h3 style="margin-top:0">Worked example: Split a total, then check</h3>
+<p>A charity run has 126 volunteers split equally into 3 teams. How many volunteers are on each team?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">126 ÷ 3 = 42</span><span class="sr">126 divided by 3 equals 42</span></span></span><span class="say">Splitting a total into equal groups means divide.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">3 × 42 = 126</span><span class="sr">3 times 42 equals 126</span></span></span><span class="say">Multiply back to check. Three teams of 42 make 126 volunteers.</span></li></ol><p><strong>Answer: 42 volunteers on each team.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Rows of chairs">
+<h3 style="margin-top:0">Finish this one: Rows of chairs</h3>
+<p>A meeting room has 9 rows with 16 chairs in each row. How many chairs are there in all?</p>
+<p>The first step is done for you. You finish it.</p><ol class="steps"><li><span class="work">9 rows, 16 chairs in each row</span><span class="say">Label the numbers first. These are equal groups and the question asks for a total, so multiply: <span class="m"><span aria-hidden="true">9 × 16</span><span class="sr">9 times 16</span></span>.</span></li></ol>
+</div>
+<div class="q" data-mode="num" data-answer="144" data-miss="{&quot;25&quot;: &quot;That adds 9 and 16. There are 9 equal rows of 16, so multiply: 9 times 16 is 144.&quot;, &quot;7&quot;: &quot;That subtracts. Equal groups to a total means multiply: 9 times 16 is 144.&quot;, &quot;135&quot;: &quot;Check the multiplication. 9 times 16 is 9 times 10 plus 9 times 6, which is 90 plus 54, or 144.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: how many chairs are in the room?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">9 × 16</span><span class="sr">9 times 16</span></span> is the same as <span class="m"><span aria-hidden="true">9 × 10 + 9 × 6</span><span class="sr">9 times 10 plus 9 times 6</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>144 chairs</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="39" data-miss="{&quot;624&quot;: &quot;That multiplies 156 by 4. Splitting a total into equal boxes means divide: 156 divided by 4 is 39.&quot;, &quot;152&quot;: &quot;That subtracts 4. Splitting a total into 4 equal boxes means divide: 156 divided by 4 is 39.&quot;, &quot;160&quot;: &quot;That adds 4. Splitting a total into 4 equal boxes means divide: 156 divided by 4 is 39.&quot;, &quot;38&quot;: &quot;Check by multiplying back: 4 times 38 is 152, not 156. Try 156 divided by 4 again.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> A food bank packs 156 cans equally into 4 boxes. How many cans go in each box?</p>
+<details><summary>Hint</summary><p>Divide 156 by 4. Check by multiplying your answer by 4.</p></details>
+<details><summary>Show answer</summary><p><strong>39 cans</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="36" data-miss="{&quot;92&quot;: &quot;That adds 28 to 64. \&quot;The remaining members\&quot; are the ones left after 28 are taken out, so subtract: 64 minus 28 is 36.&quot;, &quot;32&quot;: &quot;That splits the choir in half. The morning group has 28, not half, so the rest is 64 minus 28, which is 36.&quot;, &quot;28&quot;: &quot;28 sing in the morning. The question asks about the rest: 64 minus 28 is 36.&quot;, &quot;46&quot;: &quot;Check the subtraction. 64 minus 28 is 36 (64 minus 30 is 34, then add back 2).&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> A choir has 64 members. 28 of them sing at the morning concert, and the remaining members sing at the evening concert. How many sing at the evening concert?</p>
+<details><summary>Hint</summary><p>"The remaining" means what is left. Subtract the morning group from the whole choir.</p></details>
+<details><summary>Show answer</summary><p><strong>36 members</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Adding gives 25, which treats the 7 rooms as 7 more patients. There are 7 equal groups of 18, so multiply.&quot;, &quot;c&quot;: &quot;Dividing would split 18 patients among 7 rooms. Here each room sees 18, so multiply to get the total.&quot;, &quot;d&quot;: &quot;Subtracting does not fit: nothing is being taken away. There are 7 equal groups of 18, so multiply.&quot;}" data-why="Correct. Seven equal groups of 18 make 18 times 7, which is 126 patients.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> A clinic has 7 exam rooms, and each room sees 18 patients a day. Which calculation gives the total number of patients seen in a day?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">18 × 7</span><span class="sr">18 times 7</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true">18 + 7</span><span class="sr">18 plus 7</span></span></span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">18 ÷ 7</span><span class="sr">18 divided by 7</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">18 − 7</span><span class="sr">18 minus 7</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture 7 rooms with 18 patients in each one. Equal groups to a total means which operation?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">18 × 7</span><span class="sr">18 times 7</span></span>, which is 126 patients</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="750" data-miss="{&quot;450&quot;: &quot;450 is the number of closed seats (3 sections of 150). The open sections are the other 5: 5 times 150 is 750.&quot;, &quot;1197&quot;: &quot;That subtracts 3 seats. Three whole sections are closed. Each section has 1,200 divided by 8, which is 150 seats, and 5 sections are open: 750.&quot;, &quot;150&quot;: &quot;150 is the number of seats in one section. Five sections are open: 5 times 150 is 750.&quot;, &quot;1050&quot;: &quot;That takes away only one section. Three sections are closed, so 5 of the 8 are open: 5 times 150 is 750.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> A theater has 1,200 seats in 8 equal sections. 3 sections are closed for repairs. How many seats are open?</p>
+<details><summary>Hint</summary><p>First find the seats in one section: <span class="m"><span aria-hidden="true">1,200 ÷ 8</span><span class="sr">1,200 divided by 8</span></span>. Then count how many sections are still open.</p></details>
+<details><summary>Show answer</summary><p><strong>750 seats</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="8" data-miss="{&quot;7&quot;: &quot;7 vans hold 7 times 14, which is 98 people, so 2 people would have no seat. Round up to 8 vans.&quot;, &quot;7.1&quot;: &quot;You cannot use part of a van. 100 divided by 14 is about 7.14, and everyone needs a seat, so round up to 8.&quot;, &quot;7.14&quot;: &quot;You cannot use part of a van. 100 divided by 14 is about 7.14, and everyone needs a seat, so round up to 8.&quot;, &quot;7.143&quot;: &quot;You cannot use part of a van. 100 divided by 14 is about 7.14, and everyone needs a seat, so round up to 8.&quot;, &quot;1400&quot;: &quot;That multiplies. To find how many vans of 14 it takes to carry 100 people, divide 100 by 14, then round up.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> A van holds 14 people. What is the fewest number of vans needed to carry 100 people?</p>
+<details><summary>Hint</summary><p>Divide 100 by 14. Then ask: if you rounded down, would everyone have a seat?</p></details>
+<details><summary>Show answer</summary><p><strong>8 vans</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 1.3</h3>
+<p>The examples in the notes split and combine groups: 30 participants and another 30 in the example for item 3 (Placebo) on page 1, 60 participants split into two groups of 30 in the example for item 6 (Randomness) on page 2, and three parts of a day with 3 times in each part in Classroom Example 1.3.3 on page 4.</p>
+<p><strong>Watch for this:</strong> words such as "each," "another" and "the remaining." They tell you whether a number is being multiplied, added or subtracted.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Fractions and percents of a group</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Write a part of a group as a fraction of the whole group.</li><li>Change a fraction to a decimal and a percent.</li><li>Change a percent to a decimal without moving the point the wrong number of places.</li><li>Compare a decimal with a percent.</li></ul>
+</div>
+<h3>The whole goes on the bottom</h3>
+<p>"What fraction of the group" means the part you are asked about goes on top and the <strong>whole group</strong> goes on the bottom. The whole is everyone, not the other part. In a group of 10 people where 4 wear hats, the fraction wearing hats is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">4</span><span class="fb">10</span></span><span class="sr">4 over 10</span></span>, not <span class="m"><span aria-hidden="true" class="frac"><span class="ft">4</span><span class="fb">6</span></span><span class="sr">4 over 6</span></span>.</p>
+<h3>Fraction, decimal, percent</h3>
+<ul>
+<li><strong>Fraction to decimal:</strong> divide the top by the bottom. <span class="m"><span aria-hidden="true" class="frac"><span class="ft">4</span><span class="fb">10</span></span><span class="sr">4 over 10</span></span> is <span class="m"><span aria-hidden="true">4 ÷ 10 = 0.4</span><span class="sr">4 divided by 10 equals 0 point 4</span></span>.</li>
+<li><strong>Decimal to percent:</strong> multiply by 100, which moves the decimal point two places to the right. <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> is <span class="m"><span aria-hidden="true">40%</span><span class="sr">40 percent</span></span>.</li>
+<li><strong>Percent to decimal:</strong> divide by 100, which moves the decimal point two places to the left. <span class="m"><span aria-hidden="true">5%</span><span class="sr">5 percent</span></span> is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, not <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>. And <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> is <span class="m"><span aria-hidden="true">50%</span><span class="sr">50 percent</span></span>, not <span class="m"><span aria-hidden="true">5%</span><span class="sr">5 percent</span></span>.</li>
+</ul>
+<p>To compare a decimal with a percent, first write both the same way, either both as decimals or both as percents.</p>
+<div class="worked" role="group" aria-label="Worked example: One part, three ways">
+<h3 style="margin-top:0">Worked example: One part, three ways</h3>
+<p>Of 72 people at a workshop, 18 brought a laptop. What fraction of the people brought a laptop? Write it as a decimal and as a percent too.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true" class="frac"><span class="ft">18</span><span class="fb">72</span></span><span class="sr">18 over 72</span></span></span><span class="say">The part asked about (18 with laptops) goes on top. The whole group (72 people) goes on the bottom.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">18 ÷ 72 = 0.25</span><span class="sr">18 divided by 72 equals 0 point 2 5</span></span></span><span class="say">Divide the top by the bottom to get the decimal.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.25 = 25%</span><span class="sr">0 point 2 5 equals 25 percent</span></span></span><span class="say">Multiply by 100 (move the point two places right) to get the percent.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true" class="frac"><span class="ft">18</span><span class="fb">72</span></span><span class="sr">18 over 72</span></span>, which is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">4</span></span><span class="sr">1 over 4</span></span>, or <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>, or <span class="m"><span aria-hidden="true">25%</span><span class="sr">25 percent</span></span>.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Runners as a percent">
+<h3 style="margin-top:0">Finish this one: Runners as a percent</h3>
+<p>In a race, 45 of the 60 runners finished in under an hour. What percent of the runners finished in under an hour?</p>
+<p>The first step is done for you. You finish it.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">45 ÷ 60 = 0.75</span><span class="sr">45 divided by 60 equals 0 point 7 5</span></span></span><span class="say">The part (45) goes on top and the whole (60 runners) on the bottom. Dividing gives the decimal.</span></li></ol>
+</div>
+<div class="q" data-mode="num" data-answer="75" data-miss="{&quot;0.75&quot;: &quot;0.75 is the decimal. To write it as a percent, multiply by 100 (move the point two places right): 75%.&quot;, &quot;7.5&quot;: &quot;The decimal point moved only one place. Multiplying by 100 moves it two places: 0.75 becomes 75%.&quot;, &quot;133.3&quot;: &quot;The fraction is flipped: that is 60 divided by 45. The part (45) goes on top: 45 divided by 60 is 0.75, or 75%.&quot;, &quot;133.33&quot;: &quot;The fraction is flipped: that is 60 divided by 45. The part (45) goes on top: 45 divided by 60 is 0.75, or 75%.&quot;, &quot;133&quot;: &quot;The fraction is flipped: that is 60 divided by 45. The part (45) goes on top: 45 divided by 60 is 0.75, or 75%.&quot;, &quot;15&quot;: &quot;15 is how many runners did not finish in under an hour (60 minus 45). The question asks for a percent: 45 out of 60 is 75%.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Finish it: what percent of the runners finished in under an hour?</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.75</span><span class="sr">0 point 7 5</span></span> by 100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">75%</span><span class="sr">75 percent</span></span> (typing 75 is also fine)</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That is 12 over 18, which compares commuters to on-campus students. The whole group is 12 plus 18, which is 30, so the fraction is 12 over 30, or 2 over 5.&quot;, &quot;c&quot;: &quot;That is 18 over 30, the fraction who live on campus. The question asks about commuters: 12 over 30, or 2 over 5.&quot;, &quot;d&quot;: &quot;That is 18 over 12, which compares the two parts upside down. The whole group (30) goes on the bottom: 12 over 30, or 2 over 5.&quot;}" data-why="Correct. The whole group is 12 plus 18, which is 30, and 12 over 30 reduces to 2 over 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> A study group has 12 students who commute and 18 students who live on campus. What fraction of the study group commutes?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">2</span><span class="fb">5</span></span><span class="sr">2 over 5</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">2</span><span class="fb">3</span></span><span class="sr">2 over 3</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">3</span><span class="fb">5</span></span><span class="sr">3 over 5</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">3</span><span class="fb">2</span></span><span class="sr">3 over 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>First find the whole group: <span class="m"><span aria-hidden="true">12 + 18</span><span class="sr">12 plus 18</span></span>. That number goes on the bottom.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">2</span><span class="fb">5</span></span><span class="sr">2 over 5</span></span> (which is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">12</span><span class="fb">30</span></span><span class="sr">12 over 30</span></span> reduced)</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;50% is 0.50, ten times as large as 0.05. Moving the point two places right turns 0.05 into 5%.&quot;, &quot;c&quot;: &quot;That only adds a percent sign. To change a decimal to a percent, multiply by 100: 0.05 becomes 5%.&quot;, &quot;d&quot;: &quot;That moves the decimal point one place instead of two. Multiplying 0.05 by 100 gives 5%.&quot;}" data-why="Correct. Multiplying 0.05 by 100 gives 5, so 0.05 is 5%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> Which percent is equal to the decimal <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>?</legend>
+<label><input type="radio" name="mc15" value="a"> <span><span class="m"><span aria-hidden="true">5%</span><span class="sr">5 percent</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">50%</span><span class="sr">50 percent</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span><span class="m"><span aria-hidden="true">0.05%</span><span class="sr">0 point 0 5 percent</span></span></span></label><label><input type="radio" name="mc15" value="d"> <span><span class="m"><span aria-hidden="true">0.5%</span><span class="sr">0 point 5 percent</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> by 100, which moves the point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5%</span><span class="sr">5 percent</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That compares 35 with 0.4 without changing either one. Written as percents, 0.4 is 40%, which is more than 35%.&quot;, &quot;c&quot;: &quot;Write both as percents: 0.4 is 40%, and 40% is not the same as 35%.&quot;, &quot;d&quot;: &quot;They can be compared once they are written the same way. 0.4 is 40%, which is more than 35%.&quot;}" data-why="Correct. 0.4 is 40%, and 40% is more than 35%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Which is larger, <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> or <span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span>?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> is larger.</span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span> is larger, because 35 is more than <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span>.</span></label><label><input type="radio" name="mc16" value="c"> <span>They are equal.</span></label><label><input type="radio" name="mc16" value="d"> <span>They cannot be compared, because one is a decimal and one is a percent.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> to a percent first: multiply by 100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> (it is <span class="m"><span aria-hidden="true">40%</span><span class="sr">40 percent</span></span>)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="50" data-miss="{&quot;1250&quot;: &quot;That multiplies 250 by 5. \&quot;1 in 5\&quot; means one fifth of the group, so divide: 250 divided by 5 is 50.&quot;, &quot;20&quot;: &quot;20% is the percent who wear glasses. The question asks how many people: 20% of 250 is 50.&quot;, &quot;5&quot;: &quot;5 is the size of each small group in \&quot;1 in 5.\&quot; One out of every 5 people in 250 is 250 divided by 5, which is 50.&quot;, &quot;245&quot;: &quot;That subtracts 5. \&quot;1 in 5\&quot; means one fifth of the group: 250 divided by 5 is 50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> In a group of 250 people, 1 in 5 wear glasses. How many people in the group wear glasses?</p>
+<details><summary>Hint</summary><p>"1 in 5" means <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">5</span></span><span class="sr">1 over 5</span></span> of the group. Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">5</span></span><span class="sr">1 over 5</span></span> of 250.</p></details>
+<details><summary>Show answer</summary><p><strong>50 people</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="34.5" data-miss="{&quot;34.6&quot;: &quot;This rounds in a chain from the right (34.545 to 34.55 to 34.6). Only the digit right after the tenths place counts. 57 divided by 165 is 34.545...%, and that digit is 4, so the answer is 34.5.&quot;, &quot;34.55&quot;: &quot;That has two decimal places. One decimal place means one digit after the point: 34.5.&quot;, &quot;35&quot;: &quot;That is the nearest whole number. The directions ask for one decimal place: 34.5.&quot;, &quot;0.345&quot;: &quot;That is the decimal, rounded. Multiply by 100 first to get the percent, then round: 34.5.&quot;, &quot;0.3&quot;: &quot;That is the decimal, rounded. Multiply by 100 first to get the percent, then round: 34.5.&quot;, &quot;0.35&quot;: &quot;That is the decimal, rounded. Multiply by 100 first to get the percent, then round: 34.5.&quot;, &quot;289.5&quot;: &quot;The fraction is flipped: that is 165 divided by 57. The part (57) goes on top.&quot;, &quot;108&quot;: &quot;That is 165 minus 57, the number who did not speak. Divide 57 by 165 and multiply by 100: 34.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Of 165 people at a town meeting, 57 spoke during the meeting. What percent of the people spoke? Round to one decimal place.</p>
+<details><summary>Hint</summary><p>Divide 57 by 165 and multiply by 100. You should see <span class="m"><span aria-hidden="true">34.545...</span><span class="sr">34 point 5 4 5 and so on</span></span>. The kept digit is 5 (tenths), and only the next digit decides.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">34.5%</span><span class="sr">34 point 5 percent</span></span> (typing 34.5 is also fine)</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 1.3</h3>
+<p>Fractions and percents of a group show up in the examples: 30 of the 60 participants go to each group in the example for item 6 (Randomness) on page 2, and Classroom Example 1.3.4 on page 4 reports that 52% of the respondents said "yes."</p>
+<p><strong>Watch for this:</strong> which whole a fraction or a percent is taken out of. The words right after "of" usually name it.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. A percent of a group as a count</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find a percent of a number.</li><li>Choose the right calculation for "a percent of" a group.</li><li>Find the part of a group that is not described by a percent.</li><li>Round a count to the nearest whole number, including when 9s carry.</li></ul>
+</div>
+<h3>A percent of a number</h3>
+<p>"Of" after a percent means multiply. Change the percent to a decimal first, then multiply: <span class="m"><span aria-hidden="true">38%</span><span class="sr">38 percent</span></span> of 650 is <span class="m"><span aria-hidden="true">0.38 × 650</span><span class="sr">0 point 3 8 times 650</span></span>.</p>
+<p>If <span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span> of a group said yes, then the rest, <span class="m"><span aria-hidden="true">100% − 35% = 65%</span><span class="sr">100 percent minus 35 percent equals 65 percent</span></span>, did not. You can find the "not" count either by subtracting the "yes" count from the total or by taking <span class="m"><span aria-hidden="true">65%</span><span class="sr">65 percent</span></span> of the total.</p>
+<h3>Rounding a count</h3>
+<p>A percent of a group can come out with a decimal, like <span class="m"><span aria-hidden="true">95.45</span><span class="sr">95 point 4 5</span></span> people. Follow the rounding direction in the question.</p>
+<ol class="steps">
+<li>Find the last digit you keep. For the nearest whole number, that is the ones digit.</li>
+<li>Look at only the <strong>one</strong> digit right after it. If it is 5 or more, the kept digit goes up by 1. If it is 4 or less, the kept digit stays.</li>
+<li>Do not round in a chain from the right. <span class="m"><span aria-hidden="true">95.45</span><span class="sr">95 point 4 5</span></span> rounds to 95, because the digit after the ones place is 4. The 5 at the end does not matter.</li>
+<li>When a 9 goes up, it becomes 0 and carries 1 to the left. <span class="m"><span aria-hidden="true">299.7</span><span class="sr">299 point 7</span></span> rounds to 300.</li>
+</ol>
+<div class="worked" role="group" aria-label="Worked example: A percent of a group, then round">
+<h3 style="margin-top:0">Worked example: A percent of a group, then round</h3>
+<p>In a town of 415 households, <span class="m"><span aria-hidden="true">23%</span><span class="sr">23 percent</span></span> have a garden. About how many households have a garden? Round to the nearest whole number.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">23% = 0.23</span><span class="sr">23 percent equals 0 point 2 3</span></span></span><span class="say">Change the percent to a decimal by moving the point two places left.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.23 × 415 = 95.45</span><span class="sr">0 point 2 3 times 415 equals 95 point 4 5</span></span></span><span class="say">"Of" means multiply.</span></li><li><span class="work">Kept digit: 5 (ones). Next digit: 4.</span><span class="say">The digit right after the ones place is 4, which is less than 5, so the 5 stays.</span></li></ol><p><strong>Answer: 95 households.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Percent of a class">
+<h3 style="margin-top:0">Finish this one: Percent of a group of students</h3>
+<p>At a college, 350 students live within 10 miles of campus, and <span class="m"><span aria-hidden="true">64%</span><span class="sr">64 percent</span></span> of them drive to class. How many of these students drive?</p>
+<p>The first step is done for you. You finish it.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">64% = 0.64</span><span class="sr">64 percent equals 0 point 6 4</span></span></span><span class="say">Change the percent to a decimal by moving the point two places left.</span></li></ol>
+</div>
+<div class="q" data-mode="num" data-answer="224" data-miss="{&quot;22400&quot;: &quot;That multiplies 64 by 350 without changing the percent to a decimal. Use 0.64: 0.64 times 350 is 224.&quot;, &quot;22.4&quot;: &quot;That uses 0.064, which moves the point three places. 64% is 0.64: 0.64 times 350 is 224.&quot;, &quot;2240&quot;: &quot;That uses 6.4, which moves the point only one place. 64% is 0.64: 0.64 times 350 is 224.&quot;, &quot;5.46875&quot;: &quot;That divides 350 by 64. \&quot;Of\&quot; means multiply: 0.64 times 350 is 224.&quot;, &quot;5.47&quot;: &quot;That divides 350 by 64. \&quot;Of\&quot; means multiply: 0.64 times 350 is 224.&quot;, &quot;546.875&quot;: &quot;That divides 350 by 0.64. \&quot;Of\&quot; means multiply: 0.64 times 350 is 224.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Finish it: what is <span class="m"><span aria-hidden="true">64%</span><span class="sr">64 percent</span></span> of 350?</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.64 × 350</span><span class="sr">0 point 6 4 times 350</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>224 students</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="172" data-miss="{&quot;1720&quot;: &quot;That uses 0.8 for 8%. 0.8 is 80%. 8% is 0.08: 0.08 times 2,150 is 172.&quot;, &quot;17.2&quot;: &quot;That uses 0.008, which is 0.8%. 8% is 0.08: 0.08 times 2,150 is 172.&quot;, &quot;17200&quot;: &quot;That multiplies by 8 instead of 0.08. Change the percent to a decimal first: 0.08 times 2,150 is 172.&quot;, &quot;268.75&quot;: &quot;That divides 2,150 by 8. \&quot;Of\&quot; means multiply by the decimal: 0.08 times 2,150 is 172.&quot;, &quot;26875&quot;: &quot;That divides 2,150 by 0.08. \&quot;Of\&quot; means multiply: 0.08 times 2,150 is 172.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> A city has 2,150 streetlights, and <span class="m"><span aria-hidden="true">8%</span><span class="sr">8 percent</span></span> of them need new bulbs. How many streetlights need new bulbs?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">8%</span><span class="sr">8 percent</span></span> as a decimal is <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>, not <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>172 streetlights</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;300 divided by 15 is 20, which is not 15% of 300. \&quot;Of\&quot; means multiply by the decimal, 0.15.&quot;, &quot;c&quot;: &quot;15 times 300 is 4,500, far more than 300 itself. Change 15% to 0.15 before multiplying.&quot;, &quot;d&quot;: &quot;300 divided by 0.15 is 2,000, far more than 300 itself. \&quot;Of\&quot; means multiply, not divide.&quot;}" data-why="Correct. 15% is 0.15, and 0.15 times 300 is 45.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 21.</b> Which calculation finds <span class="m"><span aria-hidden="true">15%</span><span class="sr">15 percent</span></span> of 300?</legend>
+<label><input type="radio" name="mc21" value="a"> <span><span class="m"><span aria-hidden="true">0.15 × 300</span><span class="sr">0 point 1 5 times 300</span></span></span></label><label><input type="radio" name="mc21" value="b"> <span><span class="m"><span aria-hidden="true">300 ÷ 15</span><span class="sr">300 divided by 15</span></span></span></label><label><input type="radio" name="mc21" value="c"> <span><span class="m"><span aria-hidden="true">15 × 300</span><span class="sr">15 times 300</span></span></span></label><label><input type="radio" name="mc21" value="d"> <span><span class="m"><span aria-hidden="true">300 ÷ 0.15</span><span class="sr">300 divided by 0 point 1 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change <span class="m"><span aria-hidden="true">15%</span><span class="sr">15 percent</span></span> to a decimal, then use the operation that "of" stands for.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.15 × 300</span><span class="sr">0 point 1 5 times 300</span></span>, which is 45</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="806" data-miss="{&quot;434&quot;: &quot;434 is the number who said yes. The rest did not: 1,240 minus 434 is 806 (or 65% of 1,240).&quot;, &quot;1205&quot;: &quot;That subtracts 35 people. 35% is a percent, not a count. The \&quot;not yes\&quot; group is 65% of 1,240, which is 806.&quot;, &quot;65&quot;: &quot;65% is the percent who did not say yes. The question asks how many adults: 0.65 times 1,240 is 806.&quot;, &quot;0.65&quot;: &quot;0.65 is the decimal for the percent who did not say yes. Multiply it by 1,240 to get the count: 806.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> In a survey of 1,240 adults, <span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span> said yes. How many adults did <strong>not</strong> say yes?</p>
+<details><summary>Hint</summary><p>Either find <span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span> of 1,240 and subtract it from 1,240, or find <span class="m"><span aria-hidden="true">65%</span><span class="sr">65 percent</span></span> of 1,240.</p></details>
+<details><summary>Show answer</summary><p><strong>806 adults</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="400" data-miss="{&quot;399&quot;: &quot;That cuts off the decimal instead of rounding. 0.37 times 1,080 is 399.6. The digit after the ones place is 6, so the 9 goes up and carries: 400.&quot;, &quot;399.6&quot;: &quot;That is the exact value. The directions say to round to the nearest whole number: 399.6 rounds to 400.&quot;, &quot;390&quot;: &quot;Check the carry. In 399.6 the 6 makes the ones digit 9 go up; it becomes 0 and carries, and the tens 9 carries too: 400.&quot;, &quot;3996&quot;: &quot;That uses 3.7 for 37%. 37% is 0.37: 0.37 times 1,080 is 399.6, which rounds to 400.&quot;, &quot;39.96&quot;: &quot;That uses 0.037 for 37%. 37% is 0.37: 0.37 times 1,080 is 399.6, which rounds to 400.&quot;, &quot;40&quot;: &quot;That uses 0.037 for 37% and then rounds. 37% is 0.37: 0.37 times 1,080 is 399.6, which rounds to 400.&quot;, &quot;39960&quot;: &quot;That multiplies by 37 instead of 0.37. 0.37 times 1,080 is 399.6, which rounds to 400.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> A town has 1,080 households, and <span class="m"><span aria-hidden="true">37%</span><span class="sr">37 percent</span></span> of them have a dog. How many households have a dog? Round to the nearest whole number.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">0.37 × 1,080 = 399.6</span><span class="sr">0 point 3 7 times 1,080 equals 399 point 6</span></span>. When the 9 in the ones place goes up, it carries.</p></details>
+<details><summary>Show answer</summary><p><strong>400 households</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="99" data-miss="{&quot;100&quot;: &quot;This rounds in a chain from the right (99.45 to 99.5 to 100). Only the digit right after the ones place counts, and it is 4, so the answer is 99.&quot;, &quot;99.5&quot;: &quot;That is rounded to one decimal place. The nearest whole number has no digits after the point: 99.&quot;, &quot;99.45&quot;: &quot;That is the exact value. The directions say to round to the nearest whole number: 99.&quot;, &quot;994.5&quot;: &quot;That uses 1.3 for 13%. 13% is 0.13: 0.13 times 765 is 99.45, which rounds to 99.&quot;, &quot;995&quot;: &quot;That uses 1.3 for 13%. 13% is 0.13: 0.13 times 765 is 99.45, which rounds to 99.&quot;, &quot;994&quot;: &quot;That uses 1.3 for 13%. 13% is 0.13: 0.13 times 765 is 99.45, which rounds to 99.&quot;, &quot;9945&quot;: &quot;That multiplies by 13 instead of 0.13. 0.13 times 765 is 99.45, which rounds to 99.&quot;, &quot;9.945&quot;: &quot;That uses 0.013 for 13%. 13% is 0.13: 0.13 times 765 is 99.45, which rounds to 99.&quot;, &quot;10&quot;: &quot;That uses 0.013 for 13% and then rounds. 13% is 0.13: 0.13 times 765 is 99.45, which rounds to 99.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> A museum had 765 visitors on Saturday, and <span class="m"><span aria-hidden="true">13%</span><span class="sr">13 percent</span></span> of them were children. How many visitors were children? Round to the nearest whole number.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">0.13 × 765 = 99.45</span><span class="sr">0 point 1 3 times 765 equals 99 point 4 5</span></span>. The kept digit is the ones digit, 9. Look at only the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong>99 children</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 1.3</h3>
+<p>Classroom Example 1.3.4 on page 4 of the notes describes a survey of 1465 Internet users in which 52% of the respondents said "yes." A percent like that stands for a number of people.</p>
+<p><strong>Watch for this:</strong> a percent of a group of people stands for a whole number of people, even if the arithmetic gives a decimal.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, so no two in a row use the same skill. Nothing is graded. If one feels shaky, its feedback points to what to look at again.</p>
+<div class="q" data-mode="num" data-answer="225" data-miss="{&quot;2250&quot;: &quot;That uses 1.2 for 12%. 12% is 0.12: 0.12 times 1,875 is 225. Section 5 has more practice.&quot;, &quot;22.5&quot;: &quot;That uses 0.012 for 12%. 12% is 0.12: 0.12 times 1,875 is 225. Section 5 has more practice.&quot;, &quot;22500&quot;: &quot;That multiplies by 12 instead of 0.12. 0.12 times 1,875 is 225. Section 5 has more practice.&quot;, &quot;156.25&quot;: &quot;That divides 1,875 by 12. \&quot;Of\&quot; means multiply: 0.12 times 1,875 is 225. Section 5 has more practice.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> A hospital has 1,875 employees, and <span class="m"><span aria-hidden="true">12%</span><span class="sr">12 percent</span></span> of them work the night shift. How many employees work the night shift?</p>
+<details><summary>Hint</summary><p>Change <span class="m"><span aria-hidden="true">12%</span><span class="sr">12 percent</span></span> to a decimal and multiply.</p></details>
+<details><summary>Show answer</summary><p><strong>225 employees</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="60" data-miss="{&quot;59&quot;: &quot;59 counts the steps from 41 to 100. Add 1 so ticket 41 is counted too: 60. Section 2 has more practice.&quot;, &quot;61&quot;: &quot;That adds one too many. 100 minus 41 is 59, and adding 1 gives 60. Section 2 has more practice.&quot;, &quot;141&quot;: &quot;That adds the two ticket numbers. Subtract and add 1: 100 minus 41 plus 1 is 60. Section 2 has more practice.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> People in a line hold numbered tickets. How many people hold tickets numbered 41 through 100?</p>
+<details><summary>Hint</summary><p>Subtract the first number from the last, then add 1.</p></details>
+<details><summary>Show answer</summary><p><strong>60 people</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;0.8 is 80%. Dividing 8 by 100 moves the point two places left: 0.08. Section 4 has more practice.&quot;, &quot;c&quot;: &quot;8.0 is 800%. A percent is out of 100, so divide 8 by 100: 0.08. Section 4 has more practice.&quot;, &quot;d&quot;: &quot;0.008 moves the point three places, which is 0.8%. Dividing 8 by 100 gives 0.08. Section 4 has more practice.&quot;}" data-why="Correct. 8 divided by 100 is 0.08.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 27.</b> Which decimal is equal to <span class="m"><span aria-hidden="true">8%</span><span class="sr">8 percent</span></span>?</legend>
+<label><input type="radio" name="mc27" value="a"> <span><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></span></label><label><input type="radio" name="mc27" value="b"> <span><span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span></span></label><label><input type="radio" name="mc27" value="c"> <span><span class="m"><span aria-hidden="true">8.0</span><span class="sr">8 point 0</span></span></span></label><label><input type="radio" name="mc27" value="d"> <span><span class="m"><span aria-hidden="true">0.008</span><span class="sr">0 point 0 0 8</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Divide 8 by 100, which moves the point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="155" data-miss="{&quot;192&quot;: &quot;192 is the total number of chairs. Subtract the 37 empty ones: 192 minus 37 is 155. Section 3 has more practice.&quot;, &quot;229&quot;: &quot;That adds the empty chairs. Empty chairs are not in use, so subtract: 192 minus 37 is 155. Section 3 has more practice.&quot;, &quot;32&quot;: &quot;That adds 24 and 8 for the total. There are 24 equal groups of 8, so multiply: 192 chairs, then subtract 37 to get 155. Section 3 has more practice.&quot;, &quot;-5&quot;: &quot;That adds 24 and 8 and then subtracts 37. There are 24 equal groups of 8, so multiply: 192 chairs, then subtract 37 to get 155. Section 3 has more practice.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> A banquet hall has 24 tables with 8 chairs at each table. During a dinner, 37 chairs are empty. How many chairs are in use?</p>
+<details><summary>Hint</summary><p>First find the total: <span class="m"><span aria-hidden="true">24 × 8</span><span class="sr">24 times 8</span></span>. Then take away the empty chairs.</p></details>
+<details><summary>Show answer</summary><p><strong>155 chairs</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="155" data-miss="{&quot;156&quot;: &quot;Only the digit right after the ones place decides. 0.065 times 2,390 is 155.35, and that digit is 3, so the answer is 155. Section 5 has more practice.&quot;, &quot;155.35&quot;: &quot;That is the exact value. The directions say to round to the nearest whole number: 155. Section 5 has more practice.&quot;, &quot;155.4&quot;: &quot;That is rounded to one decimal place. The nearest whole number has no digits after the point: 155. Section 5 has more practice.&quot;, &quot;1553.5&quot;: &quot;That uses 0.65 for 6.5%. 6.5% is 0.065: 0.065 times 2,390 is 155.35, which rounds to 155. Section 5 has more practice.&quot;, &quot;1554&quot;: &quot;That uses 0.65 for 6.5%. 6.5% is 0.065: 0.065 times 2,390 is 155.35, which rounds to 155. Section 5 has more practice.&quot;, &quot;15.535&quot;: &quot;That uses 0.0065 for 6.5%. 6.5% is 0.065: 0.065 times 2,390 is 155.35, which rounds to 155. Section 5 has more practice.&quot;, &quot;16&quot;: &quot;That uses 0.0065 for 6.5% and then rounds. 6.5% is 0.065: 0.065 times 2,390 is 155.35, which rounds to 155. Section 5 has more practice.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> A school district has 2,390 students, and <span class="m"><span aria-hidden="true">6.5%</span><span class="sr">6 point 5 percent</span></span> of them ride a bike to school. How many students ride a bike? Round to the nearest whole number.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">6.5%</span><span class="sr">6 point 5 percent</span></span> as a decimal is <span class="m"><span aria-hidden="true">0.065</span><span class="sr">0 point 0 6 5</span></span>. Multiply, then look at the one digit right after the ones place.</p></details>
+<details><summary>Show answer</summary><p><strong>155 students</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="35" data-miss="{&quot;65&quot;: &quot;65% is the percent who did turn it in early (26 out of 40). The rest is 14 out of 40, which is 35%. Section 4 has more practice.&quot;, &quot;14&quot;: &quot;14 is the number of students who did not turn it in early. As a percent of the 40 students, that is 14 divided by 40, or 35%. Section 4 has more practice.&quot;, &quot;0.35&quot;: &quot;0.35 is the decimal. Multiply by 100 to write it as a percent: 35%. Section 4 has more practice.&quot;, &quot;285.7&quot;: &quot;The fraction is flipped: that is 40 divided by 14. The part (14) goes on top and the whole class (40) on the bottom. Section 4 has more practice.&quot;, &quot;153.8&quot;: &quot;That is 40 divided by 26, which is flipped and uses the wrong part. Use 14 out of 40, which is 35%. Section 4 has more practice.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> In a class of 40 students, 26 turned in a project early. What percent of the class did <strong>not</strong> turn it in early?</p>
+<details><summary>Hint</summary><p>First find how many did not: <span class="m"><span aria-hidden="true">40 − 26</span><span class="sr">40 minus 26</span></span>. Then divide by the whole class, 40.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">35%</span><span class="sr">35 percent</span></span> (typing 35 is also fine)</strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked on large numbers and positions, equal groups, fractions and percents of a group, and percents as counts. You can come back to any section at any time.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec1-3-corequisite-v1'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&Array.isArray(x.done))store=Object.assign(store,x);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/×/g,'*').replace(/[,%$]/g,'').replace(/\s+/g,'').replace(/^[a-z]=/,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^-?\((-?\d+)\)\/\((\d+)\)$/); if(m)return Object.assign(R(Number(m[1]),Number(m[2]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw).replace(/\*/g,''), stu=toRat(s);
+  const P=x=>norm(x).replace(/^\{|\}$/g,'').split(',').filter(Boolean).map(toRat);
+  const f=l=>l.map(v=>v.n+'/'+v.d).sort().join();
+  for(const k of Object.keys(m)){
+    if(s===norm(k).replace(/\*/g,''))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+    if(q.dataset.mode==='set'){const a=P(raw), b=P(k); if(a.length&&a.length===b.length&&!a.some(v=>!v)&&!b.some(v=>!v)&&f(a)===f(b))return m[k];}
+  }
+  return null;
+}
+const NICE=['Nice try. I do not recognize that one as a common slip, so go back through each step slowly. A hint is there if you want one.','Good effort. Not quite yet. Work it again on paper and compare each step. Hints are available whenever you want them.','Thanks for giving that a go. This is not the answer yet. Try a different first step or open a hint.','Nice attempt. It is not there yet, and that is okay. Read the problem once more and check your decimal placement or rounding.','You gave it a try, and that counts. Take a breath, redo it more slowly, and open a hint if you like.','Good try. Not quite yet. Check each step against the worked example above, or open a hint.','Nice work sticking with it. That is not the answer yet. Look again at what the problem asks for, then try once more.'];
+let lastNice=-1; function nice(){let i; do{i=Math.floor(Math.random()*NICE.length);}while(i===lastNice&&NICE.length>1); lastNice=i; return NICE[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){
+      if(sameRat(key,stu)){
+        if(key.frac&&key.d!==1&&stu.dec)return show(q,'almost','That value is equal, but this problem needs the exact fraction, not a decimal. Type it with a slash.');
+        if(key.dec&&stu.frac)return show(q,'almost','That fraction has the right value, but this problem asks for a decimal. Divide the top by the bottom.');
+        const rm=s.match(/^-?(\d+)\/(\d+)$/); if(key.frac&&rm&&gcd(Number(rm[1]),Number(rm[2]))>1)return show(q,'almost','That fraction has the right value, but it is not reduced yet.');
+        return show(q,'good','Correct!');
+      }
+    } else if(s===norm(a)) return show(q,'good','Correct!');
+  }
+  if(!stu&&!/[(),a-z]/.test(s)&&s)return show(q,'info','Enter your answer using digits, a decimal point, or a minus sign.');
+  show(q,'wrong',missFor(q,raw)||nice());
+}
+function judgeExpr(q,raw){
+  const s=norm(raw).replace(/\*/g,'');
+  for(const a of answers(q)){ if(s===norm(a).replace(/\*/g,''))return show(q,'good','Correct!'); }
+  show(q,'wrong',missFor(q,raw)||nice());
+}
+function judgeSet(q,raw){
+  const parts=x=>norm(x).replace(/^\{|\}$/g,'').split(',').filter(Boolean);
+  const stu=parts(raw).map(toRat); if(stu.some(v=>!v)){const mf=missFor(q,raw); if(mf)return show(q,'wrong',mf); return show(q,'info','Enter your answers separated by commas.');}
+  for(const a of answers(q)){
+    const key=parts(a).map(toRat); if(key.length!==stu.length)continue;
+    const k=key.map(v=>v.n+'/'+v.d).sort().join(); const t=stu.map(v=>v.n+'/'+v.d).sort().join();
+    if(k===t)return show(q,'good','Correct!');
+  }
+  show(q,'wrong',missFor(q,raw)||nice());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct!'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||nice());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); const m=q.dataset.mode; m==='expr'?judgeExpr(q,input.value):m==='set'?judgeSet(q,input.value):judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); b.dataset.done=done?'1':''; const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+
+</script>
+</body>
+</html>

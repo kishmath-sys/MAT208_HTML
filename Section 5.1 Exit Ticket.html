@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 5.1 Exit Ticket: Probability Distributions</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 5.1 Exit Ticket</div>
+<h1>Section 5.1 Exit Ticket: Probability Distributions</h1>
+<p>A short, ungraded check to use after the Section 5.1 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Random Variables and Probability Distributions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Parameters and Expected Value<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Significantly High or Low<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 17 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 5.1 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul><li><button type="button" data-go="s2">Random Variables and Probability Distributions</button></li><li><button type="button" data-go="s3">Parameters and Expected Value</button></li><li><button type="button" data-go="s4">Significantly High or Low</button></li><li><button type="button" data-go="s5">StatCrunch check</button></li><li><button type="button" data-go="s6">Your results and help from Matt</button></li></ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Random Variables and Probability Distributions</h2>
+<p>These checks cover items 1 and 2 on page 1 of the Section 5.1 notes and Classroom Example 5.1.1 on page 5.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. The count changes by chance from one group of 20 cars to the next." data-miss="{&quot;a&quot;: &quot;Not quite. The number of days in a week is always 7, so it is not determined by chance. Review: item 1 (Random Variable) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A printed price is set ahead of time, so it is not determined by chance. Review: item 1 (Random Variable) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The number of seats stays the same each time, so it is not determined by chance. Review: item 1 (Random Variable) on page 1 of the notes.&quot;}" data-review="item 1 (Random Variable) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Random Variable).</b> Which of these is a random variable in the sense of item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The number of days in a week.</span></label><label><input type="radio" name="mc1" value="b"> <span>The number of red cars among the next 20 cars to pass an intersection.</span></label><label><input type="radio" name="mc1" value="c"> <span>The price printed on a coffee shop menu.</span></label><label><input type="radio" name="mc1" value="d"> <span>The number of seats in a classroom.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The number of red cars among the next 20 cars to pass an intersection.</strong></p><p class="ptr">Where this is: Item 1 (Random Variable) on page 1 of the notes.</p></details>
+</div>
+<p>The next three checks each use their own table.</p>
+<div class="table-wrap" role="region" aria-label="Table for Check 2" tabindex="0">
+<table>
+<caption>Table for Check 2</caption>
+<thead><tr><th scope="col">x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.40</span><span class="sr">0 point 4 0</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0.30</span><span class="sr">0 point 3 0</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The sum of the probabilities is 1.10, so one requirement fails." data-miss="{&quot;a&quot;: &quot;Not quite. Each probability is between 0 and 1, but the probabilities must also add to 1, and these add to 1.10. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. An x-value of 0 is fine, as in the coffee example, so starting at 0 is not the problem. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;c&quot;: &quot;Not quite. Numerical x-values are only one requirement, and the probabilities here add to 1.10. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Requirements).</b> Is the table for Check 2 a probability distribution?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>Yes, because every probability is between 0 and 1.</span></label><label><input type="radio" name="mc2" value="b"> <span>No, because the x-values start at 0 instead of 1.</span></label><label><input type="radio" name="mc2" value="c"> <span>Yes, because the x-values are numerical.</span></label><label><input type="radio" name="mc2" value="d"> <span>No, because the probabilities add to 1.10, not 1.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because the probabilities add to 1.10, not 1.</strong></p><p class="ptr">Where this is: Item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<div class="table-wrap" role="region" aria-label="Table for Check 3" tabindex="0">
+<table>
+<caption>Table for Check 3</caption>
+<thead><tr><th scope="col">x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0.30</span><span class="sr">0 point 3 0</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">−0.10</span><span class="sr">negative 0 point 1 0</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. A probability of &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;−0.10&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;negative 0 point 1 0&lt;/span&gt;&lt;/span&gt; is not between 0 and 1." data-miss="{&quot;b&quot;: &quot;Not quite. The sum is 1, but every probability must also be between 0 and 1, and one of them is &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;−0.10&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;negative 0 point 1 0&lt;/span&gt;&lt;/span&gt;. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;c&quot;: &quot;Not quite. Including the negative value, these probabilities add to exactly 1, so the sum is not the problem. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. Numerical x-values are only one requirement, and one probability here is negative. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Requirements).</b> Is the table for Check 3 a probability distribution?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>No, because one probability is below 0.</span></label><label><input type="radio" name="mc3" value="b"> <span>Yes, because the probabilities add to exactly 1.</span></label><label><input type="radio" name="mc3" value="c"> <span>No, because the probabilities add to more than 1.</span></label><label><input type="radio" name="mc3" value="d"> <span>Yes, because the x-values are numerical.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because one probability is below 0.</strong></p><p class="ptr">Where this is: Item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<div class="table-wrap" role="region" aria-label="Table for Check 4" tabindex="0">
+<table>
+<caption>Table for Check 4</caption>
+<thead><tr><th scope="col">x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.333</span><span class="sr">0 point 3 3 3</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.333</span><span class="sr">0 point 3 3 3</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0</span><span class="sr">0</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">0.333</span><span class="sr">0 point 3 3 3</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. The requirements allow a sum very close to 1 due to rounding, and 0 is allowed as a probability." data-miss="{&quot;a&quot;: &quot;Not quite. The notes allow a sum that is very close to 1 due to rounding, and &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0.999&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 point 9 9 9&lt;/span&gt;&lt;/span&gt; is that close. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. A probability of 0 is between 0 and 1, inclusive, just like the 0 in the coffee example. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. The requirements are about the x-values and the probabilities, not the mean or standard deviation. Review: item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Requirements).</b> Is the table for Check 4 a probability distribution?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>No, because the probabilities add to <span class="m"><span aria-hidden="true">0.999</span><span class="sr">0 point 9 9 9</span></span>, not exactly 1.</span></label><label><input type="radio" name="mc4" value="b"> <span>No, because x = 2 has a probability of 0.</span></label><label><input type="radio" name="mc4" value="c"> <span>Yes. The sum is very close to 1 due to rounding, and each probability is between 0 and 1.</span></label><label><input type="radio" name="mc4" value="d"> <span>There is not enough information, because the mean and standard deviation are not given.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes. The sum is very close to 1 due to rounding, and each probability is between 0 and 1.</strong></p><p class="ptr">Where this is: Item 2 (Probability Distribution) and its Requirements of a Probability Distribution on page 1 of the notes, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Random Variable: item 1, page 1</li><li>Probability Distribution and its Requirements: item 2, page 1</li><li>Video: "Classroom Example 5.1.1", page 5</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Parameters and Expected Value</h2>
+<p>These checks cover items 3 and 4 on pages 2 and 3 of the Section 5.1 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The key parameters are the mean &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;μ&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;mu&lt;/span&gt;&lt;/span&gt; and the standard deviation &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;σ&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;sigma&lt;/span&gt;&lt;/span&gt;." data-miss="{&quot;a&quot;: &quot;Not quite. This has the two symbols reversed. Review: item 3 (Parameters of a Probability Distribution) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;x&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;x&lt;/span&gt;&lt;/span&gt; is the random variable and &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;P(x)&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;P of x&lt;/span&gt;&lt;/span&gt; is its probability, not a parameter. Review: item 3 (Parameters of a Probability Distribution) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. E stands for expected value, not standard deviation. Review: item 3 (Parameters of a Probability Distribution) on page 2 of the notes.&quot;}" data-review="item 3 (Parameters of a Probability Distribution) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Parameters).</b> Which statement matches item 3?</legend>
+<label><input type="radio" name="mc5" value="a"> <span><span class="m"><span aria-hidden="true">μ</span><span class="sr">mu</span></span> is the standard deviation, and <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> is the mean.</span></label><label><input type="radio" name="mc5" value="b"> <span><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span> is the mean, and <span class="m"><span aria-hidden="true">x</span><span class="sr">x</span></span> is the standard deviation.</span></label><label><input type="radio" name="mc5" value="c"> <span><span class="m"><span aria-hidden="true">μ</span><span class="sr">mu</span></span> is the mean, and <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> is the standard deviation.</span></label><label><input type="radio" name="mc5" value="d"> <span><span class="m"><span aria-hidden="true">E</span><span class="sr">E</span></span> is the standard deviation, and <span class="m"><span aria-hidden="true">μ</span><span class="sr">mu</span></span> is the expected value.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">μ</span><span class="sr">mu</span></span> is the mean, and <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> is the standard deviation.</strong></p><p class="ptr">Where this is: Item 3 (Parameters of a Probability Distribution) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The expected value is the mean, so E = 2.3 pies." data-miss="{&quot;b&quot;: &quot;Not quite. The expected value describes what to expect on average, and no one buys exactly 2.3 pies. Review: item 4 (Expected Value) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 4 says the expected value is the mean, not the value with the largest probability. Review: item 4 (Expected Value) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The sum of the probabilities is a requirement, not the expected value, which is the mean. Review: item 4 (Expected Value) on page 3 of the notes.&quot;}" data-review="item 4 (Expected Value) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Expected Value).</b> A bakery finds that the mean number of pies a customer buys is <span class="m"><span aria-hidden="true">μ = 2.3</span><span class="sr">mu equals 2 point 3</span></span> pies. Which statement matches item 4?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>The expected value is 2.3 pies, so customers are expected to buy about 2.3 pies, or roughly 2.</span></label><label><input type="radio" name="mc6" value="b"> <span>Every customer buys exactly 2.3 pies.</span></label><label><input type="radio" name="mc6" value="c"> <span>The expected value is the number of pies with the largest probability.</span></label><label><input type="radio" name="mc6" value="d"> <span>The expected value is 1, because the probabilities add to 1.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The expected value is 2.3 pies, so customers are expected to buy about 2.3 pies, or roughly 2.</strong></p><p class="ptr">Where this is: Item 4 (Expected Value) on page 3 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Parameters of a Probability Distribution: item 3, page 2</li><li>Expected Value: item 4, page 3</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Significantly High or Low</h2>
+<p>These checks cover item 5 on page 4 of the Section 5.1 notes and Classroom Example 5.1.4 on page 6.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. The probability of x or more, &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;0.012&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0 point 0 1 2&lt;/span&gt;&lt;/span&gt;, is less than or equal to &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;0.05&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0 point 0 5&lt;/span&gt;&lt;/span&gt;." data-miss="{&quot;a&quot;: &quot;Not quite. This reverses the direction of the check, which looks for a probability less than or equal to &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0.05&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 point 0 5&lt;/span&gt;&lt;/span&gt;. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The conclusion fits, but the reason uses the exact probability instead of the probability of x or more. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 5 uses &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0.05&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 point 0 5&lt;/span&gt;&lt;/span&gt; or less, not a probability of 0. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes.&quot;}" data-review="item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Significantly High).</b> For some number of successes x, the probability of getting x or more successes is <span class="m"><span aria-hidden="true">0.012</span><span class="sr">0 point 0 1 2</span></span>, and the probability of exactly x successes is <span class="m"><span aria-hidden="true">0.009</span><span class="sr">0 point 0 0 9</span></span>. Which statement matches item 5?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>Not significantly high, because the probability must be greater than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc7" value="b"> <span>Significantly high, but only because the probability of exactly x is below <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc7" value="c"> <span>Not significantly high, because only a probability of 0 is significant.</span></label><label><input type="radio" name="mc7" value="d"> <span>Significantly high, because the probability of x or more is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> or less.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Significantly high, because the probability of x or more is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> or less.</strong></p><p class="ptr">Where this is: Item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. For significantly low, use the probability of x or fewer." data-miss="{&quot;a&quot;: &quot;Not quite. This is the exact probability, and the notes say to focus on a cumulative probability to judge significance. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;c&quot;: &quot;Not quite. This is the cumulative probability used for significantly high, not significantly low. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. This leaves out 2 itself, and the notes use x or fewer. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;}" data-review="item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video &quot;Classroom Example 5.1.4&quot; on page 6.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Exact and Cumulative Probability).</b> A gardener plants 8 seeds. Which probability is relevant for deciding whether 2 seeds sprouting is a significantly <strong>low</strong> number?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>The probability of exactly 2</span></label><label><input type="radio" name="mc8" value="b"> <span>The probability of 2 or fewer</span></label><label><input type="radio" name="mc8" value="c"> <span>The probability of 2 or more</span></label><label><input type="radio" name="mc8" value="d"> <span>The probability of fewer than 2</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The probability of 2 or fewer</strong></p><p class="ptr">Where this is: Item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video "Classroom Example 5.1.4" on page 6.</p></details>
+</div>
+<p>Use this table for Checks 9 to 11. A gardener plants 8 seeds, and x is the number that sprout.</p>
+<div class="table-wrap" role="region" aria-label="Table for Checks 9 to 11" tabindex="0">
+<table>
+<caption>Table for Checks 9 to 11</caption>
+<thead><tr><th scope="col">Number of seeds that sprout, x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.006</span><span class="sr">0 point 0 0 6</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.022</span><span class="sr">0 point 0 2 2</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">0.112</span><span class="sr">0 point 1 1 2</span></span></td></tr>
+<tr><th scope="row">4</th><td><span class="m"><span aria-hidden="true">0.220</span><span class="sr">0 point 2 2 0</span></span></td></tr>
+<tr><th scope="row">5</th><td><span class="m"><span aria-hidden="true">0.260</span><span class="sr">0 point 2 6 0</span></span></td></tr>
+<tr><th scope="row">6</th><td><span class="m"><span aria-hidden="true">0.190</span><span class="sr">0 point 1 9 0</span></span></td></tr>
+<tr><th scope="row">7</th><td><span class="m"><span aria-hidden="true">0.110</span><span class="sr">0 point 1 1 0</span></span></td></tr>
+<tr><th scope="row">8</th><td><span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.04" data-why="Correct. The row for x = 2 shows 0.040." data-miss="{&quot;0.068&quot;: &quot;Not quite. This adds 0, 1 and 2, which is 2 or fewer, not exactly 2. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.022&quot;: &quot;Not quite. This is the probability for x = 1, one row too high in the table. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.112&quot;: &quot;Not quite. This is the probability for x = 3, one row too low in the table. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;4&quot;: &quot;Not quite. This is a percent, and the notes write probabilities as decimals. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;2&quot;: &quot;Not quite. This is the value of x, not its probability. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;}" data-review="item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video &quot;Classroom Example 5.1.4&quot; on page 6.">
+<p class="prompt"><b class="qlabel">Check 9 (Exact Probability).</b> Using the table, find the probability that exactly 2 seeds sprout.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span> (typing <span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span> is fine)</strong></p><p class="ptr">Where this is: Item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video "Classroom Example 5.1.4" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.068" data-why="Correct. Adding the rows for 0, 1 and 2 gives 0.068." data-miss="{&quot;0.04&quot;: &quot;Not quite. This is the probability of exactly 2, not 2 or fewer. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.028&quot;: &quot;Not quite. This adds only 0 and 1, which leaves out 2 itself. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.062&quot;: &quot;Not quite. This adds 1 and 2 but leaves out x = 0. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.972&quot;: &quot;Not quite. This is the probability of 2 or more, which is the other direction. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.932&quot;: &quot;Not quite. This is the probability of 3 or more, which is the other direction. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;6.8&quot;: &quot;Not quite. This is a percent, and the notes write probabilities as decimals. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.07&quot;: &quot;Not quite. The directions say do not round. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;0.1&quot;: &quot;Not quite. The directions say do not round. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;}" data-review="item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video &quot;Classroom Example 5.1.4&quot; on page 6.">
+<p class="prompt"><b class="qlabel">Check 10 (Cumulative Probability).</b> Using the table, find the probability that 2 or fewer seeds sprout. Do not round.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.068</span><span class="sr">0 point 0 6 8</span></span></strong></p><p class="ptr">Where this is: Item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video "Classroom Example 5.1.4" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. The probability of 2 or fewer, &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;0.068&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0 point 0 6 8&lt;/span&gt;&lt;/span&gt;, is more than &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;0.05&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0 point 0 5&lt;/span&gt;&lt;/span&gt;." data-miss="{&quot;a&quot;: &quot;Not quite. This uses the exact probability, and significance is judged with the probability of 2 or fewer. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;b&quot;: &quot;Not quite. Small is not enough, since the notes use &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0.05&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 point 0 5&lt;/span&gt;&lt;/span&gt; or less, and &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0.068&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 point 0 6 8&lt;/span&gt;&lt;/span&gt; is more than that. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. The conclusion fits, but significantly low uses the probability of 2 or fewer, not 2 or more. Review: item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video \&quot;Classroom Example 5.1.4\&quot; on page 6.&quot;}" data-review="item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video &quot;Classroom Example 5.1.4&quot; on page 6.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Significantly Low).</b> Is 2 seeds sprouting a significantly low number?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Yes, because the probability of exactly 2 is <span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span>, which is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> or less.</span></label><label><input type="radio" name="mc11" value="b"> <span>Yes, because <span class="m"><span aria-hidden="true">0.068</span><span class="sr">0 point 0 6 8</span></span> is a small probability.</span></label><label><input type="radio" name="mc11" value="c"> <span>No, because the probability of 2 or fewer is <span class="m"><span aria-hidden="true">0.068</span><span class="sr">0 point 0 6 8</span></span>, which is more than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc11" value="d"> <span>No, because the probability of 2 or more is <span class="m"><span aria-hidden="true">0.972</span><span class="sr">0 point 9 7 2</span></span>, which is large.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because the probability of 2 or fewer is <span class="m"><span aria-hidden="true">0.068</span><span class="sr">0 point 0 6 8</span></span>, which is more than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</strong></p><p class="ptr">Where this is: Item 5 (Significantly High or Significantly Low Number of Successes) on page 4 of the notes, including Understanding the Language, and the video "Classroom Example 5.1.4" on page 6.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Significantly High or Significantly Low Number of Successes: item 5, page 4 (including Understanding the Language)</li><li>Video: "Classroom Example 5.1.4", page 6</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover Using StatCrunch to Find Parameters for a Probability Distribution on pages 2 and 3 of the notes, its video on page 2, and the Classroom Example 5.1.1 to 5.1.3 videos on pages 5 and 6.</p>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="d" data-why="Correct. The values in are always the random variable, and the weights in are always the probabilities." data-miss="{&quot;a&quot;: &quot;Not quite. This has the two boxes reversed, which gives the wrong mean and standard deviation. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. Without the probabilities as weights, StatCrunch treats every x-value as equally likely. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;c&quot;: &quot;Not quite. The probabilities are the weights, and the random variable belongs in Values in. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video &quot;Using StatCrunch to Find Parameters for a Probability Distribution&quot; on page 2, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Custom Calculator Setup).</b> In StatCrunch, you entered a probability distribution in two columns and opened Stat, then Calculators, then Custom. How should the two boxes be set?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Values in: the probabilities. Weights in: the random variable.</span></label><label><input type="radio" name="mc12" value="b"> <span>Values in: the random variable. Weights in: leave it blank.</span></label><label><input type="radio" name="mc12" value="c"> <span>Values in: the probabilities. Weights in: leave it blank.</span></label><label><input type="radio" name="mc12" value="d"> <span>Values in: the random variable. Weights in: the probabilities.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Values in: the random variable. Weights in: the probabilities.</strong></p><p class="ptr">Where this is: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video "Using StatCrunch to Find Parameters for a Probability Distribution" on page 2, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<p>Use this table for Checks 13 to 16. A store tracks x, the number of customer complaints it receives in a day. Enter it into StatCrunch yourself.</p>
+<div class="table-wrap" role="region" aria-label="Table for Checks 13 to 16" tabindex="0">
+<table>
+<caption>Table for Checks 13 to 16</caption>
+<thead><tr><th scope="col">Number of complaints, x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.12</span><span class="sr">0 point 1 2</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.29</span><span class="sr">0 point 2 9</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0.31</span><span class="sr">0 point 3 1</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">0.17</span><span class="sr">0 point 1 7</span></span></td></tr>
+<tr><th scope="row">4</th><td><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></td></tr>
+<tr><th scope="row">5</th><td><span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="1.9" data-why="Correct. StatCrunch shows a mean of 1.89, which rounds to 1.9." data-miss="{&quot;1.89&quot;: &quot;Not quite. This is the unrounded mean, and the directions ask for one decimal place. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1.8&quot;: &quot;Not quite. This cuts off the digits instead of rounding, and the 9 rounds the 8 up. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;2&quot;: &quot;Not quite. This rounds to a whole number instead of one decimal place. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;2.5&quot;: &quot;Not quite. This is the plain average of the x-values, so the probabilities were not used as weights. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;0.1&quot;: &quot;Not quite. This matches the Values in and Weights in boxes being reversed. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;0.126&quot;: &quot;Not quite. This matches the Values in and Weights in boxes being reversed. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1.2&quot;: &quot;Not quite. This is the standard deviation, not the mean. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video &quot;Using StatCrunch to Find Parameters for a Probability Distribution&quot; on page 2, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 13 (Mean).</b> Use StatCrunch to find the mean of this probability distribution. Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.9</span><span class="sr">1 point 9</span></span> complaints</strong></p><p class="ptr">Where this is: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video "Using StatCrunch to Find Parameters for a Probability Distribution" on page 2, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="1.2" data-why="Correct. StatCrunch shows a standard deviation of about 1.2320308, which rounds to 1.2." data-miss="{&quot;~1.2320308~0.00001&quot;: &quot;Not quite. This is the unrounded value, and the directions ask for one decimal place. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1.23&quot;: &quot;Not quite. This keeps two decimal places, and the directions ask for one. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1.5&quot;: &quot;Not quite. This looks like the variance, which is the square of the standard deviation. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;0.1&quot;: &quot;Not quite. This matches the Values in and Weights in boxes being reversed. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1.9&quot;: &quot;Not quite. This is the mean, not the standard deviation. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;, &quot;1&quot;: &quot;Not quite. This rounds to a whole number instead of one decimal place. Review: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video \&quot;Using StatCrunch to Find Parameters for a Probability Distribution\&quot; on page 2, and the video \&quot;Classroom Example 5.1.1\&quot; on page 5.&quot;}" data-review="Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video &quot;Using StatCrunch to Find Parameters for a Probability Distribution&quot; on page 2, and the video &quot;Classroom Example 5.1.1&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 14 (Standard Deviation).</b> Use StatCrunch to find the standard deviation of this probability distribution. Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.2</span><span class="sr">1 point 2</span></span> complaints</strong></p><p class="ptr">Where this is: Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3 of the notes, the video "Using StatCrunch to Find Parameters for a Probability Distribution" on page 2, and the video "Classroom Example 5.1.1" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="4.4" data-why="Correct. The mean plus 2 times the standard deviation is about 4.354, which rounds to 4.4." data-miss="{&quot;4.3&quot;: &quot;Not quite. This matches using the rounded mean and standard deviation, 1.9 and 1.2, before computing. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;~4.3540617~0.00001&quot;: &quot;Not quite. This is the unrounded value, and the directions ask for one decimal place. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;4.35&quot;: &quot;Not quite. This keeps two decimal places, and the directions ask for one. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;4.8&quot;: &quot;Not quite. This matches adding the mean and 2 before multiplying, so the multiplication was not done first. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;3.1&quot;: &quot;Not quite. This adds one standard deviation instead of 2 times the standard deviation. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;4.9&quot;: &quot;Not quite. This matches using the variance in place of the standard deviation. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;-0.6&quot;: &quot;Not quite. This is the minimum usual value, which subtracts instead of adds. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;}" data-review="the video &quot;Classroom Example 5.1.3&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.">
+<p class="prompt"><b class="qlabel">Check 15 (Maximum Usual Value).</b> Use the range rule of thumb, as in the Classroom Example 5.1.3 video, to find the maximum usual value for this distribution. Use the unrounded mean and standard deviation, and round only the final answer to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.4</span><span class="sr">4 point 4</span></span> complaints</strong></p><p class="ptr">Where this is: The video "Classroom Example 5.1.3" on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="a" data-why="Correct. 5 is above the maximum usual value of 4.4." data-miss="{&quot;b&quot;: &quot;Not quite. Being above the mean is not enough, since the comparison is with the maximum usual value. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;c&quot;: &quot;Not quite. Values in the table can still be significantly high, as 4 matches was in Classroom Example 5.1.3. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;d&quot;: &quot;Not quite. The rule compares a value with the maximum usual value, whether or not it appears in the table. Review: the video \&quot;Classroom Example 5.1.3\&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;}" data-review="the video &quot;Classroom Example 5.1.3&quot; on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Significantly High by the Range Rule).</b> Using your maximum usual value from Check 15, is 5 complaints in a day a significantly high number?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Yes, because 5 is higher than the maximum usual value of <span class="m"><span aria-hidden="true">4.4</span><span class="sr">4 point 4</span></span>.</span></label><label><input type="radio" name="mc16" value="b"> <span>Yes, because 5 is greater than the mean of <span class="m"><span aria-hidden="true">1.9</span><span class="sr">1 point 9</span></span>.</span></label><label><input type="radio" name="mc16" value="c"> <span>No, because 5 is listed in the table, so it can happen.</span></label><label><input type="radio" name="mc16" value="d"> <span>No, because the range rule of thumb only applies to values that are not in the table.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes, because 5 is higher than the maximum usual value of <span class="m"><span aria-hidden="true">4.4</span><span class="sr">4 point 4</span></span>.</strong></p><p class="ptr">Where this is: The video "Classroom Example 5.1.3" on page 6 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.</p></details>
+</div>
+<p>Check 17 uses the seed table from Section 4, shown again here. A gardener plants 8 seeds, and x is the number that sprout.</p>
+<div class="table-wrap" role="region" aria-label="Table for Check 17" tabindex="0">
+<table>
+<caption>Table for Check 17</caption>
+<thead><tr><th scope="col">Number of seeds that sprout, x</th><th scope="col"><span class="m"><span aria-hidden="true">P(x)</span><span class="sr">P of x</span></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td><span class="m"><span aria-hidden="true">0.006</span><span class="sr">0 point 0 0 6</span></span></td></tr>
+<tr><th scope="row">1</th><td><span class="m"><span aria-hidden="true">0.022</span><span class="sr">0 point 0 2 2</span></span></td></tr>
+<tr><th scope="row">2</th><td><span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span></td></tr>
+<tr><th scope="row">3</th><td><span class="m"><span aria-hidden="true">0.112</span><span class="sr">0 point 1 1 2</span></span></td></tr>
+<tr><th scope="row">4</th><td><span class="m"><span aria-hidden="true">0.220</span><span class="sr">0 point 2 2 0</span></span></td></tr>
+<tr><th scope="row">5</th><td><span class="m"><span aria-hidden="true">0.260</span><span class="sr">0 point 2 6 0</span></span></td></tr>
+<tr><th scope="row">6</th><td><span class="m"><span aria-hidden="true">0.190</span><span class="sr">0 point 1 9 0</span></span></td></tr>
+<tr><th scope="row">7</th><td><span class="m"><span aria-hidden="true">0.110</span><span class="sr">0 point 1 1 0</span></span></td></tr>
+<tr><th scope="row">8</th><td><span class="m"><span aria-hidden="true">0.040</span><span class="sr">0 point 0 4 0</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="1.7" data-why="Correct. The mean minus 2 times the standard deviation is about 1.688, which rounds to 1.7." data-miss="{&quot;1.6&quot;: &quot;Not quite. This matches using the rounded mean and standard deviation, 4.8 and 1.6, before computing. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;~1.6876861~0.00001&quot;: &quot;Not quite. This is the unrounded value, and the directions ask for one decimal place. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;1.69&quot;: &quot;Not quite. This keeps two decimal places, and the directions ask for one. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;8&quot;: &quot;Not quite. This is the maximum usual value, which adds instead of subtracts. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;4.5&quot;: &quot;Not quite. This matches subtracting 2 from the mean before multiplying, so the multiplication was not done first. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;3.3&quot;: &quot;Not quite. This subtracts one standard deviation instead of 2 times the standard deviation. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;, &quot;-0.1&quot;: &quot;Not quite. This matches using the variance in place of the standard deviation. Review: the video \&quot;Classroom Example 5.1.2\&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.&quot;}" data-review="the video &quot;Classroom Example 5.1.2&quot; on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.">
+<p class="prompt"><b class="qlabel">Check 17 (Minimum Usual Value).</b> Use StatCrunch and the range rule of thumb, as in the Classroom Example 5.1.2 video, to find the minimum usual value for the seed table. Use the unrounded mean and standard deviation, and round only the final answer to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.7</span><span class="sr">1 point 7</span></span> seeds</strong></p><p class="ptr">Where this is: The video "Classroom Example 5.1.2" on page 5 of the notes, and Using StatCrunch to Find Parameters for a Probability Distribution (item 3) on pages 2 and 3.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Page 2 of the notes gives two ways: click StatCrunch inside MyLab, or go to statcrunch.com and log in if it asks. Then choose Open StatCrunch." value="I could not get StatCrunch to open."> I could not get StatCrunch to open.</label><label><input type="checkbox" class="sc-issue" data-tip="The Classroom Example 5.1.2 video clicks the table in MyLab and uses the box that opens it in StatCrunch. You can also type the two columns in yourself." value="I was not sure how to get a table from MyLab into StatCrunch."> I was not sure how to get a table from MyLab into StatCrunch.</label><label><input type="checkbox" class="sc-issue" data-tip="The video &quot;Using StatCrunch to Find Parameters for a Probability Distribution&quot; keeps each x-value in the same row as its probability, and labels a column by clicking it and typing a name." value="My columns did not line up, or I could not label them."> My columns did not line up, or I could not label them.</label><label><input type="checkbox" class="sc-issue" data-tip="Go to Stat, then Calculators, then all the way down to Custom. Page 3 of the notes shows this." value="I could not find the Custom calculator."> I could not find the Custom calculator.</label><label><input type="checkbox" class="sc-issue" data-tip="Check the Note on page 3: Values in is always the random variable and Weights in is always the probabilities. Then check each probability against the table, row by row." value="The mean or standard deviation looked wrong."> The mean or standard deviation looked wrong.</label><label><input type="checkbox" class="sc-issue" data-tip="The Classroom Example 5.1.2 video uses Data, then Compute, then Expression, types * for multiplication, and uses every decimal place instead of rounded values." value="I needed the mean and standard deviation in another computation."> I needed the mean and standard deviation in another computation.</label><label><input type="checkbox" class="sc-issue" data-tip="Round only the final answer, to the place the question asks. The Classroom Example 5.1.2 video shows a value typed into the wrong box at first, so reread which box asks for which value." value="MyLab marked my answer wrong after I rounded or typed it in."> MyLab marked my answer wrong after I rounded or typed it in.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Using StatCrunch to Find Parameters for a Probability Distribution: item 3, pages 2 and 3, video "Using StatCrunch to Find Parameters for a Probability Distribution", page 2</li><li>Mean and standard deviation from a table: video "Classroom Example 5.1.1", page 5</li><li>Minimum usual value: video "Classroom Example 5.1.2", page 5</li><li>Maximum usual value and significantly high: video "Classroom Example 5.1.3", page 6</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 10: I am not sure which rows of the table to add for 2 or fewer."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec5.1-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Random Variables and Probability Distributions", "resource": "Items 1 and 2 on page 1 of the Section 5.1 notes, and the video \"Classroom Example 5.1.1\" on page 5."}, {"id": "s3", "name": "Parameters and Expected Value", "resource": "Items 3 and 4 on pages 2 and 3 of the Section 5.1 notes."}, {"id": "s4", "name": "Significantly High or Low", "resource": "Item 5 on page 4 of the notes, and the video \"Classroom Example 5.1.4\" on page 6."}, {"id": "s5", "name": "StatCrunch", "resource": "Using StatCrunch to Find Parameters for a Probability Distribution on pages 2 and 3, its video on page 2, and the videos \"Classroom Example 5.1.1\" to \"Classroom Example 5.1.3\" on pages 5 and 6."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='5.1';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

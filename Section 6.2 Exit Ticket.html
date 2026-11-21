@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 6.2 Exit Ticket: Applications of Normal Distributions</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 6.2 Exit Ticket</div>
+<h1>Section 6.2 Exit Ticket: Applications of Normal Distributions</h1>
+<p>A short, ungraded check to use after the Section 6.2 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Nonstandard Normal Distributions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Finding a Probability<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Finding a Data Value<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 16 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 6.2 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Nonstandard Normal Distributions</button></li>
+<li><button type="button" data-go="s3">Finding a Probability</button></li>
+<li><button type="button" data-go="s4">Finding a Data Value</button></li>
+<li><button type="button" data-go="s5">StatCrunch check</button></li>
+<li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Nonstandard Normal Distributions</h2>
+<p>These checks cover the Introduction and item 1 on page 1 and Classroom Example 6.2.1 on page 5 of the Section 6.2 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. A mean of 42 and a standard deviation of 6 make it a nonstandard normal distribution." data-miss="{&quot;a&quot;: &quot;Not quite. Item 1 describes normal distributions whose mean is not zero, and they are still normal distributions. Review: the Introduction and item 1 (Working with Nonstandard Normal Distributions) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A mean of 42 and a standard deviation of 6 are not 0 and 1, so this distribution is not the standard normal one. Review: the Introduction and item 1 (Working with Nonstandard Normal Distributions) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The notes say StatCrunch works with nonstandard normal distributions directly, instead of converting each data value into a z-score. Review: the Introduction and item 1 (Working with Nonstandard Normal Distributions) on page 1 of the notes.&quot;}" data-review="the Introduction and item 1 (Working with Nonstandard Normal Distributions) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Nonstandard Normal Distributions).</b> The lifetimes of a brand of phone battery are normally distributed with a mean of 42 months and a standard deviation of 6 months. Which statement matches item 1 of the notes?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>It is not a normal distribution, because a normal distribution must have a mean of 0.</span></label><label><input type="radio" name="mc1" value="b"> <span>It is a nonstandard normal distribution, because its mean is not 0 and its standard deviation is not 1.</span></label><label><input type="radio" name="mc1" value="c"> <span>It is the standard normal distribution, because the lifetimes are normally distributed.</span></label><label><input type="radio" name="mc1" value="d"> <span>Each lifetime has to be converted into a z-score before StatCrunch can find a probability.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>It is a nonstandard normal distribution, because its mean is not 0 and its standard deviation is not 1.</strong></p><p class="ptr">Where this is: The Introduction and item 1 (Working with Nonstandard Normal Distributions) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. The area under any normal curve is 1." data-miss="{&quot;a&quot;: &quot;Not quite. That is the area on one side of the center, not the area under the whole curve. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. That is the mean, which is a weight, not an area. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. That is the standard deviation, which is a weight, not an area. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;}" data-review="Classroom Example 6.2.1 on page 5 of the notes, and the video &quot;Classroom Example 6.2.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Area Under the Curve).</b> The weights of bags of rice from one factory are normally distributed with a mean of <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg and a standard deviation of <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> kg. For the bell-shaped graph of this distribution, what is the area under the curve?</legend>
+<label><input type="radio" name="mc2" value="a"> <span><span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></span></label><label><input type="radio" name="mc2" value="b"> <span><span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span></span></label><label><input type="radio" name="mc2" value="c"> <span>1</span></label><label><input type="radio" name="mc2" value="d"> <span><span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>1</strong></p><p class="ptr">Where this is: Classroom Example 6.2.1 on page 5 of the notes, and the video "Classroom Example 6.2.1" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. In a normal distribution, the mean, median and mode are the same value." data-miss="{&quot;b&quot;: &quot;Not quite. In a normal distribution the mode is the same value as the mean, so no list of data is needed. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;, &quot;c&quot;: &quot;Not quite. This distribution has a mean of 2.04 kg, so its center is not at 0. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. 2.07 kg is one standard deviation above the mean, and the mode sits at the center with the mean. Review: Classroom Example 6.2.1 on page 5 of the notes, and the video \&quot;Classroom Example 6.2.1\&quot; on page 5.&quot;}" data-review="Classroom Example 6.2.1 on page 5 of the notes, and the video &quot;Classroom Example 6.2.1&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Median and Mode).</b> For the same bags of rice (mean <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg, standard deviation <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> kg), what are the median and the mode of the weights?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>The median and the mode are both <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg.</span></label><label><input type="radio" name="mc3" value="b"> <span>The median is <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg, and the mode cannot be found without the data.</span></label><label><input type="radio" name="mc3" value="c"> <span>The median is 0 kg and the mode is 1 kg, as in the standard normal.</span></label><label><input type="radio" name="mc3" value="d"> <span>The median is <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg, and the mode is <span class="m"><span aria-hidden="true">2.07</span><span class="sr">2 point 0 7</span></span> kg.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The median and the mode are both <span class="m"><span aria-hidden="true">2.04</span><span class="sr">2 point 0 4</span></span> kg.</strong></p><p class="ptr">Where this is: Classroom Example 6.2.1 on page 5 of the notes, and the video "Classroom Example 6.2.1" on page 5.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Nonstandard normal distributions: Introduction and item 1, page 1</li><li>Area under the curve, median and mode: Classroom Example 6.2.1, page 5, video "Classroom Example 6.2.1"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Finding a Probability</h2>
+<p>These checks cover the examples on pages 1 to 3 and Classroom Examples 6.2.2, 6.2.4 and 6.2.6 part a on pages 6 and 7 of the Section 6.2 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. The problem&#x27;s mean and standard deviation, the greater than or equal to sign, and 80 as the value." data-miss="{&quot;a&quot;: &quot;Not quite. That sign gives the area to the left of 80, and the question asks about heart rates greater than 80. Review: item 1 and the example on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;, &quot;b&quot;: &quot;Not quite. The mean and standard deviation from the problem have to replace the 0 and 1 before you compute. Review: item 1 and the example on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;, &quot;c&quot;: &quot;Not quite. 80 is a heart rate, a data value, so it goes in the X box rather than after the equals sign. Review: item 1 and the example on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;}" data-review="item 1 and the example on pages 1 and 2 of the notes, and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value&quot; on page 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Greater Than a Value).</b> Resting heart rates of adults in a study are normally distributed with a mean of 71 beats per minute and a standard deviation of 9. To find the probability that a randomly selected adult has a resting heart rate greater than 80, which StatCrunch setup matches the notes?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>Mean 71, Std. Dev. 9, the <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, and 80 in the X box</span></label><label><input type="radio" name="mc4" value="b"> <span>Mean 0 and Std. Dev. 1 left as they are, the <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, and 80 in the X box</span></label><label><input type="radio" name="mc4" value="c"> <span>Mean 71, Std. Dev. 9, the <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, and <span class="m"><span aria-hidden="true">0.80</span><span class="sr">0 point 8 0</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc4" value="d"> <span>Mean 71, Std. Dev. 9, the <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, and 80 in the X box</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Mean 71, Std. Dev. 9, the <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, and 80 in the X box</strong></p><p class="ptr">Where this is: Item 1 and the example on pages 1 and 2 of the notes, and the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value" on page 1.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The Between option takes both values at once." data-miss="{&quot;b&quot;: &quot;Not quite. That finds the probability for every commute of 20 minutes or more, including those over 30. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;c&quot;: &quot;Not quite. The mean and standard deviation from the problem have to replace the 0 and 1 before you compute. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;d&quot;: &quot;Not quite. That finds the probability for every commute of 30 minutes or less, including those under 20. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;}" data-review="the example on pages 2 and 3 of the notes, and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values&quot; on page 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Between Two Values).</b> Commute times in a city are normally distributed with a mean of 27 minutes and a standard deviation of 8 minutes. Which StatCrunch setup finds the probability that a commute takes between 20 and 30 minutes?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Click Between, enter mean 27 and Std. Dev. 8, then enter 20 and 30</span></label><label><input type="radio" name="mc5" value="b"> <span>Stay on Standard, enter mean 27 and Std. Dev. 8, choose <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> and enter 20</span></label><label><input type="radio" name="mc5" value="c"> <span>Click Between, leave mean 0 and Std. Dev. 1, then enter 20 and 30</span></label><label><input type="radio" name="mc5" value="d"> <span>Stay on Standard, enter mean 27 and Std. Dev. 8, choose <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and enter 30</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Click Between, enter mean 27 and Std. Dev. 8, then enter 20 and 30</strong></p><p class="ptr">Where this is: The example on pages 2 and 3 of the notes, and the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values" on page 2.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The shaded region is to the left of 40, so the less than or equal to sign with 40." data-miss="{&quot;a&quot;: &quot;Not quite. That finds the area to the right of 40, and the graph shades the region on the other side of the line. Review: Classroom Example 6.2.2 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.2\&quot; on page 6.&quot;, &quot;b&quot;: &quot;Not quite. 40 is a value on the axis, a data value, so it goes in the X box rather than after the equals sign. Review: Classroom Example 6.2.2 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.2\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. The shaded region runs all the way to the left end of the curve, not only from 34 to 40. Review: Classroom Example 6.2.2 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.2\&quot; on page 6.&quot;}" data-review="Classroom Example 6.2.2 on page 6 of the notes, and the video &quot;Classroom Example 6.2.2&quot; on page 6.">
+<figure class="axisfig">
+<svg viewBox="0 0 420 190" width="420" height="190" role="img" aria-labelledby="g6t g6d"><title id="g6t">Graph for Check 6</title><desc id="g6d">A bell-shaped curve over a horizontal axis. The axis is marked at 34, under the peak of the curve, and at 40, to the right of 34. A vertical line rises from 40 to the curve. The region under the curve to the left of the line at 40 is shaded.</desc><path d="M20.0 150 L20.0 149.7 L21.9 149.7 L23.8 149.7 L25.8 149.6 L27.7 149.6 L29.6 149.5 L31.5 149.4 L33.5 149.4 L35.4 149.3 L37.3 149.2 L39.2 149.1 L41.1 149.0 L43.1 148.9 L45.0 148.8 L46.9 148.6 L48.8 148.5 L50.8 148.3 L52.7 148.1 L54.6 147.9 L56.5 147.7 L58.5 147.5 L60.4 147.2 L62.3 146.9 L64.2 146.6 L66.1 146.3 L68.1 145.9 L70.0 145.5 L71.9 145.1 L73.8 144.6 L75.8 144.1 L77.7 143.6 L79.6 143.0 L81.5 142.4 L83.4 141.7 L85.4 141.0 L87.3 140.3 L89.2 139.5 L91.1 138.6 L93.1 137.7 L95.0 136.8 L96.9 135.7 L98.8 134.6 L100.7 133.5 L102.7 132.3 L104.6 131.0 L106.5 129.7 L108.4 128.3 L110.4 126.8 L112.3 125.3 L114.2 123.7 L116.1 122.0 L118.1 120.2 L120.0 118.4 L121.9 116.5 L123.8 114.5 L125.7 112.5 L127.7 110.4 L129.6 108.3 L131.5 106.0 L133.4 103.8 L135.4 101.4 L137.3 99.0 L139.2 96.6 L141.1 94.1 L143.0 91.6 L145.0 89.0 L146.9 86.4 L148.8 83.8 L150.7 81.1 L152.7 78.4 L154.6 75.8 L156.5 73.1 L158.4 70.4 L160.4 67.7 L162.3 65.1 L164.2 62.4 L166.1 59.8 L168.0 57.3 L170.0 54.8 L171.9 52.3 L173.8 49.9 L175.7 47.6 L177.7 45.3 L179.6 43.2 L181.5 41.1 L183.4 39.1 L185.3 37.2 L187.3 35.5 L189.2 33.9 L191.1 32.3 L193.0 31.0 L195.0 29.7 L196.9 28.6 L198.8 27.6 L200.7 26.8 L202.6 26.1 L204.6 25.6 L206.5 25.3 L208.4 25.1 L210.3 25.0 L212.3 25.1 L214.2 25.4 L216.1 25.8 L218.0 26.4 L220.0 27.1 L221.9 28.0 L223.8 29.0 L225.7 30.1 L227.6 31.4 L229.6 32.9 L231.5 34.4 L233.4 36.1 L235.3 37.9 L237.3 39.8 L239.2 41.8 L241.1 43.9 L243.0 46.1 L244.9 48.4 L246.9 50.7 L248.8 53.2 L250.7 55.6 L250.7 150 Z" fill="currentColor" fill-opacity="0.55" stroke="none"/><line x1="20" y1="150" x2="400" y2="150" stroke="currentColor" stroke-width="2"/><path d="M20.0 149.7 L21.9 149.7 L23.8 149.7 L25.7 149.6 L27.6 149.6 L29.5 149.5 L31.4 149.4 L33.3 149.4 L35.2 149.3 L37.1 149.2 L39.0 149.1 L40.9 149.0 L42.8 148.9 L44.7 148.8 L46.6 148.7 L48.5 148.5 L50.4 148.3 L52.3 148.2 L54.2 148.0 L56.1 147.8 L58.0 147.5 L59.9 147.3 L61.8 147.0 L63.7 146.7 L65.6 146.4 L67.5 146.0 L69.4 145.6 L71.3 145.2 L73.2 144.8 L75.1 144.3 L77.0 143.8 L78.9 143.2 L80.8 142.6 L82.7 142.0 L84.6 141.3 L86.5 140.6 L88.4 139.8 L90.3 139.0 L92.2 138.1 L94.1 137.2 L96.0 136.2 L97.9 135.2 L99.8 134.1 L101.7 132.9 L103.6 131.7 L105.5 130.4 L107.4 129.0 L109.3 127.6 L111.2 126.1 L113.1 124.6 L115.0 123.0 L116.9 121.3 L118.8 119.5 L120.7 117.7 L122.6 115.8 L124.5 113.8 L126.4 111.8 L128.3 109.7 L130.2 107.6 L132.1 105.4 L134.0 103.1 L135.9 100.8 L137.8 98.4 L139.7 96.0 L141.6 93.5 L143.5 91.0 L145.4 88.4 L147.3 85.8 L149.2 83.2 L151.1 80.6 L153.0 78.0 L154.9 75.3 L156.8 72.7 L158.7 70.0 L160.6 67.4 L162.5 64.8 L164.4 62.2 L166.3 59.6 L168.2 57.1 L170.1 54.6 L172.0 52.2 L173.9 49.8 L175.8 47.5 L177.7 45.3 L179.6 43.1 L181.5 41.1 L183.4 39.1 L185.3 37.3 L187.2 35.6 L189.1 33.9 L191.0 32.4 L192.9 31.1 L194.8 29.8 L196.7 28.7 L198.6 27.7 L200.5 26.9 L202.4 26.2 L204.3 25.7 L206.2 25.3 L208.1 25.1 L210.0 25.0 L211.9 25.1 L213.8 25.3 L215.7 25.7 L217.6 26.2 L219.5 26.9 L221.4 27.7 L223.3 28.7 L225.2 29.8 L227.1 31.1 L229.0 32.4 L230.9 33.9 L232.8 35.6 L234.7 37.3 L236.6 39.1 L238.5 41.1 L240.4 43.1 L242.3 45.3 L244.2 47.5 L246.1 49.8 L248.0 52.2 L249.9 54.6 L251.8 57.1 L253.7 59.6 L255.6 62.2 L257.5 64.8 L259.4 67.4 L261.3 70.0 L263.2 72.7 L265.1 75.3 L267.0 78.0 L268.9 80.6 L270.8 83.2 L272.7 85.8 L274.6 88.4 L276.5 91.0 L278.4 93.5 L280.3 96.0 L282.2 98.4 L284.1 100.8 L286.0 103.1 L287.9 105.4 L289.8 107.6 L291.7 109.7 L293.6 111.8 L295.5 113.8 L297.4 115.8 L299.3 117.7 L301.2 119.5 L303.1 121.3 L305.0 123.0 L306.9 124.6 L308.8 126.1 L310.7 127.6 L312.6 129.0 L314.5 130.4 L316.4 131.7 L318.3 132.9 L320.2 134.1 L322.1 135.2 L324.0 136.2 L325.9 137.2 L327.8 138.1 L329.7 139.0 L331.6 139.8 L333.5 140.6 L335.4 141.3 L337.3 142.0 L339.2 142.6 L341.1 143.2 L343.0 143.8 L344.9 144.3 L346.8 144.8 L348.7 145.2 L350.6 145.6 L352.5 146.0 L354.4 146.4 L356.3 146.7 L358.2 147.0 L360.1 147.3 L362.0 147.5 L363.9 147.8 L365.8 148.0 L367.7 148.2 L369.6 148.3 L371.5 148.5 L373.4 148.7 L375.3 148.8 L377.2 148.9 L379.1 149.0 L381.0 149.1 L382.9 149.2 L384.8 149.3 L386.7 149.4 L388.6 149.4 L390.5 149.5 L392.4 149.6 L394.3 149.6 L396.2 149.7 L398.1 149.7 L400.0 149.7" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="250.7" y1="150" x2="250.7" y2="55.6" stroke="currentColor" stroke-width="2.5"/><line x1="210.0" y1="150" x2="210.0" y2="158" stroke="currentColor" stroke-width="2"/><text x="210.0" y="176" text-anchor="middle" font-size="16" fill="currentColor">34</text><text x="250.7" y="176" text-anchor="middle" font-size="16" fill="currentColor">40</text></svg>
+<figcaption>Commute times: mean 34 minutes, standard deviation 8 minutes.</figcaption>
+</figure>
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Reading a Shaded Graph).</b> The graph shows commute times that are normally distributed with a mean of 34 minutes and a standard deviation of 8 minutes. To find the area of the shaded region, you enter mean 34 and Std. Dev. 8. What else matches the graph?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign with 40 in the X box</span></label><label><input type="radio" name="mc6" value="b"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign with <span class="m"><span aria-hidden="true">0.40</span><span class="sr">0 point 4 0</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc6" value="c"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign with 40 in the X box</span></label><label><input type="radio" name="mc6" value="d"> <span>Click Between and enter 34 and 40</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign with 40 in the X box</strong></p><p class="ptr">Where this is: Classroom Example 6.2.2 on page 6 of the notes, and the video "Classroom Example 6.2.2" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The sketch tells you where the values go, so you are not guessing, and it lets you check StatCrunch&#x27;s graph." data-miss="{&quot;a&quot;: &quot;Not quite. StatCrunch draws its own graph, and your sketch is for you, not for StatCrunch. Review: Classroom Example 6.2.4 on page 6 of the notes, the video \&quot;Classroom Example 6.2.4\&quot; on page 6, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;, &quot;c&quot;: &quot;Not quite. The sketch shows where the values go, and StatCrunch is what computes the probability. Review: Classroom Example 6.2.4 on page 6 of the notes, the video \&quot;Classroom Example 6.2.4\&quot; on page 6, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;, &quot;d&quot;: &quot;Not quite. The videos recommend sketching the curve every time, before opening the calculator. Review: Classroom Example 6.2.4 on page 6 of the notes, the video \&quot;Classroom Example 6.2.4\&quot; on page 6, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1.&quot;}" data-review="Classroom Example 6.2.4 on page 6 of the notes, the video &quot;Classroom Example 6.2.4&quot; on page 6, and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value&quot; on page 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Draw a Graph First).</b> Classroom Example 6.2.4 ends with the hint "Draw a graph." According to the videos, why sketch the graph before opening StatCrunch?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>StatCrunch cannot compute until you upload a sketch of the problem.</span></label><label><input type="radio" name="mc7" value="b"> <span>You know which sign and values to enter, and can compare with the graph StatCrunch draws.</span></label><label><input type="radio" name="mc7" value="c"> <span>The sketch gives the exact probability, so StatCrunch only double-checks it.</span></label><label><input type="radio" name="mc7" value="d"> <span>Only nonstandard problems need it, because the standard normal never needs a graph.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>You know which sign and values to enter, and can compare with the graph StatCrunch draws.</strong></p><p class="ptr">Where this is: Classroom Example 6.2.4 on page 6 of the notes, the video "Classroom Example 6.2.4" on page 6, and the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value" on page 1.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. About 96.21% meet the limits, and only a small percentage are turned away." data-miss="{&quot;a&quot;: &quot;Not quite. Only about 3.79% fall outside the limits, which is a small percentage. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. Changing 0.962143 to a percent moves the decimal point two places to the right, which gives about 96.21%. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. 3.79% is the part outside the limits, and StatCrunch gave the probability between them. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;}" data-review="part a of Classroom Example 6.2.6 on page 7 of the notes, and the video &quot;Classroom Example 6.2.6&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Percent Meeting a Requirement).</b> A theme park ride allows riders whose heights are between 48 in. and 76 in. StatCrunch gives <span class="m"><span aria-hidden="true">0.962143</span><span class="sr">0 point 9 6 2 1 4 3</span></span> for the probability that a visitor's height is between those limits. Which statement fits the way part a of Classroom Example 6.2.6 is answered, with the percent rounded to two decimal places?</legend>
+<label><input type="radio" name="mc8" value="a"> <span><span class="m"><span aria-hidden="true">96.21%</span><span class="sr">96 point 2 1 percent</span></span> of visitors meet the limits, so many visitors are turned away.</span></label><label><input type="radio" name="mc8" value="b"> <span><span class="m"><span aria-hidden="true">0.96%</span><span class="sr">0 point 9 6 percent</span></span> of visitors meet the limits, so very few visitors can ride.</span></label><label><input type="radio" name="mc8" value="c"> <span><span class="m"><span aria-hidden="true">3.79%</span><span class="sr">3 point 7 9 percent</span></span> of visitors meet the limits, so very few visitors can ride.</span></label><label><input type="radio" name="mc8" value="d"> <span><span class="m"><span aria-hidden="true">96.21%</span><span class="sr">96 point 2 1 percent</span></span> of visitors meet the limits, so few visitors are turned away.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">96.21%</span><span class="sr">96 point 2 1 percent</span></span> of visitors meet the limits, so few visitors are turned away.</strong></p><p class="ptr">Where this is: Part a of Classroom Example 6.2.6 on page 7 of the notes, and the video "Classroom Example 6.2.6" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Greater than a value: example on pages 1 and 2, video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value"</li><li>Between two values: example on pages 2 and 3, video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values"</li><li>Shaded graphs and drawing a graph: Classroom Examples 6.2.2 and 6.2.4, page 6, videos "Classroom Example 6.2.2" and "Classroom Example 6.2.4"</li><li>Percent meeting a requirement: Classroom Example 6.2.6 part a, page 7, video "Classroom Example 6.2.6"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Finding a Data Value</h2>
+<p>These checks cover Example 3 on pages 4 and 5 and Classroom Examples 6.2.3, 6.2.5 and 6.2.6 part b on pages 6 and 7 of the Section 6.2 notes.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. The area on the right, 0.10, goes after the equals sign, and StatCrunch fills in the score." data-miss="{&quot;a&quot;: &quot;Not quite. The area is entered as a decimal, so 10% is typed as 0.10. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;c&quot;: &quot;Not quite. 0.10 is an area, so it goes after the equals sign, and the X box is where the score appears. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. That puts the 0.10 area on the left, which marks off the bottom 10% instead of the top 10%. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;}" data-review="Example 3 on pages 4 and 5 of the notes, and the video &quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Top Percent Cutoff).</b> Scores on a state driving test are normally distributed. You want the score that separates the top 10% from the bottom 90%. Using the same approach as Example 3, after entering the mean and standard deviation, which entry matches?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with 10 typed after the equals sign</span></label><label><input type="radio" name="mc9" value="b"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span> typed after the equals sign and the X box left empty</span></label><label><input type="radio" name="mc9" value="c"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span> typed in the X box</span></label><label><input type="radio" name="mc9" value="d"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span> typed after the equals sign</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span> typed after the equals sign and the X box left empty</strong></p><p class="ptr">Where this is: Example 3 on pages 4 and 5 of the notes, and the video "Using StatCrunch to A Data Value On A Nonstandard Normal Curve" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The area 0.3 is on the left, so the less than or equal to sign with 0.3 after the equals sign." data-miss="{&quot;b&quot;: &quot;Not quite. That puts the 0.3 area to the right of x, and the graph shades the region on the left. Review: Classroom Example 6.2.3 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.3\&quot; on page 6.&quot;, &quot;c&quot;: &quot;Not quite. 0.3 is an area, not a weight, so it goes after the equals sign. Review: Classroom Example 6.2.3 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.3\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. The area is given as 0.3, and an area is entered as that decimal. Review: Classroom Example 6.2.3 on page 6 of the notes, and the video \&quot;Classroom Example 6.2.3\&quot; on page 6.&quot;}" data-review="Classroom Example 6.2.3 on page 6 of the notes, and the video &quot;Classroom Example 6.2.3&quot; on page 6.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Area on the Left).</b> A graph of weights that are normally distributed shows a shaded region to the left of an unknown weight x, labeled with an area of <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>. After entering the mean and standard deviation, which entry finds x?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc10" value="b"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc10" value="c"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> typed in the X box</span></label><label><input type="radio" name="mc10" value="d"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with 30 typed after the equals sign</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> typed after the equals sign</strong></p><p class="ptr">Where this is: Classroom Example 6.2.3 on page 6 of the notes, and the video "Classroom Example 6.2.3" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. The largest 5% is the area on the right, entered as 0.05." data-miss="{&quot;a&quot;: &quot;Not quite. That puts 0.95 on the right, which would mark off the smallest 5% instead of the largest 5%. Review: Classroom Example 6.2.5 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.5\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. That puts 0.05 on the left, which marks off the smallest 5% of widths. Review: Classroom Example 6.2.5 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.5\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. The area is entered as a decimal, so 5% is typed as 0.05. Review: Classroom Example 6.2.5 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.5\&quot; on page 7.&quot;}" data-review="Classroom Example 6.2.5 on page 7 of the notes, and the video &quot;Classroom Example 6.2.5&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Smallest Percent and Largest Percent).</b> Men's shoulder widths are normally distributed with a mean of <span class="m"><span aria-hidden="true">18.2</span><span class="sr">18 point 2</span></span> in. and a standard deviation of <span class="m"><span aria-hidden="true">1.0</span><span class="sr">1 point 0</span></span> in. A bus seat designer wants the width that separates the smallest 95% from the largest 5%. Following the Classroom Example 6.2.5 video, which entry matches?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.95</span><span class="sr">0 point 9 5</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc11" value="b"> <span>The <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> typed after the equals sign</span></label><label><input type="radio" name="mc11" value="c"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with 5 typed after the equals sign</span></label><label><input type="radio" name="mc11" value="d"> <span>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> typed after the equals sign</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign, with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> typed after the equals sign</strong></p><p class="ptr">Where this is: Classroom Example 6.2.5 on page 7 of the notes, and the video "Classroom Example 6.2.5" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. There is one limit at each end, so there are two separate computations." data-miss="{&quot;a&quot;: &quot;Not quite. 0.03 and 0.05 are areas at opposite ends, and the video treats them as two separate problems. Review: part b of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. Adding the areas gives a single cutoff, but there is one limit at each end of the curve. Review: part b of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. The longest 5% is at the right end, so the upper limit needs the greater than or equal to sign. Review: part b of Classroom Example 6.2.6 on page 7 of the notes, and the video \&quot;Classroom Example 6.2.6\&quot; on page 7.&quot;}" data-review="part b of Classroom Example 6.2.6 on page 7 of the notes, and the video &quot;Classroom Example 6.2.6&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Two Cutoffs).</b> A factory rejects the shortest 3% and the longest 5% of the bolts it makes, and bolt lengths are normally distributed. To find the new length limits, how should the work in StatCrunch be set up?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>One Between computation, with <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> and <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> entered as the two values</span></label><label><input type="radio" name="mc12" value="b"> <span>One computation with the <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> sign and <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>, since 3% and 5% make 8%</span></label><label><input type="radio" name="mc12" value="c"> <span>Two computations: <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> for the lower limit, and <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> for the upper limit</span></label><label><input type="radio" name="mc12" value="d"> <span>Two computations: <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> for the lower limit, and <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> for the upper limit</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Two computations: <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> for the lower limit, and <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> for the upper limit</strong></p><p class="ptr">Where this is: Part b of Classroom Example 6.2.6 on page 7 of the notes, and the video "Classroom Example 6.2.6" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Finding a data value from an area: Example 3, pages 4 and 5, video "Using StatCrunch to A Data Value On A Nonstandard Normal Curve"</li><li>Area on the left: Classroom Example 6.2.3, page 6, video "Classroom Example 6.2.3"</li><li>Separating the smallest from the largest: Classroom Example 6.2.5, page 7, video "Classroom Example 6.2.5"</li><li>Two cutoffs: Classroom Example 6.2.6 part b, page 7, video "Classroom Example 6.2.6"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps on pages 1 to 5 of the notes, the three StatCrunch videos on pages 1, 2 and 4, and the Classroom Example videos on pages 6 and 7.</p>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="0.0578" data-why="Correct. StatCrunch shows about 0.05777, which rounds to 0.0578." data-miss="{&quot;0.0577&quot;: &quot;Not quite. This cuts off the extra digits instead of rounding to four decimal places. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;, &quot;0.058&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;, &quot;5.78&quot;: &quot;Not quite. This is a percent, and the question asks for the probability as a decimal. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;, &quot;0.9422&quot;: &quot;Not quite. This is the area to the left of 42, so the inequality sign points the wrong way. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;, &quot;0&quot;: &quot;Not quite. This is what StatCrunch gives when the mean 0 and standard deviation 1 are left in place. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;, &quot;~0.05777~0.000006&quot;: &quot;Not quite. This is not yet rounded to four decimal places. Review: the example on pages 1 and 2 of the notes, the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value\&quot; on page 1, and the video \&quot;Classroom Example 6.2.4\&quot; on page 6.&quot;}" data-review="the example on pages 1 and 2 of the notes, the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value&quot; on page 1, and the video &quot;Classroom Example 6.2.4&quot; on page 6.">
+<p class="prompt"><b class="qlabel">Check 13 (Probability Greater Than a Value).</b> Pizza delivery times are normally distributed with a mean of <span class="m"><span aria-hidden="true">32.4</span><span class="sr">32 point 4</span></span> minutes and a standard deviation of <span class="m"><span aria-hidden="true">6.1</span><span class="sr">6 point 1</span></span> minutes. Use StatCrunch to find the probability that a delivery takes more than 42 minutes. Round the probability to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0578</span><span class="sr">0 point 0 5 7 8</span></span></strong></p><p class="ptr">Where this is: The example on pages 1 and 2 of the notes, the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value" on page 1, and the video "Classroom Example 6.2.4" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="0.627" data-why="Correct. StatCrunch shows about 0.62717, which rounds to 0.627." data-miss="{&quot;0.761&quot;: &quot;Not quite. This is the area for every weight of 3 kg or more, so the Between option was not used. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.866&quot;: &quot;Not quite. This is the area for every weight of 4 kg or less, so the Between option was not used. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.373&quot;: &quot;Not quite. This is the area outside the two weights, not between them. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.001&quot;: &quot;Not quite. This is what StatCrunch gives when the mean 0 and standard deviation 1 are left in place. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.6272&quot;: &quot;Not quite. This is rounded to four decimal places, and the directions ask for three. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.63&quot;: &quot;Not quite. This is rounded to two decimal places, and the directions ask for three. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;62.7&quot;: &quot;Not quite. This is a percent, and the question asks for the probability as a decimal. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;~0.62717~0.000006&quot;: &quot;Not quite. This is not yet rounded to three decimal places. Review: the example on pages 2 and 3 of the notes, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;}" data-review="the example on pages 2 and 3 of the notes, and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values&quot; on page 2.">
+<p class="prompt"><b class="qlabel">Check 14 (Probability Between Two Values).</b> Newborn birth weights at a hospital are normally distributed with a mean of <span class="m"><span aria-hidden="true">3.39</span><span class="sr">3 point 3 9</span></span> kg and a standard deviation of <span class="m"><span aria-hidden="true">0.55</span><span class="sr">0 point 5 5</span></span> kg. Use StatCrunch to find the probability that a newborn weighs between 3 kg and 4 kg. Round the probability to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.627</span><span class="sr">0 point 6 2 7</span></span></strong></p><p class="ptr">Where this is: The example on pages 2 and 3 of the notes, and the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values" on page 2.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="80.5" data-why="Correct. StatCrunch shows about 80.5112, which rounds to 80.5." data-miss="{&quot;64.7&quot;: &quot;Not quite. This score separates the bottom 20%, so the area was placed on the wrong side. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;81&quot;: &quot;Not quite. This is rounded to the nearest whole number, and the directions ask for one decimal place. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;80&quot;: &quot;Not quite. This cuts off the decimal part, and the directions ask for one decimal place. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;80.51&quot;: &quot;Not quite. This is rounded to two decimal places, and the directions ask for one. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;0.8&quot;: &quot;Not quite. This is what StatCrunch gives when the mean 0 and standard deviation 1 are left in place. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;, &quot;~80.5112~0.00006&quot;: &quot;Not quite. This is not yet rounded to one decimal place. Review: Example 3 on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve\&quot; on page 4.&quot;}" data-review="Example 3 on pages 4 and 5 of the notes, and the video &quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 15 (Data Value from a Top Percent).</b> Scores on a placement test are normally distributed with a mean of <span class="m"><span aria-hidden="true">72.6</span><span class="sr">72 point 6</span></span> and a standard deviation of <span class="m"><span aria-hidden="true">9.4</span><span class="sr">9 point 4</span></span>. Use StatCrunch to find the score that separates the top 20% from the bottom 80%. Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">80.5</span><span class="sr">80 point 5</span></span></strong></p><p class="ptr">Where this is: Example 3 on pages 4 and 5 of the notes, and the video "Using StatCrunch to A Data Value On A Nonstandard Normal Curve" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="98.42" data-why="Correct. StatCrunch shows about 0.98415, which is 98.415%, and that rounds to 98.42%." data-miss="{&quot;0.9842&quot;: &quot;Not quite. This is the probability as a decimal, and the question asks for a percent. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;0.98&quot;: &quot;Not quite. This is the probability as a decimal, and the question asks for a percent. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;98.41&quot;: &quot;Not quite. This cuts off the extra digits instead of rounding to two decimal places. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;98.4&quot;: &quot;Not quite. This is rounded to one decimal place, and the directions ask for two. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;1.58&quot;: &quot;Not quite. This is the percent outside the range, not between the two heights. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;99.28&quot;: &quot;Not quite. This is the percent for every height of 62 in. or more, so the Between option was not used. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;99.13&quot;: &quot;Not quite. This is the percent for every height of 76 in. or less, so the Between option was not used. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;, &quot;~98.415~0.0006&quot;: &quot;Not quite. This is not yet rounded to two decimal places. Review: part a of Classroom Example 6.2.6 on page 7 of the notes, the video \&quot;Classroom Example 6.2.6\&quot; on page 7, and the video \&quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values\&quot; on page 2.&quot;}" data-review="part a of Classroom Example 6.2.6 on page 7 of the notes, the video &quot;Classroom Example 6.2.6&quot; on page 7, and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values&quot; on page 2.">
+<p class="prompt"><b class="qlabel">Check 16 (Percent Between Two Values).</b> Heights of adult men are normally distributed with a mean of <span class="m"><span aria-hidden="true">69.1</span><span class="sr">69 point 1</span></span> in. and a standard deviation of <span class="m"><span aria-hidden="true">2.9</span><span class="sr">2 point 9</span></span> in. A doorway is designed for men with heights between 62 in. and 76 in. Use StatCrunch to find the percentage of men in that range. Give the answer as a percent rounded to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">98.42%</span><span class="sr">98 point 4 2 percent</span></span></strong></p><p class="ptr">Where this is: Part a of Classroom Example 6.2.6 on page 7 of the notes, the video "Classroom Example 6.2.6" on page 7, and the video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values" on page 2.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Some problems do not offer it. Open StatCrunch on its own in a separate window, as the &quot;Classroom Example 6.2.3&quot; and &quot;Classroom Example 6.2.6&quot; videos do. Then choose Stat, then Calculators, then Normal." value="MyLab did not offer StatCrunch under Get More Help."> MyLab did not offer StatCrunch under Get More Help.</label><label><input type="checkbox" class="sc-issue" data-tip="Type the mean and standard deviation from the problem into the Mean and Std. Dev. boxes before you choose Compute. Pages 1, 3 and 4 of the notes show this." value="The calculator showed mean 0 and standard deviation 1."> The calculator showed mean 0 and standard deviation 1.</label><label><input type="checkbox" class="sc-issue" data-tip="Click Between at the top of the Normal Calculator. Page 3 of the notes and the video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values&quot; show this." value="I needed two values, but there was only one box."> I needed two values, but there was only one box.</label><label><input type="checkbox" class="sc-issue" data-tip="Click Standard to switch back, as the &quot;Classroom Example 6.2.6&quot; video does. Page 3 of the notes shows both buttons." value="I could not get back to one value after using Between."> I could not get back to one value after using Between.</label><label><input type="checkbox" class="sc-issue" data-tip="Leave the X box empty and type the area after the equals sign, then choose Compute. Pages 4 and 5 of the notes and the video &quot;Using StatCrunch to A Data Value On A Nonstandard Normal Curve&quot; show this." value="I needed a data value, not a probability."> I needed a data value, not a probability.</label><label><input type="checkbox" class="sc-issue" data-tip="Sketch the curve first and check the inequality sign before you compute, then compare your sketch with the graph StatCrunch draws. The video &quot;Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value&quot; shows this." value="My answer was on the wrong side, too big or too small."> My answer was on the wrong side, too big or too small.</label><label><input type="checkbox" class="sc-issue" data-tip="Read the rounding direction in the problem and look only at the next digit, as the &quot;Classroom Example 6.2.4&quot; video does. For a percent, the &quot;Classroom Example 6.2.6&quot; video moves the decimal point two places to the right before rounding." value="I was not sure how to round or how to give a percent."> I was not sure how to round or how to give a percent.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Greater than a value: example on pages 1 and 2, video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Greater than a Given Value"</li><li>Between two values: example on pages 2 and 3, video "Using StatCrunch to Find Area Under Nonstandard Normal Curve Between Two Values"</li><li>Data value from an area: Example 3, pages 4 and 5, video "Using StatCrunch to A Data Value On A Nonstandard Normal Curve"</li><li>Rounding and percents: videos "Classroom Example 6.2.4" (page 6) and "Classroom Example 6.2.6" (page 7)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 12: I am not sure why the two cutoffs need two separate computations."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec6.2-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Nonstandard Normal Distributions", "resource": "The Introduction and item 1 on page 1 and Classroom Example 6.2.1 on page 5 of the Section 6.2 notes."}, {"id": "s3", "name": "Finding a Probability", "resource": "The examples on pages 1 to 3, Classroom Examples 6.2.2, 6.2.4 and 6.2.6 on pages 6 and 7, and their videos."}, {"id": "s4", "name": "Finding a Data Value", "resource": "Example 3 on pages 4 and 5, Classroom Examples 6.2.3, 6.2.5 and 6.2.6 on pages 6 and 7, and their videos."}, {"id": "s5", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 1 to 5, the three StatCrunch videos on pages 1, 2 and 4, and the Classroom Example videos on pages 6 and 7."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='6.2';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s6')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

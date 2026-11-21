@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 3.2 Exit Ticket: Measures of Variation</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 3.2 Exit Ticket</div>
+<h1>Section 3.2 Exit Ticket: Measures of Variation</h1>
+<p>A short, ungraded check to use after the Section 3.2 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Range, Standard Deviation and Variance<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Range Rule of Thumb<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Estimating and Estimators<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 19 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 3.2 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Range, Standard Deviation and Variance</button></li>
+<li><button type="button" data-go="s3">Range Rule of Thumb</button></li>
+<li><button type="button" data-go="s4">Estimating Standard Deviation and Estimators</button></li>
+<li><button type="button" data-go="s5">StatCrunch check</button></li>
+<li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Range, Standard Deviation and Variance</h2>
+<p>These checks cover the Introductory Example and items 1 to 3 on pages 1 and 2 of the Section 3.2 notes, and the Classroom Example 3.2.2 video on page 7.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Same center, different variation." data-miss="{&quot;a&quot;: &quot;Not quite. Matching means and medians describe the center, and the two machines still differ in how much the amounts vary. Review: the Introductory Example on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Identical amounts show no variation at all, so Machine A varies the least. Review: the Introductory Example on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Amounts that run from 6 to 10 vary more than amounts that are all 8, even when the spacing is even. Review: the Introductory Example on page 1 of the notes.&quot;}" data-review="the Introductory Example on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Introductory Example).</b> Two coffee machines each fill five cups. Machine A pours 8, 8, 8, 8 and 8 ounces. Machine B pours 6, 7, 8, 9 and 10 ounces. Both have a mean of 8 ounces and a median of 8 ounces. Which statement matches the Introductory Example?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The two machines behave the same, because their means and medians match.</span></label><label><input type="radio" name="mc1" value="b"> <span>The centers match, but Machine B varies more, which the mean and median do not show.</span></label><label><input type="radio" name="mc1" value="c"> <span>Machine A varies more, because every one of its cups holds the same amount.</span></label><label><input type="radio" name="mc1" value="d"> <span>Machine B varies less, because its amounts are spread out evenly from 6 to 10.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The centers match, but Machine B varies more, which the mean and median do not show.</strong></p><p class="ptr">Where this is: The Introductory Example on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="num" data-answer="11.7" data-why="Correct. 21.5 minus 9.8 is 11.7 miles." data-miss="{&quot;7.3&quot;: &quot;Not quite. This subtracts the first value in the list, 14.2, instead of the minimum. Review: item 1 (Range) on page 1 of the notes.&quot;, &quot;1.6&quot;: &quot;Not quite. This subtracts the first and last values in the list, which are not the maximum and minimum. Review: item 1 (Range) on page 1 of the notes.&quot;, &quot;-11.7&quot;: &quot;Not quite. This subtracts the maximum from the minimum, so the order is reversed. Review: item 1 (Range) on page 1 of the notes.&quot;, &quot;31.3&quot;: &quot;Not quite. This adds the maximum and minimum instead of subtracting. Review: item 1 (Range) on page 1 of the notes.&quot;, &quot;21.5&quot;: &quot;Not quite. This is the maximum alone, with the minimum not yet subtracted. Review: item 1 (Range) on page 1 of the notes.&quot;}" data-review="item 1 (Range) on page 1 of the notes.">
+<p class="prompt"><b class="qlabel">Check 2 (Range).</b> Five runners logged these distances in miles last week: <span class="m"><span aria-hidden="true">14.2</span><span class="sr">14 point 2</span></span>, <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span>, <span class="m"><span aria-hidden="true">21.5</span><span class="sr">21 point 5</span></span>, <span class="m"><span aria-hidden="true">17.0</span><span class="sr">17 point 0</span></span>, <span class="m"><span aria-hidden="true">12.6</span><span class="sr">12 point 6</span></span>. Find the range in miles. Do not round.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">11.7</span><span class="sr">11 point 7</span></span> miles</strong></p><p class="ptr">Where this is: Item 1 (Range) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. Range and standard deviation are both sensitive to outliers." data-miss="{&quot;a&quot;: &quot;Not quite. The notes say range and standard deviation are sensitive to outliers, so even two extreme values can change them a lot. Review: items 1 and 2 (Range, Standard Deviation) on page 1 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. The smallest rents sit close to the rest of the data, and the two largest rents are the ones far away. Review: items 1 and 2 (Range, Standard Deviation) on page 1 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. Real values can still be outliers when they are far from the rest, as 4,800 and 6,200 are here. Review: items 1 and 2 (Range, Standard Deviation) on page 1 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;}" data-review="items 1 and 2 (Range, Standard Deviation) on page 1 of the notes, and the video &quot;Classroom Example 3.2.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Outliers).</b> Monthly rents, in dollars, for eight apartments are 850, 875, 900, 910, 925, 950, 4,800 and 6,200. Are there any outliers, and are they likely to have much of an effect on the measures of variation?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Yes, the largest amounts appear to be outliers, but they are not likely to have much effect, because there are only two of them.</span></label><label><input type="radio" name="mc3" value="b"> <span>Yes, the smallest amounts are much lower than the rest and appear to be outliers.</span></label><label><input type="radio" name="mc3" value="c"> <span>No, there are no outliers, because every amount is a real monthly rent.</span></label><label><input type="radio" name="mc3" value="d"> <span>Yes, the largest amounts appear to be outliers, and they are likely to have a large effect on the measures of variation.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes, the largest amounts appear to be outliers, and they are likely to have a large effect on the measures of variation.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Range, Standard Deviation) on page 1 of the notes, and the video "Classroom Example 3.2.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. When all values are identical, the standard deviation is zero." data-miss="{&quot;b&quot;: &quot;Not quite. 2.5 pounds is the weight of each bag, which describes the center, not how much the weights vary. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The notes say a standard deviation is always positive, or zero when all values are identical, so it is never negative. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The notes give a value for this case: zero, when all data values are identical. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes.&quot;}" data-review="items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Standard Deviation of Identical Values).</b> A store weighs 6 bags of rice, and every bag weighs exactly <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> pounds. What is the standard deviation of these weights?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>0 pounds</span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> pounds</span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span> pounds</span></label><label><input type="radio" name="mc4" value="d"> <span>It cannot be found, because no weights differ.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>0 pounds</strong></p><p class="ptr">Where this is: Items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Standard deviation uses the data units, and variance uses the square of them." data-miss="{&quot;a&quot;: &quot;Not quite. The variance is the standard deviation squared, so its units are squared as well. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. This has the two reversed, since the standard deviation keeps the units of the data values. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. Both measures carry units, and the notes and video give them with every answer. Review: items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;}" data-review="items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes, and the video &quot;Classroom Example 3.2.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Units).</b> Commute times for a sample of workers are measured in minutes, and the standard deviation is <span class="m"><span aria-hidden="true">6.2</span><span class="sr">6 point 2</span></span> minutes. Which statement about units matches items 2 and 3?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>The standard deviation and the variance are both in minutes.</span></label><label><input type="radio" name="mc5" value="b"> <span>The standard deviation is in minutes squared, and the variance is in minutes.</span></label><label><input type="radio" name="mc5" value="c"> <span>The standard deviation is in minutes, and the variance is in minutes squared.</span></label><label><input type="radio" name="mc5" value="d"> <span>Neither one has units, because both are found from a formula.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The standard deviation is in minutes, and the variance is in minutes squared.</strong></p><p class="ptr">Where this is: Items 2 and 3 (Standard Deviation, Variance) on pages 1 and 2 of the notes, and the video "Classroom Example 3.2.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="num" data-nonneg="1" data-answer="20.25" data-why="Correct. 4.5 squared is 20.25, in kilograms squared." data-miss="{&quot;9&quot;: &quot;Not quite. This multiplies 4.5 by 2, and the variance is 4.5 times 4.5. Review: item 3 (Variance) on page 2 of the notes.&quot;, &quot;16.25&quot;: &quot;Not quite. This squares the 4 and the 0.5 separately and adds them, and the variance is 4.5 times 4.5. Review: item 3 (Variance) on page 2 of the notes.&quot;, &quot;2.25&quot;: &quot;Not quite. This divides 4.5 by 2, and the variance is 4.5 times 4.5. Review: item 3 (Variance) on page 2 of the notes.&quot;, &quot;20.3&quot;: &quot;Not quite. The directions say do not round, and this is rounded. Review: item 3 (Variance) on page 2 of the notes.&quot;, &quot;20&quot;: &quot;Not quite. The directions say do not round, and this is rounded. Review: item 3 (Variance) on page 2 of the notes.&quot;, &quot;~2.1213~0.001&quot;: &quot;Not quite. This takes a square root, and the variance is the square of the standard deviation. Review: item 3 (Variance) on page 2 of the notes.&quot;}" data-review="item 3 (Variance) on page 2 of the notes.">
+<p class="prompt"><b class="qlabel">Check 6 (Variance from Standard Deviation).</b> The standard deviation of a set of package weights is <span class="m"><span aria-hidden="true">4.5</span><span class="sr">4 point 5</span></span> kilograms. Find the variance. Do not round.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">20.25</span><span class="sr">20 point 2 5</span></span> kilograms squared</strong></p><p class="ptr">Where this is: Item 3 (Variance) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. Sigma squared is the population variance." data-miss="{&quot;a&quot;: &quot;Not quite. The population standard deviation is sigma without the square. Review: the Notations under items 2 and 3 on pages 1 and 2 of the notes, and item 7 (Unbiased Estimator) on page 3.&quot;, &quot;b&quot;: &quot;Not quite. The sample variance uses the letter s, written s squared. Review: the Notations under items 2 and 3 on pages 1 and 2 of the notes, and item 7 (Unbiased Estimator) on page 3.&quot;, &quot;c&quot;: &quot;Not quite. The sample standard deviation uses the letter s with no square. Review: the Notations under items 2 and 3 on pages 1 and 2 of the notes, and item 7 (Unbiased Estimator) on page 3.&quot;}" data-review="the Notations under items 2 and 3 on pages 1 and 2 of the notes, and item 7 (Unbiased Estimator) on page 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Notation).</b> A report gives <span class="m"><span aria-hidden="true">σ² = 36</span><span class="sr">sigma squared equals 36</span></span> for an entire population. What does <span class="m"><span aria-hidden="true">σ²</span><span class="sr">sigma squared</span></span> name?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>The population standard deviation</span></label><label><input type="radio" name="mc7" value="b"> <span>The sample variance</span></label><label><input type="radio" name="mc7" value="c"> <span>The sample standard deviation</span></label><label><input type="radio" name="mc7" value="d"> <span>The population variance</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The population variance</strong></p><p class="ptr">Where this is: The Notations under items 2 and 3 on pages 1 and 2 of the notes, and item 7 (Unbiased Estimator) on page 3.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Introductory Example (paint drying times): page 1</li><li>Range: item 1, page 1</li><li>Standard Deviation: item 2, page 1</li><li>Variance: item 3, page 2</li><li>Notation for variance: item 7, page 3</li><li>Outliers and units: video "Classroom Example 3.2.2", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Range Rule of Thumb</h2>
+<p>These checks cover item 4 on page 2 of the notes and the Classroom Example 3.2.1 and 3.2.3 videos on page 7.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The rule says about 95% fall within two standard deviations." data-miss="{&quot;a&quot;: &quot;Not quite. Half of the values is not the share the rule gives for two standard deviations. Review: item 4 (Range Rule of Thumb) on page 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. That share is smaller than the one item 4 gives for two standard deviations. Review: item 4 (Range Rule of Thumb) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The rule says about, not all, so some values can fall outside. Review: item 4 (Range Rule of Thumb) on page 2 of the notes.&quot;}" data-review="item 4 (Range Rule of Thumb) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Range Rule of Thumb).</b> By the range rule of thumb in item 4, about what percent of the data values fall within two standard deviations of the mean?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>About 50%</span></label><label><input type="radio" name="mc8" value="b"> <span>About 95%</span></label><label><input type="radio" name="mc8" value="c"> <span>About 68%</span></label><label><input type="radio" name="mc8" value="d"> <span>100%</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>About 95%</strong></p><p class="ptr">Where this is: Item 4 (Range Rule of Thumb) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="155.7" data-why="Correct. 172.45 minus 2 times 8.37 is 155.71, which rounds to 155.7 cm." data-miss="{&quot;1426.7&quot;: &quot;Not quite. This subtracts 2 from the mean before multiplying, so the order of operations is off. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;~1426.6665~0.0001&quot;: &quot;Not quite. This subtracts 2 from the mean before multiplying, so the order of operations is off. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;164.1&quot;: &quot;Not quite. This subtracts one standard deviation instead of two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;164.08&quot;: &quot;Not quite. This subtracts one standard deviation instead of two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;189.2&quot;: &quot;Not quite. This is the maximum usual value, which adds two standard deviations. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;155.71&quot;: &quot;Not quite. The directions say one decimal place, and this has two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;155.8&quot;: &quot;Not quite. The digit after the 7 is 1, so the 7 stays. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;}" data-review="item 4 (Range Rule of Thumb) on page 2 of the notes, and the video &quot;Classroom Example 3.2.3&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 9 (Minimum Usual Value).</b> Heights of a sample of adult women have a mean of <span class="m"><span aria-hidden="true">172.45</span><span class="sr">172 point 4 5</span></span> cm and a standard deviation of <span class="m"><span aria-hidden="true">8.37</span><span class="sr">8 point 3 7</span></span> cm. Find the minimum usual value. If rounding is necessary, then round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">155.7</span><span class="sr">155 point 7</span></span> cm</strong></p><p class="ptr">Where this is: Item 4 (Range Rule of Thumb) on page 2 of the notes, and the video "Classroom Example 3.2.3" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="189.2" data-why="Correct. 172.45 plus 2 times 8.37 is 189.19, which rounds to 189.2 cm." data-miss="{&quot;1460.1&quot;: &quot;Not quite. This adds 2 to the mean before multiplying, so the order of operations is off. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;~1460.1465~0.0001&quot;: &quot;Not quite. This adds 2 to the mean before multiplying, so the order of operations is off. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;180.8&quot;: &quot;Not quite. This adds one standard deviation instead of two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;180.82&quot;: &quot;Not quite. This adds one standard deviation instead of two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;155.7&quot;: &quot;Not quite. This is the minimum usual value, which subtracts two standard deviations. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;189.19&quot;: &quot;Not quite. The directions say one decimal place, and this has two. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;189.1&quot;: &quot;Not quite. The digit after the 1 is 9, so the 1 goes up. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;}" data-review="item 4 (Range Rule of Thumb) on page 2 of the notes, and the video &quot;Classroom Example 3.2.1&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 10 (Maximum Usual Value).</b> For the same heights (mean <span class="m"><span aria-hidden="true">172.45</span><span class="sr">172 point 4 5</span></span> cm, standard deviation <span class="m"><span aria-hidden="true">8.37</span><span class="sr">8 point 3 7</span></span> cm), find the maximum usual value. If rounding is necessary, then round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">189.2</span><span class="sr">189 point 2</span></span> cm</strong></p><p class="ptr">Where this is: Item 4 (Range Rule of Thumb) on page 2 of the notes, and the video "Classroom Example 3.2.1" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. 470.0 grams falls between 336.9 and 488.1 grams." data-miss="{&quot;a&quot;: &quot;Not quite. Being above the mean is not enough, since the cutoff for significantly high is the maximum usual value. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. The rule uses two standard deviations, not one, to set the cutoff. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. 470.0 is above 336.9, so it is not below the lower limit. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.1\&quot; on page 7.&quot;}" data-review="item 4 (Range Rule of Thumb) on page 2 of the notes, and the video &quot;Classroom Example 3.2.1&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Significantly High).</b> Weights of newborn puppies of one breed have a mean of <span class="m"><span aria-hidden="true">412.5</span><span class="sr">412 point 5</span></span> grams and a standard deviation of <span class="m"><span aria-hidden="true">37.8</span><span class="sr">37 point 8</span></span> grams. The limits from the range rule of thumb are <span class="m"><span aria-hidden="true">336.9</span><span class="sr">336 point 9</span></span> grams and <span class="m"><span aria-hidden="true">488.1</span><span class="sr">488 point 1</span></span> grams. Would a weight of <span class="m"><span aria-hidden="true">470.0</span><span class="sr">470 point 0</span></span> grams be significantly high?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Yes, because it is above the mean of <span class="m"><span aria-hidden="true">412.5</span><span class="sr">412 point 5</span></span> grams.</span></label><label><input type="radio" name="mc11" value="b"> <span>Yes, because it is more than one standard deviation above the mean.</span></label><label><input type="radio" name="mc11" value="c"> <span>No, because it is between the two limits.</span></label><label><input type="radio" name="mc11" value="d"> <span>No, because it is below the lower limit of <span class="m"><span aria-hidden="true">336.9</span><span class="sr">336 point 9</span></span> grams.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because it is between the two limits.</strong></p><p class="ptr">Where this is: Item 4 (Range Rule of Thumb) on page 2 of the notes, and the video "Classroom Example 3.2.1" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The minimum usual value is 51.1, and 49.0 is below it." data-miss="{&quot;b&quot;: &quot;Not quite. 49.0 is 25.3 below the mean, which is more than two standard deviations of 11.6. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. 49.0 is below the mean, so it can only be significantly low, not high. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. Item 4 also treats values below the minimum usual value as significantly low. Review: item 4 (Range Rule of Thumb) on page 2 of the notes, and the video \&quot;Classroom Example 3.2.3\&quot; on page 7.&quot;}" data-review="item 4 (Range Rule of Thumb) on page 2 of the notes, and the video &quot;Classroom Example 3.2.3&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Significantly Low, High or Neither).</b> Resting pulse rates for a sample of 100 adult women have a mean of <span class="m"><span aria-hidden="true">74.3</span><span class="sr">74 point 3</span></span> beats per minute and a standard deviation of <span class="m"><span aria-hidden="true">11.6</span><span class="sr">11 point 6</span></span> beats per minute. Is a pulse rate of <span class="m"><span aria-hidden="true">49.0</span><span class="sr">49 point 0</span></span> beats per minute significantly low, significantly high, or neither?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Significantly low, because it is below the minimum usual value of <span class="m"><span aria-hidden="true">51.1</span><span class="sr">51 point 1</span></span> beats per minute.</span></label><label><input type="radio" name="mc12" value="b"> <span>Neither, because it is within two standard deviations of the mean.</span></label><label><input type="radio" name="mc12" value="c"> <span>Significantly high, because it is far from the mean.</span></label><label><input type="radio" name="mc12" value="d"> <span>Neither, because only values above the maximum usual value are unusual.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Significantly low, because it is below the minimum usual value of <span class="m"><span aria-hidden="true">51.1</span><span class="sr">51 point 1</span></span> beats per minute.</strong></p><p class="ptr">Where this is: Item 4 (Range Rule of Thumb) on page 2 of the notes, and the video "Classroom Example 3.2.3" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Range Rule of Thumb, maximum and minimum usual values: item 4, page 2</li><li>Significantly high: video "Classroom Example 3.2.1", page 7</li><li>Significantly low, significantly high or neither: video "Classroom Example 3.2.3", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Estimating Standard Deviation and Estimators</h2>
+<p>These checks cover items 5 to 7 on page 3 of the Section 3.2 notes.</p>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="9.2" data-why="Correct. 88.4 minus 51.6 is 36.8, and 36.8 divided by 4 is 9.2 seconds." data-miss="{&quot;75.5&quot;: &quot;Not quite. This divides only the minimum by 4, so the whole range was not grouped first. Review: item 5 (Estimating Standard Deviation) on page 3 of the notes.&quot;, &quot;36.8&quot;: &quot;Not quite. This is the range, which still needs to be divided by 4. Review: item 5 (Estimating Standard Deviation) on page 3 of the notes.&quot;, &quot;35&quot;: &quot;Not quite. This adds the maximum and minimum before dividing, and the range subtracts them. Review: item 5 (Estimating Standard Deviation) on page 3 of the notes.&quot;, &quot;18.4&quot;: &quot;Not quite. This divides the range by 2, and the estimate divides by 4. Review: item 5 (Estimating Standard Deviation) on page 3 of the notes.&quot;, &quot;147.2&quot;: &quot;Not quite. This multiplies the range by 4 instead of dividing. Review: item 5 (Estimating Standard Deviation) on page 3 of the notes.&quot;}" data-review="item 5 (Estimating Standard Deviation) on page 3 of the notes.">
+<p class="prompt"><b class="qlabel">Check 13 (Estimating Standard Deviation).</b> In a reaction-time study, the maximum data value is <span class="m"><span aria-hidden="true">88.4</span><span class="sr">88 point 4</span></span> seconds and the minimum is <span class="m"><span aria-hidden="true">51.6</span><span class="sr">51 point 6</span></span> seconds. Estimate the standard deviation. If rounding is necessary, then round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">9.2</span><span class="sr">9 point 2</span></span> seconds</strong></p><p class="ptr">Where this is: Item 5 (Estimating Standard Deviation) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. Item 6 lists the sample standard deviation as biased." data-miss="{&quot;a&quot;: &quot;Not quite. Item 6 lists the sample standard deviation as an example of a biased estimator. Review: item 6 (Biased Estimator) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Biased here describes how the sample measurement compares with the population measurement, not a measuring mistake. Review: item 6 (Biased Estimator) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 6 says s is typically different from sigma, even when the work is done correctly. Review: item 6 (Biased Estimator) on page 3 of the notes.&quot;}" data-review="item 6 (Biased Estimator) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Biased Estimator).</b> A forester uses the sample standard deviation s from 30 trees to estimate the population standard deviation <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> for the whole forest. Which statement matches item 6?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>The sample standard deviation is an unbiased estimator, because it tends to equal <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</span></label><label><input type="radio" name="mc14" value="b"> <span>The sample standard deviation is a biased estimator, because it typically differs from <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</span></label><label><input type="radio" name="mc14" value="c"> <span>The estimate is biased only if the forester made a mistake measuring the trees.</span></label><label><input type="radio" name="mc14" value="d"> <span>With a random sample, s is always exactly equal to <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The sample standard deviation is a biased estimator, because it typically differs from <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</strong></p><p class="ptr">Where this is: Item 6 (Biased Estimator) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Item 7 lists the sample variance, along with the sample mean." data-miss="{&quot;b&quot;: &quot;Not quite. Item 6 lists the sample standard deviation as biased, not unbiased. Review: item 7 (Unbiased Estimator) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 6 lists the sample range as biased, not unbiased. Review: item 7 (Unbiased Estimator) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Only one of these three is listed in item 7, and the other two appear in item 6. Review: item 7 (Unbiased Estimator) on page 3 of the notes.&quot;}" data-review="item 7 (Unbiased Estimator) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Unbiased Estimator).</b> Which sample measurement does item 7 list as tending to equal its population measurement?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>The sample variance, <span class="m"><span aria-hidden="true">s²</span><span class="sr">s squared</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span>The sample standard deviation, s</span></label><label><input type="radio" name="mc15" value="c"> <span>The sample range</span></label><label><input type="radio" name="mc15" value="d"> <span>All three of these</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The sample variance, <span class="m"><span aria-hidden="true">s²</span><span class="sr">s squared</span></span></strong></p><p class="ptr">Where this is: Item 7 (Unbiased Estimator) on page 3 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Estimating Standard Deviation: item 5, page 3</li><li>Biased Estimator: item 6, page 3</li><li>Unbiased Estimator: item 7, page 3</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover "Using StatCrunch to Find Measures of Variation" on pages 4 to 6 of the notes, its video, and the Classroom Example 3.2.2 video on page 7.</p>
+<p>Checks 16 to 19 use one data set. The wait times, in minutes, for 10 cars at a pharmacy drive-through are:</p>
+<p class="work"><span class="m"><span aria-hidden="true">23.4</span><span class="sr">23 point 4</span></span>, <span class="m"><span aria-hidden="true">18.9</span><span class="sr">18 point 9</span></span>, <span class="m"><span aria-hidden="true">31.2</span><span class="sr">31 point 2</span></span>, <span class="m"><span aria-hidden="true">27.5</span><span class="sr">27 point 5</span></span>, <span class="m"><span aria-hidden="true">18.9</span><span class="sr">18 point 9</span></span>, <span class="m"><span aria-hidden="true">44.8</span><span class="sr">44 point 8</span></span>, <span class="m"><span aria-hidden="true">25.1</span><span class="sr">25 point 1</span></span>, <span class="m"><span aria-hidden="true">21.7</span><span class="sr">21 point 7</span></span>, <span class="m"><span aria-hidden="true">29.6</span><span class="sr">29 point 6</span></span>, <span class="m"><span aria-hidden="true">36.3</span><span class="sr">36 point 3</span></span></p>
+<p>Enter the data in StatCrunch yourself and set up each computation. Round all results to two decimal places.</p>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="8.15" data-why="Correct. StatCrunch shows about 8.15396, which rounds to 8.15 minutes." data-miss="{&quot;~8.15396~0.0001&quot;: &quot;Not quite. The directions say two decimal places, and this has more. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;8.2&quot;: &quot;Not quite. The directions say two decimal places, and this has one. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;8.16&quot;: &quot;Not quite. The digit after the 5 is 3, so the 5 stays. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;66.49&quot;: &quot;Not quite. This is the variance, which is in the column next to the standard deviation. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;7.74&quot;: &quot;Not quite. This is the population standard deviation, and StatCrunch Summary Stats gives the sample standard deviation. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;25.9&quot;: &quot;Not quite. This is the range, in a different column of the output. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;27.74&quot;: &quot;Not quite. This is the mean, in a different column of the output. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;}" data-review="&quot;Using StatCrunch to Find Measures of Variation&quot; on pages 4 and 5 of the notes, the video &quot;Using StatCrunch to find measures of variation&quot; on page 4, and the video &quot;Classroom Example 3.2.2&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 16 (Standard Deviation).</b> Use StatCrunch to find the standard deviation of the wait times, in minutes. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">8.15</span><span class="sr">8 point 1 5</span></span> minutes</strong></p><p class="ptr">Where this is: "Using StatCrunch to Find Measures of Variation" on pages 4 and 5 of the notes, the video "Using StatCrunch to find measures of variation" on page 4, and the video "Classroom Example 3.2.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="66.49" data-why="Correct. StatCrunch shows about 66.48711, which rounds to 66.49 minutes squared." data-miss="{&quot;66.42&quot;: &quot;Not quite. This squares the rounded standard deviation, 8.15, so the early rounding changed the answer. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;66.4225&quot;: &quot;Not quite. This squares the rounded standard deviation, 8.15, so the early rounding changed the answer. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;~66.48711~0.0001&quot;: &quot;Not quite. The directions say two decimal places, and this has more. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;66.5&quot;: &quot;Not quite. The directions say two decimal places, and this has one. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;16.31&quot;: &quot;Not quite. This doubles the standard deviation, and the variance squares it. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;59.84&quot;: &quot;Not quite. This is the population variance, and StatCrunch Summary Stats gives the sample variance. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;, &quot;8.15&quot;: &quot;Not quite. This is the standard deviation, in the column next to the variance. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 4 and 5 of the notes, the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4, and the video \&quot;Classroom Example 3.2.2\&quot; on page 7.&quot;}" data-review="&quot;Using StatCrunch to Find Measures of Variation&quot; on pages 4 and 5 of the notes, the video &quot;Using StatCrunch to find measures of variation&quot; on page 4, and the video &quot;Classroom Example 3.2.2&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 17 (Variance).</b> Use StatCrunch to find the variance of the wait times, in minutes squared. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">66.49</span><span class="sr">66 point 4 9</span></span> minutes squared</strong></p><p class="ptr">Where this is: "Using StatCrunch to Find Measures of Variation" on pages 4 and 5 of the notes, the video "Using StatCrunch to find measures of variation" on page 4, and the video "Classroom Example 3.2.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="11.43" data-why="Correct. Using every digit, the mean minus 2 times the standard deviation is about 11.43207, which rounds to 11.43 minutes." data-miss="{&quot;11.44&quot;: &quot;Not quite. This uses a rounded standard deviation, 8.15, and the notes say to use the values without rounding. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;11.3&quot;: &quot;Not quite. This rounds the mean and standard deviation to one decimal place before computing. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;11.4&quot;: &quot;Not quite. The directions say two decimal places, and this has one. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;~11.43207~0.0001&quot;: &quot;Not quite. The directions say two decimal places, and this has more. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;19.59&quot;: &quot;Not quite. This subtracts one standard deviation instead of two. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;209.88&quot;: &quot;Not quite. This subtracts 2 from the mean before multiplying, so the expression needs the multiplication done first. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;44.05&quot;: &quot;Not quite. This is the maximum usual value, which adds two standard deviations. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;12.27&quot;: &quot;Not quite. This uses the population standard deviation, and the notes use the standard deviation from Summary Stats. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on page 5 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;}" data-review="&quot;Using StatCrunch to Find Measures of Variation&quot; on page 5 of the notes, and the video &quot;Using StatCrunch to find measures of variation&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 18 (Minimum Usual Value).</b> Use the full mean and standard deviation from StatCrunch, without rounding them, to find the minimum usual value of the wait times. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">11.43</span><span class="sr">11 point 4 3</span></span> minutes</strong></p><p class="ptr">Where this is: "Using StatCrunch to Find Measures of Variation" on page 5 of the notes, and the video "Using StatCrunch to find measures of variation" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="44.05" data-why="Correct. Using every digit, the mean plus 2 times the standard deviation is about 44.04793, which rounds to 44.05 minutes." data-miss="{&quot;44.04&quot;: &quot;Not quite. This uses a rounded standard deviation, 8.15, and the notes say to use the values without rounding. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;44.1&quot;: &quot;Not quite. This is rounded to one decimal place, or uses values rounded to one decimal place, and the directions say two decimal places. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;~44.04793~0.0001&quot;: &quot;Not quite. The directions say two decimal places, and this has more. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;35.89&quot;: &quot;Not quite. This adds one standard deviation instead of two. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;242.5&quot;: &quot;Not quite. This adds 2 to the mean before multiplying, so the expression needs the multiplication done first. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;~242.5088~0.001&quot;: &quot;Not quite. This adds 2 to the mean before multiplying, so the expression needs the multiplication done first. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;11.43&quot;: &quot;Not quite. This is the minimum usual value, which subtracts two standard deviations. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;, &quot;43.21&quot;: &quot;Not quite. This uses the population standard deviation, and the notes use the standard deviation from Summary Stats. Review: \&quot;Using StatCrunch to Find Measures of Variation\&quot; on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to find measures of variation\&quot; on page 4.&quot;}" data-review="&quot;Using StatCrunch to Find Measures of Variation&quot; on pages 5 and 6 of the notes, and the video &quot;Using StatCrunch to find measures of variation&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 19 (Maximum Usual Value).</b> Use the full mean and standard deviation from StatCrunch, without rounding them, to find the maximum usual value of the wait times. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">44.05</span><span class="sr">44 point 0 5</span></span> minutes</strong></p><p class="ptr">Where this is: "Using StatCrunch to Find Measures of Variation" on pages 5 and 6 of the notes, and the video "Using StatCrunch to find measures of variation" on page 4.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="In MyLab, look under Get More Help and click StatCrunch. If it does not open right away, close the window that pops up and open it again. The video &quot;Classroom Example 3.2.1&quot; shows this." value="I could not get StatCrunch to open from MyLab."> I could not get StatCrunch to open from MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Page 4 of the notes says you may need to log in at statcrunch.com, then click Open StatCrunch." value="statcrunch.com asked me to log in."> statcrunch.com asked me to log in.</label><label><input type="checkbox" class="sc-issue" data-tip="Enter the data in the column labeled var1, then scan it against the list to spot any typing errors. Page 4 of the notes says this. In the homework, data sets can be imported instead of typed." value="My data did not match the list, or I was not sure how to enter it."> My data did not match the list, or I was not sure how to enter it.</label><label><input type="checkbox" class="sc-issue" data-tip="Go to Stat, then Summary Stats, then Columns, click your column under Select Column(s), and click Compute! Pages 4 and 5 of the notes show each step." value="I could not find the standard deviation or variance."> I could not find the standard deviation or variance.</label><label><input type="checkbox" class="sc-issue" data-tip="Go to Data, then Compute, then Expression, and type the full mean and the full standard deviation. Pages 5 and 6 of the notes show the expressions." value="I could not find where to type the computation for the usual values."> I could not find where to type the computation for the usual values.</label><label><input type="checkbox" class="sc-issue" data-tip="StatCrunch may keep your last expression. In the video &quot;Using StatCrunch to find measures of variation,&quot; the minus sign is changed to a plus sign for the second one." value="My second computation used the old expression."> My second computation used the old expression.</label><label><input type="checkbox" class="sc-issue" data-tip="Use every digit of the mean and standard deviation, and round only the final result, as page 5 of the notes and the video &quot;Using StatCrunch to find measures of variation&quot; say." value="My answer was off in the last decimal place."> My answer was off in the last decimal place.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Standard deviation and variance in StatCrunch: pages 4 and 5, video "Using StatCrunch to find measures of variation"</li><li>Minimum and maximum usual values in StatCrunch: pages 5 and 6, same video</li><li>Summary Stats with units: video "Classroom Example 3.2.2", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 11: I found both limits, but I am not sure how to decide whether 470.0 grams is significantly high."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec3.2-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Range, Standard Deviation and Variance", "resource": "The Introductory Example and items 1 to 3 on pages 1 and 2 of the Section 3.2 notes, and the video \"Classroom Example 3.2.2\" on page 7."}, {"id": "s3", "name": "Range Rule of Thumb", "resource": "Item 4 on page 2 of the notes, and the videos \"Classroom Example 3.2.1\" and \"Classroom Example 3.2.3\" on page 7."}, {"id": "s4", "name": "Estimating Standard Deviation and Estimators", "resource": "Items 5 to 7 on page 3 of the Section 3.2 notes."}, {"id": "s5", "name": "StatCrunch", "resource": "Using StatCrunch to Find Measures of Variation on pages 4 to 6 of the notes, and the video \"Using StatCrunch to find measures of variation\" on page 4."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='3.2';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s6')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

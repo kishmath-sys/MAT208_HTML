@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 2.1 Corequisite: Frequency Distributions for Organizing and Summarizing Data</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 2.1</div>
+<h1>Section 2.1 Corequisite: Frequency Distributions for Organizing and Summarizing Data</h1>
+<p>Get ready for the Section 2.1 notes with practice on the decimal, order of operations, percent and rounding skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Adding, subtracting and halving with decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Order of operations on one line<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Part of a total as a decimal or percent<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding to one or two decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Add a list of counts, split a number in half, and add or subtract decimals, including answers below zero.</li><li>Work out one-line expressions where a sum is divided by a number.</li><li>Find what part of a total one count is, as a decimal and as a percent.</li><li>Round to two decimal places or one decimal place, including a 9 that rounds up.</li></ul>
+</div>
+<p>Section 2.1 of the notes introduces frequency distributions and relative frequency distributions, the parts of a frequency distribution, building both kinds of tables in StatCrunch, and a check for whether a distribution is normal.</p>
+<p>The notes and videos do a lot of small arithmetic along the way: adding counts, halving, subtracting decimals, dividing a count by a total, changing a decimal to a percent, and rounding. The Note on page 8 and two of the videos give the decimal to percent step only a one-line reminder, so the notes expect you to know it already. This page gives that arithmetic more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span>. For a negative answer, type a minus sign (the hyphen key) in front, such as <span class="m"><span aria-hidden="true">-0.5</span><span class="sr">minus 0 point 5</span></span>. Commas, a percent sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 2.1 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 2.1 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure what <span class="m"><span aria-hidden="true">0 − 0.25</span><span class="sr">0 minus 0 point 2 5</span></span> is, or what happens when I subtract and the answer drops below zero.</strong><br><button type="button" data-go="s2">Adding, subtracting and halving with decimals</button></li>
+<li><strong>I am not sure what a calculator does first when a sum and a division are typed on one line.</strong><br><button type="button" data-go="s3">Order of operations on one line</button></li>
+<li><strong>I am not sure which number to divide by when a question asks what part of a total something is.</strong><br><button type="button" data-go="s4">Part of a total as a decimal or percent</button></li>
+<li><strong>I lose track of which digit to keep when the directions say two decimal places.</strong><br><button type="button" data-go="s5">Rounding to one or two decimal places</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Adding, subtracting and halving with decimals</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Add a list of whole numbers without leaving any out.</li><li>Split a whole number or a decimal in half and write the result as a decimal.</li><li>Add or subtract a decimal and a whole number by lining up the decimal points.</li><li>Subtract a larger number from a smaller one and keep the minus sign.</li><li>Put negative and positive decimals in order.</li></ul>
+</div>
+<h3>Line up the decimal points</h3>
+<p>To add or subtract a whole number and a decimal, write the whole number with a decimal point and zeros, then line up the points. For example, <span class="m"><span aria-hidden="true">46 − 0.5</span><span class="sr">46 minus 0 point 5</span></span> is the same as <span class="m"><span aria-hidden="true">46.0 − 0.5</span><span class="sr">46 point 0 minus 0 point 5</span></span>, which is <span class="m"><span aria-hidden="true">45.5</span><span class="sr">45 point 5</span></span>.</p>
+<p><strong>Halving.</strong> Half of a number is the number divided by 2. Half of 1 is <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>, half of 3 is <span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span>, and half of <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>. Halving a number smaller than 1 gives an even smaller number.</p>
+<p><strong>Going below zero.</strong> When you subtract a larger number from a smaller one, the answer is negative. Find the difference of the two sizes, then put a minus sign in front. On a number line, a negative number is to the left of zero, and <span class="m"><span aria-hidden="true">−0.5</span><span class="sr">negative 0 point 5</span></span> is farther left than <span class="m"><span aria-hidden="true">−0.05</span><span class="sr">negative 0 point 0 5</span></span>, so <span class="m"><span aria-hidden="true">−0.5</span><span class="sr">negative 0 point 5</span></span> is the smaller of the two.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Treating <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> as 5.</strong> <span class="m"><span aria-hidden="true">46 − 0.5</span><span class="sr">46 minus 0 point 5</span></span> is not 41. Half of 1 is subtracted, so the answer is <span class="m"><span aria-hidden="true">45.5</span><span class="sr">45 point 5</span></span>.</li>
+<li><strong>Dropping the minus sign.</strong> <span class="m"><span aria-hidden="true">0 − 0.25</span><span class="sr">0 minus 0 point 2 5</span></span> is <span class="m"><span aria-hidden="true">−0.25</span><span class="sr">negative 0 point 2 5</span></span>, not <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>. The number taken away is larger, so the result is below zero.</li>
+<li><strong>Losing a place when halving a decimal.</strong> Half of <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, not <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>. Write <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> as <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span> first: half of 10 hundredths is 5 hundredths.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Find 6 − 6.25">
+<h3 style="margin-top:0">Worked example: Find 6 − 6.25</h3>
+<p>Find <span class="m"><span aria-hidden="true">6 − 6.25</span><span class="sr">6 minus 6 point 2 5</span></span>.</p><ol class="steps"><li><span class="work">The second number is larger</span><span class="say">So the answer will be below zero.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">6.25 − 6.00 = 0.25</span><span class="sr">6 point 2 5 minus 6 point 0 0 equals 0 point 2 5</span></span></span><span class="say">Find the difference of the two sizes, lining up the decimal points.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">6 − 6.25 = −0.25</span><span class="sr">6 minus 6 point 2 5 equals negative 0 point 2 5</span></span></span><span class="say">Put a minus sign in front.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">−0.25</span><span class="sr">negative 0 point 2 5</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Add five counts">
+<h3 style="margin-top:0">Finish this one: Add five counts</h3>
+<p>A coffee cart counted drinks sold in each of five hours: 12, 7, 15, 4 and 2. How many drinks did it sell in all?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">12 + 7 = 19</span><span class="sr">12 plus 7 equals 19</span></span></span><span class="say">Add the first two counts. Next, keep adding the rest one at a time.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="40" data-miss="{&quot;5&quot;: &quot;That counts how many numbers are in the list. Add the numbers themselves: 12 + 7 + 15 + 4 + 2 is 40.&quot;, &quot;38&quot;: &quot;That leaves out the 2 at the end. Add all five counts: 40.&quot;, &quot;36&quot;: &quot;That leaves out the 4. Add all five counts: 40.&quot;, &quot;33&quot;: &quot;That leaves out the 7. Add all five counts: 40.&quot;, &quot;25&quot;: &quot;That leaves out the 15. Add all five counts: 40.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: how many drinks did the coffee cart sell in all?</p>
+<details><summary>Hint</summary><p>After 19, add 15, then 4, then 2. Check that you used all five numbers.</p></details>
+<details><summary>Show answer</summary><p><strong>40 drinks</strong>, because <span class="m"><span aria-hidden="true">12 + 7 + 15 + 4 + 2 = 40</span><span class="sr">12 plus 7 plus 15 plus 4 plus 2 equals 40</span></span>.</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="1.5" data-miss="{&quot;~0.6667~0.005&quot;: &quot;That divides 2 by 3, so the division is flipped. Half of 3 means 3 divided by 2: 1.5.&quot;, &quot;6&quot;: &quot;That doubles 3 instead of halving it. Half of 3 is 1.5.&quot;, &quot;0.15&quot;: &quot;The decimal point is one place too far left. 3 divided by 2 is 1.5.&quot;, &quot;1&quot;: &quot;That drops the half. 3 divided by 2 is 1.5 exactly.&quot;, &quot;2&quot;: &quot;That rounds. 3 divided by 2 is 1.5 exactly, so keep the decimal.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Split 3 in half. Write the answer as a decimal.</p>
+<details><summary>Hint</summary><p>Half of 2 is 1, and half of the 1 that is left over is <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">3 ÷ 2 = 1.5</span><span class="sr">3 divided by 2 equals 1 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.05" data-miss="{&quot;0.5&quot;: &quot;That is half of 1, not half of 0.1. Write 0.1 as 0.10; half of 10 hundredths is 5 hundredths: 0.05.&quot;, &quot;0.2&quot;: &quot;That doubles 0.1 instead of halving it. Half of 0.1 is 0.05.&quot;, &quot;0.005&quot;: &quot;The point is one place too far left. Half of 10 hundredths is 5 hundredths: 0.05.&quot;, &quot;5&quot;: &quot;That drops the decimal point. Half of 0.1 is 0.05, which is less than 0.1.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Find half of <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span>. Write the answer as a decimal.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> as <span class="m"><span aria-hidden="true">0.10</span><span class="sr">0 point 1 0</span></span>, which is 10 hundredths. Half of 10 hundredths is how many hundredths?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span></strong>, because <span class="m"><span aria-hidden="true">0.1 ÷ 2 = 0.05</span><span class="sr">0 point 1 divided by 2 equals 0 point 0 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="45.5" data-miss="{&quot;46.5&quot;: &quot;That adds 0.5 instead of subtracting it. 46 minus 0.5 is 45.5.&quot;, &quot;41&quot;: &quot;That subtracts 5 instead of 0.5. Line up the points: 46.0 minus 0.5 is 45.5.&quot;, &quot;45&quot;: &quot;That subtracts a whole 1. Only half of 1 is taken away: 45.5.&quot;, &quot;0.46&quot;: &quot;That moves the decimal point instead of subtracting. 46.0 minus 0.5 is 45.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> Find <span class="m"><span aria-hidden="true">46 − 0.5</span><span class="sr">46 minus 0 point 5</span></span>.</p>
+<details><summary>Hint</summary><p>Write 46 as <span class="m"><span aria-hidden="true">46.0</span><span class="sr">46 point 0</span></span> and line up the decimal points.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">45.5</span><span class="sr">45 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-0.05" data-miss="{&quot;0.05&quot;: &quot;The minus sign is missing. You take 0.05 away from 0, so the answer is below zero: negative 0.05.&quot;, &quot;-0.5&quot;: &quot;The point is one place off. 0 minus 0.05 is negative 0.05, five hundredths below zero.&quot;, &quot;-5&quot;: &quot;That drops the decimal point. 0 minus 0.05 is negative 0.05.&quot;, &quot;0&quot;: &quot;Taking 0.05 away from 0 moves below zero: negative 0.05.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Find <span class="m"><span aria-hidden="true">0 − 0.05</span><span class="sr">0 minus 0 point 0 5</span></span>.</p>
+<details><summary>Hint</summary><p>Taking something away from 0 always gives a negative answer. How far below zero?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.05</span><span class="sr">negative 0 point 0 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-0.5" data-miss="{&quot;0.5&quot;: &quot;The minus sign is missing. The temperature drops past zero, so it is negative 0.5 degrees.&quot;, &quot;-3.5&quot;: &quot;That adds the sizes 1.5 and 2. The drop crosses zero: 1.5 minus 2 is negative 0.5.&quot;, &quot;3.5&quot;: &quot;That adds 2 instead of subtracting it. A drop means subtract: 1.5 minus 2 is negative 0.5.&quot;, &quot;-1.5&quot;: &quot;That treats the starting temperature as negative. Start at positive 1.5 and go down 2: negative 0.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> A thermometer reads <span class="m"><span aria-hidden="true">1.5°F</span><span class="sr">1 point 5 degrees Fahrenheit</span></span> and the temperature drops by 2 degrees. What does it read now?</p>
+<details><summary>Hint</summary><p>Find <span class="m"><span aria-hidden="true">1.5 − 2</span><span class="sr">1 point 5 minus 2</span></span>. The second number is larger, so the answer is below zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.5°F</span><span class="sr">negative 0 point 5 degrees Fahrenheit</span></span></strong>, because <span class="m"><span aria-hidden="true">1.5 − 2 = −0.5</span><span class="sr">1 point 5 minus 2 equals negative 0 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Negative 0.5 is farther below zero than negative 0.05, so negative 0.5 is the smaller one and comes first.&quot;, &quot;b&quot;: &quot;This sorts by size and ignores the minus signs. Every negative number is less than 0, so both negatives come before 0.&quot;, &quot;d&quot;: &quot;Negative 0.05 is below zero, so it comes before 0, not after it.&quot;}" data-why="Correct. Negative 0.5 is farthest left on the number line, then negative 0.05, then 0, then 0.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 7.</b> Which list is in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc7" value="a"> <span><span class="m"><span aria-hidden="true">−0.05, −0.5, 0, 0.5</span><span class="sr">negative 0 point 0 5, negative 0 point 5, 0, 0 point 5</span></span></span></label><label><input type="radio" name="mc7" value="b"> <span><span class="m"><span aria-hidden="true">0, −0.05, −0.5, 0.5</span><span class="sr">0, negative 0 point 0 5, negative 0 point 5, 0 point 5</span></span></span></label><label><input type="radio" name="mc7" value="c"> <span><span class="m"><span aria-hidden="true">−0.5, −0.05, 0, 0.5</span><span class="sr">negative 0 point 5, negative 0 point 0 5, 0, 0 point 5</span></span></span></label><label><input type="radio" name="mc7" value="d"> <span><span class="m"><span aria-hidden="true">−0.5, 0, −0.05, 0.5</span><span class="sr">negative 0 point 5, 0, negative 0 point 0 5, 0 point 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture a number line. Negative numbers sit to the left of 0, and the one farther from 0 is farther left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.5, −0.05, 0, 0.5</span><span class="sr">negative 0 point 5, negative 0 point 0 5, 0, 0 point 5</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 2.1</h3>
+<p>Item 1 (Frequency Distribution) on page 1 of the notes adds a list of counts. Item 4 (Class Boundaries) on pages 2 and 3 halves a number and then adds or subtracts the result, and one of its answers is below zero. The videos "Using StatCrunch to Compute Class Boundaries" (page 3) and "Classroom Example 2.1.1" (page 13) do this arithmetic in StatCrunch.</p>
+<p><strong>Watch for this:</strong> the minus sign when the number you take away is the larger one.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Order of operations on one line</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Work inside parentheses first.</li><li>Do multiplication and division from left to right, before addition and subtraction.</li><li>Type a fraction whose top is a sum so that the whole sum gets divided.</li><li>Work out these expressions when one number is negative.</li></ul>
+</div>
+<h3>The order</h3>
+<ol class="steps">
+<li>Parentheses first.</li>
+<li>Multiplication and division next, working <strong>from left to right</strong>.</li>
+<li>Addition and subtraction last, also from left to right.</li>
+</ol>
+<p>On one line, a slash (/) means divide. A fraction bar groups everything above it, so the fraction <span class="m"><span aria-hidden="true" class="frac"><span class="ft">18 + 25</span><span class="fb">2</span></span><span class="sr">the fraction with 18 plus 25 on top and 2 on the bottom</span></span> means add first, then divide. Typed on one line, it needs parentheses: <span class="m"><span aria-hidden="true">(18 + 25) / 2</span><span class="sr">open parenthesis 18 plus 25 close parenthesis, slash 2</span></span>. Without them, only the 25 gets divided.</p>
+<div class="worked" role="group" aria-label="Worked example: (18 + 25) / 2">
+<h3 style="margin-top:0">Worked example: (18 + 25) / 2</h3>
+<p>Evaluate <span class="m"><span aria-hidden="true">(18 + 25) / 2</span><span class="sr">open parenthesis 18 plus 25 close parenthesis, slash 2</span></span>, then see what happens without the parentheses.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">18 + 25 = 43</span><span class="sr">18 plus 25 equals 43</span></span></span><span class="say">Parentheses first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">43 / 2 = 21.5</span><span class="sr">43 slash 2 equals 21 point 5</span></span></span><span class="say">Then divide.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">18 + 25 / 2 = 18 + 12.5 = 30.5</span><span class="sr">18 plus 25 slash 2 equals 18 plus 12 point 5 equals 30 point 5</span></span></span><span class="say">Leaving out the parentheses divides only the 25, which gives a very different value.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">21.5</span><span class="sr">21 point 5</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Parentheses first">
+<h3 style="margin-top:0">Finish this one: Parentheses first</h3>
+<p>Evaluate <span class="m"><span aria-hidden="true">(12 + 31) / 2</span><span class="sr">open parenthesis 12 plus 31 close parenthesis, slash 2</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">12 + 31 = 43</span><span class="sr">12 plus 31 equals 43</span></span></span><span class="say">Work inside the parentheses first. Next, divide by 2.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="21.5" data-miss="{&quot;27.5&quot;: &quot;That divides only the 31 by 2 and adds 12. The parentheses say add first: 43 divided by 2 is 21.5.&quot;, &quot;43&quot;: &quot;43 is the value inside the parentheses. Now divide it by 2.&quot;, &quot;9.5&quot;: &quot;That subtracts 12 from 31. The expression adds them: 43 divided by 2 is 21.5.&quot;, &quot;22&quot;: &quot;The directions say do not round. 43 divided by 2 is exactly 21.5.&quot;, &quot;21&quot;: &quot;The directions say do not round. 43 divided by 2 is exactly 21.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> Finish it: what is <span class="m"><span aria-hidden="true">(12 + 31) / 2</span><span class="sr">open parenthesis 12 plus 31 close parenthesis, slash 2</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">43 / 2</span><span class="sr">43 slash 2</span></span> is the last step.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">21.5</span><span class="sr">21 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="55" data-miss="{&quot;40&quot;: &quot;That adds 30 and 50 before dividing. With no parentheses, division comes first: 50 divided by 2 is 25, and 30 plus 25 is 55.&quot;, &quot;80&quot;: &quot;That skips the division. 50 divided by 2 is 25, then add 30: 55.&quot;, &quot;25&quot;: &quot;That is 50 divided by 2. One step is left: add 30.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Evaluate <span class="m"><span aria-hidden="true">30 + 50 / 2</span><span class="sr">30 plus 50 slash 2</span></span> exactly as it is typed, with no parentheses.</p>
+<details><summary>Hint</summary><p>Division comes before addition. Do <span class="m"><span aria-hidden="true">50 / 2</span><span class="sr">50 slash 2</span></span> first.</p></details>
+<details><summary>Show answer</summary><p><strong>55</strong>, because <span class="m"><span aria-hidden="true">50 / 2 = 25</span><span class="sr">50 slash 2 equals 25</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;With no parentheses, only the 14 is divided, so this is 9 plus 7, which is 16.&quot;, &quot;b&quot;: &quot;The parentheses wrap everything, so inside them the division still happens first: 9 plus 7 is 16.&quot;, &quot;c&quot;: &quot;These parentheses group 14 / 2, which division does first anyway, so this is still 16.&quot;}" data-why="Correct. The parentheses make the calculator add 9 and 14 first, then divide 23 by 2 to get 11.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Which one-line expression has the same value as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">9 + 14</span><span class="fb">2</span></span><span class="sr">the fraction with 9 plus 14 on top and 2 on the bottom</span></span>?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">9 + 14 / 2</span><span class="sr">9 plus 14 slash 2</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true">(9 + 14 / 2)</span><span class="sr">open parenthesis 9 plus 14 slash 2 close parenthesis</span></span></span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">9 + (14 / 2)</span><span class="sr">9 plus, open parenthesis 14 slash 2 close parenthesis</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">(9 + 14) / 2</span><span class="sr">open parenthesis 9 plus 14 close parenthesis, slash 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The fraction bar groups the whole top, <span class="m"><span aria-hidden="true">9 + 14</span><span class="sr">9 plus 14</span></span>. Which choice adds before it divides?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(9 + 14) / 2</span><span class="sr">open parenthesis 9 plus 14 close parenthesis, slash 2</span></span></strong>, which equals <span class="m"><span aria-hidden="true">11.5</span><span class="sr">11 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;1&quot;: &quot;That divides only the 10 by 2 and adds negative 4. Add first: negative 4 plus 10 is 6, and 6 divided by 2 is 3.&quot;, &quot;7&quot;: &quot;That uses positive 4. Negative 4 plus 10 is 6, and 6 divided by 2 is 3.&quot;, &quot;-7&quot;: &quot;That subtracts 10 from negative 4. The expression adds: negative 4 plus 10 is 6, then divide by 2.&quot;, &quot;6&quot;: &quot;6 is the value inside the parentheses. Now divide it by 2.&quot;, &quot;-3&quot;: &quot;Check the sign inside the parentheses. Negative 4 plus 10 is positive 6, so the answer is positive 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Evaluate <span class="m"><span aria-hidden="true">(−4 + 10) / 2</span><span class="sr">open parenthesis negative 4 plus 10 close parenthesis, slash 2</span></span>.</p>
+<details><summary>Hint</summary><p>Start at negative 4 on a number line and move 10 to the right. Then divide by 2.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>, because <span class="m"><span aria-hidden="true">−4 + 10 = 6</span><span class="sr">negative 4 plus 10 equals 6</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="40" data-miss="{&quot;0.004&quot;: &quot;That multiplies 45 by 100 first. Go left to right: 18 divided by 45 is 0.4, then times 100 is 40.&quot;, &quot;0.4&quot;: &quot;That stops after the division. Finish by multiplying by 100: 40.&quot;, &quot;250&quot;: &quot;That divides 45 by 18. Read left to right: 18 divided by 45 comes first.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Evaluate <span class="m"><span aria-hidden="true">18 / 45 * 100</span><span class="sr">18 slash 45 star 100</span></span>.</p>
+<details><summary>Hint</summary><p>In StatCrunch and many calculators, * means multiply. Left to right: do <span class="m"><span aria-hidden="true">18 / 45</span><span class="sr">18 slash 45</span></span> first.</p></details>
+<details><summary>Show answer</summary><p><strong>40</strong>, because <span class="m"><span aria-hidden="true">18 / 45 = 0.4</span><span class="sr">18 slash 45 equals 0 point 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="69.5" data-miss="{&quot;99.5&quot;: &quot;That divides only the 79 by 2. The parentheses say add first: 139 divided by 2 is 69.5.&quot;, &quot;139&quot;: &quot;139 is the value inside the parentheses. Now divide it by 2.&quot;, &quot;9.5&quot;: &quot;That subtracts 60 from 79. The expression adds them: 139 divided by 2 is 69.5.&quot;, &quot;70&quot;: &quot;The directions say do not round. 139 divided by 2 is exactly 69.5.&quot;, &quot;69&quot;: &quot;The directions say do not round. 139 divided by 2 is exactly 69.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Evaluate <span class="m"><span aria-hidden="true">(60 + 79) / 2</span><span class="sr">open parenthesis 60 plus 79 close parenthesis, slash 2</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Parentheses first, then divide by 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">69.5</span><span class="sr">69 point 5</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 2.1</h3>
+<p>The formula in item 5 (Class Midpoints) on page 4 of the notes has a sum on top of a fraction bar. The videos "Using StatCrunch to compute class midpoints" (page 4) and "Classroom Example 2.1.1" (page 13) type formulas like it on one line in StatCrunch.</p>
+<p><strong>Watch for this:</strong> parentheses around the whole top of a fraction when you type it on one line.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Part of a total as a decimal or percent</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Pick out the part and the total, and find the total by adding all the counts when it is not given.</li><li>Divide the part by the total to get a decimal.</li><li>Change a decimal to a percent by multiplying by 100.</li><li>Answer a two-step question about the part that is left over.</li></ul>
+</div>
+<h3>Part divided by total</h3>
+<p>To find what part of a total one count is, divide the part by the total. The answer is a decimal between 0 and 1. To write it as a percent, multiply by 100, which moves the decimal point two places to the right, and add the percent sign.</p>
+<ul>
+<li>The <strong>total</strong> is the whole group. If you are given several counts that make up the group, the total is all of them added together.</li>
+<li>The <strong>part</strong> is the one count the question asks about.</li>
+<li>A part is never bigger than its total, so the decimal must be 1 or less. An answer bigger than 1 usually means the division was flipped.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Dividing by the number of groups.</strong> If 4 shelves hold 40 books, the total is 40 books, not 4 shelves.</li>
+<li><strong>Flipping the division.</strong> Total divided by part gives a number bigger than 1, which cannot be a part of the whole.</li>
+<li><strong>Moving the point the wrong distance.</strong> <span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span> is 4%, not 40% or <span class="m"><span aria-hidden="true">0.4%</span><span class="sr">0 point 4 percent</span></span>. Multiplying by 100 moves the point exactly two places.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Book club">
+<h3 style="margin-top:0">Worked example: Book club</h3>
+<p>A book club has 25 members, and 9 of them prefer mysteries. What part of the club prefers mysteries, as a decimal and as a percent?</p><ol class="steps"><li><span class="work">Part: 9 members. Total: 25 members.</span><span class="say">Label both numbers before dividing.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">9 / 25 = 0.36</span><span class="sr">9 slash 25 equals 0 point 3 6</span></span></span><span class="say">Divide the part by the total to get the decimal.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.36 × 100 = 36</span><span class="sr">0 point 3 6 times 100 equals 36</span></span></span><span class="say">Multiply by 100 to get the percent.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.36</span><span class="sr">0 point 3 6</span></span> as a decimal, or 36%</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Plants that flowered">
+<h3 style="margin-top:0">Finish this one: Plants that flowered</h3>
+<p>A gardener planted 20 bulbs, and 7 of them flowered. What part of the bulbs flowered, as a decimal?</p><ol class="steps"><li><span class="work">Part: 7 flowered. Total: 20 planted.</span><span class="say">The total is every bulb planted. Next, divide the part by the total.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.35" data-miss="{&quot;~2.857~0.006&quot;: &quot;The division is flipped. That is 20 divided by 7. Divide the part (7) by the total (20): 0.35.&quot;, &quot;35&quot;: &quot;That is the percent. The question asks for a decimal: 7 divided by 20 is 0.35.&quot;, &quot;0.7&quot;: &quot;That divides 7 by 10. The total is 20 bulbs: 7 divided by 20 is 0.35.&quot;, &quot;0.035&quot;: &quot;The point is one place too far left. 7 divided by 20 is 0.35.&quot;, &quot;13&quot;: &quot;That is the number of bulbs that did not flower. Divide 7 by 20 to get the decimal.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> Finish it: what part of the bulbs flowered, as a decimal?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">7 / 20</span><span class="sr">7 slash 20</span></span>. Half of the bulbs would be 10, so the answer should be a bit less than <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span></strong>, because <span class="m"><span aria-hidden="true">7 / 20 = 0.35</span><span class="sr">7 slash 20 equals 0 point 3 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;0.4&quot;: &quot;That moves the point only one place. Multiply by 100 to move it two places: 0.04 is 4%.&quot;, &quot;40&quot;: &quot;That moves the point three places. Multiplying by 100 moves it two: 0.04 is 4%.&quot;, &quot;0.04&quot;: &quot;That adds a percent sign without converting. Multiply by 100: 4%.&quot;, &quot;0.0004&quot;: &quot;That divides by 100. Going from a decimal to a percent, multiply by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> Write <span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span> as a percent.</p>
+<details><summary>Hint</summary><p>Move the decimal point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>4%</strong> (typing 4 is fine)</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.15" data-miss="{&quot;1.5&quot;: &quot;That divides by 4, the number of genres. The total is the number of books: 14 + 9 + 6 + 11 is 40, and 6 divided by 40 is 0.15.&quot;, &quot;0.06&quot;: &quot;That divides by 100. The total is the number of books on the shelf: 40. 6 divided by 40 is 0.15.&quot;, &quot;~6.667~0.005&quot;: &quot;The division is flipped. That is 40 divided by 6. Divide the part (6) by the total (40).&quot;, &quot;15&quot;: &quot;That is the percent. The question asks for a decimal: 0.15.&quot;, &quot;0.6&quot;: &quot;That divides by 10. Add all four counts to get the total, 40, then divide 6 by 40.&quot;, &quot;40&quot;: &quot;That is the total. Now divide the 6 science books by it.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> A shelf holds 14 mystery books, 9 history books, 6 science books and 11 poetry books. What part of the books on the shelf are science books, as a decimal?</p>
+<details><summary>Hint</summary><p>The total is not given. Add all four counts first, then divide 6 by that total.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></strong>, because the total is <span class="m"><span aria-hidden="true">14 + 9 + 6 + 11 = 40</span><span class="sr">14 plus 9 plus 6 plus 11 equals 40</span></span> and <span class="m"><span aria-hidden="true">6 / 40 = 0.15</span><span class="sr">6 slash 40 equals 0 point 1 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="22.5" data-miss="{&quot;0.225&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 22.5%.&quot;, &quot;~444.44~0.01&quot;: &quot;The division is flipped. That is 120 divided by 27, times 100. Divide the part (27) by the total (120).&quot;, &quot;22&quot;: &quot;The directions say do not round. Keep every digit: 22.5.&quot;, &quot;23&quot;: &quot;The directions say do not round. Keep every digit: 22.5.&quot;, &quot;27&quot;: &quot;That is the count, not the percent. Divide 27 by 120 and multiply by 100.&quot;, &quot;2.25&quot;: &quot;The point moved only one place. 0.225 times 100 is 22.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> A gym has 120 members, and 27 of them take a morning class. What percent of the members take a morning class? Do not round.</p>
+<details><summary>Hint</summary><p>Part: 27. Total: 120. Divide, then multiply by 100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">22.5%</span><span class="sr">22 point 5 percent</span></span></strong>, because <span class="m"><span aria-hidden="true">27 / 120 = 0.225</span><span class="sr">27 slash 120 equals 0 point 2 2 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;This divides by 3, the number of kinds of pets. The total is the number of pets: 18 + 30 + 12 is 60.&quot;, &quot;b&quot;: &quot;This treats the total as 100. The total here is the number of pets: 60.&quot;, &quot;d&quot;: &quot;This divides the total by the part, so it is flipped. It gives 2, which is bigger than 1.&quot;}" data-why="Correct. The total is 18 + 30 + 12, which is 60 pets, and 30 divided by 60 is 0.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 18.</b> A pet survey counted 18 cats, 30 dogs and 12 birds. Which calculation gives the part of the pets that are dogs, as a decimal?</legend>
+<label><input type="radio" name="mc18" value="a"> <span><span class="m"><span aria-hidden="true">30 / 3</span><span class="sr">30 slash 3</span></span></span></label><label><input type="radio" name="mc18" value="b"> <span><span class="m"><span aria-hidden="true">30 / 100</span><span class="sr">30 slash 100</span></span></span></label><label><input type="radio" name="mc18" value="c"> <span><span class="m"><span aria-hidden="true">30 / 60</span><span class="sr">30 slash 60</span></span></span></label><label><input type="radio" name="mc18" value="d"> <span><span class="m"><span aria-hidden="true">60 / 30</span><span class="sr">60 slash 30</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>First find the total number of pets. Then the part goes on top.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">30 / 60</span><span class="sr">30 slash 60</span></span></strong>, which is <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="84" data-miss="{&quot;16&quot;: &quot;That is the percent that were returned. The question asks for the orders that were not returned: 84%.&quot;, &quot;0.84&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 84%.&quot;, &quot;~119.05~0.01&quot;: &quot;The division is flipped. Divide the part (210 not returned) by the total (250).&quot;, &quot;210&quot;: &quot;That is the number of orders not returned. Divide it by 250 and multiply by 100.&quot;, &quot;0.16&quot;: &quot;That is the decimal for the orders that were returned. Use the 210 that were not returned, then multiply by 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> An online store shipped 250 orders last week, and 40 of them were returned. What percent of the orders were <strong>not</strong> returned?</p>
+<details><summary>Hint</summary><p>First find how many were not returned: <span class="m"><span aria-hidden="true">250 − 40</span><span class="sr">250 minus 40</span></span>. Then divide by 250.</p></details>
+<details><summary>Show answer</summary><p><strong>84%</strong>, because <span class="m"><span aria-hidden="true">250 − 40 = 210</span><span class="sr">250 minus 40 equals 210</span></span> and <span class="m"><span aria-hidden="true">210 / 250 = 0.84</span><span class="sr">210 slash 250 equals 0 point 8 4</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 2.1</h3>
+<p>Item 6 (Relative Frequency Distribution) on page 8 of the notes divides one count by a total, and its Note changes the result to a percentage. The videos "Using StatCrunch to perform relative frequency arithmetic computations" (page 8) and "Classroom Example 2.1.3" (page 14) do these divisions in StatCrunch, and the Classroom Example 2.1.3 video also changes the results to percents.</p>
+<p><strong>Watch for this:</strong> what the total is. When it is not given, it is all of the counts added together.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding to one or two decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to two decimal places.</li><li>Round to one decimal place.</li><li>Carry correctly when a 9 rounds up.</li><li>Follow the rounding direction in the question, even when a whole number looks tidier.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. For one decimal place, that is the first digit after the point. For two decimal places, it is the second digit after the point.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">0.2449</span><span class="sr">0 point 2 4 4 9</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.24</span><span class="sr">0 point 2 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">0.245</span><span class="sr">0 point 2 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span> is a slip.</li>
+<li><strong>Chopping instead of rounding.</strong> Dropping digits without looking at the next one is not rounding. <span class="m"><span aria-hidden="true">0.2875</span><span class="sr">0 point 2 8 7 5</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.29</span><span class="sr">0 point 2 9</span></span>, not <span class="m"><span aria-hidden="true">0.28</span><span class="sr">0 point 2 8</span></span>.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.596</span><span class="sr">0 point 5 9 6</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.60</span><span class="sr">0 point 6 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 5 / 12 two ways">
+<h3 style="margin-top:0">Worked example: 5 / 12 two ways</h3>
+<p>A calculator shows <span class="m"><span aria-hidden="true">0.416666667</span><span class="sr">0 point 4 1 6 6 6 6 6 6 7</span></span> for <span class="m"><span aria-hidden="true">5 / 12</span><span class="sr">5 slash 12</span></span>. Round it to two decimal places. Then write it as a percent rounded to one decimal place.</p><ol class="steps"><li><span class="work">Two decimal places: keep the 1, look at the 6</span><span class="say">The 6 is 5 or more, so the 1 becomes 2: <span class="m"><span aria-hidden="true">0.42</span><span class="sr">0 point 4 2</span></span>.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.416666667 × 100 = 41.6666667</span><span class="sr">0 point 4 1 6 6 6 6 6 6 7 times 100 equals 41 point 6 6 6 6 6 6 7</span></span></span><span class="say">For the percent, multiply the unrounded decimal by 100.</span></li><li><span class="work">One decimal place: keep the 6 after the point, look at the next 6</span><span class="say">The next digit is 6, so the kept 6 becomes 7: <span class="m"><span aria-hidden="true">41.7%</span><span class="sr">41 point 7 percent</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.42</span><span class="sr">0 point 4 2</span></span> to two decimal places, and <span class="m"><span aria-hidden="true">41.7%</span><span class="sr">41 point 7 percent</span></span> to one decimal place</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Two decimal places" means exactly two digits after the point. "One decimal place" means exactly one. A direction such as "Round to one decimal place as needed" still means one decimal place, not a whole number.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.2875 to two decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.2875 to two decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.2875</span><span class="sr">0 point 2 8 7 5</span></span> to two decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 8 in the second place after the point. Next digit: 7.</span><span class="say">The 7 is 5 or more, so the 8 goes up by 1. Next, write the rounded number.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.29" data-miss="{&quot;0.28&quot;: &quot;That chops off the 75 instead of rounding. The next digit is 7, so the 8 goes up: 0.29.&quot;, &quot;0.3&quot;: &quot;That rounds to one decimal place. Two decimal places keeps two digits after the point: 0.29.&quot;, &quot;0.288&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 0.29.&quot;, &quot;0.2875&quot;: &quot;That is the number you started with. Keep only two digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.2875</span><span class="sr">0 point 2 8 7 5</span></span> rounded to two decimal places?</p>
+<details><summary>Hint</summary><p>The 8 becomes 9. Drop everything after it.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.29</span><span class="sr">0 point 2 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.24" data-miss="{&quot;0.25&quot;: &quot;That rounds in steps from the right (0.2449 to 0.245 to 0.25). Only the digit right after the kept 4 counts, and it is 4: 0.24.&quot;, &quot;0.245&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 0.24.&quot;, &quot;0.2&quot;: &quot;That rounds to one decimal place. Two decimal places keeps two: 0.24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Round <span class="m"><span aria-hidden="true">0.2449</span><span class="sr">0 point 2 4 4 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the second place. Look only at the very next digit, the other 4. Ignore the 9 at the end.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.24</span><span class="sr">0 point 2 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.60" data-miss="{&quot;0.59&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.60.&quot;, &quot;0.5&quot;: &quot;When the 9 goes up, it becomes 0 and carries 1 to the 5 on its left, so the 5 becomes 6: 0.60.&quot;, &quot;0.510&quot;: &quot;When a 9 goes up, it does not become 10 in its place. It becomes 0 and carries 1 to the left: 0.60.&quot;, &quot;0.596&quot;: &quot;That is the number you started with. Keep only two digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Round <span class="m"><span aria-hidden="true">0.596</span><span class="sr">0 point 5 9 6</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9. The next digit is 6, so the 9 goes up. Follow the carry to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.60</span><span class="sr">0 point 6 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="40.0" data-miss="{&quot;39.9&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 40.0.&quot;, &quot;39.1&quot;: &quot;When the 9 goes up, it does not become 1. It becomes 0 and carries 1 to the left, so 39 becomes 40: 40.0.&quot;, &quot;39.96&quot;: &quot;That is the number you started with. Keep only one digit after the point.&quot;, &quot;39&quot;: &quot;That chops to a whole number. One decimal place keeps one digit after the point, and the carry gives 40.0.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> A calculator shows <span class="m"><span aria-hidden="true">39.96</span><span class="sr">39 point 9 6</span></span> for a percent. Round it to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 right after the point. The next digit is 6. When a 9 goes up, it becomes 0 and carries.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">40.0%</span><span class="sr">40 point 0 percent</span></span></strong> (typing 40 is accepted too)</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.43" data-miss="{&quot;0.42&quot;: &quot;That chops instead of rounding. 3 divided by 7 is 0.428..., and the 8 after the 2 rounds it up: 0.43.&quot;, &quot;~2.333~0.004&quot;: &quot;The division is flipped. That is 7 divided by 3. Divide 3 by 7: 0.43.&quot;, &quot;~42.857~0.01&quot;: &quot;That is the percent. The question asks for the decimal rounded to two places: 0.43.&quot;, &quot;43&quot;: &quot;That is the percent. The question asks for the decimal rounded to two places: 0.43.&quot;, &quot;~0.42857~0.00006&quot;: &quot;Round to two decimal places: keep two digits after the point. 0.43.&quot;, &quot;0.4&quot;: &quot;That rounds to one decimal place. Two decimal places keeps two digits after the point: 0.43.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Find <span class="m"><span aria-hidden="true">3 / 7</span><span class="sr">3 slash 7</span></span> as a decimal. Round to two decimal places.</p>
+<details><summary>Hint</summary><p>The calculator shows <span class="m"><span aria-hidden="true">0.428</span><span class="sr">0 point 4 2 8</span></span> and more digits. The kept digit is the 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.43</span><span class="sr">0 point 4 3</span></span></strong>, because <span class="m"><span aria-hidden="true">3 / 7 = 0.42857…</span><span class="sr">3 slash 7 equals 0 point 4 2 8 5 7 and more digits</span></span> rounds up to <span class="m"><span aria-hidden="true">0.43</span><span class="sr">0 point 4 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="15.3" data-miss="{&quot;15&quot;: &quot;That rounds to a whole number. The direction says one decimal place, so keep one digit after the point: 15.3.&quot;, &quot;15.2&quot;: &quot;That chops off the 7 instead of rounding. The digit after the 2 is 7, so the 2 goes up: 15.3.&quot;, &quot;~15.28~0.005&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 15.3.&quot;, &quot;0.15&quot;: &quot;That is the decimal. Multiply by 100 first, then round to one decimal place: 15.3.&quot;, &quot;0.2&quot;: &quot;That is the decimal, rounded. Multiply by 100 first, then round to one decimal place: 15.3.&quot;, &quot;~654.5~0.06&quot;: &quot;The division is flipped. Divide the part (11) by the total (72), then multiply by 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> A team played 72 games and lost 11 of them. What percent of its games did it lose? Round to one decimal place as needed.</p>
+<details><summary>Hint</summary><p>Divide 11 by 72, multiply by 100, then look at the digit two places after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">15.3%</span><span class="sr">15 point 3 percent</span></span></strong>. <span class="m"><span aria-hidden="true">11 / 72 × 100</span><span class="sr">11 slash 72 times 100</span></span> is about <span class="m"><span aria-hidden="true">15.28</span><span class="sr">15 point 2 8</span></span>, which rounds to <span class="m"><span aria-hidden="true">15.3</span><span class="sr">15 point 3</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 2.1</h3>
+<p>The example on page 9 of the notes says "Round each frequency to two decimal places," and the second WARNING on page 11 says to round each result according to the directions of the problem. The video "Using StatCrunch to create a relative frequency distribution from a list of data" (page 9) rounds to two decimal places, and the "Classroom Example 2.1.3" video (page 14) rounds percents to one decimal place.</p>
+<p><strong>Watch for this:</strong> how many decimal places the directions ask for, and any 9 that rounds up and carries.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="-1.5" data-miss="{&quot;1.5&quot;: &quot;The minus sign is missing. You take away more than you start with, so the answer is below zero: negative 1.5.&quot;, &quot;-2.5&quot;: &quot;That adds the sizes 0.5 and 2. Find the difference, 2 minus 0.5, which is 1.5, and keep the minus sign.&quot;, &quot;2.5&quot;: &quot;That adds 2 instead of subtracting it. 0.5 minus 2 is negative 1.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Find <span class="m"><span aria-hidden="true">0.5 − 2</span><span class="sr">0 point 5 minus 2</span></span>.</p>
+<details><summary>Hint</summary><p>The second number is larger, so the answer is below zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="24" data-miss="{&quot;0.24&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 24%.&quot;, &quot;~416.67~0.01&quot;: &quot;The division is flipped. Divide the part (18) by the total (75).&quot;, &quot;18&quot;: &quot;That is the count, not the percent. Divide 18 by 75 and multiply by 100.&quot;, &quot;76&quot;: &quot;That is the percent that did not sign up. Use the 18 who did: 24%.&quot;, &quot;2.4&quot;: &quot;The point moved only one place. 0.24 times 100 is 24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Of 75 people at a library event, 18 signed up for a library card. What percent signed up? Do not round.</p>
+<details><summary>Hint</summary><p>Part: 18. Total: 75.</p></details>
+<details><summary>Show answer</summary><p><strong>24%</strong>, because <span class="m"><span aria-hidden="true">18 / 75 = 0.24</span><span class="sr">18 slash 75 equals 0 point 2 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.5" data-miss="{&quot;2.25&quot;: &quot;That divides only the 9.5 by 2. Add first: negative 2.5 plus 9.5 is 7, and 7 divided by 2 is 3.5.&quot;, &quot;6&quot;: &quot;That uses positive 2.5. Negative 2.5 plus 9.5 is 7, and 7 divided by 2 is 3.5.&quot;, &quot;7&quot;: &quot;7 is the value inside the parentheses. Now divide it by 2.&quot;, &quot;-6&quot;: &quot;That subtracts 9.5 from negative 2.5. The expression adds: negative 2.5 plus 9.5 is 7.&quot;, &quot;-3.5&quot;: &quot;Check the sign inside the parentheses. Negative 2.5 plus 9.5 is positive 7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> Evaluate <span class="m"><span aria-hidden="true">(−2.5 + 9.5) / 2</span><span class="sr">open parenthesis negative 2 point 5 plus 9 point 5 close parenthesis, slash 2</span></span>.</p>
+<details><summary>Hint</summary><p>Parentheses first. Start at negative 2.5 and move 9.5 to the right.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.5</span><span class="sr">3 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">−2.5 + 9.5 = 7</span><span class="sr">negative 2 point 5 plus 9 point 5 equals 7</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.05" data-miss="{&quot;0.06&quot;: &quot;That rounds in steps from the right (0.0549 to 0.055 to 0.06). Only the digit right after the kept 5 counts, and it is 4: 0.05.&quot;, &quot;0.055&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 0.05.&quot;, &quot;0.1&quot;: &quot;That rounds to one decimal place. Two decimal places keeps two: 0.05.&quot;, &quot;0.0549&quot;: &quot;That is the number you started with. Keep only two digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> Round <span class="m"><span aria-hidden="true">0.0549</span><span class="sr">0 point 0 5 4 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 5. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.6 is double 0.3, not half of it.&quot;, &quot;c&quot;: &quot;The point is one place too far right. Half of 30 hundredths is 15 hundredths: 0.15.&quot;, &quot;d&quot;: &quot;The point is one place too far left. Half of 30 hundredths is 15 hundredths: 0.15.&quot;}" data-why="Correct. 0.3 is 30 hundredths, and half of 30 hundredths is 15 hundredths, which is 0.15.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 30.</b> Which number is half of <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>?</legend>
+<label><input type="radio" name="mc30" value="a"> <span><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span></span></label><label><input type="radio" name="mc30" value="b"> <span><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></span></label><label><input type="radio" name="mc30" value="c"> <span><span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span></span></label><label><input type="radio" name="mc30" value="d"> <span><span class="m"><span aria-hidden="true">0.015</span><span class="sr">0 point 0 1 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> as <span class="m"><span aria-hidden="true">0.30</span><span class="sr">0 point 3 0</span></span>, which is 30 hundredths.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="16.4" data-miss="{&quot;16&quot;: &quot;That rounds to a whole number. Keep one digit after the point: 16.4.&quot;, &quot;0.16&quot;: &quot;That is the decimal. Multiply by 100 first, then round to one decimal place: 16.4.&quot;, &quot;0.2&quot;: &quot;That is the decimal, rounded. Multiply by 100 first, then round: 16.4.&quot;, &quot;~608.7~0.06&quot;: &quot;The division is flipped. Divide the part (23) by the total (140).&quot;, &quot;~16.43~0.005&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 16.4.&quot;, &quot;16.5&quot;: &quot;That rounds in steps from the right. The digit after the 4 is 2, so the 4 stays: 16.4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 31.</b> A school surveyed 140 students, and 23 said they walk to school. What percent walk? Round to one decimal place.</p>
+<details><summary>Hint</summary><p>Part: 23. Total: 140. Divide, multiply by 100, then round.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">16.4%</span><span class="sr">16 point 4 percent</span></span></strong>. <span class="m"><span aria-hidden="true">23 / 140 × 100</span><span class="sr">23 slash 140 times 100</span></span> is about <span class="m"><span aria-hidden="true">16.43</span><span class="sr">16 point 4 3</span></span>, which rounds to <span class="m"><span aria-hidden="true">16.4</span><span class="sr">16 point 4</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have added and halved decimals, worked below zero, used parentheses on one line, found a part of a total as a decimal and a percent, and rounded to one or two decimal places. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec2.1-getready-corequisite-2026a'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

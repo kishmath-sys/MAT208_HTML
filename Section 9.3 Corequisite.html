@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 9.3 Corequisite: Two Dependent Samples (Matched Pairs)</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 9.3</div>
+<h1>Section 9.3 Corequisite: Two Dependent Samples (Matched Pairs)</h1>
+<p>Get ready for the Section 9.3 notes with practice on the signed-number, decimal and rounding skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Subtracting in a set order<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Adding signed numbers and dividing<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Comparing decimals and negative numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Subtracting from 1 and order of operations<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Rounding, including negative numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Subtract two numbers in the order the directions give, and get the sign right when the answer is negative.</li><li>Add a list of positive and negative numbers, and divide a negative number.</li><li>Compare decimals of different lengths and compare negative numbers.</li><li>Work out expressions such as <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span> with multiplication before subtraction.</li><li>Round to two or three decimal places or to the nearest integer, including negative numbers.</li></ul>
+</div>
+<p>Section 9.3 of the notes compares two dependent samples, also called matched pairs, using hypothesis tests and confidence intervals, with the computations done in StatCrunch.</p>
+<p>The notes work with lists of differences, many of them negative, and with small decimals such as <span class="m"><span aria-hidden="true">0.501</span><span class="sr">0 point 5 0 1</span></span> and <span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span>. This page gives the arithmetic behind those numbers more practice than the notes have room for: subtracting in a set order, signed numbers, comparing decimals, order of operations and rounding. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.62</span><span class="sr">0 point 6 2</span></span>. Type a negative number with a minus sign in front, such as <span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span>. Commas, a percent sign and extra spaces are all fine, unless a question asks for a decimal. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 9.3 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 9.3 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am never sure whether <span class="m"><span aria-hidden="true">4 − 5</span><span class="sr">4 minus 5</span></span> is 1 or <span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span>.</strong><br><button type="button" data-go="s2">Subtracting in a set order</button></li>
+<li><strong>Adding a mix of positive and negative numbers trips me up.</strong><br><button type="button" data-go="s3">Adding signed numbers and dividing</button></li>
+<li><strong>I am not sure whether <span class="m"><span aria-hidden="true">0.0082</span><span class="sr">0 point 0 0 8 2</span></span> or <span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span> is larger, or whether <span class="m"><span aria-hidden="true">−3.15</span><span class="sr">negative 3 point 1 5</span></span> is smaller than <span class="m"><span aria-hidden="true">−2.4</span><span class="sr">negative 2 point 4</span></span>.</strong><br><button type="button" data-go="s4">Comparing decimals and negative numbers</button></li>
+<li><strong>I am not sure what to do first in <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span>.</strong><br><button type="button" data-go="s5">Subtracting from 1 and order of operations</button></li>
+<li><strong>I am not sure how to round a negative number.</strong><br><button type="button" data-go="s6">Rounding, including negative numbers</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Subtracting in a set order</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Subtract two numbers in the order the directions give.</li><li>Give a difference the right sign when the second number is larger.</li><li>Line up decimal points when the numbers have different numbers of digits.</li><li>Subtract a negative number.</li><li>Read matching values from the same column of a table.</li></ul>
+</div>
+<h3>Order matters in subtraction</h3>
+<p>Adding works in any order, but subtracting does not. <span class="m"><span aria-hidden="true">9 − 4 = 5</span><span class="sr">9 minus 4 equals 5</span></span>, while <span class="m"><span aria-hidden="true">4 − 9 = −5</span><span class="sr">4 minus 9 equals negative 5</span></span>. When directions say "first minus second," write the first number, then the minus sign, then the second number, and keep that order.</p>
+<ul>
+<li><strong>Second number larger:</strong> subtract the smaller from the larger to get the size, then make the answer negative.</li>
+<li><strong>First number larger:</strong> the answer is positive.</li>
+<li><strong>Same number:</strong> the answer is 0.</li>
+<li><strong>Subtracting a negative:</strong> it is the same as adding the positive. <span class="m"><span aria-hidden="true">2 − (−5) = 2 + 5 = 7</span><span class="sr">2 minus open parenthesis negative 5 close parenthesis equals 2 plus 5 equals 7</span></span>.</li>
+</ul>
+<p>With decimals, line up the decimal points and fill empty places with zeros: write <span class="m"><span aria-hidden="true">9.4</span><span class="sr">9 point 4</span></span> as <span class="m"><span aria-hidden="true">9.40</span><span class="sr">9 point 4 0</span></span> before subtracting <span class="m"><span aria-hidden="true">9.75</span><span class="sr">9 point 7 5</span></span>.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Subtracting the smaller from the larger no matter the order.</strong> <span class="m"><span aria-hidden="true">4 − 9 = −5</span><span class="sr">4 minus 9 equals negative 5</span></span>, not 5.</li>
+<li><strong>Dropping the negative sign.</strong> The size can be right while the sign is wrong.</li>
+<li><strong>Treating subtraction like multiplication.</strong> "Two negatives make a positive" is a rule for multiplying. <span class="m"><span aria-hidden="true">−4 − 3 = −7</span><span class="sr">negative 4 minus 3 equals negative 7</span></span>, not 12.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Mile times">
+<h3 style="margin-top:0">Worked example: Mile times</h3>
+<p>A runner's mile time was <span class="m"><span aria-hidden="true">9.4</span><span class="sr">9 point 4</span></span> minutes on Monday and <span class="m"><span aria-hidden="true">9.75</span><span class="sr">9 point 7 5</span></span> minutes on Friday. Find the Monday time minus the Friday time.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">9.40 − 9.75</span><span class="sr">9 point 4 0 minus 9 point 7 5</span></span></span><span class="say">Keep the order: Monday first. Line up the points by writing 9.4 as 9.40.</span></li><li><span class="work">The second number is larger</span><span class="say">So the answer will be negative.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">9.75 − 9.40 = 0.35</span><span class="sr">9 point 7 5 minus 9 point 4 0 equals 0 point 3 5</span></span></span><span class="say">Subtract the smaller from the larger to get the size.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">−0.35</span><span class="sr">negative 0 point 3 5</span></span> minutes</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Find 12.5 minus 14.0">
+<h3 style="margin-top:0">Finish this one: Find <span class="m"><span aria-hidden="true">12.5 − 14.0</span><span class="sr">12 point 5 minus 14 point 0</span></span></h3>
+<p>Find <span class="m"><span aria-hidden="true">12.5 − 14.0</span><span class="sr">12 point 5 minus 14 point 0</span></span>.</p><ol class="steps"><li><span class="work">The second number is larger</span><span class="say">So the answer is negative. Next, subtract 12.5 from 14.0 to get the size.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="-1.5" data-miss="{&quot;1.5&quot;: &quot;The size is right, but the sign is missing. The second number is larger, so 12.5 minus 14.0 is negative: −1.5.&quot;, &quot;26.5&quot;: &quot;That adds the two numbers. Subtract instead: 12.5 minus 14.0 is −1.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: what is <span class="m"><span aria-hidden="true">12.5 − 14.0</span><span class="sr">12 point 5 minus 14 point 0</span></span>?</p>
+<details><summary>Hint</summary><p>14.0 minus 12.5 is 1.5. Now decide the sign.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-16" data-miss="{&quot;16&quot;: &quot;That is the April bill minus the March bill. Keep the order the question gives: 47 minus 63 is −16.&quot;, &quot;110&quot;: &quot;That adds the bills. Subtract: 47 minus 63 is −16.&quot;, &quot;-110&quot;: &quot;That adds the bills and makes the result negative. Subtract: 47 minus 63 is −16.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> A phone bill was $47 in March and $63 in April. Find the March bill minus the April bill, in dollars.</p>
+<details><summary>Hint</summary><p>March comes first. Is the second number larger?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−16</span><span class="sr">negative 16</span></span></strong> dollars</p></details>
+</div>
+<p>Practice 3 and 4 use this table. Each month's two bills are in the same column.</p>
+<div class="table-wrap" role="region" aria-label="Electric bill table" tabindex="0">
+<table>
+<caption>Monthly electric bill, in dollars</caption>
+<thead><tr><th scope="col">Bill</th><th scope="col">January</th><th scope="col">February</th><th scope="col">March</th><th scope="col">April</th></tr></thead>
+<tbody>
+<tr><th scope="row">This year</th><td>112.40</td><td>98.75</td><td>105.00</td><td>131.20</td></tr>
+<tr><th scope="row">Last year</th><td>118.90</td><td>96.25</td><td>105.00</td><td>124.60</td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="num" data-answer="-6.5" data-miss="{&quot;6.5&quot;: &quot;That is last year minus this year. Keep the order: 112.40 minus 118.90 is −6.50.&quot;, &quot;231.3&quot;: &quot;That adds the two January bills. Subtract them: −6.50.&quot;, &quot;2.5&quot;: &quot;That is the February column. January is the first column: 112.40 minus 118.90 is −6.50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> For January, find this year's bill minus last year's bill, in dollars.</p>
+<details><summary>Hint</summary><p>Both January bills are in the January column. This year comes first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−6.50</span><span class="sr">negative 6 point 5 0</span></span></strong> dollars (typing <span class="m"><span aria-hidden="true">−6.5</span><span class="sr">negative 6 point 5</span></span> is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;This list is last year minus this year, so every sign is flipped. Start each subtraction with this year&#x27;s bill.&quot;, &quot;b&quot;: &quot;The sizes are right, but January should be negative, because last year&#x27;s January bill was larger.&quot;, &quot;d&quot;: &quot;March has the same bill both years, and 105.00 minus 105.00 is 0, not 105.00.&quot;}" data-why="Correct. January is negative because last year was higher, March is 0 because the bills match, and February and April are positive.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which list gives this year's bill minus last year's bill for January, February, March and April, in that order?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">6.50</span><span class="sr">6 point 5 0</span></span>, <span class="m"><span aria-hidden="true">−2.50</span><span class="sr">negative 2 point 5 0</span></span>, <span class="m"><span aria-hidden="true">0</span><span class="sr">0</span></span>, <span class="m"><span aria-hidden="true">−6.60</span><span class="sr">negative 6 point 6 0</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">6.50</span><span class="sr">6 point 5 0</span></span>, <span class="m"><span aria-hidden="true">2.50</span><span class="sr">2 point 5 0</span></span>, <span class="m"><span aria-hidden="true">0</span><span class="sr">0</span></span>, <span class="m"><span aria-hidden="true">6.60</span><span class="sr">6 point 6 0</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">−6.50</span><span class="sr">negative 6 point 5 0</span></span>, <span class="m"><span aria-hidden="true">2.50</span><span class="sr">2 point 5 0</span></span>, <span class="m"><span aria-hidden="true">0</span><span class="sr">0</span></span>, <span class="m"><span aria-hidden="true">6.60</span><span class="sr">6 point 6 0</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">−6.50</span><span class="sr">negative 6 point 5 0</span></span>, <span class="m"><span aria-hidden="true">2.50</span><span class="sr">2 point 5 0</span></span>, <span class="m"><span aria-hidden="true">105.00</span><span class="sr">105 point 0 0</span></span>, <span class="m"><span aria-hidden="true">6.60</span><span class="sr">6 point 6 0</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find each month on its own: this year minus last year. A month where last year is larger gives a negative number.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−6.50</span><span class="sr">negative 6 point 5 0</span></span>, <span class="m"><span aria-hidden="true">2.50</span><span class="sr">2 point 5 0</span></span>, <span class="m"><span aria-hidden="true">0</span><span class="sr">0</span></span>, <span class="m"><span aria-hidden="true">6.60</span><span class="sr">6 point 6 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-7" data-miss="{&quot;-1&quot;: &quot;That adds −4 and 3. Subtracting 3 moves 3 more steps below −4, to −7.&quot;, &quot;1&quot;: &quot;That drops the negative sign on the 4. Start at −4 and go down 3: −7.&quot;, &quot;7&quot;: &quot;The size is right, but starting below zero and going further down stays negative: −7.&quot;, &quot;12&quot;: &quot;That uses a multiplication rule. This is subtraction: −4 minus 3 is −7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Find <span class="m"><span aria-hidden="true">−4 − 3</span><span class="sr">negative 4 minus 3</span></span>.</p>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">−4</span><span class="sr">negative 4</span></span> on a number line and move 3 steps to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−7</span><span class="sr">negative 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7" data-miss="{&quot;-3&quot;: &quot;That subtracts 5 instead of negative 5. Subtracting a negative is the same as adding: 2 plus 5 is 7.&quot;, &quot;-7&quot;: &quot;The size is right, but subtracting a negative makes the result larger, not negative: 7.&quot;, &quot;3&quot;: &quot;That is 5 minus 2. Subtracting negative 5 is the same as adding 5: 7.&quot;, &quot;-10&quot;: &quot;That multiplies 2 by −5. This is subtraction: 2 minus negative 5 is 7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Find <span class="m"><span aria-hidden="true">2 − (−5)</span><span class="sr">2 minus open parenthesis negative 5 close parenthesis</span></span>.</p>
+<details><summary>Hint</summary><p>Subtracting a negative is the same as adding its positive.</p></details>
+<details><summary>Show answer</summary><p><strong>7</strong>, because <span class="m"><span aria-hidden="true">2 − (−5) = 2 + 5 = 7</span><span class="sr">2 minus open parenthesis negative 5 close parenthesis equals 2 plus 5 equals 7</span></span></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 9.3</h3>
+<p>Topic 2 (The Mean of the Differences for Matched Pairs) on pages 1 and 2 of the notes subtracts each participant's weight at age 25 from the weight at age 20, and three of the four results are negative. The examples in topics 3 and 4 (pages 2 and 6) find each difference as before minus after from a table of five days, and Classroom Example 9.3.1 on page 8 gives two rows of word counts.</p>
+<p><strong>Watch for this:</strong> the order the directions name, such as "before minus after." When the second value is larger, the difference is negative, and two equal values give 0.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Adding signed numbers and dividing</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Add two numbers with the same sign or with different signs.</li><li>Add a list of positive and negative numbers one at a time.</li><li>Divide a negative number by a positive number.</li><li>Treat a fraction bar as grouping its whole top.</li></ul>
+</div>
+<h3>Rules for adding signed numbers</h3>
+<ul>
+<li><strong>Same signs:</strong> add the sizes and keep the sign. <span class="m"><span aria-hidden="true">(−6) + (−11) = −17</span><span class="sr">open parenthesis negative 6 close parenthesis plus open parenthesis negative 11 close parenthesis equals negative 17</span></span>.</li>
+<li><strong>Different signs:</strong> subtract the smaller size from the larger size, and keep the sign of the number with the larger size. <span class="m"><span aria-hidden="true">(−6) + 2 = −4</span><span class="sr">open parenthesis negative 6 close parenthesis plus 2 equals negative 4</span></span>.</li>
+<li><strong>Adding 0</strong> changes nothing.</li>
+</ul>
+<p>For a long list, add two numbers at a time from left to right. Writing each negative number in parentheses keeps its sign from getting mixed up with a minus sign.</p>
+<p><strong>Dividing:</strong> a negative number divided by a positive number is negative. <span class="m"><span aria-hidden="true">−12 ÷ 4 = −3</span><span class="sr">negative 12 divided by 4 equals negative 3</span></span>.</p>
+<p>A fraction bar groups everything above it. Add the whole top first, then divide. On one line, the top needs parentheses around it.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Taking the sign of the wrong number.</strong> <span class="m"><span aria-hidden="true">2 + (−9) = −7</span><span class="sr">2 plus open parenthesis negative 9 close parenthesis equals negative 7</span></span> is negative, because 9 has the larger size.</li>
+<li><strong>Making every number negative.</strong> A positive number in the list still adds to the total.</li>
+<li><strong>Dividing only the last number.</strong> Without parentheses, a calculator divides only the number right next to the slash.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: A four-number fraction">
+<h3 style="margin-top:0">Worked example: A four-number fraction</h3>
+<p>Evaluate <span class="m"><span aria-hidden="true" class="frac"><span class="ft">(−6) + 2 + (−11) + 3</span><span class="fb">4</span></span><span class="sr">the fraction with negative 6 plus 2 plus negative 11 plus 3 on top and 4 on the bottom</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">(−6) + 2 = −4</span><span class="sr">open parenthesis negative 6 close parenthesis plus 2 equals negative 4</span></span></span><span class="say">Different signs: 6 minus 2 is 4, and the 6 has the larger size, so the result is negative.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">−4 + (−11) = −15</span><span class="sr">negative 4 plus open parenthesis negative 11 close parenthesis equals negative 15</span></span></span><span class="say">Same signs: add the sizes and keep the negative sign.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">−15 + 3 = −12</span><span class="sr">negative 15 plus 3 equals negative 12</span></span></span><span class="say">Different signs: 15 minus 3 is 12, and it stays negative.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">−12 ÷ 4 = −3</span><span class="sr">negative 12 divided by 4 equals negative 3</span></span></span><span class="say">Now divide the whole top. Negative divided by positive is negative.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Add three numbers">
+<h3 style="margin-top:0">Finish this one: Add three signed numbers</h3>
+<p>Find <span class="m"><span aria-hidden="true">(−5) + 9 + (−12)</span><span class="sr">open parenthesis negative 5 close parenthesis plus 9 plus open parenthesis negative 12 close parenthesis</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">(−5) + 9 = 4</span><span class="sr">open parenthesis negative 5 close parenthesis plus 9 equals 4</span></span></span><span class="say">Different signs: 9 minus 5 is 4, and the 9 has the larger size, so the result is positive. Next, add −12 to 4.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="-8" data-miss="{&quot;8&quot;: &quot;The size is right, but 12 has a larger size than 4, so 4 plus −12 is negative: −8.&quot;, &quot;-26&quot;: &quot;That treats the 9 as negative. The 9 is positive, so it moves the total up: −8.&quot;, &quot;26&quot;: &quot;That adds the sizes and ignores the signs. Two of the numbers are negative: −8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: what is <span class="m"><span aria-hidden="true">(−5) + 9 + (−12)</span><span class="sr">open parenthesis negative 5 close parenthesis plus 9 plus open parenthesis negative 12 close parenthesis</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">4 + (−12)</span><span class="sr">4 plus open parenthesis negative 12 close parenthesis</span></span>. Different signs again.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−8</span><span class="sr">negative 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-4.5" data-miss="{&quot;4.5&quot;: &quot;The size is right, but a negative divided by a positive is negative: −4.5.&quot;, &quot;~-0.222222~0.0001&quot;: &quot;The division is flipped. That is 8 divided by −36. Divide −36 by 8: −4.5.&quot;, &quot;-4&quot;: &quot;The directions say do not round. Keep every digit: −4.5.&quot;, &quot;-5&quot;: &quot;The directions say do not round. Keep every digit: −4.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> Find <span class="m"><span aria-hidden="true">−36 ÷ 8</span><span class="sr">negative 36 divided by 8</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>36 divided by 8 is 4.5. Then decide the sign.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−4.5</span><span class="sr">negative 4 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;Without parentheses around the top, only the −10 is divided by 4, and the value is 1.5 instead of −1.5.&quot;, &quot;c&quot;: &quot;The fraction bar means divide by 4, not multiply. This gives −24.&quot;, &quot;d&quot;: &quot;This is flipped: it divides 4 by the top. The top goes first, then the slash, then 4.&quot;}" data-why="Correct. The whole top is in parentheses, so the value is −6 divided by 4, which is −1.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 9.</b> Which one-line expression has the same value as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">(−3) + 7 + (−10)</span><span class="fb">4</span></span><span class="sr">the fraction with negative 3 plus 7 plus negative 10 on top and 4 on the bottom</span></span>?</legend>
+<label><input type="radio" name="mc9" value="a"> <span><span class="m"><span aria-hidden="true">(−3) + 7 + (−10) / 4</span><span class="sr">open parenthesis negative 3 close parenthesis plus 7 plus open parenthesis negative 10 close parenthesis slash 4</span></span></span></label><label><input type="radio" name="mc9" value="b"> <span><span class="m"><span aria-hidden="true">((−3) + 7 + (−10)) / 4</span><span class="sr">open parenthesis open parenthesis negative 3 close parenthesis plus 7 plus open parenthesis negative 10 close parenthesis close parenthesis slash 4</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span><span class="m"><span aria-hidden="true">((−3) + 7 + (−10)) × 4</span><span class="sr">open parenthesis open parenthesis negative 3 close parenthesis plus 7 plus open parenthesis negative 10 close parenthesis close parenthesis times 4</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span><span class="m"><span aria-hidden="true">4 / ((−3) + 7 + (−10))</span><span class="sr">4 slash open parenthesis open parenthesis negative 3 close parenthesis plus 7 plus open parenthesis negative 10 close parenthesis close parenthesis</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The fraction bar groups the whole top. Which choice puts parentheses around all of it?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">((−3) + 7 + (−10)) / 4</span><span class="sr">open parenthesis open parenthesis negative 3 close parenthesis plus 7 plus open parenthesis negative 10 close parenthesis close parenthesis slash 4</span></span></strong>, which equals <span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-1.6" data-miss="{&quot;1.6&quot;: &quot;The size is right, but the top adds to −8, and −8 divided by 5 is negative: −1.6.&quot;, &quot;-8&quot;: &quot;That is the top. One step is left: divide by 5 to get −1.6.&quot;, &quot;2.2&quot;: &quot;That adds the sizes and ignores the signs. Only 1.5 is positive. The top is −8, so the answer is −1.6.&quot;, &quot;-6.4&quot;: &quot;That divides only the last number by 5. The fraction bar divides the whole top: −8 divided by 5 is −1.6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> Evaluate <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1.5 + (−4) + (−3.5) + 0 + (−2)</span><span class="fb">5</span></span><span class="sr">the fraction with 1 point 5 plus negative 4 plus negative 3 point 5 plus 0 plus negative 2 on top and 5 on the bottom</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Add the top first: <span class="m"><span aria-hidden="true">1.5 + (−4) = −2.5</span><span class="sr">1 point 5 plus open parenthesis negative 4 close parenthesis equals negative 2 point 5</span></span>, then keep adding. The 0 changes nothing.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.6</span><span class="sr">negative 1 point 6</span></span></strong>. The top is <span class="m"><span aria-hidden="true">−8</span><span class="sr">negative 8</span></span>, and <span class="m"><span aria-hidden="true">−8 ÷ 5 = −1.6</span><span class="sr">negative 8 divided by 5 equals negative 1 point 6</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-4.75" data-miss="{&quot;4.75&quot;: &quot;The size is right, but the three withdrawals add to 124.75, which is more than the 120 deposit, so the total is negative: −4.75.&quot;, &quot;244.75&quot;: &quot;That adds the sizes and ignores the signs. The withdrawals are negative: −4.75.&quot;, &quot;-244.75&quot;: &quot;That makes the 120 deposit negative too. It is positive: −4.75.&quot;, &quot;-124.75&quot;: &quot;That leaves out the 120 deposit. Add it in: −4.75.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> A checking account had these changes in one week: <span class="m"><span aria-hidden="true">−42.50</span><span class="sr">negative 42 point 5 0</span></span>, <span class="m"><span aria-hidden="true">+120.00</span><span class="sr">positive 120 point 0 0</span></span>, <span class="m"><span aria-hidden="true">−18.25</span><span class="sr">negative 18 point 2 5</span></span> and <span class="m"><span aria-hidden="true">−64.00</span><span class="sr">negative 64 point 0 0</span></span> dollars. What was the total change, in dollars? Do not round.</p>
+<details><summary>Hint</summary><p>Add the three negative numbers first, then add the positive 120.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−4.75</span><span class="sr">negative 4 point 7 5</span></span></strong> dollars</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 9.3</h3>
+<p>Page 2 of the notes, under Mean of the Differences, adds four differences, three of them negative, and divides the total by 4. The notes show this calculation for illustration, and StatCrunch does it for you.</p>
+<p><strong>Watch for this:</strong> parentheses around each negative number, and a fraction bar that divides the whole top.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Comparing decimals and negative numbers</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare decimals that have different numbers of digits.</li><li>Compare negative numbers.</li><li>Tell whether a number is between two others.</li><li>Read the symbols <, >, ≤ and ≠, including a chain such as <span class="m"><span aria-hidden="true">−2 &lt; x &lt; 5</span><span class="sr">negative 2 is less than x, which is less than 5</span></span>.</li></ul>
+</div>
+<h3>Comparing decimals</h3>
+<p>Line up the decimal points and add zeros at the end so both numbers have the same number of digits. Then compare from left to right. The first place where the digits differ decides.</p>
+<p>A decimal with more digits is not automatically larger. <span class="m"><span aria-hidden="true">0.0082 &lt; 0.01</span><span class="sr">0 point 0 0 8 2 is less than 0 point 0 1</span></span>, because <span class="m"><span aria-hidden="true">0.0082</span><span class="sr">0 point 0 0 8 2</span></span> is less than <span class="m"><span aria-hidden="true">0.0100</span><span class="sr">0 point 0 1 0 0</span></span>.</p>
+<h3>Comparing negative numbers</h3>
+<p>On a number line, numbers get smaller as you move left. Every negative number is less than 0, and 0 is less than every positive number. Between two negative numbers, the one with the larger size is smaller: <span class="m"><span aria-hidden="true">−3.15 &lt; −2.4</span><span class="sr">negative 3 point 1 5 is less than negative 2 point 4</span></span>, even though 3.15 is more than 2.4.</p>
+<h3>Reading the symbols</h3>
+<ul>
+<li><span class="m"><span aria-hidden="true">a &lt; b</span><span class="sr">a is less than b</span></span> means a is less than b. The symbol points at the smaller number.</li>
+<li><span class="m"><span aria-hidden="true">a ≤ b</span><span class="sr">a is less than or equal to b</span></span> means a is less than or equal to b.</li>
+<li><span class="m"><span aria-hidden="true">a ≠ b</span><span class="sr">a is not equal to b</span></span> means a is not equal to b.</li>
+<li><span class="m"><span aria-hidden="true">−2 &lt; x &lt; 5</span><span class="sr">negative 2 is less than x, which is less than 5</span></span> means x is greater than −2 and less than 5 at the same time, so x is between −2 and 5.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Longer is larger.</strong> <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span> is not larger than <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span>.</li>
+<li><strong>Ignoring the negative sign.</strong> <span class="m"><span aria-hidden="true">−3.15</span><span class="sr">negative 3 point 1 5</span></span> is smaller than <span class="m"><span aria-hidden="true">−0.9</span><span class="sr">negative 0 point 9</span></span>, not larger.</li>
+<li><strong>Reading a symbol backwards.</strong> Read a chain from left to right, and check that each symbol points at the smaller number.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Compare 0.06 and 0.0475">
+<h3 style="margin-top:0">Worked example: Compare <span class="m"><span aria-hidden="true">0.06</span><span class="sr">0 point 0 6</span></span> and <span class="m"><span aria-hidden="true">0.0475</span><span class="sr">0 point 0 4 7 5</span></span></h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">0.06</span><span class="sr">0 point 0 6</span></span> or <span class="m"><span aria-hidden="true">0.0475</span><span class="sr">0 point 0 4 7 5</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.0600</span><span class="sr">0 point 0 6 0 0</span></span> and <span class="m"><span aria-hidden="true">0.0475</span><span class="sr">0 point 0 4 7 5</span></span></span><span class="say">Add zeros so both have four digits after the point.</span></li><li><span class="work">Compare the hundredths digits: 6 and 4</span><span class="say">The tenths digits match (both 0), and 6 is more than 4.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.06</span><span class="sr">0 point 0 6</span></span> is larger</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Compare 0.4 and 0.125">
+<h3 style="margin-top:0">Finish this one: Compare <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> and <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span></h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> or <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.400</span><span class="sr">0 point 4 0 0</span></span> and <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span></span><span class="say">Add zeros so both have three digits after the point. Next, compare the tenths digits.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.125 has more digits, but more digits does not mean larger. Compare 0.400 with 0.125: the tenths digit 4 beats 1.&quot;, &quot;c&quot;: &quot;Written with the same number of digits they are 0.400 and 0.125, which are not equal.&quot;}" data-why="Correct. As 0.400 and 0.125, the tenths digits are 4 and 1, so 0.4 is larger.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 12.</b> Finish it: which is larger?</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span><span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span>They are equal</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Compare the first digit after the point in <span class="m"><span aria-hidden="true">0.400</span><span class="sr">0 point 4 0 0</span></span> and <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Written as 0.0082 and 0.0100, the hundredths digits are 0 and 1, so 0.0082 is smaller. Longer is not larger.&quot;, &quot;b&quot;: &quot;Written as 0.049 and 0.050, the hundredths digits are 4 and 5, so 0.049 is smaller.&quot;, &quot;d&quot;: &quot;Written as 0.30 and 0.25, the tenths digits are 3 and 2, so 0.3 is larger. Shorter is not smaller.&quot;}" data-why="Correct. As 0.12 and 0.05, the tenths digits are 1 and 0, so 0.12 is larger.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 13.</b> Which statement is true?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true">0.0082 &gt; 0.01</span><span class="sr">0 point 0 0 8 2 is greater than 0 point 0 1</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true">0.049 &gt; 0.05</span><span class="sr">0 point 0 4 9 is greater than 0 point 0 5</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true">0.12 &gt; 0.05</span><span class="sr">0 point 1 2 is greater than 0 point 0 5</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span><span class="m"><span aria-hidden="true">0.3 &lt; 0.25</span><span class="sr">0 point 3 is less than 0 point 2 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>For each statement, add zeros so both numbers have the same number of digits, then compare.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.12 &gt; 0.05</span><span class="sr">0 point 1 2 is greater than 0 point 0 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;−0.9 is the closest to 0 of the negative numbers, so it is the largest of them.&quot;, &quot;b&quot;: &quot;1.2 is positive, so it is larger than every negative number.&quot;, &quot;c&quot;: &quot;−2.4 is to the right of −3.15 on the number line, so it is larger.&quot;}" data-why="Correct. −3.15 is farthest to the left on the number line.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> Which number is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">−0.9</span><span class="sr">negative 0 point 9</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">1.2</span><span class="sr">1 point 2</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">−2.4</span><span class="sr">negative 2 point 4</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">−3.15</span><span class="sr">negative 3 point 1 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture a number line. The smallest number is the one farthest to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3.15</span><span class="sr">negative 3 point 1 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;−5 is to the left of −4.2, so it is below the range.&quot;, &quot;c&quot;: &quot;−1 is to the right of −1.5, closer to 0, so it is above the range.&quot;, &quot;d&quot;: &quot;2 is positive, and both ends of the range are negative.&quot;}" data-why="Correct. −4.2 &lt; −3.6 &lt; −1.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> Which number is between <span class="m"><span aria-hidden="true">−4.2</span><span class="sr">negative 4 point 2</span></span> and <span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span>?</legend>
+<label><input type="radio" name="mc15" value="a"> <span><span class="m"><span aria-hidden="true">−3.6</span><span class="sr">negative 3 point 6</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span><span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span></span></label><label><input type="radio" name="mc15" value="d"> <span>2</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>A number between them is larger than <span class="m"><span aria-hidden="true">−4.2</span><span class="sr">negative 4 point 2</span></span> and smaller than <span class="m"><span aria-hidden="true">−1.5</span><span class="sr">negative 1 point 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3.6</span><span class="sr">negative 3 point 6</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;Each symbol here points the wrong way. This says x is less than −2 and greater than 5, which no number can be.&quot;, &quot;c&quot;: &quot;The ≤ symbols also allow x to equal −2 or 5. The question asks for greater than and less than, with no equal.&quot;, &quot;d&quot;: &quot;This says x is less than −2, so x is not greater than −2.&quot;}" data-why="Correct. Read left to right: −2 is less than x, and x is less than 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Which statement says that x is greater than <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and less than 5?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">−2 &gt; x &gt; 5</span><span class="sr">negative 2 is greater than x, which is greater than 5</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">−2 &lt; x &lt; 5</span><span class="sr">negative 2 is less than x, which is less than 5</span></span></span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">−2 ≤ x ≤ 5</span><span class="sr">negative 2 is less than or equal to x, which is less than or equal to 5</span></span></span></label><label><input type="radio" name="mc16" value="d"> <span><span class="m"><span aria-hidden="true">x &lt; −2 &lt; 5</span><span class="sr">x is less than negative 2, which is less than 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write "x is greater than −2" as <span class="m"><span aria-hidden="true">−2 &lt; x</span><span class="sr">negative 2 is less than x</span></span>, then add "x is less than 5" on the right.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−2 &lt; x &lt; 5</span><span class="sr">negative 2 is less than x, which is less than 5</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 9.3</h3>
+<p>Step Four of the example in topic 3 (page 3 of the notes) compares <span class="m"><span aria-hidden="true">0.501</span><span class="sr">0 point 5 0 1</span></span> with <span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span>. Topic 4 on page 6 writes a result as a chain of inequalities, <span class="m"><span aria-hidden="true">−1.57 lbs &lt; μd &lt; 2.17 lbs</span><span class="sr">negative 1 point 5 7 pounds is less than mu sub d, which is less than 2 point 1 7 pounds</span></span>, with one negative and one positive number, and the Classroom Example 9.3.1 video (page 8) has negative numbers in the thousands.</p>
+<p><strong>Watch for this:</strong> a decimal with more digits is not automatically larger, and a negative number with a larger size is smaller.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Subtracting from 1 and order of operations</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Subtract a decimal from 1 by lining up the decimal points.</li><li>Multiply before subtracting in an expression such as <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span>.</li><li>Read a typed expression that uses an asterisk for multiplication.</li><li>Change a decimal answer to a percent.</li></ul>
+</div>
+<h3>Subtracting from 1</h3>
+<p>Write 1 with as many zeros after the point as the other number has digits: <span class="m"><span aria-hidden="true">1 = 1.00</span><span class="sr">1 equals 1 point 0 0</span></span>. Then subtract place by place: <span class="m"><span aria-hidden="true">1.00 − 0.03 = 0.97</span><span class="sr">1 point 0 0 minus 0 point 0 3 equals 0 point 9 7</span></span>.</p>
+<h3>Multiply before you subtract</h3>
+<p>In <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span>, multiplication comes before subtraction, even though the subtraction is on the left.</p>
+<ol class="steps"><li>Multiply: <span class="m"><span aria-hidden="true">2 × 0.04 = 0.08</span><span class="sr">2 times 0 point 0 4 equals 0 point 0 8</span></span>.</li><li>Subtract: <span class="m"><span aria-hidden="true">1 − 0.08 = 0.92</span><span class="sr">1 minus 0 point 0 8 equals 0 point 9 2</span></span>.</li></ol>
+<p>On a keyboard, the asterisk (*) means multiply, so <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span> is typed as <span class="m"><span aria-hidden="true">1-2*0.04</span><span class="sr">1 minus 2 asterisk 0 point 0 4</span></span>. A calculator follows the same order.</p>
+<p><strong>Decimal to percent:</strong> multiply by 100, which moves the point two places right. <span class="m"><span aria-hidden="true">0.92</span><span class="sr">0 point 9 2</span></span> is 92%.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Subtracting first.</strong> <span class="m"><span aria-hidden="true">(1 − 2) × 0.04 = −0.04</span><span class="sr">open parenthesis 1 minus 2 close parenthesis times 0 point 0 4 equals negative 0 point 0 4</span></span>, a negative number nowhere near the right answer.</li>
+<li><strong>Lining up the wrong places.</strong> <span class="m"><span aria-hidden="true">1 − 0.03 = 0.97</span><span class="sr">1 minus 0 point 0 3 equals 0 point 9 7</span></span>, not <span class="m"><span aria-hidden="true">0.7</span><span class="sr">0 point 7</span></span>. The 3 is in the hundredths place.</li>
+<li><strong>Doubling slips.</strong> <span class="m"><span aria-hidden="true">2 × 0.025 = 0.05</span><span class="sr">2 times 0 point 0 2 5 equals 0 point 0 5</span></span>, not <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 1 minus 2 times 0.04">
+<h3 style="margin-top:0">Worked example: <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span></h3>
+<p>Evaluate <span class="m"><span aria-hidden="true">1 − 2 × 0.04</span><span class="sr">1 minus 2 times 0 point 0 4</span></span>, then write the result as a percent.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2 × 0.04 = 0.08</span><span class="sr">2 times 0 point 0 4 equals 0 point 0 8</span></span></span><span class="say">Multiplication first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">1.00 − 0.08 = 0.92</span><span class="sr">1 point 0 0 minus 0 point 0 8 equals 0 point 9 2</span></span></span><span class="say">Then subtract, with the points lined up.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.92 × 100 = 92</span><span class="sr">0 point 9 2 times 100 equals 92</span></span></span><span class="say">Multiply by 100 for the percent.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.92</span><span class="sr">0 point 9 2</span></span>, which is 92%</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 1 minus 0.03">
+<h3 style="margin-top:0">Finish this one: <span class="m"><span aria-hidden="true">1 − 0.03</span><span class="sr">1 minus 0 point 0 3</span></span></h3>
+<p>Find <span class="m"><span aria-hidden="true">1 − 0.03</span><span class="sr">1 minus 0 point 0 3</span></span> as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1.00 − 0.03</span><span class="sr">1 point 0 0 minus 0 point 0 3</span></span></span><span class="say">Write 1 as 1.00 so both numbers have two digits after the point. Next, subtract place by place.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.97" data-form="decimal" data-pct="That has a percent sign. 0.97% would mean less than 1 percent. The question asks for a decimal, so type 0.97 with no percent sign." data-miss="{&quot;0.7&quot;: &quot;That subtracts 0.3, not 0.03. The 3 is in the hundredths place: 1.00 minus 0.03 is 0.97.&quot;, &quot;1.03&quot;: &quot;That adds. Subtract: 1.00 minus 0.03 is 0.97.&quot;, &quot;97&quot;: &quot;That is the percent. The question asks for a decimal: 0.97.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Finish it: write <span class="m"><span aria-hidden="true">1 − 0.03</span><span class="sr">1 minus 0 point 0 3</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p>Think of dollars: $1.00 minus 3 cents.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.97</span><span class="sr">0 point 9 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.95" data-form="decimal" data-pct="That has a percent sign. The question asks for a decimal, so type 0.95 with no percent sign." data-miss="{&quot;-0.025&quot;: &quot;That subtracts first. Multiply first: 2 times 0.025 is 0.05, and 1 minus 0.05 is 0.95.&quot;, &quot;0.975&quot;: &quot;That skips the 2. Multiply 2 times 0.025 first: 0.05. Then 1 minus 0.05 is 0.95.&quot;, &quot;0.5&quot;: &quot;That uses 0.5 for 2 times 0.025. The product is 0.05, so the answer is 0.95.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Evaluate <span class="m"><span aria-hidden="true">1 − 2 × 0.025</span><span class="sr">1 minus 2 times 0 point 0 2 5</span></span>. Write the answer as a decimal.</p>
+<details><summary>Hint</summary><p>First <span class="m"><span aria-hidden="true">2 × 0.025</span><span class="sr">2 times 0 point 0 2 5</span></span>. Then subtract from 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.95</span><span class="sr">0 point 9 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.7" data-miss="{&quot;-0.15&quot;: &quot;That subtracts first. The asterisk means multiply, and multiplication comes first: 2 times 0.15 is 0.3, and 1 minus 0.3 is 0.7.&quot;, &quot;0.85&quot;: &quot;That skips the 2. 2 times 0.15 is 0.3, and 1 minus 0.3 is 0.7.&quot;, &quot;0.97&quot;: &quot;That uses 0.03 for 2 times 0.15. The product is 0.30, so the answer is 0.7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> A calculator line shows <span class="m"><span aria-hidden="true">1-2*0.15</span><span class="sr">1 minus 2 asterisk 0 point 1 5</span></span>. What value does it give?</p>
+<details><summary>Hint</summary><p>The asterisk means multiply. Do <span class="m"><span aria-hidden="true">2 × 0.15</span><span class="sr">2 times 0 point 1 5</span></span> first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.7</span><span class="sr">0 point 7</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.70</span><span class="sr">0 point 7 0</span></span> is fine)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="98" data-miss="{&quot;9.8&quot;: &quot;That moves the point only one place. Multiply by 100 to move it two places: 98%.&quot;, &quot;0.98&quot;: &quot;That adds a percent sign without converting. Multiply 0.98 by 100: 98%.&quot;, &quot;980&quot;: &quot;That moves the point three places. Multiplying by 100 moves it two places: 98%.&quot;, &quot;0.0098&quot;: &quot;That divides by 100. Going from a decimal to a percent, multiply by 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Write <span class="m"><span aria-hidden="true">0.98</span><span class="sr">0 point 9 8</span></span> as a percent.</p>
+<details><summary>Hint</summary><p>Move the decimal point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>98%</strong> (typing 98 is fine)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="99" data-miss="{&quot;99.5&quot;: &quot;That skips the 2. 2 times 0.005 is 0.01, 1 minus 0.01 is 0.99, and that is 99%.&quot;, &quot;0.99&quot;: &quot;That is the decimal. Multiply by 100 for the percent: 99%.&quot;, &quot;90&quot;: &quot;That uses 0.1 for 2 times 0.005. The product is 0.010, so the decimal is 0.99, which is 99%.&quot;, &quot;-0.5&quot;: &quot;That subtracts first. Multiply first: 2 times 0.005 is 0.01, so the decimal is 0.99, which is 99%.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Evaluate <span class="m"><span aria-hidden="true">1 − 2 × 0.005</span><span class="sr">1 minus 2 times 0 point 0 0 5</span></span>, then write the result as a percent. Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">2 × 0.005 = 0.010</span><span class="sr">2 times 0 point 0 0 5 equals 0 point 0 1 0</span></span>. Then subtract from 1 and multiply by 100.</p></details>
+<details><summary>Show answer</summary><p><strong>99%</strong>, because <span class="m"><span aria-hidden="true">1 − 0.01 = 0.99</span><span class="sr">1 minus 0 point 0 1 equals 0 point 9 9</span></span></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 9.3</h3>
+<p>The Review of Converting Significance (α) to Confidence Level on page 8 of the notes uses <span class="m"><span aria-hidden="true">1 − α</span><span class="sr">1 minus alpha</span></span> and <span class="m"><span aria-hidden="true">1 − 2α</span><span class="sr">1 minus 2 alpha</span></span>, and the note above it works <span class="m"><span aria-hidden="true">1 − 0.01 = 0.99</span><span class="sr">1 minus 0 point 0 1 equals 0 point 9 9</span></span>. The Classroom Example 9.3.1 video types an expression like this with an asterisk for multiplication.</p>
+<p><strong>Watch for this:</strong> multiply before you subtract, and line up the decimal points when you subtract from 1.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Rounding, including negative numbers</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to two decimal places and to three decimal places.</li><li>Round to the nearest integer (whole number).</li><li>Round a negative number and keep its sign.</li><li>Carry correctly when a 9 rounds up, and avoid rounding in steps.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. Two decimal places keeps the hundredths digit, three decimal places keeps the thousandths digit, and the nearest integer keeps the ones digit.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Negative numbers</h3>
+<p>Round the digits exactly as if there were no sign, then put the negative sign back. <span class="m"><span aria-hidden="true">−2.4863</span><span class="sr">negative 2 point 4 8 6 3</span></span> rounds to <span class="m"><span aria-hidden="true">−2.49</span><span class="sr">negative 2 point 4 9</span></span> at two decimal places, because <span class="m"><span aria-hidden="true">2.4863</span><span class="sr">2 point 4 8 6 3</span></span> rounds to <span class="m"><span aria-hidden="true">2.49</span><span class="sr">2 point 4 9</span></span>. The size gets bigger, so the negative number moves further from 0.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Chopping instead of rounding.</strong> <span class="m"><span aria-hidden="true">−1.3462</span><span class="sr">negative 1 point 3 4 6 2</span></span> to two decimal places is <span class="m"><span aria-hidden="true">−1.35</span><span class="sr">negative 1 point 3 5</span></span>, not <span class="m"><span aria-hidden="true">−1.34</span><span class="sr">negative 1 point 3 4</span></span>.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">3127.48</span><span class="sr">3127 point 4 8</span></span> to the nearest whole number is 3127, not 3128.</li>
+<li><strong>A 9 that rounds up.</strong> It becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">−3.0962</span><span class="sr">negative 3 point 0 9 6 2</span></span> to two decimal places is <span class="m"><span aria-hidden="true">−3.10</span><span class="sr">negative 3 point 1 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round negative 2.4863 two ways">
+<h3 style="margin-top:0">Worked example: Round <span class="m"><span aria-hidden="true">−2.4863</span><span class="sr">negative 2 point 4 8 6 3</span></span> two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">−2.4863</span><span class="sr">negative 2 point 4 8 6 3</span></span> to two decimal places, and then to the nearest integer.</p><ol class="steps"><li><span class="work">Two decimal places: keep the 8, look at the 6</span><span class="say">The 6 is 5 or more, so the 8 becomes 9: <span class="m"><span aria-hidden="true">−2.49</span><span class="sr">negative 2 point 4 9</span></span>.</span></li><li><span class="work">Nearest integer: keep the 2, look at the 4</span><span class="say">The 4 is 4 or less, so the 2 stays: <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">−2.49</span><span class="sr">negative 2 point 4 9</span></span> to two decimal places and <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> to the nearest integer.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round negative 1.3462">
+<h3 style="margin-top:0">Finish this one: Round <span class="m"><span aria-hidden="true">−1.3462</span><span class="sr">negative 1 point 3 4 6 2</span></span> to two decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">−1.3462</span><span class="sr">negative 1 point 3 4 6 2</span></span> to two decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 4 in the hundredths place. Next digit: 6.</span><span class="say">The 6 is 5 or more. Next, decide what the 4 becomes, and keep the negative sign.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="-1.35" data-miss="{&quot;-1.34&quot;: &quot;That chops off the extra digits. The next digit is 6, so the 4 goes up: −1.35.&quot;, &quot;1.35&quot;: &quot;The digits are right, but the negative sign is missing: −1.35.&quot;, &quot;-1.346&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: −1.35.&quot;, &quot;-1.3&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: −1.35.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Finish it: what is <span class="m"><span aria-hidden="true">−1.3462</span><span class="sr">negative 1 point 3 4 6 2</span></span> rounded to two decimal places?</p>
+<details><summary>Hint</summary><p>Round 1.3462 as if it had no sign, then put the negative sign back.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.35</span><span class="sr">negative 1 point 3 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.41" data-miss="{&quot;0.409&quot;: &quot;That chops off the extra digits. The next digit is 5, so the 9 goes up, becomes 0 and carries: 0.410.&quot;, &quot;0.4095&quot;: &quot;That keeps four digits after the point. Three decimal places keeps three: 0.410.&quot;, &quot;0.4&quot;: &quot;That either rounds to one decimal place or turns the 9 into 0 without carrying. When the 9 goes up, it becomes 0 and adds 1 to the 0 on its left: 0.410.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> Round <span class="m"><span aria-hidden="true">0.40951</span><span class="sr">0 point 4 0 9 5 1</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the thousandths place. When a 9 goes up, write 0 and carry 1 to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.410</span><span class="sr">0 point 4 1 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.41</span><span class="sr">0 point 4 1</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-7315" data-miss="{&quot;-7314&quot;: &quot;That chops off the decimal part. The tenths digit is 6, so the size goes up from 7314 to 7315, and the sign stays: −7315.&quot;, &quot;7315&quot;: &quot;The digits are right, but the negative sign is missing: −7315.&quot;, &quot;-7314.6&quot;: &quot;That is one decimal place. The nearest integer has no digits after the point: −7315.&quot;, &quot;-7310&quot;: &quot;That rounds to the nearest ten. The nearest integer keeps the ones digit: −7315.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Round <span class="m"><span aria-hidden="true">−7314.62</span><span class="sr">negative 7314 point 6 2</span></span> to the nearest integer.</p>
+<details><summary>Hint</summary><p>Round 7314.62 as if it had no sign. The digit after the ones place is 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−7315</span><span class="sr">negative 7315</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3127" data-miss="{&quot;3128&quot;: &quot;That rounds in steps from the right (3127.48 to 3127.5 to 3128). Only the tenths digit counts, and it is 4: 3127.&quot;, &quot;3127.5&quot;: &quot;That is one decimal place. The nearest whole number has no digits after the point: 3127.&quot;, &quot;3127.48&quot;: &quot;That is the number you started with. Round so there are no digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Round <span class="m"><span aria-hidden="true">3127.48</span><span class="sr">3127 point 4 8</span></span> to the nearest whole number.</p>
+<details><summary>Hint</summary><p>Look only at the tenths digit, the 4. Ignore the 8.</p></details>
+<details><summary>Show answer</summary><p><strong>3127</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-0.073" data-miss="{&quot;-0.072&quot;: &quot;That chops off the extra digits. The next digit is 8, so the 2 goes up: −0.073.&quot;, &quot;0.073&quot;: &quot;The digits are right, but the negative sign is missing: −0.073.&quot;, &quot;-0.0729&quot;: &quot;That keeps four digits after the point. Three decimal places keeps three: −0.073.&quot;, &quot;-0.07&quot;: &quot;That is two decimal places. Three decimal places keeps three digits: −0.073.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Round <span class="m"><span aria-hidden="true">−0.07285</span><span class="sr">negative 0 point 0 7 2 8 5</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The third digit after the point is 2. The digit after it is 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.073</span><span class="sr">negative 0 point 0 7 3</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 9.3</h3>
+<p>The Notes on Step Three on page 3 of the notes say rounding is done per the directions given in MyLab (MML). The Classroom Example 9.3.1 video (page 8) rounds to two decimal places, three decimal places and the nearest integer, and some of its results are negative.</p>
+<p><strong>Watch for this:</strong> the rounding direction at the end of each question, and the negative sign on a rounded result.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="-0.75" data-miss="{&quot;0.75&quot;: &quot;The size is right, but the week 2 height is larger, so week 1 minus week 2 is negative: −0.75.&quot;, &quot;31.25&quot;: &quot;That adds the heights. Subtract them: −0.75.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> A plant was <span class="m"><span aria-hidden="true">15.25</span><span class="sr">15 point 2 5</span></span> cm tall in week 1 and 16 cm tall in week 2. Find the week 1 height minus the week 2 height, in centimeters.</p>
+<details><summary>Hint</summary><p>Write 16 as <span class="m"><span aria-hidden="true">16.00</span><span class="sr">16 point 0 0</span></span> and keep the order: week 1 first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.75</span><span class="sr">negative 0 point 7 5</span></span></strong> cm</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-3.1" data-miss="{&quot;-3.09&quot;: &quot;That chops off the extra digits. The next digit is 6, so the 9 goes up, becomes 0 and carries: −3.10.&quot;, &quot;3.1&quot;: &quot;The digits are right, but the negative sign is missing: −3.10.&quot;, &quot;-3.096&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: −3.10.&quot;, &quot;-3&quot;: &quot;That is the nearest integer. Two decimal places keeps two digits after the point: −3.10.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> Round <span class="m"><span aria-hidden="true">−3.0962</span><span class="sr">negative 3 point 0 9 6 2</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9. When it goes up, it carries.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3.10</span><span class="sr">negative 3 point 1 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">−3.1</span><span class="sr">negative 3 point 1</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;0.072 has more digits, but written as 0.300 and 0.072, the tenths digits are 3 and 0, so 0.3 is larger.&quot;, &quot;c&quot;: &quot;Written with the same number of digits they are 0.300 and 0.072, which are not equal.&quot;}" data-why="Correct. As 0.300 and 0.072, the tenths digits are 3 and 0.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 29.</b> Which is larger?</legend>
+<label><input type="radio" name="mc29" value="a"> <span><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span></span></label><label><input type="radio" name="mc29" value="b"> <span><span class="m"><span aria-hidden="true">0.072</span><span class="sr">0 point 0 7 2</span></span></span></label><label><input type="radio" name="mc29" value="c"> <span>They are equal</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Add zeros so both have three digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.93" data-miss="{&quot;-0.035&quot;: &quot;That subtracts first. Multiply first: 2 times 0.035 is 0.07, and 1 minus 0.07 is 0.93.&quot;, &quot;0.965&quot;: &quot;That skips the 2. 2 times 0.035 is 0.07, so the answer is 0.93.&quot;, &quot;0.3&quot;: &quot;That uses 0.7 for 2 times 0.035. The product is 0.070, so the answer is 0.93.&quot;, &quot;93&quot;: &quot;That is the percent. The question asks for the value: 0.93.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> Evaluate <span class="m"><span aria-hidden="true">1 − 2 × 0.035</span><span class="sr">1 minus 2 times 0 point 0 3 5</span></span>.</p>
+<details><summary>Hint</summary><p>Multiplication first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.93</span><span class="sr">0 point 9 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-3" data-miss="{&quot;3&quot;: &quot;The size is right, but the top adds to −12, and −12 divided by 4 is negative: −3.&quot;, &quot;-12&quot;: &quot;That is the top. One step is left: divide by 4 to get −3.&quot;, &quot;4.5&quot;: &quot;That adds the sizes and ignores the signs. Only the 3 is positive: the top is −12, so the answer is −3.&quot;, &quot;-4&quot;: &quot;That divides by 3. The bottom of the fraction is 4: −12 divided by 4 is −3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 31.</b> Evaluate <span class="m"><span aria-hidden="true" class="frac"><span class="ft">(−9) + 3 + (−6) + 0</span><span class="fb">4</span></span><span class="sr">the fraction with negative 9 plus 3 plus negative 6 plus 0 on top and 4 on the bottom</span></span>.</p>
+<details><summary>Hint</summary><p>Add the top from left to right. The 0 changes nothing.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;−0.7 is to the left of −0.6, so it is below the range.&quot;, &quot;b&quot;: &quot;−0.04 is closer to 0 than −0.05, so it is to the right of the range.&quot;, &quot;d&quot;: &quot;0.2 is positive, and both ends of the range are negative.&quot;}" data-why="Correct. −0.6 &lt; −0.3 &lt; −0.05.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 32.</b> Which number is between <span class="m"><span aria-hidden="true">−0.6</span><span class="sr">negative 0 point 6</span></span> and <span class="m"><span aria-hidden="true">−0.05</span><span class="sr">negative 0 point 0 5</span></span>?</legend>
+<label><input type="radio" name="mc32" value="a"> <span><span class="m"><span aria-hidden="true">−0.7</span><span class="sr">negative 0 point 7</span></span></span></label><label><input type="radio" name="mc32" value="b"> <span><span class="m"><span aria-hidden="true">−0.04</span><span class="sr">negative 0 point 0 4</span></span></span></label><label><input type="radio" name="mc32" value="c"> <span><span class="m"><span aria-hidden="true">−0.3</span><span class="sr">negative 0 point 3</span></span></span></label><label><input type="radio" name="mc32" value="d"> <span><span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture the number line between <span class="m"><span aria-hidden="true">−0.6</span><span class="sr">negative 0 point 6</span></span> and <span class="m"><span aria-hidden="true">−0.05</span><span class="sr">negative 0 point 0 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.3</span><span class="sr">negative 0 point 3</span></span></strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with subtracting in a set order, adding and dividing signed numbers, comparing decimals and negative numbers, order of operations and rounding. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec9.3-getready-corequisite-2026'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  if(q.dataset.form==='decimal'&&/%/.test(raw))return show(q,'wrong',q.dataset.pct||'This question asks for a decimal, so leave off the percent sign.');
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 6.4 Exit Ticket: The Central Limit Theorem</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 6.4 Exit Ticket</div>
+<h1>Section 6.4 Exit Ticket: The Central Limit Theorem</h1>
+<p>A short, ungraded check to use after the Section 6.4 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 5</span></label><br><progress id="overall" max="5" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Central Limit Theorem<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Examples 1 and 2 and Key Takeaways<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 15 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 6.4 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 4.</li>
+<li>Section 5 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Central Limit Theorem</button></li>
+<li><button type="button" data-go="s3">Examples 1 and 2 and Key Takeaways</button></li>
+<li><button type="button" data-go="s4">StatCrunch check</button></li>
+<li><button type="button" data-go="s5">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Central Limit Theorem</h2>
+<p>These checks cover item 1 (Central Limit Theorem) on page 1 of the Section 6.4 notes, including its Notation and Requirements, and the video "Classroom Example 6.4.1" on page 4.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Given any population, the sample means approach a normal distribution as the sample size increases." data-miss="{&quot;a&quot;: &quot;Not quite. Item 1 describes the distribution of the sample means, not the individual amounts. Review: item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 1 says this happens given any population distribution, whatever its shape. Review: item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. For a population that is not normal, item 1 says the sample means approach a normal distribution as the sample size increases. Review: item 1 (Central Limit Theorem) on page 1 of the notes.&quot;}" data-review="item 1 (Central Limit Theorem) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Central Limit Theorem).</b> The amounts customers spend at a gift shop are strongly skewed to the right, not normal. Many samples of customers are taken, and the mean amount spent is found for each sample. According to item 1, what happens as the sample size increases?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The distribution of the individual amounts spent becomes normal.</span></label><label><input type="radio" name="mc1" value="b"> <span>The distribution of the sample means stays skewed, like the population.</span></label><label><input type="radio" name="mc1" value="c"> <span>The distribution of the sample means approaches a normal distribution.</span></label><label><input type="radio" name="mc1" value="d"> <span>The distribution of the sample means is normal for every sample size.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The distribution of the sample means approaches a normal distribution.</strong></p><p class="ptr">Where this is: Item 1 (Central Limit Theorem) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The mean of the sample means equals the population mean." data-miss="{&quot;b&quot;: &quot;Not quite. The Notation divides the standard deviation by the square root of n, not the mean. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The Notation does not divide the mean by anything; the mean of the sample means equals the population mean. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The Notation gives this value from the population mean alone. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;}" data-review="the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Mean of the sample means).</b> A population has mean <span class="m"><span aria-hidden="true">μ = 68</span><span class="sr">mu equals 68</span></span> and standard deviation <span class="m"><span aria-hidden="true">σ = 10</span><span class="sr">sigma equals 10</span></span>. Samples of size <span class="m"><span aria-hidden="true">n = 25</span><span class="sr">n equals 25</span></span> are taken. What is <span class="m"><span aria-hidden="true">μ<sub>x̄</sub></span><span class="sr">mu sub x bar</span></span>, the mean of the sampling distribution of sample means?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>68, the same as the population mean</span></label><label><input type="radio" name="mc2" value="b"> <span><span class="m"><span aria-hidden="true">13.6</span><span class="sr">13 point 6</span></span>, which is 68 divided by the square root of 25</span></label><label><input type="radio" name="mc2" value="c"> <span><span class="m"><span aria-hidden="true">2.72</span><span class="sr">2 point 7 2</span></span>, which is 68 divided by 25</span></label><label><input type="radio" name="mc2" value="d"> <span>It cannot be found until a sample is taken</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>68, the same as the population mean</strong></p><p class="ptr">Where this is: The Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="num" data-nonneg="1" data-answer="2" data-why="Correct. 12 divided by the square root of 36 is 12 divided by 6, which is 2." data-miss="{&quot;12&quot;: &quot;Not quite. This leaves the population standard deviation unchanged instead of using the Notation formula. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;~0.3333~0.002&quot;: &quot;Not quite. This divides by n, 36, instead of by the square root of n. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;72&quot;: &quot;Not quite. This multiplies by the square root of 36 instead of dividing by it. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;6&quot;: &quot;Not quite. This is the square root of 36 by itself; it still has to divide 12. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;, &quot;0.5&quot;: &quot;Not quite. This divides the square root of 36 by 12, which flips the formula. Review: the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.&quot;}" data-review="the Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.">
+<p class="prompt"><b class="qlabel">Check 3 (Standard deviation of the sample means).</b> A population has standard deviation <span class="m"><span aria-hidden="true">σ = 12</span><span class="sr">sigma equals 12</span></span>. For samples of size <span class="m"><span aria-hidden="true">n = 36</span><span class="sr">n equals 36</span></span>, find <span class="m"><span aria-hidden="true">σ<sub>x̄</sub></span><span class="sr">sigma sub x bar</span></span>, the standard deviation of the sampling distribution of sample means. Do not round.</p>
+<details><summary>Show answer</summary><p><strong>2</strong></p><p class="ptr">Where this is: The Notation part of item 1 (Central Limit Theorem) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. 45 is greater than 30, which meets the second requirement." data-miss="{&quot;a&quot;: &quot;Not quite. The Requirements are joined by \&quot;or,\&quot; so a large enough sample works even when the population is not known to be normal. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The Requirements give sufficiently large as n greater than 30, not 100. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. For a population that is not known to be normal, the Requirements still need n greater than 30. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes.&quot;}" data-review="the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Requirements, large sample).</b> The shape of the population of a city's monthly household water bills is unknown. A random sample of 45 bills is taken. Based on the Requirements on page 1, can the Central Limit Theorem be applied to the sample mean?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>No, because the population is not known to be normally distributed.</span></label><label><input type="radio" name="mc4" value="b"> <span>No, because the sample size would need to be at least 100.</span></label><label><input type="radio" name="mc4" value="c"> <span>Yes, because the Central Limit Theorem works for any sample size.</span></label><label><input type="radio" name="mc4" value="d"> <span>Yes, because the sample size is sufficiently large, <span class="m"><span aria-hidden="true">n > 30</span><span class="sr">n greater than 30</span></span>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes, because the sample size is sufficiently large, <span class="m"><span aria-hidden="true">n > 30</span><span class="sr">n greater than 30</span></span>.</strong></p><p class="ptr">Where this is: The Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. A normally distributed population meets the first requirement, whatever the sample size." data-miss="{&quot;a&quot;: &quot;Not quite. The Requirements set sufficiently large as n greater than 30, and 6 does not meet that. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Random selection alone is not one of the two Requirements on page 1. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The Requirements are joined by \&quot;or,\&quot; and a normally distributed population meets the first one. Review: the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;}" data-review="the Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes, and the video &quot;Classroom Example 6.4.1&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Requirements, normal population).</b> Heights of a certain plant are normally distributed. A sample of 6 plants is taken. Why can a normal distribution be used for the sample mean even though <span class="m"><span aria-hidden="true">n = 6</span><span class="sr">n equals 6</span></span> is not greater than 30?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Because 6 is close enough to 30 to count as sufficiently large.</span></label><label><input type="radio" name="mc5" value="b"> <span>Because the original population is normally distributed, so the sample size does not need to be greater than 30.</span></label><label><input type="radio" name="mc5" value="c"> <span>Because the sample was randomly selected.</span></label><label><input type="radio" name="mc5" value="d"> <span>It cannot be used, because the sample size must be greater than 30 in every case.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Because the original population is normally distributed, so the sample size does not need to be greater than 30.</strong></p><p class="ptr">Where this is: The Requirements to Use the Central Limit Theorem in item 1 on page 1 of the notes, and the video "Classroom Example 6.4.1" on page 4.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Central Limit Theorem: item 1, page 1</li><li>Notation (mean and standard deviation of the sample means): item 1, page 1</li><li>Requirements to Use the Central Limit Theorem: item 1, page 1</li><li>Video: "Classroom Example 6.4.1", page 4</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Examples 1 and 2 and Key Takeaways</h2>
+<p>These checks cover Example 1 on page 2, Example 2 on page 3, and item 2 (Key Takeaways) on page 4 of the Section 6.4 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. This asks about the mean of a sample of 25, like Example 2." data-miss="{&quot;a&quot;: &quot;Not quite. This asks about one battery, an individual value, like Example 1. Review: Example 1 (Probability of an Individual Value) on page 2, Example 2 (Probability of a Sample Mean) on page 3, and item 2 (Key Takeaways) on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. \&quot;Between\&quot; does not make it a sample mean; this still asks about one battery. Review: Example 1 (Probability of an Individual Value) on page 2, Example 2 (Probability of a Sample Mean) on page 3, and item 2 (Key Takeaways) on page 4 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The box of 25 does not change anything, since the question still asks about one battery. Review: Example 1 (Probability of an Individual Value) on page 2, Example 2 (Probability of a Sample Mean) on page 3, and item 2 (Key Takeaways) on page 4 of the notes.&quot;}" data-review="Example 1 (Probability of an Individual Value) on page 2, Example 2 (Probability of a Sample Mean) on page 3, and item 2 (Key Takeaways) on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Individual value or sample mean).</b> Battery life for one model is normally distributed with <span class="m"><span aria-hidden="true">μ = 40</span><span class="sr">mu equals 40</span></span> hours and <span class="m"><span aria-hidden="true">σ = 5</span><span class="sr">sigma equals 5</span></span> hours. Which question calls for <span class="m"><span aria-hidden="true">σ<sub>x̄</sub></span><span class="sr">sigma sub x bar</span></span> instead of <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>The probability that one randomly selected battery lasts more than 42 hours.</span></label><label><input type="radio" name="mc6" value="b"> <span>The probability that one randomly selected battery lasts between 38 and 42 hours.</span></label><label><input type="radio" name="mc6" value="c"> <span>The probability that the mean life of 25 randomly selected batteries is more than 42 hours.</span></label><label><input type="radio" name="mc6" value="d"> <span>The probability that one battery, taken from a box of 25, lasts more than 42 hours.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The probability that the mean life of 25 randomly selected batteries is more than 42 hours.</strong></p><p class="ptr">Where this is: Example 1 (Probability of an Individual Value) on page 2, Example 2 (Probability of a Sample Mean) on page 3, and item 2 (Key Takeaways) on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The Key Differences say Example 2 involves the sample mean and adjusts the standard deviation for the sample size." data-miss="{&quot;a&quot;: &quot;Not quite. Example 2 says the mean of the sample means is identical to the population mean, 100. Review: Example 2 on page 3 of the notes, including the Key Differences from Example 1.&quot;, &quot;c&quot;: &quot;Not quite. Example 2 says to type the standard deviation as is, without a decimal approximation. Review: Example 2 on page 3 of the notes, including the Key Differences from Example 1.&quot;, &quot;d&quot;: &quot;Not quite. Example 2 asks about the mean of 20 people being greater than 91, not one person below 91. Review: Example 2 on page 3 of the notes, including the Key Differences from Example 1.&quot;}" data-review="Example 2 on page 3 of the notes, including the Key Differences from Example 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Why Examples 1 and 2 differ).</b> Example 1 and Example 2 both use <span class="m"><span aria-hidden="true">μ = 100</span><span class="sr">mu equals 100</span></span>, <span class="m"><span aria-hidden="true">σ = 15</span><span class="sr">sigma equals 15</span></span> and the value 91, but their answers are <span class="m"><span aria-hidden="true">0.726</span><span class="sr">0 point 7 2 6</span></span> and <span class="m"><span aria-hidden="true">0.996</span><span class="sr">0 point 9 9 6</span></span>. Which statement explains the difference?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>Example 2 uses a different mean, because the mean changes for a sample of 20.</span></label><label><input type="radio" name="mc7" value="b"> <span>Example 2 is about a sample mean, so its standard deviation is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15</span><span class="fb">√20</span></span><span class="sr">15 divided by the square root of 20</span></span> instead of 15.</span></label><label><input type="radio" name="mc7" value="c"> <span>Example 2 rounds its standard deviation to a decimal before using it.</span></label><label><input type="radio" name="mc7" value="d"> <span>Example 2 finds the probability that one person scores below 91.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Example 2 is about a sample mean, so its standard deviation is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15</span><span class="fb">√20</span></span><span class="sr">15 divided by the square root of 20</span></span> instead of 15.</strong></p><p class="ptr">Where this is: Example 2 on page 3 of the notes, including the Key Differences from Example 1.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. The mean stays 41, the standard deviation becomes 6 divided by the square root of 16, and the probability is for x bar." data-miss="{&quot;a&quot;: &quot;Not quite. Only the standard deviation is divided by the square root of n; the mean of the sample means equals the population mean. Review: Example 2 (Probability of a Sample Mean) on page 3 and the Notation part of item 1 on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This is the setup for one bag, an individual value, but the question asks about the mean of 16 bags. Review: Example 2 (Probability of a Sample Mean) on page 3 and the Notation part of item 1 on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This divides the standard deviation by n instead of by the square root of n. Review: Example 2 (Probability of a Sample Mean) on page 3 and the Notation part of item 1 on page 1 of the notes.&quot;}" data-review="Example 2 (Probability of a Sample Mean) on page 3 and the Notation part of item 1 on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Setting up a sample mean).</b> Weights of checked bags are normally distributed with a mean of 41 pounds and a standard deviation of 6 pounds. You want the probability that the mean weight of 16 randomly selected bags is greater than 43 pounds. Which setup matches the notes?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Mean <span class="m"><span aria-hidden="true" class="frac"><span class="ft">41</span><span class="fb">√16</span></span><span class="sr">41 divided by the square root of 16</span></span>, standard deviation <span class="m"><span aria-hidden="true" class="frac"><span class="ft">6</span><span class="fb">√16</span></span><span class="sr">6 divided by the square root of 16</span></span>, find <span class="m"><span aria-hidden="true">P(x̄ ≥ 43)</span><span class="sr">P of x bar greater than or equal to 43</span></span></span></label><label><input type="radio" name="mc8" value="b"> <span>Mean 41, standard deviation 6, find <span class="m"><span aria-hidden="true">P(x ≥ 43)</span><span class="sr">P of x greater than or equal to 43</span></span></span></label><label><input type="radio" name="mc8" value="c"> <span>Mean 41, standard deviation <span class="m"><span aria-hidden="true" class="frac"><span class="ft">6</span><span class="fb">16</span></span><span class="sr">6 over 16</span></span>, find <span class="m"><span aria-hidden="true">P(x̄ ≥ 43)</span><span class="sr">P of x bar greater than or equal to 43</span></span></span></label><label><input type="radio" name="mc8" value="d"> <span>Mean 41, standard deviation <span class="m"><span aria-hidden="true" class="frac"><span class="ft">6</span><span class="fb">√16</span></span><span class="sr">6 divided by the square root of 16</span></span>, find <span class="m"><span aria-hidden="true">P(x̄ ≥ 43)</span><span class="sr">P of x bar greater than or equal to 43</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Mean 41, standard deviation <span class="m"><span aria-hidden="true" class="frac"><span class="ft">6</span><span class="fb">√16</span></span><span class="sr">6 divided by the square root of 16</span></span>, find <span class="m"><span aria-hidden="true">P(x̄ ≥ 43)</span><span class="sr">P of x bar greater than or equal to 43</span></span></strong></p><p class="ptr">Where this is: Example 2 (Probability of a Sample Mean) on page 3 and the Notation part of item 1 on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Example 2 says to type the formula into StatCrunch as is." data-miss="{&quot;b&quot;: &quot;Not quite. The standard deviation of the means formula divides by the square root of n, not by n. Review: the Solution of Example 2 on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Example 2 adjusts the standard deviation for the sample size, so it is not 15. Review: the Solution of Example 2 on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Example 2 says not to use a decimal approximation at all, however many places it keeps. Review: the Solution of Example 2 on page 3 of the notes.&quot;}" data-review="the Solution of Example 2 on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Typing the standard deviation).</b> For Example 2, a classmate works out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15</span><span class="fb">√20</span></span><span class="sr">15 divided by the square root of 20</span></span> on a calculator, gets <span class="m"><span aria-hidden="true">3.354…</span><span class="sr">3 point 3 5 4 and more digits</span></span>, and types <span class="m"><span aria-hidden="true">3.4</span><span class="sr">3 point 4</span></span> into StatCrunch as the standard deviation. What does Example 2 say to do instead?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Type <span class="m"><span aria-hidden="true">15/sqrt(20)</span><span class="sr">15 slash square root of 20</span></span> as is, without a decimal approximation.</span></label><label><input type="radio" name="mc9" value="b"> <span>Type <span class="m"><span aria-hidden="true">15/20</span><span class="sr">15 slash 20</span></span>, since the square root is only needed by hand.</span></label><label><input type="radio" name="mc9" value="c"> <span>Type 15, since the standard deviation does not change for a sample mean.</span></label><label><input type="radio" name="mc9" value="d"> <span>Type <span class="m"><span aria-hidden="true">3.35</span><span class="sr">3 point 3 5</span></span>, since two decimal places is accurate enough.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Type <span class="m"><span aria-hidden="true">15/sqrt(20)</span><span class="sr">15 slash square root of 20</span></span> as is, without a decimal approximation.</strong></p><p class="ptr">Where this is: The Solution of Example 2 on page 3 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Example 1 (Probability of an Individual Value): page 2</li><li>Example 2 (Probability of a Sample Mean), including the Key Differences from Example 1: page 3</li><li>Key Takeaways: item 2, page 4</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. StatCrunch check</h2>
+<p>These checks cover the StatCrunch work in Examples 1 and 2 on pages 2 and 3 of the notes, the Note on page 1 about the normal calculator, and the video "Classroom Example 6.4.1" and the video "Classroom Example 6.4.2" on page 4.</p>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.3085" data-why="Correct. StatCrunch shows about 0.3085." data-miss="{&quot;0.6915&quot;: &quot;Not quite. This is the area below 38, but the question asks for longer than 38, so the direction is reversed. Review: Example 1 (Probability of an Individual Value) on page 2 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.309&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 1 (Probability of an Individual Value) on page 2 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;~0.308538~0.00003&quot;: &quot;Not quite. The value is right, but it still needs rounding to four decimal places. Review: Example 1 (Probability of an Individual Value) on page 2 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;}" data-review="Example 1 (Probability of an Individual Value) on page 2 of the notes, and the video &quot;Classroom Example 6.4.1&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 10 (Individual value).</b> Commute times for a city's workers are normally distributed with a mean of 34 minutes and a standard deviation of 8 minutes. If one worker is randomly selected, use StatCrunch to find the probability that the commute is longer than 38 minutes. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.3085</span><span class="sr">0 point 3 0 8 5</span></span></strong></p><p class="ptr">Where this is: Example 1 (Probability of an Individual Value) on page 2 of the notes, and the video "Classroom Example 6.4.1" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.0416" data-why="Correct. StatCrunch shows about 0.0416." data-miss="{&quot;0.3085&quot;: &quot;Not quite. This uses the standard deviation 8, which fits one worker, but the question asks about the mean of 12 workers. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0&quot;: &quot;Not quite. This divides the standard deviation by 12 instead of by the square root of 12. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.9584&quot;: &quot;Not quite. This is the area below 38, but the question asks for longer than 38, so the direction is reversed. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.0417&quot;: &quot;Not quite. This is slightly off because the standard deviation was typed as a rounded decimal (2.31) instead of as is. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.041&quot;: &quot;Not quite. This is off because the standard deviation was typed as a rounded decimal (2.3) instead of as is. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.042&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;~0.041632~0.00002&quot;: &quot;Not quite. The value is right, but it still needs rounding to four decimal places. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;}" data-review="Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video &quot;Classroom Example 6.4.1&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 11 (Sample mean).</b> For the same commute times (mean 34 minutes, standard deviation 8 minutes), 12 workers are randomly selected. Use StatCrunch to find the probability that their mean commute time is longer than 38 minutes. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0416</span><span class="sr">0 point 0 4 1 6</span></span></strong></p><p class="ptr">Where this is: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video "Classroom Example 6.4.1" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.7066" data-why="Correct. StatCrunch shows about 0.7066." data-miss="{&quot;0.2902&quot;: &quot;Not quite. This uses the standard deviation 8, which fits one worker, but the question asks about the mean of 9 workers. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.9878&quot;: &quot;Not quite. This divides the standard deviation by 9 instead of by the square root of 9. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.7734&quot;: &quot;Not quite. This is only the area below 36, so the lower value, 30, was left out. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.9332&quot;: &quot;Not quite. This is only the area above 30, so the upper value, 36, was left out. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;0.707&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;, &quot;~0.706565~0.00002&quot;: &quot;Not quite. The value is right, but it still needs rounding to four decimal places. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.1\&quot; on page 4.&quot;}" data-review="Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video &quot;Classroom Example 6.4.1&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 12 (Sample mean between two values).</b> For the same commute times (mean 34 minutes, standard deviation 8 minutes), 9 workers are randomly selected. Use StatCrunch to find the probability that their mean commute time is between 30 and 36 minutes. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.7066</span><span class="sr">0 point 7 0 6 6</span></span></strong></p><p class="ptr">Where this is: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video "Classroom Example 6.4.1" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="180" data-why="Correct. 2,700 divided by 15 is 180 pounds." data-miss="{&quot;40500&quot;: &quot;Not quite. This multiplies the load limit by 15 instead of dividing it among the 15 riders. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;, &quot;~0.005556~0.00006&quot;: &quot;Not quite. This divides 15 by 2,700, so the division is flipped. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;, &quot;2685&quot;: &quot;Not quite. This subtracts 15 from the load limit instead of dividing it among the 15 riders. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;}" data-review="the video &quot;Classroom Example 6.4.2&quot; on page 4 of the notes.">
+<p class="prompt"><b class="qlabel">Check 13 (Load limit per person).</b> An elevator has a stated capacity of 15 people and is rated for a load limit of 2,700 pounds. What is the maximum mean weight of the riders if the elevator is filled to its stated capacity? Do not round.</p>
+<details><summary>Show answer</summary><p><strong>180 pounds</strong></p><p class="ptr">Where this is: The video "Classroom Example 6.4.2" on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="0.1427" data-why="Correct. StatCrunch shows about 0.1427." data-miss="{&quot;0.3913&quot;: &quot;Not quite. This uses the standard deviation 29, which fits one rider, but the question asks about the mean of 15 riders. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;, &quot;0&quot;: &quot;Not quite. This divides the standard deviation by 15 instead of by the square root of 15. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;, &quot;0.8573&quot;: &quot;Not quite. This is the area below 180, but the question asks for greater than 180, so the direction is reversed. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;, &quot;0.1431&quot;: &quot;Not quite. This is slightly off because the standard deviation was typed as a rounded decimal (7.5) instead of as is. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;, &quot;0.143&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;, &quot;~0.142668~0.00002&quot;: &quot;Not quite. The value is right, but it still needs rounding to four decimal places. Review: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video \&quot;Classroom Example 6.4.2\&quot; on page 4.&quot;}" data-review="Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video &quot;Classroom Example 6.4.2&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 14 (Mean weight over the limit).</b> For the elevator in Check 13, assume rider weights are normally distributed with a mean of 172 pounds and a standard deviation of 29 pounds. If the elevator is filled with 15 randomly selected riders, use StatCrunch to find the probability that their mean weight is greater than 180 pounds. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.1427</span><span class="sr">0 point 1 4 2 7</span></span></strong></p><p class="ptr">Where this is: Example 2 (Probability of a Sample Mean) on page 3 of the notes, and the video "Classroom Example 6.4.2" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. A probability over 50% means overloading is likely, so the capacity does not appear safe." data-miss="{&quot;a&quot;: &quot;Not quite. A probability below 1 can still make overloading likely, and this one is well over 50%. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The question is about the mean weight of the whole load, not whether some passengers are light. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The probability already describes the mean weight of the full load, so individual weights are not needed. Review: the video \&quot;Classroom Example 6.4.2\&quot; on page 4 of the notes.&quot;}" data-review="the video &quot;Classroom Example 6.4.2&quot; on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Is the capacity safe?).</b> In a problem like Classroom Example 6.4.2, the probability that the mean weight of a full load of passengers exceeds the per-passenger limit comes out to <span class="m"><span aria-hidden="true">0.8812</span><span class="sr">0 point 8 8 1 2</span></span>. Which conclusion matches the reasoning in the video?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>The capacity is safe, because the probability is less than 1.</span></label><label><input type="radio" name="mc15" value="b"> <span>The capacity is not safe, because overloading is likely, with a probability over 50%.</span></label><label><input type="radio" name="mc15" value="c"> <span>The capacity is safe, because some passengers will weigh less than the limit.</span></label><label><input type="radio" name="mc15" value="d"> <span>There is not enough information without each passenger's weight.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The capacity is not safe, because overloading is likely, with a probability over 50%.</strong></p><p class="ptr">Where this is: The video "Classroom Example 6.4.2" on page 4 of the notes.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Wait for StatCrunch to finish loading, then choose Stat, then Calculators, then Normal. The &quot;Classroom Example 6.4.1&quot; and &quot;Classroom Example 6.4.2&quot; videos show this." value="I could not find the normal calculator."> I could not find the normal calculator.</label><label><input type="checkbox" class="sc-issue" data-tip="Type sqrt with the number in parentheses, as in the Std. Dev. box in the screenshot on page 3 of the notes. The &quot;Classroom Example 6.4.1&quot; video types it this way." value="I was not sure how to type a square root."> I was not sure how to type a square root.</label><label><input type="checkbox" class="sc-issue" data-tip="Type the standard deviation as a division by a square root, as is, not as a rounded decimal (Example 2, page 3). Then round only the final answer, to the number of places the problem asks for." value="My answer was close but did not match."> My answer was close but did not match.</label><label><input type="checkbox" class="sc-issue" data-tip="Use the Between option in the normal calculator and enter both values. The &quot;Classroom Example 6.4.1&quot; video finds probabilities between two values in parts a and b." value="I needed the probability between two values."> I needed the probability between two values.</label><label><input type="checkbox" class="sc-issue" data-tip="Sketch the normal curve first and mark where each value falls compared with the mean, as both classroom example videos do before opening StatCrunch." value="I was not sure which values go where, or which direction to use."> I was not sure which values go where, or which direction to use.</label><label><input type="checkbox" class="sc-issue" data-tip="The &quot;Classroom Example 6.4.2&quot; video does this division in StatCrunch with Data, then Compute, then Expression." value="I needed to divide a load limit by a number of passengers."> I needed to divide a load limit by a number of passengers.</label><label><input type="checkbox" class="sc-issue" data-tip="That can happen. In part b of the &quot;Classroom Example 6.4.2&quot; video, StatCrunch shows a probability of 1." value="StatCrunch showed a probability of 1."> StatCrunch showed a probability of 1.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 5.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Normal calculator in StatCrunch: Note on page 1, Example 1 on page 2, Example 2 on page 3</li><li>Individual values and sample means, including "between": video "Classroom Example 6.4.1", page 4</li><li>Load limits, capacity and whether it is safe: video "Classroom Example 6.4.2", page 4</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 8: I am not sure when to divide by the square root of n."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec6.4-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Central Limit Theorem", "resource": "Item 1 on page 1 of the Section 6.4 notes, and the video \"Classroom Example 6.4.1\" on page 4."}, {"id": "s3", "name": "Examples 1 and 2 and Key Takeaways", "resource": "Examples 1 and 2 on pages 2 and 3 and item 2 (Key Takeaways) on page 4 of the Section 6.4 notes."}, {"id": "s4", "name": "StatCrunch", "resource": "Examples 1 and 2 on pages 2 and 3 of the notes, and the videos \"Classroom Example 6.4.1\" and \"Classroom Example 6.4.2\" on page 4."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='6.4';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s5')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

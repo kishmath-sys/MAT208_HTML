@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 7.3 Exit Ticket: Estimating a Population Standard Deviation or Variance</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 7.3 Exit Ticket</div>
+<h1>Section 7.3 Exit Ticket: Estimating a Population Standard Deviation or Variance</h1>
+<p>A short, ungraded check to use after the Section 7.3 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 4</span></label><br><progress id="overall" max="4" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Concepts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 16 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 7.3 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 3.</li>
+<li>Section 4 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Concepts</button></li>
+<li><button type="button" data-go="s3">StatCrunch check</button></li>
+<li><button type="button" data-go="s4">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Concepts</h2>
+<p>These checks cover items 1 to 5 on pages 1 and 2 of the Section 7.3 notes and the Classroom Example 7.3.1 and 7.3.2 videos on page 8.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. The sample variance is the best point estimate for the population variance." data-miss="{&quot;a&quot;: &quot;Not quite. That is the sample standard deviation, and item 1 names a different sample value as the best point estimate for the population variance. Review: item 1 (Point Estimate) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Doubling 5 does not give a value named in item 1, which names the sample variance as the best point estimate. Review: item 1 (Point Estimate) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. A point estimate is a single value from a sample, so it does not need data from every commuter. Review: item 1 (Point Estimate) on page 1 of the notes.&quot;}" data-review="item 1 (Point Estimate) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Point Estimate).</b> A simple random sample of bike commute times has a sample standard deviation of s = 5 minutes, so the sample variance is <span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span> = 25. Which statement matches item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The best point estimate for the population variance <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span> is 5, the sample standard deviation.</span></label><label><input type="radio" name="mc1" value="b"> <span>The best point estimate for the population variance <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span> is 10, twice the sample standard deviation.</span></label><label><input type="radio" name="mc1" value="c"> <span>The best point estimate for the population variance <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span> is 25, the sample variance.</span></label><label><input type="radio" name="mc1" value="d"> <span>There is no point estimate for <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span> unless data are collected from every commuter.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The best point estimate for the population variance <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span> is 25, the sample variance.</strong></p><p class="ptr">Where this is: Item 1 (Point Estimate) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Item 2 names the sample variance and critical values from the chi-squared distribution." data-miss="{&quot;b&quot;: &quot;Not quite. Item 2 uses a sample measure of variability, not the sample mean. Review: item 2 (Confidence Interval for a Population Mean) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Items 2 and 3 name a different distribution for estimating a variance or standard deviation. Review: item 2 (Confidence Interval for a Population Mean) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The population variance is the unknown value being estimated, so it is not available to build the interval. Review: item 2 (Confidence Interval for a Population Mean) on page 1 of the notes.&quot;}" data-review="item 2 (Confidence Interval for a Population Mean) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (How the Interval Is Calculated).</b> Item 2 describes how the confidence intervals in this section are calculated. Which two things does it say are used?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>The sample variance and critical values from the <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span>-distribution</span></label><label><input type="radio" name="mc2" value="b"> <span>The sample mean and critical values from the <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span>-distribution</span></label><label><input type="radio" name="mc2" value="c"> <span>The sample variance and critical values from the normal (z) distribution</span></label><label><input type="radio" name="mc2" value="d"> <span>The population variance and critical values from the <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span>-distribution</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The sample variance and critical values from the <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span>-distribution</strong></p><p class="ptr">Where this is: Item 2 (Confidence Interval for a Population Mean) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The chi-squared distribution is right-skewed, with values that are positive or zero only." data-miss="{&quot;a&quot;: &quot;Not quite. Item 3 says the distribution is not symmetric, and its values cannot be negative. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The values part fits, but item 3 gives the other direction of skew. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The shape part fits, but item 3 says the values are positive or zero only. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;}" data-review="item 3 (The Chi-Squared Distribution) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Shape and Values of Chi-Squared).</b> Which description matches the key characteristics of the <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span> distribution in item 3?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Symmetric and bell-shaped, with both negative and positive values</span></label><label><input type="radio" name="mc3" value="b"> <span>Left-skewed, with values that are positive or zero only</span></label><label><input type="radio" name="mc3" value="c"> <span>Right-skewed, with both negative and positive values</span></label><label><input type="radio" name="mc3" value="d"> <span>Right-skewed, with values that are positive or zero only</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Right-skewed, with values that are positive or zero only</strong></p><p class="ptr">Where this is: Item 3 (The Chi-Squared Distribution) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="num" data-nonneg="1" data-answer="25" data-why="Correct. df = n − 1 = 26 − 1 = 25." data-miss="{&quot;26&quot;: &quot;Not quite. 26 is the sample size n itself, and item 3 gives df as n − 1. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;27&quot;: &quot;Not quite. That adds 1 to the sample size, and item 3 subtracts 1. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;24&quot;: &quot;Not quite. That subtracts 2 from the sample size, and item 3 subtracts 1. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;13&quot;: &quot;Not quite. That halves the sample size, and item 3 subtracts 1 from it. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;}" data-review="item 3 (The Chi-Squared Distribution) on page 1 of the notes.">
+<p class="prompt"><b class="qlabel">Check 4 (Degrees of Freedom).</b> A simple random sample of 26 phone batteries is used to estimate the population standard deviation of battery life. Using item 3, how many degrees of freedom (df) go with this sample?</p>
+<details><summary>Show answer</summary><p><strong>25</strong></p><p class="ptr">Where this is: Item 3 (The Chi-Squared Distribution) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. As n increases, the skewness diminishes." data-miss="{&quot;a&quot;: &quot;Not quite. Item 3 says the skewness changes the other way as n increases. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 3 says the skewness diminishes as n increases, not that it switches direction. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 3 says the values are positive or zero only, whatever the sample size. Review: item 3 (The Chi-Squared Distribution) on page 1 of the notes.&quot;}" data-review="item 3 (The Chi-Squared Distribution) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (As n Increases).</b> Picture two <span class="m"><span aria-hidden="true">χ<sup>2</sup></span><span class="sr">chi-squared</span></span> distributions, one for a sample size of n = 5 and one for n = 40. Which statement matches item 3?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>The n = 40 distribution is more right-skewed than the n = 5 one.</span></label><label><input type="radio" name="mc5" value="b"> <span>The n = 40 distribution is less skewed than the n = 5 one.</span></label><label><input type="radio" name="mc5" value="c"> <span>The n = 40 distribution is left-skewed, and the n = 5 one is right-skewed.</span></label><label><input type="radio" name="mc5" value="d"> <span>The n = 40 distribution has negative values, and the n = 5 one does not.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The n = 40 distribution is less skewed than the n = 5 one.</strong></p><p class="ptr">Where this is: Item 3 (The Chi-Squared Distribution) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. The population must follow a normal distribution, and this one does not." data-miss="{&quot;a&quot;: &quot;Not quite. Item 4 lists two requirements, and a simple random sample is only one of them. Review: item 4 (Requirements for Estimating a Population Standard Deviation) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 4 says this normality requirement is stricter than the one for estimating the mean, so a large sample does not remove it. Review: item 4 (Requirements for Estimating a Population Standard Deviation) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 4 does not set a sample size limit, and the problem here is the shape of the population. Review: item 4 (Requirements for Estimating a Population Standard Deviation) on page 2 of the notes.&quot;}" data-review="item 4 (Requirements for Estimating a Population Standard Deviation) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Requirements).</b> A researcher has a simple random sample of 60 home sale prices and wants a confidence interval for <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>. Home sale prices in this population are strongly right-skewed, not normal. Which statement matches item 4?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>The requirements are met, because a simple random sample is the only requirement.</span></label><label><input type="radio" name="mc6" value="b"> <span>The requirements are met, because 60 prices is large enough that normality does not matter.</span></label><label><input type="radio" name="mc6" value="c"> <span>The requirements are not met, because the population must follow a normal distribution.</span></label><label><input type="radio" name="mc6" value="d"> <span>The requirements are not met, because the sample must have fewer than 30 prices.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The requirements are not met, because the population must follow a normal distribution.</strong></p><p class="ptr">Where this is: Item 4 (Requirements for Estimating a Population Standard Deviation) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. It names the confidence level, the population standard deviation in context and both endpoints with units." data-miss="{&quot;b&quot;: &quot;Not quite. The sample standard deviation is already known from the data, and the interval estimates the population value. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the Phase I statement on page 7.&quot;, &quot;c&quot;: &quot;Not quite. This interval estimates a standard deviation, not a mean. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the Phase I statement on page 7.&quot;, &quot;d&quot;: &quot;Not quite. The interval is about the population standard deviation, not about where individual delivery times fall. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the Phase I statement on page 7.&quot;}" data-review="item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the Phase I statement on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Phase I Statement).</b> A 95% confidence interval for the population standard deviation of pizza delivery times is 2.4 minutes to 5.1 minutes. Which Phase I statement follows the pattern in item 5?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>We are 95% confident that the population standard deviation of delivery times is between 2.4 minutes and 5.1 minutes.</span></label><label><input type="radio" name="mc7" value="b"> <span>We are 95% confident that the sample standard deviation of delivery times is between 2.4 minutes and 5.1 minutes.</span></label><label><input type="radio" name="mc7" value="c"> <span>We are 95% confident that the population mean delivery time is between 2.4 minutes and 5.1 minutes.</span></label><label><input type="radio" name="mc7" value="d"> <span>About 95% of all the delivery times are between 2.4 minutes and 5.1 minutes, so most deliveries take that long.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>We are 95% confident that the population standard deviation of delivery times is between 2.4 minutes and 5.1 minutes.</strong></p><p class="ptr">Where this is: Item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the Phase I statement on page 7.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. An interval for a standard deviation does not tell whether a treatment works." data-miss="{&quot;a&quot;: &quot;Not quite. Values of a standard deviation are not negative anyway, and the interval says nothing about height gains. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;b&quot;: &quot;Not quite. The interval describes how much heights vary, and the question is about whether plants grew taller. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. A confidence interval can answer some questions, just not this one, since it is about variability. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;}" data-review="item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video &quot;Classroom Example 7.3.1&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Answering the Question).</b> A study of a new plant fertilizer finds a 90% confidence interval of 1.8 cm to 3.6 cm for the population standard deviation of plant heights. A reporter asks, "Does this show that the fertilizer makes plants grow taller?" Which answer matches the notes and the Classroom Example 7.3.1 video?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Yes, because both endpoints of the interval are above zero.</span></label><label><input type="radio" name="mc8" value="b"> <span>Yes, because a narrow interval shows the fertilizer works well.</span></label><label><input type="radio" name="mc8" value="c"> <span>No, because a 90% confidence interval cannot answer any question.</span></label><label><input type="radio" name="mc8" value="d"> <span>No, because the interval estimates variability, not whether plants grew taller.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because the interval estimates variability, not whether plants grew taller.</strong></p><p class="ptr">Where this is: Item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video "Classroom Example 7.3.1" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. The interval describes Saturday waits between 8 and 9 a.m., not other times." data-miss="{&quot;a&quot;: &quot;Not quite. A simple random sample of Saturday morning waits still only represents Saturday morning waits. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. An interval describes the population the sample came from, and this sample came from one time slot. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;d&quot;: &quot;Not quite. The issue here is when the data were collected, not whether wait times can be normal. Review: item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;}" data-review="item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video &quot;Classroom Example 7.3.2&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Context of the Sample).</b> A simple random sample of drive-through wait times was collected on Saturdays between 8 and 9 a.m. The 95% confidence interval for the population standard deviation of wait times is 0.9 minutes to 2.1 minutes. Does this interval describe wait times for all hours of the week?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Yes, because the data came from a simple random sample.</span></label><label><input type="radio" name="mc9" value="b"> <span>No, because the sample only came from Saturdays between 8 and 9 a.m.</span></label><label><input type="radio" name="mc9" value="c"> <span>Yes, because a confidence interval covers every hour the business is open.</span></label><label><input type="radio" name="mc9" value="d"> <span>No, because wait times can never come from a normal distribution.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because the sample only came from Saturdays between 8 and 9 a.m.</strong></p><p class="ptr">Where this is: Item 5 (Writing Confidence Interval Conclusions) on page 2 of the notes, and the video "Classroom Example 7.3.2" on page 8.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Point Estimate: item 1, page 1</li><li>Confidence Interval for a Population Mean: item 2, page 1</li><li>The Chi-Squared Distribution: item 3, page 1</li><li>Requirements for Estimating a Population Standard Deviation: item 4, page 2</li><li>Writing Confidence Interval Conclusions: item 5, page 2</li><li>Videos: "Classroom Example 7.3.1" and "Classroom Example 7.3.2", page 8</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. StatCrunch check</h2>
+<p>These checks cover Examples 1 and 2 under "Finding a Confidence Interval that Estimates a Population Standard Deviation using StatCrunch" on pages 2 to 7 of the notes, their two walkthrough videos, and the Classroom Example 7.3.1 and 7.3.2 videos on page 8.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. The variance is the square of the standard deviation, typed 4.6^2." data-miss="{&quot;a&quot;: &quot;Not quite. 4.6 is the standard deviation, and the Note on page 3 says what the box needs instead. Review: Example 1 (With Summary Statistics Given) on pages 2 and 3 of the notes, including the Note on page 3, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;b&quot;: &quot;Not quite. The star multiplies, so this doubles 4.6 rather than squaring it. Review: Example 1 (With Summary Statistics Given) on pages 2 and 3 of the notes, including the Note on page 3, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. The square root step comes at the end, on the limits, not on the value entered here. Review: Example 1 (With Summary Statistics Given) on pages 2 and 3 of the notes, including the Note on page 3, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;}" data-review="Example 1 (With Summary Statistics Given) on pages 2 and 3 of the notes, including the Note on page 3, the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats&quot; on page 2, and the video &quot;Classroom Example 7.3.1&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Sample Variance Box).</b> A problem gives a sample standard deviation of 4.6 and a sample size of 18. In the With Summary window in StatCrunch, what should go in the Sample variance box?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">4.6</span><span class="sr">4 point 6</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true">4.6*2</span><span class="sr">4 point 6 star 2</span></span></span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">sqrt(4.6)</span><span class="sr">sqrt of 4 point 6</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">4.6^2</span><span class="sr">4 point 6 caret 2</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.6^2</span><span class="sr">4 point 6 caret 2</span></span></strong></p><p class="ptr">Where this is: Example 1 (With Summary Statistics Given) on pages 2 and 3 of the notes, including the Note on page 3, the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats" on page 2, and the video "Classroom Example 7.3.1" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.67" data-why="Correct. StatCrunch gives about 0.6735, which rounds to 0.67." data-miss="{&quot;0.45&quot;: &quot;Not quite. This is the lower limit for the variance, before taking its square root. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.73&quot;: &quot;Not quite. This matches typing 0.84 itself in the Sample variance box instead of its square. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.54&quot;: &quot;Not quite. This matches typing 0.84 as the variance and then not taking the square root. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.65&quot;: &quot;Not quite. This matches a 95% level, so the confidence level was not changed to 90%. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.42&quot;: &quot;Not quite. This matches a 95% level with no square root taken. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.04&quot;: &quot;Not quite. This matches typing 0.84*2, which doubles the standard deviation instead of squaring it. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.7&quot;: &quot;Not quite. This is rounded to one decimal place, and the directions ask for two. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;~0.67346~0.0001&quot;: &quot;Not quite. This is not rounded yet, and the directions ask for two decimal places. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.673&quot;: &quot;Not quite. This has three decimal places, and the directions ask for two. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.13&quot;: &quot;Not quite. This is the upper boundary, and the question asks for the lower one. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;}" data-review="Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats&quot; on page 2, and the video &quot;Classroom Example 7.3.1&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 11 (Summary Statistics, Lower Boundary).</b> A simple random sample of 22 cereal boxes has a sample standard deviation of <span class="m"><span aria-hidden="true">0.84</span><span class="sr">0 point 8 4</span></span> ounces. Assume the fill weights are normally distributed. Use StatCrunch to construct a 90% confidence interval estimate for the population standard deviation of fill weights. What is the <strong>lower</strong> boundary? Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.67</span><span class="sr">0 point 6 7</span></span> ounces</strong></p><p class="ptr">Where this is: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats" on page 2, and the video "Classroom Example 7.3.1" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="1.13" data-why="Correct. StatCrunch gives about 1.1306, which rounds to 1.13." data-miss="{&quot;1.28&quot;: &quot;Not quite. This is the upper limit for the variance, before taking its square root. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.23&quot;: &quot;Not quite. This matches typing 0.84 itself in the Sample variance box instead of its square. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.52&quot;: &quot;Not quite. This matches typing 0.84 as the variance and then not taking the square root. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.20&quot;: &quot;Not quite. This matches a 95% level, so the confidence level was not changed to 90%. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.44&quot;: &quot;Not quite. This matches a 95% level with no square root taken. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.74&quot;: &quot;Not quite. This matches typing 0.84*2, which doubles the standard deviation instead of squaring it. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.1&quot;: &quot;Not quite. This is rounded to one decimal place, and the directions ask for two. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;~1.13064~0.0001&quot;: &quot;Not quite. This is not rounded yet, and the directions ask for two decimal places. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;1.131&quot;: &quot;Not quite. This has three decimal places, and the directions ask for two. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;, &quot;0.67&quot;: &quot;Not quite. This is the lower boundary, and the question asks for the upper one. Review: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats\&quot; on page 2, and the video \&quot;Classroom Example 7.3.1\&quot; on page 8.&quot;}" data-review="Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats&quot; on page 2, and the video &quot;Classroom Example 7.3.1&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 12 (Summary Statistics, Upper Boundary).</b> Use the same cereal box problem from Check 11. What is the <strong>upper</strong> boundary of the 90% confidence interval for the population standard deviation? Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.13</span><span class="sr">1 point 1 3</span></span> ounces</strong></p><p class="ptr">Where this is: Example 1 (With Summary Statistics Given) on pages 2 to 4 of the notes, the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats" on page 2, and the video "Classroom Example 7.3.1" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The lower boundary is on the left, and sigma names the population standard deviation." data-miss="{&quot;a&quot;: &quot;Not quite. The endpoints are reversed, and the notes put the lower boundary on the left. Review: the Interval Notation and Inequality Notation rows on pages 4 and 7 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. These are boundaries for the standard deviation, and this choice labels them as the variance. Review: the Interval Notation and Inequality Notation rows on pages 4 and 7 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The letter s is the sample standard deviation, which is already known, and the notes use the population symbol. Review: the Interval Notation and Inequality Notation rows on pages 4 and 7 of the notes.&quot;}" data-review="the Interval Notation and Inequality Notation rows on pages 4 and 7 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Interval and Inequality Notation).</b> A confidence interval for a population standard deviation is written in interval notation as <span class="m"><span aria-hidden="true">(3.2 min, 7.9 min)</span><span class="sr">open parenthesis 3 point 2 minutes comma 7 point 9 minutes close parenthesis</span></span>. Which inequality notation matches it, in the style of the notes?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true">7.9 min &lt; σ &lt; 3.2 min</span><span class="sr">7 point 9 minutes is less than sigma is less than 3 point 2 minutes</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true">3.2 min &lt; σ &lt; 7.9 min</span><span class="sr">3 point 2 minutes is less than sigma is less than 7 point 9 minutes</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true">3.2 min &lt; σ<sup>2</sup> &lt; 7.9 min</span><span class="sr">3 point 2 minutes is less than sigma squared is less than 7 point 9 minutes</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span><span class="m"><span aria-hidden="true">3.2 min &lt; s &lt; 7.9 min</span><span class="sr">3 point 2 minutes is less than s is less than 7 point 9 minutes</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.2 min &lt; σ &lt; 7.9 min</span><span class="sr">3 point 2 minutes is less than sigma is less than 7 point 9 minutes</span></span></strong></p><p class="ptr">Where this is: The Interval Notation and Inequality Notation rows on pages 4 and 7 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. Take the square root of the entire decimal number." data-miss="{&quot;a&quot;: &quot;Not quite. This squares the limit, and the notes take its square root. Review: the square root steps and their Reminders on pages 3, 4, 6 and 7 of the notes, and the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. This halves the limit, and a square root is not half. Review: the square root steps and their Reminders on pages 3, 4, 6 and 7 of the notes, and the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. This rounds the limit before the square root, and the Reminders say to use the entire decimal number. Review: the square root steps and their Reminders on pages 3, 4, 6 and 7 of the notes, and the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5.&quot;}" data-review="the square root steps and their Reminders on pages 3, 4, 6 and 7 of the notes, and the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Taking the Square Root).</b> After you select Compute, StatCrunch shows a lower limit of <span class="m"><span aria-hidden="true">52.738194</span><span class="sr">52 point 7 3 8 1 9 4</span></span>. What should you type in the Compute Expression box?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">52.738194^2</span><span class="sr">52 point 7 3 8 1 9 4 caret 2</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">52.738194/2</span><span class="sr">52 point 7 3 8 1 9 4 slash 2</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">sqrt(52.738194)</span><span class="sr">sqrt of 52 point 7 3 8 1 9 4</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">sqrt(52.74)</span><span class="sr">sqrt of 52 point 7 4</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">sqrt(52.738194)</span><span class="sr">sqrt of 52 point 7 3 8 1 9 4</span></span></strong></p><p class="ptr">Where this is: The square root steps and their Reminders on pages 3, 4, 6 and 7 of the notes, and the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="4.5" data-why="Correct. StatCrunch gives about 4.5011, which rounds to 4.5." data-miss="{&quot;20.3&quot;: &quot;Not quite. This is the lower limit for the variance, before taking its square root. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;~20.2595~0.06&quot;: &quot;Not quite. This is the lower limit for the variance, before taking its square root. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;4.8&quot;: &quot;Not quite. This matches a 95% level, so the confidence level was not changed to 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;4.3&quot;: &quot;Not quite. This matches a 99% level, and the problem asks for 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;5.0&quot;: &quot;Not quite. This matches a 90% level, and the problem asks for 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;~4.50106~0.0001&quot;: &quot;Not quite. This is not rounded yet, and the directions ask for one decimal place. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;6.7&quot;: &quot;Not quite. This is the sample standard deviation of the data, and the question asks for a boundary of the interval. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;6.75&quot;: &quot;Not quite. This is the sample standard deviation of the data, and the question asks for a boundary of the interval. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;12.8&quot;: &quot;Not quite. This is the upper boundary, and the question asks for the lower one. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;}" data-review="Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data&quot; on page 5, and the video &quot;Classroom Example 7.3.2&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 15 (Raw Data, Lower Boundary).</b> A simple random sample of 12 employees reported their one-way commute times in minutes: <span class="m"><span aria-hidden="true">42, 37, 51, 46, 33, 48, 55, 40, 44, 39, 50, 36</span><span class="sr">42, 37, 51, 46, 33, 48, 55, 40, 44, 39, 50, 36</span></span>. Assume commute times are normally distributed. Enter the data in StatCrunch and construct a 98% confidence interval estimate for the population standard deviation of commute times. What is the <strong>lower</strong> boundary? Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.5</span><span class="sr">4 point 5</span></span> minutes</strong></p><p class="ptr">Where this is: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data" on page 5, and the video "Classroom Example 7.3.2" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="12.8" data-why="Correct. StatCrunch gives about 12.8081, which rounds to 12.8." data-miss="{&quot;~164.0476~0.06&quot;: &quot;Not quite. This is the upper limit for the variance, before taking its square root. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;11.5&quot;: &quot;Not quite. This matches a 95% level, so the confidence level was not changed to 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;13.9&quot;: &quot;Not quite. This matches a 99% level, and the problem asks for 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;10.5&quot;: &quot;Not quite. This matches a 90% level, and the problem asks for 98%. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;12.81&quot;: &quot;Not quite. This is rounded to two decimal places, and the directions ask for one. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;~12.80811~0.0001&quot;: &quot;Not quite. This is not rounded yet, and the directions ask for one decimal place. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;6.7&quot;: &quot;Not quite. This is the sample standard deviation of the data, and the question asks for a boundary of the interval. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;6.75&quot;: &quot;Not quite. This is the sample standard deviation of the data, and the question asks for a boundary of the interval. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;, &quot;4.5&quot;: &quot;Not quite. This is the lower boundary, and the question asks for the upper one. Review: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video \&quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data\&quot; on page 5, and the video \&quot;Classroom Example 7.3.2\&quot; on page 8.&quot;}" data-review="Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data&quot; on page 5, and the video &quot;Classroom Example 7.3.2&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 16 (Raw Data, Upper Boundary).</b> Use the same commute time data from Check 15. What is the <strong>upper</strong> boundary of the 98% confidence interval for the population standard deviation? Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">12.8</span><span class="sr">12 point 8</span></span> minutes</strong></p><p class="ptr">Where this is: Example 2 (With Raw Data Given) on pages 5 to 7 of the notes, the video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data" on page 5, and the video "Classroom Example 7.3.2" on page 8.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Go to Stat, then Variance Stats, then One Sample, then With Summary when the problem gives the numbers, or With Data when it gives a data set. Pages 2 and 5 of the notes show the menus." value="I could not find the right StatCrunch menu."> I could not find the right StatCrunch menu.</label><label><input type="checkbox" class="sc-issue" data-tip="Type the standard deviation from the problem with ^2 after it, as the screenshot on page 3 shows. The caret ^ is Shift and 6, as in the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats&quot;." value="I was not sure what to type in the Sample variance box."> I was not sure what to type in the Sample variance box.</label><label><input type="checkbox" class="sc-issue" data-tip="Select the circle for Confidence interval for σ², then change Level to the one in the problem. The Classroom Example 7.3.2 video types 0.98 for 98%. Pages 3 and 6 of the notes show this." value="My confidence level stayed at 0.95."> My confidence level stayed at 0.95.</label><label><input type="checkbox" class="sc-issue" data-tip="The results StatCrunch shows are limits for the variance. Go to Data, then Compute, then Expression, and type sqrt( ) around each limit. Pages 3, 4, 6 and 7 of the notes show this." value="My answers looked too large or did not match."> My answers looked too large or did not match.</label><label><input type="checkbox" class="sc-issue" data-tip="Use the entire decimal number StatCrunch shows. The video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats&quot; copies the limits and pastes them, and typing them in works too." value="I was not sure how many digits to type inside sqrt( )."> I was not sure how many digits to type inside sqrt( ).</label><label><input type="checkbox" class="sc-issue" data-tip="The Classroom Example 7.3.2 video opens the data in StatCrunch by clicking the little boxes icon by the data instead of typing it. The new column is not labeled, so note which column holds the data." value="Typing the data set took a long time."> Typing the data set took a long time.</label><label><input type="checkbox" class="sc-issue" data-tip="Round only the final square roots, to the places the problem asks for. In the video &quot;Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data&quot;, the boundaries are first rounded to two places and then corrected to one decimal place: 4.0 and 10.2." value="I was not sure how to round."> I was not sure how to round.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 4.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Example 1 (With Summary Statistics Given): pages 2 to 4, video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Summary Stats"</li><li>Example 2 (With Raw Data Given): pages 5 to 7, video "Finding a Confidence Interval that Estimates a Population Standard Deviation using Raw Data"</li><li>Interval Notation and Inequality Notation: pages 4 and 7</li><li>Square root Reminders: pages 3, 4, 6 and 7</li><li>Videos: "Classroom Example 7.3.1" and "Classroom Example 7.3.2", page 8</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 12: my upper boundary does not match, and I am not sure which step I missed."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec7.3-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Concepts", "resource": "Items 1 to 5 on pages 1 and 2 of the Section 7.3 notes, and the videos \"Classroom Example 7.3.1\" and \"Classroom Example 7.3.2\" on page 8."}, {"id": "s3", "name": "StatCrunch", "resource": "Examples 1 and 2 on pages 2 to 7 of the notes, the two StatCrunch walkthrough videos on pages 2 and 5, and the videos \"Classroom Example 7.3.1\" and \"Classroom Example 7.3.2\" on page 8."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='7.3';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

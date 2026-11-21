@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 6.3 Corequisite: Sampling Distributions and Estimators</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 6.3</div>
+<h1>Section 6.3 Corequisite: Sampling Distributions and Estimators</h1>
+<p>Get ready for the Section 6.3 notes with practice on squares, square roots, parts of a whole, and comparing numbers that are close. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Squares and square roots<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. What squaring does to a number<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Part of a whole as a fraction, decimal or percent<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. How far apart, and approximately equal<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Square whole numbers, decimals and negative numbers, and find square roots.</li><li>Predict whether squaring makes a number larger or smaller, and compare the squares of two numbers.</li><li>Write a part of a whole as a fraction, a decimal or a percent, after picking out the whole.</li><li>Find how far apart two numbers are, and read the symbols for "equals," "does not equal" and "approximately equal."</li></ul>
+</div>
+<p>Section 6.3 of the notes describes the sampling distributions of the sample mean, the sample variance and the sample proportion, and reviews biased and unbiased estimators.</p>
+<p>The Section 6.3 notes do not work out any numbers, so this page is shorter than most. It practices the number skills that the notes' symbols and wording lean on: squared values written with a small raised 2, parts of a whole, and the difference between "approximately" and "exactly." It does not teach any of the statistics ideas in the notes. The notes do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span>, and fractions with a slash, such as 3/8. Type a negative number with a minus sign, such as -4. Commas, a percent sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 6.3 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure whether <span class="m"><span aria-hidden="true">(−6)<sup>2</sup></span><span class="sr">open parenthesis negative 6 close parenthesis squared</span></span> is 36, negative 36 or 12.</strong><br><button type="button" data-go="s2">Squares and square roots</button></li>
+<li><strong>I expect squaring to make every number bigger.</strong><br><button type="button" data-go="s3">What squaring does to a number</button></li>
+<li><strong>When a question asks what part of a group something is, I am not sure which number to divide by.</strong><br><button type="button" data-go="s4">Part of a whole as a fraction, decimal or percent</button></li>
+<li><strong>I am not sure how to tell how far apart two numbers are, especially when one is negative, or what the symbol ≈ means.</strong><br><button type="button" data-go="s5">How far apart, and approximately equal</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Squares and square roots</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read a small raised 2 as "squared," so <span class="m"><span aria-hidden="true">7<sup>2</sup></span><span class="sr">7 squared</span></span> is 7 times 7.</li><li>Square a negative number and get a positive result.</li><li>Tell <span class="m"><span aria-hidden="true">(−5)<sup>2</sup></span><span class="sr">open parenthesis negative 5 close parenthesis squared</span></span> apart from <span class="m"><span aria-hidden="true">−5<sup>2</sup></span><span class="sr">negative 5 squared, with no parentheses</span></span>.</li><li>Square a decimal and place the decimal point correctly.</li><li>Find a square root, the number that was squared.</li></ul>
+</div>
+<h3>Squared means times itself</h3>
+<p>A small raised 2 is an exponent. It means multiply the number by itself, and it is read "squared." So <span class="m"><span aria-hidden="true">7<sup>2</sup></span><span class="sr">7 squared</span></span> is <span class="m"><span aria-hidden="true">7 × 7 = 49</span><span class="sr">7 times 7 equals 49</span></span>, not <span class="m"><span aria-hidden="true">7 × 2</span><span class="sr">7 times 2</span></span>.</p>
+<ul>
+<li><strong>Negative numbers:</strong> a negative times a negative is positive, so <span class="m"><span aria-hidden="true">(−4)<sup>2</sup> = (−4) × (−4) = 16</span><span class="sr">open parenthesis negative 4 close parenthesis squared equals negative 4 times negative 4, which equals 16</span></span>. A square is never negative.</li>
+<li><strong>Parentheses matter:</strong> <span class="m"><span aria-hidden="true">−4<sup>2</sup></span><span class="sr">negative 4 squared, with no parentheses</span></span> squares only the 4 and then puts the minus sign in front: <span class="m"><span aria-hidden="true">−(4 × 4) = −16</span><span class="sr">negative, open parenthesis 4 times 4 close parenthesis, equals negative 16</span></span>. Many calculators read <span class="m"><span aria-hidden="true">−4^2</span><span class="sr">negative 4, caret, 2</span></span> this way too. Use parentheses to square a negative number.</li>
+<li><strong>Decimals:</strong> count the digits after the point in the number, and the square has twice as many. <span class="m"><span aria-hidden="true">0.3<sup>2</sup> = 0.3 × 0.3 = 0.09</span><span class="sr">0 point 3 squared equals 0 point 3 times 0 point 3, which equals 0 point 0 9</span></span>, not <span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span>.</li>
+<li><strong>Square roots:</strong> the square root sign <span class="m"><span aria-hidden="true">√</span><span class="sr">square root</span></span> asks which non-negative number was squared. <span class="m"><span aria-hidden="true">√49 = 7</span><span class="sr">the square root of 49 equals 7</span></span> because <span class="m"><span aria-hidden="true">7<sup>2</sup> = 49</span><span class="sr">7 squared equals 49</span></span>. Square roots undo squaring.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Doubling instead of squaring.</strong> <span class="m"><span aria-hidden="true">6<sup>2</sup></span><span class="sr">6 squared</span></span> is 36, not 12. The 2 says how many times the number is used as a factor, not what to multiply by.</li>
+<li><strong>Keeping the negative sign.</strong> <span class="m"><span aria-hidden="true">(−6)<sup>2</sup></span><span class="sr">open parenthesis negative 6 close parenthesis squared</span></span> is 36, not negative 36. Two negatives multiply to a positive.</li>
+<li><strong>Losing a decimal place.</strong> <span class="m"><span aria-hidden="true">0.4<sup>2</sup></span><span class="sr">0 point 4 squared</span></span> is <span class="m"><span aria-hidden="true">0.16</span><span class="sr">0 point 1 6</span></span>. One digit after the point, squared, gives two digits after the point.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Square negative 1.2">
+<h3 style="margin-top:0">Worked example: Square <span class="m"><span aria-hidden="true">−1.2</span><span class="sr">negative 1 point 2</span></span></h3>
+<p>Find <span class="m"><span aria-hidden="true">(−1.2)<sup>2</sup></span><span class="sr">open parenthesis negative 1 point 2 close parenthesis squared</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">(−1.2) × (−1.2)</span><span class="sr">negative 1 point 2 times negative 1 point 2</span></span></span><span class="say">Squared means the number times itself. Keep the parentheses so the negative sign is part of the number.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">12 × 12 = 144</span><span class="sr">12 times 12 equals 144</span></span></span><span class="say">Multiply without the decimal points first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">1.44</span><span class="sr">1 point 4 4</span></span></span><span class="say">Each factor has one digit after the point, so the answer has two. A negative times a negative is positive.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">1.44</span><span class="sr">1 point 4 4</span></span> (not <span class="m"><span aria-hidden="true">−1.44</span><span class="sr">negative 1 point 4 4</span></span>, and not <span class="m"><span aria-hidden="true">−2.4</span><span class="sr">negative 2 point 4</span></span>, which doubles)</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Square negative 6">
+<h3 style="margin-top:0">Finish this one: Square negative 6</h3>
+<p>Find <span class="m"><span aria-hidden="true">(−6)<sup>2</sup></span><span class="sr">open parenthesis negative 6 close parenthesis squared</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">(−6) × (−6)</span><span class="sr">negative 6 times negative 6</span></span></span><span class="say">Write the number times itself. Next, multiply and decide the sign.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="36" data-miss="{&quot;-36&quot;: &quot;The sign is off. A negative times a negative is positive: negative 6 times negative 6 is 36.&quot;, &quot;-12&quot;: &quot;That doubles negative 6 instead of squaring it. Squared means negative 6 times negative 6, which is 36.&quot;, &quot;12&quot;: &quot;That doubles 6 instead of squaring it. Squared means 6 times 6, which is 36.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: find <span class="m"><span aria-hidden="true">(−6)<sup>2</sup></span><span class="sr">open parenthesis negative 6 close parenthesis squared</span></span>.</p>
+<details><summary>Hint</summary><p>Negative times negative is positive, and <span class="m"><span aria-hidden="true">6 × 6</span><span class="sr">6 times 6</span></span> is 36.</p></details>
+<details><summary>Show answer</summary><p><strong>36</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="225" data-miss="{&quot;30&quot;: &quot;That doubles 15. Squared means 15 times 15, which is 225.&quot;, &quot;~3.873~0.01&quot;: &quot;That is the square root of 15. Squared means 15 times 15, which is 225.&quot;, &quot;17&quot;: &quot;That adds 2 to 15. Squared means 15 times 15, which is 225.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Find <span class="m"><span aria-hidden="true">15<sup>2</sup></span><span class="sr">15 squared</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">15 × 15</span><span class="sr">15 times 15</span></span>. A quick check: <span class="m"><span aria-hidden="true">15 × 10 = 150</span><span class="sr">15 times 10 equals 150</span></span>, and half of 150 is 75.</p></details>
+<details><summary>Show answer</summary><p><strong>225</strong>, because <span class="m"><span aria-hidden="true">15 × 15 = 225</span><span class="sr">15 times 15 equals 225</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.16" data-miss="{&quot;1.6&quot;: &quot;The decimal point is one place off. 4 times 4 is 16, and two digits go after the point: 0.16.&quot;, &quot;0.016&quot;: &quot;The decimal point is one place too far left. Each 0.4 has one digit after the point, so the square has two: 0.16.&quot;, &quot;0.8&quot;: &quot;That doubles 0.4. Squared means 0.4 times 0.4, which is 0.16.&quot;, &quot;16&quot;: &quot;Put the decimal point back. Each 0.4 has one digit after the point, so the square has two: 0.16.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Find <span class="m"><span aria-hidden="true">0.4<sup>2</sup></span><span class="sr">0 point 4 squared</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply 4 times 4, then count the digits after the point: <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> has one, and so does the other <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.16</span><span class="sr">0 point 1 6</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Without parentheses, only the 5 is squared and the minus sign stays in front, so this is negative 25.&quot;, &quot;c&quot;: &quot;That doubles 5 and gives 10. Squaring means 5 times 5.&quot;, &quot;d&quot;: &quot;That adds negative 5 twice and gives negative 10. Squaring multiplies the number by itself.&quot;}" data-why="Correct. Negative 5 times negative 5 is positive 25.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which expression equals <strong>positive</strong> 25?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">(−5)<sup>2</sup></span><span class="sr">open parenthesis negative 5 close parenthesis squared</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">−5<sup>2</sup></span><span class="sr">negative 5 squared, with no parentheses</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">5 × 2</span><span class="sr">5 times 2</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">(−5) + (−5)</span><span class="sr">negative 5 plus negative 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Which one multiplies negative 5 by negative 5?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(−5)<sup>2</sup></span><span class="sr">open parenthesis negative 5 close parenthesis squared</span></span></strong>, which is 25. Choice b is negative 25, choice c is 10 and choice d is negative 10.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.6" data-miss="{&quot;0.06&quot;: &quot;Check by squaring: 0.06 times 0.06 is 0.0036, not 0.36. Try 0.6, since 0.6 times 0.6 is 0.36.&quot;, &quot;0.18&quot;: &quot;That divides 0.36 by 2. A square root asks which number times itself gives 0.36.&quot;, &quot;0.1296&quot;: &quot;That squares 0.36. A square root goes the other way: which number times itself gives 0.36?&quot;, &quot;6&quot;: &quot;Check by squaring: 6 times 6 is 36, not 0.36. Try 0.6.&quot;, &quot;-0.6&quot;: &quot;Negative 0.6 squared is also 0.36, but the square root sign asks for the non-negative number: 0.6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Find <span class="m"><span aria-hidden="true">√0.36</span><span class="sr">the square root of 0 point 3 6</span></span>.</p>
+<details><summary>Hint</summary><p>Which number times itself gives <span class="m"><span aria-hidden="true">0.36</span><span class="sr">0 point 3 6</span></span>? You know <span class="m"><span aria-hidden="true">6 × 6 = 36</span><span class="sr">6 times 6 equals 36</span></span>. Now place the decimal point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span></strong>, because <span class="m"><span aria-hidden="true">0.6 × 0.6 = 0.36</span><span class="sr">0 point 6 times 0 point 6 equals 0 point 3 6</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 6.3</h3>
+<p>Items 1 and 3 on page 1 of the notes write the sample variance as <span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>, and item 5 on page 2 uses <span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span> and <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span>. Item 3 describes the variance as a squared value.</p>
+<p><strong>Watch for this:</strong> the small raised 2. Read <span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span> as "s squared," which means a value multiplied by itself.</p>
+<p>This page stops here on purpose. The notes take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. What squaring does to a number</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Predict whether squaring makes a number larger, smaller or the same.</li><li>See that squaring stretches larger numbers much more than smaller ones.</li><li>Compare the squares of two numbers, including a negative number.</li><li>Use the fact that a square is never negative.</li></ul>
+</div>
+<h3>Bigger, smaller or the same</h3>
+<p>Many people expect multiplying to always make a number bigger. Squaring shows that is not always true.</p>
+<div class="table-wrap" role="region" aria-label="Numbers and their squares" tabindex="0">
+<table>
+<caption>Some numbers and their squares</caption>
+<thead><tr><th scope="col">Number</th><th scope="col">Square</th><th scope="col">What happened</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></th><td><span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span></td><td>Smaller</td></tr>
+<tr><th scope="row">1</th><td>1</td><td>Same</td></tr>
+<tr><th scope="row">2</th><td>4</td><td>Larger by 2</td></tr>
+<tr><th scope="row">10</th><td>100</td><td>Larger by 90</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">−10</span><span class="sr">negative 10</span></span></th><td>100</td><td>Becomes positive and larger</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>Between 0 and 1:</strong> squaring makes the number smaller, because you take a part of a part.</li>
+<li><strong>Greater than 1:</strong> squaring makes the number larger, and the larger the number, the bigger the jump. 2 grows to 4, but 10 grows to 100.</li>
+<li><strong>Negative:</strong> the square is positive. A square is never negative.</li>
+<li><strong>Times as large:</strong> if one number is 3 times another, its square is <strong>9</strong> times the other square, because 3 times 3 is 9.</li>
+</ul>
+<h3>Two slips to watch for</h3>
+<ul>
+<li><strong>"Multiplying always makes bigger."</strong> <span class="m"><span aria-hidden="true">0.8<sup>2</sup> = 0.64</span><span class="sr">0 point 8 squared equals 0 point 6 4</span></span>, which is smaller than <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span>.</li>
+<li><strong>Thinking the gap stays the same.</strong> 8 is 2 times 4, but 64 is 4 times 16. When one number is a few times another, the squares are much further apart.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Compare 3 and 12 after squaring">
+<h3 style="margin-top:0">Worked example: Compare 3 and 12 after squaring</h3>
+<p>12 is 4 times as large as 3. How many times as large is the square of 12 as the square of 3?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">3<sup>2</sup> = 9 and 12<sup>2</sup> = 144</span><span class="sr">3 squared equals 9, and 12 squared equals 144</span></span></span><span class="say">Square each number.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">144 ÷ 9 = 16</span><span class="sr">144 divided by 9 equals 16</span></span></span><span class="say">Divide to compare. Notice that 16 is 4 times 4.</span></li></ol><p><strong>Answer: 16 times as large, not 4 times</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Square 4 and 8">
+<h3 style="margin-top:0">Finish this one: Square 4 and 8</h3>
+<p>8 is 2 times as large as 4. How many times as large is <span class="m"><span aria-hidden="true">8<sup>2</sup></span><span class="sr">8 squared</span></span> as <span class="m"><span aria-hidden="true">4<sup>2</sup></span><span class="sr">4 squared</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">4<sup>2</sup> = 16 and 8<sup>2</sup> = 64</span><span class="sr">4 squared equals 16, and 8 squared equals 64</span></span></span><span class="say">Square each number. Next, divide the larger square by the smaller one.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;2&quot;: &quot;8 is 2 times 4, but the squares are 64 and 16, and 64 divided by 16 is 4.&quot;, &quot;48&quot;: &quot;That subtracts 16 from 64, which says how much larger, not how many times as large. Divide: 64 divided by 16 is 4.&quot;, &quot;0.25&quot;: &quot;That divides the smaller square by the larger one. Divide 64 by 16 to get 4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: how many times as large is <span class="m"><span aria-hidden="true">8<sup>2</sup></span><span class="sr">8 squared</span></span> as <span class="m"><span aria-hidden="true">4<sup>2</sup></span><span class="sr">4 squared</span></span>?</p>
+<details><summary>Hint</summary><p>Divide <span class="m"><span aria-hidden="true">64 ÷ 16</span><span class="sr">64 divided by 16</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>4 times as large</strong>, because <span class="m"><span aria-hidden="true">64 ÷ 16 = 4</span><span class="sr">64 divided by 16 equals 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;1.5 squared is 2.25, which is larger than 1.5. Numbers greater than 1 get larger when squared.&quot;, &quot;b&quot;: &quot;Negative 3 squared is positive 9, which is larger than negative 3.&quot;, &quot;c&quot;: &quot;1 squared is 1, so it stays the same.&quot;}" data-why="Correct. 0.8 squared is 0.64, which is smaller than 0.8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 7.</b> Which number gets <strong>smaller</strong> when it is squared?</legend>
+<label><input type="radio" name="mc7" value="a"> <span><span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span></span></label><label><input type="radio" name="mc7" value="b"> <span><span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span></span></label><label><input type="radio" name="mc7" value="c"> <span>1</span></label><label><input type="radio" name="mc7" value="d"> <span><span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Square each choice. Which kind of number gives a part of a part?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span></strong>, because <span class="m"><span aria-hidden="true">0.8<sup>2</sup> = 0.64</span><span class="sr">0 point 8 squared equals 0 point 6 4</span></span>. The others give <span class="m"><span aria-hidden="true">2.25</span><span class="sr">2 point 2 5</span></span>, 9 and 1.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="72" data-miss="{&quot;-90&quot;: &quot;Negative 9 squared is positive 81, not negative 81. Then 81 minus 9 is 72.&quot;, &quot;144&quot;: &quot;That subtracts first and then squares. Square each number first: 81 and 9. Then 81 minus 9 is 72.&quot;, &quot;36&quot;: &quot;That subtracts first and then squares. Square each number first: 81 and 9. Then 81 minus 9 is 72.&quot;, &quot;-24&quot;: &quot;That doubles each number instead of squaring. Squaring gives 81 and 9, and 81 minus 9 is 72.&quot;, &quot;-72&quot;: &quot;That subtracts in the wrong order. 81 is the larger square, so take 81 minus 9 to get 72.&quot;, &quot;9&quot;: &quot;That divides 81 by 9, which says how many times as large. The question asks how much larger: 81 minus 9 is 72.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> How much larger is <span class="m"><span aria-hidden="true">(−9)<sup>2</sup></span><span class="sr">open parenthesis negative 9 close parenthesis squared</span></span> than <span class="m"><span aria-hidden="true">3<sup>2</sup></span><span class="sr">3 squared</span></span>?</p>
+<details><summary>Hint</summary><p>Square each number first. Then subtract the smaller square from the larger one.</p></details>
+<details><summary>Show answer</summary><p><strong>72</strong>, because <span class="m"><span aria-hidden="true">(−9)<sup>2</sup> = 81</span><span class="sr">open parenthesis negative 9 close parenthesis squared equals 81</span></span>, <span class="m"><span aria-hidden="true">3<sup>2</sup> = 9</span><span class="sr">3 squared equals 9</span></span> and <span class="m"><span aria-hidden="true">81 − 9 = 72</span><span class="sr">81 minus 9 equals 72</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="9" data-miss="{&quot;3&quot;: &quot;The side is 3 times as long, but the area is the side squared, so it grows by 3 times 3, which is 9.&quot;, &quot;6&quot;: &quot;That doubles 3. The area grows by 3 squared, which is 3 times 3, or 9.&quot;, &quot;27&quot;: &quot;That uses 3 times 3 times 3. A square has area side times side, so the area grows by 3 times 3, or 9.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Two square floor tiles are being compared. The side of tile B is 3 times as long as the side of tile A. The area of a square is its side squared. How many times as much area does tile B have?</p>
+<details><summary>Hint</summary><p>Try it with numbers. If tile A has side 1 foot, tile B has side 3 feet. Square each side.</p></details>
+<details><summary>Show answer</summary><p><strong>9 times as much area</strong>, because <span class="m"><span aria-hidden="true">3<sup>2</sup> = 9</span><span class="sr">3 squared equals 9</span></span>. For example, sides of 1 foot and 3 feet give areas of 1 and 9 square feet.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 6.3</h3>
+<p>Item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes says the variance is a squared value and that squaring turns values into higher values.</p>
+<p><strong>Watch for this:</strong> squaring stretches large numbers much more than small ones, and a square is never negative.</p>
+<p>This page stops here on purpose. The notes take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Part of a whole as a fraction, decimal or percent</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Pick out the whole group and the part in a sentence.</li><li>Write the part of the whole as a fully simplified fraction, a decimal and a percent.</li><li>Know that a part of a whole, as a decimal, is between 0 and 1.</li><li>Compare parts of a whole written in different forms.</li></ul>
+</div>
+<h3>Part divided by whole</h3>
+<p>To describe a part of a whole group, divide the part by the whole. The result is a decimal from 0 to 1. Multiply by 100 to write it as a percent.</p>
+<p class="work"><span class="m"><span aria-hidden="true">part ÷ whole = decimal, then decimal × 100 = percent</span><span class="sr">part divided by whole equals a decimal, then the decimal times 100 equals the percent</span></span></p>
+<ul>
+<li>The <strong>whole</strong> is the entire group. It often comes after words such as "of the," "out of" or "in a group of."</li>
+<li>The <strong>part</strong> is the smaller group the question asks about. A part can never be more than the whole, so the decimal can never be more than 1.</li>
+<li>To <strong>simplify a fraction</strong>, divide the top and bottom by the largest number that goes into both. Keep going until no number other than 1 goes into both.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Flipping the division.</strong> Whole divided by part gives a number over 1, which cannot describe a part of a whole.</li>
+<li><strong>Using the other part as the whole.</strong> If 14 of 40 books are late, the other 26 are not the whole. The whole is all 40.</li>
+<li><strong>Stopping a simplification early.</strong> <span class="m"><span aria-hidden="true">6/15</span><span class="sr">6 over 15</span></span> can still be divided by 3. It simplifies to <span class="m"><span aria-hidden="true">2/5</span><span class="sr">2 over 5</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Seeds that sprouted">
+<h3 style="margin-top:0">Worked example: Seeds that sprouted</h3>
+<p>A gardener planted 250 seeds, and 215 of them sprouted. Write the part that sprouted as a fraction, a decimal and a percent.</p><ol class="steps"><li><span class="work">Part: 215 sprouted. Whole: 250 planted.</span><span class="say">Label both numbers before dividing.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">215/250 = 43/50</span><span class="sr">215 over 250 equals 43 over 50</span></span></span><span class="say">Simplify. 5 goes into both 215 and 250. No number other than 1 goes into both 43 and 50.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">215 ÷ 250 = 0.86</span><span class="sr">215 divided by 250 equals 0 point 8 6</span></span></span><span class="say">Divide the part by the whole for the decimal. It is between 0 and 1, as it should be.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.86 × 100 = 86</span><span class="sr">0 point 8 6 times 100 equals 86</span></span></span><span class="say">Multiply by 100 for the percent.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">43/50</span><span class="sr">43 over 50</span></span>, <span class="m"><span aria-hidden="true">0.86</span><span class="sr">0 point 8 6</span></span> and 86%</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Late library books">
+<h3 style="margin-top:0">Finish this one: Late library books</h3>
+<p>A library checked in 40 books on Monday, and 14 of them were late. What part of the books were late, as a decimal?</p><ol class="steps"><li><span class="work">Part: 14 late. Whole: 40 books.</span><span class="say">The whole is every book checked in. Next, divide the part by the whole.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.35" data-miss="{&quot;~2.857~0.01&quot;: &quot;The division is flipped. That is 40 divided by 14. Divide the part (14) by the whole (40): 0.35.&quot;, &quot;~0.5385~0.006&quot;: &quot;That divides 14 by 26, the books that were not late. The whole is all 40 books: 14 divided by 40 is 0.35.&quot;, &quot;35&quot;: &quot;That is the percent. The question asks for the decimal: 0.35.&quot;, &quot;0.14&quot;: &quot;That writes the count 14 as a decimal. Divide 14 by 40 to get 0.35.&quot;, &quot;0.65&quot;: &quot;That is the part that was on time, 26 out of 40. The question asks about the late books: 0.35.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> Finish it: write the part of the 40 books that were late as a decimal. Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">14 ÷ 40</span><span class="sr">14 divided by 40</span></span> gives a decimal between 0 and 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span></strong>, because <span class="m"><span aria-hidden="true">14 ÷ 40 = 0.35</span><span class="sr">14 divided by 40 equals 0 point 3 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="65" data-miss="{&quot;35&quot;: &quot;That is the percent who are first-time volunteers. The returning volunteers are 60 minus 21, or 39, and 39 out of 60 is 65%.&quot;, &quot;0.65&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 65%.&quot;, &quot;39&quot;: &quot;That is the number of returning volunteers, not the percent. Divide 39 by 60 and multiply by 100.&quot;, &quot;~153.85~0.06&quot;: &quot;The division is flipped. That is 60 divided by 39. Divide the part (39) by the whole (60).&quot;, &quot;~185.71~0.06&quot;: &quot;That divides 39 by 21, the first-time volunteers. The whole is all 60 volunteers.&quot;, &quot;~53.85~0.06&quot;: &quot;That divides 21 by 39, two parts of the group. The whole is all 60 volunteers, and the part asked about is 39.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> A food bank has 60 volunteers this week. Of them, 21 are first-time volunteers and the rest are returning volunteers. What percent of the volunteers are returning volunteers?</p>
+<details><summary>Hint</summary><p>First find the number of returning volunteers. The whole is all 60 volunteers.</p></details>
+<details><summary>Show answer</summary><p><strong>65%</strong>. There are <span class="m"><span aria-hidden="true">60 − 21 = 39</span><span class="sr">60 minus 21 equals 39</span></span> returning volunteers, and <span class="m"><span aria-hidden="true">39 ÷ 60 = 0.65</span><span class="sr">39 divided by 60 equals 0 point 6 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;0.07 is a small part of a whole, such as 7 out of 100. It is between 0 and 1, so it can be a part of a whole.&quot;, &quot;b&quot;: &quot;1 means the part is the whole group, such as 30 out of 30. That can happen.&quot;, &quot;d&quot;: &quot;0 means none of the group, such as 0 out of 30. That can happen.&quot;}" data-why="Correct. 1.25 is more than 1, so the part would be bigger than the whole.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 12.</b> Which number <strong>cannot</strong> be a part of a whole written as a decimal?</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span>1</span></label><label><input type="radio" name="mc12" value="c"> <span><span class="m"><span aria-hidden="true">1.25</span><span class="sr">1 point 2 5</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span>0</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>A part divided by a whole can be as small as 0 or as large as 1. Which choice is outside that range?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.25</span><span class="sr">1 point 2 5</span></span></strong>. A part divided by its whole is always from 0 to 1.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2/5" data-form="frac" data-unsimp="That fraction is equal to the answer, but it is not fully simplified. Divide the top and bottom by a number that goes into both, until only 1 goes into both. The answer is 2/5." data-formmsg="That is the right amount written as a decimal. The question asks for a fully simplified fraction: 2/5." data-miss="{&quot;6/15&quot;: &quot;6/15 can still be simplified. 3 goes into both 6 and 15, which gives 2/5.&quot;, &quot;18/45&quot;: &quot;That is the right fraction, but it is not fully simplified. 9 goes into both 18 and 45, which gives 2/5.&quot;, &quot;~2.5~0.0001&quot;: &quot;The fraction is flipped. The part (18) goes on top and the whole (45) on the bottom: 2/5.&quot;, &quot;40&quot;: &quot;That is the percent. The question asks for a fully simplified fraction: 2/5.&quot;, &quot;~0.6667~0.001&quot;: &quot;That uses 27, the students not taking another course, as the bottom. The whole is all 45 students: 18/45, which simplifies to 2/5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> In a class of 45 students, 18 are taking another math course this term. Write the part of the class taking another math course as a <strong>fully simplified fraction</strong>.</p>
+<details><summary>Hint</summary><p>9 goes into both 18 and 45.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2/5</span><span class="sr">2 over 5</span></span></strong>, because <span class="m"><span aria-hidden="true">18 ÷ 9 = 2</span><span class="sr">18 divided by 9 equals 2</span></span> and <span class="m"><span aria-hidden="true">45 ÷ 9 = 5</span><span class="sr">45 divided by 9 equals 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.3 is 30%, the smallest of the four.&quot;, &quot;c&quot;: &quot;33% is 0.33, which is less than 7/20, or 0.35.&quot;, &quot;d&quot;: &quot;A longer decimal is not always larger. 0.325 is 32.5%, which is less than 0.35.&quot;}" data-why="Correct. 7 divided by 20 is 0.35, which is 35%. The others are 30%, 33% and 32.5%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> Four groups each report the part of their members who voted in a club election. Which group had the <strong>largest</strong> part vote?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">7/20</span><span class="sr">7 over 20</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span>33%</span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">0.325</span><span class="sr">0 point 3 2 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write each one as a percent first. Divide 7 by 20 for the fraction.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7/20</span><span class="sr">7 over 20</span></span></strong>, which is 35%. The others are 30%, 33% and <span class="m"><span aria-hidden="true">32.5%</span><span class="sr">32 point 5 percent</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 6.3</h3>
+<p>Item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes is about proportions, written <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> and p. A proportion describes a part of a whole.</p>
+<p><strong>Watch for this:</strong> which number is the whole group. Divide the part by the whole, and expect a decimal from 0 to 1.</p>
+<p>This page stops here on purpose. The notes take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. How far apart, and approximately equal</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find how far apart two numbers are, even when one is negative.</li><li>Decide which of several numbers is closest to a given number.</li><li>Read the symbols =, ≠ and ≈.</li><li>Round to one decimal place or the nearest whole number without rounding in steps, and carry when a 9 rounds up.</li></ul>
+</div>
+<h3>Distance between two numbers</h3>
+<p>How far apart two numbers are is the larger number minus the smaller one. A distance is never negative. When one number is negative, subtracting it adds its size: the distance from <span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span> to 4 is <span class="m"><span aria-hidden="true">4 − (−3) = 7</span><span class="sr">4 minus negative 3 equals 7</span></span>. On a number line, that is 3 steps up to 0 and 4 more steps to 4.</p>
+<h3>Three symbols</h3>
+<dl class="vocab">
+<dt>=</dt><dd>"Equals." Exactly the same value, such as <span class="m"><span aria-hidden="true">0.5 = 1/2</span><span class="sr">0 point 5 equals 1 over 2</span></span>.</dd>
+<dt>≠</dt><dd>"Does not equal." Not exactly the same value, such as <span class="m"><span aria-hidden="true">0.49 ≠ 0.5</span><span class="sr">0 point 4 9 does not equal 0 point 5</span></span>.</dd>
+<dt>≈</dt><dd>"Approximately equal." Close, but not necessarily exact, such as <span class="m"><span aria-hidden="true">3.98 ≈ 4</span><span class="sr">3 point 9 8 is approximately equal to 4</span></span>. A rounded value is approximately equal to the original.</dd>
+</dl>
+<p>Two numbers can be approximately equal and not equal at the same time. "Approximately" means close, not exactly the same.</p>
+<h3>Rounding, and three slips to watch for</h3>
+<p>Find the last digit you will keep. Look only at the one digit right after it. If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone. Then drop the rest.</p>
+<ul>
+<li><strong>Subtracting in the wrong order.</strong> 4 minus 6 is negative 2, but the distance between 4 and 6 is 2.</li>
+<li><strong>Rounding in steps from the right.</strong> <span class="m"><span aria-hidden="true">2.449</span><span class="sr">2 point 4 4 9</span></span> to one decimal place is <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> is a slip.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">6.95</span><span class="sr">6 point 9 5</span></span> to one decimal place is <span class="m"><span aria-hidden="true">7.0</span><span class="sr">7 point 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Which is closer to 20?">
+<h3 style="margin-top:0">Worked example: Which is closer to 20?</h3>
+<p>Which is closer to 20: <span class="m"><span aria-hidden="true">18.6</span><span class="sr">18 point 6</span></span> or <span class="m"><span aria-hidden="true">21.2</span><span class="sr">21 point 2</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">20 − 18.6 = 1.4</span><span class="sr">20 minus 18 point 6 equals 1 point 4</span></span></span><span class="say">Distance from 18.6 to 20: larger minus smaller.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">21.2 − 20 = 1.2</span><span class="sr">21 point 2 minus 20 equals 1 point 2</span></span></span><span class="say">Distance from 20 to 21.2: larger minus smaller.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">1.2 < 1.4</span><span class="sr">1 point 2 is less than 1 point 4</span></span></span><span class="say">The smaller distance wins.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">21.2</span><span class="sr">21 point 2</span></span> is closer to 20, even though it is above 20</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Distance from negative 2 to 6">
+<h3 style="margin-top:0">Finish this one: Distance from negative 2 to 6</h3>
+<p>How far apart are <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and 6?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">6 − (−2)</span><span class="sr">6 minus negative 2</span></span></span><span class="say">Larger minus smaller. Next, remember that subtracting a negative adds.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="8" data-miss="{&quot;4&quot;: &quot;That ignores the negative sign on the 2. From negative 2 up to 0 is 2 steps, and from 0 to 6 is 6 more: 8.&quot;, &quot;-8&quot;: &quot;That subtracts in the wrong order. A distance is never negative: 6 minus negative 2 is 8.&quot;, &quot;-4&quot;: &quot;That adds negative 2 and negative 6. The distance is 6 minus negative 2, which is 8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> Finish it: how far apart are <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and 6?</p>
+<details><summary>Hint</summary><p>Subtracting a negative is the same as adding: 6 minus negative 2 is 6 plus 2.</p></details>
+<details><summary>Show answer</summary><p><strong>8</strong>, because <span class="m"><span aria-hidden="true">6 − (−2) = 6 + 2 = 8</span><span class="sr">6 minus negative 2 equals 6 plus 2, which equals 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;47.5 is 2.5 away from 50. 52.1 is only 2.1 away.&quot;, &quot;b&quot;: &quot;53 is 3 away from 50. 52.1 is only 2.1 away.&quot;, &quot;d&quot;: &quot;46 is 4 away from 50, the farthest of the four.&quot;}" data-why="Correct. 52.1 is 2.1 away from 50. The others are 2.5, 3 and 4 away.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Which number is <strong>closest</strong> to 50?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">47.5</span><span class="sr">47 point 5</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span>53</span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">52.1</span><span class="sr">52 point 1</span></span></span></label><label><input type="radio" name="mc16" value="d"> <span>46</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find each distance from 50, larger minus smaller, then pick the smallest distance.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">52.1</span><span class="sr">52 point 1</span></span></strong>, which is <span class="m"><span aria-hidden="true">2.1</span><span class="sr">2 point 1</span></span> away. The others are <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>, 3 and 4 away.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The two values differ by 0.2, so they are not exactly equal. The equals sign means exactly the same value.&quot;, &quot;c&quot;: &quot;Does not equal only says the values are not exactly the same. They differ by 0.2, which is close.&quot;, &quot;d&quot;: &quot;71.8 is less than 72, not greater.&quot;}" data-why="Correct. They differ by only 0.2, so they are approximately equal, but they are not exactly equal.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 17.</b> A weather app forecast a high of 72 degrees, and the actual high was <span class="m"><span aria-hidden="true">71.8</span><span class="sr">71 point 8</span></span> degrees. Which statement is true?</legend>
+<label><input type="radio" name="mc17" value="a"> <span><span class="m"><span aria-hidden="true">71.8 = 72</span><span class="sr">71 point 8 equals 72</span></span></span></label><label><input type="radio" name="mc17" value="b"> <span><span class="m"><span aria-hidden="true">71.8 ≈ 72 and 71.8 ≠ 72</span><span class="sr">71 point 8 is approximately equal to 72, and 71 point 8 does not equal 72</span></span></span></label><label><input type="radio" name="mc17" value="c"> <span><span class="m"><span aria-hidden="true">71.8 ≠ 72, so the two are not close</span><span class="sr">71 point 8 does not equal 72, so the two are not close</span></span></span></label><label><input type="radio" name="mc17" value="d"> <span><span class="m"><span aria-hidden="true">71.8 > 72</span><span class="sr">71 point 8 is greater than 72</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>How far apart are the two numbers? Can two numbers be close without being exactly the same?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">71.8 ≈ 72 and 71.8 ≠ 72</span><span class="sr">71 point 8 is approximately equal to 72, and 71 point 8 does not equal 72</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.3" data-miss="{&quot;7.4&quot;: &quot;That rounds in steps from the right (7.3449 to 7.345 to 7.35 to 7.4). Only the digit right after the tenths place counts, and it is 4, so the 3 stays: 7.3.&quot;, &quot;7.34&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 7.3.&quot;, &quot;7.35&quot;: &quot;That keeps two digits after the point, and it rounds in steps. Look only at the 4 right after the 3: 7.3.&quot;, &quot;7.345&quot;: &quot;That keeps three digits after the point. One decimal place keeps one: 7.3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> A calculator shows <span class="m"><span aria-hidden="true">7.3449</span><span class="sr">7 point 3 4 4 9</span></span>. Round it to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 3 right after the point. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.3</span><span class="sr">7 point 3</span></span></strong>. The digit after the 3 is 4, so the 3 stays.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="13.0" data-miss="{&quot;12.9&quot;: &quot;That chops off the 7 instead of rounding. The 7 is 5 or more, so the 9 rounds up, becomes 0 and carries: 13.0.&quot;, &quot;12.1&quot;: &quot;The 9 went up to 10, but the 1 was not carried. When the 9 rounds up it becomes 0 and adds 1 to the 12: 13.0.&quot;, &quot;12.97&quot;: &quot;That is not rounded. One decimal place keeps one digit after the point: 13.0.&quot;, &quot;12.98&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 13.0.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Round <span class="m"><span aria-hidden="true">12.97</span><span class="sr">12 point 9 7</span></span> to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9. The next digit is 7, so the 9 goes up by 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">13.0</span><span class="sr">13 point 0</span></span></strong> (typing 13 is accepted too). The 9 becomes 0 and carries 1 to the 12.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 6.3</h3>
+<p>Items 2, 3 and 4 on pages 1 and 2 of the notes say that each sample value "approximates" a population value, and items 2 and 4 describe a distribution as "approximately" normal. Item 5 on page 2 uses "does not equal" and "equals."</p>
+<p><strong>Watch for this:</strong> "approximately" means close, not exactly the same. Two values can be approximately equal and still not be equal.</p>
+<p>This page stops here on purpose. The notes take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="0.04" data-miss="{&quot;-0.04&quot;: &quot;The sign is off. A negative times a negative is positive: 0.04.&quot;, &quot;0.4&quot;: &quot;The decimal point is one place off. 2 times 2 is 4, and two digits go after the point: 0.04.&quot;, &quot;-0.4&quot;: &quot;That doubles negative 0.2. Squared means negative 0.2 times negative 0.2, which is 0.04.&quot;, &quot;0.004&quot;: &quot;The decimal point is one place too far left. Each factor has one digit after the point, so the square has two: 0.04.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Find <span class="m"><span aria-hidden="true">(−0.2)<sup>2</sup></span><span class="sr">open parenthesis negative 0 point 2 close parenthesis squared</span></span>.</p>
+<details><summary>Hint</summary><p>Negative times negative is positive. Count the digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="75" data-miss="{&quot;0.75&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 75%.&quot;, &quot;~133.33~0.06&quot;: &quot;The division is flipped. That is 36 divided by 27. Divide the part (27) by the whole (36).&quot;, &quot;300&quot;: &quot;That divides 27 by 9, the households without a pet. The whole is all 36 households.&quot;, &quot;25&quot;: &quot;That is the percent without a pet. The question asks about pet owners: 75%.&quot;, &quot;~33.33~0.06&quot;: &quot;That divides 9 by 27, two parts of the group. Divide the pet owners (27) by all 36 households.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> A survey of 36 households found that 27 of them own a pet. What percent of the households own a pet?</p>
+<details><summary>Hint</summary><p>Part: 27 households. Whole: 36 households.</p></details>
+<details><summary>Show answer</summary><p><strong>75%</strong>, because <span class="m"><span aria-hidden="true">27 ÷ 36 = 0.75</span><span class="sr">27 divided by 36 equals 0 point 7 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.5" data-miss="{&quot;1.5&quot;: &quot;That ignores the negative sign on 4.5. From negative 4.5 up to 0 is 4.5, and from 0 to 3 is 3 more: 7.5.&quot;, &quot;-7.5&quot;: &quot;That subtracts in the wrong order. A distance is never negative: 3 minus negative 4.5 is 7.5.&quot;, &quot;-1.5&quot;: &quot;That adds 3 and negative 4.5. The distance is 3 minus negative 4.5, which is 7.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> How far apart are <span class="m"><span aria-hidden="true">−4.5</span><span class="sr">negative 4 point 5</span></span> and 3?</p>
+<details><summary>Hint</summary><p>Larger minus smaller, and subtracting a negative adds.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.5</span><span class="sr">7 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">3 − (−4.5) = 3 + 4.5 = 7.5</span><span class="sr">3 minus negative 4 point 5 equals 3 plus 4 point 5, which equals 7 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;10 squared is 100, but negative 11 squared is positive 121, which is larger.&quot;, &quot;c&quot;: &quot;0.9 squared is 0.81. Numbers between 0 and 1 get smaller when squared.&quot;, &quot;d&quot;: &quot;Negative 0.5 squared is 0.25, the smallest of the four squares.&quot;}" data-why="Correct. Negative 11 squared is 121. The others are 100, 0.81 and 0.25.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 23.</b> Which number has the <strong>largest</strong> square?</legend>
+<label><input type="radio" name="mc23" value="a"> <span><span class="m"><span aria-hidden="true">−11</span><span class="sr">negative 11</span></span></span></label><label><input type="radio" name="mc23" value="b"> <span>10</span></label><label><input type="radio" name="mc23" value="c"> <span><span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span></span></label><label><input type="radio" name="mc23" value="d"> <span><span class="m"><span aria-hidden="true">−0.5</span><span class="sr">negative 0 point 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Square each choice. A negative number has a positive square.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−11</span><span class="sr">negative 11</span></span></strong>, because <span class="m"><span aria-hidden="true">(−11)<sup>2</sup> = 121</span><span class="sr">open parenthesis negative 11 close parenthesis squared equals 121</span></span>. The others give 100, <span class="m"><span aria-hidden="true">0.81</span><span class="sr">0 point 8 1</span></span> and <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="50" data-miss="{&quot;49&quot;: &quot;That chops off the decimal part. The digit after the 9 is 6, so the 9 rounds up, becomes 0 and carries: 50.&quot;, &quot;49.6&quot;: &quot;That rounds to one decimal place. The nearest whole number has no digits after the point: 50.&quot;, &quot;49.62&quot;: &quot;That is not rounded. The nearest whole number has no digits after the point: 50.&quot;, &quot;40&quot;: &quot;The 9 became 0, but the 1 was not carried. When the 9 rounds up it becomes 0 and adds 1 to the 4: 50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Round <span class="m"><span aria-hidden="true">49.62</span><span class="sr">49 point 6 2</span></span> to the nearest whole number.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the ones place. The next digit is 6.</p></details>
+<details><summary>Show answer</summary><p><strong>50</strong>. The 9 becomes 0 and carries 1 to the 4.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1/4" data-form="frac" data-unsimp="That fraction is equal to the answer, but it is not fully simplified. Divide the top and bottom by a number that goes into both, until only 1 goes into both. The answer is 1/4." data-formmsg="That is the right amount written as a decimal. The question asks for a fully simplified fraction: 1/4." data-miss="{&quot;3/12&quot;: &quot;3/12 can still be simplified. 3 goes into both 3 and 12, which gives 1/4.&quot;, &quot;30/120&quot;: &quot;That is the right fraction, but it is not fully simplified. 30 goes into both 30 and 120, which gives 1/4.&quot;, &quot;4&quot;: &quot;The fraction is flipped. The part (30) goes on top and the whole (120) on the bottom: 1/4.&quot;, &quot;25&quot;: &quot;That is the percent. The question asks for a fully simplified fraction: 1/4.&quot;, &quot;1/3&quot;: &quot;That uses 90, the calls that were answered, as the bottom. The whole is all 120 calls: 30/120, which simplifies to 1/4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> A help desk received 120 phone calls, and 30 of them were missed. Write the part of the calls that were missed as a <strong>fully simplified fraction</strong>.</p>
+<details><summary>Hint</summary><p>Part: 30 missed. Whole: 120 calls. What goes into both 30 and 120?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1/4</span><span class="sr">1 over 4</span></span></strong>, because <span class="m"><span aria-hidden="true">30 ÷ 30 = 1</span><span class="sr">30 divided by 30 equals 1</span></span> and <span class="m"><span aria-hidden="true">120 ÷ 30 = 4</span><span class="sr">120 divided by 30 equals 4</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with squares and square roots, what squaring does to a number, parts of a whole, distances between numbers, and rounding. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec6.3-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeFrac(q,raw){
+  const s=norm(raw).replace(/^\+/,''); const stu=toRat(s); const key=toRat(q.dataset.answer);
+  if(!stu)return show(q,'info','Enter your answer as a fraction with a slash, like 3/8.');
+  let m={}; try{m=JSON.parse(q.dataset.miss||'{}');}catch(e){}
+  for(const k of Object.keys(m)){ if(k[0]!=='~'&&s===norm(k))return show(q,'wrong',m[k]); }
+  const p=s.match(/^(-?)(\d+)\/(\d+)$/);
+  if(p&&sameRat(stu,key)&&Number(p[2])===Math.abs(key.n)&&Number(p[3])===key.d)return show(q,'good',q.dataset.why||'Correct.');
+  if(p&&sameRat(stu,key))return show(q,'wrong',q.dataset.unsimp||'That fraction is equal to the answer but is not fully simplified. Divide the top and bottom by a number that goes into both.');
+  if(sameRat(stu,key))return show(q,'wrong',q.dataset.formmsg||'That has the right value, but the question asks for a fraction. Write it with a slash, like 3/8.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeNum(q,raw){
+  if(q.dataset.form==='frac')return judgeFrac(q,raw);
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

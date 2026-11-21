@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 10.1 Exit Ticket: Correlation</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 10.1 Exit Ticket</div>
+<h1>Section 10.1 Exit Ticket: Correlation</h1>
+<p>A short, ungraded check to use after the Section 10.1 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Introduction and Scatterplot<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Linear Correlation Coefficient<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Hypothesis Testing to Determine a Linear Correlation<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 19 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 10.1 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Introduction and Scatterplot</button></li>
+<li><button type="button" data-go="s3">Linear Correlation Coefficient</button></li>
+<li><button type="button" data-go="s4">Hypothesis Testing to Determine a Linear Correlation</button></li>
+<li><button type="button" data-go="s5">StatCrunch check</button></li>
+<li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Introduction and Scatterplot</h2>
+<p>These checks cover the Important Reminder and item 1 (Scatterplot) on page 1 of the Section 10.1 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. Correlation does not imply causation." data-miss="{&quot;a&quot;: &quot;Not quite. A strong correlation alone does not show that one variable causes the other. Review: the Important Reminder (Correlation does not imply causation!) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. More data does not turn a correlation into proof that one variable causes the other. Review: the Important Reminder (Correlation does not imply causation!) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Two variables can be correlated even when neither one causes the other. Review: the Important Reminder (Correlation does not imply causation!) on page 1 of the notes.&quot;}" data-review="the Important Reminder (Correlation does not imply causation!) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Correlation and Causation).</b> Across 40 towns, the towns with more fast-food restaurants also tend to have more car accidents each year, and the two have a strong correlation. Which statement matches the Important Reminder?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>Fast-food restaurants cause car accidents, since the correlation is strong.</span></label><label><input type="radio" name="mc1" value="b"> <span>The correlation proves a cause, because 40 towns is plenty of data.</span></label><label><input type="radio" name="mc1" value="c"> <span>There cannot be a correlation, since restaurants do not cause accidents.</span></label><label><input type="radio" name="mc1" value="d"> <span>The two are correlated, but that does not mean one causes the other.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The two are correlated, but that does not mean one causes the other.</strong></p><p class="ptr">Where this is: The Important Reminder (Correlation does not imply causation!) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. A roughly straight-line pattern means there may be a linear correlation." data-miss="{&quot;b&quot;: &quot;Not quite. Item 1 says the points only need to roughly form a straight-line pattern. Review: item 1 (Scatterplot) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 1 looks for a straight-line pattern, and a curve is not one. Review: item 1 (Scatterplot) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. A scatterplot plots data points for two variables. Review: item 1 (Scatterplot) on page 1 of the notes.&quot;}" data-review="item 1 (Scatterplot) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Scatterplot).</b> A student makes a scatterplot of two variables. Which statement about the points matches item 1?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>If the points roughly form a straight line, there may be a linear correlation.</span></label><label><input type="radio" name="mc2" value="b"> <span>There is a linear correlation only when every point lies exactly on one straight line.</span></label><label><input type="radio" name="mc2" value="c"> <span>Any clear pattern in the points, even a curve, shows a linear correlation.</span></label><label><input type="radio" name="mc2" value="d"> <span>A scatterplot shows only one variable, so it cannot show a correlation.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>If the points roughly form a straight line, there may be a linear correlation.</strong></p><p class="ptr">Where this is: Item 1 (Scatterplot) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. The points form a line that descends as you move from left to right." data-miss="{&quot;a&quot;: &quot;Not quite. Read the points from left to right: they descend, and a positive linear correlation rises. Review: item 1 (Scatterplot) and Types of Linear Correlation on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The type depends on the direction of the points from left to right, not on the sign of the values. Review: item 1 (Scatterplot) and Types of Linear Correlation on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The points roughly form a straight-line pattern, which is all item 1 asks for. Review: item 1 (Scatterplot) and Types of Linear Correlation on page 1 of the notes.&quot;}" data-review="item 1 (Scatterplot) and Types of Linear Correlation on page 1 of the notes.">
+<figure class="axisfig">
+<svg viewBox="0 0 400 290" width="400" height="290" role="img" aria-label="Scatterplot with 8 points, one for each student, listed as hours of practice and number of errors: 1 hour, 22 errors; 2 hours, 21 errors; 3 hours, 17 errors; 4 hours, 16 errors; 5 hours, 13 errors; 6 hours, 10 errors; 7 hours, 9 errors; 8 hours, 5 errors." focusable="false">
+<g stroke="currentColor" opacity="0.3" stroke-width="1"><line x1="50" y1="30" x2="50" y2="230"/><line x1="86" y1="30" x2="86" y2="230"/><line x1="122" y1="30" x2="122" y2="230"/><line x1="158" y1="30" x2="158" y2="230"/><line x1="194" y1="30" x2="194" y2="230"/><line x1="230" y1="30" x2="230" y2="230"/><line x1="266" y1="30" x2="266" y2="230"/><line x1="302" y1="30" x2="302" y2="230"/><line x1="338" y1="30" x2="338" y2="230"/><line x1="50" y1="230.0" x2="338" y2="230.0"/><line x1="50" y1="187.5" x2="338" y2="187.5"/><line x1="50" y1="145.0" x2="338" y2="145.0"/><line x1="50" y1="102.5" x2="338" y2="102.5"/><line x1="50" y1="60.0" x2="338" y2="60.0"/></g>
+<g stroke="currentColor" stroke-width="2"><line x1="50" y1="230" x2="348" y2="230"/><line x1="50" y1="20" x2="50" y2="230"/></g>
+<g fill="currentColor" font-size="13" font-family="system-ui,sans-serif"><text x="46" y="250">0</text><text x="82" y="250">1</text><text x="118" y="250">2</text><text x="154" y="250">3</text><text x="190" y="250">4</text><text x="226" y="250">5</text><text x="262" y="250">6</text><text x="298" y="250">7</text><text x="334" y="250">8</text><text x="32" y="235.0">0</text><text x="32" y="192.5">5</text><text x="24" y="150.0">10</text><text x="24" y="107.5">15</text><text x="24" y="65.0">20</text><circle cx="86" cy="43.0" r="5"/><circle cx="122" cy="51.5" r="5"/><circle cx="158" cy="85.5" r="5"/><circle cx="194" cy="94.0" r="5"/><circle cx="230" cy="119.5" r="5"/><circle cx="266" cy="145.0" r="5"/><circle cx="302" cy="153.5" r="5"/><circle cx="338" cy="187.5" r="5"/>
+<text x="140" y="280">Hours of practice per week</text><text x="8" y="16">Errors</text></g>
+</svg>
+<figcaption>Hours of typing practice per week (horizontal axis) and typing errors on a test (vertical axis) for 8 students.</figcaption>
+</figure>
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Types of Linear Correlation).</b> The scatterplot above shows hours of typing practice per week and typing errors on a test for 8 students. Which type of linear correlation does it show?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Positive linear correlation, because the first points are the highest.</span></label><label><input type="radio" name="mc3" value="b"> <span>Positive linear correlation, because every value in the data is positive.</span></label><label><input type="radio" name="mc3" value="c"> <span>Negative linear correlation, because the points descend from left to right.</span></label><label><input type="radio" name="mc3" value="d"> <span>No linear correlation, because the points do not all fall exactly on one line.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Negative linear correlation, because the points descend from left to right.</strong></p><p class="ptr">Where this is: Item 1 (Scatterplot) and Types of Linear Correlation on page 1 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Correlation does not imply causation: Important Reminder, page 1</li><li>Scatterplot and Types of Linear Correlation: item 1, page 1</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Linear Correlation Coefficient</h2>
+<p>These checks cover item 2 (Linear Correlation Coefficient) on page 3 of the Section 10.1 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. r ranges from −1 to 1, and 1.08 is greater than 1." data-miss="{&quot;a&quot;: &quot;Not quite. The range −1 ≤ r ≤ 1 includes −1 itself. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. −0.97 is between −1 and 1, so it is a possible value of r. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. 0 is between −1 and 1, so it is a possible value of r. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;}" data-review="item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Range of r).</b> Which of these could <strong>not</strong> be a value of r?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">1.08</span><span class="sr">1 point 0 8</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">−0.97</span><span class="sr">negative 0 point 9 7</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span>0</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.08</span><span class="sr">1 point 0 8</span></span></strong></p><p class="ptr">Where this is: Item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. −0.94 is near −1, a strong negative linear correlation." data-miss="{&quot;a&quot;: &quot;Not quite. 0.58 is farther from 1 than −0.94 is from −1, so it is not the strongest. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Values near −1 are a strong negative linear correlation, so a negative r can be strong. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Values near 0 show no linear correlation, which is the weakest, not the strongest. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;}" data-review="item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Values Near 1, 0 and −1).</b> Four studies report these values of r: <span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>, <span class="m"><span aria-hidden="true">−0.12</span><span class="sr">negative 0 point 1 2</span></span>, <span class="m"><span aria-hidden="true">0.31</span><span class="sr">0 point 3 1</span></span> and <span class="m"><span aria-hidden="true">−0.94</span><span class="sr">negative 0 point 9 4</span></span>. Which one shows the strongest linear correlation?</legend>
+<label><input type="radio" name="mc5" value="a"> <span><span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>, because it is the largest of the four numbers.</span></label><label><input type="radio" name="mc5" value="b"> <span><span class="m"><span aria-hidden="true">0.31</span><span class="sr">0 point 3 1</span></span>, because a positive r is always stronger than a negative r.</span></label><label><input type="radio" name="mc5" value="c"> <span><span class="m"><span aria-hidden="true">−0.12</span><span class="sr">negative 0 point 1 2</span></span>, because it is the closest of the four to 0.</span></label><label><input type="radio" name="mc5" value="d"> <span><span class="m"><span aria-hidden="true">−0.94</span><span class="sr">negative 0 point 9 4</span></span>, because it is the closest of the four to <span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span> or 1.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.94</span><span class="sr">negative 0 point 9 4</span></span>, because it is the closest of the four to <span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span> or 1.</strong></p><p class="ptr">Where this is: Item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The value of r does not change if the units of measurement are changed." data-miss="{&quot;b&quot;: &quot;Not quite. Changing the units of measurement does not change the value of r. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Changing the units of measurement does not change the value of r. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The data are the same 50 adults in new units, and item 2 covers exactly this change. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;}" data-review="item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Units of Measurement).</b> A researcher finds r = <span class="m"><span aria-hidden="true">0.81</span><span class="sr">0 point 8 1</span></span> for the heights (inches) and weights (pounds) of 50 adults. She changes the heights to centimeters and the weights to kilograms and finds r again. What does item 2 say she will get?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>r = <span class="m"><span aria-hidden="true">0.81</span><span class="sr">0 point 8 1</span></span> again, because r does not change when the units change.</span></label><label><input type="radio" name="mc6" value="b"> <span>A larger r, because a height has more centimeters than inches.</span></label><label><input type="radio" name="mc6" value="c"> <span>A smaller r, because the weights in kilograms are smaller numbers.</span></label><label><input type="radio" name="mc6" value="d"> <span>There is no way to know until all new data are collected.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>r = <span class="m"><span aria-hidden="true">0.81</span><span class="sr">0 point 8 1</span></span> again, because r does not change when the units change.</strong></p><p class="ptr">Where this is: Item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. r only measures linear relationships." data-miss="{&quot;a&quot;: &quot;Not quite. r only measures linear relationships, so a value near 0 does not rule out a curved one. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The pattern is a curve, and an r near 0 means no linear correlation. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. r only measures linear relationships, so a clear curve can still give an r near 0. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;}" data-review="item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Only Linear Relationships).</b> A scatterplot of a car's speed (miles per hour) and its gas mileage (miles per gallon) shows points that rise and then fall in a clear curve, and r is close to 0. Which statement matches item 2?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>The two variables have no relationship of any kind at all, since r is close to 0.</span></label><label><input type="radio" name="mc7" value="b"> <span>There is a strong linear correlation, since the points show a clear pattern.</span></label><label><input type="radio" name="mc7" value="c"> <span>There is no linear correlation, and r does not measure the curved relationship.</span></label><label><input type="radio" name="mc7" value="d"> <span>r must be wrong, since a clear pattern always gives a value of r near 1.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>There is no linear correlation, and r does not measure the curved relationship.</strong></p><p class="ptr">Where this is: Item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. r is sensitive to outliers." data-miss="{&quot;a&quot;: &quot;Not quite. Item 2 says r is sensitive to outliers, so one far-off point can change it a lot. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Here the larger r comes from one far-off point, not from a better fit. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Adding a point does not change the units of measurement. Review: item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.&quot;}" data-review="item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Outliers).</b> A scatterplot of 15 points has r = <span class="m"><span aria-hidden="true">0.12</span><span class="sr">0 point 1 2</span></span>. One more point, far away from all the others, is added, and r becomes <span class="m"><span aria-hidden="true">0.68</span><span class="sr">0 point 6 8</span></span>. Which statement matches item 2?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>One point cannot change r that much, so the new value must be a mistake.</span></label><label><input type="radio" name="mc8" value="b"> <span>r is sensitive to outliers, so one point far from the rest can change r a lot.</span></label><label><input type="radio" name="mc8" value="c"> <span>The new value is more trustworthy, because a larger r is always more accurate.</span></label><label><input type="radio" name="mc8" value="d"> <span>The far-off point changed the units of the data, which is why r changed.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>r is sensitive to outliers, so one point far from the rest can change r a lot.</strong></p><p class="ptr">Where this is: Item 2 (Linear Correlation Coefficient) and its Properties of r on page 3 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Linear Correlation Coefficient and the Properties of r: item 2, page 3</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Hypothesis Testing to Determine a Linear Correlation</h2>
+<p>These checks cover item 3 (Hypothesis Testing to Determine a Linear Correlation) on pages 3 and 4 of the notes, and Classroom Examples 10.1.1 and 10.1.2 on pages 6 and 7.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The claim of a linear correlation is ρ ≠ 0, which is H1." data-miss="{&quot;b&quot;: &quot;Not quite. The hypotheses are about ρ, the population linear correlation, not the sample value r. Review: item 3 (Hypothesis Testing to Determine a Linear Correlation) and Step One on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This has the two hypotheses reversed. Review: item 3 (Hypothesis Testing to Determine a Linear Correlation) and Step One on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. A claim of a linear correlation is ρ ≠ 0, so the claim goes with H1, not H0. Review: item 3 (Hypothesis Testing to Determine a Linear Correlation) and Step One on page 3 of the notes.&quot;}" data-review="item 3 (Hypothesis Testing to Determine a Linear Correlation) and Step One on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Hypotheses).</b> Which pair of hypotheses does item 3 use to test a claim of a linear correlation?</legend>
+<label><input type="radio" name="mc9" value="a"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: ρ = 0 and H<sub>1</sub>: ρ ≠ 0 (claim)</span><span class="sr">H sub 0: rho equals 0, and H sub 1: rho is not equal to 0, claim</span></span></span></label><label><input type="radio" name="mc9" value="b"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: r = 0 and H<sub>1</sub>: r ≠ 0 (claim)</span><span class="sr">H sub 0: r equals 0, and H sub 1: r is not equal to 0, claim</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: ρ ≠ 0 (claim) and H<sub>1</sub>: ρ = 0</span><span class="sr">H sub 0: rho is not equal to 0, claim, and H sub 1: rho equals 0</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: ρ = 0 (claim) and H<sub>1</sub>: ρ ≠ 0</span><span class="sr">H sub 0: rho equals 0, claim, and H sub 1: rho is not equal to 0</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">H<sub>0</sub>: ρ = 0 and H<sub>1</sub>: ρ ≠ 0 (claim)</span><span class="sr">H sub 0: rho equals 0, and H sub 1: rho is not equal to 0, claim</span></span></strong></p><p class="ptr">Where this is: Item 3 (Hypothesis Testing to Determine a Linear Correlation) and Step One on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. The p-value is less than or equal to α, so reject H0." data-miss="{&quot;a&quot;: &quot;Not quite. 0.0312 is less than 0.05; more digits does not make a decimal larger. Review: the Notes on Step Four on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This has the rule in Step Four reversed. Review: the Notes on Step Four on page 4 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. 0.0312 is less than 0.05, not greater. Review: the Notes on Step Four on page 4 of the notes.&quot;}" data-review="the Notes on Step Four on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Step Four Decision).</b> In a test of a linear correlation, α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> and the p-value is <span class="m"><span aria-hidden="true">0.0312</span><span class="sr">0 point 0 3 1 2</span></span>. Which decision matches the Notes on Step Four?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because <span class="m"><span aria-hidden="true">0.0312</span><span class="sr">0 point 0 3 1 2</span></span> has more digits, so it is larger than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc10" value="b"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because the p-value is smaller than α.</span></label><label><input type="radio" name="mc10" value="c"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because <span class="m"><span aria-hidden="true">0.0312 ≤ 0.05</span><span class="sr">0 point 0 3 1 2 is less than or equal to 0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc10" value="d"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because the p-value is greater than α.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because <span class="m"><span aria-hidden="true">0.0312 ≤ 0.05</span><span class="sr">0 point 0 3 1 2 is less than or equal to 0 point 0 5</span></span>.</strong></p><p class="ptr">Where this is: The Notes on Step Four on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. The claim is the alternative hypothesis and the decision is DNR H0." data-miss="{&quot;a&quot;: &quot;Not quite. That wording goes with rejecting H0, and here the decision is DNR H0. Review: the Notes on Step Five and the conclusion table on page 4 of the notes, and the video \&quot;Classroom Example 10.1.1\&quot; on page 6.&quot;, &quot;c&quot;: &quot;Not quite. That wording is for a claim that is the null hypothesis, and this claim is the alternative. Review: the Notes on Step Five and the conclusion table on page 4 of the notes, and the video \&quot;Classroom Example 10.1.1\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. That wording is for rejecting H0 when the claim is the null hypothesis. Review: the Notes on Step Five and the conclusion table on page 4 of the notes, and the video \&quot;Classroom Example 10.1.1\&quot; on page 6.&quot;}" data-review="the Notes on Step Five and the conclusion table on page 4 of the notes, and the video &quot;Classroom Example 10.1.1&quot; on page 6.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Step Five Conclusion).</b> A test of the claim of a linear correlation between hours of sleep and exam score ends with the decision DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. Using the table in the Notes on Step Five, which conclusion is worded correctly?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>There is sufficient evidence to support the claim that there is a linear correlation between hours of sleep and exam score.</span></label><label><input type="radio" name="mc11" value="b"> <span>There is no evidence to support the claim that there is a linear correlation between hours of sleep and exam score.</span></label><label><input type="radio" name="mc11" value="c"> <span>There is not sufficient evidence to warrant rejection of the claim that there is a linear correlation between hours of sleep and exam score.</span></label><label><input type="radio" name="mc11" value="d"> <span>There is sufficient evidence to warrant rejection of the claim that there is a linear correlation between hours of sleep and exam score.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>There is no evidence to support the claim that there is a linear correlation between hours of sleep and exam score.</strong></p><p class="ptr">Where this is: The Notes on Step Five and the conclusion table on page 4 of the notes, and the video "Classroom Example 10.1.1" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. 0.4734 is greater than 0.05, so the decision is DNR H0, with no evidence of a linear correlation." data-miss="{&quot;a&quot;: &quot;Not quite. 0.4734 is greater than 0.05, so the decision is DNR H0. Review: Classroom Example 10.1.1 on page 6 of the notes, the video \&quot;Classroom Example 10.1.1\&quot; on page 6, and the Notes on Step Four and Step Five on page 4.&quot;, &quot;b&quot;: &quot;Not quite. The decision compares the p-value to α, not r to the p-value. Review: Classroom Example 10.1.1 on page 6 of the notes, the video \&quot;Classroom Example 10.1.1\&quot; on page 6, and the Notes on Step Four and Step Five on page 4.&quot;, &quot;c&quot;: &quot;Not quite. That wording goes with rejecting H0, not with DNR H0. Review: Classroom Example 10.1.1 on page 6 of the notes, the video \&quot;Classroom Example 10.1.1\&quot; on page 6, and the Notes on Step Four and Step Five on page 4.&quot;}" data-review="Classroom Example 10.1.1 on page 6 of the notes, the video &quot;Classroom Example 10.1.1&quot; on page 6, and the Notes on Step Four and Step Five on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Classroom Example 10.1.1).</b> In Classroom Example 10.1.1 (time of the taxi ride and tip amount), StatCrunch gives r = <span class="m"><span aria-hidden="true">0.298</span><span class="sr">0 point 2 9 8</span></span> and a p-value of <span class="m"><span aria-hidden="true">0.4734</span><span class="sr">0 point 4 7 3 4</span></span>, with α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>. Which statement matches the video?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, so riders appear to base their tips on the time of the ride.</span></label><label><input type="radio" name="mc12" value="b"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because r = <span class="m"><span aria-hidden="true">0.298</span><span class="sr">0 point 2 9 8</span></span> is less than the p-value of <span class="m"><span aria-hidden="true">0.4734</span><span class="sr">0 point 4 7 3 4</span></span>.</span></label><label><input type="radio" name="mc12" value="c"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, so there is sufficient evidence to support the claim of a linear correlation.</span></label><label><input type="radio" name="mc12" value="d"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, so riders do not appear to base their tips on the time of the ride.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, so riders do not appear to base their tips on the time of the ride.</strong></p><p class="ptr">Where this is: Classroom Example 10.1.1 on page 6 of the notes, the video "Classroom Example 10.1.1" on page 6, and the Notes on Step Four and Step Five on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The p-value is less than 0.05, and correlation does not imply causation." data-miss="{&quot;b&quot;: &quot;Not quite. Correlation does not imply causation, even when the correlation is strong. Review: Classroom Example 10.1.2 on page 7 of the notes, the video \&quot;Classroom Example 10.1.2\&quot; on page 7, and the Important Reminder on page 1.&quot;, &quot;c&quot;: &quot;Not quite. A p-value less than 0.0001 is still smaller than α = 0.05. Review: Classroom Example 10.1.2 on page 7 of the notes, the video \&quot;Classroom Example 10.1.2\&quot; on page 7, and the Important Reminder on page 1.&quot;, &quot;d&quot;: &quot;Not quite. The decision compares the p-value to α, not r. Review: Classroom Example 10.1.2 on page 7 of the notes, the video \&quot;Classroom Example 10.1.2\&quot; on page 7, and the Important Reminder on page 1.&quot;}" data-review="Classroom Example 10.1.2 on page 7 of the notes, the video &quot;Classroom Example 10.1.2&quot; on page 7, and the Important Reminder on page 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Classroom Example 10.1.2).</b> In Classroom Example 10.1.2 (pizza cost and subway fare), r = <span class="m"><span aria-hidden="true">0.989</span><span class="sr">0 point 9 8 9</span></span> and the p-value is less than <span class="m"><span aria-hidden="true">0.0001</span><span class="sr">0 point 0 0 0 1</span></span>, with α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>. Which statement matches the video and the Important Reminder?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is sufficient evidence of a linear correlation, but that alone does not show that one price causes the other.</span></label><label><input type="radio" name="mc13" value="b"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. This proves that the rising price of a slice of pizza is what causes the subway fare to go up each time it rises.</span></label><label><input type="radio" name="mc13" value="c"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because a p-value less than <span class="m"><span aria-hidden="true">0.0001</span><span class="sr">0 point 0 0 0 1</span></span> is too small to compare with α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</span></label><label><input type="radio" name="mc13" value="d"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because r = <span class="m"><span aria-hidden="true">0.989</span><span class="sr">0 point 9 8 9</span></span> is greater than α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, so the null hypothesis stays.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is sufficient evidence of a linear correlation, but that alone does not show that one price causes the other.</strong></p><p class="ptr">Where this is: Classroom Example 10.1.2 on page 7 of the notes, the video "Classroom Example 10.1.2" on page 7, and the Important Reminder on page 1.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Hypotheses for a linear correlation and Step One: item 3, page 3</li><li>Step Four decision and Step Five conclusion table: page 4</li><li>Video "Classroom Example 10.1.1", page 6</li><li>Video "Classroom Example 10.1.2", page 7 (and the Important Reminder, page 1)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps on pages 1 and 2 and pages 4 to 6 of the notes and their two StatCrunch videos.</p>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="b" data-why="Correct. Graph, then Scatter Plot, and Stat, then Regression, then Simple Linear." data-miss="{&quot;a&quot;: &quot;Not quite. The scatterplot comes from the Graph menu, not from Regression. Review: Using StatCrunch to Construct a Scatterplot on pages 1 and 2 and Using StatCrunch Test a Claim of a Linear Correlation on pages 4 to 6 of the notes, and the videos \&quot;Using StatCrunch to Create a Scatterplot\&quot; on page 1 and \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;c&quot;: &quot;Not quite. Summary Stats is not where the notes find the test statistic and p-value. Review: Using StatCrunch to Construct a Scatterplot on pages 1 and 2 and Using StatCrunch Test a Claim of a Linear Correlation on pages 4 to 6 of the notes, and the videos \&quot;Using StatCrunch to Create a Scatterplot\&quot; on page 1 and \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. The two menus are switched: Scatter Plot is under Graph, and Regression is under Stat. Review: Using StatCrunch to Construct a Scatterplot on pages 1 and 2 and Using StatCrunch Test a Claim of a Linear Correlation on pages 4 to 6 of the notes, and the videos \&quot;Using StatCrunch to Create a Scatterplot\&quot; on page 1 and \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;}" data-review="Using StatCrunch to Construct a Scatterplot on pages 1 and 2 and Using StatCrunch Test a Claim of a Linear Correlation on pages 4 to 6 of the notes, and the videos &quot;Using StatCrunch to Create a Scatterplot&quot; on page 1 and &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (StatCrunch Menus).</b> Which menu paths match the notes for making a scatterplot and for testing a claim of a linear correlation in StatCrunch?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>Stat, then Regression, then Simple Linear for both of them</span></label><label><input type="radio" name="mc14" value="b"> <span>Graph, then Scatter Plot; and Stat, then Regression, then Simple Linear</span></label><label><input type="radio" name="mc14" value="c"> <span>Graph, then Scatter Plot; and Stat, then Summary Stats, then Columns</span></label><label><input type="radio" name="mc14" value="d"> <span>Stat, then Scatter Plot; and Graph, then Regression, then Simple Linear</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Graph, then Scatter Plot; and Stat, then Regression, then Simple Linear</strong></p><p class="ptr">Where this is: Using StatCrunch to Construct a Scatterplot on pages 1 and 2 and Using StatCrunch Test a Claim of a Linear Correlation on pages 4 to 6 of the notes, and the videos "Using StatCrunch to Create a Scatterplot" on page 1 and "Using StatCrunch Test a Claim of a Linear Correlation" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="c" data-why="Correct. Both are in the Slope row." data-miss="{&quot;a&quot;: &quot;Not quite. The notes use the Slope row, not the Intercept row. Review: page 6 of the notes (where StatCrunch shows the test statistic, p-value and r), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;b&quot;: &quot;Not quite. R-sq is a different value from both the test statistic and the p-value. Review: page 6 of the notes (where StatCrunch shows the test statistic, p-value and r), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;d&quot;: &quot;Not quite. Estimate and Std. Err. are different columns from T-Stat and P-value. Review: page 6 of the notes (where StatCrunch shows the test statistic, p-value and r), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;}" data-review="page 6 of the notes (where StatCrunch shows the test statistic, p-value and r), and the video &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Reading the Output).</b> In the Simple Linear results, where do the notes say to find the test statistic and the p-value?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>In the Intercept row, under T-Stat and under P-value</span></label><label><input type="radio" name="mc15" value="b"> <span>On the R-sq line, just below the R (correlation coefficient) line</span></label><label><input type="radio" name="mc15" value="c"> <span>In the Slope row, under T-Stat and under P-value</span></label><label><input type="radio" name="mc15" value="d"> <span>In the Slope row, under Estimate and under Std. Err.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>In the Slope row, under T-Stat and under P-value</strong></p><p class="ptr">Where this is: Page 6 of the notes (where StatCrunch shows the test statistic, p-value and r), and the video "Using StatCrunch Test a Claim of a Linear Correlation" on page 5.</p></details>
+</div>
+<div class="tool" role="group" aria-labelledby="cars-h">
+<h3 id="cars-h" style="margin-top:0">Data for Checks 16 to 19</h3>
+<div class="table-wrap" role="region" aria-label="Used car data" tabindex="0">
+<table>
+<caption>Age and price of 8 used cars of the same model</caption>
+<thead><tr><th scope="col">Variable</th><th scope="col">Car 1</th><th scope="col">Car 2</th><th scope="col">Car 3</th><th scope="col">Car 4</th><th scope="col">Car 5</th><th scope="col">Car 6</th><th scope="col">Car 7</th><th scope="col">Car 8</th></tr></thead>
+<tbody>
+<tr><th scope="row">Age (years)</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+<tr><th scope="row">Price (thousands of dollars)</th><td>29.5</td><td>31.2</td><td>24.8</td><td>28.3</td><td>21.6</td><td>25.3</td><td>19.4</td><td>22.7</td></tr>
+</tbody>
+</table>
+</div>
+<p>Enter the data in StatCrunch with Age as the X variable and Price as the Y variable. Use α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> to test the claim of a linear correlation between age and price.</p>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="-0.798" data-why="Correct. StatCrunch shows about −0.79764, which rounds to −0.798." data-miss="{&quot;0.798&quot;: &quot;Not quite. The minus sign is missing, and StatCrunch shows r as a negative number. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-0.797&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the fourth digit is 6. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.636&quot;: &quot;Not quite. This is the R-sq value, which sits on the line below R (correlation coefficient). Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-0.8&quot;: &quot;Not quite. This is rounded to fewer than three decimal places. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-1.331&quot;: &quot;Not quite. This is the slope estimate, not r. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;32.67&quot;: &quot;Not quite. This is the intercept estimate, not r. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;~-0.79764~0.0001&quot;: &quot;Not quite. This is not rounded to three decimal places yet. Review: page 6 of the notes (the \&quot;R (correlation coefficient)\&quot; line), and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;}" data-review="page 6 of the notes (the &quot;R (correlation coefficient)&quot; line), and the video &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 16 (Value of r).</b> Run the test for the car data in StatCrunch and find the value of r. Round to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong>−0.798</strong></p><p class="ptr">Where this is: Page 6 of the notes (the "R (correlation coefficient)" line), and the video "Using StatCrunch Test a Claim of a Linear Correlation" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="-3.24" data-why="Correct. StatCrunch shows about −3.2394, which rounds to −3.24." data-miss="{&quot;3.24&quot;: &quot;Not quite. The minus sign is missing, and the T-Stat in the Slope row is negative. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-3.23&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the third digit is 9. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;13.35&quot;: &quot;Not quite. This is the T-Stat in the Intercept row, not the Slope row. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-1.33&quot;: &quot;Not quite. This is the slope estimate, not the T-Stat. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-0.8&quot;: &quot;Not quite. This is r, not the test statistic. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-0.798&quot;: &quot;Not quite. This is r, not the test statistic. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;-3.2&quot;: &quot;Not quite. This is rounded to one decimal place, not two. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;~-3.2394~0.0006&quot;: &quot;Not quite. This is not rounded to two decimal places yet. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;T-Stat\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;}" data-review="page 6 of the notes (the &quot;Slope&quot; row under &quot;T-Stat&quot;), Step Three on page 4, and the video &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 17 (Test Statistic).</b> From the same StatCrunch results, find the test statistic. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong>−3.24</strong></p><p class="ptr">Where this is: Page 6 of the notes (the "Slope" row under "T-Stat"), Step Three on page 4, and the video "Using StatCrunch Test a Claim of a Linear Correlation" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="0.018" data-why="Correct. StatCrunch shows about 0.0177, which rounds to 0.018." data-miss="{&quot;0.017&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the fourth digit is 7. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.009&quot;: &quot;Not quite. This is about half the p-value for this test, which happens when the alternative is not set to ≠. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0&quot;: &quot;Not quite. This matches the Intercept row, which shows &lt;0.0001; the p-value for the test is in the Slope row. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.0001&quot;: &quot;Not quite. This matches the Intercept row, which shows &lt;0.0001; the p-value for the test is in the Slope row. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.05&quot;: &quot;Not quite. This is α, the significance level, not the p-value. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.636&quot;: &quot;Not quite. This is the R-sq value, not the p-value. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;0.02&quot;: &quot;Not quite. This is rounded to two decimal places, not three. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;, &quot;~0.0177~0.00006&quot;: &quot;Not quite. This is not rounded to three decimal places yet. Review: page 6 of the notes (the \&quot;Slope\&quot; row under \&quot;P-value\&quot;), Step Three on page 4, and the video \&quot;Using StatCrunch Test a Claim of a Linear Correlation\&quot; on page 5.&quot;}" data-review="page 6 of the notes (the &quot;Slope&quot; row under &quot;P-value&quot;), Step Three on page 4, and the video &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 18 (P-value).</b> From the same StatCrunch results, find the p-value. Round to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong>0.018</strong></p><p class="ptr">Where this is: Page 6 of the notes (the "Slope" row under "P-value"), Step Three on page 4, and the video "Using StatCrunch Test a Claim of a Linear Correlation" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="d" data-why="Correct. The p-value of about 0.018 is less than 0.05, and the claim is the alternative." data-miss="{&quot;a&quot;: &quot;Not quite. The p-value of about 0.018 is less than 0.05, so the decision is Reject H0. Review: the Notes on Step Four and Step Five on page 4 of the notes, and the video \&quot;Classroom Example 10.1.2\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. That wording is for a claim that is the null hypothesis, and this claim is the alternative. Review: the Notes on Step Four and Step Five on page 4 of the notes, and the video \&quot;Classroom Example 10.1.2\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. A negative r can still be a linear correlation, and the decision compares the p-value to α. Review: the Notes on Step Four and Step Five on page 4 of the notes, and the video \&quot;Classroom Example 10.1.2\&quot; on page 7.&quot;}" data-review="the Notes on Step Four and Step Five on page 4 of the notes, and the video &quot;Classroom Example 10.1.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 19 (Decision and Conclusion).</b> Using your StatCrunch results for the car data and α = <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, which decision and conclusion are correct for the claim of a linear correlation between age and price?</legend>
+<label><input type="radio" name="mc19" value="a"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is no evidence to support the claim of a linear correlation between age and price.</span></label><label><input type="radio" name="mc19" value="b"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is sufficient evidence to warrant rejection of the claim of a linear correlation between age and price.</span></label><label><input type="radio" name="mc19" value="c"> <span>DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. Since r is negative, there cannot be a linear correlation between age and price.</span></label><label><input type="radio" name="mc19" value="d"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is sufficient evidence to support the claim of a linear correlation between age and price.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. There is sufficient evidence to support the claim of a linear correlation between age and price.</strong></p><p class="ptr">Where this is: The Notes on Step Four and Step Five on page 4 of the notes, and the video "Classroom Example 10.1.2" on page 7.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="In the MyLab problem, use the link to open the data in StatCrunch, as the Classroom Example 10.1.1 and 10.1.2 videos do. If it does not open on the first try, try again. In the Classroom Example 10.1.2 video, the first click goes too quickly and a second try opens it." value="I could not get the MyLab data into StatCrunch."> I could not get the MyLab data into StatCrunch.</label><label><input type="checkbox" class="sc-issue" data-tip="Scatterplot: Graph, then Scatter Plot. Test: Stat, then Regression, then Simple Linear. The screenshots on pages 2 and 5 of the notes show both menus." value="I could not find where to make the scatterplot or run the test."> I could not find where to make the scatterplot or run the test.</label><label><input type="checkbox" class="sc-issue" data-tip="Choose the X variable and the Y variable named in the problem. The notes and both StatCrunch videos pick Altitude for X and Temperature for Y." value="I was not sure which column to choose for X and which for Y."> I was not sure which column to choose for X and which for Y.</label><label><input type="checkbox" class="sc-issue" data-tip="Expand the results window, as the videos do. The test statistic and p-value are in the Slope row under T-Stat and P-value, and r is on the R (correlation coefficient) line (page 6 of the notes)." value="I could not find the test statistic, p-value or r in the results."> I could not find the test statistic, p-value or r in the results.</label><label><input type="checkbox" class="sc-issue" data-tip="Check that the alternative is set to not equal (≠) before you choose Compute!, as the &quot;Using StatCrunch Test a Claim of a Linear Correlation&quot; and Classroom Example 10.1.2 videos do. Then check that each data value went into the right column." value="My test statistic or p-value did not match MyLab."> My test statistic or p-value did not match MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Follow the rounding direction in MyLab. When asked for three decimal places, the Classroom Example 10.1.2 video enters 0.000, since the p-value is less than 0.0001." value="I was not sure what to enter when the p-value shows &lt;0.0001."> I was not sure what to enter when the p-value shows &lt;0.0001.</label><label><input type="checkbox" class="sc-issue" data-tip="In the Classroom Example 10.1.2 video, the save prompt is closed with Not Now, and the work carries on." value="StatCrunch asked me to save my work."> StatCrunch asked me to save my work.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Scatterplot in StatCrunch: pages 1 and 2, video "Using StatCrunch to Create a Scatterplot" (page 1)</li><li>Test of a linear correlation in StatCrunch: pages 4 to 6, video "Using StatCrunch Test a Claim of a Linear Correlation" (page 5)</li><li>Where the test statistic, p-value and r appear in the results: page 6</li><li>Decision and conclusion: Notes on Step Four and Step Five, page 4</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 11: I am not sure which row of the conclusion table to use."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec10.1-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Introduction and Scatterplot", "resource": "The Important Reminder and item 1 (Scatterplot) on page 1 of the Section 10.1 notes."}, {"id": "s3", "name": "Linear Correlation Coefficient", "resource": "Item 2 (Linear Correlation Coefficient) on page 3 of the Section 10.1 notes."}, {"id": "s4", "name": "Hypothesis Testing to Determine a Linear Correlation", "resource": "Item 3 on pages 3 and 4 of the notes, and the videos \"Classroom Example 10.1.1\" on page 6 and \"Classroom Example 10.1.2\" on page 7."}, {"id": "s5", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 1, 2 and 4 to 6 of the notes, and the videos \"Using StatCrunch to Create a Scatterplot\" on page 1 and \"Using StatCrunch Test a Claim of a Linear Correlation\" on page 5."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='10.1';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

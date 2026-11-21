@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 7.1 Exit Ticket: Estimating a Population Proportion</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 7.1 Exit Ticket</div>
+<h1>Section 7.1 Exit Ticket: Estimating a Population Proportion</h1>
+<p>A short, ungraded check to use after the Section 7.1 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Concepts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Confidence Intervals and Margin of Error in StatCrunch<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Minimum Sample Size<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 19 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 7.1 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Concepts</button></li><li><button type="button" data-go="s3">Confidence Intervals and Margin of Error in StatCrunch</button></li><li><button type="button" data-go="s4">Minimum Sample Size</button></li><li><button type="button" data-go="s5">StatCrunch check</button></li><li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Concepts</h2>
+<p>These checks cover items 1 to 7 on pages 1 to 3 of the Section 7.1 notes and the Classroom Example 7.1.1 video on page 7.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Here x is 58 and n is 400." data-miss="{&quot;a&quot;: &quot;Not quite. 0.5 is the value used when finding a minimum sample size with nothing known, not an estimate from sample data. Review: item 1 (Point Estimate) on page 1 of the notes, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. This divides n by x, so the fraction is flipped. Review: item 1 (Point Estimate) on page 1 of the notes, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. 58 is x, a count, not the sample proportion. Review: item 1 (Point Estimate) on page 1 of the notes, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;}" data-review="item 1 (Point Estimate) on page 1 of the notes, and the video &quot;Classroom Example 7.1.1&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Point Estimate).</b> A simple random sample of 400 commuters finds that 58 ride a bike to work. Which statement matches item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The best point estimate is 0.5, since nothing is known yet.</span></label><label><input type="radio" name="mc1" value="b"> <span>The best point estimate is <span class="m"><span aria-hidden="true">p̂ = 58/400 = 0.145</span><span class="sr">p hat equals 58 slash 400 equals 0 point 1 4 5</span></span>.</span></label><label><input type="radio" name="mc1" value="c"> <span>The best point estimate is <span class="m"><span aria-hidden="true">400/58</span><span class="sr">400 slash 58</span></span>, about <span class="m"><span aria-hidden="true">6.897</span><span class="sr">6 point 8 9 7</span></span>.</span></label><label><input type="radio" name="mc1" value="d"> <span>The best point estimate is 58, the number of successes.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The best point estimate is <span class="m"><span aria-hidden="true">p̂ = 58/400 = 0.145</span><span class="sr">p hat equals 58 slash 400 equals 0 point 1 4 5</span></span>.</strong></p><p class="ptr">Where this is: Item 1 (Point Estimate) on page 1 of the notes, and the video "Classroom Example 7.1.1" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. It is a range that likely contains the parameter." data-miss="{&quot;a&quot;: &quot;Not quite. A single value is the point estimate from item 1, not an interval. Review: item 2 (Confidence Interval) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 2 says the range likely contains the parameter, not that it is certain to. Review: item 2 (Confidence Interval) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 2 describes a range for the population parameter, not for every possible sample proportion. Review: item 2 (Confidence Interval) on page 1 of the notes.&quot;}" data-review="item 2 (Confidence Interval) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Confidence Interval).</b> Which statement matches the description of a confidence interval in item 2?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>A single value that gives the best estimate of the population proportion.</span></label><label><input type="radio" name="mc2" value="b"> <span>A range of values that is certain to contain the true population parameter.</span></label><label><input type="radio" name="mc2" value="c"> <span>A range of values that contains every possible sample proportion.</span></label><label><input type="radio" name="mc2" value="d"> <span>A range of values that likely contains the true population parameter.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A range of values that likely contains the true population parameter.</strong></p><p class="ptr">Where this is: Item 2 (Confidence Interval) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. 1 − 0.90 is 0.10, and half of that is 0.05." data-miss="{&quot;b&quot;: &quot;Not quite. This uses the confidence level itself as \u03b1, but item 3 pairs 90% with \u03b1 = 0.10. Review: item 3 (Confidence Level) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This doubles \u03b1 instead of splitting it between the two tails. Review: item 3 (Confidence Level) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 3 says \u03b1 is split equally between the two tails. Review: item 3 (Confidence Level) on page 1 of the notes.&quot;}" data-review="item 3 (Confidence Level) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Confidence Level).</b> A problem asks for a 90% confidence level. Which statement matches item 3?</legend>
+<label><input type="radio" name="mc3" value="a"> <span><span class="m"><span aria-hidden="true">α = 0.10</span><span class="sr">α equals 0 point 1 0</span></span>, split equally, so <span class="m"><span aria-hidden="true">α/2 = 0.05</span><span class="sr">alpha over 2 equals 0 point 0 5</span></span> in each tail.</span></label><label><input type="radio" name="mc3" value="b"> <span><span class="m"><span aria-hidden="true">α = 0.90</span><span class="sr">α equals 0 point 9 0</span></span>, split equally, so <span class="m"><span aria-hidden="true">α/2 = 0.45</span><span class="sr">alpha over 2 equals 0 point 4 5</span></span> in each tail.</span></label><label><input type="radio" name="mc3" value="c"> <span><span class="m"><span aria-hidden="true">α = 0.10</span><span class="sr">α equals 0 point 1 0</span></span>, split equally, so <span class="m"><span aria-hidden="true">α/2 = 0.20</span><span class="sr">alpha over 2 equals 0 point 2 0</span></span> in each tail.</span></label><label><input type="radio" name="mc3" value="d"> <span><span class="m"><span aria-hidden="true">α = 0.10</span><span class="sr">α equals 0 point 1 0</span></span>, with all of it placed in just one tail.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">α = 0.10</span><span class="sr">α equals 0 point 1 0</span></span>, split equally, so <span class="m"><span aria-hidden="true">α/2 = 0.05</span><span class="sr">alpha over 2 equals 0 point 0 5</span></span> in each tail.</strong></p><p class="ptr">Where this is: Item 3 (Confidence Level) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Upper minus lower, divided by 2." data-miss="{&quot;a&quot;: &quot;Not quite. This adds the boundaries instead of subtracting them. Review: item 4 (Margin of Error) on page 2 of the notes, and the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4.&quot;, &quot;b&quot;: &quot;Not quite. This is missing the division by 2. Review: item 4 (Margin of Error) on page 2 of the notes, and the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Item 4 labels this formula DO NOT USE OR MEMORIZE, since StatCrunch handles it. Review: item 4 (Margin of Error) on page 2 of the notes, and the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4.&quot;}" data-review="item 4 (Margin of Error) on page 2 of the notes, and the video &quot;Finding the Margin of Error Using StatCrunch&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Margin of Error).</b> StatCrunch has given the lower and upper boundary of a confidence interval. Which is the margin of error formula that item 4 says to memorize?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">((upper boundary) + (lower boundary)) / 2</span><span class="sr">open parenthesis upper boundary plus lower boundary close parenthesis, divided by 2</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">(upper boundary) − (lower boundary)</span><span class="sr">upper boundary minus lower boundary</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">((upper boundary) − (lower boundary)) / 2</span><span class="sr">open parenthesis upper boundary minus lower boundary close parenthesis, divided by 2</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">z times the square root of p̂q̂ over n, by hand</span><span class="sr">z times the square root of p hat q hat over n, worked out by hand</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">((upper boundary) − (lower boundary)) / 2</span><span class="sr">open parenthesis upper boundary minus lower boundary close parenthesis, divided by 2</span></span></strong></p><p class="ptr">Where this is: Item 4 (Margin of Error) on page 2 of the notes, and the video "Finding the Margin of Error Using StatCrunch" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. It matches the Phase 1 sentence pattern." data-miss="{&quot;b&quot;: &quot;Not quite. Phase 2 relates the interval to the question or a benchmark, and this sentence names no benchmark. Review: item 5 (Writing Conclusions) on page 2 of the notes, and Phase I on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Phase 3 combines the interpretation and the context to draw a conclusion, and this sentence draws none. Review: item 5 (Writing Conclusions) on page 2 of the notes, and Phase I on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The Phase 1 sentence pattern in item 5 begins \&quot;We are ___% confident.\&quot; Review: item 5 (Writing Conclusions) on page 2 of the notes, and Phase I on page 4.&quot;}" data-review="item 5 (Writing Conclusions) on page 2 of the notes, and Phase I on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Writing Conclusions).</b> A student writes: "We are 95% confident the population proportion of households with a backup generator is between <span class="m"><span aria-hidden="true">0.118</span><span class="sr">0 point 1 1 8</span></span> and <span class="m"><span aria-hidden="true">0.164</span><span class="sr">0 point 1 6 4</span></span>." Which phase of the three-phase method in item 5 is this?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Phase 1: interpret the interval.</span></label><label><input type="radio" name="mc5" value="b"> <span>Phase 2: provide context or a comparison.</span></label><label><input type="radio" name="mc5" value="c"> <span>Phase 3: answer the question.</span></label><label><input type="radio" name="mc5" value="d"> <span>None, since a conclusion never states a confidence level.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Phase 1: interpret the interval.</strong></p><p class="ptr">Where this is: Item 5 (Writing Conclusions) on page 2 of the notes, and Phase I on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. 0.62 − 0.04 is 0.58 and 0.62 + 0.04 is 0.66." data-miss="{&quot;a&quot;: &quot;Not quite. This uses p\u0302 as the lower boundary instead of p\u0302 \u2212 E. Review: item 6 (Confidence Interval Presentation Formats) on page 2 of the notes, and the notation examples on page 4.&quot;, &quot;b&quot;: &quot;Not quite. This uses half of E on each side instead of all of E. Review: item 6 (Confidence Interval Presentation Formats) on page 2 of the notes, and the notation examples on page 4.&quot;, &quot;c&quot;: &quot;Not quite. This puts the upper boundary first, but both formats start with the lower boundary. Review: item 6 (Confidence Interval Presentation Formats) on page 2 of the notes, and the notation examples on page 4.&quot;}" data-review="item 6 (Confidence Interval Presentation Formats) on page 2 of the notes, and the notation examples on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Presentation Formats).</b> A result is written in margin of error notation as <span class="m"><span aria-hidden="true">p̂ ± E</span><span class="sr">p hat plus or minus E</span></span> with <span class="m"><span aria-hidden="true">p̂ = 0.62</span><span class="sr">p hat equals 0 point 6 2</span></span> and <span class="m"><span aria-hidden="true">E = 0.04</span><span class="sr">E equals 0 point 0 4</span></span>. Which pair matches the other two formats in item 6?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">(0.62, 0.66)</span><span class="sr">open parenthesis 0 point 6 2, 0 point 6 6 close parenthesis</span></span> and <span class="m"><span aria-hidden="true">0.62 &lt; p &lt; 0.66</span><span class="sr">0 point 6 2 is less than p is less than 0 point 6 6</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">(0.60, 0.64)</span><span class="sr">open parenthesis 0 point 6 0, 0 point 6 4 close parenthesis</span></span> and <span class="m"><span aria-hidden="true">0.60 &lt; p &lt; 0.64</span><span class="sr">0 point 6 0 is less than p is less than 0 point 6 4</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true">(0.66, 0.58)</span><span class="sr">open parenthesis 0 point 6 6, 0 point 5 8 close parenthesis</span></span> and <span class="m"><span aria-hidden="true">0.66 &lt; p &lt; 0.58</span><span class="sr">0 point 6 6 is less than p is less than 0 point 5 8</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true">(0.58, 0.66)</span><span class="sr">open parenthesis 0 point 5 8, 0 point 6 6 close parenthesis</span></span> and <span class="m"><span aria-hidden="true">0.58 &lt; p &lt; 0.66</span><span class="sr">0 point 5 8 is less than p is less than 0 point 6 6</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(0.58, 0.66)</span><span class="sr">open parenthesis 0 point 5 8, 0 point 6 6 close parenthesis</span></span> and <span class="m"><span aria-hidden="true">0.58 &lt; p &lt; 0.66</span><span class="sr">0 point 5 8 is less than p is less than 0 point 6 6</span></span></strong></p><p class="ptr">Where this is: Item 6 (Confidence Interval Presentation Formats) on page 2 of the notes, and the notation examples on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. 3 is fewer than the 5 failures item 7 requires." data-miss="{&quot;a&quot;: &quot;Not quite. This sample has at least 5 successes and at least 5 failures. Review: item 7 (Requirements for Estimating a Population Proportion) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This sample has at least 5 successes and at least 5 failures. Review: item 7 (Requirements for Estimating a Population Proportion) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. This sample has at least 5 successes and at least 5 failures, even though 9 is small. Review: item 7 (Requirements for Estimating a Population Proportion) on page 3 of the notes.&quot;}" data-review="item 7 (Requirements for Estimating a Population Proportion) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Requirements).</b> Each of these is a simple random sample. Which one does <strong>not</strong> meet the requirements in item 7?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>250 shoppers: 37 used a coupon and 213 did not.</span></label><label><input type="radio" name="mc7" value="b"> <span>80 cars: 77 passed inspection and 3 did not.</span></label><label><input type="radio" name="mc7" value="c"> <span>500 voters: 260 support a measure and 240 do not.</span></label><label><input type="radio" name="mc7" value="d"> <span>60 patients: 9 had a side effect and 51 did not.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>80 cars: 77 passed inspection and 3 did not.</strong></p><p class="ptr">Where this is: Item 7 (Requirements for Estimating a Population Proportion) on page 3 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Point Estimate: item 1, page 1, video "Classroom Example 7.1.1" (page 7)</li><li>Confidence Interval and Confidence Level: items 2 and 3, page 1</li><li>Margin of Error: item 4, page 2, video "Finding the Margin of Error Using StatCrunch" (page 4)</li><li>Writing Conclusions and Presentation Formats: items 5 and 6, page 2, with the example on page 4</li><li>Requirements: item 7, page 3</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Confidence Intervals and Margin of Error in StatCrunch</h2>
+<p>These checks cover the confidence interval and margin of error examples on pages 3 to 5 of the notes, their two videos, and the Classroom Example 7.1.1, 7.1.2 and 7.1.3 videos on page 7.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The observations include both groups: 212 + 1,488." data-miss="{&quot;a&quot;: &quot;Not quite. 1,488 is only the seeds that did not sprout, so it leaves the 212 out of the observations. Review: the confidence interval table on page 3 of the notes, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. A success here is a seed that sprouted, and 1,488 is the seeds that did not. Review: the confidence interval table on page 3 of the notes, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. This switches the two boxes, so there would be more successes than observations. Review: the confidence interval table on page 3 of the notes, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;}" data-review="the confidence interval table on page 3 of the notes, and the video &quot;Classroom Example 7.1.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Successes and Observations).</b> In a random sample of seeds, 212 sprouted and 1,488 did not. To estimate the proportion that sprouted, what goes in the StatCrunch boxes?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>212 successes and 1,488 observations</span></label><label><input type="radio" name="mc8" value="b"> <span>1,488 successes and 1,700 observations</span></label><label><input type="radio" name="mc8" value="c"> <span>212 successes and 1,700 observations</span></label><label><input type="radio" name="mc8" value="d"> <span>1,700 successes and 212 observations</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>212 successes and 1,700 observations</strong></p><p class="ptr">Where this is: The confidence interval table on page 3 of the notes, and the video "Classroom Example 7.1.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Full decimals, with the subtraction in parentheses." data-miss="{&quot;b&quot;: &quot;Not quite. Without parentheses, only the lower limit is divided by 2. Review: the margin of error table on page 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. This rounds the limits before computing, but the notes say to use the entire decimal number. Review: the margin of error table on page 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. This subtracts the upper limit from the lower limit, so the result comes out negative. Review: the margin of error table on page 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;}" data-review="the margin of error table on page 5 of the notes, the video &quot;Finding the Margin of Error Using StatCrunch&quot; on page 4, and the video &quot;Classroom Example 7.1.1&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Margin of Error in StatCrunch).</b> StatCrunch shows L. Limit <span class="m"><span aria-hidden="true">0.31852247</span><span class="sr">0 point 3 1 8 5 2 2 4 7</span></span> and U. Limit <span class="m"><span aria-hidden="true">0.40127753</span><span class="sr">0 point 4 0 1 2 7 7 5 3</span></span>. Which expression should go in Data, then Compute, then Expression?</legend>
+<label><input type="radio" name="mc9" value="a"> <span><span class="m"><span aria-hidden="true">(0.40127753-0.31852247)/2</span><span class="sr">open parenthesis 0 point 4 0 1 2 7 7 5 3 minus 0 point 3 1 8 5 2 2 4 7 close parenthesis, slash 2</span></span></span></label><label><input type="radio" name="mc9" value="b"> <span><span class="m"><span aria-hidden="true">0.40127753-0.31852247/2</span><span class="sr">0 point 4 0 1 2 7 7 5 3 minus 0 point 3 1 8 5 2 2 4 7 slash 2</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span><span class="m"><span aria-hidden="true">(0.401-0.319)/2</span><span class="sr">open parenthesis 0 point 4 0 1 minus 0 point 3 1 9 close parenthesis, slash 2</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span><span class="m"><span aria-hidden="true">(0.31852247-0.40127753)/2</span><span class="sr">open parenthesis 0 point 3 1 8 5 2 2 4 7 minus 0 point 4 0 1 2 7 7 5 3 close parenthesis, slash 2</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(0.40127753-0.31852247)/2</span><span class="sr">open parenthesis 0 point 4 0 1 2 7 7 5 3 minus 0 point 3 1 8 5 2 2 4 7 close parenthesis, slash 2</span></span></strong></p><p class="ptr">Where this is: The margin of error table on page 5 of the notes, the video "Finding the Margin of Error Using StatCrunch" on page 4, and the video "Classroom Example 7.1.1" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. 0.40 is inside the interval." data-miss="{&quot;a&quot;: &quot;Not quite. This compares 40 with a decimal without changing 40% to 0.40 first. Review: item 5 (Writing Conclusions) on page 2 of the notes, Phase II and Phase III on page 4, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. Any value between the boundaries is possible, not only the center. Review: item 5 (Writing Conclusions) on page 2 of the notes, Phase II and Phase III on page 4, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. A value inside the interval is possible, but the interval does not prove it is the exact value. Review: item 5 (Writing Conclusions) on page 2 of the notes, Phase II and Phase III on page 4, and the video \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;}" data-review="item 5 (Writing Conclusions) on page 2 of the notes, Phase II and Phase III on page 4, and the video &quot;Classroom Example 7.1.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Comparing with an Expected Value).</b> A 95% confidence interval for the proportion of a seed variety that sprouts is <span class="m"><span aria-hidden="true">(0.352, 0.431)</span><span class="sr">open parenthesis 0 point 3 5 2, 0 point 4 3 1 close parenthesis</span></span>. The seed company expected 40% to sprout. Do the results appear to contradict that expectation?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>Yes, because 40 is larger than 0.431, the upper boundary.</span></label><label><input type="radio" name="mc10" value="b"> <span>No, because 0.40 lies between 0.352 and 0.431, so 40% is possible.</span></label><label><input type="radio" name="mc10" value="c"> <span>Yes, because 0.40 is not exactly at the center of the interval.</span></label><label><input type="radio" name="mc10" value="d"> <span>No, because the interval proves the proportion is exactly 40%.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because 0.40 lies between 0.352 and 0.431, so 40% is possible.</strong></p><p class="ptr">Where this is: Item 5 (Writing Conclusions) on page 2 of the notes, Phase II and Phase III on page 4, and the video "Classroom Example 7.1.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. More confidence needs a wider interval." data-miss="{&quot;a&quot;: &quot;Not quite. The video finds the 80% interval is the narrower one. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The same data give different widths at different confidence levels. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The 99% interval is wider, but the video ties that to being more confident, not less. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes.&quot;}" data-review="the video &quot;Classroom Example 7.1.3&quot; on page 7 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Confidence Level and Width).</b> From the same sample data, a student builds an 80% confidence interval and a 99% confidence interval. Which statement matches the Classroom Example 7.1.3 video?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>The 80% interval is wider, because it is less confident.</span></label><label><input type="radio" name="mc11" value="b"> <span>The two intervals have the same width, because the data match.</span></label><label><input type="radio" name="mc11" value="c"> <span>The 99% interval is wider, because wider means less confident.</span></label><label><input type="radio" name="mc11" value="d"> <span>The 99% interval is wider, because it must be wider to be more confident.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The 99% interval is wider, because it must be wider to be more confident.</strong></p><p class="ptr">Where this is: The video "Classroom Example 7.1.3" on page 7 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Constructing a confidence interval in StatCrunch: pages 3 and 4, video "Using StatCrunch to Construct Confidence Intervals for Proportions" (page 3)</li><li>Finding the margin of error in StatCrunch: pages 4 and 5, video "Finding the Margin of Error Using StatCrunch" (page 4)</li><li>Writing Conclusions: item 5, page 2, and Phases I to III on page 4</li><li>Videos: "Classroom Example 7.1.1", "Classroom Example 7.1.2" and "Classroom Example 7.1.3", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Minimum Sample Size</h2>
+<p>These checks cover item 8 and the minimum sample size example on pages 6 and 7 of the notes, its video, and the Classroom Example 7.1.4 and 7.1.5 videos on page 8.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. Two times the margin of error, as a decimal." data-miss="{&quot;a&quot;: &quot;Not quite. This leaves 2.5 as a percent, but page 6 says all percents must be converted to decimals. Review: the minimum sample size table on page 6 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the video \&quot;Classroom Example 7.1.4\&quot; on page 8.&quot;, &quot;b&quot;: &quot;Not quite. This is the margin of error alone, but the width is two times the margin of error. Review: the minimum sample size table on page 6 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the video \&quot;Classroom Example 7.1.4\&quot; on page 8.&quot;, &quot;d&quot;: &quot;Not quite. 0.25 is 25%, so the decimal point moved only one place. Review: the minimum sample size table on page 6 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the video \&quot;Classroom Example 7.1.4\&quot; on page 8.&quot;}" data-review="the minimum sample size table on page 6 of the notes, the video &quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch&quot; on page 6, and the video &quot;Classroom Example 7.1.4&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Width).</b> A planner wants the sample proportion to be within 2.5 percentage points of the population proportion. What goes in the Width box in StatCrunch?</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true">2*2.5</span><span class="sr">2 times 2 point 5</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span><span class="m"><span aria-hidden="true">0.025</span><span class="sr">0 point 0 2 5</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span><span class="m"><span aria-hidden="true">2*0.025</span><span class="sr">2 times 0 point 0 2 5</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span><span class="m"><span aria-hidden="true">2*0.25</span><span class="sr">2 times 0 point 2 5</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2*0.025</span><span class="sr">2 times 0 point 0 2 5</span></span></strong></p><p class="ptr">Where this is: The minimum sample size table on page 6 of the notes, the video "Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch" on page 6, and the video "Classroom Example 7.1.4" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. Use 0.5 when nothing is known and the earlier result when one is given." data-miss="{&quot;a&quot;: &quot;Not quite. Page 6 says to use a proportion from a previous study instead of 0.5 when one is given. Review: the minimum sample size table on page 6 of the notes, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. Page 6 says to use 0.5, not 0, when nothing is known. Review: the minimum sample size table on page 6 of the notes, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;d&quot;: &quot;Not quite. 62 is still a percent, and it must be converted to a decimal. Review: the minimum sample size table on page 6 of the notes, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;}" data-review="the minimum sample size table on page 6 of the notes, and the videos &quot;Classroom Example 7.1.4&quot; and &quot;Classroom Example 7.1.5&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Target Proportion).</b> A planner finds a minimum sample size twice: first with nothing known, then after learning that a previous study found 62%. Which target proportions match page 6?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>0.5 the first time and 0.5 again the second time</span></label><label><input type="radio" name="mc13" value="b"> <span>0.5 the first time, then 0.62 the second time</span></label><label><input type="radio" name="mc13" value="c"> <span>0 the first time, then 0.62 the second time</span></label><label><input type="radio" name="mc13" value="d"> <span>0.5 the first time, then 62 the second time</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>0.5 the first time, then 0.62 the second time</strong></p><p class="ptr">Where this is: The minimum sample size table on page 6 of the notes, and the videos "Classroom Example 7.1.4" and "Classroom Example 7.1.5" on page 8.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Item 8 requires a simple random sample." data-miss="{&quot;b&quot;: &quot;Not quite. Meeting the size does not meet the requirement that the sample be a simple random sample. Review: item 8 (Minimum Sample Size Needed to Estimate a Population Proportion) on page 6 of the notes, and the video \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. The first 58 customers to walk in are chosen for convenience, not at random. Review: item 8 (Minimum Sample Size Needed to Estimate a Population Proportion) on page 6 of the notes, and the video \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;d&quot;: &quot;Not quite. StatCrunch found 58 is enough, so the concern is how they are chosen. Review: item 8 (Minimum Sample Size Needed to Estimate a Population Proportion) on page 6 of the notes, and the video \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;}" data-review="item 8 (Minimum Sample Size Needed to Estimate a Population Proportion) on page 6 of the notes, and the video &quot;Classroom Example 7.1.5&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Sample Size Requirement).</b> StatCrunch says a store manager needs at least 58 customers. She plans to ask the first 58 customers who walk into her store on Monday. Which statement matches item 8 and the Classroom Example 7.1.5 video?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>This is a convenience sample, not a simple random sample, so it may not represent the population.</span></label><label><input type="radio" name="mc14" value="b"> <span>This is fine, because 58 customers meets the minimum sample size from StatCrunch.</span></label><label><input type="radio" name="mc14" value="c"> <span>This is fine, because any 58 customers together count as a simple random sample.</span></label><label><input type="radio" name="mc14" value="d"> <span>This is a problem only because 58 is too few people for any survey to be useful.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>This is a convenience sample, not a simple random sample, so it may not represent the population.</strong></p><p class="ptr">Where this is: Item 8 (Minimum Sample Size Needed to Estimate a Population Proportion) on page 6 of the notes, and the video "Classroom Example 7.1.5" on page 8.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Minimum Sample Size: item 8 and the table on pages 6 and 7, video "Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch" (page 6)</li><li>Videos: "Classroom Example 7.1.4" and "Classroom Example 7.1.5", page 8</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps on pages 3 to 7 of the notes, the three StatCrunch videos on pages 3, 4 and 6, and the Classroom Example videos on pages 7 and 8. Have StatCrunch open.</p>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-form="decimal" data-answer="0.367" data-why="Correct. StatCrunch shows about 0.36691." data-miss="{&quot;0.363&quot;: &quot;Not quite. This is the lower boundary at a 95% level. Change the level to 0.90. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.354&quot;: &quot;Not quite. This is the lower boundary at a 99% level. Change the level to 0.90. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.61&quot;: &quot;Not quite. This uses 763 as the number of observations. The observations include both groups: 1,250. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.588&quot;: &quot;Not quite. This uses 763 as the number of successes. A success here is an adult with a library card: 487. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.366&quot;: &quot;Not quite. This cuts off digits instead of rounding. The digit after the third place is 9, so round up. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.37&quot;: &quot;Not quite. This has two decimal places. Round to three. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.3669&quot;: &quot;Not quite. This has four decimal places. Round to three. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;36.7&quot;: &quot;Not quite. This is a percent. Give the boundary as a decimal, as StatCrunch shows it. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.412&quot;: &quot;Not quite. This is the upper boundary. The lower boundary is the smaller number. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;}" data-review="the confidence interval table on pages 3 and 4 of the notes, the video &quot;Using StatCrunch to Construct Confidence Intervals for Proportions&quot; on page 3, and the videos &quot;Classroom Example 7.1.1&quot; and &quot;Classroom Example 7.1.2&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 15 (Lower Boundary).</b> In a random sample, 487 adults said they have a library card and 763 said they do not. In StatCrunch, construct a 90% confidence interval for the proportion of adults who have a library card. Round to three decimal places. What is the lower boundary?</p>
+<details><summary>Show answer</summary><p><strong>0.367</strong></p><p class="ptr">Where this is: The confidence interval table on pages 3 and 4 of the notes, the video "Using StatCrunch to Construct Confidence Intervals for Proportions" on page 3, and the videos "Classroom Example 7.1.1" and "Classroom Example 7.1.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-form="decimal" data-answer="0.412" data-why="Correct. StatCrunch shows about 0.41229." data-miss="{&quot;0.417&quot;: &quot;Not quite. This is the upper boundary at a 95% level. Change the level to 0.90. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.425&quot;: &quot;Not quite. This is the upper boundary at a 99% level. Change the level to 0.90. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.667&quot;: &quot;Not quite. This uses 763 as the number of observations. The observations include both groups: 1,250. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.633&quot;: &quot;Not quite. This uses 763 as the number of successes. A success here is an adult with a library card: 487. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.41&quot;: &quot;Not quite. This has two decimal places. Round to three. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.4123&quot;: &quot;Not quite. This has four decimal places. Round to three. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;41.2&quot;: &quot;Not quite. This is a percent. Give the boundary as a decimal, as StatCrunch shows it. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.367&quot;: &quot;Not quite. This is the lower boundary. The upper boundary is the larger number. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.39&quot;: &quot;Not quite. This is the sample proportion, rounded. The upper boundary is in the U. Limit column. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;, &quot;0.3896&quot;: &quot;Not quite. This is the sample proportion. The upper boundary is in the U. Limit column. Review: the confidence interval table on pages 3 and 4 of the notes, the video \&quot;Using StatCrunch to Construct Confidence Intervals for Proportions\&quot; on page 3, and the videos \&quot;Classroom Example 7.1.1\&quot; and \&quot;Classroom Example 7.1.2\&quot; on page 7.&quot;}" data-review="the confidence interval table on pages 3 and 4 of the notes, the video &quot;Using StatCrunch to Construct Confidence Intervals for Proportions&quot; on page 3, and the videos &quot;Classroom Example 7.1.1&quot; and &quot;Classroom Example 7.1.2&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 16 (Upper Boundary).</b> Use the same interval as Check 15. Round to three decimal places. What is the upper boundary?</p>
+<details><summary>Show answer</summary><p><strong>0.412</strong></p><p class="ptr">Where this is: The confidence interval table on pages 3 and 4 of the notes, the video "Using StatCrunch to Construct Confidence Intervals for Proportions" on page 3, and the videos "Classroom Example 7.1.1" and "Classroom Example 7.1.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-form="decimal" data-answer="0.0227" data-why="Correct. StatCrunch shows about 0.0226876." data-miss="{&quot;0.0225&quot;: &quot;Not quite. This uses the rounded boundaries 0.412 and 0.367. Use every digit StatCrunch shows. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.2288&quot;: &quot;Not quite. This divides only the lower limit by 2. Put the subtraction in parentheses. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.3896&quot;: &quot;Not quite. This adds the limits instead of subtracting. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.0454&quot;: &quot;Not quite. This subtracts but does not divide by 2. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.027&quot;: &quot;Not quite. This comes from a 95% interval. Check that the level is 0.90. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.0270&quot;: &quot;Not quite. This comes from a 95% interval. Check that the level is 0.90. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.0355&quot;: &quot;Not quite. This comes from a 99% interval. Check that the level is 0.90. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.0226&quot;: &quot;Not quite. This cuts off digits instead of rounding. The next digit is 8, so round up. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;0.023&quot;: &quot;Not quite. This has three decimal places. Round to four. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;, &quot;-0.0227&quot;: &quot;Not quite. This subtracts the upper limit from the lower limit, so the sign is wrong. Review: the margin of error table on pages 4 and 5 of the notes, the video \&quot;Finding the Margin of Error Using StatCrunch\&quot; on page 4, and the video \&quot;Classroom Example 7.1.1\&quot; on page 7.&quot;}" data-review="the margin of error table on pages 4 and 5 of the notes, the video &quot;Finding the Margin of Error Using StatCrunch&quot; on page 4, and the video &quot;Classroom Example 7.1.1&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 17 (Margin of Error).</b> Use the full L. Limit and U. Limit from the interval in Checks 15 and 16 to find the margin of error in StatCrunch. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong>0.0227</strong></p><p class="ptr">Where this is: The margin of error table on pages 4 and 5 of the notes, the video "Finding the Margin of Error Using StatCrunch" on page 4, and the video "Classroom Example 7.1.1" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="331" data-why="Correct. StatCrunch shows 331.1." data-miss="{&quot;331.1&quot;: &quot;Not quite. This is not rounded. The nearest integer has no digits after the point. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;332&quot;: &quot;Not quite. The digit after the point is 1, so 331.1 rounds down. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;33110&quot;: &quot;Not quite. This multiplies by 38.5, so the percent was not converted to a decimal. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;3311&quot;: &quot;Not quite. This uses 3.85, so the decimal point moved only one place. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;33.11&quot;: &quot;Not quite. This uses 0.0385, so the decimal point moved three places. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;33&quot;: &quot;Not quite. This uses 0.0385, so the decimal point moved three places. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;529&quot;: &quot;Not quite. This is the other 61.5% of the nurses. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;, &quot;~2233.77~0.5&quot;: &quot;Not quite. This divides 860 by 0.385 instead of multiplying. Review: the video \&quot;Classroom Example 7.1.3\&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.&quot;}" data-review="the video &quot;Classroom Example 7.1.3&quot; on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.">
+<p class="prompt"><b class="qlabel">Check 18 (Count from a Percent).</b> In a poll of 860 nurses, <span class="m"><span aria-hidden="true">38.5%</span><span class="sr">38 point 5 percent</span></span> said they work overtime every week. Use StatCrunch to find how many of the nurses said this. Round to the nearest integer.</p>
+<details><summary>Show answer</summary><p><strong>331</strong></p><p class="ptr">Where this is: The video "Classroom Example 7.1.3" on page 7 of the notes, and the Reminder on page 6 that percents must be converted to decimals.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="505" data-why="Correct. StatCrunch shows 505." data-miss="{&quot;601&quot;: &quot;Not quite. This uses a target proportion of 0.5. A previous survey is given, so use 0.30. Review: item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;2017&quot;: &quot;Not quite. This uses a width of 0.04. The width is two times the margin of error: 2*0.04. Review: item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;356&quot;: &quot;Not quite. This uses a 90% level. Change the confidence level to 0.95. Review: item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;6&quot;: &quot;Not quite. This uses 2*0.4. Four percentage points is 0.04. Review: item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;, &quot;50420&quot;: &quot;Not quite. This uses 2*0.004. Four percentage points is 0.04. Review: item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video \&quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\&quot; on page 6, and the videos \&quot;Classroom Example 7.1.4\&quot; and \&quot;Classroom Example 7.1.5\&quot; on page 8.&quot;}" data-review="item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video &quot;Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch&quot; on page 6, and the videos &quot;Classroom Example 7.1.4&quot; and &quot;Classroom Example 7.1.5&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 19 (Minimum Sample Size).</b> How many randomly selected adults must be surveyed to be 95% confident that the sample percentage is within 4 percentage points of the true population percentage? A previous survey found about 30%. Use StatCrunch.</p>
+<details><summary>Show answer</summary><p><strong>505</strong></p><p class="ptr">Where this is: Item 8 and the minimum sample size table on pages 6 and 7 of the notes, the video "Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch" on page 6, and the videos "Classroom Example 7.1.4" and "Classroom Example 7.1.5" on page 8.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Give it a few seconds to load, then move the StatCrunch window so you can see the problem too. The Classroom Example 7.1.1 and 7.1.3 videos do this." value="StatCrunch was slow to load or covered up my problem."> StatCrunch was slow to load or covered up my problem.</label><label><input type="checkbox" class="sc-issue" data-tip="Go to Stat, then Proportion Stats, then One Sample, then With Summary. Enter the successes and the total number of observations, click the circle next to Confidence interval for p, and change Level to the decimal, such as 0.90 for 90%. The table on page 3 of the notes shows each box." value="My confidence interval did not match."> My confidence interval did not match.</label><label><input type="checkbox" class="sc-issue" data-tip="You can type the addition, such as 120+80, right into the observations box, and StatCrunch adds it for you. The Classroom Example 7.1.2 video shows this." value="I had to add two groups to get the number of observations."> I had to add two groups to get the number of observations.</label><label><input type="checkbox" class="sc-issue" data-tip="Type (U. Limit-L. Limit)/2 with the parentheses and every digit of both limits. The video &quot;Finding the Margin of Error Using StatCrunch&quot; makes this typo on purpose and fixes it." value="My margin of error came out too big or negative."> My margin of error came out too big or negative.</label><label><input type="checkbox" class="sc-issue" data-tip="Go to Stat, then Proportion Stats, then One Sample, then Power/Sample Size, and click Confidence Interval Width first. The selected button looks less bright. Page 6 of the notes and the Classroom Example 7.1.4 video show this." value="I could not find where to enter the width for sample size."> I could not find where to enter the width for sample size.</label><label><input type="checkbox" class="sc-issue" data-tip="Close the window and start the problem over, then go back through every box. The Classroom Example 7.1.4 video hits this error and fixes it by restarting, and it says not to assume you did anything wrong." value="StatCrunch said &quot;Incorrect number for sample size&quot; or gave an error."> StatCrunch said &quot;Incorrect number for sample size&quot; or gave an error.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Confidence interval in StatCrunch: pages 3 and 4, video "Using StatCrunch to Construct Confidence Intervals for Proportions" (page 3)</li><li>Margin of error in StatCrunch: pages 4 and 5, video "Finding the Margin of Error Using StatCrunch" (page 4)</li><li>Count from a percent: video "Classroom Example 7.1.3" (page 7)</li><li>Minimum sample size in StatCrunch: pages 6 and 7, video "Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch" (page 6), and videos "Classroom Example 7.1.4" and "Classroom Example 7.1.5" (page 8)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 12: I am not sure why the width is two times the margin of error."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec7.1-exitticket-2026';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Concepts", "resource": "Items 1 to 7 on pages 1 to 3 of the Section 7.1 notes, and the video \"Classroom Example 7.1.1\" on page 7."}, {"id": "s3", "name": "Confidence Intervals and Margin of Error in StatCrunch", "resource": "The examples on pages 3 to 5 of the notes, the videos \"Using StatCrunch to Construct Confidence Intervals for Proportions\" on page 3 and \"Finding the Margin of Error Using StatCrunch\" on page 4, and the Classroom Example 7.1.1, 7.1.2 and 7.1.3 videos on page 7."}, {"id": "s4", "name": "Minimum Sample Size", "resource": "Item 8 and the example on pages 6 and 7 of the notes, the video \"Finding Minimum Sample Size Needed to Estimate a Population Proportion Using StatCrunch\" on page 6, and the Classroom Example 7.1.4 and 7.1.5 videos on page 8."}, {"id": "s5", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 3 to 7 of the notes, the three StatCrunch videos on pages 3, 4 and 6, and the Classroom Example videos on pages 7 and 8."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  if(q.dataset.form==='decimal'&&/%/.test(raw))return show(q,'wrong','Not quite. This asks for a decimal, as StatCrunch shows it, so leave off the percent sign. Review: '+q.dataset.review,record);
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='7.1';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s6')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

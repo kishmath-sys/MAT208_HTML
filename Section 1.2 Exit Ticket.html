@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1.2 Exit Ticket: Types of Data</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 1.2 Exit Ticket</div>
+<h1>Section 1.2 Exit Ticket: Types of Data</h1>
+<p>A short, ungraded check to use after the Section 1.2 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 4</span></label><br><progress id="overall" max="4" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Concepts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Levels of Measurement<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. Nobody sees your answers unless you choose to send them to your instructor, Matt Read. It has 17 quick checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do this <strong>after</strong> you finish the Section 1.2 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page or video to go back to.</li>
+<li>Section 4 builds a short summary and a message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and come back later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Take it in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Jump to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Concepts</button></li>
+<li><button type="button" data-go="s3">Levels of Measurement</button></li>
+<li><button type="button" data-go="s4">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Concepts</h2>
+<p>These checks cover items 1 to 6 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.1 and 1.2.2 videos on page 4.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Every student in the population is included, so the value is a parameter." data-miss="{&quot;b&quot;: &quot;Not quite. What makes a value a statistic is that it uses only a sample, not that it is an average. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. A population is the entire group being studied, whatever its size, and here that is all 1,850 students. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The records of all 1,850 students were used, so the data are not a sample. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;}" data-review="items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Parameter).</b> A college wants to describe the 1,850 students enrolled this semester. The registrar uses the records of all 1,850 students and finds that their average age is <span class="m"><span aria-hidden="true">24.6</span><span class="sr">24 point 6</span></span> years. Is <span class="m"><span aria-hidden="true">24.6</span><span class="sr">24 point 6</span></span> years a statistic or a parameter?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>A parameter, because it uses every data value from the entire population of 1,850 students.</span></label><label><input type="radio" name="mc1" value="b"> <span>A statistic, because any average calculated from data is a statistic.</span></label><label><input type="radio" name="mc1" value="c"> <span>A statistic, because 1,850 students is too large a group to be a population.</span></label><label><input type="radio" name="mc1" value="d"> <span>A parameter, because the data come from a sample of the college's students.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A parameter, because it uses every data value from the entire population of 1,850 students.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Three weekends were not counted, so the value comes from a sample." data-miss="{&quot;a&quot;: &quot;Not quite. Most is not all, and 3 of the 14 weekends were not counted. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. This pairs the terms the wrong way, since a value from a sample is a statistic. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Only 11 of the 14 weekends were counted, so the data do not represent the whole population. Review: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.&quot;}" data-review="items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Statistic).</b> A city wants to describe weekend attendance at its public pool for one summer, which had 14 weekends. Staff counted visitors on 11 of the 14 weekends, and the average was 486 visitors per weekend. Is 486 a statistic or a parameter?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>A parameter, because 11 of 14 weekends is most of the summer.</span></label><label><input type="radio" name="mc2" value="b"> <span>A statistic, because the data come from only some of the weekends, which is a sample.</span></label><label><input type="radio" name="mc2" value="c"> <span>A parameter, because the data collected represent a sample.</span></label><label><input type="radio" name="mc2" value="d"> <span>A statistic, because the data collected represent the population.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A statistic, because the data come from only some of the weekends, which is a sample.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Parameter, Statistic) on page 1 of the Section 1.2 notes and the Classroom Example 1.2.1 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Majors are categories, so adding or averaging them does not make sense." data-miss="{&quot;a&quot;: &quot;Not quite. Credit hours are numerical values that can be added, subtracted and averaged. Review: Items 3 and 4 (Quantitative Data, Qualitative Data) on page 1 of the Section 1.2 notes.&quot;, &quot;c&quot;: &quot;Not quite. Commute minutes are numerical values that can be added, subtracted and averaged. Review: Items 3 and 4 (Quantitative Data, Qualitative Data) on page 1 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. Dollar amounts are numerical values that can be added, subtracted and averaged. Review: Items 3 and 4 (Quantitative Data, Qualitative Data) on page 1 of the Section 1.2 notes.&quot;}" data-review="items 3 and 4 (Quantitative Data, Qualitative Data) on page 1 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Quantitative and Qualitative Data).</b> A survey records four things about each student. Which one is <strong>qualitative</strong> data?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>The number of credit hours each student is taking</span></label><label><input type="radio" name="mc3" value="b"> <span>Each student's major, such as nursing or welding</span></label><label><input type="radio" name="mc3" value="c"> <span>The number of minutes each student spends commuting</span></label><label><input type="radio" name="mc3" value="d"> <span>Each student's monthly phone bill, in dollars</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Each student's major, such as nursing or welding</strong></p><p class="ptr">Where this is: Items 3 and 4 (Quantitative Data, Qualitative Data) on page 1 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Zip codes are labels, so arithmetic on them does not make sense." data-miss="{&quot;a&quot;: &quot;Not quite. Being written with digits does not make data quantitative, because arithmetic on the values also has to make sense. Review: Items 3 and 4 on page 1 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.5 video on page 5.&quot;, &quot;c&quot;: &quot;Not quite. A calculator can average any list of numbers, but an average zip code does not mean anything. Review: Items 3 and 4 on page 1 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.5 video on page 5.&quot;, &quot;d&quot;: &quot;Not quite. Sorting zip codes does not make arithmetic on them make sense. Review: Items 3 and 4 on page 1 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.5 video on page 5.&quot;}" data-review="items 3 and 4 on page 1 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.5 video on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Numbers Used as Labels).</b> A store records the zip code of each customer, such as 60115 and 61008. Which statement fits items 3 and 4?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>Quantitative, because zip codes are written with digits.</span></label><label><input type="radio" name="mc4" value="b"> <span>Qualitative (also called categorical data), because zip codes are labels and averaging them would not make sense.</span></label><label><input type="radio" name="mc4" value="c"> <span>Quantitative, because a calculator can find the average zip code of the customers.</span></label><label><input type="radio" name="mc4" value="d"> <span>Quantitative, because zip codes can be sorted from smallest to largest.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Qualitative (also called categorical data), because zip codes are labels and averaging them would not make sense.</strong></p><p class="ptr">Where this is: Items 3 and 4 on page 1 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.5 video on page 5.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. The Note says to always include units, and here the unit is minutes." data-miss="{&quot;a&quot;: &quot;Not quite. A number with no unit leaves out what was measured, and the Note says to always include units. Review: Item 3 (Quantitative Data), including the Note, on page 1 of the Section 1.2 notes.&quot;, &quot;c&quot;: &quot;Not quite. The value is a length of time, not a count of people. Review: Item 3 (Quantitative Data), including the Note, on page 1 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. The value is a length of time, not a percent. Review: Item 3 (Quantitative Data), including the Note, on page 1 of the Section 1.2 notes.&quot;}" data-review="item 3 (Quantitative Data), including the Note, on page 1 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Units).</b> A student finds that the people she surveyed spend an average of 23 minutes commuting each day. Which way of reporting the result follows the Note under item 3?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>23</span></label><label><input type="radio" name="mc5" value="b"> <span>23 minutes</span></label><label><input type="radio" name="mc5" value="c"> <span>23 people</span></label><label><input type="radio" name="mc5" value="d"> <span>23%</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>23 minutes</strong></p><p class="ptr">Where this is: Item 3 (Quantitative Data), including the Note, on page 1 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Texts are counted, and each count is a whole number." data-miss="{&quot;b&quot;: &quot;Not quite. Large values can still be whole numbers that come from counting. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Each student&#x27;s value is a whole-number count, and an average of the group is a separate calculation. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The data here are the numbers of texts, which are counts, not the words inside the texts. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;}" data-review="items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Discrete Data).</b> The number of text messages each student sends in one day. Which description fits best?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>Discrete, because the values are whole numbers that come from counting.</span></label><label><input type="radio" name="mc6" value="b"> <span>Continuous, because a student might send hundreds of texts.</span></label><label><input type="radio" name="mc6" value="c"> <span>Continuous, because the average for a group of students, such as <span class="m"><span aria-hidden="true">41.5</span><span class="sr">41 point 5</span></span> texts, can be a decimal.</span></label><label><input type="radio" name="mc6" value="d"> <span>Qualitative, because text messages are made of words.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Discrete, because the values are whole numbers that come from counting.</strong></p><p class="ptr">Where this is: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. Weight is measured, and an apple can weigh any value, such as &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;182.4&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;182 point 4&lt;/span&gt;&lt;/span&gt; grams." data-miss="{&quot;a&quot;: &quot;Not quite. The question asks for exact weights, and a weight can fall between whole grams even if a scale rounds it. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;, &quot;b&quot;: &quot;Not quite. The data are the weights of the apples, which are measured, not the number of apples. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Data that can take on only specific values describe discrete data, not continuous data. Review: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.&quot;}" data-review="items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Continuous Data).</b> The exact weights (in grams) of the apples picked in an orchard. Which description fits best?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>Discrete, because a kitchen scale shows whole grams.</span></label><label><input type="radio" name="mc7" value="b"> <span>Discrete, because the apples are counted as they are picked.</span></label><label><input type="radio" name="mc7" value="c"> <span>Continuous, because the data can take on only specific values.</span></label><label><input type="radio" name="mc7" value="d"> <span>Continuous, because the weights are measured and can take on any value in an interval.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Continuous, because the weights are measured and can take on any value in an interval.</strong></p><p class="ptr">Where this is: Items 5 and 6 (Discrete Data, Continuous Data) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.2 video on page 4.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Parameter and Statistic: items 1 and 2, page 1, and the Classroom Example 1.2.1 video, page 4</li><li>Quantitative Data and Qualitative Data: items 3 and 4, page 1 (including the Note and the Key Insight)</li><li>Discrete Data and Continuous Data: items 5 and 6, page 2, and the Classroom Example 1.2.2 video, page 4</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Levels of Measurement</h2>
+<p>These checks cover items 7 to 10 and the Summary of Levels of Measurement on pages 2 and 3 of the Section 1.2 notes and the Classroom Example 1.2.3, 1.2.4 and 1.2.5 videos on pages 4 and 5.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Blood types are categories with no natural order or ranking." data-miss="{&quot;b&quot;: &quot;Not quite. Listing labels alphabetically does not give them a natural order, since one blood type is not greater than another. Review: Item 7 (Nominal Level of Measurement) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Interval applies to quantitative data, and blood types are categories. Review: Item 7 (Nominal Level of Measurement) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Ratio applies to quantitative data, and blood types are categories. Review: Item 7 (Nominal Level of Measurement) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;}" data-review="item 7 (Nominal Level of Measurement) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Nominal).</b> The blood types of donors at a blood drive: A, B, AB and O. Which level of measurement fits best?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Nominal</span></label><label><input type="radio" name="mc8" value="b"> <span>Ordinal, because the types can be listed in alphabetical order</span></label><label><input type="radio" name="mc8" value="c"> <span>Interval</span></label><label><input type="radio" name="mc8" value="d"> <span>Ratio</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Nominal</strong></p><p class="ptr">Where this is: Item 7 (Nominal Level of Measurement) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The answers have a clear order, but the distance between them is not meaningful." data-miss="{&quot;a&quot;: &quot;Not quite. Words can still have a logical order, and these go from disagree to neutral to agree. Review: Items 7 and 8 (Nominal, Ordinal) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Interval applies to quantitative data, and these answers are categories with no measured distance between them. Review: Items 7 and 8 (Nominal, Ordinal) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Ratio applies to quantitative data, and these answers are categories. Review: Items 7 and 8 (Nominal, Ordinal) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.&quot;}" data-review="items 7 and 8 (Nominal, Ordinal) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Ordinal).</b> Survey answers of "disagree," "neutral" and "agree." Which level of measurement fits best?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Nominal, because the answers are words, not numbers.</span></label><label><input type="radio" name="mc9" value="b"> <span>Ordinal, because the answers can be ordered, but differences between them are not meaningful.</span></label><label><input type="radio" name="mc9" value="c"> <span>Interval, because "neutral" is exactly halfway between the other two.</span></label><label><input type="radio" name="mc9" value="d"> <span>Ratio, because "agree" is twice as strong as "neutral."</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Ordinal, because the answers can be ordered, but differences between them are not meaningful.</strong></p><p class="ptr">Where this is: Items 7 and 8 (Nominal, Ordinal) on page 2 of the Section 1.2 notes and the Classroom Example 1.2.3 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Ordinal data have a clear order, but the distance between the categories is not meaningful." data-miss="{&quot;b&quot;: &quot;Not quite. The rank numbers are 1 apart, but that does not mean the pies were equally far apart in quality. Review: Item 8 (Ordinal Level of Measurement), including the Key Insight, on page 2 of the Section 1.2 notes.&quot;, &quot;c&quot;: &quot;Not quite. 1st, 2nd and 3rd have a clear order, so the ranks are not nominal. Review: Item 8 (Ordinal Level of Measurement), including the Key Insight, on page 2 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. The ranks only show order, and differences between them are not meaningful. Review: Item 8 (Ordinal Level of Measurement), including the Key Insight, on page 2 of the Section 1.2 notes.&quot;}" data-review="item 8 (Ordinal Level of Measurement), including the Key Insight, on page 2 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Order Without Meaningful Differences).</b> Judges at a pie contest rank the top three pies 1st, 2nd and 3rd. Which statement fits item 8 and its Key Insight?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>The ranks show a clear order, but they do not tell how much better one pie was than another.</span></label><label><input type="radio" name="mc10" value="b"> <span>The gap between 1st and 2nd must equal the gap between 2nd and 3rd, because <span class="m"><span aria-hidden="true">2 − 1 = 3 − 2</span><span class="sr">2 minus 1 equals 3 minus 2</span></span>.</span></label><label><input type="radio" name="mc10" value="c"> <span>The ranks have no natural order, so they are nominal.</span></label><label><input type="radio" name="mc10" value="d"> <span>The ranks are numbers, so they are ratio data.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The ranks show a clear order, but they do not tell how much better one pie was than another.</strong></p><p class="ptr">Where this is: Item 8 (Ordinal Level of Measurement), including the Key Insight, on page 2 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. Subtracting temperatures makes sense, and zero on the Celsius scale is not a true zero." data-miss="{&quot;a&quot;: &quot;Not quite. The answer to \&quot;Does zero mean the absence of heat?\&quot; is no for &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0°C&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 degrees Celsius&lt;/span&gt;&lt;/span&gt;. Review: Item 9 (Interval Level of Measurement), including the \&quot;Ask\&quot; questions, and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;c&quot;: &quot;Not quite. Temperatures can be ranked, and differences between them also make sense. Review: Item 9 (Interval Level of Measurement), including the \&quot;Ask\&quot; questions, and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. Temperatures are numerical values where subtraction makes sense, not labels. Review: Item 9 (Interval Level of Measurement), including the \&quot;Ask\&quot; questions, and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;}" data-review="item 9 (Interval Level of Measurement), including the &quot;Ask&quot; questions, and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Interval).</b> Daily high temperatures in a city, in degrees Celsius. Which level of measurement fits best?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Ratio, because <span class="m"><span aria-hidden="true">0°C</span><span class="sr">0 degrees Celsius</span></span> means there is no heat.</span></label><label><input type="radio" name="mc11" value="b"> <span>Interval, because differences make sense, but <span class="m"><span aria-hidden="true">0°C</span><span class="sr">0 degrees Celsius</span></span> does not mean the absence of heat.</span></label><label><input type="radio" name="mc11" value="c"> <span>Ordinal, because temperatures can be ranked, but differences between them are not meaningful.</span></label><label><input type="radio" name="mc11" value="d"> <span>Nominal, because each temperature is a label for the day's weather.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Interval, because differences make sense, but <span class="m"><span aria-hidden="true">0°C</span><span class="sr">0 degrees Celsius</span></span> does not mean the absence of heat.</strong></p><p class="ptr">Where this is: Item 9 (Interval Level of Measurement), including the "Ask" questions, and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. You can subtract years, but the calendar does not have a true zero." data-miss="{&quot;a&quot;: &quot;Not quite. Arithmetic on years makes sense, but zero on the calendar does not mean the absence of time. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes, and the Classroom Example 1.2.4 video on page 4.&quot;, &quot;b&quot;: &quot;Not quite. Years do come in order, and the differences between years are also meaningful. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes, and the Classroom Example 1.2.4 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Years are numerical values, and subtracting them makes sense, so they are more than names. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes, and the Classroom Example 1.2.4 video on page 4.&quot;}" data-review="items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes, and the Classroom Example 1.2.4 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Interval with Years).</b> The years in which a city opened each of its public libraries, such as 1958, 1987 and 2015. Which level of measurement fits best?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Ratio, because years are numbers that can be added and subtracted.</span></label><label><input type="radio" name="mc12" value="b"> <span>Ordinal, because years come in order, but differences between them are not meaningful.</span></label><label><input type="radio" name="mc12" value="c"> <span>Interval, because differences between years make sense, but zero on the calendar is arbitrary and does not mean the absence of time.</span></label><label><input type="radio" name="mc12" value="d"> <span>Nominal, because each year is just a name for a time.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Interval, because differences between years make sense, but zero on the calendar is arbitrary and does not mean the absence of time.</strong></p><p class="ptr">Where this is: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes, and the Classroom Example 1.2.4 video on page 4.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. Zero pounds means the absence of weight." data-miss="{&quot;a&quot;: &quot;Not quite. Subtraction does make sense, and 0 pounds also means no weight. Review: Item 10 (Ratio Level of Measurement) and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;c&quot;: &quot;Not quite. Packages can be ranked, and differences between weights also make sense. Review: Item 10 (Ratio Level of Measurement) and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. Weights are numerical values where arithmetic makes sense, not labels. Review: Item 10 (Ratio Level of Measurement) and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;}" data-review="item 10 (Ratio Level of Measurement) and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Ratio).</b> The weights, in pounds, of packages shipped from a warehouse. Which level of measurement fits best?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>Interval, because subtracting weights makes sense.</span></label><label><input type="radio" name="mc13" value="b"> <span>Ratio, because 0 pounds means no weight and all arithmetic operations make sense, so 10 pounds is twice 5 pounds.</span></label><label><input type="radio" name="mc13" value="c"> <span>Ordinal, because the packages can be ranked from lightest to heaviest.</span></label><label><input type="radio" name="mc13" value="d"> <span>Nominal, because each weight is a label on a package.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Ratio, because 0 pounds means no weight and all arithmetic operations make sense, so 10 pounds is twice 5 pounds.</strong></p><p class="ptr">Where this is: Item 10 (Ratio Level of Measurement) and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. $0 means no income, so zero means the absence of income." data-miss="{&quot;a&quot;: &quot;Not quite. &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;0°F&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;0 degrees Fahrenheit&lt;/span&gt;&lt;/span&gt; does not mean the absence of heat. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;b&quot;: &quot;Not quite. Zero on the calendar is arbitrary and does not mean the absence of time. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. These ratings are categories, so there is no zero to ask about. Review: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;}" data-review="items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Does Zero Mean the Absence?).</b> Item 9 suggests asking, "Does zero mean the absence of ___?" For which data is the answer yes?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>Temperatures in degrees Fahrenheit</span></label><label><input type="radio" name="mc14" value="b"> <span>Calendar years, such as 2000 and 2024</span></label><label><input type="radio" name="mc14" value="c"> <span>Yearly incomes, in dollars</span></label><label><input type="radio" name="mc14" value="d"> <span>Satisfaction ratings of poor, fair and good</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yearly incomes, in dollars</strong></p><p class="ptr">Where this is: Items 9 and 10 and the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The codes are not counts or measures of anything, so averaging them is meaningless." data-miss="{&quot;a&quot;: &quot;Not quite. The codes look like numbers, but they stand for categories, so arithmetic on them does not make sense. Review: Items 4 and 7 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.5 video on page 5.&quot;, &quot;b&quot;: &quot;Not quite. A larger code does not make an activity better or higher, since the numbers were simply assigned to categories. Review: Items 4 and 7 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.5 video on page 5.&quot;, &quot;d&quot;: &quot;Not quite. The codes being 1 apart is only how they were assigned, and the activities themselves are categories. Review: Items 4 and 7 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.5 video on page 5.&quot;}" data-review="items 4 and 7 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.5 video on page 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Numbers as Category Codes).</b> A gym survey codes each member's favorite activity as 1 for swimming, 2 for weights, 3 for yoga and 4 for cycling. Someone averages the codes for 410 members and gets <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span>. Which statement fits?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>The data are ratio, so <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span> is a meaningful average.</span></label><label><input type="radio" name="mc15" value="b"> <span>The data are ordinal, because cycling (4) ranks above swimming (1).</span></label><label><input type="radio" name="mc15" value="c"> <span>The data are nominal, because the numbers are only labels for categories with no order, so an average of <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span> makes no sense.</span></label><label><input type="radio" name="mc15" value="d"> <span>The data are interval, because each code is exactly 1 apart from the next.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The data are nominal, because the numbers are only labels for categories with no order, so an average of <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span> makes no sense.</strong></p><p class="ptr">Where this is: Items 4 and 7 on pages 1 and 2 of the Section 1.2 notes and the Classroom Example 1.2.5 video on page 5.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. Interval has order and meaningful differences, and its zero is arbitrary." data-miss="{&quot;a&quot;: &quot;Not quite. Nominal has no order, no meaningful differences and no true zero. Review: The Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;b&quot;: &quot;Not quite. Ordinal has an order, but its differences are not meaningful. Review: The Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;, &quot;d&quot;: &quot;Not quite. Ratio has an order and meaningful differences, and it also has a true zero. Review: The Summary of Levels of Measurement on page 3 of the Section 1.2 notes.&quot;}" data-review="the Summary of Levels of Measurement on page 3 of the Section 1.2 notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Summary Table).</b> In the Summary of Levels of Measurement table, which level has an order and meaningful differences, but no true zero?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Nominal</span></label><label><input type="radio" name="mc16" value="b"> <span>Ordinal</span></label><label><input type="radio" name="mc16" value="c"> <span>Interval</span></label><label><input type="radio" name="mc16" value="d"> <span>Ratio</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Interval</strong></p><p class="ptr">Where this is: The Summary of Levels of Measurement on page 3 of the Section 1.2 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Nominal and ordinal apply to categories, and interval and ratio apply to numbers." data-miss="{&quot;b&quot;: &quot;Not quite. Interval and ratio apply to quantitative data. Review: Items 7 to 10 on pages 2 and 3 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;c&quot;: &quot;Not quite. Ordinal also applies to qualitative data whose categories have a logical order. Review: Items 7 to 10 on pages 2 and 3 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.3 video on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Interval and ratio apply only to quantitative data. Review: Items 7 to 10 on pages 2 and 3 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.3 video on page 4.&quot;}" data-review="items 7 to 10 on pages 2 and 3 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.3 video on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 17 (Levels for Qualitative Data).</b> Which levels of measurement apply to qualitative (categorical) data?</legend>
+<label><input type="radio" name="mc17" value="a"> <span>Nominal and ordinal</span></label><label><input type="radio" name="mc17" value="b"> <span>Interval and ratio</span></label><label><input type="radio" name="mc17" value="c"> <span>Nominal only</span></label><label><input type="radio" name="mc17" value="d"> <span>All four levels</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Nominal and ordinal</strong></p><p class="ptr">Where this is: Items 7 to 10 on pages 2 and 3 of the Section 1.2 notes, the Summary of Levels of Measurement on page 3, and the Classroom Example 1.2.3 video on page 4.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Nominal and Ordinal: items 7 and 8, page 2 (including the Key Insight), and the Classroom Example 1.2.3 video, page 4</li><li>Interval and Ratio: items 9 and 10, page 3 (including the "Ask" questions), and the Classroom Example 1.2.4 video, page 4</li><li>Summary of Levels of Measurement table: page 3</li><li>Numbers used as category codes: the Classroom Example 1.2.5 video, page 5</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 8: I do not see why Test B is the significant one."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><span></span></div>
+</div>
+</section>
+
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec1-2-exitticket-v1';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    if(typeof x.theme==='string')store.theme=x.theme;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[
+ {id:'s2',name:'Concepts',resource:'Items 1 to 6 on pages 1 and 2 of the Section 1.2 notes, and the Classroom Example 1.2.1 and Classroom Example 1.2.2 videos on page 4.'},
+ {id:'s3',name:'Levels of Measurement',resource:'Items 7 to 10 and the Summary of Levels of Measurement on pages 2 and 3 of the Section 1.2 notes, and the Classroom Example 1.2.3 and Classroom Example 1.2.4 videos on page 4 and the Classroom Example 1.2.5 video on page 5.'}
+];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?('Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, like 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Number(a)===stu))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Number(k)===stu);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(store.ans[qid]!==undefined)input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,store.ans[qid],false); }
+});
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='1.2';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'\u2713 Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s4')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+
+</script>
+</body>
+</html>

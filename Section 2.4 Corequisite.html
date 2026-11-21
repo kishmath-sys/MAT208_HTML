@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 2.4 Corequisite: Scatterplots, Correlation and Regression</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 2.4</div>
+<h1>Section 2.4 Corequisite: Scatterplots, Correlation and Regression</h1>
+<p>Get ready for the Section 2.4 notes with practice on the ordered pair, negative number, table, axis scale and slope skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Ordered pairs and the coordinate plane<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Negative numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Reading paired data tables and units<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Axis scales<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Rising and falling lines: the sign of a slope<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read and plot ordered pairs, including points with negative coordinates.</li><li>Compare and order negative numbers, and find how far apart two values are when one is below zero.</li><li>Read paired values and units from a table, and spot a value that was likely typed wrong.</li><li>Read and choose axis scales, including scales that go below zero.</li><li>Find the slope between two points and tell whether a line rises, falls or is flat.</li></ul>
+</div>
+<p>Section 2.4 of the notes introduces scatterplots and linear correlation, and shows how to construct a scatterplot in StatCrunch.</p>
+<p>Item 1 of the notes (Scatterplots) mentions ordered pairs and the coordinate plane in one sentence, and item 2 (Linear Correlation) mentions positive and negative slope without stopping to explain them, so the notes expect you to already know these. This page gives those skills, along with negative numbers, reading tables and reading axis scales, more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type a negative number with a minus sign, such as <span class="m"><span aria-hidden="true">-13</span><span class="sr">negative 13</span></span>. Type decimals with a period, such as <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>. Commas and extra spaces are fine. StatCrunch is the calculator for this course, and the Section 2.4 notes show how to use it to construct a scatterplot. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 2.4 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am never sure which number in <span class="m"><span aria-hidden="true">(4, −3)</span><span class="sr">the point 4 comma negative 3</span></span> tells me to go across and which tells me to go up or down.</strong><br><button type="button" data-go="s2">Ordered pairs and the coordinate plane</button></li>
+<li><strong>I am not sure whether <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> is more or less than <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>.</strong><br><button type="button" data-go="s3">Negative numbers</button></li>
+<li><strong>I lose track of which numbers go together in a table, or what a heading like "thousands of feet" means.</strong><br><button type="button" data-go="s4">Reading paired data tables and units</button></li>
+<li><strong>I am not sure how to read a point that sits between the labeled marks on an axis.</strong><br><button type="button" data-go="s5">Axis scales</button></li>
+<li><strong>I do not remember what makes a slope positive or negative.</strong><br><button type="button" data-go="s6">Rising and falling lines: the sign of a slope</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Ordered pairs and the coordinate plane</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read an ordered pair <span class="m"><span aria-hidden="true">(x, y)</span><span class="sr">x comma y</span></span> as x first, then y.</li><li>Plot a point that has negative coordinates.</li><li>Read the coordinates of a point on a grid.</li><li>Turn a two-row table into ordered pairs.</li></ul>
+</div>
+<h3>x first, then y</h3>
+<p>An ordered pair <span class="m"><span aria-hidden="true">(x, y)</span><span class="sr">x comma y</span></span> gives two moves that start at the origin, <span class="m"><span aria-hidden="true">(0, 0)</span><span class="sr">the point 0 comma 0</span></span>, where the axes cross.</p>
+<ul>
+<li>The first number, <strong>x</strong>, is the move across. Positive means right, and negative means left.</li>
+<li>The second number, <strong>y</strong>, is the move up or down. Positive means up, and negative means down.</li>
+<li>Order matters. <span class="m"><span aria-hidden="true">(2, 5)</span><span class="sr">the point 2 comma 5</span></span> and <span class="m"><span aria-hidden="true">(5, 2)</span><span class="sr">the point 5 comma 2</span></span> are two different points.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Swapping the numbers.</strong> Going up first and across second plots <span class="m"><span aria-hidden="true">(−3, 4)</span><span class="sr">the point negative 3 comma 4</span></span> as if it were <span class="m"><span aria-hidden="true">(4, −3)</span><span class="sr">the point 4 comma negative 3</span></span>.</li>
+<li><strong>Dropping a minus sign.</strong> <span class="m"><span aria-hidden="true">(2, −5)</span><span class="sr">the point 2 comma negative 5</span></span> is below the horizontal axis. Without the minus sign it lands above it.</li>
+<li><strong>Pairing the wrong numbers from a table.</strong> The two numbers in one pair come from the same column of the table, one from each row.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Plot (4, negative 3)">
+<h3 style="margin-top:0">Worked example: Plot <span class="m"><span aria-hidden="true">(4, −3)</span><span class="sr">the point 4 comma negative 3</span></span></h3>
+<p>Plot the point <span class="m"><span aria-hidden="true">(4, −3)</span><span class="sr">the point 4 comma negative 3</span></span>.</p><ol class="steps"><li><span class="work">Start at the origin, <span class="m"><span aria-hidden="true">(0, 0)</span><span class="sr">the point 0 comma 0</span></span></span><span class="say">Every point starts from where the two axes cross.</span></li><li><span class="work">x is 4: move 4 units right</span><span class="say">The first number is the move across. It is positive, so go right.</span></li><li><span class="work">y is <span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span>: move 3 units down</span><span class="say">The second number is the move up or down. It is negative, so go down.</span></li></ol><p><strong>Answer: the point is 4 units right of the vertical axis and 3 units below the horizontal axis. It is point B on the grid below.</strong></p>
+</div>
+<figure class="axisfig"><svg viewBox="0 0 380 290" width="380" height="290" role="img" aria-labelledby="fig-grid-t fig-grid-d" xmlns="http://www.w3.org/2000/svg"><title id="fig-grid-t">Coordinate grid with points A to E</title><desc id="fig-grid-d">A coordinate grid from negative 6 to 6 on both axes, with a gridline at every whole number. Point A is 3 units left of the origin and 4 units up. Point B is 4 units right and 3 units down. Point C is 3 units right and 4 units up. Point D is 4 units left and 3 units up. Point E is 2 units right and 5 units down.</desc><line x1="52.0" y1="14.0" x2="52.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="77.8" y1="14.0" x2="77.8" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="103.7" y1="14.0" x2="103.7" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="129.5" y1="14.0" x2="129.5" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="155.3" y1="14.0" x2="155.3" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="181.2" y1="14.0" x2="181.2" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="207.0" y1="14.0" x2="207.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="232.8" y1="14.0" x2="232.8" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="258.7" y1="14.0" x2="258.7" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="284.5" y1="14.0" x2="284.5" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="310.3" y1="14.0" x2="310.3" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="336.2" y1="14.0" x2="336.2" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="362.0" y1="14.0" x2="362.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="244.0" x2="362.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="224.8" x2="362.0" y2="224.8" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="205.7" x2="362.0" y2="205.7" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="186.5" x2="362.0" y2="186.5" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="167.3" x2="362.0" y2="167.3" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="148.2" x2="362.0" y2="148.2" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="129.0" x2="362.0" y2="129.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="109.8" x2="362.0" y2="109.8" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="90.7" x2="362.0" y2="90.7" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="71.5" x2="362.0" y2="71.5" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="52.3" x2="362.0" y2="52.3" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="33.2" x2="362.0" y2="33.2" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="14.0" x2="362.0" y2="14.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="129.0" x2="362.0" y2="129.0" stroke="currentColor" stroke-width="2"/><line x1="207.0" y1="14.0" x2="207.0" y2="244.0" stroke="currentColor" stroke-width="2"/><text x="52.0" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−6</text><text x="103.7" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−4</text><text x="155.3" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−2</text><text x="258.7" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">2</text><text x="310.3" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">4</text><text x="362.0" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">6</text><text x="46.0" y="248.0" font-size="13" text-anchor="end" fill="currentColor">−6</text><text x="46.0" y="209.7" font-size="13" text-anchor="end" fill="currentColor">−4</text><text x="46.0" y="171.3" font-size="13" text-anchor="end" fill="currentColor">−2</text><text x="46.0" y="94.7" font-size="13" text-anchor="end" fill="currentColor">2</text><text x="46.0" y="56.3" font-size="13" text-anchor="end" fill="currentColor">4</text><text x="46.0" y="18.0" font-size="13" text-anchor="end" fill="currentColor">6</text><text x="207.0" y="284.0" font-size="13" text-anchor="middle" fill="currentColor">x</text><text x="14" y="129.0" font-size="13" text-anchor="middle" fill="currentColor" transform="rotate(-90 14 129.0)">y</text><circle cx="129.5" cy="52.3" r="4.5" fill="currentColor"/><text x="136.5" y="46.3" font-size="14" font-weight="700" fill="currentColor">A</text><circle cx="310.3" cy="186.5" r="4.5" fill="currentColor"/><text x="317.3" y="180.5" font-size="14" font-weight="700" fill="currentColor">B</text><circle cx="284.5" cy="52.3" r="4.5" fill="currentColor"/><text x="291.5" y="46.3" font-size="14" font-weight="700" fill="currentColor">C</text><circle cx="103.7" cy="71.5" r="4.5" fill="currentColor"/><text x="110.7" y="65.5" font-size="14" font-weight="700" fill="currentColor">D</text><circle cx="258.7" cy="224.8" r="4.5" fill="currentColor"/><text x="265.7" y="218.8" font-size="14" font-weight="700" fill="currentColor">E</text></svg><figcaption>Grid for Practice 2 and 3. Each gridline is 1 unit.</figcaption></figure>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Plot (6, negative 2)">
+<h3 style="margin-top:0">Finish this one: Plot <span class="m"><span aria-hidden="true">(6, −2)</span><span class="sr">the point 6 comma negative 2</span></span></h3>
+<p>Plot the point <span class="m"><span aria-hidden="true">(6, −2)</span><span class="sr">the point 6 comma negative 2</span></span>.</p><ol class="steps"><li><span class="work">x is 6: move 6 units right</span><span class="say">The first number is the move across. Next, use the second number for the move up or down.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The y-value is negative 2, so the move is down 2, not up. Keep the minus sign.&quot;, &quot;c&quot;: &quot;That swaps the two numbers. The first number, 6, is the move across, and the second, negative 2, is the move up or down.&quot;, &quot;d&quot;: &quot;The minus sign belongs to the 2, not the 6. The x-value 6 is positive, so move right.&quot;}" data-why="Correct. x is 6, so go right 6. y is negative 2, so go down 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 1.</b> Finish it: which directions plot the point <span class="m"><span aria-hidden="true">(6, −2)</span><span class="sr">the point 6 comma negative 2</span></span>, starting from the origin?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>Right 6, then up 2</span></label><label><input type="radio" name="mc1" value="b"> <span>Right 6, then down 2</span></label><label><input type="radio" name="mc1" value="c"> <span>Down 6, then right 2</span></label><label><input type="radio" name="mc1" value="d"> <span>Left 6, then down 2</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The first number tells you right or left. The second tells you up or down. Which number has the minus sign?</p></details>
+<details><summary>Show answer</summary><p><strong>Right 6, then down 2</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Point B is at (4, negative 3). That swaps the two numbers: go across first, 3 units left, then 4 units up.&quot;, &quot;b&quot;: &quot;Point D is at (negative 4, 3). It is 4 left and 3 up. For (negative 3, 4), go 3 left and 4 up.&quot;, &quot;d&quot;: &quot;Point C is at (3, 4), which is 3 units right. The x-value is negative 3, so go 3 units left.&quot;}" data-why="Correct. Point A is 3 units left of the origin and 4 units up.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 2.</b> Use the grid above. Which point is at <span class="m"><span aria-hidden="true">(−3, 4)</span><span class="sr">the point negative 3 comma 4</span></span>?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>Point B</span></label><label><input type="radio" name="mc2" value="b"> <span>Point D</span></label><label><input type="radio" name="mc2" value="c"> <span>Point A</span></label><label><input type="radio" name="mc2" value="d"> <span>Point C</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>x is <span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span>, so go 3 units left. Then y is 4, so go 4 units up.</p></details>
+<details><summary>Show answer</summary><p><strong>Point A</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-5" data-miss="{&quot;5&quot;: &quot;Point E is below the horizontal axis, so its y-coordinate is negative: negative 5.&quot;, &quot;2&quot;: &quot;That is the x-coordinate, the move across. The y-coordinate is the move down from the origin: negative 5.&quot;, &quot;-2&quot;: &quot;That is the move across with a minus sign added. Point E is 2 units right (x is 2) and 5 units down (y is negative 5).&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Use the grid above. What is the y-coordinate of point E?</p>
+<details><summary>Hint</summary><p>Point E is 2 units right of the origin and 5 units down. Which of those moves is the y-coordinate, and is it up or down?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span></strong>. Point E is at <span class="m"><span aria-hidden="true">(2, −5)</span><span class="sr">the point 2 comma negative 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;These pairs are flipped. The first row is x, so the hours come first: (1, 12) and so on.&quot;, &quot;c&quot;: &quot;These pairs are made from two numbers in the same row. Each pair takes one number from each row, in the same column.&quot;, &quot;d&quot;: &quot;These pairs shift the costs over by one column. The cost under 1 hour is 12, so the first pair is (1, 12).&quot;}" data-why="Correct. Each column gives one pair, with hours first: (1, 12), (2, 19), (3, 26) and (4, 33).">
+<div class="table-wrap" role="region" aria-label="Hours and cost" tabindex="0">
+<table>
+<caption>Hours and cost</caption>
+<thead><tr><th scope="col">Hours (x)</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
+<tbody><tr><th scope="row">Cost in dollars (y)</th><td>12</td><td>19</td><td>26</td><td>33</td></tr></tbody>
+</table>
+</div>
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> A table lists hours (x) in the first row and cost in dollars (y) in the second row: hours 1, 2, 3, 4 and costs 12, 19, 26, 33. Which list gives the ordered pairs?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>(12, 1), (19, 2), (26, 3), (33, 4)</span></label><label><input type="radio" name="mc4" value="b"> <span>(1, 12), (2, 19), (3, 26), (4, 33)</span></label><label><input type="radio" name="mc4" value="c"> <span>(1, 2), (3, 4), (12, 19), (26, 33)</span></label><label><input type="radio" name="mc4" value="d"> <span>(1, 19), (2, 26), (3, 33)</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read down each column: the hour on top is x, and the cost under it is y.</p></details>
+<details><summary>Show answer</summary><p><strong>(1, 12), (2, 19), (3, 26), (4, 33)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-4" data-miss="{&quot;4&quot;: &quot;A move to the left makes x negative. The x-coordinate is negative 4.&quot;, &quot;7&quot;: &quot;That is the y-coordinate, the move up. The x-coordinate is the move across: 4 units left, which is negative 4.&quot;, &quot;-7&quot;: &quot;That is the move up with a minus sign. The x-coordinate is the move across: 4 units left, which is negative 4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> A point is plotted by starting at the origin, moving 4 units left, and then moving 7 units up. What is its x-coordinate?</p>
+<details><summary>Hint</summary><p>The move across gives x. Left means negative.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−4</span><span class="sr">negative 4</span></span></strong>. The point is <span class="m"><span aria-hidden="true">(−4, 7)</span><span class="sr">the point negative 4 comma 7</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 2.4</h3>
+<p>Item 1 (Scatterplots) on page 1 of the notes describes plotting ordered pairs <span class="m"><span aria-hidden="true">(x, y)</span><span class="sr">x comma y</span></span> on a coordinate plane. Classroom Example 2.4.1 on page 5 says to "use the first variable for the x-axis," and the table on page 3 lists altitude first and temperature second.</p>
+<p><strong>Watch for this:</strong> which number comes first in each pair, and which row of a table gives the x-values.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Negative numbers</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare two negative numbers and order a list that mixes negative and positive numbers.</li><li>Place negative numbers on a vertical axis.</li><li>Find how far apart two temperatures are when one is below zero.</li><li>Add a rise in temperature to a temperature below zero.</li></ul>
+</div>
+<h3>Below zero</h3>
+<p>On a number line, numbers get larger as you move right. On a vertical axis, they get larger as you move up. Zero sits between the negative and positive numbers.</p>
+<ul>
+<li>A negative number farther from zero is <strong>smaller</strong>. <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span> is less than <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, the same way <span class="m"><span aria-hidden="true">−30°F</span><span class="sr">negative 30 degrees Fahrenheit</span></span> is colder than <span class="m"><span aria-hidden="true">−5°F</span><span class="sr">negative 5 degrees Fahrenheit</span></span>.</li>
+<li>To find how far apart two numbers are, subtract the smaller from the larger. Subtracting a negative is the same as adding: <span class="m"><span aria-hidden="true">14 − (−9) = 14 + 9 = 23</span><span class="sr">14 minus negative 9 equals 14 plus 9 equals 23</span></span>.</li>
+<li>Another way: count from the lower number up to 0, then from 0 up to the higher number, and add the two counts.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading only the digits.</strong> 27 is more than 19, but <span class="m"><span aria-hidden="true">−27</span><span class="sr">negative 27</span></span> is <em>less</em> than <span class="m"><span aria-hidden="true">−19</span><span class="sr">negative 19</span></span>.</li>
+<li><strong>Subtracting the digits when zero is crossed.</strong> From <span class="m"><span aria-hidden="true">−9</span><span class="sr">negative 9</span></span> to 14 is not 5 degrees. It is 9 degrees up to 0, then 14 more: 23 degrees.</li>
+<li><strong>Losing the minus sign.</strong> A temperature of <span class="m"><span aria-hidden="true">−8</span><span class="sr">negative 8</span></span> written as 8 lands on the wrong side of zero.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Order 6, negative 15, 0, negative 2, negative 40">
+<h3 style="margin-top:0">Worked example: Order five numbers</h3>
+<p>Put 6, <span class="m"><span aria-hidden="true">−15</span><span class="sr">negative 15</span></span>, 0, <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> in order from least to greatest.</p><ol class="steps"><li><span class="work">Negatives first: <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span>, <span class="m"><span aria-hidden="true">−15</span><span class="sr">negative 15</span></span>, <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span></span><span class="say">Among the negatives, the one farthest from zero is the smallest, so <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> comes first.</span></li><li><span class="work">Then 0, then 6</span><span class="say">Zero is larger than every negative number and smaller than every positive number.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span>, <span class="m"><span aria-hidden="true">−15</span><span class="sr">negative 15</span></span>, <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span>, 0, 6</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Negative 9 to 14 degrees">
+<h3 style="margin-top:0">Finish this one: From <span class="m"><span aria-hidden="true">−9°F</span><span class="sr">negative 9 degrees Fahrenheit</span></span> to <span class="m"><span aria-hidden="true">14°F</span><span class="sr">14 degrees Fahrenheit</span></span></h3>
+<p>How many degrees warmer is <span class="m"><span aria-hidden="true">14°F</span><span class="sr">14 degrees Fahrenheit</span></span> than <span class="m"><span aria-hidden="true">−9°F</span><span class="sr">negative 9 degrees Fahrenheit</span></span>?</p><ol class="steps"><li><span class="work">From <span class="m"><span aria-hidden="true">−9</span><span class="sr">negative 9</span></span> up to 0 is 9 degrees</span><span class="say">Count up to zero first. Next, count from 0 up to 14 and add the two counts.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="23" data-miss="{&quot;5&quot;: &quot;That subtracts 9 from 14 as if both were positive. Crossing zero means adding: 9 degrees up to 0, then 14 more, is 23.&quot;, &quot;-23&quot;: &quot;The question asks how many degrees warmer, which is a distance, so the answer is positive: 23.&quot;, &quot;-5&quot;: &quot;That treats the change as 14 minus 9 and then adds a minus sign. From negative 9 up to 14 is 9 + 14 = 23 degrees.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: how many degrees warmer is <span class="m"><span aria-hidden="true">14°F</span><span class="sr">14 degrees Fahrenheit</span></span> than <span class="m"><span aria-hidden="true">−9°F</span><span class="sr">negative 9 degrees Fahrenheit</span></span>?</p>
+<details><summary>Hint</summary><p>9 degrees gets you to 0. How many more to reach 14?</p></details>
+<details><summary>Show answer</summary><p><strong>23 degrees</strong>, because <span class="m"><span aria-hidden="true">14 − (−9) = 14 + 9 = 23</span><span class="sr">14 minus negative 9 equals 14 plus 9 equals 23</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Negative 8 is the closest of the negatives to zero, so it is the warmest of the three below zero.&quot;, &quot;b&quot;: &quot;4 degrees is above zero, so it is warmer than every temperature below zero.&quot;, &quot;d&quot;: &quot;Negative 15 is colder than negative 8, but negative 23 is 8 degrees colder still.&quot;}" data-why="Correct. Negative 23 is farthest below zero, so it is the coldest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 7.</b> Which temperature is the coldest?</legend>
+<label><input type="radio" name="mc7" value="a"> <span><span class="m"><span aria-hidden="true">−8°F</span><span class="sr">negative 8 degrees Fahrenheit</span></span></span></label><label><input type="radio" name="mc7" value="b"> <span><span class="m"><span aria-hidden="true">4°F</span><span class="sr">4 degrees Fahrenheit</span></span></span></label><label><input type="radio" name="mc7" value="c"> <span><span class="m"><span aria-hidden="true">−23°F</span><span class="sr">negative 23 degrees Fahrenheit</span></span></span></label><label><input type="radio" name="mc7" value="d"> <span><span class="m"><span aria-hidden="true">−15°F</span><span class="sr">negative 15 degrees Fahrenheit</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The coldest temperature is the one farthest below zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−23°F</span><span class="sr">negative 23 degrees Fahrenheit</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7" data-miss="{&quot;-15&quot;: &quot;That moves 11 degrees down. The temperature rose, so add 11: negative 4 plus 11 is 7.&quot;, &quot;15&quot;: &quot;That adds 4 and 11 as if both were positive. Starting below zero, 4 degrees gets you to 0, and 7 more are left: 7.&quot;, &quot;-7&quot;: &quot;The sign is off. 4 of the 11 degrees bring it up to 0, and the other 7 take it above 0: 7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> At 6 a.m. the temperature was <span class="m"><span aria-hidden="true">−4°F</span><span class="sr">negative 4 degrees Fahrenheit</span></span>. By noon it had risen 11 degrees. What was the temperature at noon, in degrees Fahrenheit?</p>
+<details><summary>Hint</summary><p>Rising 4 degrees brings <span class="m"><span aria-hidden="true">−4</span><span class="sr">negative 4</span></span> up to 0. How much of the 11 is left after that?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7°F</span><span class="sr">7 degrees Fahrenheit</span></span></strong>, because <span class="m"><span aria-hidden="true">−4 + 11 = 7</span><span class="sr">negative 4 plus 11 equals 7</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;Negative 35 is farther from zero than negative 20, so it is lower on the axis, not closer to 0.&quot;, &quot;c&quot;: &quot;Between 0 and negative 20 are numbers such as negative 10. Negative 35 is past negative 20, so it is below it.&quot;, &quot;d&quot;: &quot;Every negative number goes below 0 on a vertical axis. The minus sign matters more than the digits.&quot;}" data-why="Correct. Negative 35 is less than negative 20, so it sits lower on the axis.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 9.</b> On a vertical axis with 0 in the middle, where does <span class="m"><span aria-hidden="true">−35</span><span class="sr">negative 35</span></span> go compared with <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span>?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Above <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span>, closer to 0</span></label><label><input type="radio" name="mc9" value="b"> <span>Below <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span>Between 0 and <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span>Above 0, because 35 is more than 20</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Smaller numbers sit lower on a vertical axis. Which is smaller, <span class="m"><span aria-hidden="true">−35</span><span class="sr">negative 35</span></span> or <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span>?</p></details>
+<details><summary>Show answer</summary><p><strong>Below <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;That orders the negatives by their digits. Negative 14 is less than negative 6, so it comes first.&quot;, &quot;b&quot;: &quot;That orders the numbers by distance from zero and ignores the signs. Every negative number comes before every positive one.&quot;, &quot;c&quot;: &quot;That is greatest to least. Least to greatest starts with the most negative number.&quot;}" data-why="Correct. The most negative number comes first, then the other negative, then the positives in order.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Which list is in order from least to greatest?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">−6</span><span class="sr">negative 6</span></span>, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, 2, 11, 18</span></label><label><input type="radio" name="mc10" value="b"> <span>2, <span class="m"><span aria-hidden="true">−6</span><span class="sr">negative 6</span></span>, 11, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, 18</span></label><label><input type="radio" name="mc10" value="c"> <span>18, 11, 2, <span class="m"><span aria-hidden="true">−6</span><span class="sr">negative 6</span></span>, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, <span class="m"><span aria-hidden="true">−6</span><span class="sr">negative 6</span></span>, 2, 11, 18</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start with the number farthest below zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, <span class="m"><span aria-hidden="true">−6</span><span class="sr">negative 6</span></span>, 2, 11, 18</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 2.4</h3>
+<p>The altitude and temperature table on page 3 of the notes includes the temperatures <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>, <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> and <span class="m"><span aria-hidden="true">−54</span><span class="sr">negative 54</span></span> degrees Fahrenheit, and the scatterplot screenshot on page 5 shows those points below 0 on the vertical axis.</p><p>The Important Notes on page 3 say to scan the data visually for major errors when you type data in by hand.</p>
+<p><strong>Watch for this:</strong> the minus sign on each negative value when you type data, and remember that <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> is lower than <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Reading paired data tables and units</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the value paired with another value in a two-row table.</li><li>Read units in a heading, such as "thousands of feet."</li><li>Work with a table whose values are not listed in order.</li><li>Spot a value that was most likely typed wrong.</li></ul>
+</div>
+<h3>One column, one pair</h3>
+<p>In a two-row table of paired data, each column is one pair. The value on top and the value under it belong together, so keep them together when you read or copy the table.</p>
+<ul>
+<li><strong>Units in the heading</strong> tell you what each number means. If a heading says "(thousands of feet)," then 8 means 8 thousand feet, which is 8,000 feet.</li>
+<li><strong>Values are not always in order.</strong> The smallest value can sit in any column, so search the whole row.</li>
+<li><strong>Scan for a value that does not fit.</strong> A number far from the others, such as one with a misplaced decimal point or a missing minus sign, is worth a second look.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading from the wrong column.</strong> Slide straight down from the value you found, not one column over.</li>
+<li><strong>Dropping the units.</strong> "(thousands of feet)" changes 8 into 8,000.</li>
+<li><strong>Assuming the first column holds the smallest value.</strong> Check every column first.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Boiling point of water">
+<h3 style="margin-top:0">Worked example: Boiling point of water</h3>
+<p>Use the table below. At what elevation, in feet, does water boil at 203 degrees Fahrenheit?</p><div class="table-wrap" role="region" aria-label="Elevation and boiling point" tabindex="0">
+<table>
+<caption>Elevation and the boiling point of water (rounded to the nearest degree)</caption>
+<thead><tr><th scope="col">Elevation (thousands of feet)</th><th scope="col">2</th><th scope="col">5</th><th scope="col">8</th><th scope="col">11</th></tr></thead>
+<tbody><tr><th scope="row">Boiling point (degrees Fahrenheit)</th><td>208</td><td>203</td><td>197</td><td>192</td></tr></tbody>
+</table>
+</div>
+<ol class="steps"><li><span class="work">Find 203 in the boiling point row</span><span class="say">It is in the second column of values.</span></li><li><span class="work">Read the elevation in the same column: 5</span><span class="say">The heading says thousands of feet.</span></li><li><span class="work">5 thousand feet = 5,000 feet</span><span class="say">Multiply by 1,000.</span></li></ol><p><strong>Answer: 5,000 feet</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Boiling at 197 degrees">
+<h3 style="margin-top:0">Finish this one: Boiling at <span class="m"><span aria-hidden="true">197°F</span><span class="sr">197 degrees Fahrenheit</span></span></h3>
+<p>Use the same table. At what elevation, in feet, does water boil at 197 degrees Fahrenheit?</p><ol class="steps"><li><span class="work">197 is in the column with elevation 8</span><span class="say">Next, use the units in the heading to change 8 into feet.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="8000" data-miss="{&quot;8&quot;: &quot;That is the number in the table, but the heading says thousands of feet. 8 thousand feet is 8,000 feet.&quot;, &quot;800&quot;: &quot;That multiplies by 100. Thousands of feet means multiply by 1,000: 8,000 feet.&quot;, &quot;80000&quot;: &quot;That multiplies by 10,000. Thousands of feet means multiply by 1,000: 8,000 feet.&quot;, &quot;11000&quot;: &quot;That reads the next column over. 197 is in the column with 8, so the elevation is 8,000 feet.&quot;, &quot;197&quot;: &quot;That is the boiling point. The question asks for the elevation in the same column: 8,000 feet.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Finish it: at what elevation, in feet, does water boil at 197 degrees Fahrenheit?</p>
+<details><summary>Hint</summary><p>Multiply 8 by 1,000.</p></details>
+<details><summary>Show answer</summary><p><strong>8,000 feet</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="12" data-miss="{&quot;22&quot;: &quot;That is the time in the first column, but the first column is not the shortest distance. The shortest distance, 2 miles, is in the second column, with 12 minutes.&quot;, &quot;10&quot;: &quot;That is the shortest time, but it goes with 4 miles. The shortest distance is 2 miles, which goes with 12 minutes.&quot;, &quot;2&quot;: &quot;That is the shortest distance itself. The question asks for the time paired with it: 12 minutes.&quot;, &quot;31&quot;: &quot;That is the time for 9 miles, the longest distance. The shortest distance, 2 miles, goes with 12 minutes.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> A student records four commutes. Which commute time is paired with the <strong>shortest</strong> distance? Give the time in minutes.</p>
+<div class="table-wrap" role="region" aria-label="Commute distance and time" tabindex="0">
+<table>
+<caption>Commute distance and time</caption>
+<thead><tr><th scope="col">Distance (miles)</th><th scope="col">7</th><th scope="col">2</th><th scope="col">9</th><th scope="col">4</th></tr></thead>
+<tbody><tr><th scope="row">Time (minutes)</th><td>22</td><td>12</td><td>31</td><td>10</td></tr></tbody>
+</table>
+</div>
+<details><summary>Hint</summary><p>First find the smallest distance anywhere in the top row. Then read straight down.</p></details>
+<details><summary>Show answer</summary><p><strong>12 minutes</strong>. The shortest distance is 2 miles, in the second column.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;$3.10 is the lowest price, but it is close to the others. Look for the value that is far from the rest.&quot;, &quot;b&quot;: &quot;$3.60 is the highest of the prices near $3, and it fits with the rest. One value is about 10 times too big.&quot;, &quot;d&quot;: &quot;All five are prices, but $34.5 is about 10 times the others. A misplaced decimal point is the likely cause.&quot;}" data-why="Correct. $34.5 is about 10 times the others, so the decimal point was most likely misplaced. It was probably $3.45.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 13.</b> A student types the price of a cup of coffee at five shops: $3.25, $3.40, $34.5, $3.10 and $3.60. Which value was most likely typed wrong?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>$3.10</span></label><label><input type="radio" name="mc13" value="b"> <span>$3.60</span></label><label><input type="radio" name="mc13" value="c"> <span>$34.5</span></label><label><input type="radio" name="mc13" value="d"> <span>None of them, since all five are prices</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Four of the prices are a little over $3. Which one is not?</p></details>
+<details><summary>Show answer</summary><p><strong>$34.5</strong> (most likely $3.45 with the decimal point in the wrong place)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-30" data-miss="{&quot;30&quot;: &quot;The temperature under 28 is negative 30. Keep the minus sign.&quot;, &quot;-41&quot;: &quot;That is the temperature one column to the right, under 31. The temperature under 28 is negative 30.&quot;, &quot;-5&quot;: &quot;That is the temperature one column to the left, under 22. The temperature under 28 is negative 30.&quot;, &quot;28&quot;: &quot;That is the altitude. The question asks for the temperature in the same column: negative 30.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> The altitude and temperature table on page 3 of the notes lists altitudes 3, 10, 14, 22, 28, 31 and 33, and temperatures 57, 37, 24, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>, <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> and <span class="m"><span aria-hidden="true">−54</span><span class="sr">negative 54</span></span>. What temperature is paired with an altitude of 28?</p>
+<details><summary>Hint</summary><p>Count over to 28 in the altitude row, then read the temperature in the same position.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span></strong> degrees Fahrenheit</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That drops the units in the heading. Thousands means 42 thousand: 42,000.&quot;, &quot;c&quot;: &quot;That multiplies by 100. Thousands means multiply by 1,000: 42,000.&quot;, &quot;d&quot;: &quot;That multiplies by 10,000. Thousands means multiply by 1,000: 42,000.&quot;}" data-why="Correct. 42 thousand is 42 times 1,000, which is 42,000.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> A table heading reads "Population (thousands)." One entry is 42. What population does it stand for?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>42,000</span></label><label><input type="radio" name="mc15" value="b"> <span>42</span></label><label><input type="radio" name="mc15" value="c"> <span>4,200</span></label><label><input type="radio" name="mc15" value="d"> <span>420,000</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The heading says thousands. Multiply 42 by 1,000.</p></details>
+<details><summary>Show answer</summary><p><strong>42,000</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 2.4</h3>
+<p>The table on page 3 of the notes gives altitude in thousands of feet and temperature in degrees Fahrenheit. The table in Classroom Example 2.4.1 on page 5 gives weights in pounds and highway mileage in mpg, and its weights are not listed from smallest to largest. The Important Notes on page 3 say to scan the data visually to spot any major errors.</p>
+<p><strong>Watch for this:</strong> the units in each heading, and keep the two values in each column together.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Axis scales</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the distance between the marks on an axis.</li><li>Find the value of a point that sits between labeled marks.</li><li>Choose a scale that covers the smallest and largest values, including values below zero.</li><li>Read a point when only some of the gridlines are labeled.</li></ul>
+</div>
+<h3>Reading a scale</h3>
+<ul>
+<li><strong>Step size.</strong> Subtract two labels that are next to each other. Marks at 20, 40 and 60 are 20 apart.</li>
+<li><strong>Between marks.</strong> Halfway between two marks is the number halfway between their labels. If gridlines are not labeled, find what one gridline is worth first: the step between labels divided by the number of spaces between them.</li>
+<li><strong>Choosing a scale.</strong> Find the smallest and largest values. Start at a mark at or below the smallest value, end at a mark at or above the largest, and keep the marks evenly spaced. Values below zero need room below 0.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Using a label as the step.</strong> Marks at 2,000 and 2,500 are 500 apart, not 2,000.</li>
+<li><strong>Counting each gridline as 1.</strong> If labels are 20 apart with 4 spaces between them, each gridline is worth 5.</li>
+<li><strong>Leaving out the negatives.</strong> A scale from 0 to 50 cannot show <span class="m"><span aria-hidden="true">−38</span><span class="sr">negative 38</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Choose a scale for values from 12 to 87">
+<h3 style="margin-top:0">Worked example: Choose a scale for values from 12 to 87</h3>
+<p>A set of values runs from 12 to 87. Choose marks 10 apart that show every value.</p><ol class="steps"><li><span class="work">Smallest value 12: start at 10</span><span class="say">10 is the first mark at or below 12.</span></li><li><span class="work">Largest value 87: end at 90</span><span class="say">90 is the first mark at or above 87.</span></li><li><span class="work">Marks: 10, 20, 30, 40, 50, 60, 70, 80, 90</span><span class="say">Every step is 10, so the spacing is even.</span></li></ol><p><strong>Answer: marks from 10 to 90, every 10</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Marks from 2,000 to 4,000">
+<h3 style="margin-top:0">Finish this one: Marks from 2,000 to 4,000</h3>
+<p>The labeled marks on a horizontal axis read 2,000, 2,500, 3,000, 3,500 and 4,000. How far apart are the marks?</p><ol class="steps"><li><span class="work">Pick two neighboring labels: 2,000 and 2,500</span><span class="say">Next, subtract the smaller from the larger.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="500" data-miss="{&quot;2000&quot;: &quot;That is the first label. The step is the difference between neighboring labels: 2,500 minus 2,000 is 500.&quot;, &quot;2500&quot;: &quot;That is the second label. Subtract the first from it: 2,500 minus 2,000 is 500.&quot;, &quot;5&quot;: &quot;Check the zeros. 2,500 minus 2,000 is 500.&quot;, &quot;50&quot;: &quot;Check the zeros. 2,500 minus 2,000 is 500.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> Finish it: how far apart are the marks 2,000, 2,500, 3,000, 3,500 and 4,000?</p>
+<details><summary>Hint</summary><p>Subtract: <span class="m"><span aria-hidden="true">2,500 − 2,000</span><span class="sr">2,500 minus 2,000</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>500</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-30" data-miss="{&quot;30&quot;: &quot;The point is below 0, between negative 40 and negative 20, so its value is negative: negative 30.&quot;, &quot;-50&quot;: &quot;Negative 50 is halfway between negative 60 and negative 40. Halfway between negative 40 and negative 20 is negative 30.&quot;, &quot;-10&quot;: &quot;Negative 10 is halfway between negative 20 and 0. Halfway between negative 40 and negative 20 is negative 30.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> An axis has marks at <span class="m"><span aria-hidden="true">−60</span><span class="sr">negative 60</span></span>, <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span>, <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span>, 0, 20, 40 and 60. A point sits exactly halfway between <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> and <span class="m"><span aria-hidden="true">−20</span><span class="sr">negative 20</span></span>. What value does it stand for?</p>
+<details><summary>Hint</summary><p>The marks are 20 apart, so halfway is 10 from each of them.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;This leaves no room below 0, so negative 38 cannot be shown.&quot;, &quot;b&quot;: &quot;Negative 38 is below negative 30, so the lowest value falls off this scale.&quot;, &quot;c&quot;: &quot;45 is above 40, so the highest value falls off this scale.&quot;}" data-why="Correct. Negative 40 is at or below negative 38, and 50 is at or above 45.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 18.</b> A data set has values from <span class="m"><span aria-hidden="true">−38</span><span class="sr">negative 38</span></span> to 45. Which set of marks, every 10 units, shows every value?</legend>
+<label><input type="radio" name="mc18" value="a"> <span>0 to 50</span></label><label><input type="radio" name="mc18" value="b"> <span><span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span> to 50</span></label><label><input type="radio" name="mc18" value="c"> <span><span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> to 40</span></label><label><input type="radio" name="mc18" value="d"> <span><span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> to 50</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start at a mark at or below <span class="m"><span aria-hidden="true">−38</span><span class="sr">negative 38</span></span> and end at a mark at or above 45.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> to 50</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3500" data-miss="{&quot;3000&quot;: &quot;3,000 is below 3,120, so the largest value would fall off the end. The next mark is 3,500.&quot;, &quot;3120&quot;: &quot;3,120 is a data value, not one of the marks. The marks go up by 500: the first one at or above 3,120 is 3,500.&quot;, &quot;4000&quot;: &quot;4,000 is above 3,120, but 3,500 comes first and is already enough.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> A set of values runs from 1,850 to 3,120. The axis marks are every 500, starting at 1,500: 1,500, 2,000, 2,500 and so on. What is the first mark at or above 3,120?</p>
+<details><summary>Hint</summary><p>Count up by 500 from 1,500 until you pass 3,120.</p></details>
+<details><summary>Show answer</summary><p><strong>3,500</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="55" data-miss="{&quot;43&quot;: &quot;That counts each gridline as 1. The labels are 20 apart with 4 spaces between them, so each gridline is worth 5: 40, 45, 50, 55.&quot;, &quot;70&quot;: &quot;That counts each gridline as 10. The labels are 20 apart with 4 spaces between them, so each gridline is worth 5: 40, 45, 50, 55.&quot;, &quot;60&quot;: &quot;60 is the labeled mark, which is the fourth gridline above 40. Q is on the third: 55.&quot;, &quot;45&quot;: &quot;That is the first gridline above 40. Q is on the third: 45, 50, 55.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Use the axis in the figure. Only 0, 20, 40, 60 and 80 are labeled, and there is a gridline every 5 units. Point Q sits on the third gridline above 40. What value does point Q stand for?</p>
+<figure class="axisfig"><svg viewBox="0 0 240 300" width="240" height="300" role="img" aria-labelledby="fig-q-t fig-q-d" xmlns="http://www.w3.org/2000/svg"><title id="fig-q-t">Vertical axis with point Q</title><desc id="fig-q-d">A vertical axis labeled 0, 20, 40, 60 and 80, with an unlabeled gridline every 5 units between the labels. Point Q sits on the third gridline above the 40 label.</desc><line x1="52.0" y1="254.0" x2="222.0" y2="254.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="239.0" x2="222.0" y2="239.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="224.0" x2="222.0" y2="224.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="209.0" x2="222.0" y2="209.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="194.0" x2="222.0" y2="194.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="179.0" x2="222.0" y2="179.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="164.0" x2="222.0" y2="164.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="149.0" x2="222.0" y2="149.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="134.0" x2="222.0" y2="134.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="119.0" x2="222.0" y2="119.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="104.0" x2="222.0" y2="104.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="89.0" x2="222.0" y2="89.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="74.0" x2="222.0" y2="74.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="59.0" x2="222.0" y2="59.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="44.0" x2="222.0" y2="44.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="29.0" x2="222.0" y2="29.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="14.0" x2="222.0" y2="14.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="254.0" x2="222.0" y2="254.0" stroke="currentColor" stroke-width="2"/><line x1="52.0" y1="14.0" x2="52.0" y2="254.0" stroke="currentColor" stroke-width="2"/><text x="46.0" y="258.0" font-size="13" text-anchor="end" fill="currentColor">0</text><text x="46.0" y="198.0" font-size="13" text-anchor="end" fill="currentColor">20</text><text x="46.0" y="138.0" font-size="13" text-anchor="end" fill="currentColor">40</text><text x="46.0" y="78.0" font-size="13" text-anchor="end" fill="currentColor">60</text><text x="46.0" y="18.0" font-size="13" text-anchor="end" fill="currentColor">80</text><text x="137.0" y="294.0" font-size="13" text-anchor="middle" fill="currentColor"></text><text x="14" y="134.0" font-size="13" text-anchor="middle" fill="currentColor" transform="rotate(-90 14 134.0)">value</text><circle cx="137.0" cy="89.0" r="4.5" fill="currentColor"/><text x="144.0" y="83.0" font-size="14" font-weight="700" fill="currentColor">Q</text></svg><figcaption>Axis for Practice 20.</figcaption></figure>
+<details><summary>Hint</summary><p>Each gridline is worth <span class="m"><span aria-hidden="true">20 ÷ 4 = 5</span><span class="sr">20 divided by 4 equals 5</span></span>. Count up from 40 three times.</p></details>
+<details><summary>Show answer</summary><p><strong>55</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 2.4</h3>
+<p>The scatterplot screenshot on page 5 of the notes has vertical axis marks every 20, from <span class="m"><span aria-hidden="true">−40</span><span class="sr">negative 40</span></span> to 60, and horizontal axis marks every 5, from 5 to 30. Page 5 says you may carefully graph your result on paper, and the video "Using StatCrunch to create a scatterplot" mentions sketching it "using the appropriate scales."</p>
+<p><strong>Watch for this:</strong> room below 0 when some values are negative, and what each gridline is worth.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Rising and falling lines: the sign of a slope</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read a line from left to right and say whether it rises, falls or is flat.</li><li>Find the slope between two points: the change in y divided by the change in x.</li><li>Match the sign of a slope to the direction of the line.</li><li>Subtract carefully when the points have negative coordinates.</li></ul>
+</div>
+<h3>Slope and direction</h3>
+<p>The slope between two points <span class="m"><span aria-hidden="true">(x₁, y₁)</span><span class="sr">x 1 comma y 1</span></span> and <span class="m"><span aria-hidden="true">(x₂, y₂)</span><span class="sr">x 2 comma y 2</span></span> is the change in y divided by the change in x:</p>
+<p class="work"><span class="m"><span aria-hidden="true">slope = (y₂ − y₁) ÷ (x₂ − x₁)</span><span class="sr">slope equals, open parenthesis y 2 minus y 1 close parenthesis, divided by, open parenthesis x 2 minus x 1 close parenthesis</span></span></p>
+<ul>
+<li>Read every line from <strong>left to right</strong>.</li>
+<li>A <strong>positive</strong> slope means the line rises from left to right.</li>
+<li>A <strong>negative</strong> slope means the line falls from left to right.</li>
+<li>A slope of <strong>0</strong> means the line is flat.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Flipping the fraction.</strong> The change in y goes on top. The change in x goes on the bottom.</li>
+<li><strong>Mixing the order.</strong> Use the same point first on top and on the bottom. Mixing them gives the wrong sign.</li>
+<li><strong>Judging by the numbers instead of the direction.</strong> A line can sit below the axis, where every y-value is negative, and still rise. The sign of the slope comes from the direction.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Slope from (1, 9) to (5, 1)">
+<h3 style="margin-top:0">Worked example: Slope from <span class="m"><span aria-hidden="true">(1, 9)</span><span class="sr">the point 1 comma 9</span></span> to <span class="m"><span aria-hidden="true">(5, 1)</span><span class="sr">the point 5 comma 1</span></span></h3>
+<p>Find the slope between <span class="m"><span aria-hidden="true">(1, 9)</span><span class="sr">the point 1 comma 9</span></span> and <span class="m"><span aria-hidden="true">(5, 1)</span><span class="sr">the point 5 comma 1</span></span>, and say whether the line rises or falls.</p><ol class="steps"><li><span class="work">Change in y: <span class="m"><span aria-hidden="true">1 − 9 = −8</span><span class="sr">1 minus 9 equals negative 8</span></span></span><span class="say">Second y minus first y.</span></li><li><span class="work">Change in x: <span class="m"><span aria-hidden="true">5 − 1 = 4</span><span class="sr">5 minus 1 equals 4</span></span></span><span class="say">Second x minus first x, in the same order.</span></li><li><span class="work">Slope: <span class="m"><span aria-hidden="true">−8 ÷ 4 = −2</span><span class="sr">negative 8 divided by 4 equals negative 2</span></span></span><span class="say">A negative slope, so the line falls from left to right.</span></li></ol><p><strong>Answer: slope <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span>. The line falls from left to right.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Slope from (2, 3) to (6, 11)">
+<h3 style="margin-top:0">Finish this one: Slope from <span class="m"><span aria-hidden="true">(2, 3)</span><span class="sr">the point 2 comma 3</span></span> to <span class="m"><span aria-hidden="true">(6, 11)</span><span class="sr">the point 6 comma 11</span></span></h3>
+<p>Find the slope between <span class="m"><span aria-hidden="true">(2, 3)</span><span class="sr">the point 2 comma 3</span></span> and <span class="m"><span aria-hidden="true">(6, 11)</span><span class="sr">the point 6 comma 11</span></span>.</p><ol class="steps"><li><span class="work">Change in y: <span class="m"><span aria-hidden="true">11 − 3 = 8</span><span class="sr">11 minus 3 equals 8</span></span></span><span class="say">Next, find the change in x in the same order, then divide.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="2" data-miss="{&quot;0.5&quot;: &quot;The fraction is flipped. That is the change in x over the change in y. Put the change in y on top: 8 divided by 4 is 2.&quot;, &quot;1/2&quot;: &quot;The fraction is flipped. That is the change in x over the change in y. Put the change in y on top: 8 divided by 4 is 2.&quot;, &quot;-2&quot;: &quot;The order got mixed. Using 11 minus 3 on top means using 6 minus 2 on the bottom: 8 divided by 4 is 2.&quot;, &quot;8&quot;: &quot;That is the change in y. Divide it by the change in x, 6 minus 2 = 4: the slope is 2.&quot;, &quot;4&quot;: &quot;That is the change in x. The slope is the change in y divided by it: 8 divided by 4 is 2.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Finish it: what is the slope between <span class="m"><span aria-hidden="true">(2, 3)</span><span class="sr">the point 2 comma 3</span></span> and <span class="m"><span aria-hidden="true">(6, 11)</span><span class="sr">the point 6 comma 11</span></span>?</p>
+<details><summary>Hint</summary><p>Change in x: <span class="m"><span aria-hidden="true">6 − 2</span><span class="sr">6 minus 2</span></span>. Then divide 8 by it.</p></details>
+<details><summary>Show answer</summary><p><strong>2</strong>, because <span class="m"><span aria-hidden="true">8 ÷ 4 = 2</span><span class="sr">8 divided by 4 equals 2</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-3" data-miss="{&quot;3&quot;: &quot;The sign is off. y goes from 14 down to 2, a change of negative 12, so the slope is negative 12 divided by 4: negative 3.&quot;, &quot;-1/3&quot;: &quot;The fraction is flipped. Put the change in y, negative 12, on top and the change in x, 4, on the bottom: negative 3.&quot;, &quot;~-0.3333~0.01&quot;: &quot;The fraction is flipped. Put the change in y, negative 12, on top and the change in x, 4, on the bottom: negative 3.&quot;, &quot;-12&quot;: &quot;That is the change in y. Divide it by the change in x, 4: negative 3.&quot;, &quot;12&quot;: &quot;That is the size of the change in y, and the sign is off too. Negative 12 divided by 4 is negative 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> What is the slope between <span class="m"><span aria-hidden="true">(0, 14)</span><span class="sr">the point 0 comma 14</span></span> and <span class="m"><span aria-hidden="true">(4, 2)</span><span class="sr">the point 4 comma 2</span></span>?</p>
+<details><summary>Hint</summary><p>Change in y: <span class="m"><span aria-hidden="true">2 − 14</span><span class="sr">2 minus 14</span></span>. Change in x: <span class="m"><span aria-hidden="true">4 − 0</span><span class="sr">4 minus 0</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span></strong>, because <span class="m"><span aria-hidden="true">(2 − 14) ÷ (4 − 0) = −12 ÷ 4 = −3</span><span class="sr">open parenthesis 2 minus 14 close parenthesis, divided by, open parenthesis 4 minus 0 close parenthesis, equals negative 12 divided by 4, equals negative 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;1&quot;: &quot;That subtracts 7 from 8 and 2 from 3, as if there were no minus signs. Subtracting a negative means adding: 8 minus negative 7 is 15, and 3 minus negative 2 is 5, so 15 divided by 5 is 3.&quot;, &quot;15&quot;: &quot;The change in y, 15, is right, but the change in x is 3 minus negative 2, which is 5, not 1. 15 divided by 5 is 3.&quot;, &quot;0.2&quot;: &quot;The change in x, 5, is right, but the change in y is 8 minus negative 7, which is 15, not 1. 15 divided by 5 is 3.&quot;, &quot;1/5&quot;: &quot;The change in x, 5, is right, but the change in y is 8 minus negative 7, which is 15, not 1. 15 divided by 5 is 3.&quot;, &quot;-3&quot;: &quot;The sign is off. Both changes are positive here: 15 divided by 5 is 3.&quot;, &quot;~0.3333~0.01&quot;: &quot;The fraction is flipped. Put the change in y, 15, on top: 15 divided by 5 is 3.&quot;, &quot;1/3&quot;: &quot;The fraction is flipped. Put the change in y, 15, on top: 15 divided by 5 is 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> What is the slope between <span class="m"><span aria-hidden="true">(−2, −7)</span><span class="sr">the point negative 2 comma negative 7</span></span> and <span class="m"><span aria-hidden="true">(3, 8)</span><span class="sr">the point 3 comma 8</span></span>?</p>
+<details><summary>Hint</summary><p>Change in y: <span class="m"><span aria-hidden="true">8 − (−7) = 8 + 7</span><span class="sr">8 minus negative 7 equals 8 plus 7</span></span>. Change in x: <span class="m"><span aria-hidden="true">3 − (−2) = 3 + 2</span><span class="sr">3 minus negative 2 equals 3 plus 2</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>, because <span class="m"><span aria-hidden="true">15 ÷ 5 = 3</span><span class="sr">15 divided by 5 equals 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The y-values being positive does not decide the direction. y goes down from 20 to 8 as x goes up, so the line falls.&quot;, &quot;c&quot;: &quot;A line that falls from left to right has a negative slope, even when its y-values are positive. Here the slope is negative 12 divided by 3, which is negative 4.&quot;, &quot;d&quot;: &quot;A flat line keeps the same y-value. Here y changes from 20 to 8, so the line is not flat.&quot;}" data-why="Correct. y drops by 12 while x rises by 3, so the slope is negative 4 and the line falls.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 24.</b> Along a line, as x goes from 1 to 4, y goes from 20 down to 8. Which statement describes the line?</legend>
+<label><input type="radio" name="mc24" value="a"> <span>It rises from left to right, and its slope is positive, because every y-value is positive.</span></label><label><input type="radio" name="mc24" value="b"> <span>It falls from left to right, so its slope is negative.</span></label><label><input type="radio" name="mc24" value="c"> <span>It falls from left to right, but its slope is positive, because 20 and 8 are positive.</span></label><label><input type="radio" name="mc24" value="d"> <span>It is flat, so its slope is 0.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find the change in y and the change in x. Is the change in y positive or negative?</p></details>
+<details><summary>Show answer</summary><p><strong>It falls from left to right, so its slope is negative.</strong> The slope is <span class="m"><span aria-hidden="true">(8 − 20) ÷ (4 − 1) = −4</span><span class="sr">open parenthesis 8 minus 20 close parenthesis, divided by, open parenthesis 4 minus 1 close parenthesis, equals negative 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Line A rises from left to right, so its slope is positive.&quot;, &quot;b&quot;: &quot;Line D sits below the horizontal axis, so its y-values are negative, but it rises from left to right. Its slope is positive.&quot;, &quot;d&quot;: &quot;Line B is flat, so its slope is 0.&quot;}" data-why="Correct. Line C falls from left to right, so its slope is negative.">
+<figure class="axisfig"><svg viewBox="0 0 380 290" width="380" height="290" role="img" aria-labelledby="fig-lines-t fig-lines-d" xmlns="http://www.w3.org/2000/svg"><title id="fig-lines-t">Four lines labeled A to D</title><desc id="fig-lines-d">A coordinate grid from negative 6 to 6 on both axes with four line segments. Line A runs from lower left to upper right, above the horizontal axis. Line B is level, at the same height from left to right. Line C runs from upper left to lower right. Line D lies entirely below the horizontal axis and runs from lower left to upper right.</desc><line x1="52.0" y1="14.0" x2="52.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="77.8" y1="14.0" x2="77.8" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="103.7" y1="14.0" x2="103.7" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="129.5" y1="14.0" x2="129.5" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="155.3" y1="14.0" x2="155.3" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="181.2" y1="14.0" x2="181.2" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="207.0" y1="14.0" x2="207.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="232.8" y1="14.0" x2="232.8" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="258.7" y1="14.0" x2="258.7" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="284.5" y1="14.0" x2="284.5" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="310.3" y1="14.0" x2="310.3" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="336.2" y1="14.0" x2="336.2" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="362.0" y1="14.0" x2="362.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="244.0" x2="362.0" y2="244.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="224.8" x2="362.0" y2="224.8" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="205.7" x2="362.0" y2="205.7" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="186.5" x2="362.0" y2="186.5" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="167.3" x2="362.0" y2="167.3" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="148.2" x2="362.0" y2="148.2" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="129.0" x2="362.0" y2="129.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="109.8" x2="362.0" y2="109.8" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="90.7" x2="362.0" y2="90.7" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="71.5" x2="362.0" y2="71.5" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="52.3" x2="362.0" y2="52.3" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="33.2" x2="362.0" y2="33.2" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="14.0" x2="362.0" y2="14.0" style="stroke:var(--line)" stroke-opacity=".45" stroke-width="1"/><line x1="52.0" y1="129.0" x2="362.0" y2="129.0" stroke="currentColor" stroke-width="2"/><line x1="207.0" y1="14.0" x2="207.0" y2="244.0" stroke="currentColor" stroke-width="2"/><text x="52.0" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−6</text><text x="103.7" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−4</text><text x="155.3" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">−2</text><text x="258.7" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">2</text><text x="310.3" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">4</text><text x="362.0" y="261.0" font-size="13" text-anchor="middle" fill="currentColor">6</text><text x="46.0" y="248.0" font-size="13" text-anchor="end" fill="currentColor">−6</text><text x="46.0" y="209.7" font-size="13" text-anchor="end" fill="currentColor">−4</text><text x="46.0" y="171.3" font-size="13" text-anchor="end" fill="currentColor">−2</text><text x="46.0" y="94.7" font-size="13" text-anchor="end" fill="currentColor">2</text><text x="46.0" y="56.3" font-size="13" text-anchor="end" fill="currentColor">4</text><text x="46.0" y="18.0" font-size="13" text-anchor="end" fill="currentColor">6</text><text x="207.0" y="284.0" font-size="13" text-anchor="middle" fill="currentColor">x</text><text x="14" y="129.0" font-size="13" text-anchor="middle" fill="currentColor" transform="rotate(-90 14 129.0)">y</text><line x1="77.8" y1="109.8" x2="207.0" y2="33.2" stroke="currentColor" stroke-width="2.5"/><text x="211.0" y="38.2" font-size="14" font-weight="700" fill="currentColor">A</text><line x1="232.8" y1="42.8" x2="336.2" y2="42.8" stroke="currentColor" stroke-width="2.5"/><text x="340.2" y="47.8" font-size="14" font-weight="700" fill="currentColor">B</text><line x1="77.8" y1="52.3" x2="284.5" y2="148.2" stroke="currentColor" stroke-width="2.5"/><text x="288.5" y="153.2" font-size="14" font-weight="700" fill="currentColor">C</text><line x1="155.3" y1="234.4" x2="258.7" y2="167.3" stroke="currentColor" stroke-width="2.5"/><text x="262.7" y="172.3" font-size="14" font-weight="700" fill="currentColor">D</text></svg><figcaption>Lines for Practice 25.</figcaption></figure>
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 25.</b> Use the figure. Which line has a <strong>negative</strong> slope?</legend>
+<label><input type="radio" name="mc25" value="a"> <span>Line A</span></label><label><input type="radio" name="mc25" value="b"> <span>Line D</span></label><label><input type="radio" name="mc25" value="c"> <span>Line C</span></label><label><input type="radio" name="mc25" value="d"> <span>Line B</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read each line from left to right. Which one goes down?</p></details>
+<details><summary>Show answer</summary><p><strong>Line C</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 2.4</h3>
+<p>Item 2 (Linear Correlation) on pages 1 and 2 of the notes uses these words. Under the example on page 1, the Notes say the points form a pattern that "slopes upward from left to right" and "The line has a positive slope." The example on page 2 says "slopes downward from left to right" and "The line has a negative slope."</p>
+<p><strong>Watch for this:</strong> read from left to right, and judge the direction of the line rather than whether the numbers are positive or negative.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="3600000" data-miss="{&quot;3.6&quot;: &quot;That drops the units in the heading. 3.6 million is 3.6 times 1,000,000: 3,600,000.&quot;, &quot;360000&quot;: &quot;That is 3.6 times 100,000. Millions means multiply by 1,000,000: 3,600,000.&quot;, &quot;36000000&quot;: &quot;That moves the decimal point one place too far. 3.6 times 1,000,000 is 3,600,000.&quot;, &quot;3600&quot;: &quot;That multiplies by 1,000. Millions means multiply by 1,000,000: 3,600,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> A table heading reads "Population (millions)." One entry is <span class="m"><span aria-hidden="true">3.6</span><span class="sr">3 point 6</span></span>. What population does it stand for?</p>
+<details><summary>Hint</summary><p>Multiply 3.6 by 1,000,000. That moves the decimal point six places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>3,600,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-2.5" data-miss="{&quot;2.5&quot;: &quot;The sign is off. y goes from 4 down to negative 6, a change of negative 10, so the slope is negative 10 divided by 4: negative 2.5.&quot;, &quot;-0.4&quot;: &quot;The fraction is flipped. Put the change in y, negative 10, on top and the change in x, 4, on the bottom: negative 2.5.&quot;, &quot;-0.5&quot;: &quot;That uses negative 2 for the change in y. Negative 6 minus 4 is negative 10, so the slope is negative 10 divided by 4: negative 2.5.&quot;, &quot;-10&quot;: &quot;That is the change in y. Divide it by the change in x, 4: negative 2.5.&quot;, &quot;-3&quot;: &quot;The directions say do not round. Negative 10 divided by 4 is negative 2.5.&quot;, &quot;-2&quot;: &quot;The directions say do not round. Negative 10 divided by 4 is negative 2.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> What is the slope between <span class="m"><span aria-hidden="true">(3, 4)</span><span class="sr">the point 3 comma 4</span></span> and <span class="m"><span aria-hidden="true">(7, −6)</span><span class="sr">the point 7 comma negative 6</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p>Change in y: <span class="m"><span aria-hidden="true">−6 − 4</span><span class="sr">negative 6 minus 4</span></span>. Change in x: <span class="m"><span aria-hidden="true">7 − 3</span><span class="sr">7 minus 3</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">−10 ÷ 4 = −2.5</span><span class="sr">negative 10 divided by 4 equals negative 2 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That pair is flipped. Minutes are x, so the minutes come first: (10, 7).&quot;, &quot;c&quot;: &quot;Both of those numbers come from the minutes row. A pair takes one number from each row: (10, 7).&quot;, &quot;d&quot;: &quot;Those numbers come from two different columns. The middle column holds 10 minutes and 7 laps: (10, 7).&quot;}" data-why="Correct. The middle column holds 10 minutes and 7 laps, and minutes come first.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 28.</b> A table lists minutes (x) in the first row and laps (y) in the second: minutes 5, 10, 15 and laps 3, 7, 10. Which ordered pair comes from the middle column?</legend>
+<label><input type="radio" name="mc28" value="a"> <span>(10, 7)</span></label><label><input type="radio" name="mc28" value="b"> <span>(7, 10)</span></label><label><input type="radio" name="mc28" value="c"> <span>(10, 15)</span></label><label><input type="radio" name="mc28" value="d"> <span>(5, 7)</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read the middle column from top to bottom. The top value is x.</p></details>
+<details><summary>Show answer</summary><p><strong>(10, 7)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="22" data-miss="{&quot;14&quot;: &quot;That subtracts 4 from 18 as if both were positive. Crossing zero means adding: 18 degrees up to 0, then 4 more, is 22.&quot;, &quot;-22&quot;: &quot;The question asks how many degrees warmer, which is a distance, so the answer is positive: 22.&quot;, &quot;-14&quot;: &quot;That adds negative 18 and 4. The distance between them is 4 minus negative 18, which is 22.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> A freezer is set to <span class="m"><span aria-hidden="true">−18°C</span><span class="sr">negative 18 degrees Celsius</span></span> and a refrigerator to <span class="m"><span aria-hidden="true">4°C</span><span class="sr">4 degrees Celsius</span></span>. How many degrees warmer is the refrigerator?</p>
+<details><summary>Hint</summary><p>Count from <span class="m"><span aria-hidden="true">−18</span><span class="sr">negative 18</span></span> up to 0, then from 0 up to 4.</p></details>
+<details><summary>Show answer</summary><p><strong>22 degrees</strong>, because <span class="m"><span aria-hidden="true">4 − (−18) = 22</span><span class="sr">4 minus negative 18 equals 22</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-22.5" data-miss="{&quot;22.5&quot;: &quot;The point is below 0, so its value is negative: negative 22.5.&quot;, &quot;-20&quot;: &quot;The marks are 15 apart, so halfway is 7.5 from each. Negative 30 plus 7.5 is negative 22.5.&quot;, &quot;-25&quot;: &quot;The marks are 15 apart, so halfway is 7.5 from each. Negative 30 plus 7.5 is negative 22.5.&quot;, &quot;-7.5&quot;: &quot;Negative 7.5 is halfway between negative 15 and 0. Halfway between negative 30 and negative 15 is negative 22.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> An axis has marks at <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>, <span class="m"><span aria-hidden="true">−15</span><span class="sr">negative 15</span></span>, 0, 15 and 30. A point sits exactly halfway between <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span> and <span class="m"><span aria-hidden="true">−15</span><span class="sr">negative 15</span></span>. What value does it stand for? Do not round.</p>
+<details><summary>Hint</summary><p>The marks are 15 apart. Half of 15 is <span class="m"><span aria-hidden="true">7.5</span><span class="sr">7 point 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−22.5</span><span class="sr">negative 22 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;The sign of a y-value does not decide the slope. The change in y is 6 minus 6, which is 0.&quot;, &quot;b&quot;: &quot;A negative x-value does not decide the slope. The change in y is 0, so the slope is 0.&quot;, &quot;d&quot;: &quot;The slope is the change in y over the change in x, not a y-value. 0 divided by 6 is 0.&quot;}" data-why="Correct. The change in y is 0, so the slope is 0 and the line is flat.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 31.</b> A line passes through <span class="m"><span aria-hidden="true">(−4, 6)</span><span class="sr">the point negative 4 comma 6</span></span> and <span class="m"><span aria-hidden="true">(2, 6)</span><span class="sr">the point 2 comma 6</span></span>. Which statement is true?</legend>
+<label><input type="radio" name="mc31" value="a"> <span>Its slope is positive, because 6 is positive.</span></label><label><input type="radio" name="mc31" value="b"> <span>Its slope is negative, because one x-value is negative.</span></label><label><input type="radio" name="mc31" value="c"> <span>Its slope is 0, so the line is flat.</span></label><label><input type="radio" name="mc31" value="d"> <span>Its slope is 6, the y-value of both points.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find the change in y first.</p></details>
+<details><summary>Show answer</summary><p><strong>Its slope is 0, so the line is flat.</strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with ordered pairs, negative numbers, paired data tables and units, axis scales, and the sign of a slope. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec2.4-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 12.1 Corequisite: One Way ANOVA</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 12.1</div>
+<h1>Section 12.1 Corequisite: One Way ANOVA</h1>
+<p>Get ready for the Section 12.1 notes with practice on the time, rounding, comparing and table-reading skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Minutes and seconds to seconds<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Rounding to a set number of decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Comparing decimals and reading inequality symbols<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Reading values from a table<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a time written in minutes and seconds, such as <span class="m"><span aria-hidden="true">3:45</span><span class="sr">3 minutes 45 seconds</span></span>, into seconds only.</li><li>Round a decimal to two, three or four decimal places, including zeros right after the point and a 9 that rounds up.</li><li>Compare decimals with different numbers of digits, and read the symbols &lt;, &gt;, <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>.</li><li>Find and count values in a table, whether the groups run down the columns or across the rows.</li></ul>
+</div>
+<p>Section 12.1 of the notes covers one-way analysis of variance (ANOVA): what it is, its requirements, its hypotheses, a worked example in five steps, the StatCrunch steps, and one classroom example.</p>
+<p>The notes do not compute anything by hand. They read values from StatCrunch, round them, compare them and read data from tables, and the classroom example lists times in minutes and seconds. This page gives those number skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.62</span><span class="sr">0 point 6 2</span></span>. Commas and extra spaces are fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 12.1 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 12.1 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure how to turn a time like <span class="m"><span aria-hidden="true">3:14</span><span class="sr">3 minutes 14 seconds</span></span> into seconds.</strong><br><button type="button" data-go="s2">Minutes and seconds to seconds</button></li>
+<li><strong>I lose track of which digit to keep when a question says three or four decimal places.</strong><br><button type="button" data-go="s3">Rounding to a set number of decimal places</button></li>
+<li><strong>I am not always sure which of two decimals is bigger, or what <span class="m"><span aria-hidden="true">≤</span><span class="sr">the less than or equal to symbol</span></span> means.</strong><br><button type="button" data-go="s4">Comparing decimals and reading inequality symbols</button></li>
+<li><strong>I get mixed up about rows and columns when I read a table.</strong><br><button type="button" data-go="s5">Reading values from a table</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Minutes and seconds to seconds</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a time such as <span class="m"><span aria-hidden="true">4:37</span><span class="sr">4 minutes 37 seconds</span></span> into seconds only.</li><li>Explain why <span class="m"><span aria-hidden="true">3:14</span><span class="sr">3 minutes 14 seconds</span></span> is not <span class="m"><span aria-hidden="true">3.14</span><span class="sr">3 point 1 4</span></span> and not 314 seconds.</li><li>Find how many seconds longer one time is than another.</li><li>Add several times by changing each one to seconds first.</li></ul>
+</div>
+<h3>Time counts in sixties</h3>
+<p>A time written like <span class="m"><span aria-hidden="true">4:37</span><span class="sr">4 minutes 37 seconds</span></span> means 4 minutes and 37 seconds. One minute is 60 seconds, so to write the whole time in seconds:</p>
+<p class="work"><span class="m"><span aria-hidden="true">seconds = (minutes × 60) + seconds</span><span class="sr">total seconds equals, open parenthesis minutes times 60 close parenthesis, plus the seconds</span></span></p>
+<p>The colon is not a decimal point. Our number system counts in tens, but time counts in sixties, so the digits after the colon can only run from 00 to 59.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading the colon as a decimal point.</strong> <span class="m"><span aria-hidden="true">2:45</span><span class="sr">2 minutes 45 seconds</span></span> is not <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span> minutes. Half a minute is 30 seconds, so <span class="m"><span aria-hidden="true">2:30</span><span class="sr">2 minutes 30 seconds</span></span> is <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> minutes.</li>
+<li><strong>Squeezing the digits together.</strong> <span class="m"><span aria-hidden="true">2:45</span><span class="sr">2 minutes 45 seconds</span></span> is not 245 seconds. That would be more than 4 minutes.</li>
+<li><strong>Dropping the leading zero in the seconds.</strong> <span class="m"><span aria-hidden="true">5:08</span><span class="sr">5 minutes 8 seconds</span></span> has 8 seconds, not 80. The 0 holds the tens place.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 4:37 in seconds">
+<h3 style="margin-top:0">Worked example: Write 4:37 in seconds</h3>
+<p>Write <span class="m"><span aria-hidden="true">4:37</span><span class="sr">4 minutes 37 seconds</span></span> in seconds only.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">4 × 60 = 240</span><span class="sr">4 times 60 equals 240</span></span></span><span class="say">Change the 4 minutes to seconds.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">240 + 37 = 277</span><span class="sr">240 plus 37 equals 277</span></span></span><span class="say">Add the 37 seconds that were already there.</span></li><li><span class="work">Check: 277 is between 240 and 300</span><span class="say">Every time from 4 minutes to 5 minutes is between 240 and 300 seconds, so 277 fits.</span></li></ol><p><strong>Answer: 277 seconds</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 2:45 in seconds">
+<h3 style="margin-top:0">Finish this one: Write 2:45 in seconds</h3>
+<p>Write <span class="m"><span aria-hidden="true">2:45</span><span class="sr">2 minutes 45 seconds</span></span> in seconds only.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2 × 60 = 120</span><span class="sr">2 times 60 equals 120</span></span></span><span class="say">The 2 minutes are 120 seconds. Next, add the 45 seconds.</span></li></ol>
+<p>The guided step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="165" data-miss="{&quot;245&quot;: &quot;That squeezes the digits together. The 2 is minutes, so it counts as 2 times 60, which is 120. Then 120 + 45 = 165.&quot;, &quot;2.45&quot;: &quot;That reads the colon as a decimal point. The question asks for seconds: 2 times 60 is 120, plus 45 is 165.&quot;, &quot;120&quot;: &quot;That is the 2 minutes alone. Add the 45 seconds too: 120 + 45 = 165.&quot;, &quot;47&quot;: &quot;That adds 2 + 45, treating the minutes as seconds. Each minute is 60 seconds: 120 + 45 = 165.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: how many seconds are in <span class="m"><span aria-hidden="true">2:45</span><span class="sr">2 minutes 45 seconds</span></span>?</p>
+<details><summary>Hint</summary><p>Add 45 to the 120 seconds from the guided step.</p></details>
+<details><summary>Show answer</summary><p><strong>165 seconds</strong>, because <span class="m"><span aria-hidden="true">120 + 45 = 165</span><span class="sr">120 plus 45 equals 165</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="308" data-miss="{&quot;508&quot;: &quot;That squeezes the digits together. 5 minutes is 5 times 60, which is 300 seconds. Then add 8: 308.&quot;, &quot;380&quot;: &quot;That reads the 08 as 80. The 0 holds the tens place, so it is 8 seconds: 300 + 8 = 308.&quot;, &quot;300&quot;: &quot;That is the 5 minutes alone. Add the 8 seconds: 308.&quot;, &quot;13&quot;: &quot;That adds 5 + 8, treating the minutes as seconds. Each minute is 60 seconds: 300 + 8 = 308.&quot;, &quot;5.08&quot;: &quot;That reads the colon as a decimal point. The question asks for seconds: 300 + 8 = 308.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> How many seconds are in <span class="m"><span aria-hidden="true">5:08</span><span class="sr">5 minutes 8 seconds</span></span>?</p>
+<details><summary>Hint</summary><p>Change the 5 minutes to seconds first. The seconds part is 08, which is 8 seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>308 seconds</strong>, because <span class="m"><span aria-hidden="true">5 × 60 + 8 = 308</span><span class="sr">5 times 60, plus 8, equals 308</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="119" data-miss="{&quot;159&quot;: &quot;That squeezes the digits together. 1 minute is 60 seconds, and 60 + 59 = 119.&quot;, &quot;60&quot;: &quot;That adds 1 + 59, treating the minute as a single second. One minute is 60 seconds: 60 + 59 = 119.&quot;, &quot;59&quot;: &quot;That leaves out the minute. Add 60 seconds for it: 119.&quot;, &quot;1.59&quot;: &quot;That reads the colon as a decimal point. The question asks for seconds: 60 + 59 = 119.&quot;, &quot;120&quot;: &quot;That is 2 full minutes. 1:59 is one second short of that: 119.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> A phone alarm rings after <span class="m"><span aria-hidden="true">1:59</span><span class="sr">1 minute 59 seconds</span></span>. How many seconds is that?</p>
+<details><summary>Hint</summary><p>One minute is 60 seconds. Add the 59 seconds to it. The answer should be just under 120.</p></details>
+<details><summary>Show answer</summary><p><strong>119 seconds</strong>, because <span class="m"><span aria-hidden="true">60 + 59 = 119</span><span class="sr">60 plus 59 equals 119</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;330 squeezes the digits of 3:30 together. 3 minutes is 180 seconds, plus 30 is 210.&quot;, &quot;b&quot;: &quot;That reads the colon as a decimal point. 30 seconds is half a minute, so 3:30 is 3.5 minutes, not 3.3.&quot;, &quot;d&quot;: &quot;180 seconds is the 3 minutes alone. The 30 seconds still need to be added: 210.&quot;}" data-why="Correct. 3 minutes is 180 seconds, and 180 + 30 = 210.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which amount is the same as <span class="m"><span aria-hidden="true">3:30</span><span class="sr">3 minutes 30 seconds</span></span>?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>330 seconds</span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">3.3</span><span class="sr">3 point 3</span></span> minutes</span></label><label><input type="radio" name="mc4" value="c"> <span>210 seconds</span></label><label><input type="radio" name="mc4" value="d"> <span>180 seconds</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change the 3 minutes to seconds, then add the 30 seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>210 seconds</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="15" data-miss="{&quot;55&quot;: &quot;That subtracts the times as if they were decimals (4.07 minus 3.52). Change each to seconds first: 247 minus 232 is 15.&quot;, &quot;247&quot;: &quot;That is Runner B&#x27;s time in seconds. Subtract Runner A&#x27;s time, 232 seconds: 15.&quot;, &quot;232&quot;: &quot;That is Runner A&#x27;s time in seconds. Subtract it from Runner B&#x27;s 247 seconds: 15.&quot;, &quot;45&quot;: &quot;That subtracts only the seconds parts (52 minus 7). Change each whole time to seconds first: 247 minus 232 is 15.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Runner A finished a lap in <span class="m"><span aria-hidden="true">3:52</span><span class="sr">3 minutes 52 seconds</span></span>. Runner B finished in <span class="m"><span aria-hidden="true">4:07</span><span class="sr">4 minutes 7 seconds</span></span>. How many seconds longer did Runner B take?</p>
+<details><summary>Hint</summary><p>Change both times to seconds first: <span class="m"><span aria-hidden="true">3:52</span><span class="sr">3 minutes 52 seconds</span></span> is 232 seconds. Then do the same for <span class="m"><span aria-hidden="true">4:07</span><span class="sr">4 minutes 7 seconds</span></span> and subtract.</p></details>
+<details><summary>Show answer</summary><p><strong>15 seconds</strong>, because <span class="m"><span aria-hidden="true">4:07</span><span class="sr">4 minutes 7 seconds</span></span> is 247 seconds and <span class="m"><span aria-hidden="true">247 − 232 = 15</span><span class="sr">247 minus 232 equals 15</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="346" data-miss="{&quot;506&quot;: &quot;That adds the times as if they were decimals (1.48 + 1.55 + 2.03 = 5.06). Change each to seconds first: 108 + 115 + 123 = 346.&quot;, &quot;5.06&quot;: &quot;That adds the times as if they were decimals. Change each to seconds first: 108 + 115 + 123 = 346.&quot;, &quot;106&quot;: &quot;That adds only the seconds parts (48 + 55 + 3). The minutes count too: 108 + 115 + 123 = 346.&quot;, &quot;286&quot;: &quot;That counts 2:03 as 63 seconds, as if it had only 1 minute. 2 minutes is 120 seconds, so 2:03 is 123, and the total is 346.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> A relay team ran three legs in <span class="m"><span aria-hidden="true">1:48</span><span class="sr">1 minute 48 seconds</span></span>, <span class="m"><span aria-hidden="true">1:55</span><span class="sr">1 minute 55 seconds</span></span> and <span class="m"><span aria-hidden="true">2:03</span><span class="sr">2 minutes 3 seconds</span></span>. What is the total time in seconds?</p>
+<details><summary>Hint</summary><p>Change each time to seconds: 108, then 115, then 123. Then add.</p></details>
+<details><summary>Show answer</summary><p><strong>346 seconds</strong>, because <span class="m"><span aria-hidden="true">108 + 115 + 123 = 346</span><span class="sr">108 plus 115 plus 123 equals 346</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 12.1</h3>
+<p>Classroom Example 12.1.1 on page 5 of the notes lists bike times in minutes and seconds, such as <span class="m"><span aria-hidden="true">3:14</span><span class="sr">3 minutes 14 seconds</span></span>. In the video "Classroom Example 12.1.1," each time is changed to seconds only before it goes into StatCrunch.</p>
+<p><strong>Watch for this:</strong> the colon. Count each minute as 60 seconds, and keep the 0 in seconds such as :08.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Rounding to a set number of decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the kept digit for two, three or four decimal places.</li><li>Count zeros right after the decimal point as places.</li><li>Carry correctly when a 9 rounds up.</li><li>Avoid rounding in steps from the right, and avoid chopping.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Count places after the decimal point. Two decimal places means the hundredths digit is the last one you keep. Three means the thousandths digit. Four means the ten-thousandths digit.</li>
+<li>Look at the single digit right after the kept digit.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit. Keep any zeros that are needed to show the number of places, such as <span class="m"><span aria-hidden="true">0.050</span><span class="sr">0 point 0 5 0</span></span> for three places.</li>
+</ol>
+<p>Zeros right after the decimal point count as places. In <span class="m"><span aria-hidden="true">0.000142</span><span class="sr">0 point 0 0 0 1 4 2</span></span>, the first four places are 0, 0, 0 and 1.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">0.4449</span><span class="sr">0 point 4 4 4 9</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.44</span><span class="sr">0 point 4 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">0.445</span><span class="sr">0 point 4 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span> is a slip.</li>
+<li><strong>Chopping instead of rounding.</strong> Dropping digits without looking at the next one is not rounding. <span class="m"><span aria-hidden="true">0.2687</span><span class="sr">0 point 2 6 8 7</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.27</span><span class="sr">0 point 2 7</span></span>, not <span class="m"><span aria-hidden="true">0.26</span><span class="sr">0 point 2 6</span></span>.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.396</span><span class="sr">0 point 3 9 6</span></span> to two decimal places is <span class="m"><span aria-hidden="true">0.40</span><span class="sr">0 point 4 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 0.46271 two ways">
+<h3 style="margin-top:0">Worked example: Round 0.46271 two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.46271</span><span class="sr">0 point 4 6 2 7 1</span></span> to two decimal places, and then to three decimal places.</p><ol class="steps"><li><span class="work">Two decimal places: keep the 6, look at the 2</span><span class="say">The 2 is 4 or less, so the 6 stays: <span class="m"><span aria-hidden="true">0.46</span><span class="sr">0 point 4 6</span></span>.</span></li><li><span class="work">Three decimal places: keep the 2, look at the 7</span><span class="say">The 7 is 5 or more, so the 2 becomes 3: <span class="m"><span aria-hidden="true">0.463</span><span class="sr">0 point 4 6 3</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.46</span><span class="sr">0 point 4 6</span></span> to two decimal places and <span class="m"><span aria-hidden="true">0.463</span><span class="sr">0 point 4 6 3</span></span> to three decimal places.</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Two decimal places" means exactly two digits after the point. "Four decimal places" means exactly four. "Do not round" means type every digit the calculator shows.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.52849 to three decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.52849 to three decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.52849</span><span class="sr">0 point 5 2 8 4 9</span></span> to three decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 8 in the thousandths place. Next digit: 4.</span><span class="say">Decide whether the 8 stays or goes up. Ignore the 9 at the end.</span></li></ol>
+<p>The guided step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.528" data-nopct="1" data-miss="{&quot;0.529&quot;: &quot;That rounds in steps from the right (0.52849 to 0.5285 to 0.529). Only the digit right after the 8 counts, and it is 4: 0.528.&quot;, &quot;0.53&quot;: &quot;That is two decimal places. Three decimal places keeps three digits after the point: 0.528.&quot;, &quot;0.5285&quot;: &quot;That is four decimal places. Three decimal places keeps three digits after the point: 0.528.&quot;, &quot;0.52&quot;: &quot;That keeps only two digits and chops the rest. Keep three digits: 0.528.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.52849</span><span class="sr">0 point 5 2 8 4 9</span></span> rounded to three decimal places?</p>
+<details><summary>Hint</summary><p>The digit after the 8 is 4, which is 4 or less.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.528</span><span class="sr">0 point 5 2 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.82" data-nopct="1" data-miss="{&quot;7.81&quot;: &quot;That chops off the extra digits. The digit after the 1 is 6, which is 5 or more, so the 1 goes up: 7.82.&quot;, &quot;7.8&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 7.82.&quot;, &quot;7.816&quot;: &quot;That is three decimal places. Two decimal places keeps two digits after the point: 7.82.&quot;, &quot;7.83&quot;: &quot;The kept digit is the 1 in the hundredths place, and it goes up by only 1: 7.82.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> Round <span class="m"><span aria-hidden="true">7.81637</span><span class="sr">7 point 8 1 6 3 7</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 1 in the hundredths place. The next digit is 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.82</span><span class="sr">7 point 8 2</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.050" data-nopct="1" data-miss="{&quot;0.049&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.050.&quot;, &quot;0.041&quot;: &quot;When the 9 goes up, it does not become 1. It becomes 0 and carries 1 to the left, so 0.04 becomes 0.05: 0.050.&quot;, &quot;0.0496&quot;: &quot;That is four decimal places. Three decimal places keeps three digits after the point: 0.050.&quot;, &quot;0.5&quot;: &quot;That moves the decimal point. 0.04962 is less than one tenth, so it rounds to 0.050, not 0.5.&quot;, &quot;0.04&quot;: &quot;That keeps two places and chops. Keep three places and round: 0.050.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Round <span class="m"><span aria-hidden="true">0.04962</span><span class="sr">0 point 0 4 9 6 2</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the thousandths place, and the next digit is 6. A 9 that goes up becomes 0 and carries.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.050</span><span class="sr">0 point 0 5 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> is accepted too, since it has the same value)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="12.00" data-nopct="1" data-miss="{&quot;12.01&quot;: &quot;That rounds in steps from the right (12.0047 to 12.005 to 12.01). Only the digit right after the hundredths place counts, and it is 4: 12.00.&quot;, &quot;12.005&quot;: &quot;That is three decimal places. Two decimal places keeps two digits after the point: 12.00.&quot;, &quot;12.1&quot;: &quot;The hundredths digit is 0 and the next digit is 4, so nothing goes up: 12.00.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> Round <span class="m"><span aria-hidden="true">12.0047</span><span class="sr">12 point 0 0 4 7</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 0 in the hundredths place. Look only at the very next digit, the 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">12.00</span><span class="sr">12 point 0 0</span></span></strong> (typing 12 is accepted too, since it has the same value)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.0001" data-nopct="1" data-miss="{&quot;0.0002&quot;: &quot;The digit after the kept 1 is 4, so the 1 stays: 0.0001.&quot;, &quot;0.00014&quot;: &quot;That is five decimal places. Four decimal places keeps four digits after the point: 0.0001.&quot;, &quot;0.142&quot;: &quot;That drops the zeros after the point. They hold places, so 0.000142 is much smaller than 0.142.&quot;, &quot;0.0&quot;: &quot;Four decimal places keeps four digits after the point, and the fourth one is 1: 0.0001.&quot;, &quot;0&quot;: &quot;Four decimal places keeps four digits after the point, and the fourth one is 1: 0.0001.&quot;, &quot;0.000142&quot;: &quot;That is the number you started with. Keep only four digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Round <span class="m"><span aria-hidden="true">0.000142</span><span class="sr">0 point 0 0 0 1 4 2</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>Count the zeros as places. The fourth digit after the point is the 1, and the next digit is 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0001</span><span class="sr">0 point 0 0 0 1</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;2.999 chops off the 6. The 6 is 5 or more, so the last 9 goes up and the carries run all the way left: 3.000.&quot;, &quot;c&quot;: &quot;3.0 has the right value but only one decimal place. Three decimal places needs three digits after the point: 3.000.&quot;, &quot;d&quot;: &quot;When a 9 goes up it becomes 0 and carries 1 to the left. Every 9 here carries, so the 2 becomes 3: 3.000.&quot;}" data-why="Correct. The 6 makes the last kept 9 go up, and each 9 becomes 0 and carries, giving 3.000.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 12.</b> A calculator shows <span class="m"><span aria-hidden="true">2.99961</span><span class="sr">2 point 9 9 9 6 1</span></span>. Which is this number rounded to three decimal places?</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true">2.999</span><span class="sr">2 point 9 9 9</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span><span class="m"><span aria-hidden="true">3.000</span><span class="sr">3 point 0 0 0</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span><span class="m"><span aria-hidden="true">3.0</span><span class="sr">3 point 0</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span><span class="m"><span aria-hidden="true">2.990</span><span class="sr">2 point 9 9 0</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The kept digit is the third 9, and the next digit is 6. Follow every carry to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.000</span><span class="sr">3 point 0 0 0</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 12.1</h3>
+<p>Step Three of item 4 (Performing a One-Way ANOVA) on page 2 of the notes gives two values from StatCrunch, rounded, and says rounding will be done per the directions given in MML. The StatCrunch output on page 5 shows the same values with more digits. The video "Classroom Example 12.1.1" rounds its values to four decimal places.</p>
+<p><strong>Watch for this:</strong> zeros right after the decimal point, which count as places, and any 9 that rounds up and carries.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Comparing decimals and reading inequality symbols</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Decide which of two decimals is larger, even when they have different numbers of digits.</li><li>Put a short list of decimals in order.</li><li>Read the symbols &lt;, &gt;, <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span>, <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>.</li><li>Decide whether a statement with one of these symbols is true, including when the two numbers are equal.</li></ul>
+</div>
+<h3>Line up the decimal points</h3>
+<p>To compare two decimals, write them with the decimal points lined up and add zeros at the end until they have the same number of digits. Adding zeros at the end does not change a decimal's value. Then compare digit by digit from the left. The first place where they differ decides it.</p>
+<p>For example, compare <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> and <span class="m"><span aria-hidden="true">0.2875</span><span class="sr">0 point 2 8 7 5</span></span>. Write <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> as <span class="m"><span aria-hidden="true">0.3000</span><span class="sr">0 point 3 0 0 0</span></span>. In the tenths place, 3 is more than 2, so <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> is larger even though it has fewer digits.</p>
+<div class="table-wrap" role="region" aria-label="Inequality symbols" tabindex="0">
+<table>
+<caption>Inequality symbols and how to read them</caption>
+<thead><tr><th scope="col">Symbol</th><th scope="col">Read it as</th><th scope="col">A true example</th></tr></thead>
+<tbody>
+<tr><th scope="row">&lt;</th><td>is less than</td><td><span class="m"><span aria-hidden="true">0.09 &lt; 0.1</span><span class="sr">0 point 0 9 is less than 0 point 1</span></span></td></tr>
+<tr><th scope="row">&gt;</th><td>is greater than</td><td><span class="m"><span aria-hidden="true">0.4 &gt; 0.38</span><span class="sr">0 point 4 is greater than 0 point 3 8</span></span></td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to symbol</span></span></th><td>is less than or equal to</td><td><span class="m"><span aria-hidden="true">0.2 ≤ 0.20</span><span class="sr">0 point 2 is less than or equal to 0 point 2 0</span></span></td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to symbol</span></span></th><td>is greater than or equal to</td><td><span class="m"><span aria-hidden="true">0.7 ≥ 0.07</span><span class="sr">0 point 7 is greater than or equal to 0 point 0 7</span></span></td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to symbol</span></span></th><td>is not equal to</td><td><span class="m"><span aria-hidden="true">0.5 ≠ 0.05</span><span class="sr">0 point 5 is not equal to 0 point 0 5</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<p>The open side of &lt; or &gt; faces the larger number. The line under <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> or <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> means equal also counts, so <span class="m"><span aria-hidden="true">0.2 ≤ 0.20</span><span class="sr">0 point 2 is less than or equal to 0 point 2 0</span></span> is true.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Longer is larger.</strong> More digits does not mean a bigger number. <span class="m"><span aria-hidden="true">0.0999</span><span class="sr">0 point 0 9 9 9</span></span> is less than <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span>.</li>
+<li><strong>Ignoring zeros after the point.</strong> <span class="m"><span aria-hidden="true">0.009</span><span class="sr">0 point 0 0 9</span></span> is not bigger than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> just because 9 is bigger than 5. The zeros push the 9 into a smaller place.</li>
+<li><strong>Forgetting the "or equal to."</strong> <span class="m"><span aria-hidden="true">0.6 ≤ 0.6</span><span class="sr">0 point 6 is less than or equal to 0 point 6</span></span> is true, but <span class="m"><span aria-hidden="true">0.6 &lt; 0.6</span><span class="sr">0 point 6 is less than 0 point 6</span></span> is false.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Is 0.0612 greater than 0.07?">
+<h3 style="margin-top:0">Worked example: Is 0.0612 greater than 0.07?</h3>
+<p>Decide whether <span class="m"><span aria-hidden="true">0.0612 &gt; 0.07</span><span class="sr">0 point 0 6 1 2 is greater than 0 point 0 7</span></span> is true.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.0612 and 0.0700</span><span class="sr">0 point 0 6 1 2 and 0 point 0 7 0 0</span></span></span><span class="say">Add zeros to the shorter one so both have four digits after the point.</span></li><li><span class="work">Tenths: 0 and 0. Hundredths: 6 and 7.</span><span class="say">The hundredths place is the first place that differs, and 6 is less than 7.</span></li></ol><p><strong>Answer: false. <span class="m"><span aria-hidden="true">0.0612</span><span class="sr">0 point 0 6 1 2</span></span> is less than <span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span>, even though it has more digits.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Compare 0.07 and 0.0698">
+<h3 style="margin-top:0">Finish this one: Compare 0.07 and 0.0698</h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span> or <span class="m"><span aria-hidden="true">0.0698</span><span class="sr">0 point 0 6 9 8</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.0700 and 0.0698</span><span class="sr">0 point 0 7 0 0 and 0 point 0 6 9 8</span></span></span><span class="say">Both now have four digits after the point. Next, find the first place where they differ.</span></li></ol>
+<p>The guided step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That uses \&quot;longer is larger.\&quot; In the hundredths place, 0.0700 has a 7 and 0.0698 has a 6, so 0.07 is larger.&quot;, &quot;c&quot;: &quot;Adding zeros at the end keeps the value, so 0.07 equals 0.0700, and 0.0700 is not equal to 0.0698.&quot;, &quot;d&quot;: &quot;Decimals with different lengths can always be compared. Add zeros at the end so they match: 0.0700 and 0.0698.&quot;}" data-why="Correct. In the hundredths place, 7 is more than 6, so 0.07 is larger.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 13.</b> Finish it: which statement is true?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true">0.07 &lt; 0.0698</span><span class="sr">0 point 0 7 is less than 0 point 0 6 9 8</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true">0.07 &gt; 0.0698</span><span class="sr">0 point 0 7 is greater than 0 point 0 6 9 8</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true">0.07 = 0.0698</span><span class="sr">0 point 0 7 equals 0 point 0 6 9 8</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span>They cannot be compared, because they have different numbers of digits.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Compare 0.0700 and 0.0698 place by place. The hundredths place is the first one that differs.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.07 &gt; 0.0698</span><span class="sr">0 point 0 7 is greater than 0 point 0 6 9 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;0.002 is 0.00200, which is larger than 0.00098. Fewer digits does not mean smaller.&quot;, &quot;b&quot;: &quot;0.0011 is 0.00110, which is larger than 0.00098.&quot;, &quot;c&quot;: &quot;0.01 is the largest of the four. It has the fewest digits, but its 1 sits in the hundredths place.&quot;}" data-why="Correct. Written with five places, the numbers are 0.00200, 0.00110, 0.01000 and 0.00098, and 0.00098 is the smallest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> Which of these is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">0.002</span><span class="sr">0 point 0 0 2</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">0.0011</span><span class="sr">0 point 0 0 1 1</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">0.00098</span><span class="sr">0 point 0 0 0 9 8</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Give every number five digits after the point by adding zeros at the end, then compare.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.00098</span><span class="sr">0 point 0 0 0 9 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Adding a zero at the end does not change a decimal, so 0.420 is the same as 0.42, not larger.&quot;, &quot;c&quot;: &quot;The line under the symbol means \&quot;or equal to,\&quot; so equal numbers make it true.&quot;, &quot;d&quot;: &quot;Decimals with different lengths can always be compared. Add a zero to 0.42 to see that it equals 0.420.&quot;}" data-why="Correct. 0.42 and 0.420 are equal, and the symbol allows equal.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> Is the statement <span class="m"><span aria-hidden="true">0.42 ≤ 0.420</span><span class="sr">0 point 4 2 is less than or equal to 0 point 4 2 0</span></span> true?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>True, because the two numbers are equal and the symbol allows equal.</span></label><label><input type="radio" name="mc15" value="b"> <span>False, because 0.420 has more digits, so it is larger.</span></label><label><input type="radio" name="mc15" value="c"> <span>False, because the symbol means strictly less than.</span></label><label><input type="radio" name="mc15" value="d"> <span>False, because numbers with different lengths cannot be compared.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Add a zero to the end of 0.42. Then read the symbol out loud, including "or equal to."</p></details>
+<details><summary>Show answer</summary><p><strong>True.</strong> <span class="m"><span aria-hidden="true">0.42 = 0.420</span><span class="sr">0 point 4 2 equals 0 point 4 2 0</span></span>, and the symbol allows equal.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;0.15 is greater than 0.1, so 0.15 is not less than or equal to 0.1.&quot;, &quot;b&quot;: &quot;0.101 is a little more than 0.1 (compare 0.101 with 0.100), so it does not make the statement true.&quot;, &quot;d&quot;: &quot;0.2 is greater than 0.1, so 0.2 is not less than or equal to 0.1.&quot;}" data-why="Correct. 0.1 is less than or equal to 0.1, because the two sides are equal.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Which number makes the statement <span class="m"><span aria-hidden="true"><i>x</i> ≤ 0.1</span><span class="sr">x is less than or equal to 0 point 1</span></span> true?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">0.101</span><span class="sr">0 point 1 0 1</span></span></span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span></span></label><label><input type="radio" name="mc16" value="d"> <span><span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Only a number that is less than 0.1, or equal to it, works. Compare each one with 0.100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;This orders the numbers by their nonzero digits (1, 25, then 5 and 9) and ignores the zeros after the point. The zeros make 0.05 and 0.009 smaller.&quot;, &quot;c&quot;: &quot;This list goes from largest to smallest. The question asks for smallest to largest.&quot;, &quot;d&quot;: &quot;This puts shorter decimals first, as if longer is larger. 0.009 is the smallest, even though it has the most digits.&quot;}" data-why="Correct. With three places each, they are 0.009, 0.050, 0.100 and 0.250.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 17.</b> Which list is in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc17" value="a"> <span><span class="m"><span aria-hidden="true">0.009, 0.05, 0.1, 0.25</span><span class="sr">0 point 0 0 9, 0 point 0 5, 0 point 1, 0 point 2 5</span></span></span></label><label><input type="radio" name="mc17" value="b"> <span><span class="m"><span aria-hidden="true">0.1, 0.25, 0.05, 0.009</span><span class="sr">0 point 1, 0 point 2 5, 0 point 0 5, 0 point 0 0 9</span></span></span></label><label><input type="radio" name="mc17" value="c"> <span><span class="m"><span aria-hidden="true">0.25, 0.1, 0.05, 0.009</span><span class="sr">0 point 2 5, 0 point 1, 0 point 0 5, 0 point 0 0 9</span></span></span></label><label><input type="radio" name="mc17" value="d"> <span><span class="m"><span aria-hidden="true">0.1, 0.05, 0.25, 0.009</span><span class="sr">0 point 1, 0 point 0 5, 0 point 2 5, 0 point 0 0 9</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write each number with three digits after the point, then order them.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.009, 0.05, 0.1, 0.25</span><span class="sr">0 point 0 0 9, 0 point 0 5, 0 point 1, 0 point 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;2&quot;: &quot;That leaves out 0.08 itself. The symbol means \&quot;less than or equal to,\&quot; so a number equal to 0.08 counts. The three are 0.079, 0.08 and 0.0095.&quot;, &quot;4&quot;: &quot;One number that is larger than 0.08 was counted. 0.108 is 0.108 and 0.8 is 0.800, and both are more than 0.080. The three are 0.079, 0.08 and 0.0095.&quot;, &quot;5&quot;: &quot;Not every number fits. 0.8 and 0.108 are both larger than 0.08.&quot;, &quot;1&quot;: &quot;Some smaller numbers were missed. 0.079 and 0.0095 are both less than 0.08, and 0.08 equals itself: 3 in all.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> How many of these numbers make the statement <span class="m"><span aria-hidden="true"><i>x</i> ≤ 0.08</span><span class="sr">x is less than or equal to 0 point 0 8</span></span> true? <span class="m"><span aria-hidden="true">0.079, 0.8, 0.08, 0.0095, 0.108</span><span class="sr">0 point 0 7 9, 0 point 8, 0 point 0 8, 0 point 0 0 9 5, 0 point 1 0 8</span></span></p>
+<details><summary>Hint</summary><p>Give each number four digits after the point and compare it with 0.0800. A number equal to 0.08 counts.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>: <span class="m"><span aria-hidden="true">0.079, 0.08 and 0.0095</span><span class="sr">0 point 0 7 9, 0 point 0 8 and 0 point 0 0 9 5</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 12.1</h3>
+<p>Step Four of item 4 on page 3 of the notes compares two decimals and uses the symbols <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and &gt;. Item 3 on page 1 and the Notes on Step One on page 2 use the symbols = and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>.</p>
+<p><strong>Watch for this:</strong> the "or equal to" part of <span class="m"><span aria-hidden="true">≤</span><span class="sr">the less than or equal to symbol</span></span>, and decimals with many zeros after the point, which are smaller than they look.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Reading values from a table</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find one value in a table from its row and column.</li><li>Add the values down a column, without mixing in values from a row.</li><li>Count the values in a table that meet a condition such as "greater than 83."</li><li>Read a table where each group runs across a row instead of down a column.</li></ul>
+</div>
+<h3>Rows go across, columns go down</h3>
+<p>A table's <strong>columns</strong> run up and down, and each one has a heading at the top. Its <strong>rows</strong> run side to side, and each one has a label on the left. To find one value, go down the right column and across the right row to the cell where they meet.</p>
+<p>Some tables put each group in its own column. Others put each group in its own row. Read the headings before you read any numbers, so you know which way the groups run.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading across when the question says down.</strong> A column total adds the values under one heading, not the values in one row.</li>
+<li><strong>Landing one row off.</strong> Keep a finger or the cursor on the row label as you move across.</li>
+<li><strong>Counting the edge value wrong.</strong> "Greater than 83" leaves out 83 itself. "83 or more" includes it.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Food truck customers">
+<h3 style="margin-top:0">Worked example: Food truck customers</h3>
+<p>Use the table to find the number of customers Truck 2 served in Hour 3, and the total Truck 1 served in all four hours.</p><div class="table-wrap" role="region" aria-label="Customers served each hour at three food trucks" tabindex="0">
+<table>
+<caption>Customers served each hour at three food trucks</caption>
+<thead><tr><th scope="col">Hour</th><th scope="col">Truck 1</th><th scope="col">Truck 2</th><th scope="col">Truck 3</th></tr></thead>
+<tbody>
+<tr><th scope="row">Hour 1</th><td>12</td><td>8</td><td>13</td></tr>
+<tr><th scope="row">Hour 2</th><td>15</td><td>11</td><td>7</td></tr>
+<tr><th scope="row">Hour 3</th><td>9</td><td>16</td><td>12</td></tr>
+<tr><th scope="row">Hour 4</th><td>14</td><td>10</td><td>15</td></tr>
+</tbody>
+</table>
+</div>
+<ol class="steps"><li><span class="work">Truck 2 column, Hour 3 row: 16</span><span class="say">Go down the Truck 2 column to the Hour 3 row.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">12 + 15 + 9 + 14 = 50</span><span class="sr">12 plus 15 plus 9 plus 14 equals 50</span></span></span><span class="say">For the Truck 1 total, add every value in the Truck 1 column.</span></li></ol><p><strong>Answer: 16 customers in Hour 3 for Truck 2, and 50 customers in all for Truck 1.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Truck 3 total">
+<h3 style="margin-top:0">Finish this one: Truck 3 total</h3>
+<p>Use the food truck table above to find the total number of customers Truck 3 served.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">13 + 7 = 20</span><span class="sr">13 plus 7 equals 20</span></span></span><span class="say">The first two values in the Truck 3 column add to 20. Next, add the other two values in that column.</span></li></ol>
+<p>The guided step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="47" data-miss="{&quot;33&quot;: &quot;That adds across the Hour 1 row (12 + 8 + 13). The Truck 3 total adds down its column: 13 + 7 + 12 + 15 = 47.&quot;, &quot;32&quot;: &quot;That leaves out the last value in the column. Add all four: 13 + 7 + 12 + 15 = 47.&quot;, &quot;50&quot;: &quot;That is the Truck 1 total from the worked example. Add down the Truck 3 column: 47.&quot;, &quot;45&quot;: &quot;That is the Truck 2 total. Add down the Truck 3 column: 13 + 7 + 12 + 15 = 47.&quot;, &quot;35&quot;: &quot;That adds the last three values. Include the first one, 13: 47.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Finish it: how many customers did Truck 3 serve in all four hours?</p>
+<details><summary>Hint</summary><p>Add 12 and 15 to the 20 from the guided step.</p></details>
+<details><summary>Show answer</summary><p><strong>47 customers</strong>, because <span class="m"><span aria-hidden="true">13 + 7 + 12 + 15 = 47</span><span class="sr">13 plus 7 plus 12 plus 15 equals 47</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Truck 2 served 11 in Hour 2. Its 16 is in the Hour 3 row, one row too far down.&quot;, &quot;c&quot;: &quot;Truck 3 served 7 in Hour 2. Its 13 is in the Hour 1 row.&quot;, &quot;d&quot;: &quot;Each truck has one value in the Hour 2 row: 15, 11 and 7, so they are not tied.&quot;}" data-why="Correct. In the Hour 2 row, Truck 1 has 15, Truck 2 has 11 and Truck 3 has 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 20.</b> Use the food truck table above. Which truck served the most customers in Hour 2?</legend>
+<label><input type="radio" name="mc20" value="a"> <span>Truck 1</span></label><label><input type="radio" name="mc20" value="b"> <span>Truck 2</span></label><label><input type="radio" name="mc20" value="c"> <span>Truck 3</span></label><label><input type="radio" name="mc20" value="d"> <span>They are tied</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Go across the Hour 2 row only and compare its three values.</p></details>
+<details><summary>Show answer</summary><p><strong>Truck 1</strong>, with 15 customers.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="99" data-miss="{&quot;91&quot;: &quot;That is the largest score in the No Treatment column. Look only in the Online Test column: 99.&quot;, &quot;87&quot;: &quot;That is the largest score in the Take Home Test column. Look only in the Online Test column: 99.&quot;, &quot;71&quot;: &quot;That is the first value in the Online Test column, not the largest. The largest is 99.&quot;, &quot;73&quot;: &quot;That is the last value in the Online Test column, not the largest. The largest is 99.&quot;, &quot;65&quot;: &quot;That is the smallest score in the No Treatment column. The question asks for the largest Online Test score: 99.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> The table below uses the test scores from the example on page 2 of the notes. What is the largest score in the Online Test column?</p>
+<div class="table-wrap" role="region" aria-label="Test scores (in points) from the example on page 2 of the Section 12.1 notes" tabindex="0">
+<table>
+<caption>Test scores (in points) from the example on page 2 of the Section 12.1 notes</caption>
+<thead><tr><th scope="col">Row</th><th scope="col">No Treatment</th><th scope="col">Take Home Test</th><th scope="col">Online Test</th></tr></thead>
+<tbody>
+<tr><th scope="row">Row 1</th><td>75</td><td>87</td><td>71</td></tr>
+<tr><th scope="row">Row 2</th><td>83</td><td>79</td><td>81</td></tr>
+<tr><th scope="row">Row 3</th><td>76</td><td>76</td><td>83</td></tr>
+<tr><th scope="row">Row 4</th><td>65</td><td>83</td><td>99</td></tr>
+<tr><th scope="row">Row 5</th><td>91</td><td>75</td><td>73</td></tr>
+</tbody>
+</table>
+</div>
+<details><summary>Hint</summary><p>Read down the Online Test column only: 71, 81, 83, 99, 73.</p></details>
+<details><summary>Show answer</summary><p><strong>99</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;6&quot;: &quot;That includes the three scores of exactly 83. \&quot;Greater than 83\&quot; leaves 83 out, so only 91, 87 and 99 count.&quot;, &quot;1&quot;: &quot;That counts only one column. Check all three: 91, 87 and 99 are each greater than 83.&quot;, &quot;2&quot;: &quot;One score was missed. 91 (No Treatment), 87 (Take Home Test) and 99 (Online Test) are all greater than 83.&quot;, &quot;4&quot;: &quot;One extra score was counted. Only 91, 87 and 99 are greater than 83.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Use the test score table from Practice 21. How many of the 15 scores are <strong>greater than</strong> 83?</p>
+<details><summary>Hint</summary><p>Check every cell in all three columns. A score of exactly 83 is not greater than 83.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>: 91, 87 and 99.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="80" data-miss="{&quot;75&quot;: &quot;That is the second time in the Freestyle row (1:15). The question asks about the Backstroke row: 1:20 is 80 seconds.&quot;, &quot;120&quot;: &quot;That squeezes the digits of 1:20 together. 1 minute is 60 seconds, plus 20 is 80.&quot;, &quot;84&quot;: &quot;That is the first Backstroke time (1:24). The second one is 1:20, which is 80 seconds.&quot;, &quot;82&quot;: &quot;That is the third Backstroke time (1:22). The second one is 1:20, which is 80 seconds.&quot;, &quot;20&quot;: &quot;That leaves out the minute. 1:20 is 60 + 20 = 80 seconds.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> In the table below, each stroke runs across a row. What is the <strong>second</strong> lap time for <strong>Backstroke</strong>, written in seconds?</p>
+<div class="table-wrap" role="region" aria-label="Swim lap times (minutes:seconds), one row per stroke" tabindex="0">
+<table>
+<caption>Swim lap times (minutes:seconds), one row per stroke</caption>
+<thead><tr><th scope="col">Stroke</th><th scope="col">Lap 1</th><th scope="col">Lap 2</th><th scope="col">Lap 3</th></tr></thead>
+<tbody>
+<tr><th scope="row">Freestyle</th><td><span class="m"><span aria-hidden="true">1:12</span><span class="sr">1 minute 12 seconds</span></span></td><td><span class="m"><span aria-hidden="true">1:15</span><span class="sr">1 minute 15 seconds</span></span></td><td><span class="m"><span aria-hidden="true">1:10</span><span class="sr">1 minute 10 seconds</span></span></td></tr>
+<tr><th scope="row">Backstroke</th><td><span class="m"><span aria-hidden="true">1:24</span><span class="sr">1 minute 24 seconds</span></span></td><td><span class="m"><span aria-hidden="true">1:20</span><span class="sr">1 minute 20 seconds</span></span></td><td><span class="m"><span aria-hidden="true">1:22</span><span class="sr">1 minute 22 seconds</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<details><summary>Hint</summary><p>Go across the Backstroke row to the Lap 2 column. Then change that time to seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>80 seconds</strong>. The time is <span class="m"><span aria-hidden="true">1:20</span><span class="sr">1 minute 20 seconds</span></span>, and <span class="m"><span aria-hidden="true">60 + 20 = 80</span><span class="sr">60 plus 20 equals 80</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 12.1</h3>
+<p>Item 4 on page 2 of the notes gives a table of test scores with one column for each group, and the StatCrunch screenshots on pages 4 and 5 show the same columns. Classroom Example 12.1.1 on page 5 lists its times with one row for each mile.</p>
+<p><strong>Watch for this:</strong> whether the groups run down the columns or across the rows before you read any numbers.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="0.18" data-nopct="1" data-miss="{&quot;0.19&quot;: &quot;That rounds in steps from the right (0.18469 to 0.1847 to 0.185 to 0.19). Only the digit right after the 8 counts, and it is 4: 0.18.&quot;, &quot;0.185&quot;: &quot;That is three decimal places. Two decimal places keeps two digits after the point: 0.18.&quot;, &quot;0.184&quot;: &quot;That keeps three digits. Two decimal places keeps two: 0.18.&quot;, &quot;0.2&quot;: &quot;That is one decimal place. Keep two digits after the point: 0.18.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Round <span class="m"><span aria-hidden="true">0.18469</span><span class="sr">0 point 1 8 4 6 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 8. Look only at the very next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.18</span><span class="sr">0 point 1 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="245" data-miss="{&quot;405&quot;: &quot;That squeezes the digits together. 4 minutes is 240 seconds, plus 5 is 245.&quot;, &quot;290&quot;: &quot;That reads the 05 as 50. The 0 holds the tens place, so it is 5 seconds: 245.&quot;, &quot;240&quot;: &quot;That is the 4 minutes alone. Add the 5 seconds: 245.&quot;, &quot;9&quot;: &quot;That adds 4 + 5, treating the minutes as seconds. Each minute is 60 seconds: 245.&quot;, &quot;4.05&quot;: &quot;That reads the colon as a decimal point. The question asks for seconds: 245.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> How many seconds are in <span class="m"><span aria-hidden="true">4:05</span><span class="sr">4 minutes 5 seconds</span></span>?</p>
+<details><summary>Hint</summary><p>Change the 4 minutes to seconds, then add the 5 seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>245 seconds</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That uses \&quot;longer is larger.\&quot; Write 0.01 as 0.0100. In the hundredths place, 0.0100 has a 1 and 0.0099 has a 0.&quot;, &quot;c&quot;: &quot;They are close but not equal. 0.0100 and 0.0099 differ by 0.0001.&quot;, &quot;d&quot;: &quot;Decimals with different lengths can always be compared. Add zeros at the end: 0.0100 and 0.0099.&quot;}" data-why="Correct. 0.0100 is larger than 0.0099.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 26.</b> Which is larger, <span class="m"><span aria-hidden="true">0.0099</span><span class="sr">0 point 0 0 9 9</span></span> or <span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span>?</legend>
+<label><input type="radio" name="mc26" value="a"> <span><span class="m"><span aria-hidden="true">0.0099</span><span class="sr">0 point 0 0 9 9</span></span></span></label><label><input type="radio" name="mc26" value="b"> <span><span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span></span></label><label><input type="radio" name="mc26" value="c"> <span>They are equal</span></label><label><input type="radio" name="mc26" value="d"> <span>They cannot be compared</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Give both numbers four digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;4&quot;: &quot;That counts the 6.0 for Printer B. \&quot;Less than 6.0\&quot; leaves 6.0 out, so only 5.9, 5.8 and 5.7 count.&quot;, &quot;2&quot;: &quot;One time was missed. 5.9 (Printer A), 5.8 and 5.7 (Printer B) are all less than 6.0.&quot;, &quot;1&quot;: &quot;That counts only one column. Check all three: 5.9, 5.8 and 5.7 are less than 6.0.&quot;, &quot;9&quot;: &quot;That counts the times that are not less than 6.0. The question asks how many are less than 6.0: 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Use the printer table below. How many of the 12 times are <strong>less than</strong> <span class="m"><span aria-hidden="true">6.0</span><span class="sr">6 point 0</span></span> seconds?</p>
+<div class="table-wrap" role="region" aria-label="Seconds needed to print one page, four trials on each of three printers" tabindex="0">
+<table>
+<caption>Seconds needed to print one page, four trials on each of three printers</caption>
+<thead><tr><th scope="col">Trial</th><th scope="col">Printer A</th><th scope="col">Printer B</th><th scope="col">Printer C</th></tr></thead>
+<tbody>
+<tr><th scope="row">Trial 1</th><td><span class="m"><span aria-hidden="true">6.2</span><span class="sr">6 point 2</span></span></td><td><span class="m"><span aria-hidden="true">5.8</span><span class="sr">5 point 8</span></span></td><td><span class="m"><span aria-hidden="true">6.5</span><span class="sr">6 point 5</span></span></td></tr>
+<tr><th scope="row">Trial 2</th><td><span class="m"><span aria-hidden="true">5.9</span><span class="sr">5 point 9</span></span></td><td><span class="m"><span aria-hidden="true">6.0</span><span class="sr">6 point 0</span></span></td><td><span class="m"><span aria-hidden="true">6.6</span><span class="sr">6 point 6</span></span></td></tr>
+<tr><th scope="row">Trial 3</th><td><span class="m"><span aria-hidden="true">6.4</span><span class="sr">6 point 4</span></span></td><td><span class="m"><span aria-hidden="true">5.7</span><span class="sr">5 point 7</span></span></td><td><span class="m"><span aria-hidden="true">6.2</span><span class="sr">6 point 2</span></span></td></tr>
+<tr><th scope="row">Trial 4</th><td><span class="m"><span aria-hidden="true">6.1</span><span class="sr">6 point 1</span></span></td><td><span class="m"><span aria-hidden="true">6.3</span><span class="sr">6 point 3</span></span></td><td><span class="m"><span aria-hidden="true">6.8</span><span class="sr">6 point 8</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<details><summary>Hint</summary><p>Check every cell. A time of exactly <span class="m"><span aria-hidden="true">6.0</span><span class="sr">6 point 0</span></span> is not less than <span class="m"><span aria-hidden="true">6.0</span><span class="sr">6 point 0</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>: <span class="m"><span aria-hidden="true">5.9, 5.8 and 5.7</span><span class="sr">5 point 9, 5 point 8 and 5 point 7</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.840" data-nopct="1" data-miss="{&quot;0.839&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.840.&quot;, &quot;0.8397&quot;: &quot;That is four decimal places. Three decimal places keeps three digits after the point: 0.840.&quot;, &quot;0.830&quot;: &quot;The 9 became 0, but the carry was lost. Add 1 to the 3 on its left: 0.840.&quot;, &quot;0.831&quot;: &quot;When a 9 goes up it becomes 0, not 1, and carries 1 to the left: 0.840.&quot;, &quot;0.8&quot;: &quot;That is one decimal place. Keep three digits after the point: 0.840.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> Round <span class="m"><span aria-hidden="true">0.83966</span><span class="sr">0 point 8 3 9 6 6</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the thousandths place, and the next digit is 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.840</span><span class="sr">0 point 8 4 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.84</span><span class="sr">0 point 8 4</span></span> is accepted too, since it has the same value)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="18" data-miss="{&quot;58&quot;: &quot;That subtracts the times as if they were decimals (15.06 minus 14.48). Change each to seconds first: 906 minus 888 is 18.&quot;, &quot;42&quot;: &quot;That subtracts only the seconds parts (48 minus 6). Change each whole time to seconds first: 906 minus 888 is 18.&quot;, &quot;906&quot;: &quot;That is the second mile in seconds. Subtract the first mile, 888 seconds: 18.&quot;, &quot;888&quot;: &quot;That is the first mile in seconds. Subtract it from the second mile, 906 seconds: 18.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> A walker finished the first mile in <span class="m"><span aria-hidden="true">14:48</span><span class="sr">14 minutes 48 seconds</span></span> and the second mile in <span class="m"><span aria-hidden="true">15:06</span><span class="sr">15 minutes 6 seconds</span></span>. How many seconds longer did the second mile take?</p>
+<details><summary>Hint</summary><p>Change both times to seconds: <span class="m"><span aria-hidden="true">14 × 60 + 48</span><span class="sr">14 times 60, plus 48</span></span> and <span class="m"><span aria-hidden="true">15 × 60 + 6</span><span class="sr">15 times 60, plus 6</span></span>. Then subtract.</p></details>
+<details><summary>Show answer</summary><p><strong>18 seconds</strong>. The miles took 888 and 906 seconds, and <span class="m"><span aria-hidden="true">906 − 888 = 18</span><span class="sr">906 minus 888 equals 18</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with times in minutes and seconds, rounding to a set number of decimal places, comparing decimals and inequality symbols, and reading tables. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec12.1-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/\s*(seconds|second|secs|sec)\.?\s*$/,'').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  if(q.dataset.nopct&&/%/.test(raw))return show(q,'wrong','That has a percent sign, which makes it a different number. The question asks for a decimal, so type it without the percent sign.');
+  if(/:/.test(raw))return show(q,'wrong','That is written in minutes and seconds. Type the number of seconds only, as one number.');
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

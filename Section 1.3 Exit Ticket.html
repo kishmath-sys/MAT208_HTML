@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1.3 Exit Ticket: Collecting Sample Data</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 1.3 Exit Ticket</div>
+<h1>Section 1.3 Exit Ticket: Collecting Sample Data</h1>
+<p>A short, ungraded check to use after the Section 1.3 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 5</span></label><br><progress id="overall" max="5" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Concepts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Design of Experiments<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Sampling Methods<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. Your answers stay on this device unless you choose to send a summary to your instructor, Matt Read. It has 19 quick checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do this <strong>after</strong> you finish the Section 1.3 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it points to the item and page in the notes, and the video when there is one.</li>
+<li>Section 5 builds a short summary and a message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up where you left off.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Take it in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Jump to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Concepts</button></li>
+<li><button type="button" data-go="s3">Design of Experiments</button></li>
+<li><button type="button" data-go="s4">Sampling Methods</button></li>
+<li><button type="button" data-go="s5">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Concepts</h2>
+<p>These checks cover items 1 to 3 on page 1 and Classroom Example 1.3.4 on page 4 of the Section 1.3 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The planner records results without any intervention or influence." data-miss="{&quot;b&quot;: &quot;Not quite. Both kinds of study collect data; what this study lacks is any treatment applied to the cyclists. Review: items 1 and 2 (Observational Study, Experiment) on page 1 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Watching without stepping in is observing, and no treatment is applied to anyone. Review: items 1 and 2 (Observational Study, Experiment) on page 1 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. A placebo is a fake treatment given to participants, and no treatment of any kind is given here. Review: items 1 and 2 (Observational Study, Experiment) on page 1 of the Section 1.3 notes.&quot;}" data-review="items 1 and 2 (Observational Study, Experiment) on page 1 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Observational Study).</b> A city planner stands at a busy corner and counts how many cyclists wear helmets. She does not stop or speak to anyone. Which type of study is this?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>An observational study</span></label><label><input type="radio" name="mc1" value="b"> <span>An experiment, because the planner is collecting data</span></label><label><input type="radio" name="mc1" value="c"> <span>An experiment, because the cyclists are being watched</span></label><label><input type="radio" name="mc1" value="d"> <span>A placebo study, because the cyclists do not know they are being counted</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>An observational study</strong></p><p class="ptr">Where this is: Items 1 and 2 (Observational Study, Experiment) on page 1 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. A treatment (the routine) is applied, and experimental units who are people are called subjects." data-miss="{&quot;b&quot;: &quot;Not quite. The gym applies a treatment, the new routine, before it measures the outcome. Review: item 2 (Experiment), including its Note, on page 1 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. A placebo is a fake treatment, not the people who take part. Review: item 2 (Experiment), including its Note, on page 1 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. People in an experiment are experimental units, and the Note says they are called subjects. Review: item 2 (Experiment), including its Note, on page 1 of the Section 1.3 notes.&quot;}" data-review="item 2 (Experiment), including its Note, on page 1 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Experiment).</b> A gym has 40 members follow a new stretching routine for 8 weeks and then measures their flexibility. Which statement matches item 2 and its Note?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>This is an experiment, and the 40 members are its subjects.</span></label><label><input type="radio" name="mc2" value="b"> <span>This is an observational study, because the gym only measures flexibility at the end.</span></label><label><input type="radio" name="mc2" value="c"> <span>This is an experiment, and the 40 members are called the placebo.</span></label><label><input type="radio" name="mc2" value="d"> <span>This is an experiment, but the members are not experimental units because they are people.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>This is an experiment, and the 40 members are its subjects.</strong></p><p class="ptr">Where this is: Item 2 (Experiment), including its Note, on page 1 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The placebo group gives a comparison for the real treatment." data-miss="{&quot;b&quot;: &quot;Not quite. The remedy is the real treatment; the tablet with no active ingredient is the fake one. Review: item 3 (Placebo) on page 1 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Study size is a separate design idea, and item 3 gives the placebo a different purpose. Review: item 3 (Placebo) on page 1 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. Blinding describes who knows which tablet they got, not the tablet itself. Review: item 3 (Placebo) on page 1 of the Section 1.3 notes.&quot;}" data-review="item 3 (Placebo) on page 1 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Placebo).</b> In a study of a new cold remedy, 50 participants get the remedy and another 50 get a look-alike tablet with no active ingredient. Which statement matches item 3?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>The look-alike tablet is a placebo. It helps determine whether the remedy works better than no treatment at all.</span></label><label><input type="radio" name="mc3" value="b"> <span>The look-alike tablet is the treatment, because every participant gets a tablet.</span></label><label><input type="radio" name="mc3" value="c"> <span>The look-alike tablet is a placebo. Its purpose is to make the study large enough.</span></label><label><input type="radio" name="mc3" value="d"> <span>The look-alike tablet is called blinding, because it looks like the remedy.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The look-alike tablet is a placebo. It helps determine whether the remedy works better than no treatment at all.</strong></p><p class="ptr">Where this is: Item 3 (Placebo) on page 1 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. No treatment was applied, and the researchers did not try to change the respondents." data-miss="{&quot;b&quot;: &quot;Not quite. Posting a question and recording the answers does not apply a treatment to anyone. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.4\&quot;, and items 1 and 2 (Observational Study, Experiment) on page 1.&quot;, &quot;c&quot;: &quot;Not quite. The number of people does not decide the type of study; whether a treatment is applied does. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.4\&quot;, and items 1 and 2 (Observational Study, Experiment) on page 1.&quot;, &quot;d&quot;: &quot;Not quite. Classroom Example 1.3.4 asks you to classify this survey as one of the two types of study. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.4\&quot;, and items 1 and 2 (Observational Study, Experiment) on page 1.&quot;}" data-review="Classroom Example 1.3.4 on page 4 of the Section 1.3 notes, the video &quot;Classroom Example 1.3.4&quot;, and items 1 and 2 (Observational Study, Experiment) on page 1">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Classroom Example 1.3.4, study type).</b> In Classroom Example 1.3.4, 1465 Internet users chose to respond to a question posted on the USA Today electronic edition: "Is news online as satisfying as print and TV news?" Is this an experiment or an observational study?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>An observational study</span></label><label><input type="radio" name="mc4" value="b"> <span>An experiment, because a question was posted for people to answer</span></label><label><input type="radio" name="mc4" value="c"> <span>An experiment, because 1465 people is a large group</span></label><label><input type="radio" name="mc4" value="d"> <span>Neither, because a survey is not a study</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>An observational study</strong></p><p class="ptr">Where this is: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes, the video "Classroom Example 1.3.4", and items 1 and 2 (Observational Study, Experiment) on page 1.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The respondents chose themselves, which is the problem the video points out." data-miss="{&quot;b&quot;: &quot;Not quite. The size of the group is not the concern here; how the respondents ended up in it is. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes and the video \&quot;Classroom Example 1.3.4\&quot;.&quot;, &quot;c&quot;: &quot;Not quite. This is an observational study, so there is no treatment for a placebo to stand in for. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes and the video \&quot;Classroom Example 1.3.4\&quot;.&quot;, &quot;d&quot;: &quot;Not quite. The concern is how the responses were collected, not the value of the percent. Review: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes and the video \&quot;Classroom Example 1.3.4\&quot;.&quot;}" data-review="Classroom Example 1.3.4 on page 4 of the Section 1.3 notes and the video &quot;Classroom Example 1.3.4&quot;">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Classroom Example 1.3.4, major problem).</b> What is a major problem with the USA Today study in Classroom Example 1.3.4?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Only people who chose to respond are included (a voluntary response sample), so there is a strong potential for bias and the results may not represent all USA Today readers.</span></label><label><input type="radio" name="mc5" value="b"> <span>1465 responses is too few to tell anything.</span></label><label><input type="radio" name="mc5" value="c"> <span>The study did not use a placebo group.</span></label><label><input type="radio" name="mc5" value="d"> <span>52% is too close to half to mean anything.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Only people who chose to respond are included (a voluntary response sample), so there is a strong potential for bias and the results may not represent all USA Today readers.</strong></p><p class="ptr">Where this is: Classroom Example 1.3.4 on page 4 of the Section 1.3 notes and the video "Classroom Example 1.3.4".</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Observational Study and Experiment: items 1 and 2, page 1 (including the Note on subjects)</li><li>Placebo: item 3, page 1</li><li>Classroom Example 1.3.4: page 4, video "Classroom Example 1.3.4"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Design of Experiments</h2>
+<p>These checks cover items 4 to 6 on pages 1 and 2 of the Section 1.3 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Replication is about a large enough sample size." data-miss="{&quot;b&quot;: &quot;Not quite. With only 2 people, one unusual reaction could skew the overall conclusions. Review: item 4 (Replication) on page 1 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. In the notes, replication means a large enough sample size, not repeated tests on the same people. Review: item 4 (Replication) on page 1 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. Blinding is about whether participants know which group they are in, not about how many there are. Review: item 4 (Replication) on page 1 of the Section 1.3 notes.&quot;}" data-review="item 4 (Replication) on page 1 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Replication).</b> A company wants to test a new sunscreen. Plan A tests it on 2 volunteers. Plan B tests it on 800 volunteers. Which statement matches item 4?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>Plan B uses replication. With a large enough sample, the effects can be seen consistently across many people, and one unusual reaction is less likely to skew the conclusions.</span></label><label><input type="radio" name="mc6" value="b"> <span>Plan A is better, because with fewer people each result can be checked more carefully.</span></label><label><input type="radio" name="mc6" value="c"> <span>Replication means testing the same 2 volunteers over and over.</span></label><label><input type="radio" name="mc6" value="d"> <span>Plan B uses blinding, because there are more people.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Plan B uses replication. With a large enough sample, the effects can be seen consistently across many people, and one unusual reaction is less likely to skew the conclusions.</strong></p><p class="ptr">Where this is: Item 4 (Replication) on page 1 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The participants do not know, but the researcher does." data-miss="{&quot;b&quot;: &quot;Not quite. In a double-blind study neither the participants nor the researcher knows, and here the researcher knows. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Blinding is about the participants not knowing, and these participants do not know. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. Randomness is about how participants are assigned to groups, not about who knows which spray is real. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;}" data-review="item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Blinding).</b> In a study of a new allergy spray, the participants do not know whether their spray is real or a placebo. The researcher who records their symptoms does know. Which description fits?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>Blinding, but not a double-blind study</span></label><label><input type="radio" name="mc7" value="b"> <span>A double-blind study</span></label><label><input type="radio" name="mc7" value="c"> <span>No blinding at all, because the researcher knows</span></label><label><input type="radio" name="mc7" value="d"> <span>Randomness</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Blinding, but not a double-blind study</strong></p><p class="ptr">Where this is: Item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The improvement comes from belief, and blinding helps reduce it." data-miss="{&quot;b&quot;: &quot;Not quite. The Note in item 5 names blinding, not the number of participants, as what helps reduce this effect. Review: item 5 (Blinding), including the Note on the placebo effect, on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Selection bias comes from how participants are put into groups, while this improvement comes from what the participant believes. Review: item 5 (Blinding), including the Note on the placebo effect, on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. Replication is about sample size, and this describes one participant reporting improvement from belief. Review: item 5 (Blinding), including the Note on the placebo effect, on page 2 of the Section 1.3 notes.&quot;}" data-review="item 5 (Blinding), including the Note on the placebo effect, on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Placebo Effect).</b> In a sleep study, a participant who received the placebo reports sleeping much better, simply because they believe they got the real pill. What is this called, and what helps reduce it?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>The placebo effect. Blinding helps reduce it.</span></label><label><input type="radio" name="mc8" value="b"> <span>The placebo effect. Using more participants makes it go away.</span></label><label><input type="radio" name="mc8" value="c"> <span>Selection bias. Random assignment prevents it.</span></label><label><input type="radio" name="mc8" value="d"> <span>Replication. The same result will show up in every participant.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The placebo effect. Blinding helps reduce it.</strong></p><p class="ptr">Where this is: Item 5 (Blinding), including the Note on the placebo effect, on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Keeping both sides from knowing prevents bias from both sides." data-miss="{&quot;b&quot;: &quot;Not quite. Here the participants know, and in a double-blind study they do not. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Here the researcher knows, so only one side is blinded. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. Double-blind is about who knows, not about how many placebo groups there are. Review: item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.&quot;}" data-review="item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Double-Blind Study).</b> Which description is a double-blind study?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Neither the participants nor the researcher knows who is receiving the treatment or the placebo.</span></label><label><input type="radio" name="mc9" value="b"> <span>The participants know which group they are in, but the researcher does not.</span></label><label><input type="radio" name="mc9" value="c"> <span>The participants do not know which group they are in, but the researcher does.</span></label><label><input type="radio" name="mc9" value="d"> <span>Two placebo groups are used instead of one.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Neither the participants nor the researcher knows who is receiving the treatment or the placebo.</strong></p><p class="ptr">Where this is: Item 5 (Blinding), including Double-Blind Study, on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Participants should be assigned to the groups randomly." data-miss="{&quot;b&quot;: &quot;Not quite. The issue item 6 raises is how people end up in each group, not how many there are. Review: item 6 (Randomness) on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Taking part is not the issue; who ends up in which group is decided by the volunteers, not at random. Review: item 6 (Randomness) on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. This study does have a placebo group; the issue is how people are placed in it. Review: item 6 (Randomness) on page 2 of the Section 1.3 notes.&quot;}" data-review="item 6 (Randomness) on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Randomness).</b> A researcher lets 80 volunteers choose for themselves whether to join the new-diet group or the placebo group. Which statement matches item 6?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>The assignment is not random, so the study is open to selection bias.</span></label><label><input type="radio" name="mc10" value="b"> <span>The problem is replication: 80 volunteers is too few.</span></label><label><input type="radio" name="mc10" value="c"> <span>Nothing is wrong, because every volunteer gets to take part.</span></label><label><input type="radio" name="mc10" value="d"> <span>The problem is that there is no placebo group.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The assignment is not random, so the study is open to selection bias.</strong></p><p class="ptr">Where this is: Item 6 (Randomness) on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Replication: item 4, page 1</li><li>Blinding, the placebo effect and Double-Blind Study: item 5, page 2</li><li>Randomness: item 6, page 2</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Sampling Methods</h2>
+<p>These checks cover items 7 to 12 on pages 2 and 3, Classroom Example 1.3.1 on page 3, and Classroom Examples 1.3.2 and 1.3.3 on page 4 of the Section 1.3 notes.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Every possible group of 200 cardholders has an equal chance of being selected." data-miss="{&quot;b&quot;: &quot;Not quite. No starting point and every kth cardholder are used; the card numbers are generated at random. Review: item 7 (Simple Random Sample) on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. The cardholders are not first divided into subgroups. Review: item 7 (Simple Random Sample) on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. The cardholders are chosen by random generation from the full list, not because they are easy to reach. Review: item 7 (Simple Random Sample) on page 2 of the Section 1.3 notes.&quot;}" data-review="item 7 (Simple Random Sample) on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Simple Random Sample).</b> A library wants to survey 200 of its 6,000 cardholders. A computer randomly generates 200 card numbers from the full list of cardholders. Which type of sampling is this?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Simple random sample</span></label><label><input type="radio" name="mc11" value="b"> <span>Systematic sampling</span></label><label><input type="radio" name="mc11" value="c"> <span>Stratified sampling</span></label><label><input type="radio" name="mc11" value="d"> <span>Convenience sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Simple random sample</strong></p><p class="ptr">Where this is: Item 7 (Simple Random Sample) on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Every kth item is selected after a random starting point." data-miss="{&quot;b&quot;: &quot;Not quite. Only the start is random; after that the cases are picked by a fixed every-50th pattern. Review: item 8 (Systematic Sampling) on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. No groups of cases are selected with every case in them checked. Review: item 8 (Systematic Sampling) on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. The cases follow a set pattern from a random start, not whatever is easiest to grab. Review: item 8 (Systematic Sampling) on page 2 of the Section 1.3 notes.&quot;}" data-review="item 8 (Systematic Sampling) on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Systematic Sampling).</b> An inspector picks a random starting point among the first 50 phone cases on an assembly line, then checks every 50th case after that. Which type of sampling is this?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Systematic sampling</span></label><label><input type="radio" name="mc12" value="b"> <span>Simple random sample, because the starting point is random</span></label><label><input type="radio" name="mc12" value="c"> <span>Cluster sampling</span></label><label><input type="radio" name="mc12" value="d"> <span>Convenience sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Systematic sampling</strong></p><p class="ptr">Where this is: Item 8 (Systematic Sampling) on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The sample is chosen because it is easy to obtain." data-miss="{&quot;b&quot;: &quot;Not quite. Residents who are not at that mall have no chance of being chosen. Review: item 9 (Convenience Sampling) on page 2 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. The mall was not randomly selected from a set of groups; it was picked because it is next door. Review: item 9 (Convenience Sampling) on page 2 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. The residents were not divided into subgroups with a sample taken from each. Review: item 9 (Convenience Sampling) on page 2 of the Section 1.3 notes.&quot;}" data-review="item 9 (Convenience Sampling) on page 2 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Convenience Sampling).</b> A reporter wants to know how a city's residents feel about a new bus route. She interviews shoppers at the mall next to her office because they are easy to reach. Which type of sampling is this?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>Convenience sampling</span></label><label><input type="radio" name="mc13" value="b"> <span>Simple random sample</span></label><label><input type="radio" name="mc13" value="c"> <span>Cluster sampling, because the mall is a group</span></label><label><input type="radio" name="mc13" value="d"> <span>Stratified sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Convenience sampling</strong></p><p class="ptr">Where this is: Item 9 (Convenience Sampling) on page 2 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Taking the first 500 names is easy, and it does not fit the other types." data-miss="{&quot;b&quot;: &quot;Not quite. There is no random start followed by every kth name; the first 500 names were taken as one block. Review: Classroom Example 1.3.1 on page 3 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.1\&quot;, and item 9 (Convenience Sampling) on page 2.&quot;, &quot;c&quot;: &quot;Not quite. The 500 names were not randomly selected; they are simply the first ones on the list. Review: Classroom Example 1.3.1 on page 3 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.1\&quot;, and item 9 (Convenience Sampling) on page 2.&quot;, &quot;d&quot;: &quot;Not quite. No groups were randomly selected with everyone in them used. Review: Classroom Example 1.3.1 on page 3 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.1\&quot;, and item 9 (Convenience Sampling) on page 2.&quot;}" data-review="Classroom Example 1.3.1 on page 3 of the Section 1.3 notes, the video &quot;Classroom Example 1.3.1&quot;, and item 9 (Convenience Sampling) on page 2">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Classroom Example 1.3.1).</b> In Classroom Example 1.3.1, a woman was audited, and the tax department said it was because her name is among the first 500 names on the taxpayer list. Which type of sampling fits best, as in the video?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>Convenience sampling</span></label><label><input type="radio" name="mc14" value="b"> <span>Systematic sampling, because the names come from a list in order</span></label><label><input type="radio" name="mc14" value="c"> <span>Random sampling</span></label><label><input type="radio" name="mc14" value="d"> <span>Cluster sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Convenience sampling</strong></p><p class="ptr">Where this is: Classroom Example 1.3.1 on page 3 of the Section 1.3 notes, the video "Classroom Example 1.3.1", and item 9 (Convenience Sampling) on page 2.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The population is divided into subgroups, and a sample is taken from each subgroup." data-miss="{&quot;b&quot;: &quot;Not quite. Cluster sampling would select entire groups and use every member, but here a sample is taken from each group. Review: item 10 (Stratified Sampling) on page 3 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. The students are first divided into subgroups, and a sample is taken from each one. Review: item 10 (Stratified Sampling) on page 3 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. The students are selected randomly from each group, not because they are easy to reach. Review: item 10 (Stratified Sampling) on page 3 of the Section 1.3 notes.&quot;}" data-review="item 10 (Stratified Sampling) on page 3 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Stratified Sampling).</b> A college divides its students into full-time and part-time students, then randomly selects 60 students from each of those two groups. Which type of sampling is this?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>Stratified sampling</span></label><label><input type="radio" name="mc15" value="b"> <span>Cluster sampling</span></label><label><input type="radio" name="mc15" value="c"> <span>Simple random sample</span></label><label><input type="radio" name="mc15" value="d"> <span>Convenience sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Stratified sampling</strong></p><p class="ptr">Where this is: Item 10 (Stratified Sampling) on page 3 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The day is divided into three strata, and times are picked randomly from each." data-miss="{&quot;b&quot;: &quot;Not quite. Keri does not pick some parts of the day and use every moment in them; she samples from each part. Review: Classroom Example 1.3.3 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.3\&quot;, and item 10 (Stratified Sampling) on page 3.&quot;, &quot;c&quot;: &quot;Not quite. The times are randomly selected within each part, not every kth time after a starting point. Review: Classroom Example 1.3.3 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.3\&quot;, and item 10 (Stratified Sampling) on page 3.&quot;, &quot;d&quot;: &quot;Not quite. The day is first divided into parts, and times are selected from each part. Review: Classroom Example 1.3.3 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.3\&quot;, and item 10 (Stratified Sampling) on page 3.&quot;}" data-review="Classroom Example 1.3.3 on page 4 of the Section 1.3 notes, the video &quot;Classroom Example 1.3.3&quot;, and item 10 (Stratified Sampling) on page 3">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Classroom Example 1.3.3).</b> In Classroom Example 1.3.3, Keri divides her day into morning, afternoon and evening, then measures her heart rate at 3 randomly selected times during each part of the day. Which type of sampling is used?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Stratified</span></label><label><input type="radio" name="mc16" value="b"> <span>Cluster</span></label><label><input type="radio" name="mc16" value="c"> <span>Systematic</span></label><label><input type="radio" name="mc16" value="d"> <span>Random</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Stratified</strong></p><p class="ptr">Where this is: Classroom Example 1.3.3 on page 4 of the Section 1.3 notes, the video "Classroom Example 1.3.3", and item 10 (Stratified Sampling) on page 3.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Entire neighborhoods were randomly selected, and everyone in them is surveyed." data-miss="{&quot;b&quot;: &quot;Not quite. The word \&quot;randomly\&quot; also appears in cluster sampling, and here whole neighborhoods were chosen and everyone in them used. Review: Classroom Example 1.3.2 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.2\&quot;, and item 11 (Cluster Sampling) on page 3.&quot;, &quot;c&quot;: &quot;Not quite. The researcher does not take a sample from each neighborhood in the region; she uses everyone in four of them. Review: Classroom Example 1.3.2 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.2\&quot;, and item 11 (Cluster Sampling) on page 3.&quot;, &quot;d&quot;: &quot;Not quite. The neighborhoods were randomly selected, not picked because they were easy to reach. Review: Classroom Example 1.3.2 on page 4 of the Section 1.3 notes, the video \&quot;Classroom Example 1.3.2\&quot;, and item 11 (Cluster Sampling) on page 3.&quot;}" data-review="Classroom Example 1.3.2 on page 4 of the Section 1.3 notes, the video &quot;Classroom Example 1.3.2&quot;, and item 11 (Cluster Sampling) on page 3">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 17 (Classroom Example 1.3.2).</b> In Classroom Example 1.3.2, a market researcher has randomly selected four neighborhoods in a certain region and is surveying all the people from each neighborhood. Which type of sampling is used?</legend>
+<label><input type="radio" name="mc17" value="a"> <span>Cluster</span></label><label><input type="radio" name="mc17" value="b"> <span>Random, because the neighborhoods were randomly selected</span></label><label><input type="radio" name="mc17" value="c"> <span>Stratified</span></label><label><input type="radio" name="mc17" value="d"> <span>Convenience</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Cluster</strong></p><p class="ptr">Where this is: Classroom Example 1.3.2 on page 4 of the Section 1.3 notes, the video "Classroom Example 1.3.2", and item 11 (Cluster Sampling) on page 3.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. That is the key difference the Note describes." data-miss="{&quot;b&quot;: &quot;Not quite. These descriptions are swapped. Review: item 11 (Cluster Sampling), including its Note, on page 3 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. Cluster sampling randomly selects its clusters, so randomness is not the difference. Review: item 11 (Cluster Sampling), including its Note, on page 3 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. The difference is in how the groups are used, not in how many people end up in the sample. Review: item 11 (Cluster Sampling), including its Note, on page 3 of the Section 1.3 notes.&quot;}" data-review="item 11 (Cluster Sampling), including its Note, on page 3 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 18 (Stratified vs. Cluster).</b> Which statement matches the Note in item 11 about the key difference between stratified and cluster sampling?</legend>
+<label><input type="radio" name="mc18" value="a"> <span>Stratified: take a sample from each group. Cluster: randomly select entire groups and use every member of those groups.</span></label><label><input type="radio" name="mc18" value="b"> <span>Stratified: randomly select entire groups and use every member. Cluster: take a sample from each group.</span></label><label><input type="radio" name="mc18" value="c"> <span>Stratified sampling uses random selection, and cluster sampling does not.</span></label><label><input type="radio" name="mc18" value="d"> <span>Cluster sampling always uses more people than stratified sampling.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Stratified: take a sample from each group. Cluster: randomly select entire groups and use every member of those groups.</strong></p><p class="ptr">Where this is: Item 11 (Cluster Sampling), including its Note, on page 3 of the Section 1.3 notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. It uses more than one sampling method to form the final sample." data-miss="{&quot;b&quot;: &quot;Not quite. The selected hospitals are only the first step; a second method then picks the final 40 nurses. Review: item 12 (Multistage Sample Design) on page 3 of the Section 1.3 notes.&quot;, &quot;c&quot;: &quot;Not quite. The 40 nurses come only from 5 hospitals chosen in an earlier step, so more than one method is used. Review: item 12 (Multistage Sample Design) on page 3 of the Section 1.3 notes.&quot;, &quot;d&quot;: &quot;Not quite. A sample is not taken from every hospital in Illinois, only from the 5 that were selected. Review: item 12 (Multistage Sample Design) on page 3 of the Section 1.3 notes.&quot;}" data-review="item 12 (Multistage Sample Design) on page 3 of the Section 1.3 notes">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 19 (Multistage Sample Design).</b> To study nurses in Illinois, researchers first randomly select 5 hospitals. Then they take a simple random sample of 40 nurses from the nurses at those 5 hospitals. Which design is this?</legend>
+<label><input type="radio" name="mc19" value="a"> <span>A multistage sample design</span></label><label><input type="radio" name="mc19" value="b"> <span>Cluster sampling only</span></label><label><input type="radio" name="mc19" value="c"> <span>A simple random sample only</span></label><label><input type="radio" name="mc19" value="d"> <span>Stratified sampling</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A multistage sample design</strong></p><p class="ptr">Where this is: Item 12 (Multistage Sample Design) on page 3 of the Section 1.3 notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Simple Random Sample, Systematic Sampling and Convenience Sampling: items 7 to 9, page 2</li><li>Stratified Sampling, Cluster Sampling (including the Note) and Multistage Sample Design: items 10 to 12, page 3</li><li>Classroom Example 1.3.1: page 3, video "Classroom Example 1.3.1"</li><li>Classroom Examples 1.3.2 and 1.3.3: page 4, videos "Classroom Example 1.3.2" and "Classroom Example 1.3.3"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 8: I do not see why Test B is the significant one."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec1-3-exitticket-v1';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    if(typeof x.theme==='string')store.theme=x.theme;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[
+ {id:'s2',name:'Concepts',resource:'Items 1 to 3 on page 1 of the Section 1.3 notes, and Classroom Example 1.3.4 on page 4 with the video "Classroom Example 1.3.4".'},
+ {id:'s3',name:'Design of Experiments',resource:'Items 4 to 6 on pages 1 and 2 of the Section 1.3 notes.'},
+ {id:'s4',name:'Sampling Methods',resource:'Items 7 to 12 on pages 2 and 3 of the Section 1.3 notes, Classroom Example 1.3.1 on page 3, Classroom Examples 1.3.2 and 1.3.3 on page 4, and the videos "Classroom Example 1.3.1", "Classroom Example 1.3.2" and "Classroom Example 1.3.3".'}
+];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?('Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review+'.'),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  row.innerHTML='<button type="button" class="primary">Check</button>';
+  $('fieldset',q).after(row);
+  $$('input[type=radio]',q).forEach(r=>{
+    if(store.ans[qid]===r.value)r.checked=true;
+    r.addEventListener('change',()=>clearFb(q));
+  });
+  row.after(fb);
+  function run(){
+    const c=$('input[type=radio]:checked',q);
+    if(c){store.ans[qid]=c.value; save();}
+    return judgeMC(q,!!c);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined&&store.ok[qid]!==undefined){ judgeMC(q,false); }
+});
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='1.3';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s5')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

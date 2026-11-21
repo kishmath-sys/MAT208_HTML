@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 9.2 Exit Ticket: Two Means, Independent Samples</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 9.2 Exit Ticket</div>
+<h1>Section 9.2 Exit Ticket: Two Means, Independent Samples</h1>
+<p>A short, ungraded check to use after the Section 9.2 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Independent Samples and Requirements<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Hypothesis Testing<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Confidence Interval Method<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 18 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 9.2 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the topic, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Independent Samples and Requirements</button></li>
+<li><button type="button" data-go="s3">Hypothesis Testing</button></li>
+<li><button type="button" data-go="s4">Confidence Interval Method</button></li>
+<li><button type="button" data-go="s5">StatCrunch check</button></li>
+<li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Independent Samples and Requirements</h2>
+<p>These checks cover the Key Definitions in the Introduction and Topic 1 (Requirements) on page 1 of the Section 9.2 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. There is no relationship or natural pairing between the two sets of values." data-miss="{&quot;a&quot;: &quot;Not quite. Measuring the same thing in both groups does not create a relationship or pairing between the data values. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Having something in common does not pair a particular swimmer&#x27;s value with a particular runner&#x27;s value. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The definition is about whether the data values are related or naturally paired, not about sample sizes. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;}" data-review="the Key Definitions in the Introduction on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Independent Samples).</b> A researcher records the resting heart rate of 40 randomly selected swimmers and, separately, of 35 randomly selected runners. Which statement matches the Key Definitions on page 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>Dependent samples, because both groups are measured on the same thing, resting heart rate.</span></label><label><input type="radio" name="mc1" value="b"> <span>Independent samples, because no swimmer's value is naturally paired with a runner's value.</span></label><label><input type="radio" name="mc1" value="c"> <span>Dependent samples, because both groups are athletes who train on a regular schedule.</span></label><label><input type="radio" name="mc1" value="d"> <span>Independent samples, but only because the two samples have different sizes.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Independent samples, because no swimmer's value is naturally paired with a runner's value.</strong></p><p class="ptr">Where this is: The Key Definitions in the Introduction on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. Each patient&#x27;s before value is naturally paired with the same patient&#x27;s after value." data-miss="{&quot;a&quot;: &quot;Not quite. Equal sample sizes do not pair the values, since no first-year student is linked to a particular senior. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The two stores&#x27; customers are different people, with no natural pairing between their values. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Cars from two cities are separate groups, with no natural pairing between their values. Review: the Key Definitions in the Introduction on page 1 of the notes.&quot;}" data-review="the Key Definitions in the Introduction on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Dependent Samples).</b> Which study has <strong>dependent</strong> samples, the kind the notes save for Section 9.3?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>50 randomly selected first-year students and 50 randomly selected seniors each report their hours of sleep.</span></label><label><input type="radio" name="mc2" value="b"> <span>Two different stores each record the wait times of 30 randomly chosen customers on the same day.</span></label><label><input type="radio" name="mc2" value="c"> <span>Fuel economy is measured for 60 cars from one city and 45 cars from a second city.</span></label><label><input type="radio" name="mc2" value="d"> <span>Each of 20 patients has blood pressure measured before and after a six-week exercise program.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Each of 20 patients has blood pressure measured before and after a six-week exercise program.</strong></p><p class="ptr">Where this is: The Key Definitions in the Introduction on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. One sample has only 24 values, and normal populations are not given." data-miss="{&quot;b&quot;: &quot;Not quite. Requirement D looks at each sample size, not the two sizes added together. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Requirement D asks for both samples to have size greater than 30 when the populations are not known to be normal. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Unknown population standard deviations is requirement C, which says nothing about sample size. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;}" data-review="Topic 1 (Requirements) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Requirement D).</b> A study takes simple random samples of 24 adults and 40 adults from two independent populations, and the population standard deviations are unknown. Nothing says the populations are normal. Which statement about requirement D in Topic 1 is correct?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Requirement D is not met: only one sample is over 30, and normal populations are not given.</span></label><label><input type="radio" name="mc3" value="b"> <span>Requirement D is met, because the two samples together have 64 values, which is more than 30.</span></label><label><input type="radio" name="mc3" value="c"> <span>Requirement D is met, because at least one of the two samples has more than 30 values.</span></label><label><input type="radio" name="mc3" value="d"> <span>Requirement D is met, because the population standard deviations are unknown.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Requirement D is not met: only one sample is over 30, and normal populations are not given.</strong></p><p class="ptr">Where this is: Topic 1 (Requirements) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Requirement C says the population standard deviations are unknown." data-miss="{&quot;a&quot;: &quot;Not quite. This is requirement A in Topic 1. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This is requirement B in Topic 1. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. This is requirement D in Topic 1. Review: Topic 1 (Requirements) on page 1 of the notes.&quot;}" data-review="Topic 1 (Requirements) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Requirements A to D).</b> Which of these is <strong>not</strong> one of the requirements listed in Topic 1?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>The samples are simple random samples.</span></label><label><input type="radio" name="mc4" value="b"> <span>The populations are independent.</span></label><label><input type="radio" name="mc4" value="c"> <span>The population standard deviations are known.</span></label><label><input type="radio" name="mc4" value="d"> <span>Either both samples have size <span class="m"><span aria-hidden="true">n &gt; 30</span><span class="sr">n greater than 30</span></span> or the population distributions are normal.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The population standard deviations are known.</strong></p><p class="ptr">Where this is: Topic 1 (Requirements) on page 1 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Independent and dependent samples: Key Definitions in the Introduction, page 1</li><li>Requirements A to D: Topic 1, page 1</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Hypothesis Testing</h2>
+<p>These checks cover Topic 2 (Hypothesis Testing) on pages 1 to 7 of the notes, and the videos "Classroom Example 9.2.1" and "Classroom Example 9.2.2" on page 13.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. The null has the equal sign, and the less than claim is the alternative." data-miss="{&quot;a&quot;: &quot;Not quite. In the notes the null hypothesis has the equal sign, so the less than statement cannot be the null. Review: Step One of the example in Topic 2 on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. With City A as population 1, \&quot;City A is less than City B\&quot; needs a less than symbol, not greater than. Review: Step One of the example in Topic 2 on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The claim uses \&quot;less than,\&quot; so it is the alternative hypothesis, not the null. Review: Step One of the example in Topic 2 on page 1 of the notes.&quot;}" data-review="Step One of the example in Topic 2 on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Step One, Claim in the Alternative).</b> A study tests the claim that the mean commute time for workers in City A is less than the mean commute time for workers in City B. Population 1 is City A and population 2 is City B. Which Step One matches the notes?</legend>
+<label><input type="radio" name="mc5" value="a"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 is less than mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 equals mu 2</span></span></span></label><label><input type="radio" name="mc5" value="b"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 0: mu 1 equals mu 2</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &gt; μ<sub>2</sub> (claim)</span><span class="sr">H sub 1: mu 1 is greater than mu 2, claim</span></span></span></label><label><input type="radio" name="mc5" value="c"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 equals mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is less than mu 2</span></span></span></label><label><input type="radio" name="mc5" value="d"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 0: mu 1 equals mu 2</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub> (claim)</span><span class="sr">H sub 1: mu 1 is less than mu 2, claim</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 0: mu 1 equals mu 2</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub> (claim)</span><span class="sr">H sub 1: mu 1 is less than mu 2, claim</span></span></strong></p><p class="ptr">Where this is: Step One of the example in Topic 2 on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The &quot;same mean&quot; claim is the null hypothesis, and the alternative uses not equal." data-miss="{&quot;b&quot;: &quot;Not quite. The claim is \&quot;the same mean,\&quot; which is the equal statement, so the claim goes with the null hypothesis. Review: Step One of the raw data example in Topic 2 on page 4 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;c&quot;: &quot;Not quite. The null hypothesis in the notes has the equal sign, so the not equal statement goes in the alternative. Review: Step One of the raw data example in Topic 2 on page 4 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;d&quot;: &quot;Not quite. The claim says nothing about which brand is larger, so the alternative uses not equal, not greater than. Review: Step One of the raw data example in Topic 2 on page 4 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;}" data-review="Step One of the raw data example in Topic 2 on page 4 of the notes, and the video &quot;Classroom Example 9.2.1&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Step One, Claim in the Null).</b> A study tests the claim that two brands of tires have the same mean tread life. Population 1 is Brand A and population 2 is Brand B. Which Step One matches the notes?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 equals mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> ≠ μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is not equal to mu 2</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 0: mu 1 equals mu 2</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> ≠ μ<sub>2</sub> (claim)</span><span class="sr">H sub 1: mu 1 is not equal to mu 2, claim</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> ≠ μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 is not equal to mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> = μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 equals mu 2</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 equals mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &gt; μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is greater than mu 2</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (claim)</span><span class="sr">H sub 0: mu 1 equals mu 2, claim</span></span> and <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> ≠ μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is not equal to mu 2</span></span></strong></p><p class="ptr">Where this is: Step One of the raw data example in Topic 2 on page 4 of the notes, and the video "Classroom Example 9.2.1" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. Subtracting μ2 from both sides keeps the less than symbol." data-miss="{&quot;a&quot;: &quot;Not quite. Subtracting \u03bc2 from both sides keeps the less than symbol; this one is flipped. Review: the Conversion Process for Null and Alternative Hypothesis on page 3 of the notes, and the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3.&quot;, &quot;c&quot;: &quot;Not quite. This is the StatCrunch form of the null hypothesis, not the alternative. Review: the Conversion Process for Null and Alternative Hypothesis on page 3 of the notes, and the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3.&quot;, &quot;d&quot;: &quot;Not quite. The table subtracts \u03bc2 from both sides, so \u03bc1 stays first. Review: the Conversion Process for Null and Alternative Hypothesis on page 3 of the notes, and the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3.&quot;}" data-review="the Conversion Process for Null and Alternative Hypothesis on page 3 of the notes, and the video &quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats&quot; on page 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Conversion to StatCrunch Form).</b> On paper, the alternative hypothesis is <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is less than mu 2</span></span>. Which statement is its StatCrunch form from the Conversion Process table on page 3?</legend>
+<label><input type="radio" name="mc7" value="a"> <span><span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> − μ<sub>2</sub> &gt; 0</span><span class="sr">H sub 1: mu 1 minus mu 2 is greater than 0</span></span></span></label><label><input type="radio" name="mc7" value="b"> <span><span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> − μ<sub>2</sub> &lt; 0</span><span class="sr">H sub 1: mu 1 minus mu 2 is less than 0</span></span></span></label><label><input type="radio" name="mc7" value="c"> <span><span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> − μ<sub>2</sub> = 0</span><span class="sr">H sub 1: mu 1 minus mu 2 equals 0</span></span></span></label><label><input type="radio" name="mc7" value="d"> <span><span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>2</sub> − μ<sub>1</sub> &lt; 0</span><span class="sr">H sub 1: mu 2 minus mu 1 is less than 0</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> − μ<sub>2</sub> &lt; 0</span><span class="sr">H sub 1: mu 1 minus mu 2 is less than 0</span></span></strong></p><p class="ptr">Where this is: The Conversion Process for Null and Alternative Hypothesis on page 3 of the notes, and the video "Finding the Test Statistics and p Value to Test a Claim with Summary Stats" on page 3.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. 0.0384 is greater than 0.01, so we do not reject the null hypothesis." data-miss="{&quot;a&quot;: &quot;Not quite. The decision compares the p-value to alpha, and 0.0384 is greater than 0.01. Review: Step Four and the Notes on Step Four on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;b&quot;: &quot;Not quite. The significance level in this problem is 0.01, so 0.05 is not the value to compare with. Review: Step Four and the Notes on Step Four on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;d&quot;: &quot;Not quite. 0.0384 is greater than 0.01, not less than it. Review: Step Four and the Notes on Step Four on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;}" data-review="Step Four and the Notes on Step Four on pages 2 and 5 of the notes, and the video &quot;Classroom Example 9.2.2&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Step Four, Decision).</b> In a test of two means, <span class="m"><span aria-hidden="true">&alpha; = 0.01</span><span class="sr">alpha equals 0 point 0 1</span></span> and the p-value is <span class="m"><span aria-hidden="true">0.0384</span><span class="sr">0 point 0 3 8 4</span></span>. Which decision matches the Notes on Step Four?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because <span class="m"><span aria-hidden="true">0.0384</span><span class="sr">0 point 0 3 8 4</span></span> is a small number.</span></label><label><input type="radio" name="mc8" value="b"> <span>Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because <span class="m"><span aria-hidden="true">0.0384</span><span class="sr">0 point 0 3 8 4</span></span> is less than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, the usual level.</span></label><label><input type="radio" name="mc8" value="c"> <span>Do not reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because the p-value is greater than <span class="m"><span aria-hidden="true">&alpha;</span><span class="sr">alpha</span></span>.</span></label><label><input type="radio" name="mc8" value="d"> <span>Do not reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because the p-value is less than <span class="m"><span aria-hidden="true">&alpha;</span><span class="sr">alpha</span></span>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Do not reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>, because the p-value is greater than <span class="m"><span aria-hidden="true">&alpha;</span><span class="sr">alpha</span></span>.</strong></p><p class="ptr">Where this is: Step Four and the Notes on Step Four on pages 2 and 5 of the notes, and the video "Classroom Example 9.2.2" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. Claim in the null and Reject gives &quot;sufficient evidence to warrant rejection.&quot;" data-miss="{&quot;a&quot;: &quot;Not quite. This is the wording for a claim in the null when the decision is DNR, not Reject. Review: Step Five and the table in the Notes on Step Five on page 5 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This is the wording for a claim in the alternative with the decision Reject. Review: Step Five and the table in the Notes on Step Five on page 5 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. This is the wording for a claim in the alternative with the decision DNR. Review: Step Five and the table in the Notes on Step Five on page 5 of the notes.&quot;}" data-review="Step Five and the table in the Notes on Step Five on page 5 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Step Five, Claim in the Null).</b> The claim is that two phone models have the same mean battery life. The claim was the null hypothesis, and the decision was Reject <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. Which conclusion matches the table in the Notes on Step Five?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>"There is not sufficient evidence to warrant rejection of the claim that the two models have the same mean battery life."</span></label><label><input type="radio" name="mc9" value="b"> <span>"There is sufficient evidence to warrant rejection of the claim that the two models have the same mean battery life."</span></label><label><input type="radio" name="mc9" value="c"> <span>"There is sufficient evidence to support the claim that the two models have the same mean battery life."</span></label><label><input type="radio" name="mc9" value="d"> <span>"There is no evidence to support the claim that the two models have the same mean battery life."</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>"There is sufficient evidence to warrant rejection of the claim that the two models have the same mean battery life."</strong></p><p class="ptr">Where this is: Step Five and the table in the Notes on Step Five on page 5 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Claim in the alternative and DNR gives &quot;no evidence to support the claim.&quot;" data-miss="{&quot;a&quot;: &quot;Not quite. This is the wording for a claim in the alternative when the decision is Reject, not DNR. Review: the table in the Notes on Step Five on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;b&quot;: &quot;Not quite. This is the wording for a claim in the null with the decision DNR. Review: the table in the Notes on Step Five on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;c&quot;: &quot;Not quite. This is the wording for a claim in the null with the decision Reject. Review: the table in the Notes on Step Five on pages 2 and 5 of the notes, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;}" data-review="the table in the Notes on Step Five on pages 2 and 5 of the notes, and the video &quot;Classroom Example 9.2.2&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Step Five, Claim in the Alternative).</b> The claim was the alternative hypothesis, and the decision was DNR <span class="m"><span aria-hidden="true">H<sub>0</sub></span><span class="sr">H sub 0</span></span>. Which wording from the table in the Notes on Step Five fits?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>"There is sufficient evidence to support the claim that (original claim)."</span></label><label><input type="radio" name="mc10" value="b"> <span>"There is not sufficient evidence to warrant rejection of the claim that (original claim)."</span></label><label><input type="radio" name="mc10" value="c"> <span>"There is sufficient evidence to warrant rejection of the claim that (original claim)."</span></label><label><input type="radio" name="mc10" value="d"> <span>"There is no evidence to support the claim that (original claim)."</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>"There is no evidence to support the claim that (original claim)."</strong></p><p class="ptr">Where this is: The table in the Notes on Step Five on pages 2 and 5 of the notes, and the video "Classroom Example 9.2.2" on page 13.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Step One, claim in the alternative: Topic 2, page 1</li><li>Step One, claim in the null: raw data example in Topic 2, page 4, and video "Classroom Example 9.2.1", page 13</li><li>Conversion Process for StatCrunch: page 3, video "Finding the Test Statistics and p Value to Test a Claim with Summary Stats"</li><li>Step Four decision: pages 2 and 5, and video "Classroom Example 9.2.2", page 13</li><li>Step Five wording table: pages 2 and 5, and video "Classroom Example 9.2.2", page 13</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Confidence Interval Method</h2>
+<p>These checks cover Topic 3 (Confidence Interval Method) on pages 7 to 12 of the notes, and the videos "Classroom Example 9.2.1" and "Classroom Example 9.2.2" on page 13.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Both boundaries are negative, so μ1 is smaller than μ2." data-miss="{&quot;b&quot;: &quot;Not quite. A negative result for first minus second means the first is smaller, not larger. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the Conclusion (Using the Three Phases from Chapter 7) on pages 8 and 11.&quot;, &quot;c&quot;: &quot;Not quite. Both boundaries are below zero, so zero is not between them. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the Conclusion (Using the Three Phases from Chapter 7) on pages 8 and 11.&quot;, &quot;d&quot;: &quot;Not quite. The Key Concept lists both boundaries negative as one of the three possible results. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the Conclusion (Using the Three Phases from Chapter 7) on pages 8 and 11.&quot;}" data-review="the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the Conclusion (Using the Three Phases from Chapter 7) on pages 8 and 11.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Both Boundaries Negative).</b> A confidence interval is <span class="m"><span aria-hidden="true">−3.4 &lt; μ<sub>1</sub> − μ<sub>2</sub> &lt; −0.8</span><span class="sr">negative 3 point 4 is less than mu 1 minus mu 2, which is less than negative 0 point 8</span></span>. Which statement matches the Key Concept and the three phases?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Both boundaries are negative, so <span class="m"><span aria-hidden="true">&mu;<sub>1</sub> &minus; &mu;<sub>2</sub> &lt; 0</span><span class="sr">mu 1 minus mu 2 is less than 0</span></span> and μ<sub>1</sub> is smaller than μ<sub>2</sub>.</span></label><label><input type="radio" name="mc11" value="b"> <span>Both boundaries are negative, so <span class="m"><span aria-hidden="true">&mu;<sub>1</sub> &minus; &mu;<sub>2</sub> &lt; 0</span><span class="sr">mu 1 minus mu 2 is less than 0</span></span> and μ<sub>1</sub> is larger than μ<sub>2</sub>.</span></label><label><input type="radio" name="mc11" value="c"> <span>Zero is between the boundaries, so μ<sub>1</sub> is equal to μ<sub>2</sub>.</span></label><label><input type="radio" name="mc11" value="d"> <span>A difference of two means cannot be negative, so the interval was found incorrectly.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Both boundaries are negative, so <span class="m"><span aria-hidden="true">&mu;<sub>1</sub> &minus; &mu;<sub>2</sub> &lt; 0</span><span class="sr">mu 1 minus mu 2 is less than 0</span></span> and μ<sub>1</sub> is smaller than μ<sub>2</sub>.</strong></p><p class="ptr">Where this is: The Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the Conclusion (Using the Three Phases from Chapter 7) on pages 8 and 11.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. One boundary is negative and one is positive, so zero is between them." data-miss="{&quot;a&quot;: &quot;Not quite. The lower boundary is negative, so the two boundaries are not both positive. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;b&quot;: &quot;Not quite. The Key Concept looks at both boundaries together, and here one is negative and one is positive. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;d&quot;: &quot;Not quite. The Key Concept does not compare the distances from zero; it checks whether zero is between the boundaries. Review: the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;}" data-review="the Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the video &quot;Classroom Example 9.2.1&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Zero Between the Boundaries).</b> A confidence interval is <span class="m"><span aria-hidden="true">−0.42 &lt; μ<sub>1</sub> − μ<sub>2</sub> &lt; 1.37</span><span class="sr">negative 0 point 4 2 is less than mu 1 minus mu 2, which is less than 1 point 3 7</span></span>. Which statement matches the Key Concept?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Both boundaries are positive, so μ<sub>1</sub> is larger than μ<sub>2</sub>.</span></label><label><input type="radio" name="mc12" value="b"> <span>The lower boundary is negative, so μ<sub>1</sub> is smaller than μ<sub>2</sub>.</span></label><label><input type="radio" name="mc12" value="c"> <span>Zero is between the boundaries, so we use <span class="m"><span aria-hidden="true">&mu;<sub>1</sub> = &mu;<sub>2</sub></span><span class="sr">mu 1 equals mu 2</span></span>.</span></label><label><input type="radio" name="mc12" value="d"> <span>The upper boundary is farther from zero, so μ<sub>1</sub> is larger than μ<sub>2</sub>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Zero is between the boundaries, so we use <span class="m"><span aria-hidden="true">&mu;<sub>1</sub> = &mu;<sub>2</sub></span><span class="sr">mu 1 equals mu 2</span></span>.</strong></p><p class="ptr">Where this is: The Key Concept: Understanding the Confidence Interval on pages 8 and 10 of the notes, and the video "Classroom Example 9.2.1" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. A less than symbol makes this one tailed, and 1 minus 2 times 0.01 is 0.98." data-miss="{&quot;a&quot;: &quot;Not quite. 0.99 is 1 minus alpha, which the review uses for a two tailed test, and a less than symbol makes this one tailed. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, the video \&quot;Finding the Confidence Interval to Test a Claim with Summary Stats\&quot; on page 8, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;b&quot;: &quot;Not quite. 0.02 is 2 times alpha by itself, which still needs to be subtracted from 1. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, the video \&quot;Finding the Confidence Interval to Test a Claim with Summary Stats\&quot; on page 8, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;c&quot;: &quot;Not quite. This halves alpha, but the review for a one tailed test doubles it. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, the video \&quot;Finding the Confidence Interval to Test a Claim with Summary Stats\&quot; on page 8, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;}" data-review="the Review of Converting Significance (α) to Confidence Level on pages 9 and 12 of the notes, the video &quot;Finding the Confidence Interval to Test a Claim with Summary Stats&quot; on page 8, and the video &quot;Classroom Example 9.2.2&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Converting Significance, One Tailed).</b> The alternative hypothesis is <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> &lt; μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is less than mu 2</span></span> and <span class="m"><span aria-hidden="true">&alpha; = 0.01</span><span class="sr">alpha equals 0 point 0 1</span></span>. Using the Review of Converting Significance (<span class="m"><span aria-hidden="true">&alpha;</span><span class="sr">alpha</span></span>) to Confidence Level, which confidence level goes in StatCrunch?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true">0.99</span><span class="sr">0 point 9 9</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true">0.02</span><span class="sr">0 point 0 2</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true">0.995</span><span class="sr">0 point 9 9 5</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span><span class="m"><span aria-hidden="true">0.98</span><span class="sr">0 point 9 8</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.98</span><span class="sr">0 point 9 8</span></span></strong></p><p class="ptr">Where this is: The Review of Converting Significance (α) to Confidence Level on pages 9 and 12 of the notes, the video "Finding the Confidence Interval to Test a Claim with Summary Stats" on page 8, and the video "Classroom Example 9.2.2" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. A not equal symbol makes this two tailed, and 1 minus 0.05 is 0.95, or 95%." data-miss="{&quot;a&quot;: &quot;Not quite. 90% comes from 1 minus 2 times alpha, which is for a one tailed test, and a not equal symbol makes this two tailed. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, Phase I of the Conclusion on pages 8 and 11, and the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11.&quot;, &quot;c&quot;: &quot;Not quite. This halves alpha, but the review for a two tailed test uses 1 minus alpha. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, Phase I of the Conclusion on pages 8 and 11, and the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11.&quot;, &quot;d&quot;: &quot;Not quite. 5% is the significance level itself, not the confidence level. Review: the Review of Converting Significance (\u03b1) to Confidence Level on pages 9 and 12 of the notes, Phase I of the Conclusion on pages 8 and 11, and the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11.&quot;}" data-review="the Review of Converting Significance (α) to Confidence Level on pages 9 and 12 of the notes, Phase I of the Conclusion on pages 8 and 11, and the video &quot;Finding the Confidence Interval to Test a Claim with Raw Data&quot; on page 11.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Converting Significance, Two Tailed).</b> The alternative hypothesis is <span class="m"><span aria-hidden="true">H<sub>1</sub>: μ<sub>1</sub> ≠ μ<sub>2</sub></span><span class="sr">H sub 1: mu 1 is not equal to mu 2</span></span> and <span class="m"><span aria-hidden="true">&alpha; = 0.05</span><span class="sr">alpha equals 0 point 0 5</span></span>. Which percent belongs in the Phase I sentence "We are ___% confident..."?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>90%</span></label><label><input type="radio" name="mc14" value="b"> <span>95%</span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">97.5%</span><span class="sr">97 point 5 percent</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span>5%</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>95%</strong></p><p class="ptr">Where this is: The Review of Converting Significance (α) to Confidence Level on pages 9 and 12 of the notes, Phase I of the Conclusion on pages 8 and 11, and the video "Finding the Confidence Interval to Test a Claim with Raw Data" on page 11.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Reading the interval boundaries: Key Concept, pages 8 and 10</li><li>The three phases: Conclusion, pages 8 and 11</li><li>Converting significance to confidence level: Review on pages 9 and 12, videos "Finding the Confidence Interval to Test a Claim with Summary Stats" (page 8) and "Finding the Confidence Interval to Test a Claim with Raw Data" (page 11)</li><li>Videos "Classroom Example 9.2.1" and "Classroom Example 9.2.2", page 13</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps on pages 3 to 12 of the notes, the four StatCrunch walkthrough videos on pages 3, 6, 8 and 11, and the videos "Classroom Example 9.2.1" and "Classroom Example 9.2.2" on page 13. Have StatCrunch open.</p>
+<div class="note"><strong>Problem A.</strong> A study compares delivery wait times, in minutes, at two pizza shops. A sample of 40 orders from Shop A had a mean wait of <span class="m"><span aria-hidden="true">31.6</span><span class="sr">31 point 6</span></span> minutes and a standard deviation of <span class="m"><span aria-hidden="true">6.2</span><span class="sr">6 point 2</span></span> minutes. A sample of 45 orders from Shop B had a mean wait of <span class="m"><span aria-hidden="true">28.9</span><span class="sr">28 point 9</span></span> minutes and a standard deviation of <span class="m"><span aria-hidden="true">7.5</span><span class="sr">7 point 5</span></span> minutes. Use a <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> significance level to test the claim that the mean wait at Shop A is greater than the mean wait at Shop B. Let population 1 be Shop A and population 2 be Shop B.</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="1.82" data-why="Correct. StatCrunch shows about 1.8158, which rounds to 1.82." data-miss="{&quot;1.81&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the third decimal place is 5 or more. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;-1.82&quot;: &quot;Not quite. The sign is flipped, which happens when Shop B is entered as sample 1. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;1.8&quot;: &quot;Not quite. This matches the result with pooled variances, or a value rounded to one decimal place; the output on page 4 says without pooled variances. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;-1.8&quot;: &quot;Not quite. The sign is flipped, which happens when Shop B is entered as sample 1. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;~1.81581~0.0006&quot;: &quot;Not quite. The directions ask for two decimal places, and this has more. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;}" data-review="the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video &quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats&quot; on page 3, and the video &quot;Classroom Example 9.2.1&quot; on page 13.">
+<p class="prompt"><b class="qlabel">Check 15 (Test Statistic, Summary Stats).</b> For Problem A, set up the hypothesis test in StatCrunch yourself and find the test statistic. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.82</span><span class="sr">1 point 8 2</span></span></strong></p><p class="ptr">Where this is: The StatCrunch steps With Summary on pages 3 and 4 of the notes, the video "Finding the Test Statistics and p Value to Test a Claim with Summary Stats" on page 3, and the video "Classroom Example 9.2.1" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="0.037" data-why="Correct. StatCrunch shows about 0.0365, which rounds to 0.037." data-miss="{&quot;0.036&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the fourth decimal place is 5 or more. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;0.073&quot;: &quot;Not quite. This is the p-value for a not equal alternative; the claim \&quot;greater than\&quot; needs the greater than symbol. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;0.963&quot;: &quot;Not quite. This is the p-value for the opposite direction, which happens with a less than symbol or with the shops entered in the wrong order. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;0.038&quot;: &quot;Not quite. This matches the result with pooled variances; the output on page 4 says without pooled variances. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;, &quot;~0.036515~0.00006&quot;: &quot;Not quite. The directions ask for three decimal places, and this has more. Review: the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video \&quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats\&quot; on page 3, and the video \&quot;Classroom Example 9.2.1\&quot; on page 13.&quot;}" data-review="the StatCrunch steps With Summary on pages 3 and 4 of the notes, the video &quot;Finding the Test Statistics and p Value to Test a Claim with Summary Stats&quot; on page 3, and the video &quot;Classroom Example 9.2.1&quot; on page 13.">
+<p class="prompt"><b class="qlabel">Check 16 (p-Value, Summary Stats).</b> For Problem A, use the same StatCrunch output to find the p-value. Round to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.037</span><span class="sr">0 point 0 3 7</span></span></strong></p><p class="ptr">Where this is: The StatCrunch steps With Summary on pages 3 and 4 of the notes, the video "Finding the Test Statistics and p Value to Test a Claim with Summary Stats" on page 3, and the video "Classroom Example 9.2.1" on page 13.</p></details>
+</div>
+<div class="note"><strong>Problem B.</strong> The table lists the battery life, in hours, of randomly selected phones of two brands. Assume the samples are independent simple random samples from normally distributed populations. Use a <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> significance level to test the claim that the mean battery life of Brand X is less than the mean battery life of Brand Y by constructing a confidence interval. Let population 1 be Brand X and population 2 be Brand Y.</div>
+<div class="table-wrap" role="region" aria-label="Problem B data" tabindex="0">
+<table>
+<caption>Problem B: battery life in hours</caption>
+<thead><tr><th scope="col">Brand</th><th scope="col">Battery life values (hours)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Brand Y</th><td>9.8, 10.4, 11.2, 9.5, 10.9, 10.1, 11.6, 10.7, 9.9, 10.6</td></tr>
+<tr><th scope="row">Brand X</th><td>9.4, 10.1, 9.0, 9.7, 10.3, 8.8, 9.9, 9.6</td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="-1.35" data-why="Correct. StatCrunch shows about negative 1.3549, which rounds to negative 1.35." data-miss="{&quot;0.39&quot;: &quot;Not quite. This is the interval with the columns swapped; Brand X goes in sample 1, even though the table lists it second. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-1.46&quot;: &quot;Not quite. This matches a confidence level found with 1 minus alpha, which is for a two tailed test. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-1.37&quot;: &quot;Not quite. This matches the result with pooled variances; the output on page 12 says without pooled variances. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;1.35&quot;: &quot;Not quite. The boundary is negative, so the minus sign is needed. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-0.39&quot;: &quot;Not quite. This is the upper boundary; the lower boundary is the smaller number. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;~-1.3549~0.0006&quot;: &quot;Not quite. The directions ask for two decimal places, and this has more. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;}" data-review="the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (α) to Confidence Level on page 12, the video &quot;Finding the Confidence Interval to Test a Claim with Raw Data&quot; on page 11, and the video &quot;Classroom Example 9.2.2&quot; on page 13.">
+<p class="prompt"><b class="qlabel">Check 17 (Confidence Interval, Lower Boundary).</b> For Problem B, enter the data and construct the confidence interval in StatCrunch yourself. What is the lower boundary? Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.35</span><span class="sr">negative 1 point 3 5</span></span></strong></p><p class="ptr">Where this is: The StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (α) to Confidence Level on page 12, the video "Finding the Confidence Interval to Test a Claim with Raw Data" on page 11, and the video "Classroom Example 9.2.2" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="-0.39" data-why="Correct. StatCrunch shows about negative 0.3851, which rounds to negative 0.39." data-miss="{&quot;-0.38&quot;: &quot;Not quite. This cuts off the digits instead of rounding; the third decimal place is 5 or more. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;1.35&quot;: &quot;Not quite. This is the interval with the columns swapped; Brand X goes in sample 1, even though the table lists it second. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-0.28&quot;: &quot;Not quite. This matches a confidence level found with 1 minus alpha, which is for a two tailed test. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-0.37&quot;: &quot;Not quite. This matches the result with pooled variances; the output on page 12 says without pooled variances. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;0.39&quot;: &quot;Not quite. The boundary is negative, so the minus sign is needed. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;-1.35&quot;: &quot;Not quite. This is the lower boundary; the upper boundary is the larger number. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;, &quot;~-0.3851~0.0006&quot;: &quot;Not quite. The directions ask for two decimal places, and this has more. Review: the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (\u03b1) to Confidence Level on page 12, the video \&quot;Finding the Confidence Interval to Test a Claim with Raw Data\&quot; on page 11, and the video \&quot;Classroom Example 9.2.2\&quot; on page 13.&quot;}" data-review="the StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (α) to Confidence Level on page 12, the video &quot;Finding the Confidence Interval to Test a Claim with Raw Data&quot; on page 11, and the video &quot;Classroom Example 9.2.2&quot; on page 13.">
+<p class="prompt"><b class="qlabel">Check 18 (Confidence Interval, Upper Boundary).</b> For Problem B, what is the upper boundary of the same confidence interval? Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.39</span><span class="sr">negative 0 point 3 9</span></span></strong></p><p class="ptr">Where this is: The StatCrunch steps for a confidence interval With Data on pages 11 and 12 of the notes, the Review of Converting Significance (α) to Confidence Level on page 12, the video "Finding the Confidence Interval to Test a Claim with Raw Data" on page 11, and the video "Classroom Example 9.2.2" on page 13.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="The video &quot;Classroom Example 9.2.1&quot; opens StatCrunch from Get More Help in the MyLab problem." value="I could not find StatCrunch from inside MyLab."> I could not find StatCrunch from inside MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Pages 3 and 9 of the notes go to Stat, then T Stats, then Two Sample, then With Summary when the means, standard deviations and sample sizes are given. Pages 6 and 11 choose With Data when the data values are given." value="I was not sure whether to choose With Summary or With Data."> I was not sure whether to choose With Summary or With Data.</label><label><input type="checkbox" class="sc-issue" data-tip="The video &quot;Classroom Example 9.2.2&quot; clicks the data in the MyLab problem and opens it in StatCrunch. If you do type it, put each data set in its own column and label it, as on page 6." value="I did not want to type the data in by hand."> I did not want to type the data in by hand.</label><label><input type="checkbox" class="sc-issue" data-tip="In the video &quot;Classroom Example 9.2.1&quot; the values were not saved for the confidence interval, so they were typed in again." value="My numbers were gone when I opened the dialog box again."> My numbers were gone when I opened the dialog box again.</label><label><input type="checkbox" class="sc-issue" data-tip="In the video &quot;Classroom Example 9.2.2&quot;, StatCrunch gets closed partway through too. Open the data in StatCrunch again and rerun the same steps." value="I closed StatCrunch and lost my results."> I closed StatCrunch and lost my results.</label><label><input type="checkbox" class="sc-issue" data-tip="Check which column is sample 1. In the video &quot;Classroom Example 9.2.2&quot;, the table lists the two groups in a different order than the problem&#x27;s population 1 and population 2." value="My answer had the right digits but the wrong sign."> My answer had the right digits but the wrong sign.</label><label><input type="checkbox" class="sc-issue" data-tip="Pages 9 and 12 of the notes show the Level box with the conversion typed in. Look at the symbol in the alternative hypothesis first, then use the Review of Converting Significance on those pages." value="I was not sure what to type in the Level box."> I was not sure what to type in the Level box.</label><label><input type="checkbox" class="sc-issue" data-tip="The Notes on Step Three on pages 2 and 4 say rounding follows the directions given in MML. The videos &quot;Classroom Example 9.2.1&quot; and &quot;Classroom Example 9.2.2&quot; read the rounding direction for each answer before typing it." value="I was not sure how to round the StatCrunch output."> I was not sure how to round the StatCrunch output.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Hypothesis test With Summary: pages 3 and 4, video "Finding the Test Statistics and p Value to Test a Claim with Summary Stats", page 3</li><li>Hypothesis test With Data: pages 6 and 7, video "Finding the Test Statistics and p Value Test a Claim with Raw Data", page 6</li><li>Confidence interval With Summary: pages 8 to 10, video "Finding the Confidence Interval to Test a Claim with Summary Stats", page 8</li><li>Confidence interval With Data: pages 11 and 12, video "Finding the Confidence Interval to Test a Claim with Raw Data", page 11</li><li>Setting up both kinds of problem in MyLab: videos "Classroom Example 9.2.1" and "Classroom Example 9.2.2", page 13</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 13: I am not sure which confidence level to use when the alternative has a less than sign."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec9.2-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Independent Samples and Requirements", "resource": "The Key Definitions in the Introduction and Topic 1 (Requirements) on page 1 of the Section 9.2 notes."}, {"id": "s3", "name": "Hypothesis Testing", "resource": "Topic 2 on pages 1 to 7 of the notes, and the videos \"Classroom Example 9.2.1\" and \"Classroom Example 9.2.2\" on page 13."}, {"id": "s4", "name": "Confidence Interval Method", "resource": "Topic 3 on pages 7 to 12 of the notes, and the videos \"Classroom Example 9.2.1\" and \"Classroom Example 9.2.2\" on page 13."}, {"id": "s5", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 3 to 12 of the notes, the four StatCrunch videos on pages 3, 6, 8 and 11, and the videos \"Classroom Example 9.2.1\" and \"Classroom Example 9.2.2\" on page 13."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='9.2';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s6')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 10.2 Corequisite: Regression</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 10.2</div>
+<h1>Section 10.2 Corequisite: Regression</h1>
+<p>Get ready for the Section 10.2 notes with practice on the units, negative number, equation and rounding skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Numbers written in thousands<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Negative numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Reading and using a line&#x27;s equation<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding to a set number of decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Reading paired tables and &quot;within&quot;<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a number to "thousands" and back, such as feet to thousands of feet.</li><li>Compare, add, subtract and multiply negative numbers.</li><li>Pick out the slope and the y-intercept in a line's equation, and find y for a given x.</li><li>Round to one, three or four decimal places, or to the nearest whole number.</li><li>Read a table of paired values, and decide whether one number is within a given amount of another.</li></ul>
+</div>
+<p>Section 10.2 of the notes covers the sample linear regression line and how to make predictions with it or with the mean of the y-values, with StatCrunch steps and two classroom examples.</p>
+<p>The notes assume you can already read a line's equation, plug a number into it, work with negative numbers and units in thousands, and round to the place a problem asks for. Item 1 only reminds you what the slope and y-intercept are and says to round "according to the instructions given in the problem." This page gives those number skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.62</span><span class="sr">0 point 6 2</span></span>, and type a minus sign for a negative answer, such as <span class="m"><span aria-hidden="true">−3.9</span><span class="sr">negative 3 point 9</span></span>. Commas and extra spaces are fine. None of the answers on this page are percents, so leave off the % sign. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 10.2 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 10.2 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>When a column says "thousands of feet," I am not sure how to write 6,000 feet.</strong><br><button type="button" data-go="s2">Numbers written in thousands</button></li>
+<li><strong>I mix up whether <span class="m"><span aria-hidden="true">−12</span><span class="sr">negative 12</span></span> or <span class="m"><span aria-hidden="true">−8</span><span class="sr">negative 8</span></span> is the smaller number.</strong><br><button type="button" data-go="s3">Negative numbers</button></li>
+<li><strong>I am not sure which number in an equation is the slope, or what to do first when I plug in x.</strong><br><button type="button" data-go="s4">Reading and using a line's equation</button></li>
+<li><strong>I lose track of the places when a problem says "round to four decimal places."</strong><br><button type="button" data-go="s5">Rounding to a set number of decimal places</button></li>
+<li><strong>I am not sure how to read a table of pairs, or what "within 5" means.</strong><br><button type="button" data-go="s6">Reading paired tables and "within"</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Numbers written in thousands</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a number to thousands by dividing by 1,000.</li><li>Change a number given in thousands back to the full number by multiplying by 1,000.</li><li>Keep zeros in place, such as <span class="m"><span aria-hidden="true">4.075</span><span class="sr">4 point 0 7 5</span></span> for 4,075.</li><li>Check the direction: a bigger unit gives a smaller number.</li></ul>
+</div>
+<h3>A column labeled "in thousands"</h3>
+<p>Tables often save space by giving numbers in thousands. A column labeled "Altitude (thousands of feet)" with the entry 12 means 12 thousand feet, which is 12,000 feet.</p>
+<ul>
+<li><strong>To thousands:</strong> divide by 1,000. That moves the decimal point <strong>three</strong> places to the <strong>left</strong>.</li>
+<li><strong>From thousands back to the full number:</strong> multiply by 1,000. That moves the decimal point three places to the <strong>right</strong>. Fill any empty places with zeros.</li>
+<li><strong>Check the direction.</strong> A thousand feet is a bigger unit than a foot, so the number of thousands is always smaller than the number of feet.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Moving only two places.</strong> Dividing by 100 instead of 1,000 turns 2,380 into <span class="m"><span aria-hidden="true">23.8</span><span class="sr">23 point 8</span></span>, which is 10 times too big.</li>
+<li><strong>Losing a zero.</strong> 4,075 in thousands is <span class="m"><span aria-hidden="true">4.075</span><span class="sr">4 point 0 7 5</span></span>, not <span class="m"><span aria-hidden="true">4.75</span><span class="sr">4 point 7 5</span></span>. The zero holds the hundreds place.</li>
+<li><strong>Going the wrong way.</strong> Changing <span class="m"><span aria-hidden="true">12.6</span><span class="sr">12 point 6</span></span> thousand to <span class="m"><span aria-hidden="true">0.0126</span><span class="sr">0 point 0 1 2 6</span></span> divides when it should multiply. The full number must be bigger.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 7,450 feet in thousands of feet">
+<h3 style="margin-top:0">Worked example: Write 7,450 feet in thousands of feet</h3>
+<p>Write 7,450 feet in thousands of feet.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">7,450 ÷ 1,000</span><span class="sr">7,450 divided by 1,000</span></span></span><span class="say">Changing to thousands means divide by 1,000.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">7,450. → 745.0 → 74.50 → 7.450</span><span class="sr">7,450 point, then 745 point 0, then 74 point 5 0, then 7 point 4 5 0</span></span></span><span class="say">Move the decimal point three places to the left, one place at a time.</span></li><li><span class="work">Check</span><span class="say">7 thousand feet is 7,000 feet, and 7,450 is a little more. A number a little over 7 fits.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">7.45</span><span class="sr">7 point 4 5</span></span> thousand feet</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 2,380 meters in thousands of meters">
+<h3 style="margin-top:0">Finish this one: Write 2,380 meters in thousands of meters</h3>
+<p>Write 2,380 meters in thousands of meters.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2,380 ÷ 1,000</span><span class="sr">2,380 divided by 1,000</span></span></span><span class="say">Divide by 1,000. Next, move the decimal point three places to the left.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="2.38" data-miss="{&quot;23.8&quot;: &quot;That moves the point only two places, which divides by 100. Divide by 1,000 to move it three places: 2.38.&quot;, &quot;0.238&quot;: &quot;That moves the point four places. Three places left from 2,380 gives 2.38.&quot;, &quot;238&quot;: &quot;That moves the point only one place. Three places left from 2,380 gives 2.38.&quot;, &quot;2380000&quot;: &quot;That multiplies by 1,000. Changing to thousands makes the number smaller, so divide by 1,000.&quot;, &quot;2380&quot;: &quot;That is still the number of meters. Divide by 1,000 to write it in thousands: 2.38.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: write 2,380 meters in thousands of meters.</p>
+<details><summary>Hint</summary><p>Start at the end of 2,380 and move the point three places left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.38</span><span class="sr">2 point 3 8</span></span></strong> thousand meters</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.905" data-miss="{&quot;9.05&quot;: &quot;That moves the point only two places. Three places left from 905 gives 0.905.&quot;, &quot;0.0905&quot;: &quot;That moves the point four places. Three places left from 905 gives 0.905.&quot;, &quot;90.5&quot;: &quot;That moves the point only one place. Three places left from 905 gives 0.905.&quot;, &quot;905000&quot;: &quot;That multiplies by 1,000. Changing to thousands makes the number smaller.&quot;, &quot;0.95&quot;: &quot;A zero was lost. 905 has a 0 in the tens place, and it stays: 0.905.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Write 905 feet in thousands of feet.</p>
+<details><summary>Hint</summary><p>905 is less than 1,000, so the answer is less than 1. Moving three places left needs a zero in front.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.905</span><span class="sr">0 point 9 0 5</span></span></strong> thousand feet</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="12600" data-miss="{&quot;12.6&quot;: &quot;That is still the number of thousands. Multiply by 1,000 to get miles: 12,600.&quot;, &quot;0.0126&quot;: &quot;That divides by 1,000. Going from thousands back to miles, multiply instead: 12,600.&quot;, &quot;1260&quot;: &quot;That moves the point only two places, which multiplies by 100. Multiply by 1,000: 12,600.&quot;, &quot;126000&quot;: &quot;That moves the point four places. Multiplying by 1,000 moves it three: 12,600.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> A table lists <span class="m"><span aria-hidden="true">12.6</span><span class="sr">12 point 6</span></span> in a column labeled "Distance (thousands of miles)." How many miles is that?</p>
+<details><summary>Hint</summary><p>Going from thousands back to the full number, multiply by 1,000. The answer should be bigger than <span class="m"><span aria-hidden="true">12.6</span><span class="sr">12 point 6</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>12,600 miles</strong> (typing 12600 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;A zero was lost. 4,075 has a 0 in the hundreds place, so it is 4.075, not 4.75.&quot;, &quot;b&quot;: &quot;That moves the point only two places, which divides by 100. Dividing by 1,000 gives 4.075.&quot;, &quot;d&quot;: &quot;That moves the point four places. Dividing by 1,000 gives 4.075.&quot;}" data-why="Correct. 4,075 divided by 1,000 is 4.075, and the zero stays in the hundredths place.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which of these is the same as 4,075 feet?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">4.75</span><span class="sr">4 point 7 5</span></span> thousand feet</span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">40.75</span><span class="sr">40 point 7 5</span></span> thousand feet</span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">4.075</span><span class="sr">4 point 0 7 5</span></span> thousand feet</span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">0.4075</span><span class="sr">0 point 4 0 7 5</span></span> thousand feet</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Divide 4,075 by 1,000 and keep every digit, including the zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.075</span><span class="sr">4 point 0 7 5</span></span> thousand feet</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="11.04" data-miss="{&quot;11040&quot;: &quot;That is still in feet. The equation uses thousands of feet, so divide by 1,000: 11.04.&quot;, &quot;110.4&quot;: &quot;That moves the point only two places. Three places left gives 11.04.&quot;, &quot;1.104&quot;: &quot;That moves the point four places. Three places left gives 11.04.&quot;, &quot;11.4&quot;: &quot;A zero was lost. 11,040 has a 0 in the hundreds place, so it is 11.04, not 11.4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> An equation uses x for altitude in thousands of feet. A plane is at 11,040 feet. What value of x should you use?</p>
+<details><summary>Hint</summary><p>Divide 11,040 by 1,000. Watch the zero after the decimal point.</p></details>
+<details><summary>Show answer</summary><p><strong>x = <span class="m"><span aria-hidden="true">11.04</span><span class="sr">11 point 0 4</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 10.2</h3>
+<p>The example for item 3 on page 2 of the notes gives altitudes in thousands of feet and asks about 6,327 ft, written as <span class="m"><span aria-hidden="true">6.327</span><span class="sr">6 point 3 2 7</span></span>. Page 4 enters that same value in StatCrunch, and the video "Predicting y Values When there is Evidence of a Linear Correlation" on page 3 says it out loud.</p>
+<p><strong>Watch for this:</strong> the units in a column label. If the data are in thousands, the number you plug in has to be in thousands too.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Negative numbers</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Decide which of two negative numbers is smaller.</li><li>Put a list of positive and negative numbers in order.</li><li>Find how far apart a positive number and a negative number are.</li><li>Add a negative number, and multiply a negative number by a positive one.</li></ul>
+</div>
+<h3>Think of a thermometer or a number line</h3>
+<p>Numbers to the left on a number line (or lower on a thermometer) are smaller. Every negative number is smaller than 0, and among negatives, the one <strong>farther from 0</strong> is the <strong>smaller</strong> one. So <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> is smaller (colder) than <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>.</p>
+<ul>
+<li><strong>Adding a negative</strong> is the same as subtracting: <span class="m"><span aria-hidden="true">20 + (−6) = 14</span><span class="sr">20 plus open parenthesis negative 6 close parenthesis equals 14</span></span>.</li>
+<li><strong>Subtracting a negative</strong> is the same as adding: <span class="m"><span aria-hidden="true">20 − (−6) = 26</span><span class="sr">20 minus open parenthesis negative 6 close parenthesis equals 26</span></span>. This is how you find the distance from a negative number up to a positive one.</li>
+<li><strong>Multiplying</strong> a negative number by a positive number gives a negative result: <span class="m"><span aria-hidden="true">−2.5 × 4 = −10</span><span class="sr">negative 2 point 5 times 4 equals negative 10</span></span>.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading the digits only.</strong> 12 is bigger than 8, but <span class="m"><span aria-hidden="true">−12</span><span class="sr">negative 12</span></span> is <em>smaller</em> than <span class="m"><span aria-hidden="true">−8</span><span class="sr">negative 8</span></span>.</li>
+<li><strong>Dropping the sign.</strong> From <span class="m"><span aria-hidden="true">−9</span><span class="sr">negative 9</span></span> up to 23 is 32 steps, not 14. Write the negative number in parentheses so its sign stays visible.</li>
+<li><strong>Losing the sign in a product.</strong> <span class="m"><span aria-hidden="true">−3.5 × 4</span><span class="sr">negative 3 point 5 times 4</span></span> is <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, not 14.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: A temperature drop">
+<h3 style="margin-top:0">Worked example: A temperature drop</h3>
+<p>A thermometer reads 18°F at noon and <span class="m"><span aria-hidden="true">−7°F</span><span class="sr">negative 7 degrees Fahrenheit</span></span> at midnight. How many degrees did the temperature drop?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">18 − (−7)</span><span class="sr">18 minus open parenthesis negative 7 close parenthesis</span></span></span><span class="say">The drop is the higher temperature minus the lower one. Keep the negative in parentheses.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">18 + 7 = 25</span><span class="sr">18 plus 7 equals 25</span></span></span><span class="say">Subtracting a negative is the same as adding: 18 degrees down to 0, then 7 more.</span></li></ol><p><strong>Answer: a drop of 25 degrees</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Which is colder?">
+<h3 style="margin-top:0">Finish this one: Which is colder?</h3>
+<p>Which is colder, <span class="m"><span aria-hidden="true">−12°F</span><span class="sr">negative 12 degrees Fahrenheit</span></span> or <span class="m"><span aria-hidden="true">−8°F</span><span class="sr">negative 8 degrees Fahrenheit</span></span>?</p><ol class="steps"><li><span class="work">Picture a thermometer</span><span class="say">Both are below 0. The one farther below 0 is colder. Next, decide which number is farther from 0.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That compares the digits only. Among negatives, the one farther from 0 is smaller, so −12°F is colder.&quot;, &quot;c&quot;: &quot;Both are below 0, but one is farther below. −12°F is 12 degrees below 0, so it is colder.&quot;, &quot;d&quot;: &quot;The signs and sizes are enough. −12°F is farther below 0, so it is colder.&quot;}" data-why="Correct. 12 degrees below 0 is colder than 8 degrees below 0.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 6.</b> Finish it: which is colder, <span class="m"><span aria-hidden="true">−12°F</span><span class="sr">negative 12 degrees Fahrenheit</span></span> or <span class="m"><span aria-hidden="true">−8°F</span><span class="sr">negative 8 degrees Fahrenheit</span></span>?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">−8°F</span><span class="sr">negative 8 degrees Fahrenheit</span></span>, because 8 is less than 12</span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">−12°F</span><span class="sr">negative 12 degrees Fahrenheit</span></span>, because it is farther below 0</span></label><label><input type="radio" name="mc6" value="c"> <span>They are equally cold, because both are negative</span></label><label><input type="radio" name="mc6" value="d"> <span>There is no way to tell without a thermometer</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>12 degrees below 0 is farther down the thermometer than 8 degrees below 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−12°F</span><span class="sr">negative 12 degrees Fahrenheit</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That orders the numbers by distance from 0 and ignores the signs. Every negative is less than 0.&quot;, &quot;b&quot;: &quot;That puts the negatives in order of their digits. Among negatives, the one farthest from 0 is least, so −14 comes first.&quot;, &quot;d&quot;: &quot;That is greatest to least, the reverse of what was asked.&quot;}" data-why="Correct. The negatives go from farthest below 0 to closest, then 0, then 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 7.</b> Which list puts these numbers in order from <strong>least to greatest</strong>: <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, 3, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, 0, <span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>0, <span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>, 3, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span></span></label><label><input type="radio" name="mc7" value="b"> <span><span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, 0, 3</span></label><label><input type="radio" name="mc7" value="c"> <span><span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>, 0, 3</span></label><label><input type="radio" name="mc7" value="d"> <span>3, 0, <span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start with the negative number farthest from 0. End with the only positive number.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span>, <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span>, 0, 3</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="32" data-miss="{&quot;14&quot;: &quot;That subtracts 9 instead of negative 9. From negative 9 up to 0 is 9 degrees, and from 0 up to 23 is 23 more: 32.&quot;, &quot;-32&quot;: &quot;The size is right, but a distance apart is not negative. The answer is 32 degrees.&quot;, &quot;-14&quot;: &quot;That drops the sign of the low. 23 minus negative 9 is 23 plus 9, which is 32.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> A town had a high of 23°F and a low of <span class="m"><span aria-hidden="true">−9°F</span><span class="sr">negative 9 degrees Fahrenheit</span></span> on the same day. How many degrees apart are the high and the low?</p>
+<details><summary>Hint</summary><p>Find <span class="m"><span aria-hidden="true">23 − (−9)</span><span class="sr">23 minus open parenthesis negative 9 close parenthesis</span></span>. Subtracting a negative is the same as adding.</p></details>
+<details><summary>Show answer</summary><p><strong>32 degrees</strong>, because <span class="m"><span aria-hidden="true">23 − (−9) = 23 + 9 = 32</span><span class="sr">23 minus open parenthesis negative 9 close parenthesis equals 23 plus 9 equals 32</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-7" data-miss="{&quot;7&quot;: &quot;The size is right, but the sign is lost. 15 minus 22 goes below 0, so the answer is negative 7.&quot;, &quot;37&quot;: &quot;That adds 22 instead of negative 22. Adding a negative is subtracting: 15 minus 22 is negative 7.&quot;, &quot;-37&quot;: &quot;That subtracts 15 as well. 15 plus negative 22 is 15 minus 22, which is negative 7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Find <span class="m"><span aria-hidden="true">15 + (−22)</span><span class="sr">15 plus open parenthesis negative 22 close parenthesis</span></span>.</p>
+<details><summary>Hint</summary><p>Adding a negative is the same as subtracting: <span class="m"><span aria-hidden="true">15 − 22</span><span class="sr">15 minus 22</span></span>. The 22 is bigger, so the answer is negative.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−7</span><span class="sr">negative 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-14" data-miss="{&quot;14&quot;: &quot;The size is right, but the sign is lost. A negative times a positive is negative: negative 14.&quot;, &quot;0.5&quot;: &quot;That adds negative 3.5 and 4. The question multiplies: negative 3.5 times 4 is negative 14.&quot;, &quot;-7.5&quot;: &quot;That subtracts 4. The question multiplies: negative 3.5 times 4 is negative 14.&quot;, &quot;-0.875&quot;: &quot;That divides by 4. The question multiplies: negative 3.5 times 4 is negative 14.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> Find <span class="m"><span aria-hidden="true">−3.5 × 4</span><span class="sr">negative 3 point 5 times 4</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">3.5 × 4</span><span class="sr">3 point 5 times 4</span></span> first, then decide the sign. A negative times a positive is negative.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−14</span><span class="sr">negative 14</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 10.2</h3>
+<p>The altitude and temperature table for item 3 on page 2 of the notes has temperatures below zero, such as <span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span>, <span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span>, <span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span> and <span class="m"><span aria-hidden="true">−54</span><span class="sr">negative 54</span></span>. The StatCrunch output on pages 2 and 4 has negative numbers too, and the Classroom Example 10.2.1 video enters a slope as "plus a negative" number.</p>
+<p><strong>Watch for this:</strong> the minus sign in data tables and in StatCrunch output. A dropped sign changes every number that comes after it.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Reading and using a line's equation</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Pick out the slope and the y-intercept when the equation is written with the y-intercept first.</li><li>Keep a minus sign with the number it is in front of.</li><li>Substitute a value for x and multiply before you add or subtract.</li><li>Handle decimals and a negative y-intercept or a negative result.</li></ul>
+</div>
+<h3>Two numbers in a line's equation</h3>
+<p>The equation of a straight line has two numbers that matter. One is multiplied by x, and one stands alone. The equation can be written in either order:</p>
+<ul>
+<li><span class="m"><span aria-hidden="true">y = 30 + 2x</span><span class="sr">y equals 30 plus 2 x</span></span> and <span class="m"><span aria-hidden="true">y = 2x + 30</span><span class="sr">y equals 2 x plus 30</span></span> are the same line.</li>
+<li>The number <strong>multiplied by x</strong> is the <strong>slope</strong>. Here it is 2.</li>
+<li>The number <strong>standing alone</strong> is the <strong>y-intercept</strong>, where the line crosses the y-axis. Here it is 30.</li>
+<li>A minus sign belongs to the number right after it. In <span class="m"><span aria-hidden="true">y = 30 − 4.5x</span><span class="sr">y equals 30 minus 4 point 5 x</span></span>, the slope is <span class="m"><span aria-hidden="true">−4.5</span><span class="sr">negative 4 point 5</span></span>. That is the same as writing <span class="m"><span aria-hidden="true">y = 30 + (−4.5)x</span><span class="sr">y equals 30 plus open parenthesis negative 4 point 5 close parenthesis x</span></span>.</li>
+</ul>
+<h3>Finding y for a given x</h3>
+<p>Replace x with the number, in parentheses. Then follow the order of operations: <strong>multiply first</strong>, then add or subtract.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Taking the first number as the slope.</strong> When the y-intercept is written first, the slope is the second number, the one next to x.</li>
+<li><strong>Adding before multiplying.</strong> <span class="m"><span aria-hidden="true">12 + 2.5 × 8</span><span class="sr">12 plus 2 point 5 times 8</span></span> is <span class="m"><span aria-hidden="true">12 + 20 = 32</span><span class="sr">12 plus 20 equals 32</span></span>, not <span class="m"><span aria-hidden="true">14.5 × 8</span><span class="sr">14 point 5 times 8</span></span>.</li>
+<li><strong>Dropping the minus sign.</strong> In <span class="m"><span aria-hidden="true">y = 64 − 3.2x</span><span class="sr">y equals 64 minus 3 point 2 x</span></span>, the product is subtracted, not added.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: y = 30 − 4.5x when x = 6">
+<h3 style="margin-top:0">Worked example: <span class="m"><span aria-hidden="true">y = 30 − 4.5x</span><span class="sr">y equals 30 minus 4 point 5 x</span></span> when x = 6</h3>
+<p>For the line <span class="m"><span aria-hidden="true">y = 30 − 4.5x</span><span class="sr">y equals 30 minus 4 point 5 x</span></span>, name the slope and y-intercept, then find y when x = 6.</p><ol class="steps"><li><span class="work">Slope <span class="m"><span aria-hidden="true">−4.5</span><span class="sr">negative 4 point 5</span></span>, y-intercept 30</span><span class="say">The number next to x, with its minus sign, is the slope. The number standing alone is the y-intercept.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">y = 30 − 4.5(6)</span><span class="sr">y equals 30 minus 4 point 5 open parenthesis 6 close parenthesis</span></span></span><span class="say">Replace x with 6, in parentheses.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">4.5 × 6 = 27</span><span class="sr">4 point 5 times 6 equals 27</span></span></span><span class="say">Multiply first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">30 − 27 = 3</span><span class="sr">30 minus 27 equals 3</span></span></span><span class="say">Then subtract.</span></li></ol><p><strong>Answer: slope <span class="m"><span aria-hidden="true">−4.5</span><span class="sr">negative 4 point 5</span></span>, y-intercept 30, and y = 3 when x = 6</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: y = 12 + 2.5x when x = 8">
+<h3 style="margin-top:0">Finish this one: <span class="m"><span aria-hidden="true">y = 12 + 2.5x</span><span class="sr">y equals 12 plus 2 point 5 x</span></span> when x = 8</h3>
+<p>Find y when x = 8 for the line <span class="m"><span aria-hidden="true">y = 12 + 2.5x</span><span class="sr">y equals 12 plus 2 point 5 x</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2.5 × 8 = 20</span><span class="sr">2 point 5 times 8 equals 20</span></span></span><span class="say">Multiply first: the slope times the x value. Next, add the y-intercept.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="32" data-miss="{&quot;116&quot;: &quot;That adds 12 and 2.5 first and then multiplies by 8. Multiply first: 2.5 times 8 is 20, then 12 plus 20 is 32.&quot;, &quot;98.5&quot;: &quot;That multiplies the 12 by 8. Only the number next to x gets multiplied: 2.5 times 8 is 20, then add 12.&quot;, &quot;22.5&quot;: &quot;That adds all three numbers. The 2.5 is multiplied by x: 2.5 times 8 is 20, then add 12.&quot;, &quot;20&quot;: &quot;That is the product. One step is left: add the 12.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Finish it: find y when x = 8 for the line <span class="m"><span aria-hidden="true">y = 12 + 2.5x</span><span class="sr">y equals 12 plus 2 point 5 x</span></span>.</p>
+<details><summary>Hint</summary><p>The product is 20. Add the 12 that stands alone.</p></details>
+<details><summary>Show answer</summary><p><strong>32</strong>, because <span class="m"><span aria-hidden="true">12 + 2.5(8) = 12 + 20 = 32</span><span class="sr">12 plus 2 point 5 open parenthesis 8 close parenthesis equals 12 plus 20 equals 32</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That takes the first number as the slope. The slope is the number next to x, which is negative 0.82 here.&quot;, &quot;c&quot;: &quot;The minus sign belongs to the slope. The slope is negative 0.82.&quot;, &quot;d&quot;: &quot;The two numbers cannot be combined, because only one of them is multiplied by x. The y-intercept is 47.3.&quot;}" data-why="Correct. The number next to x, with its minus sign, is the slope, and 47.3 stands alone.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 12.</b> In the equation <span class="m"><span aria-hidden="true">y = 47.3 − 0.82x</span><span class="sr">y equals 47 point 3 minus 0 point 8 2 x</span></span>, which gives the slope and the y-intercept?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>slope <span class="m"><span aria-hidden="true">−0.82</span><span class="sr">negative 0 point 8 2</span></span>, y-intercept <span class="m"><span aria-hidden="true">47.3</span><span class="sr">47 point 3</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span>slope <span class="m"><span aria-hidden="true">47.3</span><span class="sr">47 point 3</span></span>, y-intercept <span class="m"><span aria-hidden="true">−0.82</span><span class="sr">negative 0 point 8 2</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span>slope <span class="m"><span aria-hidden="true">0.82</span><span class="sr">0 point 8 2</span></span>, y-intercept <span class="m"><span aria-hidden="true">47.3</span><span class="sr">47 point 3</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span>slope <span class="m"><span aria-hidden="true">−0.82</span><span class="sr">negative 0 point 8 2</span></span>, y-intercept <span class="m"><span aria-hidden="true">46.48</span><span class="sr">46 point 4 8</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The slope is the number next to x, together with the sign in front of it.</p></details>
+<details><summary>Show answer</summary><p><strong>slope <span class="m"><span aria-hidden="true">−0.82</span><span class="sr">negative 0 point 8 2</span></span>, y-intercept <span class="m"><span aria-hidden="true">47.3</span><span class="sr">47 point 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="48" data-miss="{&quot;80&quot;: &quot;That adds the product. The minus sign means subtract: 64 minus 16 is 48.&quot;, &quot;304&quot;: &quot;That subtracts 64 minus 3.2 first and then multiplies by 5. Multiply first: 3.2 times 5 is 16, then 64 minus 16 is 48.&quot;, &quot;316.8&quot;: &quot;That multiplies the 64 by 5. Only the number next to x gets multiplied.&quot;, &quot;16&quot;: &quot;That is the product. One step is left: subtract it from 64.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Find y when x = 5 for the line <span class="m"><span aria-hidden="true">y = 64 − 3.2x</span><span class="sr">y equals 64 minus 3 point 2 x</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">3.2 × 5</span><span class="sr">3 point 2 times 5</span></span> first, then subtract the result from 64.</p></details>
+<details><summary>Show answer</summary><p><strong>48</strong>, because <span class="m"><span aria-hidden="true">64 − 3.2(5) = 64 − 16 = 48</span><span class="sr">64 minus 3 point 2 open parenthesis 5 close parenthesis equals 64 minus 16 equals 48</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="39.8" data-miss="{&quot;68.2&quot;: &quot;That treats the y-intercept as positive 14.2. It is negative 14.2, so 54 minus 14.2 is 39.8.&quot;, &quot;-68.2&quot;: &quot;Both signs went negative. Negative 14.2 plus 54 is 39.8.&quot;, &quot;-2076&quot;: &quot;That adds negative 14.2 and 0.36 first and then multiplies. Multiply first: 0.36 times 150 is 54.&quot;, &quot;54&quot;: &quot;That is the product. One step is left: add negative 14.2.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> Find y when x = 150 for the line <span class="m"><span aria-hidden="true">y = −14.2 + 0.36x</span><span class="sr">y equals negative 14 point 2 plus 0 point 3 6 x</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.36 × 150</span><span class="sr">0 point 3 6 times 150</span></span> first. Then add that to <span class="m"><span aria-hidden="true">−14.2</span><span class="sr">negative 14 point 2</span></span>, which is the same as subtracting <span class="m"><span aria-hidden="true">14.2</span><span class="sr">14 point 2</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">39.8</span><span class="sr">39 point 8</span></span></strong>, because <span class="m"><span aria-hidden="true">0.36 × 150 = 54</span><span class="sr">0 point 3 6 times 150 equals 54</span></span> and <span class="m"><span aria-hidden="true">−14.2 + 54 = 39.8</span><span class="sr">negative 14 point 2 plus 54 equals 39 point 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-3.9" data-miss="{&quot;3.9&quot;: &quot;The size is right, but 8.6 minus 12.5 goes below 0, so the answer is negative 3.9.&quot;, &quot;21.1&quot;: &quot;That adds the product. The minus sign means subtract: 8.6 minus 12.5 is negative 3.9.&quot;, &quot;73.5&quot;: &quot;That subtracts 8.6 minus 1.25 first and then multiplies. Multiply first: 1.25 times 10 is 12.5.&quot;, &quot;84.75&quot;: &quot;That multiplies the 8.6 by 10. Only the number next to x gets multiplied.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> Find y when x = 10 for the line <span class="m"><span aria-hidden="true">y = 8.6 − 1.25x</span><span class="sr">y equals 8 point 6 minus 1 point 2 5 x</span></span>. The answer can be negative.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">1.25 × 10 = 12.5</span><span class="sr">1 point 2 5 times 10 equals 12 point 5</span></span>. Then <span class="m"><span aria-hidden="true">8.6 − 12.5</span><span class="sr">8 point 6 minus 12 point 5</span></span> goes below 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3.9</span><span class="sr">negative 3 point 9</span></span></strong>, because <span class="m"><span aria-hidden="true">8.6 − 12.5 = −3.9</span><span class="sr">8 point 6 minus 12 point 5 equals negative 3 point 9</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 10.2</h3>
+<p>Item 1 on page 1 of the notes writes the equation with the y-intercept first and the slope second, and item 2 on page 1 says to substitute the value of x into the equation. The Classroom Example 10.2.1 and 10.2.2 videos read the y-intercept and the slope from StatCrunch output.</p>
+<p><strong>Watch for this:</strong> the sign in front of the slope, and multiply before you add.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding to a set number of decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to one, three or four decimal places.</li><li>Count decimal places starting right after the point, zeros included.</li><li>Keep the minus sign when you round a negative number.</li><li>Carry correctly when a 9 rounds up, and avoid rounding in steps.</li></ul>
+</div>
+<h3>How to round to a set number of decimal places</h3>
+<ol class="steps">
+<li>Count places to the right of the decimal point, starting with the first digit after the point. <strong>Zeros count as places.</strong> In <span class="m"><span aria-hidden="true">0.0528</span><span class="sr">0 point 0 5 2 8</span></span>, the 0 right after the point is the first place.</li>
+<li>Stop at the last place you keep. Look at the one digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept one. For a negative number, round the digits the same way and keep the minus sign.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Skipping the zeros.</strong> Four decimal places for <span class="m"><span aria-hidden="true">0.083716</span><span class="sr">0 point 0 8 3 7 1 6</span></span> is <span class="m"><span aria-hidden="true">0.0837</span><span class="sr">0 point 0 8 3 7</span></span>. Starting the count at the 8 gives <span class="m"><span aria-hidden="true">0.08372</span><span class="sr">0 point 0 8 3 7 2</span></span>, which has five places.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">−0.238449</span><span class="sr">negative 0 point 2 3 8 4 4 9</span></span> to three decimal places is <span class="m"><span aria-hidden="true">−0.238</span><span class="sr">negative 0 point 2 3 8</span></span>. Rounding it to <span class="m"><span aria-hidden="true">−0.2385</span><span class="sr">negative 0 point 2 3 8 5</span></span> first and then to <span class="m"><span aria-hidden="true">−0.239</span><span class="sr">negative 0 point 2 3 9</span></span> is a slip.</li>
+<li><strong>A 9 that rounds up.</strong> It becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.04968</span><span class="sr">0 point 0 4 9 6 8</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.050</span><span class="sr">0 point 0 5 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 0.052849 two ways">
+<h3 style="margin-top:0">Worked example: Round <span class="m"><span aria-hidden="true">0.052849</span><span class="sr">0 point 0 5 2 8 4 9</span></span> two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.052849</span><span class="sr">0 point 0 5 2 8 4 9</span></span> to four decimal places, and then to three decimal places.</p><ol class="steps"><li><span class="work">Four places: 0, 5, 2, 8. Next digit: 4</span><span class="say">The 4 is 4 or less, so the 8 stays: <span class="m"><span aria-hidden="true">0.0528</span><span class="sr">0 point 0 5 2 8</span></span>.</span></li><li><span class="work">Three places: 0, 5, 2. Next digit: 8</span><span class="say">The 8 is 5 or more, so the 2 becomes 3: <span class="m"><span aria-hidden="true">0.053</span><span class="sr">0 point 0 5 3</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.0528</span><span class="sr">0 point 0 5 2 8</span></span> to four decimal places and <span class="m"><span aria-hidden="true">0.053</span><span class="sr">0 point 0 5 3</span></span> to three decimal places</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "One decimal place" means exactly one digit after the point. "Three decimal places" means three digits after the point, and "four decimal places" means four. "Round to the nearest whole number" means no digits after the point.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.04968 to three decimal places">
+<h3 style="margin-top:0">Finish this one: Round <span class="m"><span aria-hidden="true">0.04968</span><span class="sr">0 point 0 4 9 6 8</span></span> to three decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.04968</span><span class="sr">0 point 0 4 9 6 8</span></span> to three decimal places.</p><ol class="steps"><li><span class="work">Places: 0, 4, 9. Next digit: 6.</span><span class="say">The 6 is 5 or more, so the 9 in the third place goes up. Next, think about what happens when a 9 goes up.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.050" data-miss="{&quot;0.049&quot;: &quot;That cuts off the extra digits instead of rounding. The digit after the 9 is 6, so the 9 goes up, becomes 0 and carries: 0.050.&quot;, &quot;0.0497&quot;: &quot;That keeps four decimal places. Three places keeps 0, 4 and 9, and the 9 rounds up: 0.050.&quot;, &quot;0.04968&quot;: &quot;That is the number you started with. Keep three digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.04968</span><span class="sr">0 point 0 4 9 6 8</span></span> rounded to three decimal places?</p>
+<details><summary>Hint</summary><p>When the 9 goes up, it becomes 0 and the 4 becomes 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.050</span><span class="sr">0 point 0 5 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.0837" data-miss="{&quot;0.08372&quot;: &quot;That starts counting at the 8 and keeps five decimal places. The 0 right after the point is the first place: 0.0837.&quot;, &quot;0.084&quot;: &quot;That keeps three decimal places. Four places gives 0.0837.&quot;, &quot;0.0838&quot;: &quot;The digit after the 7 is 1, which is 4 or less, so the 7 stays: 0.0837.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Round <span class="m"><span aria-hidden="true">0.083716</span><span class="sr">0 point 0 8 3 7 1 6</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The four places are 0, 8, 3 and 7. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0837</span><span class="sr">0 point 0 8 3 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="-0.238" data-miss="{&quot;0.238&quot;: &quot;The rounding is right, but the minus sign was dropped. The answer is negative 0.238.&quot;, &quot;-0.239&quot;: &quot;That rounds in steps from the right (0.238449 to 0.23845 to 0.2385 to 0.239). Only the digit right after the 8 counts, and it is 4: negative 0.238.&quot;, &quot;-0.24&quot;: &quot;That keeps two decimal places. Three places gives negative 0.238.&quot;, &quot;-0.2384&quot;: &quot;That keeps four decimal places. Three places gives negative 0.238.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Round <span class="m"><span aria-hidden="true">−0.238449</span><span class="sr">negative 0 point 2 3 8 4 4 9</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The three places are 2, 3 and 8. The next digit is 4. Keep the minus sign.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.238</span><span class="sr">negative 0 point 2 3 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.400" data-miss="{&quot;7.399&quot;: &quot;That cuts off the extra digits. The digit after the second 9 is 6, so it rounds up and carries: 7.400.&quot;, &quot;7.3996&quot;: &quot;That keeps four decimal places. Three places gives 7.400.&quot;, &quot;7.39962&quot;: &quot;That is the number you started with. Keep three digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Round <span class="m"><span aria-hidden="true">7.39962</span><span class="sr">7 point 3 9 9 6 2</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the second 9. The next digit is 6, so that 9 goes up and carries, and so does the 9 before it.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.400</span><span class="sr">7 point 4 0 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">7.4</span><span class="sr">7 point 4</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;That keeps three decimal places. Four places gives 0.0262.&quot;, &quot;b&quot;: &quot;That starts counting at the 2 and keeps five decimal places. The 0 right after the point is the first place.&quot;, &quot;c&quot;: &quot;That cuts off the digits instead of rounding. The digit after the 1 is 5, so the 1 goes up: 0.0262.&quot;}" data-why="Correct. The fourth place is the 1, and the next digit is 5, so it rounds up to 0.0262.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 20.</b> StatCrunch shows <span class="m"><span aria-hidden="true">0.0261538</span><span class="sr">0 point 0 2 6 1 5 3 8</span></span>. Which is this number rounded to four decimal places?</legend>
+<label><input type="radio" name="mc20" value="a"> <span><span class="m"><span aria-hidden="true">0.026</span><span class="sr">0 point 0 2 6</span></span></span></label><label><input type="radio" name="mc20" value="b"> <span><span class="m"><span aria-hidden="true">0.02615</span><span class="sr">0 point 0 2 6 1 5</span></span></span></label><label><input type="radio" name="mc20" value="c"> <span><span class="m"><span aria-hidden="true">0.0261</span><span class="sr">0 point 0 2 6 1</span></span></span></label><label><input type="radio" name="mc20" value="d"> <span><span class="m"><span aria-hidden="true">0.0262</span><span class="sr">0 point 0 2 6 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Count 0, 2, 6, 1. The next digit is 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0262</span><span class="sr">0 point 0 2 6 2</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 10.2</h3>
+<p>The Notes under item 1 on page 1 say to round the slope and the y-intercept "according to the instructions given in the problem." In the Classroom Example 10.2.1 video the y-intercept is rounded to one decimal place, the slope to three decimal places and an age to the nearest whole number. In the Classroom Example 10.2.2 video the slope is rounded to four decimal places and a temperature to the nearest whole number.</p>
+<p><strong>Watch for this:</strong> zeros right after the decimal point. They count as places.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Reading paired tables and "within"</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read a table where each row (or column) is one pair of values.</li><li>Find the smallest and largest values in one variable.</li><li>Find the numbers that are within a given amount of a target.</li><li>Decide whether a value is within a given amount of another.</li></ul>
+</div>
+<h3>Tables of pairs</h3>
+<p>Many data tables list two values for each item, one pair per row or per column. To find a value, find the item first, then read across (or down) to the other variable. Keep the units from the labels.</p>
+<h3>What "within" means</h3>
+<p>"Within 4 of 30" means no more than 4 away from 30 in either direction. Subtract and add to find the smallest and largest numbers that count: <span class="m"><span aria-hidden="true">30 − 4 = 26</span><span class="sr">30 minus 4 equals 26</span></span> and <span class="m"><span aria-hidden="true">30 + 4 = 34</span><span class="sr">30 plus 4 equals 34</span></span>. Any number from 26 to 34 is within 4 of 30.</p>
+<p>Another way to check: find the gap between the two numbers (larger minus smaller) and compare it with the allowed amount.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Checking only one side.</strong> "Within" goes both ways. 27 is within 4 of 30, and so is 33.</li>
+<li><strong>Reading the wrong row or column.</strong> Put a finger on the item first, then read straight across to its partner.</li>
+<li><strong>Dropping a sign when finding a gap.</strong> From <span class="m"><span aria-hidden="true">−3</span><span class="sr">negative 3</span></span> up to 24 is 27, not 21.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Is 35 within 4 of 30?">
+<h3 style="margin-top:0">Worked example: Is 35 within 4 of 30?</h3>
+<p>Is 35 within 4 of 30?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">30 − 4 = 26</span><span class="sr">30 minus 4 equals 26</span></span> and <span class="m"><span aria-hidden="true">30 + 4 = 34</span><span class="sr">30 plus 4 equals 34</span></span></span><span class="say">These are the smallest and largest numbers within 4 of 30.</span></li><li><span class="work">35 is greater than 34</span><span class="say">So 35 is outside. The gap check agrees: <span class="m"><span aria-hidden="true">35 − 30 = 5</span><span class="sr">35 minus 30 equals 5</span></span>, and 5 is more than 4.</span></li></ol><p><strong>Answer: No, 35 is not within 4 of 30.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Numbers within 8 of 62">
+<h3 style="margin-top:0">Finish this one: Numbers within 8 of 62</h3>
+<p>What is the largest number that is within 8 of 62?</p><ol class="steps"><li><span class="work">The numbers within 8 of 62 run from <span class="m"><span aria-hidden="true">62 − 8</span><span class="sr">62 minus 8</span></span> up to <span class="m"><span aria-hidden="true">62 + 8</span><span class="sr">62 plus 8</span></span>.</span><span class="say">The largest one is at the top end. Next, add.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="70" data-miss="{&quot;54&quot;: &quot;That is the smallest number within 8 of 62. The largest is 62 plus 8, which is 70.&quot;, &quot;69&quot;: &quot;70 itself counts, because it is exactly 8 away. \&quot;Within 8\&quot; includes a gap of 8.&quot;, &quot;8&quot;: &quot;8 is the allowed gap. Add it to 62 to find the largest number: 70.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Finish it: what is the largest number that is within 8 of 62?</p>
+<details><summary>Hint</summary><p>Add 8 to 62.</p></details>
+<details><summary>Show answer</summary><p><strong>70</strong></p></details>
+</div>
+<p>Practice 22 and Practice 23 use the altitude and temperature data from item 3 of the notes, shown here with one pair per row.</p>
+<div class="table-wrap" role="region" aria-label="Altitude and temperature table" tabindex="0">
+<table>
+<caption>Altitude and outside air temperature (data from item 3 of the Section 10.2 notes)</caption>
+<thead><tr><th scope="col">Altitude (thousands of feet)</th><th scope="col">Temperature (°F)</th></tr></thead>
+<tbody>
+<tr><th scope="row">3</th><td>57</td></tr>
+<tr><th scope="row">10</th><td>37</td></tr>
+<tr><th scope="row">14</th><td>24</td></tr>
+<tr><th scope="row">22</th><td><span class="m"><span aria-hidden="true">−5</span><span class="sr">negative 5</span></span></td></tr>
+<tr><th scope="row">28</th><td><span class="m"><span aria-hidden="true">−30</span><span class="sr">negative 30</span></span></td></tr>
+<tr><th scope="row">31</th><td><span class="m"><span aria-hidden="true">−41</span><span class="sr">negative 41</span></span></td></tr>
+<tr><th scope="row">33</th><td><span class="m"><span aria-hidden="true">−54</span><span class="sr">negative 54</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="num" data-answer="-30" data-miss="{&quot;30&quot;: &quot;The sign was dropped. The temperature at 28 thousand feet is negative 30 degrees.&quot;, &quot;-41&quot;: &quot;That is the temperature in the next row, at 31 thousand feet. Read across from 28: negative 30.&quot;, &quot;-5&quot;: &quot;That is the temperature at 22 thousand feet. Read across from 28: negative 30.&quot;, &quot;28&quot;: &quot;28 is the altitude. Read across to the temperature: negative 30.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Using the table above, what temperature was recorded at an altitude of 28 thousand feet?</p>
+<details><summary>Hint</summary><p>Find 28 in the altitude column, then read straight across.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−30°F</span><span class="sr">negative 30 degrees Fahrenheit</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;Those are the smallest and largest temperatures. The question asks about the altitude column.&quot;, &quot;c&quot;: &quot;31 is not the largest. The last row has 33.&quot;, &quot;d&quot;: &quot;10 is not the smallest. The first row has 3.&quot;}" data-why="Correct. The altitudes run from 3 to 33 thousand feet.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 23.</b> Using the same table, what are the smallest and largest <strong>altitudes</strong>?</legend>
+<label><input type="radio" name="mc23" value="a"> <span><span class="m"><span aria-hidden="true">−54</span><span class="sr">negative 54</span></span> and 57</span></label><label><input type="radio" name="mc23" value="b"> <span>3 and 33</span></label><label><input type="radio" name="mc23" value="c"> <span>3 and 31</span></label><label><input type="radio" name="mc23" value="d"> <span>10 and 33</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Look only at the altitude column.</p></details>
+<details><summary>Show answer</summary><p><strong>3 and 33</strong> thousand feet</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That subtracts 3 instead of negative 3. From negative 3 up to 24 is 3 + 24 = 27 degrees.&quot;, &quot;b&quot;: &quot;\&quot;Within 25\&quot; means the gap can be at most 25. A gap of 27 is outside, even though it is close.&quot;, &quot;d&quot;: &quot;A gap can be found across 0: 3 degrees up to 0, then 24 more, for 27.&quot;}" data-why="Correct. From negative 3 up to 24 is 27 degrees, more than 25.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 24.</b> A forecast said the low would be 24°F. The actual low was <span class="m"><span aria-hidden="true">−3°F</span><span class="sr">negative 3 degrees Fahrenheit</span></span>. Was the forecast within 25 degrees of the actual low?</legend>
+<label><input type="radio" name="mc24" value="a"> <span>Yes. The gap is 21 degrees.</span></label><label><input type="radio" name="mc24" value="b"> <span>Yes. The gap is 27 degrees, which is close to 25.</span></label><label><input type="radio" name="mc24" value="c"> <span>No. The gap is 27 degrees, which is more than 25.</span></label><label><input type="radio" name="mc24" value="d"> <span>There is no way to tell, because one temperature is negative.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The gap is <span class="m"><span aria-hidden="true">24 − (−3)</span><span class="sr">24 minus open parenthesis negative 3 close parenthesis</span></span>. Subtracting a negative is the same as adding.</p></details>
+<details><summary>Show answer</summary><p><strong>No.</strong> The gap is <span class="m"><span aria-hidden="true">24 − (−3) = 27</span><span class="sr">24 minus open parenthesis negative 3 close parenthesis equals 27</span></span> degrees, which is more than 25.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 10.2</h3>
+<p>The tables for item 3 on page 2, item 4 on page 5 and the two classroom examples on page 7 each list pairs of values. Classroom Example 10.2.1 on page 7 asks whether a result is "within 5 years" of an actual age, and the Classroom Example 10.2.2 video compares 3,000 chirps with the chirp counts in its table.</p>
+<p><strong>Watch for this:</strong> "within" goes both ways from the target number.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="0.0047" data-miss="{&quot;0.00474&quot;: &quot;That starts counting at the 4 and keeps five decimal places. The zeros right after the point count: 0.0047.&quot;, &quot;0.005&quot;: &quot;That keeps three decimal places. Four places gives 0.0047.&quot;, &quot;0.0048&quot;: &quot;The digit after the 7 is 3, which is 4 or less, so the 7 stays: 0.0047.&quot;, &quot;0.0047361&quot;: &quot;That is the number you started with. Keep four digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Round <span class="m"><span aria-hidden="true">0.0047361</span><span class="sr">0 point 0 0 4 7 3 6 1</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>Count 0, 0, 4, 7. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0047</span><span class="sr">0 point 0 0 4 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.608" data-miss="{&quot;36.08&quot;: &quot;That moves the point only two places. Three places left gives 3.608.&quot;, &quot;0.3608&quot;: &quot;That moves the point four places. Three places left gives 3.608.&quot;, &quot;3.68&quot;: &quot;A zero was lost. 3,608 has a 0 in the tens place, so it is 3.608.&quot;, &quot;3608000&quot;: &quot;That multiplies by 1,000. Changing to thousands makes the number smaller.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> A hiking trail climbs 3,608 feet. Write this in thousands of feet.</p>
+<details><summary>Hint</summary><p>Divide by 1,000. Keep the zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.608</span><span class="sr">3 point 6 0 8</span></span></strong> thousand feet</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="18.3" data-miss="{&quot;65.1&quot;: &quot;That adds the product. The minus sign means subtract: 41.7 minus 23.4 is 18.3.&quot;, &quot;351.9&quot;: &quot;That subtracts first and then multiplies. Multiply first: 2.6 times 9 is 23.4.&quot;, &quot;372.7&quot;: &quot;That multiplies the 41.7 by 9. Only the number next to x gets multiplied.&quot;, &quot;23.4&quot;: &quot;That is the product. One step is left: subtract it from 41.7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Find y when x = 9 for the line <span class="m"><span aria-hidden="true">y = 41.7 − 2.6x</span><span class="sr">y equals 41 point 7 minus 2 point 6 x</span></span>.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">2.6 × 9</span><span class="sr">2 point 6 times 9</span></span> first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">18.3</span><span class="sr">18 point 3</span></span></strong>, because <span class="m"><span aria-hidden="true">41.7 − 2.6(9) = 41.7 − 23.4 = 18.3</span><span class="sr">41 point 7 minus 2 point 6 open parenthesis 9 close parenthesis equals 41 point 7 minus 23 point 4 equals 18 point 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Negative 0.8 is farther from 0 than negative 0.35, so it is smaller.&quot;, &quot;c&quot;: &quot;Negative 1.2 is more than 1 below 0, so it is smaller than negative 0.35.&quot;, &quot;d&quot;: &quot;Negative 2 is the farthest from 0, so it is the least of the four, not the greatest.&quot;}" data-why="Correct. Negative 0.35 is the closest to 0, so it is the greatest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 28.</b> Which of these numbers is the <strong>greatest</strong>?</legend>
+<label><input type="radio" name="mc28" value="a"> <span><span class="m"><span aria-hidden="true">−0.35</span><span class="sr">negative 0 point 3 5</span></span></span></label><label><input type="radio" name="mc28" value="b"> <span><span class="m"><span aria-hidden="true">−0.8</span><span class="sr">negative 0 point 8</span></span></span></label><label><input type="radio" name="mc28" value="c"> <span><span class="m"><span aria-hidden="true">−1.2</span><span class="sr">negative 1 point 2</span></span></span></label><label><input type="radio" name="mc28" value="d"> <span><span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>All four are negative. The greatest is the one closest to 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−0.35</span><span class="sr">negative 0 point 3 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="63" data-miss="{&quot;87&quot;: &quot;That is the largest number within 12 of 75. The smallest is 75 minus 12, which is 63.&quot;, &quot;64&quot;: &quot;63 itself counts, because it is exactly 12 away.&quot;, &quot;12&quot;: &quot;12 is the allowed gap. Subtract it from 75: 63.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> What is the smallest number that is within 12 of 75?</p>
+<details><summary>Hint</summary><p>Subtract 12 from 75.</p></details>
+<details><summary>Show answer</summary><p><strong>63</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="21.1" data-miss="{&quot;21.13&quot;: &quot;That keeps two decimal places. One decimal place gives 21.1.&quot;, &quot;21.125&quot;: &quot;That is not rounded. Keep one digit after the point: 21.1.&quot;, &quot;21&quot;: &quot;That is the nearest whole number. One decimal place gives 21.1.&quot;, &quot;21.2&quot;: &quot;The digit after the 1 in the tenths place is 2, so the 1 stays: 21.1.&quot;, &quot;1315.925&quot;: &quot;That adds 5.2 and 0.0637 first and then multiplies. Multiply first: 0.0637 times 250 is 15.925.&quot;, &quot;15.925&quot;: &quot;That is the product. Add 5.2, then round: 21.1.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> Find y when x = 250 for the line <span class="m"><span aria-hidden="true">y = 5.2 + 0.0637x</span><span class="sr">y equals 5 point 2 plus 0 point 0 6 3 7 x</span></span>. Round to one decimal place.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.0637 × 250</span><span class="sr">0 point 0 6 3 7 times 250</span></span> first, add <span class="m"><span aria-hidden="true">5.2</span><span class="sr">5 point 2</span></span>, then round.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">21.1</span><span class="sr">21 point 1</span></span></strong>. <span class="m"><span aria-hidden="true">0.0637 × 250 = 15.925</span><span class="sr">0 point 0 6 3 7 times 250 equals 15 point 9 2 5</span></span>, and <span class="m"><span aria-hidden="true">5.2 + 15.925 = 21.125</span><span class="sr">5 point 2 plus 15 point 9 2 5 equals 21 point 1 2 5</span></span>, which rounds to <span class="m"><span aria-hidden="true">21.1</span><span class="sr">21 point 1</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with numbers in thousands, negative numbers, reading and using a line's equation, rounding to a set number of decimal places, and reading paired tables. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec10.2-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  if(/%/.test(raw)&&q.dataset.pct!=='1')return show(q,'wrong','This answer is not a percent, so leave off the % sign. Type the number only.');
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

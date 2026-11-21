@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 6.3 Exit Ticket: Sampling Distributions and Estimators</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 6.3 Exit Ticket</div>
+<h1>Section 6.3 Exit Ticket: Sampling Distributions and Estimators</h1>
+<p>A short, ungraded check to use after the Section 6.3 notes.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 5</span></label><br><progress id="overall" max="5" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Sampling Distributions and the Sample Mean<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Sample Variances and Sample Proportions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Biased vs. Unbiased Estimators<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 16 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 6.3 notes.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item and page to go back to.</li>
+<li>Section 5 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Sampling Distributions and the Sample Mean</button></li>
+<li><button type="button" data-go="s3">Sample Variances and Sample Proportions</button></li>
+<li><button type="button" data-go="s4">Biased vs. Unbiased Estimators</button></li>
+<li><button type="button" data-go="s5">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Sampling Distributions and the Sample Mean</h2>
+<p>These checks cover the Introduction and items 1 and 2 on page 1 of the Section 6.3 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Item 1 describes a statistic computed from all possible samples of size n." data-miss="{&quot;a&quot;: &quot;Not quite. One sample&#x27;s individual values are data from that sample, not a statistic computed from all possible samples. Review: the Introduction and item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 1 is about the values of a statistic across samples, not the individual values in the population. Review: the Introduction and item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 1 says all possible samples of size n, not only the ones a researcher picked. Review: the Introduction and item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;}" data-review="the Introduction and item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Sampling Distribution of a Statistic).</b> Which description matches item 1's definition of a sampling distribution?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The distribution of the individual values within one sample of size n.</span></label><label><input type="radio" name="mc1" value="b"> <span>The distribution of a statistic from all possible samples of size n.</span></label><label><input type="radio" name="mc1" value="c"> <span>The distribution of every individual value in the whole population.</span></label><label><input type="radio" name="mc1" value="d"> <span>The list of samples that a researcher chose to collect for one study.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The distribution of a statistic from all possible samples of size n.</strong></p><p class="ptr">Where this is: The Introduction and item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Item 1 names the sample mean, sample variance and sample proportion." data-miss="{&quot;b&quot;: &quot;Not quite. The sample median and sample range appear later, in item 5, as examples of biased estimators. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. These are population parameters. Item 1 lists statistics computed from samples. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 1 lists the sample variance, not the sample standard deviation, and does not list the range. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;}" data-review="item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Which Statistics).</b> Item 1 lists three statistics whose sampling distributions this section explores. Which list matches?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>Sample mean (<span class="m"><span aria-hidden="true">x̄</span><span class="sr">x bar</span></span>), sample variance (<span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>) and sample proportion (<span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span>).</span></label><label><input type="radio" name="mc2" value="b"> <span>Sample mean (<span class="m"><span aria-hidden="true">x̄</span><span class="sr">x bar</span></span>), sample median (<span class="m"><span aria-hidden="true">x̃</span><span class="sr">x tilde</span></span>) and the sample range.</span></label><label><input type="radio" name="mc2" value="c"> <span>Population mean (<span class="m"><span aria-hidden="true">μ</span><span class="sr">mu</span></span>), population variance (<span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span>) and population proportion (p).</span></label><label><input type="radio" name="mc2" value="d"> <span>Sample mean (<span class="m"><span aria-hidden="true">x̄</span><span class="sr">x bar</span></span>), sample standard deviation (s) and the sample range.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Sample mean (<span class="m"><span aria-hidden="true">x̄</span><span class="sr">x bar</span></span>), sample variance (<span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>) and sample proportion (<span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span>).</strong></p><p class="ptr">Where this is: Item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Item 1 says these distributions let us estimate probabilities and test hypotheses." data-miss="{&quot;a&quot;: &quot;Not quite. Item 1 is about statistics computed from samples, so samples are still needed. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 1 says they let us estimate probabilities, not find exact parameter values. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 1 does not say any statistic will equal its parameter. Review: item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.&quot;}" data-review="item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Why Sampling Distributions Matter).</b> According to item 1, what does understanding sampling distributions allow us to do?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Skip collecting samples, since the shape is already known.</span></label><label><input type="radio" name="mc3" value="b"> <span>Find the exact value of every population parameter.</span></label><label><input type="radio" name="mc3" value="c"> <span>Estimate probabilities and test hypotheses.</span></label><label><input type="radio" name="mc3" value="d"> <span>Make every sample statistic equal its parameter.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Estimate probabilities and test hypotheses.</strong></p><p class="ptr">Where this is: Item 1 (Sampling Distribution of a Statistic) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The sample mean targets the population mean, so each sample mean approximates it." data-miss="{&quot;a&quot;: &quot;Not quite. Item 2 says each sample mean approximates the population mean, not that it equals it exactly. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 2 says the sample mean targets the population mean, not the median. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 2 says the sample mean targets the population mean, with no pull toward higher values. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;}" data-review="item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Sample Means Target the Population Mean).</b> A store manager takes many random samples of 40 receipts and computes the mean of each sample. Which statement matches the first property in item 2?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>Each sample mean equals the population mean exactly.</span></label><label><input type="radio" name="mc4" value="b"> <span>Each sample mean approximates the population median.</span></label><label><input type="radio" name="mc4" value="c"> <span>Each sample mean is typically higher than the population mean.</span></label><label><input type="radio" name="mc4" value="d"> <span>Each sample mean approximates the population mean.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Each sample mean approximates the population mean.</strong></p><p class="ptr">Where this is: Item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Item 2 says the distribution of the sample mean is approximately normal." data-miss="{&quot;b&quot;: &quot;Not quite. Right-skewed is how item 3 describes sample variances, not sample means. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 2 describes the distribution of the sample means, not the data in one sample. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 2 gives a shape for this distribution: approximately normal. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.&quot;}" data-review="item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Shape for Sample Means).</b> When all of the sample means from samples of the same size are placed into a distribution, what does item 2 say about it?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>It is approximately a normal distribution.</span></label><label><input type="radio" name="mc5" value="b"> <span>It is typically a right-skewed distribution.</span></label><label><input type="radio" name="mc5" value="c"> <span>It has the same shape as one sample's data.</span></label><label><input type="radio" name="mc5" value="d"> <span>Its shape cannot be described in general.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>It is approximately a normal distribution.</strong></p><p class="ptr">Where this is: Item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Item 2 says we can treat a sample mean as if it were a single data point in a normal distribution." data-miss="{&quot;a&quot;: &quot;Not quite. The F-distribution is mentioned in item 3, for sample variances. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes, including its Practical Use.&quot;, &quot;c&quot;: &quot;Not quite. Item 2 is about the population mean, not the population median. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes, including its Practical Use.&quot;, &quot;d&quot;: &quot;Not quite. Item 2 says the properties make probability calculations straightforward, not unneeded. Review: item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes, including its Practical Use.&quot;}" data-review="item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes, including its Practical Use.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Practical Use for Sample Means).</b> What does the Practical Use in item 2 say the properties of sample means let us do?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>Analyze the sample means with the F-distribution from later chapters.</span></label><label><input type="radio" name="mc6" value="b"> <span>Treat a sample mean as a single data point in a normal distribution.</span></label><label><input type="radio" name="mc6" value="c"> <span>Use each sample mean in place of the population median value.</span></label><label><input type="radio" name="mc6" value="d"> <span>Skip the probability calculations about sample means entirely.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Treat a sample mean as a single data point in a normal distribution.</strong></p><p class="ptr">Where this is: Item 2 (Sampling Distribution of the Sample Mean) on page 1 of the notes, including its Practical Use.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Introduction: page 1</li><li>Sampling Distribution of a Statistic: item 1, page 1</li><li>Sampling Distribution of the Sample Mean: item 2, page 1 (and its Practical Use)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Sample Variances and Sample Proportions</h2>
+<p>These checks cover items 3 and 4 on pages 1 and 2 of the Section 6.3 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The sample variance targets the population variance." data-miss="{&quot;a&quot;: &quot;Not quite. Item 3 pairs the sample variance with the population variance, not the standard deviation. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 3 says each sample variance approximates the population variance, not that it equals it. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 3 pairs the sample variance with the population variance, not the mean. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;}" data-review="item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Sample Variances Target the Population Variance).</b> Which statement about sample variances matches the first property in item 3?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>Each sample variance approximates the population standard deviation.</span></label><label><input type="radio" name="mc7" value="b"> <span>Each sample variance equals the population variance exactly.</span></label><label><input type="radio" name="mc7" value="c"> <span>Each sample variance approximates the population variance.</span></label><label><input type="radio" name="mc7" value="d"> <span>Each sample variance approximates the population mean.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Each sample variance approximates the population variance.</strong></p><p class="ptr">Where this is: Item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Item 3 says the distribution of sample variances is typically right-skewed." data-miss="{&quot;a&quot;: &quot;Not quite. Approximately normal is how items 2 and 4 describe sample means and sample proportions, not variances. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 3 says the skew is to the right, toward higher values. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 3 gives a skewed shape for this distribution, not an even spread. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;}" data-review="item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Shape for Sample Variances).</b> How does item 3 describe the distribution of the sample variances?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Approximately normal, like the sample means.</span></label><label><input type="radio" name="mc8" value="b"> <span>Typically left-skewed.</span></label><label><input type="radio" name="mc8" value="c"> <span>Spread out evenly with no peak.</span></label><label><input type="radio" name="mc8" value="d"> <span>Typically right-skewed.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Typically right-skewed.</strong></p><p class="ptr">Where this is: Item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Item 3 points to the squared value amplifying deviations into higher values." data-miss="{&quot;b&quot;: &quot;Not quite. Item 3 says all samples have size n from the same population, and gives squaring as the reason. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A squared value is never negative, and item 3 says the values are amplified upward. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 3 says nothing about the population&#x27;s shape and gives squaring as the reason. Review: item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.&quot;}" data-review="item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Reason for the Shape).</b> What reason does item 3 give for the shape of the distribution of sample variances?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>A variance is a squared value, which amplifies deviations into higher values.</span></label><label><input type="radio" name="mc9" value="b"> <span>Samples used for variances are much smaller than samples used for means.</span></label><label><input type="radio" name="mc9" value="c"> <span>Sample variances can be negative, which stretches out the left side.</span></label><label><input type="radio" name="mc9" value="d"> <span>The population is always right-skewed whenever variances are computed.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A variance is a squared value, which amplifies deviations into higher values.</strong></p><p class="ptr">Where this is: Item 3 (Sampling Distribution of the Sample Variance) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. In item 4, &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;p̂&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;p hat&lt;/span&gt;&lt;/span&gt; is the sample proportion and p is the population proportion." data-miss="{&quot;a&quot;: &quot;Not quite. This has the two symbols reversed. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes, including its Notation.&quot;, &quot;c&quot;: &quot;Not quite. Item 4 uses these symbols for proportions, one from a sample and one from the population. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes, including its Notation.&quot;, &quot;d&quot;: &quot;Not quite. Item 4 uses n for the sample size, and p for the population proportion. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes, including its Notation.&quot;}" data-review="item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes, including its Notation.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Notation for Proportions).</b> In the Notation for item 4, what do <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> and p stand for?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> is the population proportion, and p is the sample proportion.</span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> is the sample proportion, and p is the population proportion.</span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> is a predicted probability, and p is a percent of the sample.</span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> is the sample proportion, and p is the sample size.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> is the sample proportion, and p is the population proportion.</strong></p><p class="ptr">Where this is: Item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes, including its Notation.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The sample proportion targets the population proportion, and its distribution is approximately normal." data-miss="{&quot;a&quot;: &quot;Not quite. Item 4 says each &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;p̂&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;p hat&lt;/span&gt;&lt;/span&gt; approximates p, not that it equals p exactly. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Right-skewed is how item 3 describes sample variances, not sample proportions. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 4 says the sample proportion targets the population proportion, not a mean. Review: item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes.&quot;}" data-review="item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Properties of Sample Proportions).</b> A polling group takes many random samples of 500 voters and computes <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> for each sample. Which statement matches the properties in item 4?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Each <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> equals p exactly, so the distribution is one single value.</span></label><label><input type="radio" name="mc11" value="b"> <span>Each <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> approximates p, and the distribution is typically right-skewed.</span></label><label><input type="radio" name="mc11" value="c"> <span>Each <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> approximates p, and the distribution is approximately normal.</span></label><label><input type="radio" name="mc11" value="d"> <span>Each <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> approximates the sample mean, and the distribution is approximately normal.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Each <span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span> approximates p, and the distribution is approximately normal.</strong></p><p class="ptr">Where this is: Item 4 (Sampling Distribution of the Sample Proportion) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Items 2 and 4 describe these two as approximately normal, and item 3 describes variances as right-skewed." data-miss="{&quot;a&quot;: &quot;Not quite. Item 3 describes the distribution of sample variances as typically right-skewed. Review: items 2 to 4 on pages 1 and 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 3 describes the distribution of sample variances as right-skewed, not normal. Review: items 2 to 4 on pages 1 and 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 4 also describes the distribution of sample proportions as approximately normal. Review: items 2 to 4 on pages 1 and 2 of the notes.&quot;}" data-review="items 2 to 4 on pages 1 and 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Which Are Approximately Normal).</b> Across items 2 to 4, which statistics have a sampling distribution that the notes describe as approximately normal?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Sample means, sample variances and sample proportions.</span></label><label><input type="radio" name="mc12" value="b"> <span>Sample variances only.</span></label><label><input type="radio" name="mc12" value="c"> <span>Sample means only.</span></label><label><input type="radio" name="mc12" value="d"> <span>Sample means and sample proportions.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Sample means and sample proportions.</strong></p><p class="ptr">Where this is: Items 2 to 4 on pages 1 and 2 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Sampling Distribution of the Sample Variance: item 3, page 1</li><li>Sampling Distribution of the Sample Proportion: item 4, page 2 (and its Notation and Practical Use)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Biased vs. Unbiased Estimators</h2>
+<p>These checks cover item 5 on page 2 of the Section 6.3 notes.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Item 5A defines biased by whether the statistic targets its parameter." data-miss="{&quot;b&quot;: &quot;Not quite. Item 5A is about whether a statistic targets its parameter, not who paid for a study. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 5A is about the expected value of the statistic, not its value in a single sample. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 5A does not define bias by sample size, only by whether the statistic targets its parameter. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;}" data-review="item 5A (Biased Estimator) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Biased Estimator).</b> Which statement matches item 5A's definition of a <strong>biased</strong> statistic?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>It does not target its parameter, so its expected value does not equal the parameter.</span></label><label><input type="radio" name="mc13" value="b"> <span>It comes from a study paid for by a group that hopes to get a certain result.</span></label><label><input type="radio" name="mc13" value="c"> <span>Its value in one particular sample does not come out equal to the population parameter.</span></label><label><input type="radio" name="mc13" value="d"> <span>It is computed from a sample that is too small to give a useful estimate.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>It does not target its parameter, so its expected value does not equal the parameter.</strong></p><p class="ptr">Where this is: Item 5A (Biased Estimator) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. Item 5A lists the sample median, the sample range and the sample standard deviation." data-miss="{&quot;a&quot;: &quot;Not quite. Item 5B lists the sample mean as an unbiased estimator. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 5B lists the sample variance as an unbiased estimator. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 5B lists the sample proportion as an unbiased estimator. Review: item 5A (Biased Estimator) on page 2 of the notes.&quot;}" data-review="item 5A (Biased Estimator) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Examples of Biased Estimators).</b> Which statistic is listed in item 5A as a <strong>biased</strong> estimator?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>The sample mean (<span class="m"><span aria-hidden="true">x̄</span><span class="sr">x bar</span></span>)</span></label><label><input type="radio" name="mc14" value="b"> <span>The sample variance (<span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>)</span></label><label><input type="radio" name="mc14" value="c"> <span>The sample proportion (<span class="m"><span aria-hidden="true">p̂</span><span class="sr">p hat</span></span>)</span></label><label><input type="radio" name="mc14" value="d"> <span>The sample median (<span class="m"><span aria-hidden="true">x̃</span><span class="sr">x tilde</span></span>)</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The sample median (<span class="m"><span aria-hidden="true">x̃</span><span class="sr">x tilde</span></span>)</strong></p><p class="ptr">Where this is: Item 5A (Biased Estimator) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. Item 5B lists &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;s&lt;sup&gt;2&lt;/sup&gt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;s squared&lt;/span&gt;&lt;/span&gt; targeting &lt;span class=&quot;m&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;σ&lt;sup&gt;2&lt;/sup&gt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;sigma squared&lt;/span&gt;&lt;/span&gt; as an unbiased estimator." data-miss="{&quot;a&quot;: &quot;Not quite. Item 5A lists s as a biased estimator of &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;σ&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;sigma&lt;/span&gt;&lt;/span&gt;, even though &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;s&lt;sup&gt;2&lt;/sup&gt;&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;s squared&lt;/span&gt;&lt;/span&gt; is unbiased for &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;σ&lt;sup&gt;2&lt;/sup&gt;&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;sigma squared&lt;/span&gt;&lt;/span&gt;. Review: items 5A (Biased Estimator) and 5B (Unbiased Estimator) on page 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 5A lists the sample range as a biased estimator. Review: items 5A (Biased Estimator) and 5B (Unbiased Estimator) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 5A lists the sample median as a biased estimator. Review: items 5A (Biased Estimator) and 5B (Unbiased Estimator) on page 2 of the notes.&quot;}" data-review="items 5A (Biased Estimator) and 5B (Unbiased Estimator) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Unbiased Estimators).</b> Which pairing of a statistic and the parameter it targets is an <strong>unbiased</strong> estimator in item 5?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>The sample standard deviation (s) targets <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</span></label><label><input type="radio" name="mc15" value="b"> <span>The sample variance (<span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>) targets <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span>.</span></label><label><input type="radio" name="mc15" value="c"> <span>The sample range targets the population range.</span></label><label><input type="radio" name="mc15" value="d"> <span>The sample median (<span class="m"><span aria-hidden="true">x̃</span><span class="sr">x tilde</span></span>) targets the population median.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The sample variance (<span class="m"><span aria-hidden="true">s<sup>2</sup></span><span class="sr">s squared</span></span>) targets <span class="m"><span aria-hidden="true">σ<sup>2</sup></span><span class="sr">sigma squared</span></span>.</strong></p><p class="ptr">Where this is: Items 5A (Biased Estimator) and 5B (Unbiased Estimator) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. The note says s is still commonly used, especially when the sample size is large, as a reasonable approximation." data-miss="{&quot;a&quot;: &quot;Not quite. The note says s is still commonly used in practice, not that it should never be used. Review: the Important Note in item 5 (Biased vs. Unbiased Estimators) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The note says s gives a reasonable approximation with large samples, not that it becomes unbiased. Review: the Important Note in item 5 (Biased vs. Unbiased Estimators) on page 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The note says s is not an unbiased estimator for &lt;span class=\&quot;m\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;σ&lt;/span&gt;&lt;span class=\&quot;sr\&quot;&gt;sigma&lt;/span&gt;&lt;/span&gt;. Review: the Important Note in item 5 (Biased vs. Unbiased Estimators) on page 2 of the notes.&quot;}" data-review="the Important Note in item 5 (Biased vs. Unbiased Estimators) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Important Note on s).</b> Which statement matches the Important Note at the end of item 5?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Because s is biased, it should never be used in practice to estimate <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span>.</span></label><label><input type="radio" name="mc16" value="b"> <span>s becomes an unbiased estimator of <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> once the sample size is large enough.</span></label><label><input type="radio" name="mc16" value="c"> <span>s is biased for <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> but still commonly used, especially when samples are large.</span></label><label><input type="radio" name="mc16" value="d"> <span>s targets <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> exactly, so the note is only a reminder about rounding.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>s is biased for <span class="m"><span aria-hidden="true">σ</span><span class="sr">sigma</span></span> but still commonly used, especially when samples are large.</strong></p><p class="ptr">Where this is: The Important Note in item 5 (Biased vs. Unbiased Estimators) on page 2 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Biased Estimator: item 5A, page 2</li><li>Unbiased Estimator: item 5B, page 2</li><li>Important Note about the sample standard deviation: item 5, page 2</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 15: I am not sure how to tell which statistics target their parameter and which do not."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec6.3-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Sampling Distributions and the Sample Mean", "resource": "The Introduction and items 1 and 2 on page 1 of the Section 6.3 notes."}, {"id": "s3", "name": "Sample Variances and Sample Proportions", "resource": "Items 3 and 4 on pages 1 and 2 of the Section 6.3 notes."}, {"id": "s4", "name": "Biased vs. Unbiased Estimators", "resource": "Item 5 on page 2 of the Section 6.3 notes."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='6.3';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

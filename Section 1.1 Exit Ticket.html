@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1.1 Exit Ticket: Statistical and Critical Thinking</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 1.1 Exit Ticket</div>
+<h1>Section 1.1 Exit Ticket: Statistical and Critical Thinking</h1>
+<p>A short, ungraded check to use after the Section 1.1 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Concepts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Prepare the Study<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Analyze the Data and Conclusions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Pitfalls to Analyzing Data<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 20 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 1.1 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 6.</li>
+<li>Section 7 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Concepts</button></li>
+<li><button type="button" data-go="s3">Prepare the Study</button></li>
+<li><button type="button" data-go="s4">Analyze the Data and Conclusions</button></li>
+<li><button type="button" data-go="s5">Pitfalls to Analyzing Data</button></li>
+<li><button type="button" data-go="s6">StatCrunch check</button></li>
+<li><button type="button" data-go="s7">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Concepts</h2>
+<p>These checks cover items 1 to 5 on pages 1 and 2 of the Section 1.1 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Descriptions count as observations, and one observation is a datum." data-miss="{&quot;a&quot;: &quot;Not quite. The notes list descriptions, not just numbers and measurements, as observations that make up data. Review: items 1 and 2 (Data, Statistics) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This has the two words reversed. Review: items 1 and 2 (Data, Statistics) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 2 lists collecting data as one of the processes in statistics. Review: items 1 and 2 (Data, Statistics) on page 1 of the notes.&quot;}" data-review="items 1 and 2 (Data, Statistics) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Data and Statistics).</b> An animal shelter writes down the breed of every dog that arrives in March: beagle, boxer, mixed breed, beagle, and so on. Which statement matches items 1 and 2 of the notes?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The breeds are not data, because data must be numbers or measurements.</span></label><label><input type="radio" name="mc1" value="b"> <span>One recorded breed is the data, and the whole list of breeds is a datum.</span></label><label><input type="radio" name="mc1" value="c"> <span>The list of breeds is data, and a single recorded breed is a datum.</span></label><label><input type="radio" name="mc1" value="d"> <span>Writing down the breeds is not part of statistics, because statistics is only about drawing conclusions.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The list of breeds is data, and a single recorded breed is a datum.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Data, Statistics) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The 48 restaurants are the whole group being studied, so collecting from all of them is a census." data-miss="{&quot;b&quot;: &quot;Not quite. The chain only cares about its own 48 restaurants, so those 48 make up the whole population. Review: items 3 to 5 (Population, Census, Sample) on pages 1 and 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A census leaves nothing out of the population, and 6 restaurants leave out 42. Review: items 3 to 5 (Population, Census, Sample) on pages 1 and 2 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The 6 restaurants would be the smaller group selected, while the population stays all 48. Review: items 3 to 5 (Population, Census, Sample) on pages 1 and 2 of the notes.&quot;}" data-review="items 3 to 5 (Population, Census, Sample) on pages 1 and 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Population, Census and Sample).</b> A restaurant chain wants to know how long lunch service takes at its 48 restaurants, and it only cares about those 48 restaurants. Which statement matches items 3 to 5?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>Timing lunch at all 48 restaurants would be a census, and timing it at 6 of them would be a sample.</span></label><label><input type="radio" name="mc2" value="b"> <span>Timing lunch at all 48 restaurants would only be a sample, because restaurants owned by other companies are left out.</span></label><label><input type="radio" name="mc2" value="c"> <span>Timing lunch at 6 of the restaurants would be a census, because the data still comes from the chain.</span></label><label><input type="radio" name="mc2" value="d"> <span>If the chain times lunch at 6 restaurants, those 6 restaurants are the population.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Timing lunch at all 48 restaurants would be a census, and timing it at 6 of them would be a sample.</strong></p><p class="ptr">Where this is: Items 3 to 5 (Population, Census, Sample) on pages 1 and 2 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Data and Statistics: items 1 and 2, page 1</li><li>Population, Census and Sample: items 3 to 5, pages 1 and 2</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Prepare the Study</h2>
+<p>These checks cover items 6 to 9 on pages 2 and 3 of the Section 1.1 notes.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. We know what the numbers measure and what the goal is." data-miss="{&quot;a&quot;: &quot;Not quite. With no labels, there is no way to know what the numbers represent or why anyone would study them. Review: item 6 (Context) on page 2 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Having many precise numbers still does not say what they represent or what the goal is. Review: item 6 (Context) on page 2 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A label such as \&quot;Column C\&quot; does not say what the numbers represent or what the goal is. Review: item 6 (Context) on page 2 of the notes.&quot;}" data-review="item 6 (Context) on page 2 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Context).</b> Which of these has <strong>context</strong> in the sense used in item 6?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>The numbers 14, 9, 22, 31 and 17, with no labels.</span></label><label><input type="radio" name="mc3" value="b"> <span>A list of 500 numbers, each written to two decimal places, with no description.</span></label><label><input type="radio" name="mc3" value="c"> <span>Five numbers copied from a spreadsheet column labeled only "Column C."</span></label><label><input type="radio" name="mc3" value="d"> <span>The number of minutes each of 30 patients waited at an urgent care clinic, collected to see whether a new check-in system shortens waits.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The number of minutes each of 30 patients waited at an urgent care clinic, collected to see whether a new check-in system shortens waits.</strong></p><p class="ptr">Where this is: Item 6 (Context) on page 2 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. A motive creates potential for bias, which is not the same as biased results." data-miss="{&quot;a&quot;: &quot;Not quite. The Important Note says potential for bias does not guarantee that the results are biased. Review: item 7 (Source of the Data) on page 2 of the notes, including the Important Note.&quot;, &quot;c&quot;: &quot;Not quite. The concern in item 7 comes from who is behind the study and their motive, which does not go away because scientists did the work. Review: item 7 (Source of the Data) on page 2 of the notes, including the Important Note.&quot;, &quot;d&quot;: &quot;Not quite. The potential for bias comes from the source having a motive, before any results are known. Review: item 7 (Source of the Data) on page 2 of the notes, including the Important Note.&quot;}" data-review="item 7 (Source of the Data) on page 2 of the notes, including the Important Note.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Source of the Data).</b> A trade group for dairy farmers pays for a study of whether drinking milk helps adults build stronger bones. Which statement matches item 7 and its Important Note?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>The results are biased, so the study should be ignored.</span></label><label><input type="radio" name="mc4" value="b"> <span>There is potential for bias because the source has a motive to get a certain result, but that does not guarantee the results are biased.</span></label><label><input type="radio" name="mc4" value="c"> <span>There is no potential for bias, because scientists carried out the study.</span></label><label><input type="radio" name="mc4" value="d"> <span>There is potential for bias only if the study finds that milk helps.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>There is potential for bias because the source has a motive to get a certain result, but that does not guarantee the results are biased.</strong></p><p class="ptr">Where this is: Item 7 (Source of the Data) on page 2 of the notes, including the Important Note.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. Every resident has an equal chance of being selected." data-miss="{&quot;a&quot;: &quot;Not quite. People already at the recycling center may feel differently from residents who never go there, so not everyone has an equal chance. Review: item 8 (Sampling Method) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Residents on other streets have no chance of being selected, so the sample may not look like the city. Review: item 8 (Sampling Method) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Council members are a special group, and most residents have no chance of being selected. Review: item 8 (Sampling Method) on page 3 of the notes.&quot;}" data-review="item 8 (Sampling Method) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Sampling Method).</b> A city wants to know how its residents feel about a new recycling program. Which plan is most likely to give a sample that represents all residents, in the sense of item 8?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Ask the people dropping off bottles at the city recycling center on Saturday.</span></label><label><input type="radio" name="mc5" value="b"> <span>Have a computer randomly select 400 residents from a list of every resident.</span></label><label><input type="radio" name="mc5" value="c"> <span>Ask 400 residents who all live on the same street as city hall.</span></label><label><input type="radio" name="mc5" value="d"> <span>Ask the city council members, since they know the program best.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Have a computer randomly select 400 residents from a list of every resident.</strong></p><p class="ptr">Where this is: Item 8 (Sampling Method) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The users chose to respond, and the Important Note says these samples are often, not always, unrepresentative." data-miss="{&quot;b&quot;: &quot;Not quite. A large number of responses does not change the fact that the users chose to respond. Review: item 9 (Voluntary Response Sample) on page 3 of the notes, including the Important Note.&quot;, &quot;c&quot;: &quot;Not quite. The Important Note says voluntary response samples are often unrepresentative, not always. Review: item 9 (Voluntary Response Sample) on page 3 of the notes, including the Important Note.&quot;, &quot;d&quot;: &quot;Not quite. A census collects data from every member, and here only the users who chose to rate are included. Review: item 9 (Voluntary Response Sample) on page 3 of the notes, including the Important Note.&quot;}" data-review="item 9 (Voluntary Response Sample) on page 3 of the notes, including the Important Note.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Voluntary Response Sample).</b> A phone app asks users to rate a new feature, and 3,200 users choose to leave a rating. Which statement matches item 9 and its Important Note?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>This is a voluntary response sample, so it is often unrepresentative, though not always.</span></label><label><input type="radio" name="mc6" value="b"> <span>With 3,200 ratings, the results must represent all of the app's users.</span></label><label><input type="radio" name="mc6" value="c"> <span>This is a voluntary response sample, so the results are always wrong.</span></label><label><input type="radio" name="mc6" value="d"> <span>This is a census, because every user had the chance to leave a rating.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>This is a voluntary response sample, so it is often unrepresentative, though not always.</strong></p><p class="ptr">Where this is: Item 9 (Voluntary Response Sample) on page 3 of the notes, including the Important Note.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Context: item 6, page 2</li><li>Source of the Data: item 7, page 2 (and its Important Note)</li><li>Sampling Method: item 8, page 3</li><li>Voluntary Response Sample: item 9, page 3 (and its Important Note)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Analyze the Data and Conclusions</h2>
+<p>These checks cover items 10 to 13 on pages 4 and 5 of the notes and the Classroom Example 1.1.1 and 1.1.2 videos on page 13.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. The band falls as temperature rises, so heating cost decreases as temperature increases." data-miss="{&quot;a&quot;: &quot;Not quite. The direction of the pattern decides the description, not whether the values are positive. Review: item 10 (Graph and Explore) on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Negative describes the direction of the pattern, not the sign of the heating costs. Review: item 10 (Graph and Explore) on page 4 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 10 says graphs make patterns easier to see, and this graph shows a clear one. Review: item 10 (Graph and Explore) on page 4 of the notes.&quot;}" data-review="item 10 (Graph and Explore) on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Graph and Explore).</b> A scatterplot shows the outdoor temperature (horizontal axis) and a household's daily heating cost (vertical axis). The points form a fairly straight band that falls from the upper left to the lower right. Which description uses the language of item 10 correctly?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>A positive linear correlation, because all of the heating costs are positive numbers.</span></label><label><input type="radio" name="mc7" value="b"> <span>A negative linear correlation, which means some heating costs are below zero.</span></label><label><input type="radio" name="mc7" value="c"> <span>A negative linear correlation: as the temperature increases, the heating cost decreases.</span></label><label><input type="radio" name="mc7" value="d"> <span>No pattern, because a graph shows less than a table of the same numbers would.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A negative linear correlation: as the temperature increases, the heating cost decreases.</strong></p><p class="ptr">Where this is: Item 10 (Graph and Explore) on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. A sample result gives a reasonable estimate that may differ slightly from the true value." data-miss="{&quot;a&quot;: &quot;Not quite. A sample-based estimate may differ slightly from the true population value, so \&quot;exactly\&quot; goes too far. Review: item 11 (Apply Statistical Methods) on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 11 describes using sample data to estimate population values without asking every member. Review: item 11 (Apply Statistical Methods) on page 4 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 11 treats a sample result as a reasonable approximation of the population value, not as far from it. Review: item 11 (Apply Statistical Methods) on page 4 of the notes.&quot;}" data-review="item 11 (Apply Statistical Methods) on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Apply Statistical Methods).</b> A quality inspector randomly selects 250 bags of chips from one day's production and finds an average weight of <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span> ounces. Which conclusion matches item 11?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>The average weight of every bag made that day is exactly <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span> ounces.</span></label><label><input type="radio" name="mc8" value="b"> <span>Nothing can be said about the day's bags unless every bag is weighed.</span></label><label><input type="radio" name="mc8" value="c"> <span>The average weight of all the bags made that day is likely close to <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span> ounces, though it may differ slightly.</span></label><label><input type="radio" name="mc8" value="d"> <span>The average weight of all the bags is probably far from <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span> ounces, because 250 bags is only part of the day's production.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The average weight of all the bags made that day is likely close to <span class="m"><span aria-hidden="true">9.8</span><span class="sr">9 point 8</span></span> ounces, though it may differ slightly.</strong></p><p class="ptr">Where this is: Item 11 (Apply Statistical Methods) on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. 112 is far from the expected 40, while 43 is close to it." data-miss="{&quot;a&quot;: &quot;Not quite. 43 is close to the expected 40, so it could reasonably happen by chance. Review: item 12 (Statistical Significance) on page 5 of the notes, and the video \&quot;Classroom Example 1.1.2\&quot; on page 13.&quot;, &quot;c&quot;: &quot;Not quite. 43 is close to the expected 40, so that result could reasonably happen by chance. Review: item 12 (Statistical Significance) on page 5 of the notes, and the video \&quot;Classroom Example 1.1.2\&quot; on page 13.&quot;, &quot;d&quot;: &quot;Not quite. 112 is far from the expected 40, which makes it unlikely to happen by chance alone. Review: item 12 (Statistical Significance) on page 5 of the notes, and the video \&quot;Classroom Example 1.1.2\&quot; on page 13.&quot;}" data-review="item 12 (Statistical Significance) on page 5 of the notes, and the video &quot;Classroom Example 1.1.2&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Statistical Significance).</b> A toy company says about 10% of its prize capsules hold a rare toy. A collector opens 400 capsules, so about 40 rare toys are expected. In Result A, the collector finds 43 rare toys. In Result B, the collector finds 112. Which result appears to be statistically significant?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Result A only</span></label><label><input type="radio" name="mc9" value="b"> <span>Result B only</span></label><label><input type="radio" name="mc9" value="c"> <span>Both results</span></label><label><input type="radio" name="mc9" value="d"> <span>Neither result, because any count above the expected 40 could happen by chance</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Result B only</strong></p><p class="ptr">Where this is: Item 12 (Statistical Significance) on page 5 of the notes, and the video "Classroom Example 1.1.2" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. A 27% chance is well above the threshold of typically 5% or less." data-miss="{&quot;a&quot;: &quot;Not quite. The threshold in item 12 is typically 5% or less, not less than half, and 27% is well above it. Review: items 12 and 13 (Statistical Significance, Practical Significance) on page 5 of the notes, including the Important Note, and the video \&quot;Classroom Example 1.1.1\&quot; on page 13.&quot;, &quot;b&quot;: &quot;Not quite. Statistical significance depends on how likely the result is by chance, not on how large the gain is. Review: items 12 and 13 (Statistical Significance, Practical Significance) on page 5 of the notes, including the Important Note, and the video \&quot;Classroom Example 1.1.1\&quot; on page 13.&quot;, &quot;d&quot;: &quot;Not quite. The Important Note says a result must be statistically significant before it can have practical significance. Review: items 12 and 13 (Statistical Significance, Practical Significance) on page 5 of the notes, including the Important Note, and the video \&quot;Classroom Example 1.1.1\&quot; on page 13.&quot;}" data-review="items 12 and 13 (Statistical Significance, Practical Significance) on page 5 of the notes, including the Important Note, and the video &quot;Classroom Example 1.1.1&quot; on page 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Statistical and Practical Significance).</b> In a study of a memory app, 6 users raised their test scores by an average of 18 points. There is about a 27% chance of getting results like these with an app that has no effect. Which statement matches the notes and the Classroom Example 1.1.1 video?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>It is statistically significant, because 27% is less than half.</span></label><label><input type="radio" name="mc10" value="b"> <span>It is statistically significant, because an 18-point gain is large.</span></label><label><input type="radio" name="mc10" value="c"> <span>It is not statistically significant, because a 27% chance is not unlikely enough.</span></label><label><input type="radio" name="mc10" value="d"> <span>It is not statistically significant, but it is practically significant, because 18 points is a large gain.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>It is not statistically significant, because a 27% chance is not unlikely enough.</strong></p><p class="ptr">Where this is: Items 12 and 13 (Statistical Significance, Practical Significance) on page 5 of the notes, including the Important Note, and the video "Classroom Example 1.1.1" on page 13.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. The drop was unlikely by chance, but it is too small to be worth the cost." data-miss="{&quot;a&quot;: &quot;Not quite. Being unlikely by chance is statistical significance, and practical significance also needs a real-world benefit. Review: item 13 (Practical Significance) on page 5 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The analysis shows the drop was unlikely to happen by chance, so it is statistically significant. Review: item 13 (Practical Significance) on page 5 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The formal analysis showed the drop was unlikely to happen by chance, even though it is small. Review: item 13 (Practical Significance) on page 5 of the notes.&quot;}" data-review="item 13 (Practical Significance) on page 5 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Practical Significance).</b> A city spends $3 million on new traffic signals. A formal analysis shows the drop in average commute time was unlikely to happen by chance. The average commute fell from <span class="m"><span aria-hidden="true">27.0</span><span class="sr">27 point 0</span></span> minutes to <span class="m"><span aria-hidden="true">26.8</span><span class="sr">26 point 8</span></span> minutes. Which conclusion matches item 13?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>Statistically significant, and practically significant too, since the drop was unlikely to happen by chance.</span></label><label><input type="radio" name="mc11" value="b"> <span>Statistically significant, but not practically significant, since a drop of <span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span> minutes is hard to justify for $3 million.</span></label><label><input type="radio" name="mc11" value="c"> <span>Practically significant, but not statistically significant.</span></label><label><input type="radio" name="mc11" value="d"> <span>Not statistically significant, because the drop is so small.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Statistically significant, but not practically significant, since a drop of <span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span> minutes is hard to justify for $3 million.</strong></p><p class="ptr">Where this is: Item 13 (Practical Significance) on page 5 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Graph and Explore: item 10, page 4</li><li>Apply Statistical Methods: item 11, page 4</li><li>Statistical Significance and Practical Significance: items 12 and 13, page 5 (and the Important Note)</li><li>Videos: "Classroom Example 1.1.1" and "Classroom Example 1.1.2", page 13</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Pitfalls to Analyzing Data</h2>
+<p>These checks cover items 14 to 20 on pages 5 to 7 of the Section 1.1 notes.</p>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="b" data-why="Correct. The two are related, but that does not show one causes the other." data-miss="{&quot;a&quot;: &quot;Not quite. A relationship between two variables does not show that one causes the other. Review: item 14 (Misleading Conclusion) on page 5 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Switching the direction still claims one causes the other, which the relationship alone does not show. Review: item 14 (Misleading Conclusion) on page 5 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The data do show a relationship; the problem is reading cause into it. Review: item 14 (Misleading Conclusion) on page 5 of the notes.&quot;}" data-review="item 14 (Misleading Conclusion) on page 5 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Misleading Conclusion).</b> Across many neighborhoods, the ones with more coffee shops tend to have higher home prices. A headline says, "Coffee shops drive up home prices." Which statement matches item 14?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>The headline is fine, because the two are related.</span></label><label><input type="radio" name="mc12" value="b"> <span>The headline is misleading, because correlation does not imply causation.</span></label><label><input type="radio" name="mc12" value="c"> <span>The headline is backward: high home prices must be what causes coffee shops to open.</span></label><label><input type="radio" name="mc12" value="d"> <span>The data show the two are not related at all.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The headline is misleading, because correlation does not imply causation.</strong></p><p class="ptr">Where this is: Item 14 (Misleading Conclusion) on page 5 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="d" data-why="Correct. Q1 is self-reported, and Q2 leads people toward one answer." data-miss="{&quot;a&quot;: &quot;Not quite. This has the two reversed: Q1 asks neutrally, while Q2 pushes toward agreeing. Review: items 15 and 16 (Reported Results, Loaded Questions) on page 6 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. When people report their own results they may forget, estimate or be dishonest, and Q2 leads toward one answer. Review: items 15 and 16 (Reported Results, Loaded Questions) on page 6 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The problem with Q2 is its wording, which pushes toward agreeing, wherever it appears. Review: items 15 and 16 (Reported Results, Loaded Questions) on page 6 of the notes.&quot;}" data-review="items 15 and 16 (Reported Results, Loaded Questions) on page 6 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Reported Results and Loaded Questions).</b> A clinic's intake form asks two questions. Q1: "How many hours of sleep did you get each night last week?" Q2: "Wouldn't you agree that our staff is friendly?" Which statement matches items 15 and 16?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>Q1 is loaded, and Q2 is neutral.</span></label><label><input type="radio" name="mc13" value="b"> <span>Neither question is a concern, because patients know their own sleep and their own opinions.</span></label><label><input type="radio" name="mc13" value="c"> <span>Q2 is a concern only because it comes after Q1.</span></label><label><input type="radio" name="mc13" value="d"> <span>Q1 relies on what patients report, so answers may be off from forgetting or estimating, and Q2 is loaded because it pushes toward agreeing.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Q1 relies on what patients report, so answers may be off from forgetting or estimating, and Q2 is loaded because it pushes toward agreeing.</strong></p><p class="ptr">Where this is: Items 15 and 16 (Reported Results, Loaded Questions) on page 6 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="c" data-why="Correct. Thinking about tickets first may change how people rate the police." data-miss="{&quot;a&quot;: &quot;Not quite. With only one question, there is no order to influence the answers. Review: item 17 (Order of Questions) on page 6 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This question pushes toward one answer, which is the loaded question problem in item 16. Review: item 17 (Order of Questions) on page 6 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Few people sending the survey back is the low response rate problem in item 19. Review: item 17 (Order of Questions) on page 6 of the notes.&quot;}" data-review="item 17 (Order of Questions) on page 6 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Order of Questions).</b> Which survey has the problem described in item 17?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>A survey that asks only, "How would you rate your commute?"</span></label><label><input type="radio" name="mc14" value="b"> <span>A survey that asks, "Don't you agree that the city's roads are terrible?"</span></label><label><input type="radio" name="mc14" value="c"> <span>A survey that asks, "How many traffic tickets have you received this year?" and then, "How would you rate the city's police department?"</span></label><label><input type="radio" name="mc14" value="d"> <span>A survey mailed to 4,000 residents that only 3% send back.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A survey that asks, "How many traffic tickets have you received this year?" and then, "How would you rate the city's police department?"</strong></p><p class="ptr">Where this is: Item 17 (Order of Questions) on page 6 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="d" data-why="Correct. The 570 employees who did not respond, and those who skipped questions, may see things differently." data-miss="{&quot;a&quot;: &quot;Not quite. With only 5% responding, the views of the 570 employees who did not respond are missing. Review: items 18 and 19 (Nonresponse, Low Response Rates) on page 6 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. People who skip questions may have different views from those who answer them. Review: items 18 and 19 (Nonresponse, Low Response Rates) on page 6 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Sending a survey to everyone is not the same as collecting data from everyone. Review: items 18 and 19 (Nonresponse, Low Response Rates) on page 6 of the notes.&quot;}" data-review="items 18 and 19 (Nonresponse, Low Response Rates) on page 6 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Nonresponse and Low Response Rates).</b> A company sends a survey about a new manager to 600 employees. Only 30 send it back (a 5% response rate), and many of those 30 skip the questions about the manager. Which statement matches items 18 and 19?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>30 returned surveys is enough, so there is no concern.</span></label><label><input type="radio" name="mc15" value="b"> <span>The skipped questions do not matter, since the rest of each survey was completed.</span></label><label><input type="radio" name="mc15" value="c"> <span>This is a census, because every employee received the survey.</span></label><label><input type="radio" name="mc15" value="d"> <span>The low response rate and the skipped questions are both concerns, because the employees who did not answer may have different views from those who did.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The low response rate and the skipped questions are both concerns, because the employees who did not answer may have different views from those who did.</strong></p><p class="ptr">Where this is: Items 18 and 19 (Nonresponse, Low Response Rates) on page 6 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="c" data-why="Correct. An increase of 100% means the number doubled." data-miss="{&quot;a&quot;: &quot;Not quite. This is the misreading item 20 warns about: the 100% describes the change, not the share of customers. Review: item 20 (Misleading Use of Percentages) on page 7 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. A percent increase is measured against last month&#x27;s number, not a count of 100 orders. Review: item 20 (Misleading Use of Percentages) on page 7 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The ad says the orders increased by 100%, which is a change, not \&quot;100% of\&quot; last month. Review: item 20 (Misleading Use of Percentages) on page 7 of the notes.&quot;}" data-review="item 20 (Misleading Use of Percentages) on page 7 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Misleading Use of Percentages).</b> A store's ad says, "Online orders increased by 100% this month!" Last month the store had 40 online orders. Which reading is most reasonable?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Every customer ordered online this month.</span></label><label><input type="radio" name="mc16" value="b"> <span>The store had 140 online orders this month.</span></label><label><input type="radio" name="mc16" value="c"> <span>The store had 80 online orders this month, double last month.</span></label><label><input type="radio" name="mc16" value="d"> <span>The store had 40 online orders again, since 100% of last month means no change.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The store had 80 online orders this month, double last month.</strong></p><p class="ptr">Where this is: Item 20 (Misleading Use of Percentages) on page 7 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Misleading Conclusion: item 14, page 5</li><li>Reported Results, Loaded Questions, Order of Questions, Nonresponse, Low Response Rates: items 15 to 19, page 6</li><li>Misleading Use of Percentages: item 20, page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. StatCrunch check</h2>
+<p>These checks cover item 21 on pages 7 to 13 of the notes, its four StatCrunch videos, and the Classroom Example 1.1.3 and 1.1.4 videos on page 14.</p>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="638.02" data-why="Correct. StatCrunch shows 638.02." data-miss="{&quot;638&quot;: &quot;Not quite. The directions say do not round, and this is rounded to a whole number. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;638.1&quot;: &quot;Not quite. The directions say do not round, and this is rounded. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;639&quot;: &quot;Not quite. The directions say do not round, and this is rounded up. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;63802&quot;: &quot;Not quite. This is 1,387 times 46, so the percent was not changed to a decimal or divided by 100. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;63.802&quot;: &quot;Not quite. This uses 0.046, so the decimal for 46% is one place too far left. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;6380.2&quot;: &quot;Not quite. This uses 4.6, so the decimal for 46% is one place too far right. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;748.98&quot;: &quot;Not quite. This is 54% of 1,387, the renters who did not say this. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~30.1522~0.006&quot;: &quot;Not quite. This divides 1,387 by 46 instead of finding 46% of 1,387. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~3015.217~0.6&quot;: &quot;Not quite. This divides 1,387 by 0.46 instead of multiplying. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~3.3165~0.006&quot;: &quot;Not quite. This finds what percent 46 is of 1,387, which is a different question. Review: item 21a (Percentage of) on pages 7 and 8 of the notes, the video \&quot;Using StatCrunch to compute a percent of a number\&quot; on page 7, and the video \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;}" data-review="item 21a (Percentage of) on pages 7 and 8 of the notes, the video &quot;Using StatCrunch to compute a percent of a number&quot; on page 7, and the video &quot;Classroom Example 1.1.4&quot; on page 14.">
+<p class="prompt"><b class="qlabel">Check 17 (Percent of a Number).</b> In a survey of 1,387 renters, 46% said they would pay more for an apartment with in-unit laundry. Set this up in StatCrunch yourself and find the exact value of 46% of 1,387. Do not round.</p>
+<details><summary>Show answer</summary><p><strong>638.02</strong></p><p class="ptr">Where this is: Item 21a (Percentage of) on pages 7 and 8 of the notes, the video "Using StatCrunch to compute a percent of a number" on page 7, and the video "Classroom Example 1.1.4" on page 14.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="mc" data-answer="c" data-why="Correct. A count of people must be a whole number, and 638.02 rounds to 638." data-miss="{&quot;a&quot;: &quot;Not quite. StatCrunch computed it correctly, but a survey cannot count part of a person. Review: the video \&quot;Classroom Example 1.1.4\&quot; on page 14 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The digit after the decimal point is 0, so rounding to the nearest whole number gives 638, not 639. Review: the video \&quot;Classroom Example 1.1.4\&quot; on page 14 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. 46 is the percent, not the number of renters. Review: the video \&quot;Classroom Example 1.1.4\&quot; on page 14 of the notes.&quot;}" data-review="the video &quot;Classroom Example 1.1.4&quot; on page 14 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 18 (Whole-Number Counts).</b> Could 638.02 be the actual number of renters in Check 17 who said they would pay more? Which answer is correct? (Round to the nearest whole number as needed.)</legend>
+<label><input type="radio" name="mc18" value="a"> <span>Yes, 638.02 is the actual number, because StatCrunch computed it.</span></label><label><input type="radio" name="mc18" value="b"> <span>No. A count of people must be a whole number, so the actual number is 639, because counts of people always round up.</span></label><label><input type="radio" name="mc18" value="c"> <span>No. A count of people must be a whole number, so the actual number is 638.</span></label><label><input type="radio" name="mc18" value="d"> <span>No. The actual number is 46.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No. A count of people must be a whole number, so the actual number is 638.</strong></p><p class="ptr">Where this is: The video "Classroom Example 1.1.4" on page 14 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="11" data-why="Correct. StatCrunch shows about 10.89, which rounds to 11." data-miss="{&quot;10&quot;: &quot;Not quite. This cuts off the decimal part instead of rounding to the nearest whole number. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;10.9&quot;: &quot;Not quite. The directions ask for the nearest whole number, and this has one decimal place. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~10.8868~0.006&quot;: &quot;Not quite. The directions ask for the nearest whole number, and this still has decimal places. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;0.11&quot;: &quot;Not quite. This is the decimal before multiplying by 100 to make a percent. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~0.108868~0.0006&quot;: &quot;Not quite. This is the decimal before multiplying by 100 to make a percent. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~918.54~0.6&quot;: &quot;Not quite. The fraction is flipped: this divides 1,387 by 151. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;~9.1854~0.006&quot;: &quot;Not quite. The fraction is flipped: this divides 1,387 by 151. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;9&quot;: &quot;Not quite. The fraction is flipped: this divides 1,387 by 151. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;, &quot;919&quot;: &quot;Not quite. The fraction is flipped: this divides 1,387 by 151. Review: item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video \&quot;Using StatCrunch to convert a fraction to a percent\&quot; on page 10, and the videos \&quot;Classroom Example 1.1.3\&quot; and \&quot;Classroom Example 1.1.4\&quot; on page 14.&quot;}" data-review="item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video &quot;Using StatCrunch to convert a fraction to a percent&quot; on page 10, and the videos &quot;Classroom Example 1.1.3&quot; and &quot;Classroom Example 1.1.4&quot; on page 14.">
+<p class="prompt"><b class="qlabel">Check 19 (Fraction to Percent).</b> Among the same 1,387 renters, 151 said their building has no laundry room. Use StatCrunch to find the percentage of respondents who said this. Round to the nearest whole number.</p>
+<details><summary>Show answer</summary><p><strong>11</strong></p><p class="ptr">Where this is: Item 21c (Fraction to Percent) on pages 9 to 11 of the notes, the video "Using StatCrunch to convert a fraction to a percent" on page 10, and the videos "Classroom Example 1.1.3" and "Classroom Example 1.1.4" on page 14.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="mc" data-answer="d" data-why="Correct. Both conversions move the decimal point two places." data-miss="{&quot;a&quot;: &quot;Not quite. The first conversion moves the decimal point three places and the second moves it one place. Review: items 21b (Decimal to Percent) on pages 8 and 9 and 21d (Percent to Decimal) on pages 12 and 13 of the notes, and the videos \&quot;Using StatCrunch to convert a decimal to a percent\&quot; on page 8 and \&quot;Using StatCrunch to convert a percent to a decimal\&quot; on page 12.&quot;, &quot;b&quot;: &quot;Not quite. The first conversion fits, but the second moves the decimal point only one place. Review: items 21b (Decimal to Percent) on pages 8 and 9 and 21d (Percent to Decimal) on pages 12 and 13 of the notes, and the videos \&quot;Using StatCrunch to convert a decimal to a percent\&quot; on page 8 and \&quot;Using StatCrunch to convert a percent to a decimal\&quot; on page 12.&quot;, &quot;c&quot;: &quot;Not quite. The first only adds a percent sign, and the second multiplies by 100 instead of dividing. Review: items 21b (Decimal to Percent) on pages 8 and 9 and 21d (Percent to Decimal) on pages 12 and 13 of the notes, and the videos \&quot;Using StatCrunch to convert a decimal to a percent\&quot; on page 8 and \&quot;Using StatCrunch to convert a percent to a decimal\&quot; on page 12.&quot;}" data-review="items 21b (Decimal to Percent) on pages 8 and 9 and 21d (Percent to Decimal) on pages 12 and 13 of the notes, and the videos &quot;Using StatCrunch to convert a decimal to a percent&quot; on page 8 and &quot;Using StatCrunch to convert a percent to a decimal&quot; on page 12.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 20 (Decimal to Percent and Percent to Decimal).</b> A StatCrunch result shows <span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span>, and a problem gives the percent <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span>. Which pair of conversions is correct?</legend>
+<label><input type="radio" name="mc20" value="a"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is 35%, and <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>.</span></label><label><input type="radio" name="mc20" value="b"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is <span class="m"><span aria-hidden="true">3.5%</span><span class="sr">3 point 5 percent</span></span>, and <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>.</span></label><label><input type="radio" name="mc20" value="c"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is <span class="m"><span aria-hidden="true">0.035%</span><span class="sr">0 point 0 3 5 percent</span></span>, and <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> is 250.</span></label><label><input type="radio" name="mc20" value="d"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is <span class="m"><span aria-hidden="true">3.5%</span><span class="sr">3 point 5 percent</span></span>, and <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.025</span><span class="sr">0 point 0 2 5</span></span>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is <span class="m"><span aria-hidden="true">3.5%</span><span class="sr">3 point 5 percent</span></span>, and <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.025</span><span class="sr">0 point 0 2 5</span></span>.</strong></p><p class="ptr">Where this is: Items 21b (Decimal to Percent) on pages 8 and 9 and 21d (Percent to Decimal) on pages 12 and 13 of the notes, and the videos "Using StatCrunch to convert a decimal to a percent" on page 8 and "Using StatCrunch to convert a percent to a decimal" on page 12.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="In MyLab, look under Get More Help and choose StatCrunch. If the window does not load, close it and open it again. The Classroom Example 1.1.2, 1.1.3 and 1.1.4 videos show this." value="I could not get StatCrunch to open from MyLab."> I could not get StatCrunch to open from MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Sign in at the top right corner with your MyLab Math username and password, then choose Open StatCrunch. The video &quot;Using StatCrunch to compute a percent of a number&quot; shows this." value="statcrunch.com asked me to sign in."> statcrunch.com asked me to sign in.</label><label><input type="checkbox" class="sc-issue" data-tip="After Open StatCrunch, choose Data, then Compute, then Expression, and type in the Expression box. The screenshots on pages 7 and 8 of the notes show each step." value="I could not find where to type the computation."> I could not find where to type the computation.</label><label><input type="checkbox" class="sc-issue" data-tip="Compare your entry with the Note on page 8: * multiplies, / divides, - subtracts and + adds. The Expression screenshots on pages 8, 9, 10, 11 and 13 show complete entries." value="StatCrunch gave an error, or the result looked wrong."> StatCrunch gave an error, or the result looked wrong.</label><label><input type="checkbox" class="sc-issue" data-tip="Page 11 of the notes says it is okay to leave the earlier result on the screen. The Classroom Example 1.1.4 video copies a result with Ctrl+C and pastes it with Ctrl+V, and typing the number in also works." value="I needed to use one result in a second computation."> I needed to use one result in a second computation.</label><label><input type="checkbox" class="sc-issue" data-tip="Read the direction at the end of the question first, such as &quot;Do not round&quot; or &quot;Round to the nearest whole number as needed.&quot; In the Classroom Example 1.1.3 video, MyLab already shows the percent sign, so only the number is typed." value="I was not sure how to round or whether to type a percent sign."> I was not sure how to round or whether to type a percent sign.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 7.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Percentage of: item 21a, pages 7 and 8, video "Using StatCrunch to compute a percent of a number"</li><li>Decimal to Percent: item 21b, pages 8 and 9, video "Using StatCrunch to convert a decimal to a percent"</li><li>Fraction to Percent: item 21c, pages 9 to 11, video "Using StatCrunch to convert a fraction to a percent"</li><li>Percent to Decimal: item 21d, pages 12 and 13, video "Using StatCrunch to convert a percent to a decimal"</li><li>Rounding directions and whole-number counts: videos "Classroom Example 1.1.3" and "Classroom Example 1.1.4", page 14</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 8: I do not see why Test B is the significant one."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec1.1-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Concepts", "resource": "Items 1 to 5 on pages 1 and 2 of the Section 1.1 notes."}, {"id": "s3", "name": "Prepare the Study", "resource": "Items 6 to 9 on pages 2 and 3 of the Section 1.1 notes."}, {"id": "s4", "name": "Analyze the Data and Conclusions", "resource": "Items 10 to 13 on pages 4 and 5 of the notes, and the videos \"Classroom Example 1.1.1\" and \"Classroom Example 1.1.2\" on page 13."}, {"id": "s5", "name": "Pitfalls to Analyzing Data", "resource": "Items 14 to 20 on pages 5 to 7 of the Section 1.1 notes."}, {"id": "s6", "name": "StatCrunch", "resource": "Item 21 on pages 7 to 13 of the notes, the four StatCrunch videos for item 21 on pages 7, 8, 10 and 12, and the videos \"Classroom Example 1.1.3\" and \"Classroom Example 1.1.4\" on page 14."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='1.1';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

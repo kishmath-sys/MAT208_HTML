@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1.1 Corequisite: Statistical and Critical Thinking</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 1.1</div>
+<h1>Section 1.1 Corequisite: Statistical and Critical Thinking</h1>
+<p>Get ready for the Section 1.1 notes with practice on the percent, rounding and order of operations skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Percents, decimals and fractions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Finding a percent of a number<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. What percent is it? Part and total<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding and rounding directions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Order of operations on one line<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change percents to decimals, and decimals and fractions to percents.</li><li>Find a percent of a number.</li><li>Find what percent one number is of another, after picking out the part and the total.</li><li>Round to the nearest whole number or one decimal place, and follow "do not round."</li><li>Work out one-line expressions with parentheses, multiplication and division in the right order.</li></ul>
+</div>
+<p>Section 1.1 of the notes introduces the basic vocabulary of statistics, the parts of a statistical study, common pitfalls in studies and surveys, and computing with percents in StatCrunch.</p>
+<p>Item 21 of the notes (Computing with Percents) says it is a good time to "refresh" percent skills, so the notes expect you to already know them. This page gives those percent, rounding and order of operations skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.62</span><span class="sr">0 point 6 2</span></span>. Commas, a percent sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 1.1 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 1.1 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I mix up whether <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> is 4% or 40%.</strong><br><button type="button" data-go="s2">Percents, decimals and fractions</button></li>
+<li><strong>I am not sure what to do with the percent sign when I find 15% of something.</strong><br><button type="button" data-go="s3">Finding a percent of a number</button></li>
+<li><strong>When a question asks "what percent," I am not sure which number to divide by.</strong><br><button type="button" data-go="s4">What percent is it? Part and total</button></li>
+<li><strong>I second-guess which digit to look at when I round.</strong><br><button type="button" data-go="s5">Rounding and rounding directions</button></li>
+<li><strong>I am not sure what a calculator does first when everything is typed on one line.</strong><br><button type="button" data-go="s6">Order of operations on one line</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Percents, decimals and fractions</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a percent to a decimal, including percents such as <span class="m"><span aria-hidden="true">7.5%</span><span class="sr">7 point 5 percent</span></span>.</li><li>Change a decimal to a percent, including decimals with one digit after the point and decimals greater than 1.</li><li>Change a fraction to a percent by dividing first.</li><li>Compare numbers written in different forms.</li></ul>
+</div>
+<h3>Percent means "out of 100"</h3>
+<p>The word percent means "per hundred." So 37% means 37 out of 100, which is the fraction <span class="m"><span aria-hidden="true" class="frac"><span class="ft">37</span><span class="fb">100</span></span><span class="sr">37 over 100</span></span> and the decimal <span class="m"><span aria-hidden="true">0.37</span><span class="sr">0 point 3 7</span></span>. Moving between the three forms comes down to multiplying or dividing by 100.</p>
+<ul>
+<li><strong>Percent to decimal:</strong> divide by 100. That moves the decimal point two places to the <strong>left</strong>. Fill any empty places with zeros.</li>
+<li><strong>Decimal to percent:</strong> multiply by 100. That moves the decimal point two places to the <strong>right</strong>, then add the percent sign.</li>
+<li><strong>Fraction to percent:</strong> divide the top by the bottom to get a decimal, then multiply by 100.</li>
+</ul>
+<div class="table-wrap" role="region" aria-label="Benchmark percents and decimals" tabindex="0">
+<table>
+<caption>Benchmark percents and their decimals</caption>
+<thead><tr><th scope="col">Percent</th><th scope="col">Decimal</th><th scope="col">Fraction</th></tr></thead>
+<tbody>
+<tr><th scope="row">1%</th><td><span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span></td><td><span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">100</span></span><span class="sr">1 over 100</span></span></td></tr>
+<tr><th scope="row">10%</th><td><span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span></td><td><span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">10</span></span><span class="sr">1 over 10</span></span></td></tr>
+<tr><th scope="row">50%</th><td><span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></td><td><span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">2</span></span><span class="sr">1 over 2</span></span></td></tr>
+<tr><th scope="row">100%</th><td>1</td><td>1 whole</td></tr>
+<tr><th scope="row">150%</th><td><span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span></td><td><span class="m"><span aria-hidden="true" class="frac"><span class="ft">3</span><span class="fb">2</span></span><span class="sr">3 over 2</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<p>Notice the last row. A percent can be more than 100%. Any decimal greater than 1 is a percent greater than 100%.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading the digit as the percent.</strong> <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> is 4 tenths, which is 40 hundredths, so it is 40%, not 4%.</li>
+<li><strong>Moving only one place.</strong> <span class="m"><span aria-hidden="true">7.5%</span><span class="sr">7 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.075</span><span class="sr">0 point 0 7 5</span></span>, not <span class="m"><span aria-hidden="true">0.75</span><span class="sr">0 point 7 5</span></span>. Count two places to the left and fill the empty place with a zero.</li>
+<li><strong>Adding a percent sign without converting.</strong> <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> is 60%. Writing <span class="m"><span aria-hidden="true">0.6%</span><span class="sr">0 point 6 percent</span></span> names a much smaller amount.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 4.5% as a decimal">
+<h3 style="margin-top:0">Worked example: Write 4.5% as a decimal</h3>
+<p>Write <span class="m"><span aria-hidden="true">4.5%</span><span class="sr">4 point 5 percent</span></span> as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">4.5 ÷ 100</span><span class="sr">4 point 5 divided by 100</span></span></span><span class="say">Percent to decimal means divide by 100.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">4.5 → 0.45 → 0.045</span><span class="sr">4 point 5, then 0 point 4 5, then 0 point 0 4 5</span></span></span><span class="say">Move the decimal point one place left, then a second place left. The second move needs a zero in front of the 4.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.045</span><span class="sr">0 point 0 4 5</span></span> (not <span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span>, which would be 45%)</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 0.8 as a percent">
+<h3 style="margin-top:0">Finish this one: Write 0.8 as a percent</h3>
+<p>Write <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span> as a percent.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.8 = 0.80</span><span class="sr">0 point 8 equals 0 point 8 0</span></span></span><span class="say">Decimal to percent means multiply by 100, which moves the point two places right. Add a zero at the end so there are two digits to move past.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="80" data-miss="{&quot;8&quot;: &quot;That reads the 8 after the point as the percent. 0.8 is 8 tenths, which is 80 hundredths, so it is 80%.&quot;, &quot;0.8&quot;: &quot;That adds a percent sign without converting. Multiply 0.8 by 100 (move the point two places right) to get 80%.&quot;, &quot;0.008&quot;: &quot;That divides by 100. Going from a decimal to a percent, multiply by 100 instead.&quot;, &quot;800&quot;: &quot;That moves the point three places. Multiplying by 100 moves it exactly two places: 0.80 becomes 80.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: write <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span> as a percent.</p>
+<details><summary>Hint</summary><p>Write it as <span class="m"><span aria-hidden="true">0.80</span><span class="sr">0 point 8 0</span></span>, then move the decimal point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>80%</strong> (typing 80 is fine)</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.62" data-miss="{&quot;6.2&quot;: &quot;That divides by 10, which moves the point only one place. Divide by 100 to move it two places: 0.62.&quot;, &quot;62&quot;: &quot;That is still the percent number. Divide by 100 to change it to a decimal: 0.62.&quot;, &quot;0.062&quot;: &quot;That moves the point three places. Dividing by 100 moves it two places: 0.62.&quot;, &quot;6200&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Write 62% as a decimal.</p>
+<details><summary>Hint</summary><p>Divide 62 by 100. The decimal point starts after the 2 and moves two places left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.62</span><span class="sr">0 point 6 2</span></span></strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.075" data-miss="{&quot;0.75&quot;: &quot;This is the one-place slip. 0.75 is 75%. From 7.5, move the point two places left and fill in a zero: 0.075.&quot;, &quot;7.5&quot;: &quot;That is still the percent number. Divide by 100: 0.075.&quot;, &quot;0.0075&quot;: &quot;That moves the point three places. Two places left from 7.5 gives 0.075.&quot;, &quot;750&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Write <span class="m"><span aria-hidden="true">7.5%</span><span class="sr">7 point 5 percent</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">7.5</span><span class="sr">7 point 5</span></span>. One move left gives <span class="m"><span aria-hidden="true">0.75</span><span class="sr">0 point 7 5</span></span>. One more move left needs a zero.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.075</span><span class="sr">0 point 0 7 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="87.5" data-miss="{&quot;0.875&quot;: &quot;That is the decimal. Multiply it by 100 to get the percent: 87.5%.&quot;, &quot;~114.2857~0.06&quot;: &quot;The fraction is flipped. That divides 8 by 7. Divide the top by the bottom: 7 divided by 8 is 0.875, which is 87.5%.&quot;, &quot;~1.142857~0.006&quot;: &quot;The fraction is flipped. That divides 8 by 7. Divide the top by the bottom: 7 divided by 8 is 0.875, which is 87.5%.&quot;, &quot;78&quot;: &quot;That just puts the digits 7 and 8 side by side. Divide 7 by 8 first, then multiply by 100.&quot;, &quot;8.75&quot;: &quot;That moves the point only one place. 0.875 times 100 is 87.5.&quot;, &quot;88&quot;: &quot;The directions say do not round. Keep every digit: 87.5.&quot;, &quot;87&quot;: &quot;The directions say do not round. Keep every digit: 87.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> Write the fraction <span class="m"><span aria-hidden="true" class="frac"><span class="ft">7</span><span class="fb">8</span></span><span class="sr">7 over 8</span></span> as a percent. Do not round.</p>
+<details><summary>Hint</summary><p>Divide the top by the bottom: <span class="m"><span aria-hidden="true">7 ÷ 8</span><span class="sr">7 divided by 8</span></span>. Then multiply the decimal by 100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">87.5%</span><span class="sr">87 point 5 percent</span></span></strong>, because <span class="m"><span aria-hidden="true">7 ÷ 8 = 0.875</span><span class="sr">7 divided by 8 equals 0 point 8 7 5</span></span> and <span class="m"><span aria-hidden="true">0.875 × 100 = 87.5</span><span class="sr">0 point 8 7 5 times 100 equals 87 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="135" data-miss="{&quot;13.5&quot;: &quot;That moves the point one place. Multiply by 100 to move it two places: 135%.&quot;, &quot;1.35&quot;: &quot;That adds a percent sign without converting. Multiply by 100: 135%.&quot;, &quot;35&quot;: &quot;The 1 in front counts. 1.35 is more than 1 whole, so it is more than 100%: 135%.&quot;, &quot;0.0135&quot;: &quot;That divides by 100. Going from a decimal to a percent, multiply by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Write <span class="m"><span aria-hidden="true">1.35</span><span class="sr">1 point 3 5</span></span> as a percent.</p>
+<details><summary>Hint</summary><p>A decimal greater than 1 is a percent greater than 100%. Move the point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>135%</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.07 is 7 hundredths, which is 7%, not 70%. It is the smallest of the four.&quot;, &quot;c&quot;: &quot;0.6 is 60%, which is less than 65%.&quot;, &quot;d&quot;: &quot;5 divided by 8 is 0.625, which is 62.5%. That is less than 65%.&quot;}" data-why="Correct. As percents they are 7%, 65%, 60% and 62.5%, so 65% is the largest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 6.</b> Which of these is the <strong>largest</strong>?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span>65%</span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">5</span><span class="fb">8</span></span><span class="sr">5 over 8</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change each one to a percent first: <span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span> is 7%, <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> is 60%, and divide 5 by 8 for the fraction.</p></details>
+<details><summary>Show answer</summary><p><strong>65%</strong>. The others are 7%, 60% and <span class="m"><span aria-hidden="true">62.5%</span><span class="sr">62 point 5 percent</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 1.1</h3>
+<p>Item 21 (Computing with Percents) has three parts that use these conversions: part b, Decimal to Percent, on page 8; part c, Fraction to Percent, on page 9; and part d, Percent to Decimal, on page 12. Each part has its own StatCrunch video.</p>
+<p><strong>Watch for this:</strong> a percent or a decimal with only one digit next to the point, such as <span class="m"><span aria-hidden="true">4.5%</span><span class="sr">4 point 5 percent</span></span> or <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span>. Count two places and fill empty places with zeros.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Finding a percent of a number</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find a percent of a number by changing the percent to a decimal and multiplying.</li><li>Write the same calculation with a fraction of 100.</li><li>Check that an answer is reasonable with a quick estimate.</li><li>Answer a two-step question that asks for the part left over.</li></ul>
+</div>
+<h3>"Of" means multiply</h3>
+<p>To find a percent of a number, change the percent to a decimal and multiply. Dividing the percent by 100 does the same job, so these two lines give the same answer:</p>
+<ul>
+<li><span class="m"><span aria-hidden="true">35% of 240 = 0.35 × 240</span><span class="sr">35 percent of 240 equals 0 point 3 5 times 240</span></span></li>
+<li><span class="m"><span aria-hidden="true">35% of 240 = 240 × (35 / 100)</span><span class="sr">35 percent of 240 equals 240 times, open parenthesis 35 over 100 close parenthesis</span></span></li>
+</ul>
+<p><strong>Quick estimate.</strong> 10% of a number is the number divided by 10, and 50% is half. If the percent is less than 100%, the answer must be smaller than the number you started with.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Ignoring the percent sign.</strong> Multiplying by 35 instead of <span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span> gives an answer 100 times too big.</li>
+<li><strong>Dividing instead of multiplying.</strong> "35% of 240" never means <span class="m"><span aria-hidden="true">240 ÷ 35</span><span class="sr">240 divided by 35</span></span>.</li>
+<li><strong>Answering a different question.</strong> If the question asks for the part that is left, find the percent of the number and then subtract, or use the leftover percent.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Find 35% of 240">
+<h3 style="margin-top:0">Worked example: Find 35% of 240</h3>
+<p>Find 35% of 240.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">35% = 0.35</span><span class="sr">35 percent equals 0 point 3 5</span></span></span><span class="say">Change the percent to a decimal by moving the point two places left.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.35 × 240 = 84</span><span class="sr">0 point 3 5 times 240 equals 84</span></span></span><span class="say">Multiply.</span></li><li><span class="work">Estimate: 10% of 240 is 24</span><span class="say">So 30% is <span class="m"><span aria-hidden="true">3 × 24 = 72</span><span class="sr">3 times 24 equals 72</span></span>, and 35% should be a little more than 72. The answer 84 fits.</span></li></ol><p><strong>Answer: 84</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Find 15% of 80">
+<h3 style="margin-top:0">Finish this one: Find 15% of 80</h3>
+<p>Find 15% of 80.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">15% = 0.15</span><span class="sr">15 percent equals 0 point 1 5</span></span></span><span class="say">Change the percent to a decimal first. Next, multiply the decimal by 80.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="12" data-miss="{&quot;1200&quot;: &quot;That multiplies by 15 instead of 0.15, so the percent sign was ignored. 0.15 times 80 is 12.&quot;, &quot;120&quot;: &quot;That uses 1.5 instead of 0.15. Move the point two places left from 15: 0.15 times 80 is 12.&quot;, &quot;1.2&quot;: &quot;That uses 0.015 instead of 0.15. Two places left from 15 is 0.15, and 0.15 times 80 is 12.&quot;, &quot;~5.3333~0.01&quot;: &quot;That divides 80 by 15. \&quot;Of\&quot; means multiply: 0.15 times 80 is 12.&quot;, &quot;~533.33~0.5&quot;: &quot;That divides 80 by 0.15. \&quot;Of\&quot; means multiply: 0.15 times 80 is 12.&quot;, &quot;68&quot;: &quot;That is the other 85%, what is left after taking 15% away. The question asks for 15% of 80: 12.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: what is 15% of 80?</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">0.15 × 80</span><span class="sr">0 point 1 5 times 80</span></span>. Check: 10% of 80 is 8, so 15% should be a bit more than 8.</p></details>
+<details><summary>Show answer</summary><p><strong>12</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="52" data-miss="{&quot;520&quot;: &quot;That uses 0.8, which is 80%. 8% is 0.08, and 0.08 times 650 is 52.&quot;, &quot;5.2&quot;: &quot;That uses 0.008. Two places left from 8 is 0.08, and 0.08 times 650 is 52.&quot;, &quot;5200&quot;: &quot;That multiplies by 8 instead of 0.08, so the percent sign was ignored.&quot;, &quot;81.25&quot;: &quot;That divides 650 by 8. \&quot;Of\&quot; means multiply: 0.08 times 650 is 52.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> What is 8% of 650?</p>
+<details><summary>Hint</summary><p>8% is <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>. A single-digit percent needs a zero after the decimal point.</p></details>
+<details><summary>Show answer</summary><p><strong>52</strong>, because <span class="m"><span aria-hidden="true">0.08 × 650 = 52</span><span class="sr">0 point 0 8 times 650 equals 52</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="9.3" data-miss="{&quot;930&quot;: &quot;That multiplies by 20 instead of 0.20, so the percent sign was ignored. 0.20 times 46.50 is 9.30.&quot;, &quot;93&quot;: &quot;That uses 2.0 instead of 0.20. 20% is 0.20, and 0.20 times 46.50 is 9.30.&quot;, &quot;0.93&quot;: &quot;That uses 0.02, which is 2%. 20% is 0.20, and 0.20 times 46.50 is 9.30.&quot;, &quot;2.325&quot;: &quot;That divides 46.50 by 20. \&quot;Of\&quot; means multiply: 0.20 times 46.50 is 9.30.&quot;, &quot;55.8&quot;: &quot;That is the bill plus the tip. The question asks for the tip alone: 9.30.&quot;, &quot;9&quot;: &quot;The directions say do not round. Keep the cents: 9.30.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> A restaurant bill is $46.50. A 20% tip is how many dollars? Do not round.</p>
+<details><summary>Hint</summary><p>20% is <span class="m"><span aria-hidden="true">0.20</span><span class="sr">0 point 2 0</span></span>. A quick check: 10% of $46.50 is about $4.65, and 20% is double that.</p></details>
+<details><summary>Show answer</summary><p><strong>$9.30</strong> (typing 9.3 or 9.30 is fine)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="186" data-miss="{&quot;1054&quot;: &quot;That is the number of seats sold. Subtract it from 1,240, or find 15% of 1,240: 186.&quot;, &quot;1155&quot;: &quot;That subtracts 85 seats, but 85 is a percent, not a number of seats. 85% of 1,240 is 1,054 seats, so 186 were not sold.&quot;, &quot;15&quot;: &quot;That is the percent not sold. The question asks for seats: 15% of 1,240 is 186.&quot;, &quot;105400&quot;: &quot;That multiplies by 85 instead of 0.85. Then the answer is 100 times too big.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> A theater has 1,240 seats and sold 85% of them for a show. How many seats were <strong>not</strong> sold?</p>
+<details><summary>Hint</summary><p>If 85% were sold, then 15% were not. Find 15% of 1,240.</p></details>
+<details><summary>Show answer</summary><p><strong>186 seats</strong>. Either find <span class="m"><span aria-hidden="true">0.15 × 1,240 = 186</span><span class="sr">0 point 1 5 times 1,240 equals 186</span></span>, or find <span class="m"><span aria-hidden="true">0.85 × 1,240 = 1,054</span><span class="sr">0 point 8 5 times 1,240 equals 1,054</span></span> and subtract from 1,240.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="34.5" data-miss="{&quot;3450&quot;: &quot;That multiplies by 37.5 instead of 0.375, so the percent sign was ignored.&quot;, &quot;345&quot;: &quot;That uses 3.75. Two places left from 37.5 is 0.375, and 0.375 times 92 is 34.5.&quot;, &quot;3.45&quot;: &quot;That uses 0.0375, which moves the point three places. Use 0.375.&quot;, &quot;35&quot;: &quot;The directions say do not round. Keep every digit: 34.5.&quot;, &quot;34&quot;: &quot;The directions say do not round. Keep every digit: 34.5.&quot;, &quot;~2.4533~0.01&quot;: &quot;That divides 92 by 37.5. \&quot;Of\&quot; means multiply: 0.375 times 92 is 34.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Find <span class="m"><span aria-hidden="true">37.5%</span><span class="sr">37 point 5 percent</span></span> of 92. Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">37.5%</span><span class="sr">37 point 5 percent</span></span> as a decimal is <span class="m"><span aria-hidden="true">0.375</span><span class="sr">0 point 3 7 5</span></span>. Then multiply by 92.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">34.5</span><span class="sr">34 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">0.375 × 92 = 34.5</span><span class="sr">0 point 3 7 5 times 92 equals 34 point 5</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 1.1</h3>
+<p>Item 21a (Percentage of) on page 7 of the notes gives the formula for a percent of a value. The videos for Classroom Examples 1.1.2, 1.1.3 and 1.1.4 (pages 13 and 14) each find a percent of a number of peas or people.</p>
+<p><strong>Watch for this:</strong> the percent sign. Change the percent to a decimal, or divide it by 100, before you multiply.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. What percent is it? Part and total</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Pick out the part and the total in a sentence.</li><li>Find what percent the part is of the total: divide, then multiply by 100.</li><li>Spot a flipped division by checking whether the answer makes sense.</li><li>Handle a sentence with three or more numbers in it.</li></ul>
+</div>
+<h3>Part divided by total</h3>
+<p>To find what percent one number is of another, divide the part by the total, then multiply by 100.</p>
+<p class="work"><span class="m"><span aria-hidden="true">percent = (part ÷ total) × 100</span><span class="sr">percent equals, open parenthesis part divided by total close parenthesis, times 100</span></span></p>
+<ul>
+<li>The <strong>total</strong> is the whole group. It often comes after words such as "of the," "out of" or "among."</li>
+<li>The <strong>part</strong> is the smaller group the question asks about.</li>
+<li>If the part is smaller than the total, the answer must be less than 100%. An answer over 100% usually means the division was flipped.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Adopted dogs">
+<h3 style="margin-top:0">Worked example: Adopted dogs</h3>
+<p>An animal shelter took in 140 dogs this month, and 42 of them were adopted. What percent of the dogs were adopted?</p><ol class="steps"><li><span class="work">Part: 42 adopted. Total: 140 dogs.</span><span class="say">Label both numbers before dividing.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">42 ÷ 140 = 0.3</span><span class="sr">42 divided by 140 equals 0 point 3</span></span></span><span class="say">Divide the part by the total.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.3 × 100 = 30</span><span class="sr">0 point 3 times 100 equals 30</span></span></span><span class="say">Multiply by 100 to change the decimal to a percent.</span></li></ol><p><strong>Answer: 30%</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Free throws">
+<h3 style="margin-top:0">Finish this one: Free throws</h3>
+<p>A basketball team took 25 free throws and made 17 of them. What percent of its free throws did it make?</p><ol class="steps"><li><span class="work">Part: 17 made. Total: 25 taken.</span><span class="say">The total is every free throw taken. Next, divide the part by the total and multiply by 100.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="68" data-miss="{&quot;0.68&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 68%.&quot;, &quot;~147.06~0.06&quot;: &quot;The division is flipped. That is 25 divided by 17. Divide the part (17) by the total (25): 68%.&quot;, &quot;~1.4706~0.006&quot;: &quot;The division is flipped. That is 25 divided by 17. Divide the part (17) by the total (25): 68%.&quot;, &quot;32&quot;: &quot;That is the percent missed. The question asks for the percent made: 68%.&quot;, &quot;17&quot;: &quot;That is the number made, not the percent. Divide 17 by 25 and multiply by 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Finish it: what percent of its free throws did the team make?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">17 ÷ 25</span><span class="sr">17 divided by 25</span></span> gives a decimal. Multiply it by 100.</p></details>
+<details><summary>Show answer</summary><p><strong>68%</strong>, because <span class="m"><span aria-hidden="true">17 ÷ 25 = 0.68</span><span class="sr">17 divided by 25 equals 0 point 6 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;This divides the total by the part, so it is flipped. It gives more than 100%, which cannot be right when only some students walk.&quot;, &quot;c&quot;: &quot;This treats 12 as if it were already a percent. 12 is a number of students, so divide it by the total, 32.&quot;, &quot;d&quot;: &quot;This finds how many students do not walk (20). It is a count, not a percent.&quot;}" data-why="Correct. Divide the part (12) by the total (32), then multiply by 100. That gives 37.5%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 13.</b> A class has 32 students, and 12 of them walk to campus. Which calculation gives the <strong>percent</strong> of the class that walks?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true">(12 ÷ 32) × 100</span><span class="sr">open parenthesis 12 divided by 32 close parenthesis, times 100</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true">(32 ÷ 12) × 100</span><span class="sr">open parenthesis 32 divided by 12 close parenthesis, times 100</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true">(12 ÷ 100) × 32</span><span class="sr">open parenthesis 12 divided by 100 close parenthesis, times 32</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span><span class="m"><span aria-hidden="true">32 − 12</span><span class="sr">32 minus 12</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The part is 12 students and the total is 32 students. Which choice divides the part by the total?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(12 ÷ 32) × 100</span><span class="sr">open parenthesis 12 divided by 32 close parenthesis, times 100</span></span></strong>, which is <span class="m"><span aria-hidden="true">37.5%</span><span class="sr">37 point 5 percent</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.6" data-miss="{&quot;0.036&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 3.6%.&quot;, &quot;36&quot;: &quot;The point moved three places. 0.036 times 100 is 3.6.&quot;, &quot;~27.78~0.03&quot;: &quot;The division is flipped. That is 250 divided by 9. Divide the part (9) by the total (250).&quot;, &quot;~2777.8~0.5&quot;: &quot;The division is flipped. That is 250 divided by 9, times 100. Divide the part (9) by the total (250).&quot;, &quot;4&quot;: &quot;The directions say do not round. Keep every digit: 3.6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> A repair shop fixed 250 phones last month, and 9 of them needed a new screen. What percent of the phones needed a new screen? Do not round.</p>
+<details><summary>Hint</summary><p>The part is 9 and the total is 250. <span class="m"><span aria-hidden="true">9 ÷ 250</span><span class="sr">9 divided by 250</span></span> is a small decimal.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.6%</span><span class="sr">3 point 6 percent</span></span></strong>, because <span class="m"><span aria-hidden="true">9 ÷ 250 = 0.036</span><span class="sr">9 divided by 250 equals 0 point 0 3 6</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="95" data-miss="{&quot;5&quot;: &quot;That is the percent not sold. The question asks for the percent sold: 95%.&quot;, &quot;~105.26~0.06&quot;: &quot;The division is flipped. That is 480 divided by 456. Divide the part sold (456) by the total made (480).&quot;, &quot;0.95&quot;: &quot;That is the decimal. Multiply by 100 to get the percent: 95%.&quot;, &quot;24&quot;: &quot;That is the number of muffins not sold. Divide 456 by 480 and multiply by 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> A bakery made 480 muffins on Saturday and sold 456 of them. What percent of the muffins did it sell?</p>
+<details><summary>Hint</summary><p>Here the part is a large number, but it is still the part: 456 sold out of 480 made.</p></details>
+<details><summary>Show answer</summary><p><strong>95%</strong>, because <span class="m"><span aria-hidden="true">456 ÷ 480 = 0.95</span><span class="sr">456 divided by 480 equals 0 point 9 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="33.3" data-miss="{&quot;6&quot;: &quot;That divides 90 by 1,500, all employees. The question asks about the employees who work from home, so the total is 270.&quot;, &quot;18&quot;: &quot;That is the percent of all employees who work from home (270 out of 1,500). The question asks about the 90 out of 270.&quot;, &quot;300&quot;: &quot;The division is flipped. That is 270 divided by 90. Divide the part (90) by the total (270).&quot;, &quot;0.3&quot;: &quot;That is the decimal, rounded. Multiply by 100 first, then round to one decimal place: 33.3.&quot;, &quot;0.333&quot;: &quot;That is the decimal. Multiply by 100 first, then round to one decimal place: 33.3.&quot;, &quot;33&quot;: &quot;That is rounded to the nearest whole number. One decimal place keeps one digit after the point: 33.3.&quot;, &quot;33.4&quot;: &quot;The digit after the 3 in the tenths place is 3, so the tenths digit stays 3: 33.3.&quot;, &quot;~33.333~0.001&quot;: &quot;Round to one decimal place: keep one digit after the point. 33.3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> A company has 1,500 employees. Of those, 270 work from home, and 90 of the employees who work from home live in another state. What percent of the employees who work from home live in another state? Round to one decimal place.</p>
+<details><summary>Hint</summary><p>The question is about the employees who work from home, so 270 is the total and 90 is the part.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">33.3%</span><span class="sr">33 point 3 percent</span></span></strong>. <span class="m"><span aria-hidden="true">90 ÷ 270 = 0.3333…</span><span class="sr">90 divided by 270 equals 0 point 3 3 3 3, repeating</span></span>, which is <span class="m"><span aria-hidden="true">33.333…%</span><span class="sr">33 point 3 3 3, repeating, percent</span></span>, and that rounds to <span class="m"><span aria-hidden="true">33.3%</span><span class="sr">33 point 3 percent</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 1.1</h3>
+<p>Item 21c (Fraction to Percent) on page 9 of the notes divides the top of a fraction by the bottom and multiplies by 100. Part b of Classroom Example 1.1.3 on page 14 asks what percentage of 600 respondents said something, and the Classroom Example 1.1.4 video asks a question like it.</p>
+<p><strong>Watch for this:</strong> which number is the whole group. When a sentence has three or more numbers, label each one before you divide.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding and rounding directions</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to the nearest whole number.</li><li>Round to one decimal place.</li><li>Carry correctly when a 9 rounds up.</li><li>Follow the direction "do not round."</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. For the nearest whole number, that is the ones digit. For one decimal place, it is the tenths digit, the first digit after the point.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">12.4501</span><span class="sr">12 point 4 5 0 1</span></span> to the nearest whole number is 12. Rounding to <span class="m"><span aria-hidden="true">12.5</span><span class="sr">12 point 5</span></span> first and then to 13 is a slip.</li>
+<li><strong>Chopping instead of rounding.</strong> Dropping digits without looking at the next one is not rounding. <span class="m"><span aria-hidden="true">62.48</span><span class="sr">62 point 4 8</span></span> to one decimal place is <span class="m"><span aria-hidden="true">62.5</span><span class="sr">62 point 5</span></span>, not <span class="m"><span aria-hidden="true">62.4</span><span class="sr">62 point 4</span></span>.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">4.97</span><span class="sr">4 point 9 7</span></span> to one decimal place is <span class="m"><span aria-hidden="true">5.0</span><span class="sr">5 point 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 213.4762 two ways">
+<h3 style="margin-top:0">Worked example: Round 213.4762 two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">213.4762</span><span class="sr">213 point 4 7 6 2</span></span> to one decimal place, and then to the nearest whole number.</p><ol class="steps"><li><span class="work">One decimal place: keep the 4, look at the 7</span><span class="say">The 7 is 5 or more, so the 4 becomes 5: <span class="m"><span aria-hidden="true">213.5</span><span class="sr">213 point 5</span></span>.</span></li><li><span class="work">Nearest whole number: keep the 3, look at the 4</span><span class="say">The 4 is 4 or less, so the 3 stays: 213.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">213.5</span><span class="sr">213 point 5</span></span> to one decimal place and 213 to the nearest whole number.</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Do not round" means type every digit the calculator shows. "Round to the nearest whole number" means no digits after the point. "One decimal place" means exactly one digit after the point.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 39.97 to one decimal place">
+<h3 style="margin-top:0">Finish this one: Round 39.97 to one decimal place</h3>
+<p>Round <span class="m"><span aria-hidden="true">39.97</span><span class="sr">39 point 9 7</span></span> to one decimal place.</p><ol class="steps"><li><span class="work">Kept digit: the 9 in the tenths place. Next digit: 7.</span><span class="say">The 7 is 5 or more, so the tenths digit goes up by 1. Next, think about what happens when a 9 goes up.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="40.0" data-miss="{&quot;39.9&quot;: &quot;That chops off the 7 instead of rounding. The 7 is 5 or more, so the 9 goes up, becomes 0 and carries: 40.0.&quot;, &quot;39.1&quot;: &quot;When the 9 goes up, it does not become 1. It becomes 0 and carries 1 to the left, so 39 becomes 40: 40.0.&quot;, &quot;39.97&quot;: &quot;That is the number you started with. Keep only one digit after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Finish it: what is <span class="m"><span aria-hidden="true">39.97</span><span class="sr">39 point 9 7</span></span> rounded to one decimal place?</p>
+<details><summary>Hint</summary><p>When a 9 goes up by 1, write 0 and add 1 to the ones digit. The 39 becomes 40.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">40.0</span><span class="sr">40 point 0</span></span></strong> (typing 40 is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="15.8" data-miss="{&quot;15.9&quot;: &quot;That rounds in steps from the right (15.849 to 15.85 to 15.9). Only the digit right after the tenths place counts, and it is 4: 15.8.&quot;, &quot;15.85&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 15.8.&quot;, &quot;16&quot;: &quot;That is the nearest whole number. Keep one digit after the point: 15.8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Round <span class="m"><span aria-hidden="true">15.849</span><span class="sr">15 point 8 4 9</span></span> to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 8. Look only at the very next digit, the 4. Ignore the 9 at the end.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">15.8</span><span class="sr">15 point 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="62.5" data-miss="{&quot;62.4&quot;: &quot;That chops off the extra digits. The digit after the 4 is 8, which is 5 or more, so the 4 goes up: 62.5.&quot;, &quot;62&quot;: &quot;That is the nearest whole number. One decimal place keeps one digit after the point: 62.5.&quot;, &quot;62.49&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 62.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> A calculator shows <span class="m"><span aria-hidden="true">62.48731</span><span class="sr">62 point 4 8 7 3 1</span></span> for a percent. Round it to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the tenths place. The next digit is 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">62.5</span><span class="sr">62 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="286.125" data-miss="{&quot;286&quot;: &quot;That rounds to a whole number. \&quot;Do not round\&quot; means type every digit: 286.125.&quot;, &quot;286.1&quot;: &quot;That rounds to one decimal place. \&quot;Do not round\&quot; means type every digit: 286.125.&quot;, &quot;286.13&quot;: &quot;That rounds to two decimal places. \&quot;Do not round\&quot; means type every digit: 286.125.&quot;, &quot;286.12&quot;: &quot;That chops off the last digit. \&quot;Do not round\&quot; means type every digit: 286.125.&quot;, &quot;28612.5&quot;: &quot;That multiplies by 12.5 instead of 0.125, so the percent sign was ignored.&quot;, &quot;2861.25&quot;: &quot;That uses 1.25 instead of 0.125. Two places left from 12.5 is 0.125.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Find <span class="m"><span aria-hidden="true">12.5%</span><span class="sr">12 point 5 percent</span></span> of 2,289. The directions say: "Type an integer or a decimal. Do not round."</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">12.5%</span><span class="sr">12 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span>. Multiply, then type the whole result.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">286.125</span><span class="sr">286 point 1 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="100" data-miss="{&quot;99&quot;: &quot;That chops off the decimal part. The tenths digit is 6, so the ones digit 9 goes up, and the carry turns 99 into 100.&quot;, &quot;99.6&quot;: &quot;That is rounded to one decimal place. The nearest whole number has no digits after the point: 100.&quot;, &quot;90&quot;: &quot;When the ones digit 9 goes up, it carries into the tens. The tens digit 9 also goes up and carries, giving 100.&quot;, &quot;99.62&quot;: &quot;That is the number you started with. Round so there are no digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Round <span class="m"><span aria-hidden="true">99.62</span><span class="sr">99 point 6 2</span></span> to the nearest whole number.</p>
+<details><summary>Hint</summary><p>The tenths digit is 6, so the 9 in the ones place goes up. Follow the carries to the left.</p></details>
+<details><summary>Show answer</summary><p><strong>100</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 1.1</h3>
+<p>The Classroom Example 1.1.4 video (page 14 of the notes) works through two rounding directions in one problem: "Do not round" and "Round to the nearest whole number as needed."</p>
+<p><strong>Watch for this:</strong> the rounding direction at the end of each question, and any 9 that rounds up and carries.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Order of operations on one line</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Work inside parentheses first.</li><li>Do multiplication and division from left to right.</li><li>Treat a fraction bar as grouping its whole top and its whole bottom.</li><li>Choose the one-line version of a fraction that keeps its value.</li></ul>
+</div>
+<h3>The order</h3>
+<ol class="steps">
+<li>Parentheses first.</li>
+<li>Multiplication and division next, working <strong>from left to right</strong>. Neither one automatically goes first.</li>
+<li>Addition and subtraction last, also from left to right.</li>
+</ol>
+<p>On one line, a slash (/) means divide, just like ÷. A fraction bar groups everything above it and everything below it, so when a fraction is typed on one line, its top and bottom may need parentheses.</p>
+<div class="worked" role="group" aria-label="Worked example: 18 / 24 × 100">
+<h3 style="margin-top:0">Worked example: 18 / 24 × 100</h3>
+<p>Evaluate <span class="m"><span aria-hidden="true">18 / 24 × 100</span><span class="sr">18 slash 24 times 100</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">18 / 24 = 0.75</span><span class="sr">18 slash 24 equals 0 point 7 5</span></span></span><span class="say">Division comes first because it is on the left.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.75 × 100 = 75</span><span class="sr">0 point 7 5 times 100 equals 75</span></span></span><span class="say">Then multiply.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">18 / (24 × 100) = 0.0075</span><span class="sr">18 slash, open parenthesis 24 times 100 close parenthesis, equals 0 point 0 0 7 5</span></span></span><span class="say">Multiplying first would give this very different value. That is why the order matters.</span></li></ol><p><strong>Answer: 75</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Parentheses first">
+<h3 style="margin-top:0">Finish this one: Parentheses first</h3>
+<p>Evaluate <span class="m"><span aria-hidden="true">(52 + 28) / 4</span><span class="sr">open parenthesis 52 plus 28 close parenthesis, slash 4</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">52 + 28 = 80</span><span class="sr">52 plus 28 equals 80</span></span></span><span class="say">Work inside the parentheses first. Next, divide by 4.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="20" data-miss="{&quot;59&quot;: &quot;That divides only the 28 by 4. The parentheses group 52 + 28 first: 80 divided by 4 is 20.&quot;, &quot;80&quot;: &quot;80 is the value inside the parentheses. Now divide it by 4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Finish it: what is <span class="m"><span aria-hidden="true">(52 + 28) / 4</span><span class="sr">open parenthesis 52 plus 28 close parenthesis, slash 4</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">80 / 4</span><span class="sr">80 slash 4</span></span> is the last step.</p></details>
+<details><summary>Show answer</summary><p><strong>20</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="25" data-miss="{&quot;0.0025&quot;: &quot;That multiplies 36 by 100 first. Go left to right: 9 divided by 36 is 0.25, then times 100 is 25.&quot;, &quot;0.25&quot;: &quot;That stops after the division. Finish by multiplying by 100: 25.&quot;, &quot;400&quot;: &quot;That divides 36 by 9. Read left to right: 9 divided by 36 comes first.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> Evaluate <span class="m"><span aria-hidden="true">9 / 36 × 100</span><span class="sr">9 slash 36 times 100</span></span>.</p>
+<details><summary>Hint</summary><p>Left to right: do <span class="m"><span aria-hidden="true">9 / 36</span><span class="sr">9 slash 36</span></span> first.</p></details>
+<details><summary>Show answer</summary><p><strong>25</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;With no parentheses, only the 16 is divided, and the value is negative 8, not 2. Both the top and the bottom need parentheses.&quot;, &quot;b&quot;: &quot;The top is grouped, but the bottom is not. Left to right this is 24 divided by 2, times 6, which is 72.&quot;, &quot;d&quot;: &quot;The bottom is grouped, but the top is not. Only the 16 gets divided, so the value is about 38.67.&quot;}" data-why="Correct. Both the top and the bottom are in parentheses, so the value is 24 divided by 12, which is 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 24.</b> Which one-line expression has the same value as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">40 − 16</span><span class="fb">2 × 6</span></span><span class="sr">the fraction with 40 minus 16 on top and 2 times 6 on the bottom</span></span>?</legend>
+<label><input type="radio" name="mc24" value="a"> <span><span class="m"><span aria-hidden="true">40 − 16 / 2 × 6</span><span class="sr">40 minus 16 slash 2 times 6</span></span></span></label><label><input type="radio" name="mc24" value="b"> <span><span class="m"><span aria-hidden="true">(40 − 16) / 2 × 6</span><span class="sr">open parenthesis 40 minus 16 close parenthesis, slash 2 times 6</span></span></span></label><label><input type="radio" name="mc24" value="c"> <span><span class="m"><span aria-hidden="true">(40 − 16) / (2 × 6)</span><span class="sr">open parenthesis 40 minus 16 close parenthesis, slash, open parenthesis 2 times 6 close parenthesis</span></span></span></label><label><input type="radio" name="mc24" value="d"> <span><span class="m"><span aria-hidden="true">40 − 16 / (2 × 6)</span><span class="sr">40 minus 16 slash, open parenthesis 2 times 6 close parenthesis</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The fraction bar groups the whole top, <span class="m"><span aria-hidden="true">40 − 16</span><span class="sr">40 minus 16</span></span>, and the whole bottom, <span class="m"><span aria-hidden="true">2 × 6</span><span class="sr">2 times 6</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(40 − 16) / (2 × 6)</span><span class="sr">open parenthesis 40 minus 16 close parenthesis, slash, open parenthesis 2 times 6 close parenthesis</span></span></strong>, which equals 2.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="88" data-miss="{&quot;288&quot;: &quot;That subtracts 100 minus 4 first. Multiplication comes before subtraction: 4 times 3 is 12, then 100 minus 12 is 88.&quot;, &quot;43&quot;: &quot;That skips the parentheses. Work inside them first: 12 minus 9 is 3.&quot;, &quot;12&quot;: &quot;That is 4 times 3. One step is left: subtract it from 100.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Evaluate <span class="m"><span aria-hidden="true">100 − 4 × (12 − 9)</span><span class="sr">100 minus 4 times, open parenthesis 12 minus 9 close parenthesis</span></span>.</p>
+<details><summary>Hint</summary><p>Parentheses first: <span class="m"><span aria-hidden="true">12 − 9 = 3</span><span class="sr">12 minus 9 equals 3</span></span>. Then multiply, then subtract.</p></details>
+<details><summary>Show answer</summary><p><strong>88</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 1.1</h3>
+<p>The formulas in item 21 of the notes on pages 7, 9 and 12 use parentheses and fraction bars, such as the Percentage of formula on page 7. The StatCrunch steps that follow each formula enter the whole computation on one line.</p>
+<p><strong>Watch for this:</strong> where the parentheses sit when a fraction is written on one line.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="64.0" data-miss="{&quot;64.1&quot;: &quot;That rounds in steps from the right (64.0451 to 64.045 to 64.05 to 64.1). Only the digit right after the tenths place counts, and it is 4: 64.0.&quot;, &quot;64.05&quot;: &quot;That keeps two digits after the point. One decimal place keeps one: 64.0.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Round <span class="m"><span aria-hidden="true">64.0451</span><span class="sr">64 point 0 4 5 1</span></span> to one decimal place.</p>
+<details><summary>Hint</summary><p>The kept digit is the 0 in the tenths place. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">64.0</span><span class="sr">64 point 0</span></span></strong> (typing 64 is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="94" data-miss="{&quot;940&quot;: &quot;That uses 0.4, which is 40%. 4% is 0.04.&quot;, &quot;9.4&quot;: &quot;That uses 0.004. Two places left from 4 is 0.04.&quot;, &quot;9400&quot;: &quot;That multiplies by 4 instead of 0.04, so the percent sign was ignored.&quot;, &quot;587.5&quot;: &quot;That divides 2,350 by 4. \&quot;Of\&quot; means multiply by 0.04.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> What is 4% of 2,350?</p>
+<details><summary>Hint</summary><p>4% as a decimal needs a zero right after the point.</p></details>
+<details><summary>Show answer</summary><p><strong>94</strong>, because <span class="m"><span aria-hidden="true">0.04 × 2,350 = 94</span><span class="sr">0 point 0 4 times 2,350 equals 94</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;0.3 is 30%. The percent sign means 0.3% still has to be divided by 100.&quot;, &quot;b&quot;: &quot;0.03 is 3%. Move the point two places left from 0.3, not one.&quot;, &quot;d&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100.&quot;}" data-why="Correct. Dividing 0.3 by 100 moves the point two places left: 0.003.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 28.</b> Which decimal is equal to <span class="m"><span aria-hidden="true">0.3%</span><span class="sr">0 point 3 percent</span></span>?</legend>
+<label><input type="radio" name="mc28" value="a"> <span><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span></span></label><label><input type="radio" name="mc28" value="b"> <span><span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span></span></label><label><input type="radio" name="mc28" value="c"> <span><span class="m"><span aria-hidden="true">0.003</span><span class="sr">0 point 0 0 3</span></span></span></label><label><input type="radio" name="mc28" value="d"> <span>30</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> and move the point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.003</span><span class="sr">0 point 0 0 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="32.5" data-miss="{&quot;0.325&quot;: &quot;That is the decimal. Multiply by 100 to get the percent.&quot;, &quot;~307.69~0.06&quot;: &quot;The division is flipped. Divide the part (52) by the total (160).&quot;, &quot;~3.0769~0.006&quot;: &quot;The division is flipped. Divide the part (52) by the total (160).&quot;, &quot;33&quot;: &quot;The directions say do not round. Keep every digit: 32.5.&quot;, &quot;32&quot;: &quot;The directions say do not round. Keep every digit: 32.5.&quot;, &quot;67.5&quot;: &quot;That is the percent that were not fish tacos.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> A food truck sold 160 tacos on Friday, and 52 of them were fish tacos. What percent of the tacos were fish tacos? Do not round.</p>
+<details><summary>Hint</summary><p>Part: 52 fish tacos. Total: 160 tacos.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">32.5%</span><span class="sr">32 point 5 percent</span></span></strong>, because <span class="m"><span aria-hidden="true">52 ÷ 160 = 0.325</span><span class="sr">52 divided by 160 equals 0 point 3 2 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="10" data-miss="{&quot;2.5&quot;: &quot;That multiplies 15 by 2 before dividing. After the parentheses, go left to right: 75 divided by 15 is 5, then times 2 is 10.&quot;, &quot;17.5&quot;: &quot;That skips the parentheses. Add 10 + 5 first.&quot;, &quot;5&quot;: &quot;That stops after the division. Finish by multiplying by 2.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> Evaluate <span class="m"><span aria-hidden="true">75 / (10 + 5) × 2</span><span class="sr">75 slash, open parenthesis 10 plus 5 close parenthesis, times 2</span></span>.</p>
+<details><summary>Hint</summary><p>Parentheses give 15. Then work left to right.</p></details>
+<details><summary>Show answer</summary><p><strong>10</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="20" data-miss="{&quot;19&quot;: &quot;That chops off the decimal part. The calculator shows 19.96, and the 9 after the point means the 19 rounds up to 20.&quot;, &quot;19.9&quot;: &quot;That is not rounded to a whole number. The nearest whole number has no digits after the point.&quot;, &quot;~19.96~0.01&quot;: &quot;Round to the nearest whole number: no digits after the point.&quot;, &quot;0.2&quot;: &quot;That is the decimal, rounded. Multiply by 100 to get the percent, then round.&quot;, &quot;~501.0~0.6&quot;: &quot;The division is flipped. Divide the part (299) by the total (1,498).&quot;, &quot;5&quot;: &quot;The division is flipped. Divide the part (299) by the total (1,498).&quot;}">
+<p class="prompt"><b class="qlabel">Practice 31.</b> Of 1,498 tickets sold for a concert, 299 were student tickets. What percent were student tickets? Round to the nearest whole number.</p>
+<details><summary>Hint</summary><p>Part: 299. Total: 1,498. Divide, multiply by 100, then round.</p></details>
+<details><summary>Show answer</summary><p><strong>20%</strong>. <span class="m"><span aria-hidden="true">299 ÷ 1,498 × 100</span><span class="sr">299 divided by 1,498 times 100</span></span> is about <span class="m"><span aria-hidden="true">19.96</span><span class="sr">19 point 9 6</span></span>, which rounds to 20.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with percents, decimals and fractions, finding a percent of a number, finding what percent a part is of a total, rounding, and the order of operations. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec1.1-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

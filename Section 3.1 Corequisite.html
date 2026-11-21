@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 3.1 Corequisite: Measures of Center</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 3.1</div>
+<h1>Section 3.1 Corequisite: Measures of Center</h1>
+<p>Get ready for the Section 3.1 notes with practice on the ordering, fraction, rounding and table-reading skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Comparing and ordering decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Fractions on one line and decimal arithmetic<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Rounding to two decimal places and to the nearest hundred<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Reading lists and tables of data<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare decimals and put a list of numbers in order from smallest to largest.</li><li>Work out a fraction typed on one line, with parentheses around its top and bottom, and add or subtract decimals.</li><li>Round to two decimal places "if necessary," and round to the nearest hundred.</li><li>Count and find values in a list or table of data, and compare two amounts with their units.</li></ul>
+</div>
+<p>Section 3.1 of the notes introduces four measures of center, shows how to find them in StatCrunch, and works three classroom examples with real data.</p>
+<p>Along the way, the notes expect you to put numbers in order, pick out the smallest and largest value in a list, type a fraction on one line, and follow the direction "Round all results to two decimal places, if necessary." The Note on page 5 only says "Don't forget ( ) around your numerator!", a quick reminder that assumes you already know why. This page gives those number skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">12.75</span><span class="sr">12 point 7 5</span></span>. Commas, a dollar sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 3.1 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 3.1 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure whether <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span> or <span class="m"><span aria-hidden="true">4.08</span><span class="sr">4 point 0 8</span></span> is larger.</strong><br><button type="button" data-go="s2">Comparing and ordering decimals</button></li>
+<li><strong>I am never sure where the parentheses go when I type a fraction on one line.</strong><br><button type="button" data-go="s3">Fractions on one line and decimal arithmetic</button></li>
+<li><strong>I am not sure what "two decimal places, if necessary" wants, or how to round to the nearest hundred.</strong><br><button type="button" data-go="s4">Rounding to two decimal places and to the nearest hundred</button></li>
+<li><strong>I lose track when I count or look up values in a table of numbers.</strong><br><button type="button" data-go="s5">Reading lists and tables of data</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Comparing and ordering decimals</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare two decimals by lining up the decimal points.</li><li>Find the smallest and the largest number in a list.</li><li>Put a list of decimals in order from smallest to largest.</li><li>Avoid the "more digits means bigger" slip.</li></ul>
+</div>
+<h3>Line up the decimal points</h3>
+<p>To compare decimals, line up the decimal points and compare place by place from the left: the whole-number part first, then the tenths, then the hundredths. If one number has fewer digits after the point, write zeros on the end so both have the same number of digits. Zeros on the end do not change the value, so <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span> and <span class="m"><span aria-hidden="true">4.70</span><span class="sr">4 point 7 0</span></span> are equal.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>More digits looks bigger.</strong> <span class="m"><span aria-hidden="true">4.08</span><span class="sr">4 point 0 8</span></span> can look larger than <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span> because 8 is bigger than 7. Write <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span> as <span class="m"><span aria-hidden="true">4.70</span><span class="sr">4 point 7 0</span></span>: 70 hundredths is more than 8 hundredths, so <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span> is larger.</li>
+<li><strong>Reading the part after the point as a whole number.</strong> <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span> is not larger than <span class="m"><span aria-hidden="true">3.7</span><span class="sr">3 point 7</span></span> just because 65 is bigger than 7. Compare <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span> with <span class="m"><span aria-hidden="true">3.70</span><span class="sr">3 point 7 0</span></span> instead.</li>
+<li><strong>Looking only at the first digit.</strong> <span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span> starts with a 9 and <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span> starts with a 1, but <span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span> is smaller. Compare the whole-number parts, 98 and 104, first. A spreadsheet that sorts numbers as text makes this same slip.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Put four decimals in order">
+<h3 style="margin-top:0">Worked example: Put four decimals in order</h3>
+<p>Put <span class="m"><span aria-hidden="true">62.5</span><span class="sr">62 point 5</span></span>, <span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span>, <span class="m"><span aria-hidden="true">62.05</span><span class="sr">62 point 0 5</span></span> and <span class="m"><span aria-hidden="true">60.9</span><span class="sr">60 point 9</span></span> in order from smallest to largest.</p><ol class="steps"><li><span class="work">Whole-number parts: 62, 6, 62 and 60</span><span class="say">The 6 is smallest, so <span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span> comes first. Then 60, so <span class="m"><span aria-hidden="true">60.9</span><span class="sr">60 point 9</span></span> comes next.</span></li><li><span class="work">Two numbers start with 62: compare <span class="m"><span aria-hidden="true">62.50</span><span class="sr">62 point 5 0</span></span> and <span class="m"><span aria-hidden="true">62.05</span><span class="sr">62 point 0 5</span></span></span><span class="say">Write <span class="m"><span aria-hidden="true">62.5</span><span class="sr">62 point 5</span></span> with two digits after the point. The tenths digits are 5 and 0, so <span class="m"><span aria-hidden="true">62.05</span><span class="sr">62 point 0 5</span></span> is smaller.</span></li><li><span class="work">Smallest to largest</span><span class="say">Check that each number is bigger than the one before it.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span>, <span class="m"><span aria-hidden="true">60.9</span><span class="sr">60 point 9</span></span>, <span class="m"><span aria-hidden="true">62.05</span><span class="sr">62 point 0 5</span></span>, <span class="m"><span aria-hidden="true">62.5</span><span class="sr">62 point 5</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Which is larger, 3.7 or 3.65?">
+<h3 style="margin-top:0">Finish this one: Which is larger, 3.7 or 3.65?</h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">3.7</span><span class="sr">3 point 7</span></span> or <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">3.7</span><span class="sr">3 point 7</span></span> = <span class="m"><span aria-hidden="true">3.70</span><span class="sr">3 point 7 0</span></span></span><span class="say">Write zeros on the end so both numbers have two digits after the point. Next, compare 70 hundredths with 65 hundredths.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="3.7" data-miss="{&quot;3.65&quot;: &quot;That is the \&quot;more digits looks bigger\&quot; slip. Write 3.7 as 3.70. Then 70 hundredths is more than 65 hundredths, so 3.7 is larger.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: which is larger, <span class="m"><span aria-hidden="true">3.7</span><span class="sr">3 point 7</span></span> or <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span>? Type the larger number.</p>
+<details><summary>Hint</summary><p>Compare <span class="m"><span aria-hidden="true">3.70</span><span class="sr">3 point 7 0</span></span> with <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.7</span><span class="sr">3 point 7</span></span></strong>, because <span class="m"><span aria-hidden="true">3.70</span><span class="sr">3 point 7 0</span></span> is more than <span class="m"><span aria-hidden="true">3.65</span><span class="sr">3 point 6 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="5.09" data-miss="{&quot;5.1&quot;: &quot;That reads the part after the point as whole numbers, 9 against 1. Write 5.1 as 5.10. Then 9 hundredths is less than 10 hundredths, so 5.09 is smaller.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Which is <strong>smaller</strong>, <span class="m"><span aria-hidden="true">5.09</span><span class="sr">5 point 0 9</span></span> or <span class="m"><span aria-hidden="true">5.1</span><span class="sr">5 point 1</span></span>? Type the smaller number.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">5.1</span><span class="sr">5 point 1</span></span> as <span class="m"><span aria-hidden="true">5.10</span><span class="sr">5 point 1 0</span></span>, then compare the tenths digits: 0 and 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5.09</span><span class="sr">5 point 0 9</span></span></strong>. Its tenths digit is 0, and the tenths digit of <span class="m"><span aria-hidden="true">5.1</span><span class="sr">5 point 1</span></span> is 1.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;12.8 has the fewest digits, but it is 12.80, the largest of the four. Fewer digits does not mean smaller.&quot;, &quot;b&quot;: &quot;12.705 has 7 tenths. 12.09 has 0 tenths, so 12.09 is smaller. Compare tenths before looking at length.&quot;, &quot;d&quot;: &quot;12.75 has 7 tenths. 12.09 has 0 tenths, so 12.09 is smaller.&quot;}" data-why="Correct. All four have 12 as the whole-number part, and 12.09 has the smallest tenths digit, 0.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 3.</b> Four commute times, in minutes, are <span class="m"><span aria-hidden="true">12.8</span><span class="sr">12 point 8</span></span>, <span class="m"><span aria-hidden="true">12.705</span><span class="sr">12 point 7 0 5</span></span>, <span class="m"><span aria-hidden="true">12.09</span><span class="sr">12 point 0 9</span></span> and <span class="m"><span aria-hidden="true">12.75</span><span class="sr">12 point 7 5</span></span>. Which one is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc3" value="a"> <span><span class="m"><span aria-hidden="true">12.8</span><span class="sr">12 point 8</span></span></span></label><label><input type="radio" name="mc3" value="b"> <span><span class="m"><span aria-hidden="true">12.705</span><span class="sr">12 point 7 0 5</span></span></span></label><label><input type="radio" name="mc3" value="c"> <span><span class="m"><span aria-hidden="true">12.09</span><span class="sr">12 point 0 9</span></span></span></label><label><input type="radio" name="mc3" value="d"> <span><span class="m"><span aria-hidden="true">12.75</span><span class="sr">12 point 7 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>All four start with 12, so compare the tenths digits: 8, 7, 0 and 7.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">12.09</span><span class="sr">12 point 0 9</span></span></strong>. In order from smallest to largest: <span class="m"><span aria-hidden="true">12.09</span><span class="sr">12 point 0 9</span></span>, <span class="m"><span aria-hidden="true">12.705</span><span class="sr">12 point 7 0 5</span></span>, <span class="m"><span aria-hidden="true">12.75</span><span class="sr">12 point 7 5</span></span>, <span class="m"><span aria-hidden="true">12.8</span><span class="sr">12 point 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;This sorts by the first digit, so the numbers starting with 1 come first. Compare whole-number parts instead: 98 and 99 are less than 104 and 110.&quot;, &quot;c&quot;: &quot;This puts 99.15 last because it has the most digits. Its whole-number part, 99, is less than 104, so it belongs second.&quot;, &quot;d&quot;: &quot;This is largest to smallest. Smallest to largest starts with 98.6.&quot;}" data-why="Correct. The whole-number parts are 98, 99, 104 and 110.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Four package weights, in kilograms, are <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span> and <span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span>. Which list puts them in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span>, <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span>, <span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span>, <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span>, <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span>, <span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Compare the whole-number parts first: 104, 98, 99 and 110.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">98.6</span><span class="sr">98 point 6</span></span>, <span class="m"><span aria-hidden="true">99.15</span><span class="sr">99 point 1 5</span></span>, <span class="m"><span aria-hidden="true">104.2</span><span class="sr">104 point 2</span></span>, <span class="m"><span aria-hidden="true">110.0</span><span class="sr">110 point 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.2" data-miss="{&quot;0.45&quot;: &quot;0.45 has the most digits, but it is less than half an inch. 1.2 is more than a whole inch.&quot;, &quot;0.07&quot;: &quot;The 7 looks big, but 0.07 is only 7 hundredths, the smallest amount in the list.&quot;, &quot;0.6&quot;: &quot;0.6 is less than 1. The amount 1.2 has a whole 1 before the point, so it is larger.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Daily rainfall amounts, in inches, are <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span>, <span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span>, <span class="m"><span aria-hidden="true">1.2</span><span class="sr">1 point 2</span></span>, <span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span> and <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>. What is the <strong>largest</strong> amount?</p>
+<details><summary>Hint</summary><p>Look at the whole-number parts first. Only one amount has a whole-number part bigger than 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.2</span><span class="sr">1 point 2</span></span> inches</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="8.7" data-miss="{&quot;8.75&quot;: &quot;Write 8.7 as 8.70. Then 70 hundredths is less than 75 hundredths, so 8.7 is the smallest.&quot;, &quot;80&quot;: &quot;80 has the fewest digits, but it is the largest price in the list.&quot;, &quot;18.05&quot;: &quot;18.05 has a 0 in the tenths place, but its whole-number part is 18. The prices that start with 8 are smaller.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Ticket prices, in dollars, are <span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span>, <span class="m"><span aria-hidden="true">8.75</span><span class="sr">8 point 7 5</span></span>, <span class="m"><span aria-hidden="true">18.05</span><span class="sr">18 point 0 5</span></span>, 80 and <span class="m"><span aria-hidden="true">8.7</span><span class="sr">8 point 7</span></span>. What is the <strong>smallest</strong> price?</p>
+<details><summary>Hint</summary><p>Two prices have 8 as the whole-number part. Compare <span class="m"><span aria-hidden="true">8.70</span><span class="sr">8 point 7 0</span></span> with <span class="m"><span aria-hidden="true">8.75</span><span class="sr">8 point 7 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>$<span class="m"><span aria-hidden="true">8.70</span><span class="sr">8 point 7 0</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 3.1</h3>
+<p>The StatCrunch steps on page 5 of the notes sort a column with "Sort table ascending," which lists the values from smallest to largest. The midrange formula in item 6 on page 2 uses the maximum and minimum data values, and the Classroom Example 3.1.1 video (page 6) sorts a list of 25 dollar amounts.</p>
+<p><strong>Watch for this:</strong> a number with more digits after the point is not automatically larger, and <span class="m"><span aria-hidden="true">98.7</span><span class="sr">98 point 7</span></span> comes before <span class="m"><span aria-hidden="true">109.9</span><span class="sr">109 point 9</span></span> even though 9 is bigger than 1.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Fractions on one line and decimal arithmetic</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Add and subtract decimals by lining up the decimal points.</li><li>Work out a fraction by finishing its top and its bottom before dividing.</li><li>Type a fraction on one line with parentheses around its top, and around its bottom when needed.</li><li>Spot the value you get when the parentheses are left out.</li></ul>
+</div>
+<h3>Adding and subtracting decimals</h3>
+<p>Line up the decimal points, fill any empty places with zeros, and then add or subtract as you would with whole numbers. The point in the answer lines up with the points above it.</p>
+<h3>A fraction bar groups its whole top and its whole bottom</h3>
+<p>In a fraction, you finish everything above the bar and everything below the bar first. Then you divide the top by the bottom. When a fraction is typed on one line, the bar becomes a slash (/), and a slash does not group anything. A calculator follows the order of operations: parentheses first, then multiplication and division from left to right, then addition and subtraction. So the top needs parentheses whenever it has more than one number, and so does the bottom.</p>
+<p class="work"><span class="m"><span aria-hidden="true" class="frac"><span class="ft">36.4 + 12.8</span><span class="fb">4</span></span><span class="sr">the fraction with 36 point 4 plus 12 point 8 on top and 4 on the bottom</span></span> is typed as <span class="m"><span aria-hidden="true">(36.4 + 12.8) / 4</span><span class="sr">open parenthesis 36 point 4 plus 12 point 8 close parenthesis, slash 4</span></span></p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Dividing only the last number.</strong> <span class="m"><span aria-hidden="true">36.4 + 12.8 / 4</span><span class="sr">36 point 4 plus 12 point 8 slash 4</span></span> divides only the <span class="m"><span aria-hidden="true">12.8</span><span class="sr">12 point 8</span></span> by 4, because division comes before addition.</li>
+<li><strong>Adding the parts after the point as whole numbers.</strong> <span class="m"><span aria-hidden="true">45.6 + 7.25</span><span class="sr">45 point 6 plus 7 point 2 5</span></span> is not <span class="m"><span aria-hidden="true">52.31</span><span class="sr">52 point 3 1</span></span>. Write <span class="m"><span aria-hidden="true">45.60 + 7.25</span><span class="sr">45 point 6 0 plus 7 point 2 5</span></span>, then add: <span class="m"><span aria-hidden="true">52.85</span><span class="sr">52 point 8 5</span></span>.</li>
+<li><strong>Grouping only the top.</strong> When the bottom has two numbers, such as <span class="m"><span aria-hidden="true">3 × 4</span><span class="sr">3 times 4</span></span>, it needs its own parentheses too.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Fraction with 36.4 plus 12.8 on top and 4 on the bottom">
+<h3 style="margin-top:0">Worked example: A fraction on one line</h3>
+<p>Work out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36.4 + 12.8</span><span class="fb">4</span></span><span class="sr">the fraction with 36 point 4 plus 12 point 8 on top and 4 on the bottom</span></span>, then compare it with the value you get without parentheses.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">36.4 + 12.8 = 49.2</span><span class="sr">36 point 4 plus 12 point 8 equals 49 point 2</span></span></span><span class="say">Finish the top first. Line up the points: 36.4 and 12.8 add to 49.2.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">49.2 / 4 = 12.3</span><span class="sr">49 point 2 slash 4 equals 12 point 3</span></span></span><span class="say">Then divide by the bottom. Typed on one line, this is <span class="m"><span aria-hidden="true">(36.4 + 12.8) / 4</span><span class="sr">open parenthesis 36 point 4 plus 12 point 8 close parenthesis, slash 4</span></span>.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">36.4 + 12.8 / 4 = 36.4 + 3.2 = 39.6</span><span class="sr">36 point 4 plus 12 point 8 slash 4 equals 36 point 4 plus 3 point 2, which equals 39 point 6</span></span></span><span class="say">Without parentheses, only 12.8 is divided, and the value is very different.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">12.3</span><span class="sr">12 point 3</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Fraction with 15.5 plus 4.5 on top and 5 on the bottom">
+<h3 style="margin-top:0">Finish this one: A fraction with a sum on top</h3>
+<p>Work out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15.5 + 4.5</span><span class="fb">5</span></span><span class="sr">the fraction with 15 point 5 plus 4 point 5 on top and 5 on the bottom</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">15.5 + 4.5 = 20.0</span><span class="sr">15 point 5 plus 4 point 5 equals 20 point 0</span></span></span><span class="say">Finish the top first. Next, divide the top by 5.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;16.4&quot;: &quot;That divides only the 4.5 by 5. The bar groups the whole top: 20 divided by 5 is 4.&quot;, &quot;20&quot;: &quot;20 is the top. One step is left: divide it by 5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: what is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15.5 + 4.5</span><span class="fb">5</span></span><span class="sr">the fraction with 15 point 5 plus 4 point 5 on top and 5 on the bottom</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">20 / 5</span><span class="sr">20 slash 5</span></span> is the last step.</p></details>
+<details><summary>Show answer</summary><p><strong>4</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="52.85" data-miss="{&quot;52.31&quot;: &quot;That adds the parts after the point as whole numbers, 6 + 25. Write 45.6 as 45.60, then add: 52.85.&quot;, &quot;11.81&quot;: &quot;That lines up the last digits instead of the decimal points. Line up the points: 45.60 + 7.25 = 52.85.&quot;, &quot;118.1&quot;: &quot;That lines up the last digits instead of the decimal points. Line up the points: 45.60 + 7.25 = 52.85.&quot;, &quot;52.9&quot;: &quot;The directions say do not round. Keep every digit: 52.85.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> Add: <span class="m"><span aria-hidden="true">45.6 + 7.25</span><span class="sr">45 point 6 plus 7 point 2 5</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">45.60</span><span class="sr">45 point 6 0</span></span> so both numbers have two digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">52.85</span><span class="sr">52 point 8 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="63.85" data-miss="{&quot;64.15&quot;: &quot;That subtracts the smaller decimal part from the larger one (45 minus 30) instead of borrowing. Write 72.30 minus 8.45: 63.85.&quot;, &quot;80.75&quot;: &quot;That adds. The question asks for 72.3 minus 8.45.&quot;, &quot;63.95&quot;: &quot;Check the borrowing in the hundredths place: 72.30 minus 8.45 is 63.85.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Subtract: <span class="m"><span aria-hidden="true">72.3 − 8.45</span><span class="sr">72 point 3 minus 8 point 4 5</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">72.30 − 8.45</span><span class="sr">72 point 3 0 minus 8 point 4 5</span></span>, then subtract and borrow where needed.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">63.85</span><span class="sr">63 point 8 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;With no parentheses, only the 40.5 is divided by 6, so the value is 243.75, not 35.&quot;, &quot;c&quot;: &quot;This divides only the 250.5 by 6 and then subtracts, which gives 1.25, not 35.&quot;, &quot;d&quot;: &quot;Parentheses around the whole line do not group the top. Inside them, only the 40.5 is divided, so the value is 243.75.&quot;}" data-why="Correct. The parentheses group the whole top, so the value is 210 divided by 6, which is 35.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Which one-line entry has the same value as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">250.5 − 40.5</span><span class="fb">6</span></span><span class="sr">the fraction with 250 point 5 minus 40 point 5 on top and 6 on the bottom</span></span>?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">250.5 − 40.5 / 6</span><span class="sr">250 point 5 minus 40 point 5 slash 6</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true">(250.5 − 40.5) / 6</span><span class="sr">open parenthesis 250 point 5 minus 40 point 5 close parenthesis, slash 6</span></span></span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">250.5 / 6 − 40.5</span><span class="sr">250 point 5 slash 6 minus 40 point 5</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true">(250.5 − 40.5 / 6)</span><span class="sr">open parenthesis 250 point 5 minus 40 point 5 slash 6 close parenthesis</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The bar groups the whole top, <span class="m"><span aria-hidden="true">250.5 − 40.5</span><span class="sr">250 point 5 minus 40 point 5</span></span>. Which choice keeps the top together before dividing?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(250.5 − 40.5) / 6</span><span class="sr">open parenthesis 250 point 5 minus 40 point 5 close parenthesis, slash 6</span></span></strong>, which equals 35.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="50" data-miss="{&quot;1960&quot;: &quot;That leaves out every parenthesis, so only 360 is divided by 4 and then multiplied by 8. Finish the top (1,600) and the bottom (32) first.&quot;, &quot;3200&quot;: &quot;That groups the top but not the bottom: 1,600 divided by 4, times 8. The bottom is 4 times 8, which is 32, and 1,600 divided by 32 is 50.&quot;, &quot;1600&quot;: &quot;1,600 is the top. Now divide it by the bottom, 32.&quot;, &quot;32&quot;: &quot;32 is the bottom. Divide the top, 1,600, by it.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Work out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1,240 + 360</span><span class="fb">4 × 8</span></span><span class="sr">the fraction with 1,240 plus 360 on top and 4 times 8 on the bottom</span></span>.</p>
+<details><summary>Hint</summary><p>Top: <span class="m"><span aria-hidden="true">1,240 + 360 = 1,600</span><span class="sr">1,240 plus 360 equals 1,600</span></span>. Bottom: <span class="m"><span aria-hidden="true">4 × 8 = 32</span><span class="sr">4 times 8 equals 32</span></span>. Then divide.</p></details>
+<details><summary>Show answer</summary><p><strong>50</strong>, because <span class="m"><span aria-hidden="true">1,600 / 32 = 50</span><span class="sr">1,600 slash 32 equals 50</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="11.5" data-miss="{&quot;46.8&quot;: &quot;That leaves out every parenthesis, so only 3.4 is divided. Finish the top (23) and the bottom (2) first.&quot;, &quot;184&quot;: &quot;That groups the top but not the bottom: 23 divided by 0.5, times 4. The bottom is 0.5 times 4, which is 2.&quot;, &quot;46&quot;: &quot;That divides the top by 0.5 only. The whole bottom is 0.5 times 4, which is 2.&quot;, &quot;23&quot;: &quot;23 is the top. Now divide it by the bottom, 2.&quot;, &quot;12&quot;: &quot;The directions say do not round. 23 divided by 2 is 11.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Work out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">19.6 + 3.4</span><span class="fb">0.5 × 4</span></span><span class="sr">the fraction with 19 point 6 plus 3 point 4 on top and 0 point 5 times 4 on the bottom</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Top: <span class="m"><span aria-hidden="true">19.6 + 3.4 = 23</span><span class="sr">19 point 6 plus 3 point 4 equals 23</span></span>. Bottom: <span class="m"><span aria-hidden="true">0.5 × 4 = 2</span><span class="sr">0 point 5 times 4 equals 2</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">11.5</span><span class="sr">11 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">23 / 2 = 11.5</span><span class="sr">23 slash 2 equals 11 point 5</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 3.1</h3>
+<p>Item 6 (Midrange) on page 2 of the notes gives a formula with a fraction bar, and page 4 shows it entered on one line in StatCrunch. The Note on page 5 says, "Don't forget ( ) around your numerator!" The video "Using StatCrunch to find measures of center" and the Classroom Example 3.1.1 video (page 6) both say the parentheses are required.</p>
+<p><strong>Watch for this:</strong> a fraction typed on one line. Put the whole top in parentheses before the slash.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Rounding to two decimal places and to the nearest hundred</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to two decimal places.</li><li>Follow "if necessary": leave a number alone when it already has two or fewer decimal places.</li><li>Carry correctly when a 9 rounds up.</li><li>Round a whole number to the nearest hundred.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. For two decimal places, that is the hundredths digit, the second digit after the point. For the nearest hundred, it is the hundreds digit.</li>
+<li>Look at the single digit right after it, and only that digit.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>After the decimal point, drop the digits past the kept digit. Before the decimal point, the places past the kept digit become zeros, so the number keeps its size.</li>
+</ol>
+<div class="note"><strong>"If necessary."</strong> A direction such as "Round all results to two decimal places, if necessary" means round only when a result has more than two decimal places. A result of <span class="m"><span aria-hidden="true">83.6</span><span class="sr">83 point 6</span></span> already has fewer, so it stays <span class="m"><span aria-hidden="true">83.6</span><span class="sr">83 point 6</span></span>. Typing <span class="m"><span aria-hidden="true">83.60</span><span class="sr">83 point 6 0</span></span> is the same value and is also fine.</div>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Rounding in steps from the right.</strong> <span class="m"><span aria-hidden="true">7.2449</span><span class="sr">7 point 2 4 4 9</span></span> to two decimal places is <span class="m"><span aria-hidden="true">7.24</span><span class="sr">7 point 2 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">7.245</span><span class="sr">7 point 2 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">7.25</span><span class="sr">7 point 2 5</span></span> is a slip.</li>
+<li><strong>Chopping instead of rounding.</strong> <span class="m"><span aria-hidden="true">6.4781</span><span class="sr">6 point 4 7 8 1</span></span> to two decimal places is <span class="m"><span aria-hidden="true">6.48</span><span class="sr">6 point 4 8</span></span>, not <span class="m"><span aria-hidden="true">6.47</span><span class="sr">6 point 4 7</span></span>. And 3,467 to the nearest hundred is 3,500, not 3,400.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">12.996</span><span class="sr">12 point 9 9 6</span></span> to two decimal places is <span class="m"><span aria-hidden="true">13.00</span><span class="sr">13 point 0 0</span></span>, and 3,962 to the nearest hundred is 4,000.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round two numbers">
+<h3 style="margin-top:0">Worked example: Round two numbers</h3>
+<p>Round <span class="m"><span aria-hidden="true">52.36849</span><span class="sr">52 point 3 6 8 4 9</span></span> to two decimal places. Then round 2,847 grams to the nearest hundred.</p><ol class="steps"><li><span class="work">Two decimal places: keep the 6, look at the 8</span><span class="say">The 8 is 5 or more, so the 6 becomes 7: <span class="m"><span aria-hidden="true">52.37</span><span class="sr">52 point 3 7</span></span>.</span></li><li><span class="work">Nearest hundred: keep the 8 in 2,847, look at the 4</span><span class="say">The 4 is 4 or less, so the 8 stays, and the tens and ones become zeros: 2,800.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">52.37</span><span class="sr">52 point 3 7</span></span>, and 2,800 grams</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 64.0951 to two decimal places">
+<h3 style="margin-top:0">Finish this one: Round 64.0951 to two decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">64.0951</span><span class="sr">64 point 0 9 5 1</span></span> to two decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 9 in the hundredths place. Next digit: 5.</span><span class="say">The 5 is 5 or more, so the hundredths digit goes up by 1. Next, think about what happens when a 9 goes up.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="64.10" data-miss="{&quot;64.09&quot;: &quot;That chops off the 51 instead of rounding. The next digit is 5, so the 9 goes up, becomes 0 and carries: 64.10.&quot;, &quot;64.01&quot;: &quot;When the 9 goes up, it does not become 1. It becomes 0 and carries 1 to the tenths digit: 64.10.&quot;, &quot;64.095&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 64.10.&quot;, &quot;64&quot;: &quot;That rounds to a whole number. Two decimal places keeps two digits after the point: 64.10.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Finish it: what is <span class="m"><span aria-hidden="true">64.0951</span><span class="sr">64 point 0 9 5 1</span></span> rounded to two decimal places?</p>
+<details><summary>Hint</summary><p>The 9 becomes 0, and the 0 in the tenths place becomes 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">64.10</span><span class="sr">64 point 1 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">64.1</span><span class="sr">64 point 1</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.24" data-miss="{&quot;7.25&quot;: &quot;That rounds in steps from the right (7.2449 to 7.245 to 7.25). Only the digit right after the hundredths place counts, and it is 4: 7.24.&quot;, &quot;7.2&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 7.24.&quot;, &quot;7.245&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 7.24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> Round <span class="m"><span aria-hidden="true">7.2449</span><span class="sr">7 point 2 4 4 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the hundredths place. Look only at the very next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.24</span><span class="sr">7 point 2 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;That rounds to a whole number. 83.6 has only one decimal place, so no rounding is necessary.&quot;, &quot;b&quot;: &quot;That puts a zero in the tenths place and changes the value. 83.6 is the same as 83.60, not 83.06.&quot;, &quot;c&quot;: &quot;That chops off the decimal part. 83.6 has only one decimal place, so it stays as it is.&quot;}" data-why="Correct. 83.6 has only one decimal place, so no rounding is necessary. 83.60 is the same value.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> A problem says, "Round all results to two decimal places, if necessary." A calculator shows <span class="m"><span aria-hidden="true">83.6</span><span class="sr">83 point 6</span></span>. Which entry follows the direction?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>84</span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">83.06</span><span class="sr">83 point 0 6</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span>83</span></label><label><input type="radio" name="mc15" value="d"> <span><span class="m"><span aria-hidden="true">83.6</span><span class="sr">83 point 6</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Count the digits after the point. Is rounding necessary?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">83.6</span><span class="sr">83 point 6</span></span></strong> (or <span class="m"><span aria-hidden="true">83.60</span><span class="sr">83 point 6 0</span></span>, the same value)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3500" data-miss="{&quot;3400&quot;: &quot;That chops off the 67. The tens digit is 6, which is 5 or more, so the 4 goes up: 3,500.&quot;, &quot;3470&quot;: &quot;That is the nearest ten. The nearest hundred keeps the hundreds digit: 3,500.&quot;, &quot;35&quot;: &quot;The tens and ones places become zeros. They are not dropped: 3,500.&quot;, &quot;3000&quot;: &quot;That is the nearest thousand. The nearest hundred keeps the hundreds digit: 3,500.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> A bag of flour weighs 3,467 grams. Round this to the nearest hundred grams.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the hundreds place. Look at the tens digit, 6.</p></details>
+<details><summary>Show answer</summary><p><strong>3,500 grams</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2400" data-miss="{&quot;2500&quot;: &quot;That rounds in steps (2,449 to 2,450 to 2,500). Only the tens digit counts, and it is 4: 2,400.&quot;, &quot;2450&quot;: &quot;That is the nearest ten. The nearest hundred keeps the hundreds digit: 2,400.&quot;, &quot;2449&quot;: &quot;That is the number you started with. Round it so the tens and ones are zeros.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Round 2,449 to the nearest hundred.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the hundreds place. The tens digit is also 4. Ignore the ones digit.</p></details>
+<details><summary>Show answer</summary><p><strong>2,400</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="4000" data-miss="{&quot;3900&quot;: &quot;That chops off the 62. The tens digit is 6, so the 9 goes up, becomes 0 and carries: 4,000.&quot;, &quot;3960&quot;: &quot;That is the nearest ten. The nearest hundred keeps the hundreds digit: 4,000.&quot;, &quot;31000&quot;: &quot;When the 9 goes up, it becomes 0 and adds 1 to the thousands digit. 3,962 rounds to 4,000.&quot;, &quot;3000&quot;: &quot;That drops the hundreds instead of rounding. The 9 rounds up and carries: 4,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Round 3,962 to the nearest hundred.</p>
+<details><summary>Hint</summary><p>The 9 in the hundreds place goes up, so it becomes 0 and the 3 becomes 4.</p></details>
+<details><summary>Show answer</summary><p><strong>4,000</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 3.1</h3>
+<p>The StatCrunch example on page 3 of the notes says, "Round all results to two decimal places, if necessary," and the Reminder on page 4 points back to it. In the video "Using StatCrunch to find measures of center," one result needs rounding and another does not. The Classroom Example 3.1.1 and 3.1.2 videos (page 6) also round to two decimal places, and Classroom Example 3.1.3 (page 7) lists birth weights in grams and asks how the results should be rounded.</p>
+<p><strong>Watch for this:</strong> a 9 that rounds up and carries, and results that already have two or fewer decimal places, which need no rounding.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Reading lists and tables of data</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Count the values in a table or in a list with rows of different lengths.</li><li>Find one value in a table by its row and column.</li><li>Find the largest or smallest value in one column.</li><li>Compare two amounts by subtracting, and say which is larger, with units.</li></ul>
+</div>
+<h3>Read before you compute</h3>
+<ul>
+<li>Read the title or caption first. It tells you what the values measure and their units, such as pounds, kilograms, dollars or grams.</li>
+<li>When every row of a table is full, count the values by multiplying the number of rows by the number of columns. When the rows have different lengths, count each row and add.</li>
+<li>To find one value, go across from its row label and down from its column label to the cell where they meet.</li>
+<li>To compare two amounts, subtract the smaller from the larger, keep the units, and say in words which one is larger.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Adding instead of multiplying.</strong> A table with 3 rows and 4 columns holds 12 values, not 7.</li>
+<li><strong>Assuming every row is full.</strong> The last row of a list is often shorter. Count it on its own.</li>
+<li><strong>Reading the cell next door.</strong> Check both the row label and the column label before you copy a value.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Books checked out">
+<h3 style="margin-top:0">Worked example: Books checked out</h3>
+<div class="table-wrap" role="region" aria-label="Books checked out table" tabindex="0">
+<table>
+<caption>Books checked out at three library branches</caption>
+<thead><tr><th scope="col">Branch</th><th scope="col">Monday</th><th scope="col">Tuesday</th><th scope="col">Wednesday</th><th scope="col">Thursday</th></tr></thead>
+<tbody>
+<tr><th scope="row">North</th><td>112</td><td>98</td><td>105</td><td>120</td></tr>
+<tr><th scope="row">South</th><td>87</td><td>93</td><td>110</td><td>101</td></tr>
+<tr><th scope="row">East</th><td>64</td><td>72</td><td>69</td><td>80</td></tr>
+</tbody>
+</table>
+</div>
+<p>How many values are in the table? How many books did the South branch check out on Wednesday, and how many more is that than on Tuesday?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">3 × 4 = 12</span><span class="sr">3 times 4 equals 12</span></span></span><span class="say">3 rows (branches) and 4 columns (days), and every row is full. The row labels and the column labels are not values.</span></li><li><span class="work">South row, Wednesday column: 110</span><span class="say">Go across from "South" and down from "Wednesday."</span></li><li><span class="work"><span class="m"><span aria-hidden="true">110 − 93 = 17</span><span class="sr">110 minus 93 equals 17</span></span></span><span class="say">South checked out 93 on Tuesday. Wednesday is larger by 17 books.</span></li></ol><p><strong>Answer: 12 values; 110 books on Wednesday, 17 more than on Tuesday</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Counting the temperatures">
+<h3 style="margin-top:0">Finish this one: Counting the temperatures</h3>
+<p>The table below shows daily high temperatures. How many temperatures are in the table?</p><ol class="steps"><li><span class="work">6 rows (Monday to Saturday) and 4 columns (Week 1 to Week 4)</span><span class="say">Every row is full. Next, multiply the number of rows by the number of columns.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="table-wrap" role="region" aria-label="Daily high temperatures table" tabindex="0">
+<table>
+<caption>Daily high temperatures, in degrees Fahrenheit</caption>
+<thead><tr><th scope="col">Day</th><th scope="col">Week 1</th><th scope="col">Week 2</th><th scope="col">Week 3</th><th scope="col">Week 4</th></tr></thead>
+<tbody>
+<tr><th scope="row">Monday</th><td>41</td><td>55</td><td>60</td><td>71</td></tr><tr><th scope="row">Tuesday</th><td>45</td><td>49</td><td>64</td><td>69</td></tr><tr><th scope="row">Wednesday</th><td>38</td><td>58</td><td>59</td><td>74</td></tr><tr><th scope="row">Thursday</th><td>50</td><td>61</td><td>66</td><td>70</td></tr><tr><th scope="row">Friday</th><td>47</td><td>57</td><td>62</td><td>73</td></tr><tr><th scope="row">Saturday</th><td>52</td><td>53</td><td>68</td><td>77</td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="num" data-answer="24" data-miss="{&quot;10&quot;: &quot;That adds the 6 rows and the 4 columns. Every row is full, so multiply: 6 times 4 is 24.&quot;, &quot;6&quot;: &quot;That counts the rows only. Each row holds 4 temperatures, so there are 6 times 4.&quot;, &quot;4&quot;: &quot;That counts the columns only. Each column holds 6 temperatures, so there are 6 times 4.&quot;, &quot;30&quot;: &quot;That counts the row labels and column labels too. Only the temperatures count: 6 times 4 is 24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Finish it: how many temperatures are in the table above?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">6 × 4</span><span class="sr">6 times 4</span></span></p></details>
+<details><summary>Show answer</summary><p><strong>24</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="66" data-miss="{&quot;59&quot;: &quot;That is Wednesday of Week 3, one row up. Go across from \&quot;Thursday.\&quot;&quot;, &quot;62&quot;: &quot;That is Friday of Week 3, one row down. Go across from \&quot;Thursday.\&quot;&quot;, &quot;61&quot;: &quot;That is Thursday of Week 2, one column to the left. Go down from \&quot;Week 3.\&quot;&quot;, &quot;70&quot;: &quot;That is Thursday of Week 4, one column to the right. Go down from \&quot;Week 3.\&quot;&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> In the same table, what was the high temperature on Thursday of Week 3, in degrees Fahrenheit?</p>
+<details><summary>Hint</summary><p>Find the row labeled Thursday, then move across to the Week 3 column.</p></details>
+<details><summary>Show answer</summary><p><strong>66 degrees Fahrenheit</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="61" data-miss="{&quot;77&quot;: &quot;That is the largest temperature in the whole table. The question asks about the Week 2 column only.&quot;, &quot;55&quot;: &quot;That is the first value in the Week 2 column. Read every value in the column: 55, 49, 58, 61, 57, 53.&quot;, &quot;53&quot;: &quot;That is the last value in the Week 2 column. Read every value in the column: 55, 49, 58, 61, 57, 53.&quot;, &quot;68&quot;: &quot;That is in the Week 3 column. Go down the Week 2 column only.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> In the same table, what is the <strong>largest</strong> high temperature in Week 2?</p>
+<details><summary>Hint</summary><p>Read down the Week 2 column only: six values.</p></details>
+<details><summary>Show answer</summary><p><strong>61 degrees Fahrenheit</strong> (Thursday)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;The 2025 price is the larger one, so the price went up, not down. The difference is $2.65.&quot;, &quot;b&quot;: &quot;That subtracts the whole dollars and the cents separately without borrowing. 14.12 minus 11.47 is 2.65.&quot;, &quot;d&quot;: &quot;That adds the two prices. To compare, subtract: 14.12 minus 11.47 is 2.65.&quot;}" data-why="Correct. 14.12 minus 11.47 is 2.65, and the later price is the larger one.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 22.</b> A store sold a bag of coffee for $<span class="m"><span aria-hidden="true">11.47</span><span class="sr">11 point 4 7</span></span> in 2015 and for $<span class="m"><span aria-hidden="true">14.12</span><span class="sr">14 point 1 2</span></span> in 2025. Which statement is correct?</legend>
+<label><input type="radio" name="mc22" value="a"> <span>The price decreased by $<span class="m"><span aria-hidden="true">2.65</span><span class="sr">2 point 6 5</span></span>.</span></label><label><input type="radio" name="mc22" value="b"> <span>The price increased by $<span class="m"><span aria-hidden="true">3.35</span><span class="sr">3 point 3 5</span></span>.</span></label><label><input type="radio" name="mc22" value="c"> <span>The price increased by $<span class="m"><span aria-hidden="true">2.65</span><span class="sr">2 point 6 5</span></span>.</span></label><label><input type="radio" name="mc22" value="d"> <span>The price increased by $<span class="m"><span aria-hidden="true">25.59</span><span class="sr">25 point 5 9</span></span>.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Which year has the larger price? Subtract the smaller price from the larger one.</p></details>
+<details><summary>Show answer</summary><p><strong>The price increased by $<span class="m"><span aria-hidden="true">2.65</span><span class="sr">2 point 6 5</span></span>.</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.75" data-miss="{&quot;8.11&quot;: &quot;That treats 78.4 as if it were 78.04. Write 78.4 as 78.40 before you subtract: 86.15 minus 78.40 is 7.75.&quot;, &quot;8.25&quot;: &quot;That subtracts the smaller decimal part from the larger one (40 minus 15) instead of borrowing. 86.15 minus 78.40 is 7.75.&quot;, &quot;164.55&quot;: &quot;That adds the two weights. To compare, subtract: 86.15 minus 78.40 is 7.75.&quot;, &quot;-7.75&quot;: &quot;The sign is backward. Bag B is the heavier bag, so the difference is positive: 7.75.&quot;, &quot;8&quot;: &quot;The directions say do not round. Keep every digit: 7.75.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> Bag A weighs <span class="m"><span aria-hidden="true">78.4</span><span class="sr">78 point 4</span></span> kilograms and Bag B weighs <span class="m"><span aria-hidden="true">86.15</span><span class="sr">86 point 1 5</span></span> kilograms. How many kilograms heavier is Bag B? Do not round.</p>
+<details><summary>Hint</summary><p>Line up the points: <span class="m"><span aria-hidden="true">86.15 − 78.40</span><span class="sr">86 point 1 5 minus 78 point 4 0</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.75</span><span class="sr">7 point 7 5</span></span> kilograms</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="17" data-miss="{&quot;18&quot;: &quot;That assumes both rows have 9 values. The second row is shorter: 9 plus 8 is 17.&quot;, &quot;9&quot;: &quot;That counts the first row only. Add the 8 values in the second row.&quot;, &quot;8&quot;: &quot;That counts the second row only. Add the 9 values in the first row.&quot;, &quot;2&quot;: &quot;That counts the rows. Count the values in each row and add.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> A list gives the prices of parking passes at different lots. It is printed in two rows, like the lists in the notes. How many prices are in the list?</p>
+<figure class="axisfig"><p class="work">12&nbsp;&nbsp; 15&nbsp;&nbsp; 18&nbsp;&nbsp; 20&nbsp;&nbsp; 22&nbsp;&nbsp; 25&nbsp;&nbsp; 27&nbsp;&nbsp; 30&nbsp;&nbsp; 34<br>36&nbsp;&nbsp; 40&nbsp;&nbsp; 45&nbsp;&nbsp; 50&nbsp;&nbsp; 55&nbsp;&nbsp; 60&nbsp;&nbsp; 64&nbsp;&nbsp; 95</p><figcaption>Parking pass prices, in dollars</figcaption></figure>
+<details><summary>Hint</summary><p>Count each row on its own, then add the two counts.</p></details>
+<details><summary>Show answer</summary><p><strong>17</strong> (9 in the first row and 8 in the second)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 3.1</h3>
+<p>Classroom Example 3.1.1 on page 6 of the notes lists 25 dollar amounts in two rows of different lengths. Classroom Example 3.1.2 on page 6 shows part of a two-column table of weights in kilograms, one column for 1988 and one for 2012, and Classroom Example 3.1.3 on page 7 lists birth weights in grams in a table.</p>
+<p><strong>Watch for this:</strong> the units in each problem (pounds, dollars, kilograms or grams) and which column goes with which year.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="20.00" data-miss="{&quot;19.99&quot;: &quot;That chops off the last 5 instead of rounding. The 5 makes the 9 go up, and the carries turn 19.99 into 20.00.&quot;, &quot;19.995&quot;: &quot;That is the number you started with. Keep two digits after the point.&quot;, &quot;19.1&quot;: &quot;When a 9 goes up, it becomes 0 and carries 1 to the left. Follow the carries: 20.00.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Round <span class="m"><span aria-hidden="true">19.995</span><span class="sr">19 point 9 9 5</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the hundredths place, and the next digit is 5. Follow every carry to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">20.00</span><span class="sr">20 point 0 0</span></span></strong> (typing 20 is accepted too)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;0.405 has the most digits, but compare tenths and then hundredths: 0.405 is 0.405 and 0.45 is 0.450, so 0.45 is larger.&quot;, &quot;b&quot;: &quot;0.4 is 0.400, which is less than 0.450.&quot;, &quot;c&quot;: &quot;0.045 has 0 tenths, so it is the smallest of the four.&quot;}" data-why="Correct. Written with three digits after the point, they are 0.405, 0.400, 0.045 and 0.450.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 26.</b> Which of these is the <strong>largest</strong>?</legend>
+<label><input type="radio" name="mc26" value="a"> <span><span class="m"><span aria-hidden="true">0.405</span><span class="sr">0 point 4 0 5</span></span></span></label><label><input type="radio" name="mc26" value="b"> <span><span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span></span></label><label><input type="radio" name="mc26" value="c"> <span><span class="m"><span aria-hidden="true">0.045</span><span class="sr">0 point 0 4 5</span></span></span></label><label><input type="radio" name="mc26" value="d"> <span><span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write each one with three digits after the point, then compare.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.45</span><span class="sr">0 point 4 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="6.3" data-miss="{&quot;71.4&quot;: &quot;That leaves out every parenthesis, so only 12.6 is divided. Finish the top (75.6) and the bottom (12) first.&quot;, &quot;100.8&quot;: &quot;That groups the top but not the bottom: 75.6 divided by 3, times 4. The bottom is 3 times 4, which is 12.&quot;, &quot;87.15&quot;: &quot;That groups the bottom but not the top, so only 12.6 is divided by 12. Finish the top first: 75.6.&quot;, &quot;75.6&quot;: &quot;75.6 is the top. Now divide it by the bottom, 12.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Work out <span class="m"><span aria-hidden="true" class="frac"><span class="ft">88.2 − 12.6</span><span class="fb">3 × 4</span></span><span class="sr">the fraction with 88 point 2 minus 12 point 6 on top and 3 times 4 on the bottom</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Top: <span class="m"><span aria-hidden="true">88.2 − 12.6 = 75.6</span><span class="sr">88 point 2 minus 12 point 6 equals 75 point 6</span></span>. Bottom: <span class="m"><span aria-hidden="true">3 × 4 = 12</span><span class="sr">3 times 4 equals 12</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">6.3</span><span class="sr">6 point 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.25" data-miss="{&quot;2.51&quot;: &quot;That is the Basic row. Go across from \&quot;Standard.\&quot;&quot;, &quot;6.75&quot;: &quot;That is the Premium row. Go across from \&quot;Standard.\&quot;&quot;, &quot;82.25&quot;: &quot;That adds the two prices. To compare, subtract: 42.75 minus 39.50 is 3.25.&quot;, &quot;-3.25&quot;: &quot;The sign is backward. Store B costs more, so the difference is positive: 3.25.&quot;, &quot;3.7&quot;: &quot;That subtracts 5 from 75 as whole numbers. Line up the points: 42.75 minus 39.50 is 3.25.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> Using the table below, how many dollars more does the Standard plan cost at Store B than at Store A? Do not round.</p>
+<div class="table-wrap" role="region" aria-label="Monthly plan prices table" tabindex="0">
+<table>
+<caption>Monthly plan prices, in dollars</caption>
+<thead><tr><th scope="col">Plan</th><th scope="col">Store A</th><th scope="col">Store B</th></tr></thead>
+<tbody>
+<tr><th scope="row">Basic</th><td><span class="m"><span aria-hidden="true">24.99</span><span class="sr">24 point 9 9</span></span></td><td><span class="m"><span aria-hidden="true">27.50</span><span class="sr">27 point 5 0</span></span></td></tr><tr><th scope="row">Standard</th><td><span class="m"><span aria-hidden="true">39.50</span><span class="sr">39 point 5 0</span></span></td><td><span class="m"><span aria-hidden="true">42.75</span><span class="sr">42 point 7 5</span></span></td></tr><tr><th scope="row">Premium</th><td><span class="m"><span aria-hidden="true">54.25</span><span class="sr">54 point 2 5</span></span></td><td><span class="m"><span aria-hidden="true">61.00</span><span class="sr">61 point 0 0</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<details><summary>Hint</summary><p>Standard row: Store A is <span class="m"><span aria-hidden="true">39.50</span><span class="sr">39 point 5 0</span></span> and Store B is <span class="m"><span aria-hidden="true">42.75</span><span class="sr">42 point 7 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>$<span class="m"><span aria-hidden="true">3.25</span><span class="sr">3 point 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7000" data-miss="{&quot;6900&quot;: &quot;That chops off the 51. The tens digit is 5, so the 9 goes up, becomes 0 and carries: 7,000.&quot;, &quot;6950&quot;: &quot;That is the nearest ten. The nearest hundred keeps the hundreds digit: 7,000.&quot;, &quot;61000&quot;: &quot;When the 9 goes up, it becomes 0 and adds 1 to the 6. 6,951 rounds to 7,000.&quot;, &quot;6000&quot;: &quot;That drops the hundreds instead of rounding. The 9 rounds up and carries: 7,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> Round 6,951 to the nearest hundred.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the hundreds place. The tens digit is 5.</p></details>
+<details><summary>Show answer</summary><p><strong>7,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="51.20" data-miss="{&quot;50.84&quot;: &quot;That adds the parts after the point as whole numbers (75 + 4 + 5). Write 8.4 as 8.40, then add: 51.20.&quot;, &quot;43.64&quot;: &quot;That lines up the last digits instead of the decimal points, so 8.4 was treated as 0.84. Line up the points: 51.20.&quot;, &quot;51&quot;: &quot;The directions say do not round. Keep the cents: 51.20.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> A shopping cart holds items that cost $<span class="m"><span aria-hidden="true">12.75</span><span class="sr">12 point 7 5</span></span>, $<span class="m"><span aria-hidden="true">8.4</span><span class="sr">8 point 4</span></span> and $<span class="m"><span aria-hidden="true">30.05</span><span class="sr">30 point 0 5</span></span>. What is the total, in dollars? Do not round.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">8.40</span><span class="sr">8 point 4 0</span></span> so every price has two digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong>$<span class="m"><span aria-hidden="true">51.20</span><span class="sr">51 point 2 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">51.2</span><span class="sr">51 point 2</span></span> is fine)</p></details>
+</div>
+<div class="why">That is the end of the practice. You have compared and ordered decimals, worked out fractions on one line, added and subtracted decimals, rounded to two decimal places and to the nearest hundred, and read lists and tables of data. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec3.1-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

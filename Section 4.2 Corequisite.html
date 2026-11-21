@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 4.2 Corequisite: Addition Rule and Multiplication Rule</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 4.2</div>
+<h1>Section 4.2 Corequisite: Addition Rule and Multiplication Rule</h1>
+<p>Get ready for the Section 4.2 notes with practice on the table, fraction, percent, multiplication and rounding skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Reading a two-way table and a deck of cards<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Adding, subtracting and simplifying fractions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Percents, decimals and subtracting from 1<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Multiplying fractions, decimals and powers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Rounding to three, four and five decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read single counts, row totals, column totals and the grand total from a two-way table, and know what is in a standard deck of cards.</li><li>Add, subtract and simplify fractions, including subtracting a fraction from 1.</li><li>Change a percent to a decimal, find a percent of a number, and subtract a decimal from 1.</li><li>Multiply fractions and decimals, and work out a power such as <span class="m"><span aria-hidden="true">0.9<sup>3</sup></span><span class="sr">0 point 9 to the third power</span></span>.</li><li>Round to three, four or five decimal places, even when zeros come right after the decimal point.</li></ul>
+</div>
+<p>Section 4.2 of the notes covers the addition rule and the multiplication rule: probabilities of events joined by "or" and by "and," disjoint and complementary events, and independent and dependent events.</p>
+<p>Along the way, the notes and videos add, subtract, multiply and simplify fractions, change a percent to a decimal, read counts from a table and from a deck of cards, and round to three, four or five decimal places. They do this quickly, so they expect you to already have these skills. For example, item 11 writes "5% times 500 (0.05 times 500)" with no further explanation. This page gives those number skills more practice than the notes have room for. It does not teach any of the probability ideas in the notes, and it does not show StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.064</span><span class="sr">0 point 0 6 4</span></span>, and fractions with a slash, such as 7/9. Commas, a percent sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Classroom Example videos for Section 4.2 use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 4.2 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure how to find a row total or the grand total in a table, or what is in a deck of cards.</strong><br><button type="button" data-go="s2">Reading a two-way table and a deck of cards</button></li>
+<li><strong>I am not sure whether to add the bottoms when I add fractions, or how to take a fraction away from 1.</strong><br><button type="button" data-go="s3">Adding, subtracting and simplifying fractions</button></li>
+<li><strong>I mix up where the decimal point goes for a percent such as <span class="m"><span aria-hidden="true">11.9%</span><span class="sr">11 point 9 percent</span></span>, or when I subtract a decimal from 1.</strong><br><button type="button" data-go="s4">Percents, decimals and subtracting from 1</button></li>
+<li><strong>I expect multiplying to make a number bigger, or I am not sure what an exponent does.</strong><br><button type="button" data-go="s5">Multiplying fractions, decimals and powers</button></li>
+<li><strong>I lose count of decimal places when a number starts with zeros, such as <span class="m"><span aria-hidden="true">0.00169</span><span class="sr">0 point 0 0 1 6 9</span></span>.</strong><br><button type="button" data-go="s6">Rounding to three, four and five decimal places</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Reading a two-way table and a deck of cards</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the count in one cell of a two-way table.</li><li>Add across a row and down a column to get row and column totals.</li><li>Find the grand total of every cell.</li><li>Know how a standard 52-card deck is made up.</li></ul>
+</div>
+<h3>Rows, columns and totals</h3>
+<p>A two-way table sorts one group of things two ways at once. Each row is one category, each column is another, and each inside number (a cell) counts the things that fit both its row and its column.</p>
+<ul>
+<li><strong>Row total:</strong> add every cell across one row.</li>
+<li><strong>Column total:</strong> add every cell down one column.</li>
+<li><strong>Grand total:</strong> add every inside cell. Adding all the row totals gives the same number, and so does adding all the column totals.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Reading one cell as a total.</strong> A single cell counts only the things in that row and that column.</li>
+<li><strong>Using only one row for the grand total.</strong> The grand total needs every row.</li>
+<li><strong>Adding a total in with the cells.</strong> If a table already shows a total, do not add it to the cells again.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Phone repairs at three shops">
+<h3 style="margin-top:0">Worked example: Phone repairs at three shops</h3>
+<div class="table-wrap" role="region" aria-label="Phone repairs at three shops" tabindex="0">
+<table>
+<caption>Phone repairs at three shops</caption>
+<thead><tr><th scope="col">Repair</th><th scope="col">Shop A</th><th scope="col">Shop B</th><th scope="col">Shop C</th></tr></thead>
+<tbody>
+<tr><th scope="row">Fixed the same day</th><td>84</td><td>61</td><td>47</td></tr><tr><th scope="row">Not fixed the same day</th><td>16</td><td>19</td><td>23</td></tr>
+</tbody>
+</table>
+</div>
+<p>Find the total for Shop C, the total for "Not fixed the same day," and the grand total.</p><ol class="steps"><li><span class="work">Shop C: 47 + 23 = 70</span><span class="say">Add down the Shop C column.</span></li><li><span class="work">Not fixed the same day: 16 + 19 + 23 = 58</span><span class="say">Add across that row.</span></li><li><span class="work">Grand total: 84 + 61 + 47 + 16 + 19 + 23 = 250</span><span class="say">Add every inside cell. Check: the row totals 192 and 58 also add to 250.</span></li></ol><p><strong>Answer: Shop C has 70 repairs, 58 were not fixed the same day, and the grand total is 250.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<p>Practice 1 to 3 use the table from Classroom Example 4.2.2 in the notes. These questions only ask you to read and add the counts.</p>
+<div class="table-wrap" role="region" aria-label="Classroom Example 4.2.2 table" tabindex="0">
+<table>
+<caption>Drive-thru order accuracy, Classroom Example 4.2.2 (page 5 of the notes)</caption>
+<thead><tr><th scope="col">Order</th><th scope="col">Restaurant A</th><th scope="col">Restaurant B</th><th scope="col">Restaurant C</th><th scope="col">Restaurant D</th></tr></thead>
+<tbody>
+<tr><th scope="row">Order Accurate</th><td>329</td><td>264</td><td>235</td><td>148</td></tr><tr><th scope="row">Order Not Accurate</th><td>32</td><td>56</td><td>33</td><td>16</td></tr>
+</tbody>
+</table>
+</div>
+<div class="worked" role="group" aria-label="Guided example: Restaurant B total">
+<h3 style="margin-top:0">Finish this one: Restaurant B total</h3>
+<p>How many orders in the table came from Restaurant B?</p><ol class="steps"><li><span class="work">Restaurant B column: 264 and 56</span><span class="say">Restaurant B is a column, so use both numbers in that column. Next, add them.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="320" data-miss="{&quot;264&quot;: &quot;That is only the accurate orders from Restaurant B. Add the 56 not accurate orders in the same column: 320.&quot;, &quot;56&quot;: &quot;That is only the not accurate orders from Restaurant B. Add the 264 accurate orders in the same column: 320.&quot;, &quot;208&quot;: &quot;That subtracts. A column total adds the cells: 264 + 56 = 320.&quot;, &quot;976&quot;: &quot;That is the whole Order Accurate row. Restaurant B is a column: 264 + 56 = 320.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: how many orders in the table came from Restaurant B?</p>
+<details><summary>Hint</summary><p>Add down the Restaurant B column: 264 + 56.</p></details>
+<details><summary>Show answer</summary><p><strong>320</strong>, because 264 + 56 = 320.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="137" data-miss="{&quot;33&quot;: &quot;That is one cell, Restaurant C. Add across the whole Order Not Accurate row: 32 + 56 + 33 + 16 = 137.&quot;, &quot;976&quot;: &quot;That is the Order Accurate row. Use the Order Not Accurate row: 137.&quot;, &quot;1113&quot;: &quot;That is every order in the table. Use only the Order Not Accurate row: 137.&quot;, &quot;361&quot;: &quot;That is the Restaurant A column (329 + 32). The question asks for a row: 32 + 56 + 33 + 16 = 137.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> How many orders in the table were <strong>not</strong> accurate, across all four restaurants?</p>
+<details><summary>Hint</summary><p>Add across the Order Not Accurate row.</p></details>
+<details><summary>Show answer</summary><p><strong>137</strong>, because 32 + 56 + 33 + 16 = 137.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="1113" data-miss="{&quot;976&quot;: &quot;That is only the Order Accurate row. Add the Order Not Accurate row too: 976 + 137 = 1,113.&quot;, &quot;137&quot;: &quot;That is only the Order Not Accurate row. Add the Order Accurate row too: 976 + 137 = 1,113.&quot;, &quot;1250&quot;: &quot;That counts the Not Accurate row twice. Add each of the eight cells once: 1,113.&quot;, &quot;976137&quot;: &quot;That writes the two row totals side by side. Add them: 976 + 137 = 1,113.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> What is the grand total, the number of orders in the whole table?</p>
+<details><summary>Hint</summary><p>Add all eight cells, or add the two row totals.</p></details>
+<details><summary>Show answer</summary><p><strong>1,113</strong> (typing 1113 is fine), because the rows add to 976 and 137, and 976 + 137 = 1,113.</p></details>
+</div>
+<h3>A standard deck of cards</h3>
+<p>Items 2 and 3 of the notes use a standard deck. It has 52 cards in four suits. Each suit has 13 cards: ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, jack, queen and king. So each of those 13 kinds of card appears 4 times, once in each suit.</p>
+<div class="table-wrap" role="region" aria-label="Standard deck of cards" tabindex="0">
+<table>
+<caption>The four suits of a standard 52-card deck</caption>
+<thead><tr><th scope="col">Suit</th><th scope="col">Color</th><th scope="col">Number of cards</th></tr></thead>
+<tbody>
+<tr><th scope="row">Hearts</th><td>Red</td><td>13</td></tr><tr><th scope="row">Diamonds</th><td>Red</td><td>13</td></tr><tr><th scope="row">Clubs</th><td>Black</td><td>13</td></tr><tr><th scope="row">Spades</th><td>Black</td><td>13</td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The suit count is right, but spades are black. The red suits are hearts and diamonds.&quot;, &quot;c&quot;: &quot;This swaps the two numbers. There are 4 suits, and each suit has 13 cards.&quot;, &quot;d&quot;: &quot;There are 26 red cards and 26 black cards, but they come from 4 suits, two of each color.&quot;}" data-why="Correct. Four suits times 13 cards is 52, and hearts and diamonds are red.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which statement about a standard 52-card deck is true?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>4 suits of 13 cards each, and hearts and spades are the red suits</span></label><label><input type="radio" name="mc4" value="b"> <span>4 suits of 13 cards each, and hearts and diamonds are the red suits</span></label><label><input type="radio" name="mc4" value="c"> <span>13 suits of 4 cards each, and half of the suits are red</span></label><label><input type="radio" name="mc4" value="d"> <span>2 suits of 26 cards each, one red and one black</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Look at the table above. Check both the number of suits and the colors.</p></details>
+<details><summary>Show answer</summary><p><strong>4 suits of 13 cards each, and hearts and diamonds are the red suits.</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="4" data-miss="{&quot;13&quot;: &quot;13 is the number of cards in one suit. Each kind of card appears once in each of the 4 suits, so there are 4 nines.&quot;, &quot;1&quot;: &quot;There is one 9 in each suit, and there are 4 suits, so there are 4 nines.&quot;, &quot;36&quot;: &quot;That multiplies 9 by 4. The question asks how many cards are 9s, not what they add to: 4.&quot;, &quot;2&quot;: &quot;That counts only the red 9s (or only the black ones). There are 4 nines in all.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> How many cards in a standard 52-card deck are 9s?</p>
+<details><summary>Hint</summary><p>Each suit has exactly one 9. How many suits are there?</p></details>
+<details><summary>Show answer</summary><p><strong>4</strong>, one in each suit.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 4.2</h3>
+<p>Items 2 and 3 on pages 1 and 2 of the notes count cards in a 52-card deck, such as the queens, the red cards, the 5s and the spades. Classroom Examples 4.2.2 and 4.2.3 on page 5 each give a table of drive-thru orders, and the "Classroom Example 4.2.2" and "Classroom Example 4.2.3" videos add the numbers in the rows and columns.</p>
+<p><strong>Watch for this:</strong> the two drive-thru tables on page 5 have the same layout but different numbers. Use the table that goes with the example you are working on.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Adding, subtracting and simplifying fractions</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Add and subtract fractions that have the same bottom number.</li><li>Simplify a fraction by dividing its top and bottom by the same number.</li><li>Subtract a fraction from 1 by writing 1 as a fraction.</li><li>Change a fraction to a decimal by dividing.</li></ul>
+</div>
+<h3>Same bottom: work with the tops</h3>
+<p>When fractions have the same bottom number (denominator), add or subtract the top numbers (numerators) and keep the bottom the same. Then simplify: divide the top and the bottom by the same number until no number larger than 1 divides both.</p>
+<p>To subtract a fraction from 1, write 1 as a fraction with the same bottom: <span class="m"><span aria-hidden="true" class="frac"><span class="ft">6</span><span class="fb">6</span></span><span class="sr">6 over 6</span></span>, <span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">9</span></span><span class="sr">9 over 9</span></span> and <span class="m"><span aria-hidden="true" class="frac"><span class="ft">52</span><span class="fb">52</span></span><span class="sr">52 over 52</span></span> all equal 1.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Adding the bottoms too.</strong> <span class="m"><span aria-hidden="true">3/10 + 4/10</span><span class="sr">3 over 10 plus 4 over 10</span></span> is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">7</span><span class="fb">10</span></span><span class="sr">7 over 10</span></span>, not <span class="m"><span aria-hidden="true" class="frac"><span class="ft">7</span><span class="fb">20</span></span><span class="sr">7 over 20</span></span>. The pieces are still tenths.</li>
+<li><strong>Dividing only the top.</strong> To simplify, divide the top <em>and</em> the bottom by the same number.</li>
+<li><strong>Treating 1 as one piece.</strong> In <span class="m"><span aria-hidden="true">1 − 2/9</span><span class="sr">1 minus 2 over 9</span></span>, the 1 is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">9</span></span><span class="sr">9 over 9</span></span>, not <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">9</span></span><span class="sr">1 over 9</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 9/40 + 15/40 − 4/40">
+<h3 style="margin-top:0">Worked example: 9/40 + 15/40 − 4/40</h3>
+<p>Work out <span class="m"><span aria-hidden="true">9/40 + 15/40 − 4/40</span><span class="sr">9 over 40 plus 15 over 40 minus 4 over 40</span></span> and simplify.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">9 + 15 − 4 = 20</span><span class="sr">9 plus 15 minus 4 equals 20</span></span></span><span class="say">The bottoms are all 40, so work with the tops.</span></li><li><span class="work"><span class="m"><span aria-hidden="true" class="frac"><span class="ft">20</span><span class="fb">40</span></span><span class="sr">20 over 40</span></span></span><span class="say">Keep the bottom of 40.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">20 ÷ 20 = 1 and 40 ÷ 20 = 2</span><span class="sr">20 divided by 20 equals 1, and 40 divided by 20 equals 2</span></span></span><span class="say">Divide the top and bottom by 20, the largest number that divides both.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">2</span></span><span class="sr">1 over 2</span></span>, which is <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 1 − 2/9">
+<h3 style="margin-top:0">Finish this one: 1 − 2/9</h3>
+<p>Work out <span class="m"><span aria-hidden="true">1 − 2/9</span><span class="sr">1 minus 2 over 9</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1 = 9/9</span><span class="sr">1 equals 9 over 9</span></span></span><span class="say">Write 1 as a fraction with a bottom of 9. Next, subtract the tops.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-form="frac" data-answer="7/9" data-miss="{&quot;-1/9&quot;: &quot;That treats the 1 as 1/9. The 1 is a whole, which is 9/9, so 9/9 minus 2/9 is 7/9.&quot;, &quot;11/9&quot;: &quot;That adds. Subtract the tops: 9 minus 2 is 7, so the answer is 7/9.&quot;, &quot;2/9&quot;: &quot;That is the fraction being taken away. What is left is 9/9 minus 2/9, which is 7/9.&quot;, &quot;~0.7778~0.0006&quot;: &quot;That is the decimal, rounded. Type the exact fraction instead: 7/9.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: what is <span class="m"><span aria-hidden="true">1 − 2/9</span><span class="sr">1 minus 2 over 9</span></span>? Type your answer as a fraction in lowest terms.</p>
+<details><summary>Hint</summary><p>With 1 written as 9/9, subtract the tops: 9 minus 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">7</span><span class="fb">9</span></span><span class="sr">7 over 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="frac" data-answer="2/3" data-miss="{&quot;16/48&quot;: &quot;That adds the bottoms too. The pieces are still 24ths, so the sum is 16/24, which simplifies to 2/3.&quot;, &quot;6/24&quot;: &quot;That subtracts. Add the tops: 5 + 11 = 16, so the sum is 16/24, which simplifies to 2/3.&quot;, &quot;55/576&quot;: &quot;That multiplies. Add the tops and keep the bottom: 16/24, which simplifies to 2/3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Add <span class="m"><span aria-hidden="true">5/24 + 11/24</span><span class="sr">5 over 24 plus 11 over 24</span></span>. Type your answer as a fraction in lowest terms.</p>
+<details><summary>Hint</summary><p>Add the tops, 5 + 11, and keep the bottom of 24. Then simplify: 16 and 24 can both be divided by 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">2</span><span class="fb">3</span></span><span class="sr">2 over 3</span></span></strong>. The sum is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">16</span><span class="fb">24</span></span><span class="sr">16 over 24</span></span>, and dividing the top and bottom by 8 gives <span class="m"><span aria-hidden="true" class="frac"><span class="ft">2</span><span class="fb">3</span></span><span class="sr">2 over 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;This divides the top and bottom by 2, which is a good start, but 18 and 26 can both still be divided by 2.&quot;, &quot;b&quot;: &quot;This divides only the top by 4. Divide the bottom by 4 as well: 52 divided by 4 is 13.&quot;, &quot;d&quot;: &quot;This divides only the bottom by 4. Divide the top by 4 as well: 36 divided by 4 is 9.&quot;}" data-why="Correct. Dividing the top and bottom by 4 gives 9/13, and no number larger than 1 divides both 9 and 13.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 8.</b> Which fraction is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">52</span></span><span class="sr">36 over 52</span></span> in lowest terms?</legend>
+<label><input type="radio" name="mc8" value="a"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">18</span><span class="fb">26</span></span><span class="sr">18 over 26</span></span></span></label><label><input type="radio" name="mc8" value="b"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">52</span></span><span class="sr">9 over 52</span></span></span></label><label><input type="radio" name="mc8" value="c"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">13</span></span><span class="sr">9 over 13</span></span></span></label><label><input type="radio" name="mc8" value="d"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">13</span></span><span class="sr">36 over 13</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Both 36 and 52 can be divided by 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">13</span></span><span class="sr">9 over 13</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="frac" data-answer="17/52" data-miss="{&quot;19/52&quot;: &quot;That adds the first two but does not subtract the 2/52. 6 + 13 − 2 = 17, so the answer is 17/52.&quot;, &quot;21/52&quot;: &quot;That adds the 2/52 instead of subtracting it. 6 + 13 − 2 = 17, so the answer is 17/52.&quot;, &quot;17/156&quot;: &quot;That adds the bottoms too. The pieces are all 52nds, so keep the bottom of 52: 17/52.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Work out <span class="m"><span aria-hidden="true">6/52 + 13/52 − 2/52</span><span class="sr">6 over 52 plus 13 over 52 minus 2 over 52</span></span>. Type your answer as a fraction in lowest terms.</p>
+<details><summary>Hint</summary><p>Work with the tops, left to right: 6 + 13, then subtract 2. Keep the bottom of 52.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">17</span><span class="fb">52</span></span><span class="sr">17 over 52</span></span></strong>. It does not simplify, because 17 and 52 share no factor larger than 1.</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-form="dec" data-answer="0.6875" data-miss="{&quot;0.3125&quot;: &quot;That is 5/16 as a decimal. Subtract from 1 first: 16/16 minus 5/16 is 11/16, which is 0.6875.&quot;, &quot;1.3125&quot;: &quot;That adds 5/16 to 1. Subtract instead: 11/16, which is 0.6875.&quot;, &quot;0.69&quot;: &quot;The directions say do not round. Keep every digit: 0.6875.&quot;, &quot;0.688&quot;: &quot;The directions say do not round. Keep every digit: 0.6875.&quot;, &quot;~1.4545~0.001&quot;: &quot;The fraction is flipped. That divides 16 by 11. Divide the top by the bottom: 11 divided by 16 is 0.6875.&quot;, &quot;-4/16&quot;: &quot;That treats the 1 as 1/16. The 1 is 16/16, so the result is 11/16, which is 0.6875.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> Work out <span class="m"><span aria-hidden="true">1 − 5/16</span><span class="sr">1 minus 5 over 16</span></span>, then write the result as a decimal. Do not round.</p>
+<details><summary>Hint</summary><p>Write 1 as 16/16 and subtract. Then divide the top by the bottom.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.6875</span><span class="sr">0 point 6 8 7 5</span></span></strong>, because <span class="m"><span aria-hidden="true">16/16 − 5/16 = 11/16</span><span class="sr">16 over 16 minus 5 over 16 equals 11 over 16</span></span> and <span class="m"><span aria-hidden="true">11 ÷ 16 = 0.6875</span><span class="sr">11 divided by 16 equals 0 point 6 8 7 5</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 4.2</h3>
+<p>Item 2 on page 1 of the notes adds and subtracts fractions with a bottom of 52 and then simplifies the result. Item 3 on page 2 simplifies a fraction with a bottom of 52, and item 5 on page 2 subtracts a fraction from 1.</p>
+<p><strong>Watch for this:</strong> when the bottoms are the same, they stay the same. Only the tops are added or subtracted.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Percents, decimals and subtracting from 1</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a percent to a decimal, including percents such as <span class="m"><span aria-hidden="true">11.9%</span><span class="sr">11 point 9 percent</span></span>.</li><li>Find a percent of a number by multiplying.</li><li>Subtract a decimal from 1 by lining up the decimal points.</li></ul>
+</div>
+<h3>Percent to decimal, and percent of a number</h3>
+<p>Percent means "out of 100." To change a percent to a decimal, divide by 100, which moves the decimal point two places to the <strong>left</strong>. Fill any empty places with zeros. To find a percent of a number, change the percent to a decimal and multiply.</p>
+<h3>Subtracting a decimal from 1</h3>
+<p>Write 1 with as many zeros after the decimal point as the other number has decimal places, then subtract place by place. For example, <span class="m"><span aria-hidden="true">1 − 0.36</span><span class="sr">1 minus 0 point 3 6</span></span> becomes <span class="m"><span aria-hidden="true">1.00 − 0.36 = 0.64</span><span class="sr">1 point 0 0 minus 0 point 3 6 equals 0 point 6 4</span></span>. A quick check: the two numbers should add back to 1.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Moving the point only one place.</strong> <span class="m"><span aria-hidden="true">6.4%</span><span class="sr">6 point 4 percent</span></span> is <span class="m"><span aria-hidden="true">0.064</span><span class="sr">0 point 0 6 4</span></span>, not <span class="m"><span aria-hidden="true">0.64</span><span class="sr">0 point 6 4</span></span>.</li>
+<li><strong>Lining up the last digits instead of the decimal points.</strong> In <span class="m"><span aria-hidden="true">1 − 0.08</span><span class="sr">1 minus 0 point 0 8</span></span>, the 8 is in the hundredths place. The answer is <span class="m"><span aria-hidden="true">0.92</span><span class="sr">0 point 9 2</span></span>, not <span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span>.</li>
+<li><strong>Adding instead of subtracting.</strong> Taking something away from 1 always leaves less than 1.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 1 − 0.0473">
+<h3 style="margin-top:0">Worked example: 1 − 0.0473</h3>
+<p>Work out <span class="m"><span aria-hidden="true">1 − 0.0473</span><span class="sr">1 minus 0 point 0 4 7 3</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1 = 1.0000</span><span class="sr">1 equals 1 point 0 0 0 0</span></span></span><span class="say">The other number has four decimal places, so write 1 with four zeros.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">1.0000 − 0.0473 = 0.9527</span><span class="sr">1 point 0 0 0 0 minus 0 point 0 4 7 3 equals 0 point 9 5 2 7</span></span></span><span class="say">Subtract place by place, borrowing as needed.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.9527 + 0.0473 = 1</span><span class="sr">0 point 9 5 2 7 plus 0 point 0 4 7 3 equals 1</span></span></span><span class="say">Check: the two numbers add back to 1.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.9527</span><span class="sr">0 point 9 5 2 7</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 6.4% as a decimal">
+<h3 style="margin-top:0">Finish this one: Write 6.4% as a decimal</h3>
+<p>Write <span class="m"><span aria-hidden="true">6.4%</span><span class="sr">6 point 4 percent</span></span> as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">6.4 ÷ 100</span><span class="sr">6 point 4 divided by 100</span></span></span><span class="say">Percent to decimal means divide by 100. Next, move the decimal point two places left and fill in a zero.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-form="dec" data-answer="0.064" data-miss="{&quot;0.64&quot;: &quot;This is the one-place slip. 0.64 is 64%. From 6.4, move the point two places left and fill in a zero: 0.064.&quot;, &quot;6.4&quot;: &quot;That is still the percent number. Divide by 100: 0.064.&quot;, &quot;0.0064&quot;: &quot;That moves the point three places. Two places left from 6.4 gives 0.064.&quot;, &quot;640&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Finish it: write <span class="m"><span aria-hidden="true">6.4%</span><span class="sr">6 point 4 percent</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p>One move left gives <span class="m"><span aria-hidden="true">0.64</span><span class="sr">0 point 6 4</span></span>. One more move left needs a zero in front of the 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.064</span><span class="sr">0 point 0 6 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="43" data-miss="{&quot;430&quot;: &quot;That uses 0.5, which is 50%. 5% is 0.05, and 0.05 times 860 is 43.&quot;, &quot;4.3&quot;: &quot;That uses 0.005. Two places left from 5 is 0.05, and 0.05 times 860 is 43.&quot;, &quot;4300&quot;: &quot;That multiplies by 5 instead of 0.05, so the percent sign was ignored.&quot;, &quot;172&quot;: &quot;That divides 860 by 5. \&quot;Of\&quot; means multiply by 0.05: 43.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> What is 5% of 860?</p>
+<details><summary>Hint</summary><p>5% is <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>. A single-digit percent needs a zero right after the decimal point.</p></details>
+<details><summary>Show answer</summary><p><strong>43</strong>, because <span class="m"><span aria-hidden="true">0.05 × 860 = 43</span><span class="sr">0 point 0 5 times 860 equals 43</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.92" data-miss="{&quot;0.2&quot;: &quot;That lines up the 8 under the ones place, as if it were 0.8. Write 1 as 1.00: 1.00 − 0.08 = 0.92.&quot;, &quot;1.08&quot;: &quot;That adds. Subtracting from 1 leaves less than 1: 0.92.&quot;, &quot;0.08&quot;: &quot;That is the number being taken away. What is left is 1.00 − 0.08 = 0.92.&quot;, &quot;0.98&quot;: &quot;Check by adding back: 0.98 + 0.08 is 1.06, not 1. Write 1 as 1.00 and subtract: 0.92.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Work out <span class="m"><span aria-hidden="true">1 − 0.08</span><span class="sr">1 minus 0 point 0 8</span></span>.</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.00</span><span class="sr">1 point 0 0</span></span> so both numbers have two decimal places.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.92</span><span class="sr">0 point 9 2</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;0.25 is 25%. Move the point two places left from 2.5, not one: 0.025.&quot;, &quot;b&quot;: &quot;That is still the percent number. Divide by 100: 0.025.&quot;, &quot;c&quot;: &quot;That moves the point three places. Two places left from 2.5 gives 0.025.&quot;}" data-why="Correct. Dividing 2.5 by 100 moves the point two places left: 0.025.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> A printer jams on <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span> of the pages it prints. Which decimal is equal to <span class="m"><span aria-hidden="true">2.5%</span><span class="sr">2 point 5 percent</span></span>?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">0.0025</span><span class="sr">0 point 0 0 2 5</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">0.025</span><span class="sr">0 point 0 2 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> and move the decimal point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.025</span><span class="sr">0 point 0 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.97615" data-miss="{&quot;0.7615&quot;: &quot;That subtracts 0.2385, so the 2 was lined up in the tenths place. Write 1 as 1.00000: 1.00000 − 0.02385 = 0.97615.&quot;, &quot;1.02385&quot;: &quot;That adds. Subtracting from 1 leaves less than 1: 0.97615.&quot;, &quot;0.02385&quot;: &quot;That is the number being taken away. What is left is 0.97615.&quot;, &quot;0.98&quot;: &quot;The directions say do not round. Keep every digit: 0.97615.&quot;, &quot;0.976&quot;: &quot;The directions say do not round. Keep every digit: 0.97615.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> Work out <span class="m"><span aria-hidden="true">1 − 0.02385</span><span class="sr">1 minus 0 point 0 2 3 8 5</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.00000</span><span class="sr">1 point 0 0 0 0 0</span></span> so both numbers have five decimal places. Check by adding back to 1.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.97615</span><span class="sr">0 point 9 7 6 1 5</span></span></strong>, and <span class="m"><span aria-hidden="true">0.97615 + 0.02385 = 1</span><span class="sr">0 point 9 7 6 1 5 plus 0 point 0 2 3 8 5 equals 1</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 4.2</h3>
+<p>Item 5 on page 2 of the notes subtracts <span class="m"><span aria-hidden="true">0.75</span><span class="sr">0 point 7 5</span></span> from 1. Item 11 on page 4 writes 5% as <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> and multiplies by 500. The "Classroom Example 4.2.1" video subtracts a decimal with five decimal places from 1, and the "Classroom Example 4.2.4" video changes <span class="m"><span aria-hidden="true">11.9%</span><span class="sr">11 point 9 percent</span></span> to a decimal.</p>
+<p><strong>Watch for this:</strong> zeros right after the decimal point. Line up the decimal points when you subtract, and count two places when you change a percent.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Multiplying fractions, decimals and powers</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Multiply fractions: top times top, bottom times bottom.</li><li>Multiply decimals and place the decimal point correctly.</li><li>Expect a smaller answer when both numbers are less than 1.</li><li>Work out a power as repeated multiplication, and type it on one line with parentheses.</li></ul>
+</div>
+<h3>Fractions, decimals and powers</h3>
+<ul>
+<li><strong>Fractions:</strong> multiply the tops, multiply the bottoms, then simplify. No common bottom is needed.</li>
+<li><strong>Decimals:</strong> multiply as if there were no decimal points, then count the decimal places in both numbers. The answer has that many decimal places.</li>
+<li><strong>Powers:</strong> an exponent says how many times to use the number as a factor. <span class="m"><span aria-hidden="true">0.9<sup>3</sup> = 0.9 × 0.9 × 0.9 = 0.729</span><span class="sr">0 point 9 to the third power equals 0 point 9 times 0 point 9 times 0 point 9, which equals 0 point 7 2 9</span></span>.</li>
+<li><strong>Numbers less than 1:</strong> multiplying two numbers that are both less than 1 gives an answer smaller than either one.</li>
+</ul>
+<p>On one line, many calculators use * for times and ^ for a power. Put a fraction in parentheses before raising it to a power, or the power applies only to the bottom.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Miscounting decimal places.</strong> <span class="m"><span aria-hidden="true">0.3 × 0.2</span><span class="sr">0 point 3 times 0 point 2</span></span> is <span class="m"><span aria-hidden="true">0.06</span><span class="sr">0 point 0 6</span></span>, not <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span>. There are two decimal places in all.</li>
+<li><strong>Multiplying by the exponent.</strong> <span class="m"><span aria-hidden="true">0.9<sup>3</sup></span><span class="sr">0 point 9 to the third power</span></span> is not <span class="m"><span aria-hidden="true">0.9 × 3</span><span class="sr">0 point 9 times 3</span></span>.</li>
+<li><strong>Adding instead of multiplying.</strong> <span class="m"><span aria-hidden="true">3/8 × 2/5</span><span class="sr">3 over 8 times 2 over 5</span></span> is not <span class="m"><span aria-hidden="true" class="frac"><span class="ft">5</span><span class="fb">13</span></span><span class="sr">5 over 13</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 3/8 × 2/5">
+<h3 style="margin-top:0">Worked example: 3/8 × 2/5</h3>
+<p>Work out <span class="m"><span aria-hidden="true">3/8 × 2/5</span><span class="sr">3 over 8 times 2 over 5</span></span> as a fraction and as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">3 × 2 = 6 and 8 × 5 = 40</span><span class="sr">3 times 2 equals 6, and 8 times 5 equals 40</span></span></span><span class="say">Top times top, bottom times bottom.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">6/40 = 3/20</span><span class="sr">6 over 40 equals 3 over 20</span></span></span><span class="say">Simplify by dividing the top and bottom by 2.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">3 ÷ 20 = 0.15</span><span class="sr">3 divided by 20 equals 0 point 1 5</span></span></span><span class="say">Divide to get the decimal. It is smaller than both <span class="m"><span aria-hidden="true">0.375</span><span class="sr">0 point 3 7 5</span></span> and <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span>, as expected.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true" class="frac"><span class="ft">3</span><span class="fb">20</span></span><span class="sr">3 over 20</span></span>, which is <span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 0.2 × 0.4">
+<h3 style="margin-top:0">Finish this one: 0.2 × 0.4</h3>
+<p>Work out <span class="m"><span aria-hidden="true">0.2 × 0.4</span><span class="sr">0 point 2 times 0 point 4</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2 × 4 = 8</span><span class="sr">2 times 4 equals 8</span></span></span><span class="say">Multiply without the decimal points. Next, count the decimal places: one in each number, so two in all.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.08" data-miss="{&quot;0.8&quot;: &quot;That has one decimal place, but there are two in all (one in 0.2 and one in 0.4): 0.08.&quot;, &quot;0.6&quot;: &quot;That adds. Multiply instead: 0.08.&quot;, &quot;8&quot;: &quot;Put the decimal point back. Two decimal places in all gives 0.08.&quot;, &quot;0.008&quot;: &quot;That has three decimal places. There are two in all: 0.08.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.2 × 0.4</span><span class="sr">0 point 2 times 0 point 4</span></span>?</p>
+<details><summary>Hint</summary><p>Start from 8 and move the decimal point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="frac" data-answer="5/44" data-miss="{&quot;8/23&quot;: &quot;That adds the tops and adds the bottoms. Multiply instead: 15/132, which simplifies to 5/44.&quot;, &quot;55/36&quot;: &quot;That flips the second fraction. Multiply straight across: 15/132, which simplifies to 5/44.&quot;, &quot;15/23&quot;: &quot;That multiplies the tops but adds the bottoms. Multiply both: 15/132, which simplifies to 5/44.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Multiply <span class="m"><span aria-hidden="true">5/12 × 3/11</span><span class="sr">5 over 12 times 3 over 11</span></span>. Type your answer as a fraction in lowest terms.</p>
+<details><summary>Hint</summary><p>Top times top: <span class="m"><span aria-hidden="true">5 × 3</span><span class="sr">5 times 3</span></span>. Bottom times bottom: <span class="m"><span aria-hidden="true">12 × 11</span><span class="sr">12 times 11</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">5</span><span class="fb">44</span></span><span class="sr">5 over 44</span></span></strong>. The product is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">15</span><span class="fb">132</span></span><span class="sr">15 over 132</span></span>, and dividing the top and bottom by 3 gives <span class="m"><span aria-hidden="true" class="frac"><span class="ft">5</span><span class="fb">44</span></span><span class="sr">5 over 44</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.027" data-miss="{&quot;0.9&quot;: &quot;That multiplies 0.3 by the exponent 3. The exponent means 0.3 × 0.3 × 0.3 = 0.027.&quot;, &quot;0.09&quot;: &quot;That is 0.3 × 0.3, which uses 0.3 only twice. Multiply by 0.3 once more: 0.027.&quot;, &quot;0.27&quot;: &quot;The digits are right, but there are three decimal places in all: 0.027.&quot;, &quot;0.0027&quot;: &quot;That has four decimal places. Three factors with one place each give three places: 0.027.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Work out <span class="m"><span aria-hidden="true">0.3<sup>3</sup></span><span class="sr">0 point 3 to the third power</span></span>.</p>
+<details><summary>Hint</summary><p>Write it out: <span class="m"><span aria-hidden="true">0.3 × 0.3 × 0.3</span><span class="sr">0 point 3 times 0 point 3 times 0 point 3</span></span>. Then count decimal places.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.027</span><span class="sr">0 point 0 2 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;Without parentheses, the power is done before the division, so only the 50 is cubed. The value is about 0.000376.&quot;, &quot;c&quot;: &quot;This multiplies the fraction by 3 instead of using it as a factor three times. The value is 2.82, not about 0.831.&quot;, &quot;d&quot;: &quot;This cubes only the top. The value is about 2,076, far from the correct value of about 0.831.&quot;}" data-why="Correct. The parentheses make the whole fraction the base, so the value is about 0.831.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 19.</b> Which one-line entry has the same value as <span class="m"><span aria-hidden="true">(47/50)<sup>3</sup></span><span class="sr">the fraction 47 over 50, in parentheses, to the third power</span></span>?</legend>
+<label><input type="radio" name="mc19" value="a"> <span><span class="m"><span aria-hidden="true">(47/50)^3</span><span class="sr">open parenthesis 47 slash 50 close parenthesis, caret 3</span></span></span></label><label><input type="radio" name="mc19" value="b"> <span><span class="m"><span aria-hidden="true">47/50^3</span><span class="sr">47 slash 50 caret 3</span></span></span></label><label><input type="radio" name="mc19" value="c"> <span><span class="m"><span aria-hidden="true">(47/50)*3</span><span class="sr">open parenthesis 47 slash 50 close parenthesis, times 3</span></span></span></label><label><input type="radio" name="mc19" value="d"> <span><span class="m"><span aria-hidden="true">47^3/50</span><span class="sr">47 caret 3, slash 50</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The power has to apply to the whole fraction, top and bottom.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">(47/50)^3</span><span class="sr">open parenthesis 47 slash 50 close parenthesis, caret 3</span></span></strong>, which is about <span class="m"><span aria-hidden="true">0.831</span><span class="sr">0 point 8 3 1</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.659" data-miss="{&quot;4.6&quot;: &quot;That multiplies 0.92 by 5. The exponent means using 0.92 as a factor five times: about 0.659.&quot;, &quot;0.846&quot;: &quot;That is 0.92 squared, which uses 0.92 only twice. Use it five times: about 0.659.&quot;, &quot;0.66&quot;: &quot;That has two decimal places. Three decimal places keeps three digits after the point: 0.659.&quot;, &quot;0.6591&quot;: &quot;That has four decimal places. Three decimal places gives 0.659.&quot;, &quot;~0.65908~0.00001&quot;: &quot;Round to three decimal places: keep three digits after the point. 0.659.&quot;, &quot;0.92&quot;: &quot;Multiplying numbers less than 1 makes the result smaller, so the answer is less than 0.92: about 0.659.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Work out <span class="m"><span aria-hidden="true">0.92<sup>5</sup></span><span class="sr">0 point 9 2 to the fifth power</span></span>. Round to three decimal places.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">0.92 × 0.92 × 0.92 × 0.92 × 0.92</span><span class="sr">0 point 9 2 times itself, five factors in all</span></span> is about <span class="m"><span aria-hidden="true">0.65908</span><span class="sr">0 point 6 5 9 0 8</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.659</span><span class="sr">0 point 6 5 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.003375" data-miss="{&quot;0.45&quot;: &quot;That adds the three numbers. Multiply them: 0.003375.&quot;, &quot;0.0225&quot;: &quot;That is 0.15 × 0.15, only two factors. Multiply by 0.15 once more: 0.003375.&quot;, &quot;0.03375&quot;: &quot;The digits are right, but there are six decimal places in all (two in each factor): 0.003375.&quot;, &quot;0.3375&quot;: &quot;The digits are right, but there are six decimal places in all: 0.003375.&quot;, &quot;0.00338&quot;: &quot;The directions say do not round. Keep every digit: 0.003375.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Work out <span class="m"><span aria-hidden="true">0.15 × 0.15 × 0.15</span><span class="sr">0 point 1 5 times 0 point 1 5 times 0 point 1 5</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">15 × 15 × 15 = 3,375</span><span class="sr">15 times 15 times 15 equals 3,375</span></span>. Each factor has two decimal places, so the answer has six.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.003375</span><span class="sr">0 point 0 0 3 3 7 5</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 4.2</h3>
+<p>Item 10 on page 4 of the notes multiplies two fractions, and item 11 on page 4 raises a fraction to the 6th power. The "Classroom Example 4.2.3" video types a product of two fractions on one line with each fraction in parentheses, and the "Classroom Example 4.2.4" video multiplies a decimal by itself.</p>
+<p><strong>Watch for this:</strong> an exponent means repeated multiplication, and parentheses around a fraction keep its top and bottom together.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Rounding to three, four and five decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Count decimal places, including zeros right after the decimal point.</li><li>Round to three, four or five decimal places.</li><li>Carry correctly when a 9 rounds up.</li><li>Round once, from the original number.</li></ul>
+</div>
+<h3>How to round to a number of decimal places</h3>
+<ol class="steps">
+<li>Count that many digits to the right of the decimal point, starting with the first digit after the point, even if it is a zero. That digit is the last one you keep.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Starting the count at the first nonzero digit.</strong> In <span class="m"><span aria-hidden="true">0.0415862</span><span class="sr">0 point 0 4 1 5 8 6 2</span></span>, three decimal places ends at the 1, not the 5: <span class="m"><span aria-hidden="true">0.042</span><span class="sr">0 point 0 4 2</span></span>.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">0.0744962</span><span class="sr">0 point 0 7 4 4 9 6 2</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.074</span><span class="sr">0 point 0 7 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">0.0745</span><span class="sr">0 point 0 7 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.075</span><span class="sr">0 point 0 7 5</span></span> is a slip.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 0.0083917 to five decimal places">
+<h3 style="margin-top:0">Worked example: Round 0.0083917 to five decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.0083917</span><span class="sr">0 point 0 0 8 3 9 1 7</span></span> to five decimal places.</p><ol class="steps"><li><span class="work">Places 1 to 5: 0, 0, 8, 3, 9</span><span class="say">Count from the first digit after the point, zeros included. The fifth digit is the 9.</span></li><li><span class="work">Next digit: 1</span><span class="say">The 1 is 4 or less, so the 9 stays.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.00839</span><span class="sr">0 point 0 0 8 3 9</span></span></span><span class="say">Drop everything after the fifth place.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.00839</span><span class="sr">0 point 0 0 8 3 9</span></span></strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Round to four decimal places" means exactly four digits after the point. "Do not round" means type every digit the calculator shows.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.62846 to four decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.62846 to four decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.62846</span><span class="sr">0 point 6 2 8 4 6</span></span> to four decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 4 in the fourth place. Next digit: 6.</span><span class="say">The 6 is 5 or more. Next, decide what happens to the 4.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.6285" data-miss="{&quot;0.6284&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 4 goes up: 0.6285.&quot;, &quot;0.628&quot;: &quot;That has three decimal places. Four decimal places keeps four digits after the point: 0.6285.&quot;, &quot;0.62846&quot;: &quot;That is the number you started with. Keep only four digits after the point.&quot;, &quot;0.629&quot;: &quot;That has three decimal places. Four decimal places gives 0.6285.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.62846</span><span class="sr">0 point 6 2 8 4 6</span></span> rounded to four decimal places?</p>
+<details><summary>Hint</summary><p>The digit after the kept 4 is 6, so the 4 becomes 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.6285</span><span class="sr">0 point 6 2 8 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.042" data-miss="{&quot;0.041&quot;: &quot;That chops off the extra digits. The digit after the 1 is 5, so the 1 goes up: 0.042.&quot;, &quot;0.0416&quot;: &quot;That has four decimal places, as if the count started at the 4. Count from the first digit after the point (the 0): three places gives 0.042.&quot;, &quot;0.04159&quot;: &quot;That has five decimal places. Three decimal places gives 0.042.&quot;, &quot;0.04&quot;: &quot;That has two decimal places. Three decimal places gives 0.042.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> Round <span class="m"><span aria-hidden="true">0.0415862</span><span class="sr">0 point 0 4 1 5 8 6 2</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>Places 1 to 3 are 0, 4 and 1. The next digit is 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.042</span><span class="sr">0 point 0 4 2</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.00300" data-miss="{&quot;0.00299&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.00300.&quot;, &quot;0.0029&quot;: &quot;When the fifth-place 9 goes up, the 9 before it also becomes 0, and the 2 becomes 3: 0.00300.&quot;, &quot;0.00290&quot;: &quot;When the fifth-place 9 goes up, the 9 before it also becomes 0, and the 2 becomes 3: 0.00300.&quot;, &quot;0.002996&quot;: &quot;That has six decimal places. Five decimal places gives 0.00300.&quot;, &quot;0.00399&quot;: &quot;Only the kept digit goes up, then carries left. The result is 0.00300.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Round <span class="m"><span aria-hidden="true">0.0029963</span><span class="sr">0 point 0 0 2 9 9 6 3</span></span> to five decimal places.</p>
+<details><summary>Hint</summary><p>The fifth digit is the second 9, and the next digit is 6. Follow the carries to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.00300</span><span class="sr">0 point 0 0 3 0 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.003</span><span class="sr">0 point 0 0 3</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.074" data-miss="{&quot;0.075&quot;: &quot;That rounds in steps from the right (0.0744962 to 0.0745 to 0.075). Only the digit right after the third place counts, and it is 4: 0.074.&quot;, &quot;0.0745&quot;: &quot;That has four decimal places. Three decimal places gives 0.074.&quot;, &quot;0.07&quot;: &quot;That has two decimal places. Three decimal places gives 0.074.&quot;, &quot;0.074496&quot;: &quot;That has six decimal places. Keep only three: 0.074.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Round <span class="m"><span aria-hidden="true">0.0744962</span><span class="sr">0 point 0 7 4 4 9 6 2</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the first 4. Look only at the very next digit, which is also 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.074</span><span class="sr">0 point 0 7 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="1.0000" data-miss="{&quot;0.9999&quot;: &quot;That chops off the 7 instead of rounding. The 7 is 5 or more, so the fourth 9 goes up, and every 9 carries: 1.0000.&quot;, &quot;0.99997&quot;: &quot;That has five decimal places. Four decimal places gives 1.0000.&quot;, &quot;0.1&quot;: &quot;The carries go all the way past the decimal point, so the ones digit becomes 1: 1.0000.&quot;, &quot;0.99998&quot;: &quot;That has five decimal places. Four decimal places gives 1.0000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Round <span class="m"><span aria-hidden="true">0.9999721</span><span class="sr">0 point 9 9 9 9 7 2 1</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The digit after the fourth 9 is 7. Each 9 that goes up becomes 0 and carries 1 to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.0000</span><span class="sr">1 point 0 0 0 0</span></span></strong> (typing 1 is accepted too)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 4.2</h3>
+<p>Items 10 and 11 on page 4 of the notes give results to three decimal places, such as <span class="m"><span aria-hidden="true">0.116</span><span class="sr">0 point 1 1 6</span></span> and <span class="m"><span aria-hidden="true">0.783</span><span class="sr">0 point 7 8 3</span></span>. The Classroom Example videos round to five decimal places ("Classroom Example 4.2.1" and "Classroom Example 4.2.4"), three decimal places ("Classroom Example 4.2.2") and four decimal places ("Classroom Example 4.2.3").</p>
+<p><strong>Watch for this:</strong> zeros right after the decimal point count as decimal places, and the rounding direction changes from one question to the next.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.0517" data-miss="{&quot;0.0516&quot;: &quot;That chops off the 8 instead of rounding. The 8 is 5 or more, so the 6 goes up: 0.0517.&quot;, &quot;0.052&quot;: &quot;That has three decimal places. Four decimal places gives 0.0517.&quot;, &quot;0.05168&quot;: &quot;That has five decimal places, as if the count started at the 5. Count from the first digit after the point: 0.0517.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Round <span class="m"><span aria-hidden="true">0.0516837</span><span class="sr">0 point 0 5 1 6 8 3 7</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>Places 1 to 4 are 0, 5, 1 and 6. The next digit is 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0517</span><span class="sr">0 point 0 5 1 7</span></span></strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-form="dec" data-answer="0.142" data-miss="{&quot;1.42&quot;: &quot;That moves the point only one place. Two places left from 14.2 gives 0.142.&quot;, &quot;0.0142&quot;: &quot;That moves the point three places. Two places left from 14.2 gives 0.142.&quot;, &quot;14.2&quot;: &quot;That is still the percent number. Divide by 100: 0.142.&quot;, &quot;1420&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> A delivery van is late on <span class="m"><span aria-hidden="true">14.2%</span><span class="sr">14 point 2 percent</span></span> of its trips. Write <span class="m"><span aria-hidden="true">14.2%</span><span class="sr">14 point 2 percent</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p>Divide by 100: move the decimal point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.142</span><span class="sr">0 point 1 4 2</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="frac" data-answer="11/14" data-miss="{&quot;-2/14&quot;: &quot;That treats the 1 as 1/14. The 1 is 14/14, so 14/14 minus 3/14 is 11/14.&quot;, &quot;17/14&quot;: &quot;That adds. Subtract the tops: 14 minus 3 is 11, so the answer is 11/14.&quot;, &quot;3/14&quot;: &quot;That is the fraction being taken away. What is left is 11/14.&quot;, &quot;~0.7857~0.0006&quot;: &quot;That is the decimal, rounded. Type the exact fraction instead: 11/14.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> Work out <span class="m"><span aria-hidden="true">1 − 3/14</span><span class="sr">1 minus 3 over 14</span></span>. Type your answer as a fraction in lowest terms.</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">14</span><span class="fb">14</span></span><span class="sr">14 over 14</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">11</span><span class="fb">14</span></span><span class="sr">11 over 14</span></span></strong></p></details>
+</div>
+<p>Practice 30 uses the table from Classroom Example 4.2.3 in the notes.</p>
+<div class="table-wrap" role="region" aria-label="Classroom Example 4.2.3 table" tabindex="0">
+<table>
+<caption>Drive-thru order accuracy, Classroom Example 4.2.3 (page 5 of the notes)</caption>
+<thead><tr><th scope="col">Order</th><th scope="col">Restaurant A</th><th scope="col">Restaurant B</th><th scope="col">Restaurant C</th><th scope="col">Restaurant D</th></tr></thead>
+<tbody>
+<tr><th scope="row">Order Accurate</th><td>330</td><td>278</td><td>247</td><td>125</td></tr><tr><th scope="row">Order Not Accurate</th><td>35</td><td>59</td><td>40</td><td>19</td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="287" data-miss="{&quot;247&quot;: &quot;That is only the accurate orders from Restaurant C. Add the 40 not accurate orders in the same column: 287.&quot;, &quot;40&quot;: &quot;That is only the not accurate orders from Restaurant C. Add the 247 accurate orders: 287.&quot;, &quot;207&quot;: &quot;That subtracts. A column total adds the cells: 247 + 40 = 287.&quot;, &quot;268&quot;: &quot;That is Restaurant C in the Classroom Example 4.2.2 table (235 + 33). This question uses the 4.2.3 table: 247 + 40 = 287.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> In the Classroom Example 4.2.3 table, how many orders came from Restaurant C?</p>
+<details><summary>Hint</summary><p>Add down the Restaurant C column of this table.</p></details>
+<details><summary>Show answer</summary><p><strong>287</strong>, because 247 + 40 = 287.</p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.885" data-miss="{&quot;3.88&quot;: &quot;That multiplies 0.97 by 4. The exponent means using 0.97 as a factor four times: about 0.885.&quot;, &quot;0.941&quot;: &quot;That is 0.97 squared, which uses 0.97 only twice. Use it four times: about 0.885.&quot;, &quot;0.8853&quot;: &quot;That has four decimal places. Three decimal places gives 0.885.&quot;, &quot;0.89&quot;: &quot;That has two decimal places. Three decimal places gives 0.885.&quot;, &quot;0.97&quot;: &quot;Multiplying numbers less than 1 makes the result smaller: about 0.885.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 31.</b> Work out <span class="m"><span aria-hidden="true">0.97<sup>4</sup></span><span class="sr">0 point 9 7 to the fourth power</span></span>. Round to three decimal places.</p>
+<details><summary>Hint</summary><p>Use <span class="m"><span aria-hidden="true">0.97</span><span class="sr">0 point 9 7</span></span> as a factor four times. The result is about <span class="m"><span aria-hidden="true">0.88529</span><span class="sr">0 point 8 8 5 2 9</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.885</span><span class="sr">0 point 8 8 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-form="dec" data-answer="0.99155" data-miss="{&quot;0.9155&quot;: &quot;That subtracts 0.0845, so the 8 was lined up one place too far left. Write 1 as 1.00000: 0.99155.&quot;, &quot;1.00845&quot;: &quot;That adds. Subtracting from 1 leaves less than 1: 0.99155.&quot;, &quot;0.00845&quot;: &quot;That is the number being taken away. What is left is 0.99155.&quot;, &quot;0.99&quot;: &quot;The directions say do not round. Keep every digit: 0.99155.&quot;, &quot;0.992&quot;: &quot;The directions say do not round. Keep every digit: 0.99155.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 32.</b> Work out <span class="m"><span aria-hidden="true">1 − 0.00845</span><span class="sr">1 minus 0 point 0 0 8 4 5</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.00000</span><span class="sr">1 point 0 0 0 0 0</span></span>, then subtract place by place.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.99155</span><span class="sr">0 point 9 9 1 5 5</span></span></strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have read two-way tables and a deck of cards, worked with fractions, percents and decimals, multiplied and raised numbers to powers, and rounded to several decimal places. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec4.2-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function formMsg(q,raw,s,stu){
+  /* enforce the form the question asks for: a fraction in lowest terms, or a decimal */
+  const key=toRat(answers(q)[0]); const same=!!(stu&&key&&sameRat(stu,key)); const hit=missFor(q,raw);
+  const fm=s.match(/^-?(\d+)\/(\d+)$/);
+  if(q.dataset.form==='frac'){
+    if(fm&&same){const g=gcd(Number(fm[1]),Number(fm[2])); if(g>1)return 'That has the right value, but it is not in lowest terms. Divide the top and bottom by '+g+' to get '+key.n+'/'+key.d+'.';}
+    if(stu&&!stu.frac&&!hit)return 'This question asks for a fraction. Type it with a slash, such as 3/8, in lowest terms.';
+  } else if(fm){
+    if(same)return 'That fraction has the right value, but this question asks for a decimal. Divide the top by the bottom.';
+    if(!hit)return 'This question asks for a decimal, not a fraction. Divide the top by the bottom, then compare with your work.';
+  }
+  return null;
+}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  if(stu){const fmsg=formMsg(q,raw,s,stu); if(fmsg)return show(q,'wrong',fmsg);}
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

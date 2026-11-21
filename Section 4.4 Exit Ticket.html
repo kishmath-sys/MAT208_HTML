@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 4.4 Exit Ticket: Counting</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+sup,sub{line-height:0}
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 4.4 Exit Ticket</div>
+<h1>Section 4.4 Exit Ticket: Counting</h1>
+<p>A short, ungraded check to use after the Section 4.4 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Introduction, Permutation and Combination<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Factorial and the Factorial Rule<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Multiplication Counting Rule<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Permutations Rule and Combinations Rule<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 18 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 4.4 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 6.</li>
+<li>Section 7 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Introduction, Permutation and Combination</button></li>
+<li><button type="button" data-go="s3">Factorial and the Factorial Rule</button></li>
+<li><button type="button" data-go="s4">Multiplication Counting Rule</button></li>
+<li><button type="button" data-go="s5">Permutations Rule and Combinations Rule</button></li>
+<li><button type="button" data-go="s6">StatCrunch check</button></li>
+<li><button type="button" data-go="s7">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Introduction, Permutation and Combination</h2>
+<p>These checks cover the Introduction and items 1 and 2 on page 1 of the Section 4.4 notes.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Gold, silver and bronze are different positions, so order matters." data-miss="{&quot;a&quot;: &quot;Not quite. The same 3 toppings make the same pizza in any order, so order does not matter. Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The same 4 friends at the table are the same group in any order, so order does not matter. Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The same 2 pieces of fruit are the same choice whichever goes in first, so order does not matter. Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;}" data-review="items 1 and 2 (Permutation, Combination) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Permutation).</b> Which situation is one where the order of the items matters, in the sense of item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>Picking 3 toppings to put on a pizza.</span></label><label><input type="radio" name="mc1" value="b"> <span>Choosing 4 friends to share a table.</span></label><label><input type="radio" name="mc1" value="c"> <span>Giving gold, silver and bronze to 3 of 10 runners.</span></label><label><input type="radio" name="mc1" value="d"> <span>Picking 2 pieces of fruit to pack in a bag.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Giving gold, silver and bronze to 3 of 10 runners.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Permutation, Combination) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. Under item 2, the order of items does not matter, so they are the same set." data-miss="{&quot;b&quot;: &quot;Not quite. Treating the sets as different because of which item comes first is the permutation view in item 1. Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. \&quot;Position matters\&quot; is the mnemonic for permutations; the combination mnemonic is \&quot;Committee (order does not matter).\&quot; Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The Visual Example in item 2 uses sets of two items. Review: items 1 and 2 (Permutation, Combination) on page 1 of the notes.&quot;}" data-review="items 1 and 2 (Permutation, Combination) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Combination).</b> Under item 2 (Combination), how are the sets {X, Y} and {Y, X} treated?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>As the same set, since the order of items does not matter.</span></label><label><input type="radio" name="mc2" value="b"> <span>As different sets, since X comes first in only one of them.</span></label><label><input type="radio" name="mc2" value="c"> <span>As different sets, since combinations follow "position matters."</span></label><label><input type="radio" name="mc2" value="d"> <span>As neither, since a set needs more than two items.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>As the same set, since the order of items does not matter.</strong></p><p class="ptr">Where this is: Items 1 and 2 (Permutation, Combination) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. The notes give 4,960 committees, which would be almost impossible to count by hand." data-miss="{&quot;a&quot;: &quot;Not quite. The notes give 4,960 committees, far more than 32 times 3. Review: the Introduction on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The notes give 4,960 committees, far more than one per student. Review: the Introduction on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The Introduction says the techniques in this section find the value efficiently, without listing. Review: the Introduction on page 1 of the notes.&quot;}" data-review="the Introduction on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Introductory Example).</b> The Introduction asks how many different three-person committees can be formed from a class of 32 students. Which statement matches the notes?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>There are 96 committees, found by multiplying 32 by 3.</span></label><label><input type="radio" name="mc3" value="b"> <span>There are 4,960 committees, far too many to count by hand.</span></label><label><input type="radio" name="mc3" value="c"> <span>There are 32 committees, one for each student in the class.</span></label><label><input type="radio" name="mc3" value="d"> <span>The number can only be found by listing every committee.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>There are 4,960 committees, far too many to count by hand.</strong></p><p class="ptr">Where this is: The Introduction on page 1 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Introductory Example: page 1</li><li>Permutation and Combination: items 1 and 2, page 1 (and the mnemonics and Visual Examples)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Factorial and the Factorial Rule</h2>
+<p>These checks cover items 3 and 5 on pages 1 and 3 of the notes and the Classroom Example 4.4.4 video on page 7.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. A factorial multiplies all positive integers up to the given number." data-miss="{&quot;a&quot;: &quot;Not quite. This multiplies 6 by itself six times instead of multiplying the positive integers up to 6. Review: item 3 (Factorial) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. This adds the integers, and a factorial multiplies them. Review: item 3 (Factorial) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This leaves out the integers 2 to 5, and a factorial multiplies all of them. Review: item 3 (Factorial) on page 1 of the notes.&quot;}" data-review="item 3 (Factorial) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Factorial).</b> Which product matches <span class="m"><span aria-hidden="true">6!</span><span class="sr">6 factorial</span></span> as item 3 describes it?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">6 × 6 × 6 × 6 × 6 × 6</span><span class="sr">6 times 6 times 6 times 6 times 6 times 6</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">6 + 5 + 4 + 3 + 2 + 1</span><span class="sr">6 plus 5 plus 4 plus 3 plus 2 plus 1</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">6 × 1</span><span class="sr">6 times 1</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span><span class="m"><span aria-hidden="true">6 × 5 × 4 × 3 × 2 × 1</span><span class="sr">6 times 5 times 4 times 3 times 2 times 1</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">6 × 5 × 4 × 3 × 2 × 1</span><span class="sr">6 times 5 times 4 times 3 times 2 times 1</span></span></strong></p><p class="ptr">Where this is: Item 3 (Factorial) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. All 7 posters are arranged without replacement, so there are 7! ways." data-miss="{&quot;a&quot;: &quot;Not quite. 7 times 7 uses only two of the seven spots and does not arrange all 7 posters. Review: item 5 (Factorial Rule) on page 3 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. 7 counts the posters, not the ways to arrange them. Review: item 5 (Factorial Rule) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. This lets a poster be used again, but the Factorial Rule applies without replacement. Review: item 5 (Factorial Rule) on page 3 of the notes.&quot;}" data-review="item 5 (Factorial Rule) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Factorial Rule).</b> A teacher has 7 different posters and 7 spots on a wall, one poster per spot. Which matches item 5?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>7 × 7 ways, because there are 7 posters and 7 spots.</span></label><label><input type="radio" name="mc5" value="b"> <span>7! ways, because all 7 posters are arranged with none reused.</span></label><label><input type="radio" name="mc5" value="c"> <span>7 ways, because each poster goes into exactly one spot.</span></label><label><input type="radio" name="mc5" value="d"> <span>7 to the 7th power ways, because any poster can fill any spot.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>7! ways, because all 7 posters are arranged with none reused.</strong></p><p class="ptr">Where this is: Item 5 (Factorial Rule) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Only one order is alphabetical, out of 6! = 720 orders." data-miss="{&quot;a&quot;: &quot;Not quite. 6 is the number of singers, not the number of ways to order all six of them. Review: item 5 (Factorial Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.4\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. 36 is 6 times 6, which is not the number of ways to order six singers. Review: item 5 (Factorial Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.4\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. Only one order is alphabetical, so the top of the fraction is 1, not 6. Review: item 5 (Factorial Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.4\&quot; on page 7.&quot;}" data-review="item 5 (Factorial Rule) on page 3 of the notes, and the video &quot;Classroom Example 4.4.4&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Factorial Rule in a probability).</b> Six singers draw names out of a hat to set the order in which they perform. Each singer has a different name. What is the probability that they perform in alphabetical order?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">6</span></span></span><span class="sr">1 over 6</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">36</span></span></span><span class="sr">1 over 36</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">6</span><span class="fb">720</span></span></span><span class="sr">6 over 720</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">720</span></span></span><span class="sr">1 over 720</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">720</span></span></span><span class="sr">1 over 720</span></span></strong></p><p class="ptr">Where this is: Item 5 (Factorial Rule) on page 3 of the notes, and the video "Classroom Example 4.4.4" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Factorial: item 3, page 1</li><li>Factorial Rule: item 5, page 3</li><li>Video: "Classroom Example 4.4.4", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Multiplication Counting Rule</h2>
+<p>These checks cover item 4 on page 3 of the notes and the Classroom Example 4.4.1 video on page 7.</p>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="72" data-why="Correct. 4 times 6 times 3 is 72 drinks." data-miss="{&quot;13&quot;: &quot;Not quite. This adds the choices, and item 4 multiplies them. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;, &quot;24&quot;: &quot;Not quite. This leaves out the 3 kinds of milk. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;, &quot;18&quot;: &quot;Not quite. This leaves out the 4 sizes. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;, &quot;12&quot;: &quot;Not quite. This leaves out the 6 flavors. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;}" data-review="item 4 (Multiplication Counting Rule) on page 3 of the notes.">
+<p class="prompt"><b class="qlabel">Check 7 (Multiplication Counting Rule).</b> A coffee stand offers 4 sizes, 6 flavors and 3 kinds of milk. A drink is one size, one flavor and one kind of milk. How many different drinks are possible?</p>
+<details><summary>Show answer</summary><p><strong>72</strong></p><p class="ptr">Where this is: Item 4 (Multiplication Counting Rule) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. A digit can be used again, so this is a selection with replacement." data-miss="{&quot;a&quot;: &quot;Not quite. Once a student is placed in line, that student cannot be placed again, so this is without replacement. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Each book is used once, so this is without replacement. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Once a player is chosen, that player cannot be chosen again, so this is without replacement. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes.&quot;}" data-review="item 4 (Multiplication Counting Rule) on page 3 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (With replacement).</b> The Note in item 4 says the rule applies to selections with replacement. Which situation fits that Note?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>Lining up 3 different students as first, second and third.</span></label><label><input type="radio" name="mc8" value="b"> <span>Arranging 5 different books on a shelf with 5 spots.</span></label><label><input type="radio" name="mc8" value="c"> <span>Setting a 4-digit lock code in which digits may repeat.</span></label><label><input type="radio" name="mc8" value="d"> <span>Choosing 2 different players from a team of 12.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Setting a 4-digit lock code in which digits may repeat.</strong></p><p class="ptr">Where this is: Item 4 (Multiplication Counting Rule) on page 3 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. There are 3 choices for each of 5 digits, 243 codes, and only 1 is right." data-miss="{&quot;b&quot;: &quot;Not quite. 125 is 5 to the 3rd power, which swaps the number of keys and the number of digits. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.1\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. 15 is 3 times 5, which uses each number only once instead of 3 choices for each of the 5 digits. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.1\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. 8 is 3 plus 5, and the rule multiplies the choices. Review: item 4 (Multiplication Counting Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.1\&quot; on page 7.&quot;}" data-review="item 4 (Multiplication Counting Rule) on page 3 of the notes, and the video &quot;Classroom Example 4.4.1&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (Multiplication Counting Rule in a probability).</b> A gate code has 5 digits, entered on a keypad that has only 3 keys. Digits can repeat. What is the probability of guessing the code on the first try?</legend>
+<label><input type="radio" name="mc9" value="a"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">243</span></span></span><span class="sr">1 over 243</span></span></span></label><label><input type="radio" name="mc9" value="b"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">125</span></span></span><span class="sr">1 over 125</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">15</span></span></span><span class="sr">1 over 15</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">8</span></span></span><span class="sr">1 over 8</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">243</span></span></span><span class="sr">1 over 243</span></span></strong></p><p class="ptr">Where this is: Item 4 (Multiplication Counting Rule) on page 3 of the notes, and the video "Classroom Example 4.4.1" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Multiplication Counting Rule: item 4, page 3 (and its Note on replacement)</li><li>Video: "Classroom Example 4.4.1", page 7</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Permutations Rule and Combinations Rule</h2>
+<p>These checks cover items 6 and 7 on pages 3 and 5 of the notes and the Classroom Example 4.4.2, 4.4.3 and 4.4.5 videos on pages 7 and 8.</p>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="d" data-why="Correct. Order does not matter, n is 12 and r is 3." data-miss="{&quot;a&quot;: &quot;Not quite. A permutation is for when order matters, and these 3 planners have no roles. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. n is the 12 members and r is the 3 selected, so the numbers are swapped. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. 12! arranges all 12 members, but only 3 are selected. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;}" data-review="items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Combinations Rule).</b> A book club has 12 members and picks 3 of them to plan a party. The 3 planners have no separate roles. Which matches the notes?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true"><sub>12</sub>P<sub>3</sub></span><span class="sr">12 P 3</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span><span class="m"><span aria-hidden="true"><sub>3</sub>C<sub>12</sub></span><span class="sr">3 C 12</span></span></span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">12!</span><span class="sr">12 factorial</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span><span class="m"><span aria-hidden="true"><sub>12</sub>C<sub>3</sub></span><span class="sr">12 C 3</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><sub>12</sub>C<sub>3</sub></span><span class="sr">12 C 3</span></span></strong></p><p class="ptr">Where this is: Items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="b" data-why="Correct. First, second and third are different positions, n is 9 and r is 3." data-miss="{&quot;a&quot;: &quot;Not quite. A combination ignores order, but first, second and third place are different positions. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. n is the 9 entries and r is the 3 places awarded, so the numbers are swapped. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. 9 times 3 does not count the ways to fill three ranked places. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.&quot;}" data-review="items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Permutations Rule).</b> A baking contest has 9 entries, and the judges award first, second and third place. Which matches the notes?</legend>
+<label><input type="radio" name="mc11" value="a"> <span><span class="m"><span aria-hidden="true"><sub>9</sub>C<sub>3</sub></span><span class="sr">9 C 3</span></span></span></label><label><input type="radio" name="mc11" value="b"> <span><span class="m"><span aria-hidden="true"><sub>9</sub>P<sub>3</sub></span><span class="sr">9 P 3</span></span></span></label><label><input type="radio" name="mc11" value="c"> <span><span class="m"><span aria-hidden="true"><sub>3</sub>P<sub>9</sub></span><span class="sr">3 P 9</span></span></span></label><label><input type="radio" name="mc11" value="d"> <span><span class="m"><span aria-hidden="true">9 × 3</span><span class="sr">9 times 3</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><sub>9</sub>P<sub>3</sub></span><span class="sr">9 P 3</span></span></strong></p><p class="ptr">Where this is: Items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="a" data-why="Correct. Any order wins, so there are 9C3 = 84 possible groups, and 1 of them wins." data-miss="{&quot;b&quot;: &quot;Not quite. 504 counts every finishing order separately, but the bet is won in any order. Review: item 7 (Combinations Rule) on page 5 of the notes, and the video \&quot;Classroom Example 4.4.2\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. 27 is 9 times 3, which does not count the possible groups of 3 dogs. Review: item 7 (Combinations Rule) on page 5 of the notes, and the video \&quot;Classroom Example 4.4.2\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. This compares picks to dogs instead of counting the possible groups of 3. Review: item 7 (Combinations Rule) on page 5 of the notes, and the video \&quot;Classroom Example 4.4.2\&quot; on page 7.&quot;}" data-review="item 7 (Combinations Rule) on page 5 of the notes, and the video &quot;Classroom Example 4.4.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Combination in a probability).</b> A contest is won if you pick the 3 dogs that finish in the top three of a race, in any order. The race has 9 dogs. If you pick the dogs at random, what is the probability of winning?</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">84</span></span></span><span class="sr">1 over 84</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">504</span></span></span><span class="sr">1 over 504</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">27</span></span></span><span class="sr">1 over 27</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">3</span><span class="fb">9</span></span></span><span class="sr">3 over 9</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">84</span></span></span><span class="sr">1 over 84</span></span></strong></p><p class="ptr">Where this is: Item 7 (Combinations Rule) on page 5 of the notes, and the video "Classroom Example 4.4.2" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="c" data-why="Correct. Order matters, so there are 20P3 = 6,840 routes, and 1 of them is the specific route." data-miss="{&quot;a&quot;: &quot;Not quite. 1,140 is 20C3, which treats routes with the same cities in a different order as the same route. Review: item 6 (Permutations Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.3\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. 60 is 20 times 3, which does not count the possible routes. Review: item 6 (Permutations Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.3\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. This compares cities visited to cities available instead of counting the possible routes. Review: item 6 (Permutations Rule) on page 3 of the notes, and the video \&quot;Classroom Example 4.4.3\&quot; on page 7.&quot;}" data-review="item 6 (Permutations Rule) on page 3 of the notes, and the video &quot;Classroom Example 4.4.3&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Permutation in a probability).</b> A band plans a tour that visits 3 of 20 cities, and a different order of visits is a different route. What is the probability that a randomly chosen route is one specific route?</legend>
+<label><input type="radio" name="mc13" value="a"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">1,140</span></span></span><span class="sr">1 over 1,140</span></span></span></label><label><input type="radio" name="mc13" value="b"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">60</span></span></span><span class="sr">1 over 60</span></span></span></label><label><input type="radio" name="mc13" value="c"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">6,840</span></span></span><span class="sr">1 over 6,840</span></span></span></label><label><input type="radio" name="mc13" value="d"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">3</span><span class="fb">20</span></span></span><span class="sr">3 over 20</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">6,840</span></span></span><span class="sr">1 over 6,840</span></span></strong></p><p class="ptr">Where this is: Item 6 (Permutations Rule) on page 3 of the notes, and the video "Classroom Example 4.4.3" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="mc" data-answer="b" data-why="Correct. The offices have ranks, so order matters; the committee has no roles, so it does not." data-miss="{&quot;a&quot;: &quot;Not quite. This has the two swapped: the ranked offices are where order matters. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes, and the video \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;c&quot;: &quot;Not quite. The committee members have no separate roles, so order does not matter for the committee. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes, and the video \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;d&quot;: &quot;Not quite. President, vice president and treasurer are different ranks, so order matters for the offices. Review: items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes, and the video \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;}" data-review="items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes, and the video &quot;Classroom Example 4.4.5&quot; on page 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Officers and a committee).</b> A club with 10 members elects a president, a vice president and a treasurer. It also picks a 4-member social committee, and officers can also serve on the committee. Which pair matches the notes?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>Offices: <span class="m"><span aria-hidden="true"><sub>10</sub>C<sub>3</sub></span><span class="sr">10 C 3</span></span>. Committee: <span class="m"><span aria-hidden="true"><sub>10</sub>P<sub>4</sub></span><span class="sr">10 P 4</span></span>.</span></label><label><input type="radio" name="mc14" value="b"> <span>Offices: <span class="m"><span aria-hidden="true"><sub>10</sub>P<sub>3</sub></span><span class="sr">10 P 3</span></span>. Committee: <span class="m"><span aria-hidden="true"><sub>10</sub>C<sub>4</sub></span><span class="sr">10 C 4</span></span>.</span></label><label><input type="radio" name="mc14" value="c"> <span>Offices: <span class="m"><span aria-hidden="true"><sub>10</sub>P<sub>3</sub></span><span class="sr">10 P 3</span></span>. Committee: <span class="m"><span aria-hidden="true"><sub>10</sub>P<sub>4</sub></span><span class="sr">10 P 4</span></span>.</span></label><label><input type="radio" name="mc14" value="d"> <span>Offices: <span class="m"><span aria-hidden="true"><sub>10</sub>C<sub>3</sub></span><span class="sr">10 C 3</span></span>. Committee: <span class="m"><span aria-hidden="true"><sub>10</sub>C<sub>4</sub></span><span class="sr">10 C 4</span></span>.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Offices: <span class="m"><span aria-hidden="true"><sub>10</sub>P<sub>3</sub></span><span class="sr">10 P 3</span></span>. Committee: <span class="m"><span aria-hidden="true"><sub>10</sub>C<sub>4</sub></span><span class="sr">10 C 4</span></span>.</strong></p><p class="ptr">Where this is: Items 6 and 7 (Permutations Rule, Combinations Rule) on pages 3 and 5 of the notes, and the video "Classroom Example 4.4.5" on page 8.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Permutations Rule: item 6, page 3</li><li>Combinations Rule: item 7, page 5</li><li>Videos: "Classroom Example 4.4.2" and "Classroom Example 4.4.3", page 7, and "Classroom Example 4.4.5", page 8</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps for factorials (pages 1 and 2), permutations (pages 4 and 5) and combinations (pages 5 and 6) of the notes, their three videos, and the Classroom Example videos on pages 7 and 8.</p>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="362880" data-why="Correct. StatCrunch shows 362880." data-miss="{&quot;81&quot;: &quot;Not quite. This is 9 times 9, which does not arrange all 9 trophies. Review: item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find a Factorial\&quot; on page 1.&quot;, &quot;45&quot;: &quot;Not quite. This adds the whole numbers from 1 to 9, and a factorial multiplies them. Review: item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find a Factorial\&quot; on page 1.&quot;, &quot;40320&quot;: &quot;Not quite. This is 8!, which leaves out one of the 9 trophies. Review: item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find a Factorial\&quot; on page 1.&quot;, &quot;3628800&quot;: &quot;Not quite. This is 10!, which counts one trophy too many. Review: item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find a Factorial\&quot; on page 1.&quot;, &quot;387420489&quot;: &quot;Not quite. This is 9 to the 9th power, which lets a trophy be used more than once. Review: item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video \&quot;Using StatCrunch to Find a Factorial\&quot; on page 1.&quot;}" data-review="item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video &quot;Using StatCrunch to Find a Factorial&quot; on page 1.">
+<p class="prompt"><b class="qlabel">Check 15 (Factorial in StatCrunch).</b> A coach has 9 different trophies and a shelf with 9 spots, one trophy per spot. Set this up in StatCrunch yourself and find the number of ways the trophies can be arranged.</p>
+<details><summary>Show answer</summary><p><strong>362,880</strong></p><p class="ptr">Where this is: Item 5 (Factorial Rule) on page 3 and the factorial steps on pages 1 and 2 of the notes, and the video "Using StatCrunch to Find a Factorial" on page 1.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="24024" data-why="Correct. StatCrunch shows 24024." data-miss="{&quot;1001&quot;: &quot;Not quite. This is the combination result, but the 4 offices are different positions, so order matters. Review: item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find a Permutation\&quot; on page 4.&quot;, &quot;38416&quot;: &quot;Not quite. This is 14 to the 4th power, which lets one member hold more than one office. Review: item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find a Permutation\&quot; on page 4.&quot;, &quot;56&quot;: &quot;Not quite. This is 14 times 4, which does not count the ways to fill the offices. Review: item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find a Permutation\&quot; on page 4.&quot;, &quot;24&quot;: &quot;Not quite. This arranges only 4 members, but n is the 14 members of the club. Review: item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find a Permutation\&quot; on page 4.&quot;, &quot;0&quot;: &quot;Not quite. A count of 0 cannot be right here, so check that n comes first and r second, as in the Note perm(n,r) on page 4. Review: item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find a Permutation\&quot; on page 4.&quot;}" data-review="item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video &quot;Using StatCrunch to Find a Permutation&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 16 (Permutation in StatCrunch).</b> A club has 14 members. It fills 4 different offices: president, vice president, secretary and treasurer, with no one holding two offices. Use StatCrunch to find the number of ways the offices can be filled.</p>
+<details><summary>Show answer</summary><p><strong>24,024</strong></p><p class="ptr">Where this is: Item 6 (Permutations Rule) on page 3 and the permutation steps on pages 4 and 5 of the notes, and the video "Using StatCrunch to Find a Permutation" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="38760" data-why="Correct. StatCrunch shows 38760." data-miss="{&quot;27907200&quot;: &quot;Not quite. This is the permutation result, but the committee members have no separate roles, so order does not matter. Review: item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find a Combination\&quot; on page 5.&quot;, &quot;64000000&quot;: &quot;Not quite. This is 20 to the 6th power, which lets one volunteer be picked more than once. Review: item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find a Combination\&quot; on page 5.&quot;, &quot;120&quot;: &quot;Not quite. This is 20 times 6, which does not count the possible committees. Review: item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find a Combination\&quot; on page 5.&quot;, &quot;720&quot;: &quot;Not quite. This is 6!, which arranges the 6 committee members instead of choosing them from 20. Review: item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find a Combination\&quot; on page 5.&quot;, &quot;0&quot;: &quot;Not quite. A count of 0 cannot be right here, so check that n comes first and r second, as in the Note comb(n,r) on page 6. Review: item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find a Combination\&quot; on page 5.&quot;}" data-review="item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video &quot;Using StatCrunch to Find a Combination&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 17 (Combination in StatCrunch).</b> A food bank has 20 volunteers and picks 6 of them to form a committee with no separate roles. Use StatCrunch to find the number of different committees.</p>
+<details><summary>Show answer</summary><p><strong>38,760</strong></p><p class="ptr">Where this is: Item 7 (Combinations Rule) on page 5 and the combination steps on pages 5 and 6 of the notes, and the video "Using StatCrunch to Find a Combination" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s6" data-mode="num" data-nonneg="1" data-answer="0.00179" data-why="Correct. 1 divided by 560 is about 0.0017857, which rounds to 0.00179." data-miss="{&quot;0.00178&quot;: &quot;Not quite. This cuts off the extra digits instead of rounding, and the sixth decimal digit is 5 or more. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;0.0018&quot;: &quot;Not quite. This is rounded to four decimal places, not five. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;560&quot;: &quot;Not quite. This is the number of possible groups of winners, not the probability. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;~0.0017857~0.0000006&quot;: &quot;Not quite. This is not rounded to five decimal places yet. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;0.0003&quot;: &quot;Not quite. This uses the permutation, but the winners get the same prize, so order does not matter. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;~0.000297619~0.0000006&quot;: &quot;Not quite. This uses the permutation, but the winners get the same prize, so order does not matter. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;, &quot;0.01786&quot;: &quot;Not quite. This has the decimal point one place off, so check the zeros right after the point. Review: item 7 (Combinations Rule) on page 5 of the notes, and the videos \&quot;Classroom Example 4.4.2\&quot; on page 7 and \&quot;Classroom Example 4.4.5\&quot; on page 8.&quot;}" data-review="item 7 (Combinations Rule) on page 5 of the notes, and the videos &quot;Classroom Example 4.4.2&quot; on page 7 and &quot;Classroom Example 4.4.5&quot; on page 8.">
+<p class="prompt"><b class="qlabel">Check 18 (Probability in StatCrunch).</b> A raffle draws 3 winners from 16 entries, and every winner gets the same prize. You and 2 friends each have one entry. Use StatCrunch to find the probability that the 3 winners are exactly you and your 2 friends. Round to five decimal places.</p>
+<details><summary>Show answer</summary><p><strong>0.00179</strong></p><p class="ptr">Where this is: Item 7 (Combinations Rule) on page 5 of the notes, and the videos "Classroom Example 4.4.2" on page 7 and "Classroom Example 4.4.5" on page 8.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="Page 2 of the notes says to click &quot;StatCrunch&quot; inside MyLab, then &quot;Open StatCrunch.&quot; The Classroom Example videos open it from Get More Help in the MyLab problem." value="I could not get StatCrunch to open from MyLab."> I could not get StatCrunch to open from MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Page 2 of the notes says you may need to log in at statcrunch.com, then click &quot;Open StatCrunch.&quot; The video &quot;Using StatCrunch to Find a Factorial&quot; shows both ways in." value="statcrunch.com asked me to sign in."> statcrunch.com asked me to sign in.</label><label><input type="checkbox" class="sc-issue" data-tip="After Open StatCrunch, go to Data, then Compute, then Expression, and type in the Expression box. The screenshots on pages 2, 4 and 6 of the notes show each step." value="I could not find where to type the computation."> I could not find where to type the computation.</label><label><input type="checkbox" class="sc-issue" data-tip="StatCrunch does not accept the exclamation point. The video &quot;Using StatCrunch to Find a Factorial&quot; and page 2 of the notes use fact( ) with the number inside." value="StatCrunch gave an error when I typed an exclamation point."> StatCrunch gave an error when I typed an exclamation point.</label><label><input type="checkbox" class="sc-issue" data-tip="Compare your entry with the Notes perm(n,r) on page 4 and comb(n,r) on page 6: n, the total number of items, comes first, and r, the number selected, comes second." value="My permutation or combination result looked wrong."> My permutation or combination result looked wrong.</label><label><input type="checkbox" class="sc-issue" data-tip="Read the direction at the end of the question first. The Classroom Example 4.4.2 video rounds to five decimal places, and the Classroom Example 4.4.4 video gives a simplified fraction." value="I was not sure how to round or whether to give a fraction."> I was not sure how to round or whether to give a fraction.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 7.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Factorial in StatCrunch: pages 1 and 2, video "Using StatCrunch to Find a Factorial"</li><li>Permutation in StatCrunch: pages 4 and 5, video "Using StatCrunch to Find a Permutation"</li><li>Combination in StatCrunch: pages 5 and 6, video "Using StatCrunch to Find a Combination"</li><li>Rounding a probability to five decimal places: video "Classroom Example 4.4.2", page 7</li><li>Probability from a combination: video "Classroom Example 4.4.5", page 8</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 14: I am not sure how to tell whether the committee needs a permutation or a combination."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec4.4-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Introduction, Permutation and Combination", "resource": "The Introduction and items 1 and 2 on page 1 of the Section 4.4 notes."}, {"id": "s3", "name": "Factorial and the Factorial Rule", "resource": "Items 3 and 5 on pages 1 and 3 of the notes, and the video \"Classroom Example 4.4.4\" on page 7."}, {"id": "s4", "name": "Multiplication Counting Rule", "resource": "Item 4 on page 3 of the notes, and the video \"Classroom Example 4.4.1\" on page 7."}, {"id": "s5", "name": "Permutations Rule and Combinations Rule", "resource": "Items 6 and 7 on pages 3 and 5 of the notes, the videos \"Classroom Example 4.4.2\" and \"Classroom Example 4.4.3\" on page 7, and the video \"Classroom Example 4.4.5\" on page 8."}, {"id": "s6", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 1, 2 and 4 to 6 of the notes, the videos \"Using StatCrunch to Find a Factorial\" on page 1, \"Using StatCrunch to Find a Permutation\" on page 4 and \"Using StatCrunch to Find a Combination\" on page 5, and the Classroom Example videos on pages 7 and 8."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='4.4';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s7')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

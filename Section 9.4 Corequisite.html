@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 9.4 Corequisite: Two Variances or Standard Deviations</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 9.4</div>
+<h1>Section 9.4 Corequisite: Two Variances or Standard Deviations</h1>
+<p>Get ready for the Section 9.4 notes with practice on comparing decimals, squaring numbers, comparison symbols and rounding. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Comparing decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Squaring numbers and dividing squares<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Comparison symbols<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding to two and three decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare decimals, including decimals of different lengths and long decimals that match for several digits.</li><li>Square whole numbers and decimals, place the decimal point correctly, and divide one squared number by another.</li><li>Read and write the symbols <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span>, <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span>, <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span>, <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span>, = and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>, and switch the order of a comparison without changing its meaning.</li><li>Round to two decimal places and to three decimal places.</li></ul>
+</div>
+<p>Section 9.4 of the notes covers hypothesis tests that compare two population standard deviations. It works one example that starts from summary statistics and one that starts from raw data, then two Classroom Examples.</p>
+<p>StatCrunch does the long calculations in the notes and videos, but the notes expect you to handle some math on your own along the way: comparing decimals to see which is larger, squaring numbers, reading comparison symbols and rounding. This page gives those skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.48</span><span class="sr">0 point 4 8</span></span>. Commas and extra spaces are fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 9.4 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 9.4 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am never sure whether a longer decimal like <span class="m"><span aria-hidden="true">0.0729</span><span class="sr">0 point 0 7 2 9</span></span> is bigger than a shorter one like <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>.</strong><br><button type="button" data-go="s2">Comparing decimals</button></li>
+<li><strong>I am not sure what <span class="m"><span aria-hidden="true">0.7<sup>2</sup></span><span class="sr">0 point 7 squared</span></span> is, or where the decimal point goes when I square a decimal.</strong><br><button type="button" data-go="s3">Squaring numbers and dividing squares</button></li>
+<li><strong>I mix up <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">the less than symbol</span></span> and <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">the greater than symbol</span></span>, or I am not sure how to rewrite a comparison in the other order.</strong><br><button type="button" data-go="s4">Comparison symbols</button></li>
+<li><strong>I second-guess which digit to look at when I round to two or three decimal places.</strong><br><button type="button" data-go="s5">Rounding to two and three decimal places</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Comparing decimals</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Line up decimal points and compare place by place from the left.</li><li>Add zeros at the end of a decimal so two decimals have the same length.</li><li>Avoid the "longer is larger" and "shorter is larger" slips.</li><li>Compare decimals that match for several digits.</li></ul>
+</div>
+<h3>Line up the decimal points</h3>
+<p>To compare two decimals, line up their decimal points and read from left to right, one place at a time. The first place where the digits differ decides which number is larger. Adding zeros to the end of a decimal does not change its value, so <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span> is the same as <span class="m"><span aria-hidden="true">0.0800</span><span class="sr">0 point 0 8 0 0</span></span>. Adding zeros makes two decimals the same length, which makes them easier to compare.</p>
+<div class="table-wrap" role="region" aria-label="Lining up 0.0729 and 0.08" tabindex="0">
+<table>
+<caption>Lining up 0.0729 and 0.08 place by place</caption>
+<thead><tr><th scope="col">Number</th><th scope="col">Ones</th><th scope="col">Tenths</th><th scope="col">Hundredths</th><th scope="col">Thousandths</th><th scope="col">Ten-thousandths</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">0.0729</span><span class="sr">0 point 0 7 2 9</span></span></th><td>0</td><td>0</td><td>7</td><td>2</td><td>9</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span> written as <span class="m"><span aria-hidden="true">0.0800</span><span class="sr">0 point 0 8 0 0</span></span></th><td>0</td><td>0</td><td>8</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+<p>The ones and tenths match. In the hundredths place, 8 is more than 7, so <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span> is larger. The digits after that do not matter.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Longer is larger.</strong> More digits does not mean a bigger number. <span class="m"><span aria-hidden="true">0.0729</span><span class="sr">0 point 0 7 2 9</span></span> has more digits than <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>, but it is smaller.</li>
+<li><strong>Reading the digits after the point as a whole number.</strong> <span class="m"><span aria-hidden="true">0.385</span><span class="sr">0 point 3 8 5</span></span> is not bigger than <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> just because 385 is bigger than 4. Write <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span> as <span class="m"><span aria-hidden="true">0.400</span><span class="sr">0 point 4 0 0</span></span>: 400 thousandths is more than 385 thousandths.</li>
+<li><strong>Stopping too soon.</strong> When two decimals match for several digits, such as <span class="m"><span aria-hidden="true">0.48217</span><span class="sr">0 point 4 8 2 1 7</span></span> and <span class="m"><span aria-hidden="true">0.48271</span><span class="sr">0 point 4 8 2 7 1</span></span>, keep going until the digits differ. Here the fourth digits are 1 and 7, so <span class="m"><span aria-hidden="true">0.48271</span><span class="sr">0 point 4 8 2 7 1</span></span> is larger.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Which is larger, 0.0387 or 0.04?">
+<h3 style="margin-top:0">Worked example: Which is larger, 0.0387 or 0.04?</h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">0.0387</span><span class="sr">0 point 0 3 8 7</span></span> or <span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span> becomes <span class="m"><span aria-hidden="true">0.0400</span><span class="sr">0 point 0 4 0 0</span></span></span><span class="say">Add zeros so both numbers have four digits after the point.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.0387</span><span class="sr">0 point 0 3 8 7</span></span> and <span class="m"><span aria-hidden="true">0.0400</span><span class="sr">0 point 0 4 0 0</span></span></span><span class="say">Compare from the left. The tenths digits are both 0. In the hundredths place, 3 is less than 4.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.0387 &lt; 0.04</span><span class="sr">0 point 0 3 8 7 is less than 0 point 0 4</span></span></span><span class="say">The first place where the digits differ decides it.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.04</span><span class="sr">0 point 0 4</span></span> is larger, even though <span class="m"><span aria-hidden="true">0.0387</span><span class="sr">0 point 0 3 8 7</span></span> has more digits.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Compare 0.6 and 0.58">
+<h3 style="margin-top:0">Finish this one: Compare 0.6 and 0.58</h3>
+<p>Which is larger, <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> or <span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> becomes <span class="m"><span aria-hidden="true">0.60</span><span class="sr">0 point 6 0</span></span></span><span class="say">Add a zero so both numbers have two digits after the point. Next, compare the tenths digits.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That reads 58 as bigger than 6. Write 0.6 as 0.60: 60 hundredths is more than 58 hundredths.&quot;, &quot;c&quot;: &quot;They are not equal. Written with two digits after the point, they are 0.60 and 0.58, and 60 hundredths is more than 58 hundredths.&quot;}" data-why="Correct. 0.6 is the same as 0.60, and 60 hundredths is more than 58 hundredths.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 1.</b> Finish it: which is larger, <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> or <span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>?</legend>
+<label><input type="radio" name="mc1" value="a"> <span><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span></span></label><label><input type="radio" name="mc1" value="b"> <span><span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span></span></label><label><input type="radio" name="mc1" value="c"> <span>They are equal</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> as <span class="m"><span aria-hidden="true">0.60</span><span class="sr">0 point 6 0</span></span>, then compare the tenths digits: 6 and 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span></strong>, because <span class="m"><span aria-hidden="true">0.60</span><span class="sr">0 point 6 0</span></span> is more than <span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.08" data-miss="{&quot;0.0729&quot;: &quot;That is the \&quot;longer is larger\&quot; slip. Write 0.08 as 0.0800. In the hundredths place, 8 is more than 7, so 0.08 is larger.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Type the larger of these two numbers: <span class="m"><span aria-hidden="true">0.0729</span><span class="sr">0 point 0 7 2 9</span></span> or <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span>.</p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span> as <span class="m"><span aria-hidden="true">0.0800</span><span class="sr">0 point 0 8 0 0</span></span> so both numbers have four digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.07 is the same as 0.070. Compared with 0.065, its hundredths digit is 7 instead of 6, so 0.07 is larger than 0.065.&quot;, &quot;c&quot;: &quot;0.1 is one tenth, the largest of the four. It only looks small because it has one digit after the point.&quot;, &quot;d&quot;: &quot;0.0682 and 0.0650 match through the hundredths place. In the thousandths place, 8 is more than 5, so 0.0682 is larger than 0.065.&quot;}" data-why="Correct. Written as 0.0700, 0.0650, 0.1000 and 0.0682, the smallest is 0.0650.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 3.</b> Which of these is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc3" value="a"> <span><span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span></span></label><label><input type="radio" name="mc3" value="b"> <span><span class="m"><span aria-hidden="true">0.065</span><span class="sr">0 point 0 6 5</span></span></span></label><label><input type="radio" name="mc3" value="c"> <span><span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span></span></label><label><input type="radio" name="mc3" value="d"> <span><span class="m"><span aria-hidden="true">0.0682</span><span class="sr">0 point 0 6 8 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write all four with four digits after the point: 0.0700, 0.0650, 0.1000 and 0.0682.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.065</span><span class="sr">0 point 0 6 5</span></span></strong>. In order from smallest to largest: <span class="m"><span aria-hidden="true">0.065</span><span class="sr">0 point 0 6 5</span></span>, <span class="m"><span aria-hidden="true">0.0682</span><span class="sr">0 point 0 6 8 2</span></span>, <span class="m"><span aria-hidden="true">0.07</span><span class="sr">0 point 0 7</span></span>, <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The two numbers match through 3.418. The next digits are 2 and 7, and 7 is more, so 3.41872 is larger.&quot;, &quot;c&quot;: &quot;Using the same digits does not make them equal. The order matters: after 3.418, one has a 2 and the other has a 7.&quot;}" data-why="Correct. They match through 3.418, and then 7 is more than 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> Which is larger, <span class="m"><span aria-hidden="true">3.41827</span><span class="sr">3 point 4 1 8 2 7</span></span> or <span class="m"><span aria-hidden="true">3.41872</span><span class="sr">3 point 4 1 8 7 2</span></span>?</legend>
+<label><input type="radio" name="mc4" value="a"> <span><span class="m"><span aria-hidden="true">3.41827</span><span class="sr">3 point 4 1 8 2 7</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span><span class="m"><span aria-hidden="true">3.41872</span><span class="sr">3 point 4 1 8 7 2</span></span></span></label><label><input type="radio" name="mc4" value="c"> <span>They are equal, because they use the same digits</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The numbers match for the first four digits. Find the first place where they differ.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.41872</span><span class="sr">3 point 4 1 8 7 2</span></span></strong>. After <span class="m"><span aria-hidden="true">3.418</span><span class="sr">3 point 4 1 8</span></span>, the next digits are 2 and 7.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;2&quot;: &quot;One of the numbers you left out is 0.05001. It matches 0.05 for three places and then has a 1, so it is a little more than 0.05.&quot;, &quot;4&quot;: &quot;One of the numbers you counted is less than 0.05. Check 0.0499 (it is 0.0499 against 0.0500) and 0.00599 (its hundredths digit is 0).&quot;, &quot;5&quot;: &quot;0.0499 and 0.00599 are both less than 0.05. Written with five digits after the point, they are 0.04990 and 0.00599, while 0.05 is 0.05000.&quot;, &quot;1&quot;: &quot;Only 0.5 looks big, but 0.051 and 0.05001 are also greater than 0.05. Add zeros so every number has five digits after the point, then compare.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> How many of these numbers are <strong>greater than</strong> <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>? <span class="m"><span aria-hidden="true">0.0499</span><span class="sr">0 point 0 4 9 9</span></span>, <span class="m"><span aria-hidden="true">0.051</span><span class="sr">0 point 0 5 1</span></span>, <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>, <span class="m"><span aria-hidden="true">0.05001</span><span class="sr">0 point 0 5 0 0 1</span></span>, <span class="m"><span aria-hidden="true">0.00599</span><span class="sr">0 point 0 0 5 9 9</span></span></p>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span> as <span class="m"><span aria-hidden="true">0.05000</span><span class="sr">0 point 0 5 0 0 0</span></span> and give every number five digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>: <span class="m"><span aria-hidden="true">0.051</span><span class="sr">0 point 0 5 1</span></span>, <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> and <span class="m"><span aria-hidden="true">0.05001</span><span class="sr">0 point 0 5 0 0 1</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;This orders the digits after the point as whole numbers (3, 34, 304, 349). Line up the points instead: 0.0349 has a 0 in the tenths place, so it is the smallest.&quot;, &quot;b&quot;: &quot;The first three are in the right order, but 0.0349 has a 0 in the tenths place, so it belongs first, not last.&quot;, &quot;c&quot;: &quot;This treats 304 as bigger than 34. As decimals, 0.304 is 0.304 and 0.34 is 0.340, and 340 thousandths is more than 304 thousandths.&quot;}" data-why="Correct. As 0.0349, 0.3000, 0.3040 and 0.3400, they are in order.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 6.</b> Which list puts <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span>, <span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span> and <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span>, <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span>, <span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>, <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span>, <span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span>, <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span>, <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span>, <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>, <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write all four with four digits after the point: 0.3040, 0.3400, 0.0349 and 0.3000.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0349</span><span class="sr">0 point 0 3 4 9</span></span>, <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>, <span class="m"><span aria-hidden="true">0.304</span><span class="sr">0 point 3 0 4</span></span>, <span class="m"><span aria-hidden="true">0.34</span><span class="sr">0 point 3 4</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 9.4</h3>
+<p>Page 6 of the notes compares two long decimals from StatCrunch, <span class="m"><span aria-hidden="true">0.26178123</span><span class="sr">0 point 2 6 1 7 8 1 2 3</span></span> and <span class="m"><span aria-hidden="true">0.26121886</span><span class="sr">0 point 2 6 1 2 1 8 8 6</span></span>, which match for their first three digits. The video "Using StatCrunch to Determine the Larger of Two Sample Standard Deviations" on page 5 compares them side by side.</p><p>The Notes on Step Four on pages 2 and 7 compare decimals of different lengths, such as <span class="m"><span aria-hidden="true">0.0299</span><span class="sr">0 point 0 2 9 9</span></span> and <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</p>
+<p><strong>Watch for this:</strong> decimals that match for several digits, and decimals of different lengths. Add zeros, line up the points, and find the first place where the digits differ.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Squaring numbers and dividing squares</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Square a whole number or a decimal.</li><li>Place the decimal point in the square of a decimal.</li><li>Know that a number between 0 and 1 gets smaller when it is squared.</li><li>Divide one squared number by another, squaring before dividing.</li></ul>
+</div>
+<h3>Squaring means multiplying a number by itself</h3>
+<p>The small raised 2 means "squared." <span class="m"><span aria-hidden="true">9<sup>2</sup></span><span class="sr">9 squared</span></span> means <span class="m"><span aria-hidden="true">9 × 9</span><span class="sr">9 times 9</span></span>, which is 81. On one line, many calculators write it with a caret: <span class="m"><span aria-hidden="true">9^2</span><span class="sr">9 caret 2</span></span>.</p>
+<ul>
+<li><strong>Decimal places add up.</strong> When you square a decimal, the answer has twice as many decimal places as the number you started with (before you drop any zeros at the end). <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> has one decimal place, so <span class="m"><span aria-hidden="true">0.3<sup>2</sup></span><span class="sr">0 point 3 squared</span></span> has two: <span class="m"><span aria-hidden="true">0.3 × 0.3 = 0.09</span><span class="sr">0 point 3 times 0 point 3 equals 0 point 0 9</span></span>.</li>
+<li><strong>Numbers between 0 and 1 get smaller.</strong> Squaring a number between 0 and 1 gives a smaller number: <span class="m"><span aria-hidden="true">0.8<sup>2</sup></span><span class="sr">0 point 8 squared</span></span> is <span class="m"><span aria-hidden="true">0.64</span><span class="sr">0 point 6 4</span></span>, which is less than <span class="m"><span aria-hidden="true">0.8</span><span class="sr">0 point 8</span></span>. Squaring a number greater than 1 gives a larger number.</li>
+<li><strong>Square first, then divide.</strong> In <span class="m"><span aria-hidden="true" class="frac"><span class="ft"><span class="m"><span aria-hidden="true">6<sup>2</sup></span><span class="sr">6 squared</span></span></span><span class="fb"><span class="m"><span aria-hidden="true">4<sup>2</sup></span><span class="sr">4 squared</span></span></span></span><span class="sr">6 squared over 4 squared</span></span>, square the top and square the bottom, then divide: <span class="m"><span aria-hidden="true">36 ÷ 16 = 2.25</span><span class="sr">36 divided by 16 equals 2 point 2 5</span></span>.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Doubling instead of squaring.</strong> <span class="m"><span aria-hidden="true">9<sup>2</sup></span><span class="sr">9 squared</span></span> is 81, not 18. <span class="m"><span aria-hidden="true">0.3<sup>2</sup></span><span class="sr">0 point 3 squared</span></span> is <span class="m"><span aria-hidden="true">0.09</span><span class="sr">0 point 0 9</span></span>, not <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span>.</li>
+<li><strong>Losing a decimal place.</strong> <span class="m"><span aria-hidden="true">0.3<sup>2</sup></span><span class="sr">0 point 3 squared</span></span> is <span class="m"><span aria-hidden="true">0.09</span><span class="sr">0 point 0 9</span></span>, not <span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span>. Count the decimal places: one in, two out.</li>
+<li><strong>Squaring only part of a fraction.</strong> In <span class="m"><span aria-hidden="true" class="frac"><span class="ft"><span class="m"><span aria-hidden="true">6<sup>2</sup></span><span class="sr">6 squared</span></span></span><span class="fb"><span class="m"><span aria-hidden="true">4<sup>2</sup></span><span class="sr">4 squared</span></span></span></span><span class="sr">6 squared over 4 squared</span></span>, both the top and the bottom are squared. Squaring only the top gives <span class="m"><span aria-hidden="true">36 ÷ 4 = 9</span><span class="sr">36 divided by 4 equals 9</span></span>, a different value.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Square 2.5">
+<h3 style="margin-top:0">Worked example: Square 2.5</h3>
+<p>Find <span class="m"><span aria-hidden="true">2.5<sup>2</sup></span><span class="sr">2 point 5 squared</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2.5 × 2.5</span><span class="sr">2 point 5 times 2 point 5</span></span></span><span class="say">Squaring means multiplying the number by itself.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">25 × 25 = 625</span><span class="sr">25 times 25 equals 625</span></span></span><span class="say">Multiply without the decimal points first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span></span><span class="say">One decimal place in each 2.5 makes two decimal places in the answer.</span></li><li><span class="work">Check: <span class="m"><span aria-hidden="true">2<sup>2</sup></span><span class="sr">2 squared</span></span> is 4 and <span class="m"><span aria-hidden="true">3<sup>2</sup></span><span class="sr">3 squared</span></span> is 9</span><span class="say"><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> is between 2 and 3, so its square should be between 4 and 9. The answer <span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span> fits.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">6.25</span><span class="sr">6 point 2 5</span></span> (not 5, which would be doubling)</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Square 0.7">
+<h3 style="margin-top:0">Finish this one: Square 0.7</h3>
+<p>Find <span class="m"><span aria-hidden="true">0.7<sup>2</sup></span><span class="sr">0 point 7 squared</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">7 × 7 = 49</span><span class="sr">7 times 7 equals 49</span></span></span><span class="say">Multiply without the decimal point first. Next, place the decimal point: <span class="m"><span aria-hidden="true">0.7</span><span class="sr">0 point 7</span></span> has one decimal place, so the answer needs two.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.49" data-miss="{&quot;1.4&quot;: &quot;That doubles 0.7. Squaring means 0.7 times 0.7, which is 0.49.&quot;, &quot;4.9&quot;: &quot;The decimal point is one place off. One decimal place in each 0.7 makes two in the answer: 0.49.&quot;, &quot;0.049&quot;: &quot;That has three decimal places. One place in each 0.7 makes two: 0.49.&quot;, &quot;49&quot;: &quot;That is 7 times 7. Now place the decimal point: two decimal places gives 0.49.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.7<sup>2</sup></span><span class="sr">0 point 7 squared</span></span>?</p>
+<details><summary>Hint</summary><p>Two decimal places in the answer: 49 becomes <span class="m"><span aria-hidden="true">0.49</span><span class="sr">0 point 4 9</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.49</span><span class="sr">0 point 4 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="144" data-miss="{&quot;24&quot;: &quot;That doubles 12. Squaring means 12 times 12, which is 144.&quot;, &quot;14&quot;: &quot;That adds 2. Squaring means 12 times 12, which is 144.&quot;, &quot;122&quot;: &quot;That writes a 2 after the 12. Squaring means 12 times 12, which is 144.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> What is <span class="m"><span aria-hidden="true">12<sup>2</sup></span><span class="sr">12 squared</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">12 × 12</span><span class="sr">12 times 12</span></span></p></details>
+<details><summary>Show answer</summary><p><strong>144</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.25" data-miss="{&quot;3&quot;: &quot;That doubles 1.5. Squaring means 1.5 times 1.5, which is 2.25.&quot;, &quot;22.5&quot;: &quot;The decimal point is one place off. 15 times 15 is 225, and two decimal places makes it 2.25.&quot;, &quot;1.25&quot;: &quot;That squares only the 0.5 part and adds the 1. Multiply the whole number by itself: 1.5 times 1.5 is 2.25.&quot;, &quot;2.3&quot;: &quot;The directions say do not round. Keep every digit: 2.25.&quot;, &quot;2.2&quot;: &quot;The directions say do not round. Keep every digit: 2.25.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> What is <span class="m"><span aria-hidden="true">1.5<sup>2</sup></span><span class="sr">1 point 5 squared</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">15 × 15 = 225</span><span class="sr">15 times 15 equals 225</span></span>. Then give the answer two decimal places.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.25</span><span class="sr">2 point 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;1.1 squared is 1.21, which is larger than 1.1. Numbers greater than 1 get larger when squared.&quot;, &quot;b&quot;: &quot;2 squared is 4, which is larger than 2.&quot;, &quot;d&quot;: &quot;1 squared is 1, so it stays the same.&quot;}" data-why="Correct. 0.9 squared is 0.81, which is less than 0.9. Numbers between 0 and 1 get smaller when squared.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Which number gets <strong>smaller</strong> when you square it?</legend>
+<label><input type="radio" name="mc10" value="a"> <span><span class="m"><span aria-hidden="true">1.1</span><span class="sr">1 point 1</span></span></span></label><label><input type="radio" name="mc10" value="b"> <span>2</span></label><label><input type="radio" name="mc10" value="c"> <span><span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span></span></label><label><input type="radio" name="mc10" value="d"> <span>1</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Square each one. Which answer is less than the number you started with?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span></strong>, because <span class="m"><span aria-hidden="true">0.9<sup>2</sup></span><span class="sr">0 point 9 squared</span></span> is <span class="m"><span aria-hidden="true">0.81</span><span class="sr">0 point 8 1</span></span>, which is less than <span class="m"><span aria-hidden="true">0.9</span><span class="sr">0 point 9</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="18.0625" data-miss="{&quot;8.5&quot;: &quot;That doubles 4.25. Squaring means 4.25 times 4.25.&quot;, &quot;16.0625&quot;: &quot;That squares the 4 and the 0.25 separately and adds them. Multiply the whole number by itself: 4.25 times 4.25 is 18.0625.&quot;, &quot;180.625&quot;: &quot;The decimal point is one place off. Two decimal places in each 4.25 makes four in the answer: 18.0625.&quot;, &quot;18.06&quot;: &quot;The directions say do not round. Keep every digit: 18.0625.&quot;, &quot;18.063&quot;: &quot;The directions say do not round. Keep every digit: 18.0625.&quot;, &quot;18.1&quot;: &quot;The directions say do not round. Keep every digit: 18.0625.&quot;, &quot;18&quot;: &quot;The directions say do not round. Keep every digit: 18.0625.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> What is <span class="m"><span aria-hidden="true">4.25<sup>2</sup></span><span class="sr">4 point 2 5 squared</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">425 × 425 = 180,625</span><span class="sr">425 times 425 equals 180,625</span></span>. Two decimal places in each factor means four in the answer.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">18.0625</span><span class="sr">18 point 0 6 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.96" data-miss="{&quot;1.4&quot;: &quot;That divides 7 by 5 without squaring. Square both first: 49 divided by 25 is 1.96.&quot;, &quot;9.8&quot;: &quot;That squares only the top: 49 divided by 5. Square the bottom too: 49 divided by 25 is 1.96.&quot;, &quot;~0.5102~0.006&quot;: &quot;The fraction is flipped. That divides 25 by 49. Divide the top, 49, by the bottom, 25.&quot;, &quot;2&quot;: &quot;The directions say do not round. Keep every digit: 1.96.&quot;, &quot;1.9&quot;: &quot;The directions say do not round. Keep every digit: 1.96.&quot;, &quot;2.8&quot;: &quot;That doubles 7 and 5 instead of squaring them, then rounds. Square both: 49 divided by 25 is 1.96.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft"><span class="m"><span aria-hidden="true">7<sup>2</sup></span><span class="sr">7 squared</span></span></span><span class="fb"><span class="m"><span aria-hidden="true">5<sup>2</sup></span><span class="sr">5 squared</span></span></span></span><span class="sr">7 squared over 5 squared</span></span> as a decimal. Do not round.</p>
+<details><summary>Hint</summary><p>The top is <span class="m"><span aria-hidden="true">7 × 7 = 49</span><span class="sr">7 times 7 equals 49</span></span>. The bottom is <span class="m"><span aria-hidden="true">5 × 5 = 25</span><span class="sr">5 times 5 equals 25</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.96</span><span class="sr">1 point 9 6</span></span></strong>, because <span class="m"><span aria-hidden="true">49 ÷ 25 = 1.96</span><span class="sr">49 divided by 25 equals 1 point 9 6</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="9/4" data-miss="{&quot;36/16&quot;: &quot;36/16 has the right value, but it is not in lowest terms. Both 36 and 16 divide by 4: 9/4.&quot;, &quot;18/8&quot;: &quot;18/8 is not in lowest terms, and it is not the right fraction yet. Square the 6 and the 4 first: 36/16, which simplifies to 9/4.&quot;, &quot;3/2&quot;: &quot;That is 6/4 simplified without squaring. Square the top and the bottom first: 36/16, which simplifies to 9/4.&quot;, &quot;4/9&quot;: &quot;The fraction is flipped. The top is 6 squared, so 9 goes on top: 9/4.&quot;, &quot;12/8&quot;: &quot;That doubles 6 and 4 instead of squaring them. Square them: 36/16, which simplifies to 9/4.&quot;, &quot;9&quot;: &quot;That squares only the top and divides by 4. Square the bottom too: 36/16, which simplifies to 9/4.&quot;}" data-form="fraction">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Write <span class="m"><span aria-hidden="true" class="frac"><span class="ft"><span class="m"><span aria-hidden="true">6<sup>2</sup></span><span class="sr">6 squared</span></span></span><span class="fb"><span class="m"><span aria-hidden="true">4<sup>2</sup></span><span class="sr">4 squared</span></span></span></span><span class="sr">6 squared over 4 squared</span></span> as a fraction in lowest terms. Type it with a slash, such as 5/3.</p>
+<details><summary>Hint</summary><p>Square the top and the bottom: <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">16</span></span><span class="sr">36 over 16</span></span>. Then divide the top and the bottom by the largest number that goes into both.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">9</span><span class="fb">4</span></span><span class="sr">9 over 4</span></span></strong> (typed 9/4). <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">16</span></span><span class="sr">36 over 16</span></span> simplifies by dividing the top and the bottom by 4.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 9.4</h3>
+<p>The Big Reminders on page 4 of the notes square the two numbers from the Oscar example, <span class="m"><span aria-hidden="true">11.11</span><span class="sr">11 point 1 1</span></span> and 9, and the video "Testing a Claim about Two Population Standard Deviations with Summary Stats" on page 4 does the same. The Classroom Example 9.4.1 video on page 9 squares <span class="m"><span aria-hidden="true">1.28</span><span class="sr">1 point 2 8</span></span> and <span class="m"><span aria-hidden="true">0.94</span><span class="sr">0 point 9 4</span></span>.</p><p>The formula in topic 1 on page 1 divides one squared number by another.</p>
+<p><strong>Watch for this:</strong> numbers less than 1, such as <span class="m"><span aria-hidden="true">0.94</span><span class="sr">0 point 9 4</span></span>. Their squares are smaller than the number you started with, and the decimal places add up.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Comparison symbols</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read the symbols <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span>, <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span>, <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span>, <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span>, = and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span> aloud.</li><li>Turn comparison words in a sentence into the matching symbol.</li><li>Rewrite a comparison with the other quantity first, flipping the symbol.</li><li>Divide both sides of a comparison by the same positive number.</li></ul>
+</div>
+<h3>The six comparison symbols</h3>
+<div class="table-wrap" role="region" aria-label="Comparison symbols" tabindex="0">
+<table>
+<caption>Comparison symbols and the words that signal them</caption>
+<thead><tr><th scope="col">Symbol</th><th scope="col">Read it as</th><th scope="col">Words that often signal it</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span></th><td>less than</td><td style="text-align:left">"is less than," "fewer than," "smaller than," "below"</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span></th><td>greater than</td><td style="text-align:left">"is greater than," "more than," "larger than," "above"</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span></th><td>less than or equal to</td><td style="text-align:left">"is less than or equal to," "at most," "no more than"</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span></th><td>greater than or equal to</td><td style="text-align:left">"is greater than or equal to," "at least," "no less than"</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">=</span><span class="sr">equals</span></span></th><td>equals</td><td style="text-align:left">"equals," "is the same as"</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span></th><td>not equal to</td><td style="text-align:left">"is not equal to," "is different from," "differs from"</td></tr>
+</tbody>
+</table>
+</div>
+<p>A memory aid: the open side of <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">the less than symbol</span></span> or <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">the greater than symbol</span></span> faces the larger amount. The line under <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> means "or equal," so <span class="m"><span aria-hidden="true">5 ≤ 5</span><span class="sr">5 is less than or equal to 5</span></span> is true.</p>
+<h3>Switching the order</h3>
+<p>"Ana's rent is less than Ben's rent" and "Ben's rent is greater than Ana's rent" say the same thing. When you switch which quantity comes first, the symbol flips: <span class="m"><span aria-hidden="true">A &lt; B</span><span class="sr">A is less than B</span></span> means the same as <span class="m"><span aria-hidden="true">B &gt; A</span><span class="sr">B is greater than A</span></span>. Swap the order and flip the symbol together, or do neither. The symbols = and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span> stay the same when the order switches.</p>
+<h3>Dividing both sides by a positive number</h3>
+<p>Dividing both sides of a comparison by the same positive number keeps the symbol the same. From <span class="m"><span aria-hidden="true">12 &gt; 8</span><span class="sr">12 is greater than 8</span></span>, dividing both sides by 4 gives <span class="m"><span aria-hidden="true">3 &gt; 2</span><span class="sr">3 is greater than 2</span></span>. In the same way, if <var>b</var> is positive and <span class="m"><span aria-hidden="true"><var>a</var> &gt; <var>b</var></span><span class="sr"><var>a</var> is greater than <var>b</var></span></span>, dividing both sides by <var>b</var> gives <span class="m"><span aria-hidden="true"><var>a</var>/<var>b</var> &gt; 1</span><span class="sr">a over b is greater than 1</span></span>, because <var>b</var> divided by itself is 1.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Swapping without flipping.</strong> Rewriting <span class="m"><span aria-hidden="true">A &lt; B</span><span class="sr">A is less than B</span></span> as <span class="m"><span aria-hidden="true">B &lt; A</span><span class="sr">B is less than A</span></span> changes the meaning.</li>
+<li><strong>Treating <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> like <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span>.</strong> <span class="m"><span aria-hidden="true">0.04 ≤ 0.04</span><span class="sr">0 point 0 4 is less than or equal to 0 point 0 4</span></span> is true, because "or equal" is part of the symbol.</li>
+<li><strong>Using a direction for "different."</strong> "Is different from" does not say which is larger, so it is <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>, not <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span> or <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Small and large coffee">
+<h3 style="margin-top:0">Worked example: Small and large coffee</h3>
+<p>"A small coffee costs less than a large coffee." Write this with the large coffee first.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">small &lt; large</span><span class="sr">small is less than large</span></span></span><span class="say">"Costs less than" is the less than symbol, written in the order of the sentence.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">large &gt; small</span><span class="sr">large is greater than small</span></span></span><span class="say">Switch the order and flip the symbol at the same time.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">large &gt; small</span><span class="sr">large is greater than small</span></span>. Both say the large coffee costs more.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Red and blue cars">
+<h3 style="margin-top:0">Finish this one: Red and blue cars</h3>
+<p>"The number of red cars in the lot is greater than the number of blue cars." Write this with blue first.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">red &gt; blue</span><span class="sr">red is greater than blue</span></span></span><span class="say">Write it in the order of the sentence first. Next, switch the order and flip the symbol.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;That swaps the order without flipping the symbol, so it now says blue is greater, which is the opposite.&quot;, &quot;b&quot;: &quot;The sentence says the two numbers are different, with red larger, so they are not equal.&quot;, &quot;c&quot;: &quot;Not equal is true, but it loses which one is larger. Flip the symbol: blue is less than red.&quot;}" data-why="Correct. Switching the order flips the symbol, so blue is less than red.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> Finish it: which statement says the same thing as "red is greater than blue," with blue first?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true">blue &gt; red</span><span class="sr">blue is greater than red</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true">blue = red</span><span class="sr">blue equals red</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true">blue ≠ red</span><span class="sr">blue is not equal to red</span></span> only</span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true">blue &lt; red</span><span class="sr">blue is less than red</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Swap the order and flip the symbol at the same time.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">blue &lt; red</span><span class="sr">blue is less than red</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;\&quot;Different from\&quot; does not say which wait is longer, so it does not point either way. The symbol is not equal to.&quot;, &quot;c&quot;: &quot;\&quot;Different from\&quot; does not say which wait is shorter, so it does not point either way. The symbol is not equal to.&quot;, &quot;d&quot;: &quot;That says the waits are the same, which is the opposite of \&quot;different from.\&quot;&quot;}" data-why="Correct. &quot;Different from&quot; means not equal, without saying which is larger.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> "The wait time at Clinic A is different from the wait time at Clinic B." Which statement matches?</legend>
+<label><input type="radio" name="mc15" value="a"> <span><span class="m"><span aria-hidden="true">A ≠ B</span><span class="sr">A is not equal to B</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">A &gt; B</span><span class="sr">A is greater than B</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span><span class="m"><span aria-hidden="true">A &lt; B</span><span class="sr">A is less than B</span></span></span></label><label><input type="radio" name="mc15" value="d"> <span><span class="m"><span aria-hidden="true">A = B</span><span class="sr">A equals B</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Does the sentence say which wait is longer?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">A ≠ B</span><span class="sr">A is not equal to B</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;\&quot;At most\&quot; puts a ceiling on Town A, so A is less than or equal to B, not greater.&quot;, &quot;c&quot;: &quot;\&quot;At most\&quot; allows the two to be equal, so the symbol needs the \&quot;or equal\&quot; line: less than or equal to.&quot;, &quot;d&quot;: &quot;\&quot;At most\&quot; means Town A gets no more than Town B, so A cannot be greater.&quot;}" data-why="Correct. &quot;At most&quot; means less than or equal to.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> "Town A gets <strong>at most</strong> as much snow as Town B." Which statement matches?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">A ≥ B</span><span class="sr">A is greater than or equal to B</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">A ≤ B</span><span class="sr">A is less than or equal to B</span></span></span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">A &lt; B</span><span class="sr">A is less than B</span></span></span></label><label><input type="radio" name="mc16" value="d"> <span><span class="m"><span aria-hidden="true">A &gt; B</span><span class="sr">A is greater than B</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>"At most as much as" means "no more than." Can the two amounts be equal?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">A ≤ B</span><span class="sr">A is less than or equal to B</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That swaps the order without flipping the symbol, so it says the opposite.&quot;, &quot;b&quot;: &quot;That flips the symbol without swapping the order, so it says the opposite.&quot;, &quot;d&quot;: &quot;The original does not allow x and y to be equal, so the \&quot;or equal\&quot; line does not belong.&quot;}" data-why="Correct. Swapping the order and flipping the symbol keeps the meaning.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 17.</b> Which statement means the same as <span class="m"><span aria-hidden="true"><var>x</var> &lt; <var>y</var></span><span class="sr"><var>x</var> is less than <var>y</var></span></span>?</legend>
+<label><input type="radio" name="mc17" value="a"> <span><span class="m"><span aria-hidden="true"><var>y</var> &lt; <var>x</var></span><span class="sr"><var>y</var> is less than <var>x</var></span></span></span></label><label><input type="radio" name="mc17" value="b"> <span><span class="m"><span aria-hidden="true"><var>x</var> &gt; <var>y</var></span><span class="sr"><var>x</var> is greater than <var>y</var></span></span></span></label><label><input type="radio" name="mc17" value="c"> <span><span class="m"><span aria-hidden="true"><var>y</var> &gt; <var>x</var></span><span class="sr"><var>y</var> is greater than <var>x</var></span></span></span></label><label><input type="radio" name="mc17" value="d"> <span><span class="m"><span aria-hidden="true"><var>y</var> ≥ <var>x</var></span><span class="sr"><var>y</var> is greater than or equal to <var>x</var></span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Swap and flip together.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><var>y</var> &gt; <var>x</var></span><span class="sr"><var>y</var> is greater than <var>x</var></span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;Dividing both sides by a positive number keeps the symbol the same. It does not flip.&quot;, &quot;b&quot;: &quot;Only the left side was divided by b. The right side, b, also gets divided by b, which gives 1.&quot;, &quot;c&quot;: &quot;That divides by a instead of b and puts b on top. Divide both sides by b: a over b is greater than 1.&quot;}" data-why="Correct. Dividing both sides by the same positive number keeps the symbol, and b over b is 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 18.</b> Suppose <var>b</var> is a positive number and <span class="m"><span aria-hidden="true"><var>a</var> &gt; <var>b</var></span><span class="sr"><var>a</var> is greater than <var>b</var></span></span>. Dividing both sides by <var>b</var>, which statement must be true?</legend>
+<label><input type="radio" name="mc18" value="a"> <span><span class="m"><span aria-hidden="true"><var>a</var>/<var>b</var> &lt; 1</span><span class="sr">a over b is less than 1</span></span></span></label><label><input type="radio" name="mc18" value="b"> <span><span class="m"><span aria-hidden="true"><var>a</var>/<var>b</var> &gt; <var>b</var></span><span class="sr">a over b is greater than b</span></span></span></label><label><input type="radio" name="mc18" value="c"> <span><span class="m"><span aria-hidden="true"><var>b</var>/<var>a</var> &gt; 1</span><span class="sr">b over a is greater than 1</span></span></span></label><label><input type="radio" name="mc18" value="d"> <span><span class="m"><span aria-hidden="true"><var>a</var>/<var>b</var> &gt; 1</span><span class="sr">a over b is greater than 1</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Divide the left side by <var>b</var> and the right side by <var>b</var>. What is <var>b</var> divided by <var>b</var>?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><var>a</var>/<var>b</var> &gt; 1</span><span class="sr">a over b is greater than 1</span></span></strong>. For example, <span class="m"><span aria-hidden="true">12 &gt; 8</span><span class="sr">12 is greater than 8</span></span> gives <span class="m"><span aria-hidden="true">12/8 = 1.5</span><span class="sr">12 over 8 equals 1 point 5</span></span>, which is greater than 1.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;2&quot;: &quot;One of the true statements was missed. 0.04 is less than or equal to 0.04 is true, because the line under the symbol means \&quot;or equal.\&quot;&quot;, &quot;4&quot;: &quot;One false statement was counted. 0.07 and 0.070 are equal, so \&quot;not equal\&quot; is false, and 5 is not less than 4.99.&quot;, &quot;5&quot;: &quot;Two of these are false: 0.07 and 0.070 are equal, and 5 is greater than 4.99.&quot;, &quot;1&quot;: &quot;Only one counted, but three are true: 0.04 is less than or equal to 0.04, 0.3 is greater than 0.29 (0.30 against 0.29), and 12 over 4 is 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> How many of these statements are true? <span class="m"><span aria-hidden="true">0.04 ≤ 0.04</span><span class="sr">0 point 0 4 is less than or equal to 0 point 0 4</span></span>; <span class="m"><span aria-hidden="true">0.3 &gt; 0.29</span><span class="sr">0 point 3 is greater than 0 point 2 9</span></span>; <span class="m"><span aria-hidden="true">0.07 ≠ 0.070</span><span class="sr">0 point 0 7 is not equal to 0 point 0 7 0</span></span>; <span class="m"><span aria-hidden="true">5 &lt; 4.99</span><span class="sr">5 is less than 4 point 9 9</span></span>; <span class="m"><span aria-hidden="true">12/4 = 3</span><span class="sr">12 over 4 equals 3</span></span></p>
+<details><summary>Hint</summary><p>Check each one. <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> is <span class="m"><span aria-hidden="true">0.30</span><span class="sr">0 point 3 0</span></span>. A zero added at the end does not change a decimal.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>: <span class="m"><span aria-hidden="true">0.04 ≤ 0.04</span><span class="sr">0 point 0 4 is less than or equal to 0 point 0 4</span></span>, <span class="m"><span aria-hidden="true">0.3 &gt; 0.29</span><span class="sr">0 point 3 is greater than 0 point 2 9</span></span> and <span class="m"><span aria-hidden="true">12/4 = 3</span><span class="sr">12 over 4 equals 3</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 9.4</h3>
+<p>Step One on pages 2 and 6 of the notes and the conversion table on page 3 use the symbols =, <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span>, <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span> and <span class="m"><span aria-hidden="true">≠</span><span class="sr">not equal to</span></span>. The Notes on Step Four on pages 2 and 7 use <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span>.</p><p>The video "Testing a Claim about Two Population Standard Deviations with Summary Stats" on page 4 slows down to choose the symbol when the order of the two groups in a sentence is switched.</p>
+<p><strong>Watch for this:</strong> a sentence that names the two groups in one order when you need them in the other. Swap and flip together.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding to two and three decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to two decimal places.</li><li>Round to three decimal places.</li><li>Carry correctly when a 9 rounds up.</li><li>Keep zeros that the rounding direction needs, such as the zeros in 3.00.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. For two decimal places, it is the second digit after the point. For three decimal places, it is the third digit after the point.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Chopping instead of rounding.</strong> <span class="m"><span aria-hidden="true">2.00718</span><span class="sr">2 point 0 0 7 1 8</span></span> to two decimal places is <span class="m"><span aria-hidden="true">2.01</span><span class="sr">2 point 0 1</span></span>, not <span class="m"><span aria-hidden="true">2.00</span><span class="sr">2 point 0 0</span></span>. The digit after the kept 0 is 7, so the 0 goes up.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">0.03449</span><span class="sr">0 point 0 3 4 4 9</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.034</span><span class="sr">0 point 0 3 4</span></span>. Rounding to <span class="m"><span aria-hidden="true">0.0345</span><span class="sr">0 point 0 3 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span> is a slip.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.29961</span><span class="sr">0 point 2 9 9 6 1</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.300</span><span class="sr">0 point 3 0 0</span></span>.</li>
+</ul>
+<p>Two decimal places means exactly two digits after the point, even when they are zeros: <span class="m"><span aria-hidden="true">3.0041</span><span class="sr">3 point 0 0 4 1</span></span> to two decimal places is <span class="m"><span aria-hidden="true">3.00</span><span class="sr">3 point 0 0</span></span>.</p>
+<div class="worked" role="group" aria-label="Worked example: Round 2.71846 two ways">
+<h3 style="margin-top:0">Worked example: Round 2.71846 two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">2.71846</span><span class="sr">2 point 7 1 8 4 6</span></span> to two decimal places, and then to three decimal places.</p><ol class="steps"><li><span class="work">Two decimal places: keep the 1, look at the 8</span><span class="say">The 8 is 5 or more, so the 1 becomes 2: <span class="m"><span aria-hidden="true">2.72</span><span class="sr">2 point 7 2</span></span>.</span></li><li><span class="work">Three decimal places: keep the 8, look at the 4</span><span class="say">The 4 is 4 or less, so the 8 stays: <span class="m"><span aria-hidden="true">2.718</span><span class="sr">2 point 7 1 8</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">2.72</span><span class="sr">2 point 7 2</span></span> to two decimal places and <span class="m"><span aria-hidden="true">2.718</span><span class="sr">2 point 7 1 8</span></span> to three decimal places.</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> Read the rounding direction at the end of each question before you round. "Two decimal places" and "three decimal places" give different answers from the same number.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.04751 to three decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.04751 to three decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.04751</span><span class="sr">0 point 0 4 7 5 1</span></span> to three decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 7 in the third place. Next digit: 5.</span><span class="say">The 5 is 5 or more, so the kept digit goes up by 1. Next, write the answer with three digits after the point.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.048" data-miss="{&quot;0.047&quot;: &quot;That chops off the extra digits. The digit after the 7 is 5, which is 5 or more, so the 7 goes up: 0.048.&quot;, &quot;0.05&quot;: &quot;That is two decimal places. Three decimal places keeps three digits after the point: 0.048.&quot;, &quot;0.0475&quot;: &quot;That keeps four digits after the point. Three decimal places keeps three: 0.048.&quot;, &quot;0.04751&quot;: &quot;That is the number you started with. Keep only three digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.04751</span><span class="sr">0 point 0 4 7 5 1</span></span> rounded to three decimal places?</p>
+<details><summary>Hint</summary><p>The 7 goes up to 8. Drop everything after it.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.048</span><span class="sr">0 point 0 4 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="5.86" data-miss="{&quot;5.87&quot;: &quot;That rounds in steps from the right (5.8649 to 5.865 to 5.87). Only the digit right after the kept 6 counts, and it is 4: 5.86.&quot;, &quot;5.865&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 5.86.&quot;, &quot;5.9&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 5.86.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Round <span class="m"><span aria-hidden="true">5.8649</span><span class="sr">5 point 8 6 4 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 6. Look only at the very next digit, the 4. Ignore the 9 at the end.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5.86</span><span class="sr">5 point 8 6</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.300" data-miss="{&quot;0.299&quot;: &quot;That chops off the extra digits. The digit after the kept 9 is 6, so the 9 goes up, becomes 0 and carries: 0.300.&quot;, &quot;0.2910&quot;: &quot;When the 9 goes up, it does not become 10. It becomes 0 and carries 1 to the left, and that 9 carries too: 0.300.&quot;, &quot;0.29&quot;: &quot;That is two decimal places, and it is chopped. Three decimal places with the carries gives 0.300.&quot;, &quot;0.2996&quot;: &quot;That keeps four digits after the point. Three decimal places keeps three: 0.300.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Round <span class="m"><span aria-hidden="true">0.29961</span><span class="sr">0 point 2 9 9 6 1</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the third 9. The next digit is 6, so that 9 goes up. Follow the carries to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.300</span><span class="sr">0 point 3 0 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> is accepted too, but <span class="m"><span aria-hidden="true">0.300</span><span class="sr">0 point 3 0 0</span></span> shows all three places)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.01" data-miss="{&quot;2&quot;: &quot;That chops off the extra digits. The digit after the kept 0 is 7, which is 5 or more, so the 0 goes up: 2.01.&quot;, &quot;2.007&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 2.01.&quot;, &quot;2.1&quot;: &quot;The kept digit is the second 0, not the first. Two decimal places gives 2.01.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> A calculator shows <span class="m"><span aria-hidden="true">2.00718</span><span class="sr">2 point 0 0 7 1 8</span></span>. Round it to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the second 0 after the point. The next digit is 7.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.01</span><span class="sr">2 point 0 1</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;That rounds in steps from the right (0.03449 to 0.0345 to 0.035). Only the digit right after the kept 4 counts, and it is also 4: 0.034.&quot;, &quot;b&quot;: &quot;That is two decimal places. Three decimal places keeps three digits after the point: 0.034.&quot;, &quot;c&quot;: &quot;That keeps four digits after the point. Three decimal places keeps three: 0.034.&quot;}" data-why="Correct. The digit after the kept 4 is 4, so the kept digit stays.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 24.</b> Round <span class="m"><span aria-hidden="true">0.03449</span><span class="sr">0 point 0 3 4 4 9</span></span> to three decimal places.</legend>
+<label><input type="radio" name="mc24" value="a"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span></span></label><label><input type="radio" name="mc24" value="b"> <span><span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span></span></label><label><input type="radio" name="mc24" value="c"> <span><span class="m"><span aria-hidden="true">0.0345</span><span class="sr">0 point 0 3 4 5</span></span></span></label><label><input type="radio" name="mc24" value="d"> <span><span class="m"><span aria-hidden="true">0.034</span><span class="sr">0 point 0 3 4</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the third place. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.034</span><span class="sr">0 point 0 3 4</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 9.4</h3>
+<p>The Notes on Step Three on pages 2 and 7 say rounding is done per the directions given in MML.</p><p>The Classroom Example 9.4.1 and 9.4.2 videos on pages 9 and 10 round one value to two decimal places and another to three decimal places.</p>
+<p><strong>Watch for this:</strong> the rounding direction for each answer, a digit that rounds up and changes the digit before it, and zeros that must stay, such as the zeros in a value like 1.00.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="2.91" data-miss="{&quot;1.71&quot;: &quot;That divides 2.9 by 1.7 without squaring. Square both first: 8.41 divided by 2.89.&quot;, &quot;4.95&quot;: &quot;That squares only the top: 8.41 divided by 1.7. Square the bottom too: 8.41 divided by 2.89.&quot;, &quot;0.34&quot;: &quot;The fraction is flipped. That divides 2.89 by 8.41. Divide the top by the bottom.&quot;, &quot;2.92&quot;: &quot;That rounds too early (2.9 divided by 1.7 is about 1.71, and 1.71 squared is about 2.92). Square, divide, and round only at the end: 2.91.&quot;, &quot;2.9&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 2.91.&quot;, &quot;~2.91003~0.0001&quot;: &quot;Round to two decimal places: keep two digits after the point. 2.91.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft"><span class="m"><span aria-hidden="true">2.9<sup>2</sup></span><span class="sr">2 point 9 squared</span></span></span><span class="fb"><span class="m"><span aria-hidden="true">1.7<sup>2</sup></span><span class="sr">1 point 7 squared</span></span></span></span><span class="sr">2 point 9 squared over 1 point 7 squared</span></span>. Round to two decimal places.</p>
+<details><summary>Hint</summary><p>The top is <span class="m"><span aria-hidden="true">2.9<sup>2</sup></span><span class="sr">2 point 9 squared</span></span> = <span class="m"><span aria-hidden="true">8.41</span><span class="sr">8 point 4 1</span></span>, and the bottom is <span class="m"><span aria-hidden="true">1.7<sup>2</sup></span><span class="sr">1 point 7 squared</span></span> = <span class="m"><span aria-hidden="true">2.89</span><span class="sr">2 point 8 9</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.91</span><span class="sr">2 point 9 1</span></span></strong>, because <span class="m"><span aria-hidden="true">8.41 ÷ 2.89</span><span class="sr">8 point 4 1 divided by 2 point 8 9</span></span> is about <span class="m"><span aria-hidden="true">2.9100</span><span class="sr">2 point 9 1 0 0</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;\&quot;At least as long\&quot; means the new battery lasts the same or longer, so it is greater than or equal to, not less.&quot;, &quot;b&quot;: &quot;\&quot;At least\&quot; allows the two to be equal, so the symbol needs the \&quot;or equal\&quot; line.&quot;, &quot;d&quot;: &quot;That switches the order without flipping the symbol, so it says the old battery lasts at least as long, which is the opposite.&quot;}" data-why="Correct. &quot;At least&quot; means greater than or equal to.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 26.</b> "The new phone's battery lasts <strong>at least</strong> as long as the old phone's battery." Which statement matches?</legend>
+<label><input type="radio" name="mc26" value="a"> <span><span class="m"><span aria-hidden="true">new ≤ old</span><span class="sr">new is less than or equal to old</span></span></span></label><label><input type="radio" name="mc26" value="b"> <span><span class="m"><span aria-hidden="true">new &gt; old</span><span class="sr">new is greater than old</span></span></span></label><label><input type="radio" name="mc26" value="c"> <span><span class="m"><span aria-hidden="true">new ≥ old</span><span class="sr">new is greater than or equal to old</span></span></span></label><label><input type="radio" name="mc26" value="d"> <span><span class="m"><span aria-hidden="true">old ≥ new</span><span class="sr">old is greater than or equal to new</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>"At least as long as" means "the same or longer."</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">new ≥ old</span><span class="sr">new is greater than or equal to old</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="7.40" data-miss="{&quot;7.39&quot;: &quot;That chops off the extra digits. The digit after the kept 9 is 9, so the 9 goes up, becomes 0 and carries: 7.40.&quot;, &quot;7.399&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 7.40.&quot;, &quot;7.310&quot;: &quot;When the 9 goes up, it does not become 10. It becomes 0 and carries 1 to the 3: 7.40.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Round <span class="m"><span aria-hidden="true">7.39962</span><span class="sr">7 point 3 9 9 6 2</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the second place. The next digit is 9, so it goes up and carries.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.40</span><span class="sr">7 point 4 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">7.4</span><span class="sr">7 point 4</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.69" data-miss="{&quot;2.6&quot;: &quot;That doubles 1.3. Squaring means 1.3 times 1.3, which is 1.69.&quot;, &quot;16.9&quot;: &quot;The decimal point is one place off. 13 times 13 is 169, and two decimal places makes it 1.69.&quot;, &quot;1.09&quot;: &quot;That squares the 1 and the 0.3 separately and adds them. Multiply the whole number by itself: 1.3 times 1.3 is 1.69.&quot;, &quot;1.7&quot;: &quot;The directions say do not round. Keep every digit: 1.69.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> What is <span class="m"><span aria-hidden="true">1.3<sup>2</sup></span><span class="sr">1 point 3 squared</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">13 × 13 = 169</span><span class="sr">13 times 13 equals 169</span></span>. Then give the answer two decimal places.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.69</span><span class="sr">1 point 6 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That is the \&quot;longer is larger\&quot; slip. Write 0.0716 as 0.07160. The numbers match through 0.071, and then 6 is more than 5.&quot;, &quot;c&quot;: &quot;They are close but not equal. Written as 0.07160 and 0.07158, the fourth digits after the point are 6 and 5.&quot;}" data-why="Correct. As 0.07160 and 0.07158, they match through 0.071, and then 6 is more than 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 29.</b> Which is larger, <span class="m"><span aria-hidden="true">0.0716</span><span class="sr">0 point 0 7 1 6</span></span> or <span class="m"><span aria-hidden="true">0.07158</span><span class="sr">0 point 0 7 1 5 8</span></span>?</legend>
+<label><input type="radio" name="mc29" value="a"> <span><span class="m"><span aria-hidden="true">0.07158</span><span class="sr">0 point 0 7 1 5 8</span></span></span></label><label><input type="radio" name="mc29" value="b"> <span><span class="m"><span aria-hidden="true">0.0716</span><span class="sr">0 point 0 7 1 6</span></span></span></label><label><input type="radio" name="mc29" value="c"> <span>They are equal</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write <span class="m"><span aria-hidden="true">0.0716</span><span class="sr">0 point 0 7 1 6</span></span> as <span class="m"><span aria-hidden="true">0.07160</span><span class="sr">0 point 0 7 1 6 0</span></span> so both have five digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0716</span><span class="sr">0 point 0 7 1 6</span></span></strong>, because <span class="m"><span aria-hidden="true">0.07160</span><span class="sr">0 point 0 7 1 6 0</span></span> is more than <span class="m"><span aria-hidden="true">0.07158</span><span class="sr">0 point 0 7 1 5 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;0.5 squared is 0.25, which is less than 0.5. Squaring a number between 0 and 1 makes it smaller.&quot;, &quot;c&quot;: &quot;0.5 squared is 0.5 times 0.5, which is 0.25, not 1. Doubling 0.5 would give 1.&quot;, &quot;d&quot;: &quot;0.5 squared is 0.25, which is less than 0.5, so \&quot;greater than or equal to\&quot; is false.&quot;}" data-why="Correct. 0.5 squared is 0.25, and 0.25 is less than or equal to 0.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 30.</b> Which statement is true?</legend>
+<label><input type="radio" name="mc30" value="a"> <span><span class="m"><span aria-hidden="true">0.5² &gt; 0.5</span><span class="sr">0 point 5 squared is greater than 0 point 5</span></span></span></label><label><input type="radio" name="mc30" value="b"> <span><span class="m"><span aria-hidden="true">0.5² ≤ 0.5</span><span class="sr">0 point 5 squared is less than or equal to 0 point 5</span></span></span></label><label><input type="radio" name="mc30" value="c"> <span><span class="m"><span aria-hidden="true">0.5² = 1</span><span class="sr">0 point 5 squared equals 1</span></span></span></label><label><input type="radio" name="mc30" value="d"> <span><span class="m"><span aria-hidden="true">0.5² ≥ 0.5</span><span class="sr">0 point 5 squared is greater than or equal to 0 point 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>First find <span class="m"><span aria-hidden="true">0.5<sup>2</sup></span><span class="sr">0 point 5 squared</span></span>. Then compare it with <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.5² ≤ 0.5</span><span class="sr">0 point 5 squared is less than or equal to 0 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">0.5<sup>2</sup></span><span class="sr">0 point 5 squared</span></span> is <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have compared decimals, squared numbers and divided squares, read and switched comparison symbols, and rounded to two and three decimal places. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec9.4-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  /* this page has no percent answers, so a % sign means the wrong form */
+  if(/%/.test(raw)&&stu)return show(q,'wrong','This answer is a plain number, not a percent. Type it without the % sign.');
+  if(q.dataset.form==='fraction'&&stu){
+    const fm=s.replace(/^\+/,'').match(/^(-?)(\d+)\/(\d+)$/);
+    const key0=toRat(answers(q)[0]);
+    if(!fm){ if(sameRat(key0,stu))return show(q,'wrong','That has the right value, but the question asks for a fraction. Type it as a fraction in lowest terms, with a slash.'); }
+    else if(gcd(Number(fm[2]),Number(fm[3]))!==1){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} const ek=Object.keys(mm).find(k=>norm(k)===s); const hit=ek?mm[ek]:missFor(q,raw); return show(q,'wrong',hit||'That fraction is not in lowest terms. Divide the top and the bottom by a number that goes into both.'); }
+  }
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5, or a fraction with a slash, like 5/3.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

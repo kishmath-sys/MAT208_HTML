@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 3.3 Exit Ticket: Measures of Relative Standing and Boxplots</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+figure.axisfig{{margin:.75rem 0}} .axisfig svg{{color:var(--ink);max-width:100%;height:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 3.3 Exit Ticket</div>
+<h1>Section 3.3 Exit Ticket: Measures of Relative Standing and Boxplots</h1>
+<p>A short, ungraded check to use after the Section 3.3 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. z-Scores<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. 5-Number Summary<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Boxplots<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. StatCrunch check<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 20 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 3.3 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Section 5.</li>
+<li>Section 6 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">z-Scores</button></li>
+<li><button type="button" data-go="s3">5-Number Summary</button></li>
+<li><button type="button" data-go="s4">Boxplots</button></li>
+<li><button type="button" data-go="s5">StatCrunch check</button></li>
+<li><button type="button" data-go="s6">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. z-Scores</h2>
+<p>These checks cover item 1 (z-score) on page 1 of the Section 3.3 notes and Classroom Examples 3.3.1 and 3.3.2 on pages 6 and 7.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Item 1 defines a z-score as a number of standard deviations from the mean." data-miss="{&quot;a&quot;: &quot;Not quite. Item 1 describes a distance from the mean, not a count of data values. Review: item 1 (z-score) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A difference in the data&#x27;s units is not yet a number of standard deviations. Review: item 1 (z-score) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 1 describes a number of standard deviations, not a percent of the data. Review: item 1 (z-score) on page 1 of the notes.&quot;}" data-review="item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (z-score).</b> Which statement matches the definition of a z-score in item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>The number of data values in the data set that fall below the mean.</span></label><label><input type="radio" name="mc1" value="b"> <span>The number of standard deviations a data value is from the mean.</span></label><label><input type="radio" name="mc1" value="c"> <span>The difference between a data value and the mean, in the units of the data.</span></label><label><input type="radio" name="mc1" value="d"> <span>The percent of the data set that falls below a given data value.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The number of standard deviations a data value is from the mean.</strong></p><p class="ptr">Where this is: Item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. The data value minus the mean, all divided by the standard deviation." data-miss="{&quot;b&quot;: &quot;Not quite. This subtracts in the reverse order from the formula, which starts with the data value being converted. Review: the Formula for z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Here only the mean is divided, while the formula puts the whole difference over the standard deviation. Review: the Formula for z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. This swaps the roles of the mean and the standard deviation. Review: the Formula for z-scores under item 1 (z-score) on page 1 of the notes.&quot;}" data-review="the Formula for z-scores under item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Formula for z-scores).</b> A data value is 64, the mean of the data set is <span class="m"><span aria-hidden="true">70.5</span><span class="sr">70 point 5</span></span>, and the standard deviation is <span class="m"><span aria-hidden="true">4.2</span><span class="sr">4 point 2</span></span>. Which setup matches the formula in item 1?</legend>
+<label><input type="radio" name="mc2" value="a"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">64 − 70.5</span><span class="fb">4.2</span></span><span class="sr">the fraction with 64 minus 70 point 5 on top and 4 point 2 on the bottom</span></span></span></label><label><input type="radio" name="mc2" value="b"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">70.5 − 64</span><span class="fb">4.2</span></span><span class="sr">the fraction with 70 point 5 minus 64 on top and 4 point 2 on the bottom</span></span></span></label><label><input type="radio" name="mc2" value="c"> <span><span class="m"><span aria-hidden="true">64 − (70.5 ÷ 4.2)</span><span class="sr">64 minus, open parenthesis 70 point 5 divided by 4 point 2 close parenthesis</span></span></span></label><label><input type="radio" name="mc2" value="d"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">64 − 4.2</span><span class="fb">70.5</span></span><span class="sr">the fraction with 64 minus 4 point 2 on top and 70 point 5 on the bottom</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true" class="frac"><span class="ft">64 − 70.5</span><span class="fb">4.2</span></span><span class="sr">the fraction with 64 minus 70 point 5 on top and 4 point 2 on the bottom</span></span></strong></p><p class="ptr">Where this is: The Formula for z-scores under item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The Key Notes say z-scores have no units." data-miss="{&quot;a&quot;: &quot;Not quite. The Key Notes say z-scores have no units, even though the data has units. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The Key Notes say z-scores have no units at all. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. A z-score is not a percent, and the Key Notes say it has no units. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;}" data-review="the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Units).</b> Commute times are measured in minutes. One commute has a z-score of <span class="m"><span aria-hidden="true">1.25</span><span class="sr">1 point 2 5</span></span>. What units does <span class="m"><span aria-hidden="true">1.25</span><span class="sr">1 point 2 5</span></span> have?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>Minutes, the same units as the commute times</span></label><label><input type="radio" name="mc3" value="b"> <span>Minutes per standard deviation of the commute times</span></label><label><input type="radio" name="mc3" value="c"> <span>Percent, since it compares the commute with the mean</span></label><label><input type="radio" name="mc3" value="d"> <span>None, since z-scores have no units</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>None, since z-scores have no units</strong></p><p class="ptr">Where this is: The Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. −2.35 is less than −2." data-miss="{&quot;a&quot;: &quot;Not quite. Close is not the test: −2.35 is less than −2, so it is outside the range from −2 to 2. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. A negative z-score can be less than −2, which the Key Notes classify as significantly low. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The negative sign matters: −2.35 is below the mean, not above it. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;}" data-review="the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Usual and significant values).</b> A data value has a z-score of <span class="m"><span aria-hidden="true">−2.35</span><span class="sr">negative 2 point 3 5</span></span>. Using the Key Notes in item 1, how is this data value classified?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>Usual, since <span class="m"><span aria-hidden="true">−2.35</span><span class="sr">negative 2 point 3 5</span></span> is close to <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span></span></label><label><input type="radio" name="mc4" value="b"> <span>Usual, since negative z-scores are never significant</span></label><label><input type="radio" name="mc4" value="c"> <span>Significantly low</span></label><label><input type="radio" name="mc4" value="d"> <span>Significantly high, since <span class="m"><span aria-hidden="true">2.35</span><span class="sr">2 point 3 5</span></span> is greater than 2</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Significantly low</strong></p><p class="ptr">Where this is: The Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. A negative z-score means below the mean, not necessarily bad." data-miss="{&quot;b&quot;: &quot;Not quite. Significantly low needs a z-score less than −2, and −0.85 is not. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The Key Notes say a negative z-score is not necessarily \&quot;bad.\&quot; Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The z-score is negative, not the race time, and negative z-scores do occur. Review: the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.&quot;}" data-review="the Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Negative z-scores).</b> A runner's race time has a z-score of <span class="m"><span aria-hidden="true">−0.85</span><span class="sr">negative 0 point 8 5</span></span> among the runners in her race. Which statement matches the Key Notes in item 1?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>Her time is below the mean, which is not necessarily bad.</span></label><label><input type="radio" name="mc5" value="b"> <span>Her time is significantly low, since its z-score is negative.</span></label><label><input type="radio" name="mc5" value="c"> <span>Her time is worse than average, since negative z-scores are bad.</span></label><label><input type="radio" name="mc5" value="d"> <span>Her z-score must be an error, since times cannot be negative.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Her time is below the mean, which is not necessarily bad.</strong></p><p class="ptr">Where this is: The Key Notes on z-scores under item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The z-score falls within the usual range from −2 to 2." data-miss="{&quot;a&quot;: &quot;Not quite. Being negative only means below the mean; it does not make a score unusual. Review: the Example under item 1 (z-score) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The decision uses the z-score, not the distance in points. Review: the Example under item 1 (z-score) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. The cutoff in the Key Notes is −2, not −1. Review: the Example under item 1 (z-score) on page 1 of the notes.&quot;}" data-review="the Example under item 1 (z-score) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Example on page 1).</b> In the Example on page 1, an exam score of 59 has a z-score of <span class="m"><span aria-hidden="true">−1.72</span><span class="sr">negative 1 point 7 2</span></span>. Which conclusion matches the notes' Discussion?</legend>
+<label><input type="radio" name="mc6" value="a"> <span>Unusual, since the z-score is a negative number</span></label><label><input type="radio" name="mc6" value="b"> <span>Unusual, since 59 is far below the mean of <span class="m"><span aria-hidden="true">78.23</span><span class="sr">78 point 2 3</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span>Significantly low, since <span class="m"><span aria-hidden="true">−1.72</span><span class="sr">negative 1 point 7 2</span></span> is less than <span class="m"><span aria-hidden="true">−1</span><span class="sr">negative 1</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span>Not unusual, since <span class="m"><span aria-hidden="true">−1.72</span><span class="sr">negative 1 point 7 2</span></span> is between <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and 2</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Not unusual, since <span class="m"><span aria-hidden="true">−1.72</span><span class="sr">negative 1 point 7 2</span></span> is between <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and 2</strong></p><p class="ptr">Where this is: The Example and Discussion under item 1 (z-score) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. The z-score is the 3.04 standard deviations from part b, and 3.04 is greater than 2." data-miss="{&quot;a&quot;: &quot;Not quite. 57.99 is the difference in Mbps from part a, not a number of standard deviations. Review: Classroom Example 3.3.1 on page 6 of the notes, and the video \&quot;Classroom Example 3.3.1\&quot; on page 6.&quot;, &quot;c&quot;: &quot;Not quite. Positive does not mean usual, and 3.04 is greater than 2. Review: Classroom Example 3.3.1 on page 6 of the notes, and the video \&quot;Classroom Example 3.3.1\&quot; on page 6.&quot;, &quot;d&quot;: &quot;Not quite. 75.2 Mbps is above the mean, so its z-score is positive. Review: Classroom Example 3.3.1 on page 6 of the notes, and the video \&quot;Classroom Example 3.3.1\&quot; on page 6.&quot;}" data-review="Classroom Example 3.3.1 on page 6 of the notes, and the video &quot;Classroom Example 3.3.1&quot; on page 6.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 7 (Classroom Example 3.3.1).</b> In Classroom Example 3.3.1, the highest speed, <span class="m"><span aria-hidden="true">75.2</span><span class="sr">75 point 2</span></span> Mbps, is <span class="m"><span aria-hidden="true">57.99</span><span class="sr">57 point 9 9</span></span> Mbps above the mean (part a), which is <span class="m"><span aria-hidden="true">3.04</span><span class="sr">3 point 0 4</span></span> standard deviations (part b). Which answers parts c and d?</legend>
+<label><input type="radio" name="mc7" value="a"> <span>z = <span class="m"><span aria-hidden="true">57.99</span><span class="sr">57 point 9 9</span></span>, and the speed is significantly high</span></label><label><input type="radio" name="mc7" value="b"> <span>z = <span class="m"><span aria-hidden="true">3.04</span><span class="sr">3 point 0 4</span></span>, and the speed is significantly high</span></label><label><input type="radio" name="mc7" value="c"> <span>z = <span class="m"><span aria-hidden="true">3.04</span><span class="sr">3 point 0 4</span></span>, and the speed is usual since it is positive</span></label><label><input type="radio" name="mc7" value="d"> <span>z = <span class="m"><span aria-hidden="true">−3.04</span><span class="sr">negative 3 point 0 4</span></span>, and the speed is significantly low</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>z = <span class="m"><span aria-hidden="true">3.04</span><span class="sr">3 point 0 4</span></span>, and the speed is significantly high</strong></p><p class="ptr">Where this is: Classroom Example 3.3.1 on page 6 of the notes, and the video "Classroom Example 3.3.1" on page 6.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. Of the two z-scores, −2.53 is farther from 0." data-miss="{&quot;a&quot;: &quot;Not quite. Being the greater number is not what the example uses; it compares distance from 0. Review: Classroom Example 3.3.2 on page 7 of the notes, and the video \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;b&quot;: &quot;Not quite. The same weight sits differently in two groups with different means and standard deviations. Review: Classroom Example 3.3.2 on page 7 of the notes, and the video \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. The example compares the two z-scores, not the standard deviations alone. Review: Classroom Example 3.3.2 on page 7 of the notes, and the video \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;}" data-review="Classroom Example 3.3.2 on page 7 of the notes, and the video &quot;Classroom Example 3.3.2&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 8 (Classroom Example 3.3.2).</b> In Classroom Example 3.3.2, the male's 1700 g converts to a z-score of <span class="m"><span aria-hidden="true">−1.86</span><span class="sr">negative 1 point 8 6</span></span>, and the female's 1700 g converts to <span class="m"><span aria-hidden="true">−2.53</span><span class="sr">negative 2 point 5 3</span></span>. Who has the weight that is more extreme relative to their group?</legend>
+<label><input type="radio" name="mc8" value="a"> <span>The male, since <span class="m"><span aria-hidden="true">−1.86</span><span class="sr">negative 1 point 8 6</span></span> is the greater z-score</span></label><label><input type="radio" name="mc8" value="b"> <span>Neither, since both babies weigh exactly 1700 g</span></label><label><input type="radio" name="mc8" value="c"> <span>The female, since <span class="m"><span aria-hidden="true">−2.53</span><span class="sr">negative 2 point 5 3</span></span> is farther from 0</span></label><label><input type="radio" name="mc8" value="d"> <span>The male, since the males have the larger standard deviation</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The female, since <span class="m"><span aria-hidden="true">−2.53</span><span class="sr">negative 2 point 5 3</span></span> is farther from 0</strong></p><p class="ptr">Where this is: Classroom Example 3.3.2 on page 7 of the notes, and the video "Classroom Example 3.3.2" on page 7.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>z-score definition, formula, Key Notes and Example: item 1, page 1</li><li>Classroom Example 3.3.1: page 6, video "Classroom Example 3.3.1"</li><li>Classroom Example 3.3.2: page 7, video "Classroom Example 3.3.2"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. 5-Number Summary</h2>
+<p>These checks cover item 2 (5-Number Summary) on pages 1 to 3 of the Section 3.3 notes, including its StatCrunch steps.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. Item 2 lists the minimum, Q1, the median, Q3 and the maximum." data-miss="{&quot;b&quot;: &quot;Not quite. The middle entry in item 2 is the median, not the mean. Review: item 2 (5-Number Summary) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 2 starts with the minimum, ends with the maximum, and has no mean or standard deviation. Review: item 2 (5-Number Summary) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Item 2 includes the two quartiles and has no mean or standard deviation. Review: item 2 (5-Number Summary) on page 1 of the notes.&quot;}" data-review="item 2 (5-Number Summary) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 9 (5-Number Summary).</b> Which list is the 5-number summary described in item 2?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>Minimum, Q1, median, Q3, maximum</span></label><label><input type="radio" name="mc9" value="b"> <span>Minimum, Q1, mean, Q3, maximum</span></label><label><input type="radio" name="mc9" value="c"> <span>Mean, median, Q1, Q3, standard deviation</span></label><label><input type="radio" name="mc9" value="d"> <span>Minimum, mean, median, standard deviation, maximum</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Minimum, Q1, median, Q3, maximum</strong></p><p class="ptr">Where this is: Item 2 (5-Number Summary) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Item 2 defines Q1 and Q3 as the medians of the lower and upper halves." data-miss="{&quot;a&quot;: &quot;Not quite. The 1 and 3 name the first and third quartiles, not positions in the list. Review: parts b and d of item 2 (5-Number Summary) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. Item 2 uses the median of each half, not the mean. Review: parts b and d of item 2 (5-Number Summary) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. This swaps them: Q1 comes from the lower half of the data. Review: parts b and d of item 2 (5-Number Summary) on page 1 of the notes.&quot;}" data-review="parts b and d of item 2 (5-Number Summary) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 10 (Quartiles).</b> Which statement matches parts b and d of item 2?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>Q1 is the first value in the data list, and Q3 is the third value in the list.</span></label><label><input type="radio" name="mc10" value="b"> <span>Q1 is the mean of the lower half of the data, and Q3 is the mean of the upper half.</span></label><label><input type="radio" name="mc10" value="c"> <span>Q1 is the median of the upper half of the data, and Q3 is the median of the lower half.</span></label><label><input type="radio" name="mc10" value="d"> <span>Q1 is the median of the lower half of the data, and Q3 is the median of the upper half.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Q1 is the median of the lower half of the data, and Q3 is the median of the upper half.</strong></p><p class="ptr">Where this is: Parts b and d of item 2 (5-Number Summary) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="b" data-why="Correct. The output on page 3 lists Q3 as 211.3 pounds." data-miss="{&quot;a&quot;: &quot;Not quite. 114.5 pounds is Q1 in that output. Review: the output for the StatCrunch example on page 3 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;, &quot;c&quot;: &quot;Not quite. 220.1 pounds is the maximum in that output. Review: the output for the StatCrunch example on page 3 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;, &quot;d&quot;: &quot;Not quite. 115.6 pounds is the median in that output. Review: the output for the StatCrunch example on page 3 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;}" data-review="the output for the StatCrunch example on page 3 of the notes, and the video &quot;Using StatCrunch to find the 5 number summary&quot; on page 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 11 (Reading the output).</b> In the StatCrunch example on pages 2 and 3, which value is Q3 for the student weights?</legend>
+<label><input type="radio" name="mc11" value="a"> <span><span class="m"><span aria-hidden="true">114.5</span><span class="sr">114 point 5</span></span> pounds</span></label><label><input type="radio" name="mc11" value="b"> <span><span class="m"><span aria-hidden="true">211.3</span><span class="sr">211 point 3</span></span> pounds</span></label><label><input type="radio" name="mc11" value="c"> <span><span class="m"><span aria-hidden="true">220.1</span><span class="sr">220 point 1</span></span> pounds</span></label><label><input type="radio" name="mc11" value="d"> <span><span class="m"><span aria-hidden="true">115.6</span><span class="sr">115 point 6</span></span> pounds</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">211.3</span><span class="sr">211 point 3</span></span> pounds</strong></p><p class="ptr">Where this is: The output for the StatCrunch example on page 3 of the notes, and the video "Using StatCrunch to find the 5 number summary" on page 2.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. Homework data sets can be imported, and typed data should be scanned for major errors." data-miss="{&quot;a&quot;: &quot;Not quite. The Important Notes say homework data sets can be imported without typing them in. Review: the Important Notes in the StatCrunch steps for item 2 on page 2 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;, &quot;b&quot;: &quot;Not quite. Nothing in the steps asks you to sort the data before computing. Review: the Important Notes in the StatCrunch steps for item 2 on page 2 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;, &quot;d&quot;: &quot;Not quite. The steps on page 2 have you rename the column to match the data. Review: the Important Notes in the StatCrunch steps for item 2 on page 2 of the notes, and the video \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2.&quot;}" data-review="the Important Notes in the StatCrunch steps for item 2 on page 2 of the notes, and the video &quot;Using StatCrunch to find the 5 number summary&quot; on page 2.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Entering data).</b> You need to get a homework data set into StatCrunch. Which matches the Important Notes on page 2?</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Type it by hand every time, since imports can skip values.</span></label><label><input type="radio" name="mc12" value="b"> <span>Sort it from smallest to largest first, or Compute! will fail.</span></label><label><input type="radio" name="mc12" value="c"> <span>Import it when you can, and scan typed data for major errors.</span></label><label><input type="radio" name="mc12" value="d"> <span>Keep the name var1, since renaming the column changes results.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Import it when you can, and scan typed data for major errors.</strong></p><p class="ptr">Where this is: The Important Notes in the StatCrunch steps for item 2 on page 2 of the notes, and the video "Using StatCrunch to find the 5 number summary" on page 2.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>5-Number Summary, parts a to e: item 2, page 1</li><li>Using StatCrunch to Find the 5-Number Summary: pages 2 and 3 (and the Important Notes on page 2), video "Using StatCrunch to find the 5 number summary"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Boxplots</h2>
+<p>These checks cover item 3 (Boxplot) on pages 4 to 6 of the Section 3.3 notes, including its StatCrunch steps, and Classroom Example 3.3.3 on page 7.</p>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. Item 3 calls a boxplot a graphical representation of the 5-number summary." data-miss="{&quot;a&quot;: &quot;Not quite. Item 3 describes a graph of the 5-number summary, not of counts. Review: item 3 (Boxplot) on page 4 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. A boxplot comes from the 5-number summary, which has no mean or standard deviation. Review: item 3 (Boxplot) on page 4 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Item 3 describes a graph of five summary values, not of every value. Review: item 3 (Boxplot) on page 4 of the notes.&quot;}" data-review="item 3 (Boxplot) on page 4 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Boxplot).</b> Which statement matches item 3?</legend>
+<label><input type="radio" name="mc13" value="a"> <span>A boxplot shows how often each data value occurs.</span></label><label><input type="radio" name="mc13" value="b"> <span>A boxplot shows the mean and the standard deviation.</span></label><label><input type="radio" name="mc13" value="c"> <span>A boxplot lists every data value in order.</span></label><label><input type="radio" name="mc13" value="d"> <span>A boxplot is a graph of the 5-number summary.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>A boxplot is a graph of the 5-number summary.</strong></p><p class="ptr">Where this is: Item 3 (Boxplot) on page 4 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. Fences off, boxes horizontal." data-miss="{&quot;b&quot;: &quot;Not quite. The steps say to uncheck the fences option. Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;c&quot;: &quot;Not quite. The steps say to check \&quot;Draw boxes horizontally.\&quot; Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. Both settings are changed in the steps on page 5. Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;}" data-review="the StatCrunch steps for item 3 on page 5 of the notes, and the video &quot;Using StatCrunch to create a boxplot&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 14 (Other options).</b> When you make a boxplot in StatCrunch, what do the steps on page 5 say to do under "Other options"?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>Uncheck "Use fences to identify outliers" and check "Draw boxes horizontally."</span></label><label><input type="radio" name="mc14" value="b"> <span>Check "Use fences to identify outliers" and check "Draw boxes horizontally."</span></label><label><input type="radio" name="mc14" value="c"> <span>Uncheck "Use fences to identify outliers" and leave the boxes drawn vertically.</span></label><label><input type="radio" name="mc14" value="d"> <span>Leave both options as they are, since the default settings match MyLab.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Uncheck "Use fences to identify outliers" and check "Draw boxes horizontally."</strong></p><p class="ptr">Where this is: The StatCrunch steps for item 3 on page 5 of the notes, and the video "Using StatCrunch to create a boxplot" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. An x-axis label and a title, with no y-axis label." data-miss="{&quot;a&quot;: &quot;Not quite. The Note on page 5 says you do not have a y-axis label. Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;c&quot;: &quot;Not quite. The Note on page 5 says you do not have a y-axis label, and the steps add a title. Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The steps include an x-axis label as well as the title. Review: the StatCrunch steps for item 3 on page 5 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;}" data-review="the StatCrunch steps for item 3 on page 5 of the notes, and the video &quot;Using StatCrunch to create a boxplot&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 15 (Graph properties).</b> Under "Graph properties," which entries do the steps on page 5 call for?</legend>
+<label><input type="radio" name="mc15" value="a"> <span>A y-axis label and a title</span></label><label><input type="radio" name="mc15" value="b"> <span>An x-axis label and a title</span></label><label><input type="radio" name="mc15" value="c"> <span>An x-axis label and a y-axis label</span></label><label><input type="radio" name="mc15" value="d"> <span>A title only, with no axis labels</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>An x-axis label and a title</strong></p><p class="ptr">Where this is: The StatCrunch steps for item 3 on page 5 of the notes, and the video "Using StatCrunch to create a boxplot" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="c" data-why="Correct. The values appear when the cursor rests on the graph for two seconds." data-miss="{&quot;a&quot;: &quot;Not quite. The steps on page 6 stay on the graph; the values appear on it. Review: the StatCrunch steps for item 3 on page 6 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;b&quot;: &quot;Not quite. No table is printed under the graph; the values appear on the graph itself. Review: the StatCrunch steps for item 3 on page 6 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;, &quot;d&quot;: &quot;Not quite. The steps on page 6 do not use a menu for this; the values appear on the graph. Review: the StatCrunch steps for item 3 on page 6 of the notes, and the video \&quot;Using StatCrunch to create a boxplot\&quot; on page 4.&quot;}" data-review="the StatCrunch steps for item 3 on page 6 of the notes, and the video &quot;Using StatCrunch to create a boxplot&quot; on page 4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 16 (Finding the summary on the boxplot).</b> After you select "Compute!" for a boxplot, how do the steps on page 6 say to find the 5-number summary?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>Go to Stat, then Summary Stats, then Rows.</span></label><label><input type="radio" name="mc16" value="b"> <span>Read it from a table printed under the graph.</span></label><label><input type="radio" name="mc16" value="c"> <span>Let the cursor sit on top of the graph for two seconds.</span></label><label><input type="radio" name="mc16" value="d"> <span>Click Options, then choose Show summary.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Let the cursor sit on top of the graph for two seconds.</strong></p><p class="ptr">Where this is: The StatCrunch steps for item 3 on page 6 of the notes, and the video "Using StatCrunch to create a boxplot" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="a" data-why="Correct. The box runs from Q1, 126, to Q3, 209." data-miss="{&quot;b&quot;: &quot;Not quite. The line on the left of the box reaches out to 108, the minimum. Review: the boxplot example for item 3 on pages 4 to 6 of the notes, and the video \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;c&quot;: &quot;Not quite. The line on the right of the box reaches out to 215, the maximum. Review: the boxplot example for item 3 on pages 4 to 6 of the notes, and the video \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;d&quot;: &quot;Not quite. The whole plot runs from the minimum, 108, to the maximum, 215. Review: the boxplot example for item 3 on pages 4 to 6 of the notes, and the video \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;}" data-review="the boxplot example for item 3 on pages 4 to 6 of the notes, and the video &quot;Classroom Example 3.3.3&quot; on page 7.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 17 (Reading a boxplot).</b> This boxplot is drawn from the notes' boxplot example (15 student weights). StatCrunch lists the 5-number summary as Min 108, Q1 126, Median 187, Q3 209 and Max 215. Which part of the plot runs from 126 to 209?</legend>
+<figure class="axisfig" style="margin:.5rem 0 1rem"><svg viewBox="0 0 640 170" width="640" role="img" aria-labelledby="bp1t bp1d" focusable="false"><title id="bp1t">Boxplot of Weights</title><desc id="bp1d">Horizontal boxplot of the 15 student weights from the boxplot example in item 3. The x-axis is Weights (pounds), from 100 to 220. The five-number summary shown in StatCrunch is: minimum 108, Q1 126, median 187, Q3 209, maximum 215.</desc><line x1="94.7" y1="60" x2="172.7" y2="60" stroke="currentColor" stroke-width="2"/><line x1="532.3" y1="60" x2="558.3" y2="60" stroke="currentColor" stroke-width="2"/><line x1="94.7" y1="45" x2="94.7" y2="75" stroke="currentColor" stroke-width="2"/><line x1="558.3" y1="45" x2="558.3" y2="75" stroke="currentColor" stroke-width="2"/><rect x="172.7" y="25" width="359.7" height="70" fill="none" stroke="currentColor" stroke-width="3"/><line x1="437.0" y1="25" x2="437.0" y2="95" stroke="currentColor" stroke-width="3"/><line x1="60" y1="120" x2="580" y2="120" stroke="currentColor" stroke-width="1.5"/><line x1="60.0" y1="120" x2="60.0" y2="128" stroke="currentColor"/><text x="60.0" y="146" text-anchor="middle" font-size="16" fill="currentColor">100</text><line x1="146.7" y1="120" x2="146.7" y2="128" stroke="currentColor"/><text x="146.7" y="146" text-anchor="middle" font-size="16" fill="currentColor">120</text><line x1="233.3" y1="120" x2="233.3" y2="128" stroke="currentColor"/><text x="233.3" y="146" text-anchor="middle" font-size="16" fill="currentColor">140</text><line x1="320.0" y1="120" x2="320.0" y2="128" stroke="currentColor"/><text x="320.0" y="146" text-anchor="middle" font-size="16" fill="currentColor">160</text><line x1="406.7" y1="120" x2="406.7" y2="128" stroke="currentColor"/><text x="406.7" y="146" text-anchor="middle" font-size="16" fill="currentColor">180</text><line x1="493.3" y1="120" x2="493.3" y2="128" stroke="currentColor"/><text x="493.3" y="146" text-anchor="middle" font-size="16" fill="currentColor">200</text><line x1="580.0" y1="120" x2="580.0" y2="128" stroke="currentColor"/><text x="580.0" y="146" text-anchor="middle" font-size="16" fill="currentColor">220</text><text x="320" y="166" text-anchor="middle" font-size="15" fill="currentColor">Weights (pounds)</text></svg></figure>
+<label><input type="radio" name="mc17" value="a"> <span>The box</span></label><label><input type="radio" name="mc17" value="b"> <span>The line on the left side of the box</span></label><label><input type="radio" name="mc17" value="c"> <span>The line on the right side of the box</span></label><label><input type="radio" name="mc17" value="d"> <span>The whole plot, from one end to the other</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The box</strong></p><p class="ptr">Where this is: The boxplot example for item 3 on pages 4 to 6 of the notes, and the video "Classroom Example 3.3.3" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="d" data-why="Correct. The median of the 11 rates is 1.11 W/kg." data-miss="{&quot;a&quot;: &quot;Not quite. The printed list is not in order, so its middle entry is not the median. Review: Classroom Example 3.3.3 on page 7 of the notes and the video \&quot;Classroom Example 3.3.3\&quot; on page 7, with part c of item 2 on page 1.&quot;, &quot;b&quot;: &quot;Not quite. Item 2 lists the median, the middle value, not the mean. Review: Classroom Example 3.3.3 on page 7 of the notes and the video \&quot;Classroom Example 3.3.3\&quot; on page 7, with part c of item 2 on page 1.&quot;, &quot;c&quot;: &quot;Not quite. 0.95 is Q1 in this example, not the median. Review: Classroom Example 3.3.3 on page 7 of the notes and the video \&quot;Classroom Example 3.3.3\&quot; on page 7, with part c of item 2 on page 1.&quot;}" data-review="Classroom Example 3.3.3 on page 7 of the notes and the video &quot;Classroom Example 3.3.3&quot; on page 7, with part c of item 2 on page 1.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 18 (Classroom Example 3.3.3).</b> Classroom Example 3.3.3 lists 11 radiation absorption rates (W/kg): <span class="m"><span aria-hidden="true">1.46</span><span class="sr">1 point 4 6</span></span>, <span class="m"><span aria-hidden="true">1.11</span><span class="sr">1 point 1 1</span></span>, <span class="m"><span aria-hidden="true">1.18</span><span class="sr">1 point 1 8</span></span>, <span class="m"><span aria-hidden="true">1.39</span><span class="sr">1 point 3 9</span></span>, <span class="m"><span aria-hidden="true">0.95</span><span class="sr">0 point 9 5</span></span>, <span class="m"><span aria-hidden="true">1.05</span><span class="sr">1 point 0 5</span></span>, <span class="m"><span aria-hidden="true">1.06</span><span class="sr">1 point 0 6</span></span>, <span class="m"><span aria-hidden="true">0.51</span><span class="sr">0 point 5 1</span></span>, <span class="m"><span aria-hidden="true">1.41</span><span class="sr">1 point 4 1</span></span>, <span class="m"><span aria-hidden="true">0.58</span><span class="sr">0 point 5 8</span></span>, <span class="m"><span aria-hidden="true">1.17</span><span class="sr">1 point 1 7</span></span>. Which value is the median in their 5-number summary?</legend>
+<label><input type="radio" name="mc18" value="a"> <span><span class="m"><span aria-hidden="true">1.05</span><span class="sr">1 point 0 5</span></span>, the middle entry of the list as printed</span></label><label><input type="radio" name="mc18" value="b"> <span><span class="m"><span aria-hidden="true">1.08</span><span class="sr">1 point 0 8</span></span>, the mean of the 11 rates, rounded</span></label><label><input type="radio" name="mc18" value="c"> <span><span class="m"><span aria-hidden="true">0.95</span><span class="sr">0 point 9 5</span></span>, the third rate once they are in order</span></label><label><input type="radio" name="mc18" value="d"> <span><span class="m"><span aria-hidden="true">1.11</span><span class="sr">1 point 1 1</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.11</span><span class="sr">1 point 1 1</span></span></strong></p><p class="ptr">Where this is: Classroom Example 3.3.3 on page 7 of the notes and the video "Classroom Example 3.3.3" on page 7, with part c of item 2 on page 1.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Boxplot: item 3, page 4</li><li>Using StatCrunch to Find a Boxplot: pages 4 to 6, video "Using StatCrunch to create a boxplot"</li><li>Classroom Example 3.3.3: page 7, video "Classroom Example 3.3.3"</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. StatCrunch check</h2>
+<p>These checks cover the StatCrunch steps for items 2 and 3 on pages 2 to 6 of the notes, the two StatCrunch videos on pages 2 and 4, and the Classroom Example videos on pages 6 and 7. Have StatCrunch open.</p>
+<div class="q" data-topic="s5" data-mode="num" data-nonneg="1" data-answer="4.1" data-why="Correct. StatCrunch shows Q3 = 4.1 hours." data-miss="{&quot;5.5&quot;: &quot;Not quite. 5.5 is in the Max column of the output, not the Q3 column. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;3&quot;: &quot;Not quite. 3 is in the Median column of the output, not the Q3 column. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;2.2&quot;: &quot;Not quite. 2.2 is in the Q1 column of the output, not the Q3 column. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;3.8&quot;: &quot;Not quite. This is what StatCrunch gives when a value such as 5.5 is left out, so check that all 11 values were entered. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;4.7&quot;: &quot;Not quite. Check that each value was typed exactly as listed, since one mistyped value can shift Q3. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;, &quot;~3.24545~0.006&quot;: &quot;Not quite. This matches the Mean column of the output, not the Q3 column. Review: the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos \&quot;Using StatCrunch to find the 5 number summary\&quot; on page 2 and \&quot;Classroom Example 3.3.3\&quot; on page 7.&quot;}" data-review="the StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos &quot;Using StatCrunch to find the 5 number summary&quot; on page 2 and &quot;Classroom Example 3.3.3&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 19 (5-number summary in StatCrunch).</b> A student tracked hours of screen time on 11 days: <span class="m"><span aria-hidden="true">3.4</span><span class="sr">3 point 4</span></span>, <span class="m"><span aria-hidden="true">1.8</span><span class="sr">1 point 8</span></span>, <span class="m"><span aria-hidden="true">4.1</span><span class="sr">4 point 1</span></span>, <span class="m"><span aria-hidden="true">2.7</span><span class="sr">2 point 7</span></span>, <span class="m"><span aria-hidden="true">2.2</span><span class="sr">2 point 2</span></span>, <span class="m"><span aria-hidden="true">5.5</span><span class="sr">5 point 5</span></span>, <span class="m"><span aria-hidden="true">3.0</span><span class="sr">3 point 0</span></span>, <span class="m"><span aria-hidden="true">1.9</span><span class="sr">1 point 9</span></span>, <span class="m"><span aria-hidden="true">3.8</span><span class="sr">3 point 8</span></span>, <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span>, <span class="m"><span aria-hidden="true">4.7</span><span class="sr">4 point 7</span></span>. Enter the data in StatCrunch yourself and find Q3, in hours.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.1</span><span class="sr">4 point 1</span></span></strong></p><p class="ptr">Where this is: The StatCrunch steps for item 2 on pages 2 and 3 of the notes, and the videos "Using StatCrunch to find the 5 number summary" on page 2 and "Classroom Example 3.3.3" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s5" data-mode="num" data-answer="-2.25" data-why="Correct. StatCrunch shows about −2.2454, which rounds to −2.25." data-miss="{&quot;~196.748~0.006&quot;: &quot;Not quite. This divides only the mean by the standard deviation, which happens when the subtraction is not grouped before the division. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;2.25&quot;: &quot;Not quite. The sign is missing: 212 is below the mean, so the z-score is negative. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;-2.24&quot;: &quot;Not quite. This chops the digits instead of rounding: the third digit after the point is 5. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;-2.2&quot;: &quot;Not quite. The directions ask for two decimal places, not one. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;~-2.2454~0.0006&quot;: &quot;Not quite. This is not rounded yet, and the directions ask for two decimal places. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;-36.6&quot;: &quot;Not quite. This is only the difference, before dividing by the standard deviation. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;, &quot;~-0.14722~0.006&quot;: &quot;Not quite. This divides the difference by the mean instead of the standard deviation. Review: the Formula for z-scores under item 1 on page 1 of the notes, and the videos \&quot;Classroom Example 3.3.1\&quot; on page 6 and \&quot;Classroom Example 3.3.2\&quot; on page 7.&quot;}" data-review="the Formula for z-scores under item 1 on page 1 of the notes, and the videos &quot;Classroom Example 3.3.1&quot; on page 6 and &quot;Classroom Example 3.3.2&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 20 (z-score in StatCrunch).</b> A data set has a mean of <span class="m"><span aria-hidden="true">248.6</span><span class="sr">248 point 6</span></span> and a standard deviation of <span class="m"><span aria-hidden="true">16.3</span><span class="sr">16 point 3</span></span>. Use StatCrunch to find the z-score for a data value of 212. Round to two decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−2.25</span><span class="sr">negative 2 point 2 5</span></span></strong></p><p class="ptr">Where this is: The Formula for z-scores under item 1 on page 1 of the notes, and the videos "Classroom Example 3.3.1" on page 6 and "Classroom Example 3.3.2" on page 7.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="In MyLab, choose Get More Help, then StatCrunch. If it does not open on the first try, close the window and open it again. The Classroom Example 3.3.1, 3.3.2 and 3.3.3 videos show this." value="I could not get StatCrunch to open from MyLab."> I could not get StatCrunch to open from MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Pages 2 and 4 of the notes say you may need to log in at statcrunch.com. Then click Open StatCrunch." value="statcrunch.com asked me to log in."> statcrunch.com asked me to log in.</label><label><input type="checkbox" class="sc-issue" data-tip="Page 2 says homework data sets can be imported without typing them in, and the Classroom Example 3.3.3 video opens the data in StatCrunch from the problem. If you do type data, scan it for major errors." value="Typing in the data took a long time, or I made typos."> Typing in the data took a long time, or I made typos.</label><label><input type="checkbox" class="sc-issue" data-tip="Check that the column with the data is selected under Select Column(s) (page 3) and that every value was entered. Read each value from its own column: Min, Q1, Median, Q3 and Max." value="My 5-number summary did not match."> My 5-number summary did not match.</label><label><input type="checkbox" class="sc-issue" data-tip="Under Other options, uncheck Use fences to identify outliers and check Draw boxes horizontally (page 5). The video &quot;Using StatCrunch to create a boxplot&quot; shows this." value="My boxplot did not look like the one in MyLab."> My boxplot did not look like the one in MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Let the cursor sit on top of the graph for two seconds and it will appear (page 6)." value="I could not find the 5-number summary on the boxplot."> I could not find the 5-number summary on the boxplot.</label><label><input type="checkbox" class="sc-issue" data-tip="In the Classroom Example 3.3.2 video, the expression is typed in Data, then Compute, then Expression, and it starts with a parenthesis so the subtraction happens before the division." value="My z-score from StatCrunch was far too large or too small."> My z-score from StatCrunch was far too large or too small.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 6.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Using StatCrunch to Find the 5-Number Summary: pages 2 and 3, video "Using StatCrunch to find the 5 number summary"</li><li>Using StatCrunch to Find a Boxplot: pages 4 to 6, video "Using StatCrunch to create a boxplot"</li><li>Typing a z-score computation in StatCrunch: videos "Classroom Example 3.3.1" (page 6) and "Classroom Example 3.3.2" (page 7)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 8: I am not sure why the female's weight is the more extreme one."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec3.3-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "z-Scores", "resource": "Item 1 on page 1 of the Section 3.3 notes, and the videos \"Classroom Example 3.3.1\" on page 6 and \"Classroom Example 3.3.2\" on page 7."}, {"id": "s3", "name": "5-Number Summary", "resource": "Item 2 on pages 1 to 3 of the notes, and the video \"Using StatCrunch to find the 5 number summary\" on page 2."}, {"id": "s4", "name": "Boxplots", "resource": "Item 3 on pages 4 to 6 of the notes, the video \"Using StatCrunch to create a boxplot\" on page 4, and the video \"Classroom Example 3.3.3\" on page 7."}, {"id": "s5", "name": "StatCrunch", "resource": "The StatCrunch steps on pages 2 to 6 of the notes, the videos on pages 2 and 4, and the Classroom Example videos on pages 6 and 7."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9))return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='3.3';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s6')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

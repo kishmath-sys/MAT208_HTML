@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 2.3 Corequisite: Graphs That Enlighten and Graphs That Deceive</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 2.3</div>
+<h1>Section 2.3 Corequisite: Graphs That Enlighten and Graphs That Deceive</h1>
+<p>Get ready for the Section 2.3 notes with practice on reading a scale, reading lists of numbers, comparing two amounts and rounding. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Reading a scale<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Reading and checking a list of numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Comparing two amounts<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding large numbers and results<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read the value at any tick mark on a number line or axis, including tick marks with no label.</li><li>Count the values in a list or table, find the smallest and largest, and count values that are "greater than" or "at least" a number.</li><li>Compare two amounts by subtracting or by dividing, and choose which one a question asks for.</li><li>Round large numbers to the nearest thousand, round results to two decimal places, and carry when a 9 rounds up.</li></ul>
+</div>
+<p>Section 2.3 of the notes introduces dotplots and two kinds of graphs that can mislead, and it shows the StatCrunch steps for making a dotplot.</p>
+<p>The notes do very little arithmetic, but their graphs and examples count on a few number skills: reading the numbers on an axis, reading a list of data values, comparing two amounts and rounding. This page gives those skills some practice. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">1.43</span><span class="sr">1 point 4 3</span></span>. Commas, a percent sign, a dollar sign and extra spaces are all fine. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 2.3 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 2.3 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure what a tick mark with no label stands for.</strong><br><button type="button" data-go="s2">Reading a scale</button></li>
+<li><strong>I lose count in long lists, or I mix up "greater than" and "at least."</strong><br><button type="button" data-go="s3">Reading and checking a list of numbers</button></li>
+<li><strong>I am not sure whether to subtract or divide when I compare two amounts.</strong><br><button type="button" data-go="s4">Comparing two amounts</button></li>
+<li><strong>I second-guess myself when I round a number like 59,800 to the nearest thousand.</strong><br><button type="button" data-go="s5">Rounding large numbers and results</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Reading a scale</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the step between tick marks from two labels.</li><li>Read the value at a tick mark that has no label.</li><li>Read a point that sits halfway between two labels.</li><li>Work with steps other than 1, such as 2, 5 or <span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span>.</li></ul>
+</div>
+<h3>Count the spaces, not the tick marks</h3>
+<p>An axis on a graph works like a number line. The tick marks are evenly spaced, and every space between two neighboring tick marks stands for the same amount, called the step. Often only some tick marks have labels.</p>
+<ol class="steps"><li>Pick two labeled tick marks and subtract their labels.</li><li>Count the <strong>spaces</strong> between those two tick marks.</li><li>Divide: the step is the difference between the labels divided by the number of spaces.</li><li>To read a tick mark, start at a label and add one step for each space you move to the right.</li></ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Assuming each tick mark is 1.</strong> The step can be 2, 5, 10, <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> or anything else. Work it out from the labels every time.</li>
+<li><strong>Counting tick marks instead of spaces.</strong> From one label to the next, there is always one more tick mark than there are spaces, because both labeled tick marks get counted.</li>
+<li><strong>Counting only the unlabeled tick marks.</strong> Three unlabeled tick marks between two labels make four spaces, not three.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Read the dot on a number line">
+<h3 style="margin-top:0">Worked example: Read the dot on a number line</h3>
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">100</text><line x1="175.0" y1="30" x2="175.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="320.0" y1="30" x2="320.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="465.0" y1="30" x2="465.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">120</text><circle cx="465.0" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 5 evenly spaced tick marks. The first tick mark is labeled 100 and the fifth is labeled 120. The three tick marks between them have no labels. A dot sits on the fourth tick mark.</figcaption></figure><p>What value is the dot on?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">120 − 100 = 20</span><span class="sr">120 minus 100 equals 20</span></span></span><span class="say">Subtract the two labels.</span></li><li><span class="work">4 spaces</span><span class="say">From 100 to 120 there are 5 tick marks, so there are 4 spaces between them.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">20 ÷ 4 = 5</span><span class="sr">20 divided by 4 equals 5</span></span></span><span class="say">The step is 5. Each space stands for 5.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">100 + 3 × 5 = 115</span><span class="sr">100 + 3 times 5 equals 115</span></span></span><span class="say">The dot is 3 spaces to the right of 100.</span></li></ol><p><strong>Answer: 115</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Find the step from 40 to 60">
+<h3 style="margin-top:0">Finish this one: Find the step from 40 to 60</h3>
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">40</text><line x1="146.0" y1="30" x2="146.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="262.0" y1="30" x2="262.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="378.0" y1="30" x2="378.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="494.0" y1="30" x2="494.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">60</text><circle cx="378.0" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 6 evenly spaced tick marks. The first tick mark is labeled 40 and the sixth is labeled 60. The four tick marks between them have no labels. A dot sits on the fourth tick mark.</figcaption></figure><ol class="steps"><li><span class="work">5 spaces</span><span class="say">There are 6 tick marks from 40 to 60, so there are 5 spaces. Next, divide the difference between the labels by the number of spaces.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;5&quot;: &quot;That divides 20 by 4, the number of unlabeled tick marks. There are 5 spaces from 40 to 60, so the step is 20 divided by 5, which is 4.&quot;, &quot;~3.3333~0.04&quot;: &quot;That divides 20 by 6, the number of tick marks. Divide by the number of spaces, 5, to get 4.&quot;, &quot;1&quot;: &quot;That assumes each tick mark is 1. From 40 to 60 is 20, spread over 5 spaces, so each step is 4.&quot;, &quot;20&quot;: &quot;That is the difference between the labels. Divide it by the 5 spaces: 4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: on the number line above, what is the step between neighboring tick marks?</p>
+<details><summary>Hint</summary><p>The difference between the labels is 20. How many spaces are there from 40 to 60?</p></details>
+<details><summary>Show answer</summary><p><strong>4</strong>, because <span class="m"><span aria-hidden="true">20 ÷ 5 = 4</span><span class="sr">20 divided by 5 equals 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="52" data-miss="{&quot;43&quot;: &quot;That counts each space as 1. Each space is 4, so 3 spaces past 40 is 40 + 12 = 52.&quot;, &quot;55&quot;: &quot;That uses a step of 5. From 40 to 60 there are 5 spaces, so the step is 4 and the dot is at 52.&quot;, &quot;12&quot;: &quot;That is how far the dot is from 40. Add it to 40: 52.&quot;, &quot;56&quot;: &quot;That counts 4 spaces. The dot is on the fourth tick mark, which is 3 spaces past 40: 52.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> On the same number line, what value is the dot on?</p>
+<details><summary>Hint</summary><p>The dot is 3 spaces to the right of 40, and each space is 4.</p></details>
+<details><summary>Show answer</summary><p><strong>52</strong>, because <span class="m"><span aria-hidden="true">40 + 3 × 4 = 52</span><span class="sr">40 + 3 times 4 equals 52</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.8" data-miss="{&quot;2.4&quot;: &quot;That uses a step of 0.1. From 2 to 3 is 1, spread over 5 spaces, so each step is 0.2, and 4 steps is 0.8.&quot;, &quot;2.04&quot;: &quot;That treats each step as 0.01. Each step is 1 divided by 5, which is 0.2, so the dot is at 2.8.&quot;, &quot;3&quot;: &quot;That uses a step of 0.25 from counting the 4 unlabeled tick marks. There are 5 spaces, so the step is 0.2 and the dot is at 2.8.&quot;, &quot;6&quot;: &quot;That counts each space as 1. From 2 to 3 is only 1, so each of the 5 spaces is 0.2: the dot is at 2.8.&quot;, &quot;~2.6667~0.01&quot;: &quot;That divides by 6, the number of tick marks. Divide by the 5 spaces: the step is 0.2 and the dot is at 2.8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> What value is the dot on?</p>
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">2</text><line x1="146.0" y1="30" x2="146.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="262.0" y1="30" x2="262.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="378.0" y1="30" x2="378.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="494.0" y1="30" x2="494.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">3</text><circle cx="494.0" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 6 evenly spaced tick marks. The first tick mark is labeled 2 and the sixth is labeled 3. The four tick marks between them have no labels. A dot sits on the fifth tick mark.</figcaption></figure><details><summary>Hint</summary><p>From 2 to 3 is 1. There are 5 spaces, so each step is <span class="m"><span aria-hidden="true">1 ÷ 5 = 0.2</span><span class="sr">1 divided by 5 equals 0 point 2</span></span>. The dot is 4 spaces past 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.8</span><span class="sr">2 point 8</span></span></strong>, because <span class="m"><span aria-hidden="true">2 + 4 × 0.2 = 2.8</span><span class="sr">2 + 4 times 0 point 2 equals 2 point 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That counts each tick mark as 1. The labels go up by 5, and halfway between 70 and 75 is 72.5.&quot;, &quot;b&quot;: &quot;Halfway between 70 and 75 is half of 5 past 70. Half of 5 is 2.5, so the dot is at 72.5.&quot;, &quot;d&quot;: &quot;That reads the label on the right. The dot is only halfway there: 72.5.&quot;}" data-why="Correct. The step is 5, and half of a step past 70 is 72.5.">
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">60</text><line x1="175.0" y1="30" x2="175.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="175.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">65</text><line x1="320.0" y1="30" x2="320.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="320.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">70</text><line x1="465.0" y1="30" x2="465.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="465.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">75</text><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">80</text><circle cx="392.5" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 5 evenly spaced tick marks labeled 60, 65, 70, 75 and 80. A dot sits exactly halfway between the tick marks labeled 70 and 75.</figcaption></figure><fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> What value is the dot on?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>71</span></label><label><input type="radio" name="mc4" value="b"> <span>72</span></label><label><input type="radio" name="mc4" value="c"> <span><span class="m"><span aria-hidden="true">72.5</span><span class="sr">72 point 5</span></span></span></label><label><input type="radio" name="mc4" value="d"> <span>75</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The labels go up by 5. What is half of 5?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">72.5</span><span class="sr">72 point 5</span></span></strong>, halfway between 70 and 75.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="74" data-miss="{&quot;67&quot;: &quot;That counts each space as 1. From 60 to 70 there are 5 spaces, so each step is 2, and the dot is 2 steps past 70: 74.&quot;, &quot;77.5&quot;: &quot;That uses a step of 2.5 from counting the 4 unlabeled tick marks between 60 and 70. There are 5 spaces, so the step is 2: 74.&quot;, &quot;72&quot;: &quot;That counts one space past 70. The dot is on the second tick mark after 70, so it is 2 steps of 2 past 70: 74.&quot;, &quot;7&quot;: &quot;That is how many spaces the dot is from 60. Each space is 2, so the dot is at 60 + 14 = 74.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> What value is the dot on?</p>
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">60</text><line x1="68.7" y1="30" x2="68.7" y2="50" stroke="currentColor" stroke-width="2"/><line x1="107.3" y1="30" x2="107.3" y2="50" stroke="currentColor" stroke-width="2"/><line x1="146.0" y1="30" x2="146.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="184.7" y1="30" x2="184.7" y2="50" stroke="currentColor" stroke-width="2"/><line x1="223.3" y1="30" x2="223.3" y2="50" stroke="currentColor" stroke-width="2"/><text x="223.3" y="74" text-anchor="middle" font-size="18" fill="currentColor">70</text><line x1="262.0" y1="30" x2="262.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="300.7" y1="30" x2="300.7" y2="50" stroke="currentColor" stroke-width="2"/><line x1="339.3" y1="30" x2="339.3" y2="50" stroke="currentColor" stroke-width="2"/><line x1="378.0" y1="30" x2="378.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="416.7" y1="30" x2="416.7" y2="50" stroke="currentColor" stroke-width="2"/><text x="416.7" y="74" text-anchor="middle" font-size="18" fill="currentColor">80</text><line x1="455.3" y1="30" x2="455.3" y2="50" stroke="currentColor" stroke-width="2"/><line x1="494.0" y1="30" x2="494.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="532.7" y1="30" x2="532.7" y2="50" stroke="currentColor" stroke-width="2"/><line x1="571.3" y1="30" x2="571.3" y2="50" stroke="currentColor" stroke-width="2"/><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">90</text><circle cx="300.7" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 16 evenly spaced tick marks. Every fifth tick mark is labeled: 60, 70, 80 and 90, with four unlabeled tick marks between each pair of labels. A dot sits on the eighth tick mark from the left, which is the second tick mark after the label 70.</figcaption></figure><details><summary>Hint</summary><p>From 60 to 70 there are 5 spaces, so the step is <span class="m"><span aria-hidden="true">10 ÷ 5 = 2</span><span class="sr">10 divided by 5 equals 2</span></span>. Then count steps from the 70.</p></details>
+<details><summary>Show answer</summary><p><strong>74</strong>, because <span class="m"><span aria-hidden="true">70 + 2 × 2 = 74</span><span class="sr">70 + 2 times 2 equals 74</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 2.3</h3>
+<p>The finished dotplot on page 3 of the notes has a horizontal axis labeled 60, 65, 70 and so on up to 90, and the Reminder beside it talks about how far apart the columns of dots are. The two bar graphs on page 4 have vertical axes labeled in steps of 5 and of 10.</p>
+<p><strong>Watch for this:</strong> the step between tick marks. It is often 2, 5 or 10, not 1.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Reading and checking a list of numbers</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Count the values in a list or a table, even when a row of the table is not full.</li><li>Find the smallest and largest values.</li><li>Count the values that are "greater than," "less than," "at least" or "at most" a number.</li><li>Put decimals in order.</li><li>Compare a typed copy of a list with the original to find a typing slip.</li></ul>
+</div>
+<h3>Reading a list carefully</h3>
+<ul>
+<li><strong>Counting.</strong> Tick off each value as you count it, and count in groups of five or ten. In a table, count each column (or each row) and add, so a short row is not counted as full.</li>
+<li><strong>Condition words.</strong> "Greater than 75" leaves out 75 itself. "At least 75" includes 75. In the same way, "less than" leaves the number out and "at most" includes it.</li>
+<li><strong>Ordering decimals.</strong> Line up the decimal points and compare place by place from the left. Adding a zero can help: <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span> is the same as <span class="m"><span aria-hidden="true">2.40</span><span class="sr">2 point 4 0</span></span>, which is larger than <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>.</li>
+<li><strong>Checking a typed copy.</strong> Compare the copy with the original one value at a time, in order. Two digits that trade places, such as 47 and 74, are an easy slip to miss.</li>
+</ul>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Off by one.</strong> Skipping a value or counting one twice. Counting in groups makes this easier to catch.</li>
+<li><strong>Rows times columns.</strong> A table with 5 rows and 3 columns holds 15 values only if every cell is filled.</li>
+<li><strong>Longer looks larger.</strong> <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span> is not larger than <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span> just because it has more digits.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Wait times at a clinic">
+<h3 style="margin-top:0">Worked example: Wait times at a clinic</h3>
+<p>The wait times, in minutes, for 11 patients were: 12, 7, 15, 7, 9, 21, 12, 7, 18, 10, 9. How many values are there, what are the smallest and largest, and how many are at least 12 minutes?</p><ol class="steps"><li><span class="work">12, 7, 15, 7, 9 | 21, 12, 7, 18, 10 | 9</span><span class="say">Count in groups of five: 5, then 10, then 11 values.</span></li><li><span class="work">Smallest 7, largest 21</span><span class="say">Scan the whole list once for each. The 7 appears three times, but the smallest value is still 7.</span></li><li><span class="work">12, 15, 21, 12, 18</span><span class="say">"At least 12" includes both 12s. That makes 5 values.</span></li></ol><p><strong>Answer: 11 values; smallest 7, largest 21; 5 values are at least 12.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Count the pages">
+<h3 style="margin-top:0">Finish this one: Count the pages</h3>
+<p>The numbers of pages a student read on 13 days were: 34, 18, 25, 40, 18, 29, 33, 25, 18, 47, 22, 36, 25. How many values are in the list?</p><ol class="steps"><li><span class="work">34, 18, 25, 40, 18 | 29, 33, 25, 18, 47</span><span class="say">The first two groups of five make 10 values. Next, count what is left after them.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="13" data-miss="{&quot;12&quot;: &quot;That is one short. After the first 10 values, three are left (22, 36 and 25), so there are 13.&quot;, &quot;14&quot;: &quot;That is one too many, so one value was counted twice. After the first 10 values, three are left: 13.&quot;, &quot;10&quot;: &quot;That stops after the first two groups. Three more values follow them: 13.&quot;, &quot;3&quot;: &quot;That counts only the values after the first two groups. Add them to the 10: 13.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: how many values are in the list of pages read?</p>
+<details><summary>Hint</summary><p>After the first 10 values, count the values that are left and add.</p></details>
+<details><summary>Show answer</summary><p><strong>13</strong></p></details>
+</div>
+<p>The next two questions use the soda volumes table from Classroom Example 2.3.1 in the notes. The rows and columns are numbered here only so they are easy to talk about.</p>
+<div class="table-wrap" role="region" aria-label="Volumes of soda table" tabindex="0">
+<table>
+<caption>Volumes of soda (oz), from Classroom Example 2.3.1 on page 5 of the notes</caption>
+<thead><tr><th scope="col">Row</th><th scope="col">Column 1</th><th scope="col">Column 2</th><th scope="col">Column 3</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td>75</td><td>80</td><td>70</td></tr>
+<tr><th scope="row">2</th><td>80</td><td>70</td><td>75</td></tr>
+<tr><th scope="row">3</th><td>65</td><td>70</td><td>70</td></tr>
+<tr><th scope="row">4</th><td>70</td><td>65</td><td>75</td></tr>
+<tr><th scope="row">5</th><td>50</td><td>85</td><td><span class="sr">empty</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="q" data-mode="num" data-answer="14" data-miss="{&quot;15&quot;: &quot;That multiplies 5 rows by 3 columns, but row 5 has only two values. The columns hold 5, 5 and 4 values: 14.&quot;, &quot;13&quot;: &quot;That is one short. The columns hold 5, 5 and 4 values: 14.&quot;, &quot;3&quot;: &quot;That is the number of columns. Count the values in each column and add: 5 + 5 + 4 = 14.&quot;, &quot;5&quot;: &quot;That is the number of rows. Count the values in each column and add: 5 + 5 + 4 = 14.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> How many values are in the soda volumes table?</p>
+<details><summary>Hint</summary><p>Count each column separately. The last column is shorter than the others.</p></details>
+<details><summary>Show answer</summary><p><strong>14</strong>, because <span class="m"><span aria-hidden="true">5 + 5 + 4 = 14</span><span class="sr">5 + 5 + 4 equals 14</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;6&quot;: &quot;That includes the three 75s. \&quot;Greater than 75\&quot; leaves out 75 itself, so only 80, 80 and 85 count: 3.&quot;, &quot;2&quot;: &quot;That misses the 85 in row 5. The values greater than 75 are 80, 80 and 85: 3.&quot;, &quot;1&quot;: &quot;That counts only the largest value. Both 80s are also greater than 75: 3.&quot;, &quot;11&quot;: &quot;That counts the values that are not 85. Look for values above 75: 80, 80 and 85, which makes 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> How many values in the soda volumes table are <strong>greater than</strong> 75?</p>
+<details><summary>Hint</summary><p>Look for values above 75. Do not count the 75s themselves, and check the short last row.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong> (80, 80 and 85)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That puts the shorter decimals first. Length does not decide size: 2.05 is the smallest, because its tenths digit is 0.&quot;, &quot;c&quot;: &quot;That is the right order, but from largest to smallest. The question asks for smallest first.&quot;, &quot;d&quot;: &quot;That reads the digits after the point like whole numbers (4, 05, 5, 45). Compare place by place: 2.05 is smallest and 2.5 is largest.&quot;}" data-why="Correct. As hundredths they are 2.05, 2.40, 2.45 and 2.50.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 9.</b> Which list puts <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span>, <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc9" value="a"> <span><span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>, <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span></span></label><label><input type="radio" name="mc9" value="b"> <span><span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span>, <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span></span></label><label><input type="radio" name="mc9" value="c"> <span><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span>, <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span></span></label><label><input type="radio" name="mc9" value="d"> <span><span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write each with two decimal places: <span class="m"><span aria-hidden="true">2.40</span><span class="sr">2 point 4 0</span></span>, <span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span>, <span class="m"><span aria-hidden="true">2.50</span><span class="sr">2 point 5 0</span></span>. Then compare.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.05</span><span class="sr">2 point 0 5</span></span>, <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">2.45</span><span class="sr">2 point 4 5</span></span>, <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;The 68 in the copy is the mistake, but the question asks for the original value. In position 16, the original 86 was typed as 68.&quot;, &quot;b&quot;: &quot;The 88 is the 4th value in both lists. Keep comparing one value at a time: in position 16, 86 became 68.&quot;, &quot;d&quot;: &quot;The 66 is the 6th value in both lists. Keep comparing one value at a time: in position 16, 86 became 68.&quot;}" data-why="Correct. The 16th value, 86, was typed as 68. The two digits traded places.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Here are the 24 blood pressure values from the example on page 1 of the notes, and below them a copy someone typed. One value in the copy was typed wrong. Which <strong>original</strong> value was typed wrong?<span class="say" style="margin-top:.5rem">Original: 62, 70, 72, 88, 70, 66, 68, 70, 82, 74, 90, 62, 70, 76, 90, 86, 60, 78, 82, 78, 84, 76, 60, 64</span><span class="say">Typed copy: 62, 70, 72, 88, 70, 66, 68, 70, 82, 74, 90, 62, 70, 76, 90, 68, 60, 78, 82, 78, 84, 76, 60, 64</span></legend>
+<label><input type="radio" name="mc10" value="a"> <span>68</span></label><label><input type="radio" name="mc10" value="b"> <span>88</span></label><label><input type="radio" name="mc10" value="c"> <span>86</span></label><label><input type="radio" name="mc10" value="d"> <span>66</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Compare the two lists one value at a time. Count positions in groups of five so you do not lose your place.</p></details>
+<details><summary>Show answer</summary><p><strong>86</strong>, the 16th value, was typed as 68.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 2.3</h3>
+<p>The example on page 1 of the notes lists 24 blood pressure values to enter into StatCrunch, and the Important Notes on page 2 say to scan typed data for major errors. Classroom Example 2.3.1 on page 5 gives its data as a table of soda volumes, and its video works with that table.</p>
+<p><strong>Watch for this:</strong> a table whose last row is not full, and two digits that trade places when a value is typed.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Comparing two amounts</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find how much more one amount is than another by subtracting.</li><li>Find how many times as large one amount is as another by dividing.</li><li>Choose subtraction or division from the wording of a question.</li><li>Put the right amount on top when you divide.</li></ul>
+</div>
+<h3>Two ways to compare</h3>
+<ul>
+<li><strong>How much more?</strong> Subtract: larger amount minus smaller amount. The answer has the same units as the amounts, such as dollars or miles.</li>
+<li><strong>How many times as large?</strong> Divide: the amount being described divided by the amount it is compared with. The answer has no units. A result of 2 means twice as large, and a result of 1 means the two are equal.</li>
+</ul>
+<p>The same pair of numbers gives two different answers, so read the question for "how much more" or "how many times."</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Subtracting when the question says "times."</strong> "How many times as much" always means divide.</li>
+<li><strong>Flipping the division.</strong> If the amount being described is the larger one, the answer must be more than 1. An answer less than 1 means the division is upside down.</li>
+<li><strong>Treating percents differently.</strong> To compare 60% with 40%, divide the percent numbers just like any other amounts: <span class="m"><span aria-hidden="true">60 ÷ 40 = 1.5</span><span class="sr">60 divided by 40 equals 1 point 5</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Two gym memberships">
+<h3 style="margin-top:0">Worked example: Two gym memberships</h3>
+<p>Gym A costs $45 a month and Gym B costs $30 a month. How much more does Gym A cost, and how many times as much as Gym B does Gym A cost?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">45 − 30 = 15</span><span class="sr">45 minus 30 equals 15</span></span></span><span class="say">"How much more" means subtract. Gym A costs $15 more.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">45 ÷ 30 = 1.5</span><span class="sr">45 divided by 30 equals 1 point 5</span></span></span><span class="say">"How many times as much" means divide. Gym A is the amount being described, so it goes on top.</span></li><li><span class="work">Check: 1.5 is more than 1</span><span class="say">Gym A costs more, so the answer should be more than 1. It is.</span></li></ol><p><strong>Answer: $15 more, and <span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span> times as much</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Train and bus fares">
+<h3 style="margin-top:0">Finish this one: Train and bus fares</h3>
+<p>A train ticket costs $15 and a bus ticket costs $6. How many times as much as the bus ticket does the train ticket cost?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">15 ÷ 6</span><span class="sr">15 divided by 6</span></span></span><span class="say">The train fare is the amount being described, so it goes on top. Next, divide.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="2.5" data-miss="{&quot;9&quot;: &quot;That subtracts, which tells how many dollars more. \&quot;How many times\&quot; means divide: 15 divided by 6 is 2.5.&quot;, &quot;0.4&quot;: &quot;The division is flipped. That is 6 divided by 15. The train fare goes on top: 15 divided by 6 is 2.5.&quot;, &quot;21&quot;: &quot;That adds the two fares. \&quot;How many times\&quot; means divide: 15 divided by 6 is 2.5.&quot;, &quot;90&quot;: &quot;That multiplies the fares. \&quot;How many times\&quot; means divide: 15 divided by 6 is 2.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Finish it: how many times as much as the bus ticket does the train ticket cost?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">15 ÷ 6</span><span class="sr">15 divided by 6</span></span>. The answer should be more than 2, since 2 bus tickets cost only $12.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">15 ÷ 6 = 2.5</span><span class="sr">15 divided by 6 equals 2 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;Subtracting tells how many dollars more the phone costs. \&quot;How many times\&quot; means divide.&quot;, &quot;b&quot;: &quot;That division is flipped. It gives a number less than 1, but the phone costs more than the tablet. The phone goes on top.&quot;, &quot;d&quot;: &quot;Multiplying the prices does not compare them. \&quot;How many times\&quot; means divide the phone price by the tablet price.&quot;}" data-why="Correct. The phone is the amount being described, so it goes on top. The result is 2.4.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 12.</b> A phone costs $840 and a tablet costs $350. Which calculation answers "How many times as much as the tablet does the phone cost?"</legend>
+<label><input type="radio" name="mc12" value="a"> <span><span class="m"><span aria-hidden="true">840 − 350</span><span class="sr">840 minus 350</span></span></span></label><label><input type="radio" name="mc12" value="b"> <span><span class="m"><span aria-hidden="true">350 ÷ 840</span><span class="sr">350 divided by 840</span></span></span></label><label><input type="radio" name="mc12" value="c"> <span><span class="m"><span aria-hidden="true">840 ÷ 350</span><span class="sr">840 divided by 350</span></span></span></label><label><input type="radio" name="mc12" value="d"> <span><span class="m"><span aria-hidden="true">840 × 350</span><span class="sr">840 times 350</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The question is about the phone, compared with the tablet. Which choice divides and puts the phone on top?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">840 ÷ 350</span><span class="sr">840 divided by 350</span></span></strong>, which is <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.4" data-miss="{&quot;49000&quot;: &quot;That subtracts, which tells how many more residents. \&quot;How many times\&quot; means divide: 84,000 divided by 35,000 is 2.4.&quot;, &quot;~0.4167~0.004&quot;: &quot;The division is flipped. That is 35,000 divided by 84,000. Town A goes on top: 2.4.&quot;, &quot;119000&quot;: &quot;That adds the populations. \&quot;How many times\&quot; means divide: 84,000 divided by 35,000 is 2.4.&quot;, &quot;24&quot;: &quot;The decimal point slipped. 84,000 divided by 35,000 is 2.4, a little less than 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Town A has 84,000 residents and Town B has 35,000 residents. How many times as many residents as Town B does Town A have?</p>
+<details><summary>Hint</summary><p>Divide Town A by Town B. A quick check: 2 times 35,000 is 70,000, so the answer is a bit more than 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span></strong>, because <span class="m"><span aria-hidden="true">84,000 ÷ 35,000 = 2.4</span><span class="sr">84,000 divided by 35,000 equals 2 point 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.43" data-miss="{&quot;1.44&quot;: &quot;That rounds in steps (1.4348 to 1.435 to 1.44). Only the digit right after the hundredths place counts, and it is 4: 1.43.&quot;, &quot;1.4&quot;: &quot;That is rounded to one decimal place. Two decimal places keeps two digits after the point: 1.43.&quot;, &quot;~0.698~0.003&quot;: &quot;The division is flipped. That is 23 divided by 33. Monday goes on top: 33 divided by 23 is about 1.43.&quot;, &quot;10&quot;: &quot;That subtracts, which tells how many miles more. \&quot;How many times\&quot; means divide: about 1.43.&quot;, &quot;1.435&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 1.43.&quot;, &quot;~1.434783~0.0001&quot;: &quot;That is not rounded yet. Two decimal places keeps two digits after the point: 1.43.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> A delivery driver drove 33 miles on Monday and 23 miles on Tuesday. How many times as far on Monday as on Tuesday did the driver go? Round to two decimal places.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">33 ÷ 23 = 1.4347…</span><span class="sr">33 divided by 23 equals 1 point 4 3 4 7 and more digits.</span></span> The digit after the hundredths place is 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.43</span><span class="sr">1 point 4 3</span></span></strong>, because <span class="m"><span aria-hidden="true">33 ÷ 23 = 1.4347…</span><span class="sr">33 divided by 23 equals 1 point 4 3 4 7 and more digits,</span></span> rounds to <span class="m"><span aria-hidden="true">1.43</span><span class="sr">1 point 4 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.5" data-miss="{&quot;24&quot;: &quot;That subtracts, which tells how much larger. \&quot;How many times\&quot; means divide: 72 divided by 48 is 1.5.&quot;, &quot;~0.6667~0.004&quot;: &quot;The division is flipped. That is 48 divided by 72. The first percent goes on top: 1.5.&quot;, &quot;150&quot;: &quot;That writes the answer as a percent. The question asks how many times as large, which is 1.5.&quot;, &quot;120&quot;: &quot;That adds the percents. \&quot;How many times\&quot; means divide: 72 divided by 48 is 1.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> In a survey, 72% of one group and 48% of another group said yes. How many times as large is the first percent as the second?</p>
+<details><summary>Hint</summary><p>Divide the percent numbers just like any other amounts: <span class="m"><span aria-hidden="true">72 ÷ 48</span><span class="sr">72 divided by 48</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span></strong>, because <span class="m"><span aria-hidden="true">72 ÷ 48 = 1.5</span><span class="sr">72 divided by 48 equals 1 point 5</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 2.3</h3>
+<p>The Pictographs part of the notes on page 5 compares two salaries by dividing one by the other.</p>
+<p><strong>Watch for this:</strong> which amount goes on top when you divide, and whether the question asks "how much more" or "how many times."</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding large numbers and results</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round a whole number to the nearest thousand or the nearest hundred.</li><li>Carry correctly when a 9 rounds up.</li><li>Round each amount first when a question says to, then divide.</li><li>Round a result to two decimal places.</li></ul>
+</div>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep. For the nearest thousand, that is the thousands digit. For two decimal places, it is the hundredths digit, the second digit after the point.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>In a whole number, replace every digit after the kept digit with 0. After a decimal point, drop them.</li>
+</ol>
+<h3>Four slips to watch for</h3>
+<ul>
+<li><strong>Chopping instead of rounding.</strong> 26,700 to the nearest thousand is 27,000, not 26,000. The 7 after the kept digit means round up.</li>
+<li><strong>Rounding in steps from the right.</strong> 14,482 to the nearest thousand is 14,000. Rounding to 14,480, then 14,500, then 15,000 is a slip. Only the hundreds digit, 4, matters.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. 59,800 to the nearest thousand is 60,000.</li>
+<li><strong>Looking at the wrong digit.</strong> For the nearest thousand, the deciding digit is the hundreds digit, one place to the right of the thousands digit.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 47,582 two ways">
+<h3 style="margin-top:0">Worked example: Round 47,582 two ways</h3>
+<p>Round 47,582 to the nearest thousand, and then to the nearest hundred.</p><ol class="steps"><li><span class="work">Nearest thousand: keep the 7, look at the 5</span><span class="say">The 5 is 5 or more, so the 7 becomes 8, and the digits after it become zeros: 48,000.</span></li><li><span class="work">Nearest hundred: keep the 5, look at the 8</span><span class="say">The 8 is 5 or more, so the 5 becomes 6: 47,600.</span></li></ol><p><strong>Answer: 48,000 to the nearest thousand and 47,600 to the nearest hundred.</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Nearest thousand" ends in three zeros. "Two decimal places" means exactly two digits after the point. When a question says to round each amount first, round before you do anything else.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 38,512 to the nearest thousand">
+<h3 style="margin-top:0">Finish this one: Round 38,512 to the nearest thousand</h3>
+<p>Round 38,512 to the nearest thousand.</p><ol class="steps"><li><span class="work">Kept digit: the 8 in the thousands place. Next digit: 5.</span><span class="say">The 5 is 5 or more, so the 8 goes up by 1. Next, replace the digits after it with zeros.</span></li></ol><p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="39000" data-miss="{&quot;38000&quot;: &quot;That chops off the digits instead of rounding. The next digit is 5, so the 8 goes up: 39,000.&quot;, &quot;38500&quot;: &quot;That is rounded to the nearest hundred. The nearest thousand ends in three zeros: 39,000.&quot;, &quot;40000&quot;: &quot;That is rounded to the nearest ten thousand. Keep the thousands digit: 39,000.&quot;, &quot;39&quot;: &quot;That drops the zeros. The answer is still a number in the thousands: 39,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> Finish it: what is 38,512 rounded to the nearest thousand?</p>
+<details><summary>Hint</summary><p>The 8 becomes 9, and the three digits after it become zeros.</p></details>
+<details><summary>Show answer</summary><p><strong>39,000</strong> (typing 39000 is fine)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="61000" data-miss="{&quot;62000&quot;: &quot;That rounds in steps from the right (61,449 to 61,450 to 61,500 to 62,000). Only the hundreds digit counts, and it is 4: 61,000.&quot;, &quot;61400&quot;: &quot;That is rounded to the nearest hundred. The nearest thousand ends in three zeros: 61,000.&quot;, &quot;61500&quot;: &quot;That rounds the 449 up to 500. For the nearest thousand, only the hundreds digit, 4, counts: 61,000.&quot;, &quot;60000&quot;: &quot;That is rounded to the nearest ten thousand. Keep the thousands digit, 1: 61,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Round 61,449 to the nearest thousand.</p>
+<details><summary>Hint</summary><p>The kept digit is the 1 in the thousands place. Look only at the next digit, the 4. Ignore the 49 after it.</p></details>
+<details><summary>Show answer</summary><p><strong>61,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="50000" data-miss="{&quot;49000&quot;: &quot;That chops off the digits. The hundreds digit is 6, so the 9 goes up, becomes 0 and carries: 50,000.&quot;, &quot;40000&quot;: &quot;When the 9 goes up, it becomes 0 and adds 1 to the 4 on its left. 49 thousand becomes 50 thousand: 50,000.&quot;, &quot;410000&quot;: &quot;When the 9 goes up, it does not become 10 in its place. It becomes 0 and carries 1 to the left: 50,000.&quot;, &quot;49600&quot;: &quot;That is rounded to the nearest hundred. The nearest thousand ends in three zeros: 50,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Round 49,630 to the nearest thousand.</p>
+<details><summary>Hint</summary><p>The hundreds digit is 6, so the 9 goes up. Follow the carry to the left.</p></details>
+<details><summary>Show answer</summary><p><strong>50,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.50" data-miss="{&quot;1.48&quot;: &quot;That divides the exact prices. The question says to round each price to the nearest thousand first: 42,000 divided by 28,000 is 1.50.&quot;, &quot;1.46&quot;: &quot;That chops 41,870 to 41,000. Its hundreds digit is 8, so it rounds up to 42,000. Then 42,000 divided by 28,000 is 1.50.&quot;, &quot;14000&quot;: &quot;That subtracts the rounded prices. \&quot;How many times\&quot; means divide: 42,000 divided by 28,000 is 1.50.&quot;, &quot;13630&quot;: &quot;That subtracts the exact prices. Round each to the nearest thousand, then divide: 1.50.&quot;, &quot;~0.6667~0.004&quot;: &quot;The division is flipped. The first price goes on top: 42,000 divided by 28,000 is 1.50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Two prices are $41,870 and $28,240. Round each one to the nearest thousand first. Then find how many times as large the first rounded price is as the second. Round to two decimal places.</p>
+<details><summary>Hint</summary><p>41,870 rounds to 42,000 and 28,240 rounds to 28,000. Then divide.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.50</span><span class="sr">1 point 5 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span> is fine), because <span class="m"><span aria-hidden="true">42,000 ÷ 28,000 = 1.5</span><span class="sr">42,000 divided by 28,000 equals 1 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.00" data-miss="{&quot;1.99&quot;: &quot;That chops instead of rounding. The calculator shows 1.9966..., and the third digit after the point is 6, so the second 9 goes up and carries all the way: 2.00.&quot;, &quot;1.997&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two, and rounding 1.9966... gives 2.00.&quot;, &quot;1.9&quot;: &quot;That chops to one decimal place. Round 1.9966... to two decimal places: the 9s carry and give 2.00.&quot;, &quot;~0.5008~0.0009&quot;: &quot;The division is flipped. That is 300 divided by 599. Divide 599 by 300.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Divide 599 by 300 and round to two decimal places.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">599 ÷ 300 = 1.9966…</span><span class="sr">599 divided by 300 equals 1 point 9 9 6 6 and more digits</span></span>. The third digit after the point is 6, so the hundredths digit goes up. Both 9s carry.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.00</span><span class="sr">2 point 0 0</span></span></strong> (typing 2 is accepted too)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 2.3</h3>
+<p>The pictograph example on page 5 of the notes labels two salaries, $29,633 and $50,433, and then works with them rounded to the nearest thousand. Its result is given to two decimal places.</p>
+<p><strong>Watch for this:</strong> a 9 that rounds up and carries, as in $29,633.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="73000" data-miss="{&quot;72000&quot;: &quot;That chops off the digits. The hundreds digit is 5, so the 2 goes up: 73,000.&quot;, &quot;72500&quot;: &quot;That is rounded to the nearest hundred. The nearest thousand ends in three zeros: 73,000.&quot;, &quot;70000&quot;: &quot;That is rounded to the nearest ten thousand. Keep the thousands digit: 73,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Round 72,518 to the nearest thousand.</p>
+<details><summary>Hint</summary><p>The kept digit is the 2. Look at the hundreds digit right after it.</p></details>
+<details><summary>Show answer</summary><p><strong>73,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="15" data-miss="{&quot;3&quot;: &quot;That counts each space as 1. From 0 to 20 there are 4 spaces, so each step is 5: the dot is at 15.&quot;, &quot;12&quot;: &quot;That uses a step of 4 from dividing 20 by the 5 tick marks. Divide by the 4 spaces: the step is 5 and the dot is at 15.&quot;, &quot;20&quot;: &quot;That uses a step of about 6.67 from counting the 3 unlabeled tick marks, or reads the next label. There are 4 spaces from 0 to 20, so the step is 5: 15.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> What value is the dot on?</p>
+<figure class="axisfig"><svg viewBox="0 0 640 90" width="640" height="90" aria-hidden="true" focusable="false"><line x1="15" y1="40" x2="625" y2="40" stroke="currentColor" stroke-width="2"/><line x1="30.0" y1="30" x2="30.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="30.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">0</text><line x1="102.5" y1="30" x2="102.5" y2="50" stroke="currentColor" stroke-width="2"/><line x1="175.0" y1="30" x2="175.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="247.5" y1="30" x2="247.5" y2="50" stroke="currentColor" stroke-width="2"/><line x1="320.0" y1="30" x2="320.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="320.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">20</text><line x1="392.5" y1="30" x2="392.5" y2="50" stroke="currentColor" stroke-width="2"/><line x1="465.0" y1="30" x2="465.0" y2="50" stroke="currentColor" stroke-width="2"/><line x1="537.5" y1="30" x2="537.5" y2="50" stroke="currentColor" stroke-width="2"/><line x1="610.0" y1="30" x2="610.0" y2="50" stroke="currentColor" stroke-width="2"/><text x="610.0" y="74" text-anchor="middle" font-size="18" fill="currentColor">40</text><circle cx="247.5" cy="40" r="8" fill="currentColor"/></svg><figcaption>A number line with 9 evenly spaced tick marks. The first is labeled 0, the fifth is labeled 20 and the ninth is labeled 40. The other tick marks have no labels. A dot sits on the fourth tick mark.</figcaption></figure><details><summary>Hint</summary><p>From 0 to 20 there are 4 spaces.</p></details>
+<details><summary>Show answer</summary><p><strong>15</strong>, because <span class="m"><span aria-hidden="true">3 × 5 = 15</span><span class="sr">3 times 5 equals 15</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3" data-miss="{&quot;12.4&quot;: &quot;That subtracts, which tells how many gallons more. \&quot;How many times\&quot; means divide: 18.6 divided by 6.2 is 3.&quot;, &quot;~0.3333~0.004&quot;: &quot;The division is flipped. The first shop goes on top: 18.6 divided by 6.2 is 3.&quot;, &quot;24.8&quot;: &quot;That adds the amounts. \&quot;How many times\&quot; means divide: 18.6 divided by 6.2 is 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> One coffee shop sold <span class="m"><span aria-hidden="true">18.6</span><span class="sr">18 point 6</span></span> gallons of iced tea in a week, and another sold <span class="m"><span aria-hidden="true">6.2</span><span class="sr">6 point 2</span></span> gallons. How many times as much iced tea did the first shop sell?</p>
+<details><summary>Hint</summary><p>Divide the first amount by the second.</p></details>
+<details><summary>Show answer</summary><p><strong>3</strong>, because <span class="m"><span aria-hidden="true">18.6 ÷ 6.2 = 3</span><span class="sr">18 point 6 divided by 6 point 2 equals 3</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="8" data-miss="{&quot;5&quot;: &quot;That leaves out the three 30s. \&quot;At least 30\&quot; includes 30 itself: 8.&quot;, &quot;3&quot;: &quot;That counts the scores below 30. The question asks for scores of 30 or more: 8.&quot;, &quot;11&quot;: &quot;That counts every score. Leave out 28, 22 and 19, which are below 30: 8.&quot;, &quot;7&quot;: &quot;That is one short. The scores of 30 or more are 35, 30, 41, 30, 37, 30, 45 and 33: 8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Quiz scores: 28, 35, 30, 41, 30, 22, 37, 30, 45, 19, 33. How many scores are <strong>at least</strong> 30?</p>
+<details><summary>Hint</summary><p>"At least 30" means 30 or more, so the 30s count.</p></details>
+<details><summary>Show answer</summary><p><strong>8</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.24" data-miss="{&quot;3.25&quot;: &quot;That rounds in steps from the right (3.2449 to 3.245 to 3.25). Only the digit right after the hundredths place counts, and it is 4: 3.24.&quot;, &quot;3.2&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 3.24.&quot;, &quot;3.245&quot;: &quot;That keeps three digits after the point. Two decimal places keeps two: 3.24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Round <span class="m"><span aria-hidden="true">3.2449</span><span class="sr">3 point 2 4 4 9</span></span> to two decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 4 in the hundredths place. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.24</span><span class="sr">3 point 2 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That swaps the two results. Subtracting gives 160 more bikes, and dividing gives 3 times as many.&quot;, &quot;c&quot;: &quot;160 is the difference, from subtracting. \&quot;Times as many\&quot; comes from dividing: 240 divided by 80 is 3.&quot;, &quot;d&quot;: &quot;That flips the comparison. Store A sold more, so Store A sold 3 times as many as Store B.&quot;}" data-why="Correct. 240 minus 80 is 160, and 240 divided by 80 is 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 26.</b> Store A sold 240 bikes last year and Store B sold 80. Which statement is correct?</legend>
+<label><input type="radio" name="mc26" value="a"> <span>Store A sold 160 more bikes, which is 3 times as many as Store B.</span></label><label><input type="radio" name="mc26" value="b"> <span>Store A sold 3 more bikes, which is 160 times as many as Store B.</span></label><label><input type="radio" name="mc26" value="c"> <span>Store A sold 160 times as many bikes as Store B did.</span></label><label><input type="radio" name="mc26" value="d"> <span>Store B sold 3 times as many bikes as Store A did.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find both <span class="m"><span aria-hidden="true">240 − 80</span><span class="sr">240 minus 80</span></span> and <span class="m"><span aria-hidden="true">240 ÷ 80</span><span class="sr">240 divided by 80</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>Store A sold 160 more bikes, which is 3 times as many as Store B.</strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with reading a scale, reading and checking lists of numbers, comparing two amounts, and rounding. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec2.3-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

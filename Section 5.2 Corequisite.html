@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 5.2 Corequisite: Binomial Probability Distributions</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 5.2</div>
+<h1>Section 5.2 Corequisite: Binomial Probability Distributions</h1>
+<p>Get ready for the Section 5.2 notes with practice on the decimal, square root, rounding and inequality skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Percents as decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Subtracting from 1 and multiplying decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Square roots and order of operations<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Rounding to three or four decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Inequality symbols and comparing decimals<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a percent to a decimal, including percents such as <span class="m"><span aria-hidden="true">41.5%</span><span class="sr">41 point 5 percent</span></span> and <span class="m"><span aria-hidden="true">0.4%</span><span class="sr">0 point 4 percent</span></span>.</li><li>Subtract a decimal from 1 and multiply a whole number by a decimal.</li><li>Find a square root of a product and work out expressions such as <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span> in the right order.</li><li>Round to three or four decimal places, including numbers with zeros right after the point.</li><li>Read the inequality symbols and compare decimals of different lengths.</li></ul>
+</div>
+<p>Section 5.2 of the notes introduces binomial probability distributions, shows how to find binomial probabilities in StatCrunch, and gives formulas for the mean and standard deviation of a binomial distribution.</p>
+<p>The computations in those notes assume you can already work with decimals: changing percents to decimals, subtracting from 1, multiplying, taking square roots, rounding to three or four decimal places, and reading inequality symbols. Page 3 of the notes lists the inequality symbols only as a quick reminder. This page gives those number skills more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>. Commas and extra spaces are fine. When a question asks for a decimal, leave off the percent sign. Follow the rounding direction in each question. StatCrunch is the calculator for this course, and the Section 5.2 notes show how to use it. For practice on this page, any calculator with a square root key is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 5.2 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am never sure whether <span class="m"><span aria-hidden="true">27.5%</span><span class="sr">27 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.275</span><span class="sr">0 point 2 7 5</span></span> or <span class="m"><span aria-hidden="true">2.75</span><span class="sr">2 point 7 5</span></span>.</strong><br><button type="button" data-go="s2">Percents as decimals</button></li>
+<li><strong>I get stuck on problems like <span class="m"><span aria-hidden="true">1 − 0.83</span><span class="sr">1 minus 0 point 8 3</span></span> or <span class="m"><span aria-hidden="true">45 × 0.6</span><span class="sr">45 times 0 point 6</span></span>.</strong><br><button type="button" data-go="s3">Subtracting from 1 and multiplying decimals</button></li>
+<li><strong>I am not sure what a square root sign covers, or what to do first in <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span>.</strong><br><button type="button" data-go="s4">Square roots and order of operations</button></li>
+<li><strong>I lose count of decimal places when a number starts with zeros, like <span class="m"><span aria-hidden="true">0.0472</span><span class="sr">0 point 0 4 7 2</span></span>.</strong><br><button type="button" data-go="s5">Rounding to three or four decimal places</button></li>
+<li><strong>I mix up <span class="m"><span aria-hidden="true">≤</span><span class="sr">the less than or equal to symbol</span></span> and <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">the less than symbol</span></span>, or I think <span class="m"><span aria-hidden="true">0.0412</span><span class="sr">0 point 0 4 1 2</span></span> is bigger than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</strong><br><button type="button" data-go="s6">Inequality symbols and comparing decimals</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Percents as decimals</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a whole-number percent to a decimal, including one-digit percents such as 8%.</li><li>Change a percent with a decimal in it, such as <span class="m"><span aria-hidden="true">41.5%</span><span class="sr">41 point 5 percent</span></span>, to a decimal.</li><li>Change a percent less than 1%, such as <span class="m"><span aria-hidden="true">0.4%</span><span class="sr">0 point 4 percent</span></span>, to a decimal.</li><li>Compare numbers when some are percents and some are decimals.</li></ul>
+</div>
+<h3>Percent means "out of 100"</h3>
+<p>To change a percent to a decimal, drop the percent sign and divide by 100. Dividing by 100 moves the decimal point two places to the <strong>left</strong>. If the percent has no decimal point showing, it sits at the end: 64% is the same as <span class="m"><span aria-hidden="true">64.%</span><span class="sr">64 point percent</span></span>. Fill any empty places with zeros.</p>
+<div class="table-wrap" role="region" aria-label="Percents and their decimals" tabindex="0">
+<table>
+<caption>Percents and their decimals</caption>
+<thead><tr><th scope="col">Percent</th><th scope="col">Divide by 100</th><th scope="col">Decimal</th></tr></thead>
+<tbody>
+<tr><th scope="row">52%</th><td><span class="m"><span aria-hidden="true">52 ÷ 100</span><span class="sr">52 divided by 100</span></span></td><td><span class="m"><span aria-hidden="true">0.52</span><span class="sr">0 point 5 2</span></span></td></tr>
+<tr><th scope="row">3%</th><td><span class="m"><span aria-hidden="true">3 ÷ 100</span><span class="sr">3 divided by 100</span></span></td><td><span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span></td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">12.5%</span><span class="sr">12 point 5 percent</span></span></th><td><span class="m"><span aria-hidden="true">12.5 ÷ 100</span><span class="sr">12 point 5 divided by 100</span></span></td><td><span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span></td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">0.2%</span><span class="sr">0 point 2 percent</span></span></th><td><span class="m"><span aria-hidden="true">0.2 ÷ 100</span><span class="sr">0 point 2 divided by 100</span></span></td><td><span class="m"><span aria-hidden="true">0.002</span><span class="sr">0 point 0 0 2</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Moving only one place.</strong> 3% is <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span>, not <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span>. <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> is 30%.</li>
+<li><strong>Moving the point in the wrong direction.</strong> Going from a percent to a decimal always makes the number smaller. If your decimal is bigger than the percent number, you multiplied.</li>
+<li><strong>Dropping the percent sign and stopping.</strong> <span class="m"><span aria-hidden="true">0.2%</span><span class="sr">0 point 2 percent</span></span> is not <span class="m"><span aria-hidden="true">0.2</span><span class="sr">0 point 2</span></span>. It is still a percent, so it needs to be divided by 100: <span class="m"><span aria-hidden="true">0.002</span><span class="sr">0 point 0 0 2</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 27.5% as a decimal">
+<h3 style="margin-top:0">Worked example: Write 27.5% as a decimal</h3>
+<p>Write <span class="m"><span aria-hidden="true">27.5%</span><span class="sr">27 point 5 percent</span></span> as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">27.5 ÷ 100</span><span class="sr">27 point 5 divided by 100</span></span></span><span class="say">Percent to decimal means divide by 100.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">27.5 → 2.75 → 0.275</span><span class="sr">27 point 5, then 2 point 7 5, then 0 point 2 7 5</span></span></span><span class="say">Move the decimal point one place left, then a second place left.</span></li><li><span class="work">Check: <span class="m"><span aria-hidden="true">0.275</span><span class="sr">0 point 2 7 5</span></span> is a little more than <span class="m"><span aria-hidden="true">0.25</span><span class="sr">0 point 2 5</span></span>, and 25% is a quarter</span><span class="say">27.5% is a little more than 25%, so the answer makes sense.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.275</span><span class="sr">0 point 2 7 5</span></span> (not <span class="m"><span aria-hidden="true">2.75</span><span class="sr">2 point 7 5</span></span>, which would be 275%)</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 64% as a decimal">
+<h3 style="margin-top:0">Finish this one: Write 64% as a decimal</h3>
+<p>Write 64% as a decimal.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">64 ÷ 100</span><span class="sr">64 divided by 100</span></span></span><span class="say">The decimal point starts after the 4. Dividing by 100 moves it two places left.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.64" data-form="decimal" data-miss="{&quot;6.4&quot;: &quot;That divides by 10, which moves the point only one place. Divide by 100 to move it two places: 0.64.&quot;, &quot;64&quot;: &quot;That is still the percent number. Divide by 100 to change it to a decimal: 0.64.&quot;, &quot;0.064&quot;: &quot;That moves the point three places. Dividing by 100 moves it two places: 0.64.&quot;, &quot;6400&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: write 64% as a decimal.</p>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">64.</span><span class="sr">64 point</span></span> and move the point two places left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.64</span><span class="sr">0 point 6 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.08" data-form="decimal" data-miss="{&quot;0.8&quot;: &quot;This is the one-place slip. 0.8 is 80%. From 8, move the point two places left, filling the empty place with a zero: 0.08.&quot;, &quot;8&quot;: &quot;That is still the percent number. Divide by 100: 0.08.&quot;, &quot;0.008&quot;: &quot;That moves the point three places. Two places left from 8 gives 0.08.&quot;, &quot;800&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Write 8% as a decimal.</p>
+<details><summary>Hint</summary><p>The point starts after the 8. Moving it two places left needs a zero in front of the 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.415" data-form="decimal" data-miss="{&quot;4.15&quot;: &quot;That moves the point only one place. Start at 41.5 and move the point two places left: 0.415.&quot;, &quot;0.0415&quot;: &quot;That moves the point three places. Two places left from 41.5 gives 0.415.&quot;, &quot;41.5&quot;: &quot;That is still the percent number. Divide by 100: 0.415.&quot;, &quot;4150&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Write <span class="m"><span aria-hidden="true">41.5%</span><span class="sr">41 point 5 percent</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">41.5</span><span class="sr">41 point 5</span></span>. One move left gives <span class="m"><span aria-hidden="true">4.15</span><span class="sr">4 point 1 5</span></span>. Make one more move.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.415</span><span class="sr">0 point 4 1 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.004" data-form="decimal" data-miss="{&quot;0.4&quot;: &quot;That only drops the percent sign. 0.4 is 40%. A percent less than 1% becomes a decimal with two zeros after the point: 0.004.&quot;, &quot;0.04&quot;: &quot;That moves the point one place. 0.04 is 4%. Two places left from 0.4 gives 0.004.&quot;, &quot;0.0004&quot;: &quot;That moves the point three places. Two places left from 0.4 gives 0.004.&quot;, &quot;40&quot;: &quot;That multiplies by 100. Going from a percent to a decimal, divide by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> Write <span class="m"><span aria-hidden="true">0.4%</span><span class="sr">0 point 4 percent</span></span> as a decimal.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">0.4%</span><span class="sr">0 point 4 percent</span></span> is less than 1%, so the decimal must be less than <span class="m"><span aria-hidden="true">0.01</span><span class="sr">0 point 0 1</span></span>. Move the point two places left from <span class="m"><span aria-hidden="true">0.4</span><span class="sr">0 point 4</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.004</span><span class="sr">0 point 0 0 4</span></span></strong>, because <span class="m"><span aria-hidden="true">0.4 ÷ 100 = 0.004</span><span class="sr">0 point 4 divided by 100 equals 0 point 0 0 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;0.09 is 9%, which is much more than half of one percent.&quot;, &quot;b&quot;: &quot;12% is 0.12, the largest of the four.&quot;, &quot;d&quot;: &quot;0.1 is 10%. A shorter decimal is not automatically smaller: 0.1 is the same as 0.10, which is more than 0.09.&quot;}" data-why="Correct. As decimals they are 0.09, 0.12, 0.005 and 0.1, so 0.5% is the smallest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 5.</b> Which of these is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc5" value="a"> <span><span class="m"><span aria-hidden="true">0.09</span><span class="sr">0 point 0 9</span></span></span></label><label><input type="radio" name="mc5" value="b"> <span>12%</span></label><label><input type="radio" name="mc5" value="c"> <span><span class="m"><span aria-hidden="true">0.5%</span><span class="sr">0 point 5 percent</span></span></span></label><label><input type="radio" name="mc5" value="d"> <span><span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change each one to a decimal with the same number of places. <span class="m"><span aria-hidden="true">0.5%</span><span class="sr">0 point 5 percent</span></span> is <span class="m"><span aria-hidden="true">0.5 ÷ 100</span><span class="sr">0 point 5 divided by 100</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.5%</span><span class="sr">0 point 5 percent</span></span></strong>, which is <span class="m"><span aria-hidden="true">0.005</span><span class="sr">0 point 0 0 5</span></span>. The others are <span class="m"><span aria-hidden="true">0.09</span><span class="sr">0 point 0 9</span></span>, <span class="m"><span aria-hidden="true">0.12</span><span class="sr">0 point 1 2</span></span> and <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 5.2</h3>
+<p>The Classroom Example 5.2.1, 5.2.2, 5.2.3 and 5.2.4 videos (pages 9 and 10 of the notes) each start from a percent in the problem, such as 39%, <span class="m"><span aria-hidden="true">39.6%</span><span class="sr">39 point 6 percent</span></span>, 36% or 18%, and change it to a decimal before using it.</p>
+<p><strong>Watch for this:</strong> a percent with a decimal in it, such as <span class="m"><span aria-hidden="true">39.6%</span><span class="sr">39 point 6 percent</span></span>. Count two places to the left from where the point is now.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Subtracting from 1 and multiplying decimals</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Subtract a decimal from 1 by writing 1 with enough zeros.</li><li>Check a subtraction by adding back.</li><li>Multiply a whole number by a decimal and place the decimal point correctly.</li><li>Multiply three numbers in a row and check the size of the answer.</li></ul>
+</div>
+<h3>Subtracting a decimal from 1</h3>
+<p>Write 1 with a decimal point and as many zeros as the other number has decimal places. Then line up the points and subtract, borrowing as usual.</p>
+<ul><li><span class="m"><span aria-hidden="true">1 − 0.4</span><span class="sr">1 minus 0 point 4</span></span> becomes <span class="m"><span aria-hidden="true">1.0 − 0.4 = 0.6</span><span class="sr">1 point 0 minus 0 point 4 equals 0 point 6</span></span></li><li><span class="m"><span aria-hidden="true">1 − 0.06</span><span class="sr">1 minus 0 point 0 6</span></span> becomes <span class="m"><span aria-hidden="true">1.00 − 0.06 = 0.94</span><span class="sr">1 point 0 0 minus 0 point 0 6 equals 0 point 9 4</span></span></li></ul>
+<p><strong>Check by adding back.</strong> Your answer plus the number you subtracted must equal exactly 1.</p>
+<h3>Multiplying by a decimal</h3>
+<p>Multiply as if there were no decimal points, then count the digits after the point in the decimal and put that many in the answer. A quick estimate catches a point in the wrong place: multiplying by a decimal between 0 and 1 always gives an answer <strong>smaller</strong> than the number you started with.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Subtracting each digit from 10.</strong> For <span class="m"><span aria-hidden="true">1.00 − 0.83</span><span class="sr">1 point 0 0 minus 0 point 8 3</span></span>, borrowing leaves 9 tenths and 10 hundredths, not 10 and 10. The answer is <span class="m"><span aria-hidden="true">0.17</span><span class="sr">0 point 1 7</span></span>, not <span class="m"><span aria-hidden="true">0.27</span><span class="sr">0 point 2 7</span></span>.</li>
+<li><strong>Bringing the decimal part down.</strong> <span class="m"><span aria-hidden="true">1 − 0.83</span><span class="sr">1 minus 0 point 8 3</span></span> is not <span class="m"><span aria-hidden="true">1.83</span><span class="sr">1 point 8 3</span></span>. Subtracting must give something smaller than 1.</li>
+<li><strong>Losing the decimal point.</strong> <span class="m"><span aria-hidden="true">45 × 0.6</span><span class="sr">45 times 0 point 6</span></span> is 27, not 270 and not <span class="m"><span aria-hidden="true">2.7</span><span class="sr">2 point 7</span></span>. Six tenths of 45 is a bit more than half of 45.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 1 minus 0.245 and 250 times 0.32">
+<h3 style="margin-top:0">Worked example: 1 − 0.245 and 250 × 0.32</h3>
+<p>Find <span class="m"><span aria-hidden="true">1 − 0.245</span><span class="sr">1 minus 0 point 2 4 5</span></span>, then find <span class="m"><span aria-hidden="true">250 × 0.32</span><span class="sr">250 times 0 point 3 2</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1.000 − 0.245 = 0.755</span><span class="sr">1 point 0 0 0 minus 0 point 2 4 5 equals 0 point 7 5 5</span></span></span><span class="say">Write 1 as <span class="m"><span aria-hidden="true">1.000</span><span class="sr">1 point 0 0 0</span></span> so both numbers have three decimal places, then subtract.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.755 + 0.245 = 1.000</span><span class="sr">0 point 7 5 5 plus 0 point 2 4 5 equals 1 point 0 0 0</span></span></span><span class="say">Check by adding back. It comes out to exactly 1.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">250 × 32 = 8,000</span><span class="sr">250 times 32 equals 8,000</span></span></span><span class="say">For the multiplication, first multiply without the decimal point.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">250 × 0.32 = 80.00 = 80</span><span class="sr">250 times 0 point 3 2 equals 80 point 0 0 equals 80</span></span></span><span class="say"><span class="m"><span aria-hidden="true">0.32</span><span class="sr">0 point 3 2</span></span> has two digits after the point, so the answer gets two: <span class="m"><span aria-hidden="true">80.00</span><span class="sr">80 point 0 0</span></span>. Estimate: <span class="m"><span aria-hidden="true">0.32</span><span class="sr">0 point 3 2</span></span> is about a third, and a third of 250 is about 83. The answer 80 fits.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.755</span><span class="sr">0 point 7 5 5</span></span> and 80</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 1 minus 0.83">
+<h3 style="margin-top:0">Finish this one: 1 − 0.83</h3>
+<p>Find <span class="m"><span aria-hidden="true">1 − 0.83</span><span class="sr">1 minus 0 point 8 3</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1.00 − 0.83</span><span class="sr">1 point 0 0 minus 0 point 8 3</span></span></span><span class="say">Write 1 as <span class="m"><span aria-hidden="true">1.00</span><span class="sr">1 point 0 0</span></span> so it has two decimal places, like <span class="m"><span aria-hidden="true">0.83</span><span class="sr">0 point 8 3</span></span>. Next, subtract, borrowing from the 1.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.17" data-miss="{&quot;0.27&quot;: &quot;That subtracts each digit from 10. After borrowing for the hundredths, only 9 tenths are left: 1.00 − 0.83 = 0.17. Check: 0.17 + 0.83 = 1.&quot;, &quot;1.83&quot;: &quot;That brings the decimal part down instead of subtracting. Subtracting from 1 must give less than 1: 0.17.&quot;, &quot;0.83&quot;: &quot;That is the number being subtracted. Find what is left after taking it away from 1.00: 0.17.&quot;, &quot;1.17&quot;: &quot;That puts a 1 in front. Subtracting from 1 must give less than 1: 0.17.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: what is <span class="m"><span aria-hidden="true">1 − 0.83</span><span class="sr">1 minus 0 point 8 3</span></span>?</p>
+<details><summary>Hint</summary><p>Ask yourself what you add to <span class="m"><span aria-hidden="true">0.83</span><span class="sr">0 point 8 3</span></span> to reach <span class="m"><span aria-hidden="true">1.00</span><span class="sr">1 point 0 0</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.17</span><span class="sr">0 point 1 7</span></span></strong>, because <span class="m"><span aria-hidden="true">0.17 + 0.83 = 1</span><span class="sr">0 point 1 7 plus 0 point 8 3 equals 1</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.94" data-miss="{&quot;0.4&quot;: &quot;That treats 0.06 as 0.6. Line up the points: 1.00 − 0.06 = 0.94.&quot;, &quot;1.06&quot;: &quot;That adds instead of subtracting, or brings the decimal part down. Subtracting from 1 must give less than 1: 0.94.&quot;, &quot;0.04&quot;: &quot;That subtracts 0.06 from 0.10 instead of from 1.00. Line up the points: 1.00 − 0.06 = 0.94.&quot;, &quot;0.96&quot;: &quot;Check by adding back: 0.96 + 0.06 is 1.02, not 1. The answer is 0.94.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> What is <span class="m"><span aria-hidden="true">1 − 0.06</span><span class="sr">1 minus 0 point 0 6</span></span>?</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.00</span><span class="sr">1 point 0 0</span></span>. Then <span class="m"><span aria-hidden="true">1.00 − 0.06</span><span class="sr">1 point 0 0 minus 0 point 0 6</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.94</span><span class="sr">0 point 9 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.625" data-miss="{&quot;0.735&quot;: &quot;That subtracts each digit from 10. After borrowing, the tenths and hundredths have only 9 each: 1.000 − 0.375 = 0.625. Check: 0.625 + 0.375 = 1.&quot;, &quot;1.375&quot;: &quot;That brings the decimal part down instead of subtracting. Subtracting from 1 must give less than 1: 0.625.&quot;, &quot;0.375&quot;: &quot;That is the number being subtracted. Find what is left: 1.000 − 0.375 = 0.625.&quot;, &quot;0.725&quot;: &quot;Check by adding back: 0.725 + 0.375 is 1.1, not 1. Redo the borrowing: 1.000 − 0.375 = 0.625.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> What is <span class="m"><span aria-hidden="true">1 − 0.375</span><span class="sr">1 minus 0 point 3 7 5</span></span>?</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.000</span><span class="sr">1 point 0 0 0</span></span> so it has three decimal places. Check by adding your answer to <span class="m"><span aria-hidden="true">0.375</span><span class="sr">0 point 3 7 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.625</span><span class="sr">0 point 6 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="27" data-miss="{&quot;2.7&quot;: &quot;The point moved one place too far left. 45 times 6 is 270, and 0.6 has one digit after the point, so the answer is 27.0, or 27.&quot;, &quot;270&quot;: &quot;That multiplies by 6 instead of 0.6. 0.6 has one digit after the point, so 270 becomes 27.&quot;, &quot;75&quot;: &quot;That divides 45 by 0.6. Multiplying by a number less than 1 gives a smaller answer: 27.&quot;, &quot;0.27&quot;: &quot;The point moved too far left. 0.6 has one digit after the point, so 270 becomes 27.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> What is <span class="m"><span aria-hidden="true">45 × 0.6</span><span class="sr">45 times 0 point 6</span></span>?</p>
+<details><summary>Hint</summary><p>Find <span class="m"><span aria-hidden="true">45 × 6</span><span class="sr">45 times 6</span></span> first, then put one digit after the point. Six tenths of 45 is a bit more than half of 45.</p></details>
+<details><summary>Show answer</summary><p><strong>27</strong>, because <span class="m"><span aria-hidden="true">45 × 6 = 270</span><span class="sr">45 times 6 equals 270</span></span> and one decimal place gives <span class="m"><span aria-hidden="true">27.0</span><span class="sr">27 point 0</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="48" data-miss="{&quot;4.8&quot;: &quot;The point moved one place too far left. 320 times 15 is 4,800, and two decimal places gives 48.00, or 48.&quot;, &quot;480&quot;: &quot;That uses 1.5 instead of 0.15. 320 times 15 is 4,800, and 0.15 has two digits after the point: 48.&quot;, &quot;4800&quot;: &quot;That multiplies by 15 instead of 0.15. Put two digits after the point: 48.00, or 48.&quot;, &quot;~2133.33~0.01&quot;: &quot;That divides 320 by 0.15. Multiplying by a number less than 1 gives a smaller answer: 48.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> What is <span class="m"><span aria-hidden="true">320 × 0.15</span><span class="sr">320 times 0 point 1 5</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span> has two digits after the point. Estimate: <span class="m"><span aria-hidden="true">0.15</span><span class="sr">0 point 1 5</span></span> of 320 is a little more than <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> of 320, which is 32.</p></details>
+<details><summary>Show answer</summary><p><strong>48</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="16.8" data-miss="{&quot;24&quot;: &quot;That stops after 80 times 0.3. Multiply that 24 by 0.7 as well: 16.8.&quot;, &quot;56&quot;: &quot;That is 80 times 0.7 only. Multiply by 0.3 as well: 16.8.&quot;, &quot;168&quot;: &quot;The decimal point is one place off. 0.3 and 0.7 together have two digits after the point, so 80 × 3 × 7 = 1,680 becomes 16.80.&quot;, &quot;1.68&quot;: &quot;The decimal point moved one place too far. 24 times 0.7 is 16.8.&quot;, &quot;0.21&quot;: &quot;That multiplies 0.3 by 0.7 but leaves out the 80. Multiply all three: 16.8.&quot;, &quot;17&quot;: &quot;The directions say do not round. Keep every digit: 16.8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> What is <span class="m"><span aria-hidden="true">80 × 0.3 × 0.7</span><span class="sr">80 times 0 point 3 times 0 point 7</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p>Work left to right: <span class="m"><span aria-hidden="true">80 × 0.3 = 24</span><span class="sr">80 times 0 point 3 equals 24</span></span>, then multiply 24 by <span class="m"><span aria-hidden="true">0.7</span><span class="sr">0 point 7</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">16.8</span><span class="sr">16 point 8</span></span></strong>, because <span class="m"><span aria-hidden="true">80 × 0.3 = 24</span><span class="sr">80 times 0 point 3 equals 24</span></span> and <span class="m"><span aria-hidden="true">24 × 0.7 = 16.8</span><span class="sr">24 times 0 point 7 equals 16 point 8</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 5.2</h3>
+<p>The Notation for Binomial Probabilities table in item 1 (page 1 of the notes) includes a formula that subtracts a decimal from 1, and the Classroom Example 5.2.1 video (page 9) does one of these subtractions. The Example on page 9 multiplies 500 by <span class="m"><span aria-hidden="true">0.39</span><span class="sr">0 point 3 9</span></span>, and the Classroom Example 5.2.5 video (page 10) multiplies three numbers in a row.</p>
+<p><strong>Watch for this:</strong> subtractions from 1, where it is easy to subtract each digit from 10. Check by adding back.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Square roots and order of operations</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Use a calculator to find a square root and round it.</li><li>Multiply everything under a square root sign before taking the root.</li><li>Do the multiplication first in expressions such as <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span>.</li><li>Keep every digit until the last step, then round once.</li></ul>
+</div>
+<h3>What a square root sign covers</h3>
+<p>The square root of a number is the value that, multiplied by itself, gives the number. For example, <span class="m"><span aria-hidden="true">√49 = 7</span><span class="sr">the square root of 49 equals 7</span></span> because <span class="m"><span aria-hidden="true">7 × 7 = 49</span><span class="sr">7 times 7 equals 49</span></span>. Most square roots are not whole numbers, so a calculator gives a long decimal that you round.</p>
+<p>The bar on top of a square root sign works like parentheses. In <span class="m"><span aria-hidden="true">√(120 × 0.4 × 0.6)</span><span class="sr">the square root of, open parenthesis 120 times 0 point 4 times 0 point 6 close parenthesis</span></span>, multiply everything under the bar first, then take the square root of the product. Typed on one line, many calculators write this as <span class="m"><span aria-hidden="true">sqrt(120*0.4*0.6)</span><span class="sr">s q r t, open parenthesis 120 star 0 point 4 star 0 point 6 close parenthesis</span></span>, where * means multiply. The parentheses must hold the whole product.</p>
+<h3>Multiplication before addition and subtraction</h3>
+<p>A number written right next to parentheses means multiply: <span class="m"><span aria-hidden="true">2(4.5)</span><span class="sr">2 times 4 point 5</span></span> is <span class="m"><span aria-hidden="true">2 × 4.5</span><span class="sr">2 times 4 point 5</span></span>. In <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span>, the multiplication happens first: <span class="m"><span aria-hidden="true">2 × 4.5 = 9</span><span class="sr">2 times 4 point 5 equals 9</span></span>, then <span class="m"><span aria-hidden="true">36 − 9 = 27</span><span class="sr">36 minus 9 equals 27</span></span>.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Taking the root of only the first number.</strong> <span class="m"><span aria-hidden="true">√120 × 0.4 × 0.6</span><span class="sr">the square root of 120, times 0 point 4 times 0 point 6</span></span> is about <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span>, but <span class="m"><span aria-hidden="true">√(120 × 0.4 × 0.6)</span><span class="sr">the square root of the product 120 times 0 point 4 times 0 point 6</span></span> is about <span class="m"><span aria-hidden="true">5.4</span><span class="sr">5 point 4</span></span>.</li>
+<li><strong>Subtracting first.</strong> <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span> is not <span class="m"><span aria-hidden="true">34 × 4.5</span><span class="sr">34 times 4 point 5</span></span>. Multiply first.</li>
+<li><strong>Rounding in the middle.</strong> Rounding a square root before you use it in the next step can change the final answer. Keep every digit until the end.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Square root of 120 times 0.4 times 0.6, and 50 minus 2 times 3.5">
+<h3 style="margin-top:0">Worked example: √(120 × 0.4 × 0.6) and 50 − 2(3.5)</h3>
+<p>Find <span class="m"><span aria-hidden="true">√(120 × 0.4 × 0.6)</span><span class="sr">the square root of, open parenthesis 120 times 0 point 4 times 0 point 6 close parenthesis</span></span> rounded to one decimal place. Then find <span class="m"><span aria-hidden="true">50 − 2(3.5)</span><span class="sr">50 minus 2 times 3 point 5</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">120 × 0.4 × 0.6 = 28.8</span><span class="sr">120 times 0 point 4 times 0 point 6 equals 28 point 8</span></span></span><span class="say">Multiply everything under the square root sign first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">√28.8 = 5.36656…</span><span class="sr">the square root of 28 point 8 equals 5 point 3 6 6 5 6 and so on</span></span></span><span class="say">Then take the square root.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">5.36656… → 5.4</span><span class="sr">5 point 3 6 6 5 6 rounds to 5 point 4</span></span></span><span class="say">One decimal place: keep the 3, look at the 6, round up.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">50 − 2(3.5) = 50 − 7 = 43</span><span class="sr">50 minus 2 times 3 point 5 equals 50 minus 7 equals 43</span></span></span><span class="say">Multiply first, then subtract.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">5.4</span><span class="sr">5 point 4</span></span> and 43</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Square root of 90 times 0.4 times 0.6">
+<h3 style="margin-top:0">Finish this one: √(90 × 0.4 × 0.6)</h3>
+<p>Find <span class="m"><span aria-hidden="true">√(90 × 0.4 × 0.6)</span><span class="sr">the square root of, open parenthesis 90 times 0 point 4 times 0 point 6 close parenthesis</span></span> rounded to one decimal place.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">90 × 0.4 × 0.6 = 21.6</span><span class="sr">90 times 0 point 4 times 0 point 6 equals 21 point 6</span></span></span><span class="say">Multiply everything under the square root sign first. Next, take the square root of <span class="m"><span aria-hidden="true">21.6</span><span class="sr">21 point 6</span></span> and round.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="4.6" data-dp="1" data-miss="{&quot;21.6&quot;: &quot;That is the product under the square root sign. One step is left: take its square root, about 4.648, which rounds to 4.6.&quot;, &quot;2.3&quot;: &quot;That takes the square root of 90 only and then multiplies. The root covers the whole product: the square root of 21.6 is about 4.648, or 4.6.&quot;, &quot;4.65&quot;: &quot;That keeps two decimal places. One decimal place keeps one: 4.6.&quot;, &quot;4.7&quot;: &quot;That rounds in steps (4.6476 to 4.65 to 4.7). Only the digit right after the tenths place counts, and it is 4: 4.6.&quot;, &quot;~4.6476~0.001&quot;: &quot;Round to one decimal place: keep one digit after the point. 4.6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Finish it: what is <span class="m"><span aria-hidden="true">√(90 × 0.4 × 0.6)</span><span class="sr">the square root of, open parenthesis 90 times 0 point 4 times 0 point 6 close parenthesis</span></span>? Round to one decimal place.</p>
+<details><summary>Hint</summary><p>The square root of <span class="m"><span aria-hidden="true">21.6</span><span class="sr">21 point 6</span></span> is between 4 and 5, since <span class="m"><span aria-hidden="true">4 × 4 = 16</span><span class="sr">4 times 4 equals 16</span></span> and <span class="m"><span aria-hidden="true">5 × 5 = 25</span><span class="sr">5 times 5 equals 25</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.6</span><span class="sr">4 point 6</span></span></strong>. The calculator shows about <span class="m"><span aria-hidden="true">4.64758</span><span class="sr">4 point 6 4 7 5 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="27" data-miss="{&quot;153&quot;: &quot;That subtracts 36 − 2 first. Multiply first: 2 times 4.5 is 9, then 36 − 9 = 27.&quot;, &quot;31.5&quot;: &quot;That subtracts 4.5 once. The 2 in front means two of them: 2 times 4.5 is 9, and 36 − 9 = 27.&quot;, &quot;45&quot;: &quot;That adds. The sign in front of the 2 is a minus: 36 − 9 = 27.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> What is <span class="m"><span aria-hidden="true">36 − 2(4.5)</span><span class="sr">36 minus 2 times 4 point 5</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">2(4.5)</span><span class="sr">2 times 4 point 5</span></span> means <span class="m"><span aria-hidden="true">2 × 4.5</span><span class="sr">2 times 4 point 5</span></span>. Do that first.</p></details>
+<details><summary>Show answer</summary><p><strong>27</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="85" data-miss="{&quot;465.625&quot;: &quot;That adds 72.5 + 2 first. Multiply first: 2 times 6.25 is 12.5, then 72.5 + 12.5 = 85.&quot;, &quot;78.75&quot;: &quot;That adds 6.25 once. The 2 in front means two of them: 12.5. Then 72.5 + 12.5 = 85.&quot;, &quot;60&quot;: &quot;That subtracts. The sign here is a plus: 72.5 + 12.5 = 85.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> What is <span class="m"><span aria-hidden="true">72.5 + 2(6.25)</span><span class="sr">72 point 5 plus 2 times 6 point 2 5</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p>First <span class="m"><span aria-hidden="true">2 × 6.25</span><span class="sr">2 times 6 point 2 5</span></span>, then add.</p></details>
+<details><summary>Show answer</summary><p><strong>85</strong>, because <span class="m"><span aria-hidden="true">2 × 6.25 = 12.5</span><span class="sr">2 times 6 point 2 5 equals 12 point 5</span></span> and <span class="m"><span aria-hidden="true">72.5 + 12.5 = 85</span><span class="sr">72 point 5 plus 12 point 5 equals 85</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;The parentheses close after 200, so only 200 is under the root. The value is about 2.97, not about 6.48.&quot;, &quot;b&quot;: &quot;The parentheses close before the 0.7, so the 0.7 is left out of the root. The value is about 5.42, not about 6.48.&quot;, &quot;c&quot;: &quot;The parentheses close before the 0.3, so the 0.3 is left out of the root. All three numbers belong inside.&quot;}" data-why="Correct. All three numbers are inside the parentheses, so the root covers the whole product. The value is about 6.48.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> Which one-line entry has the same value as <span class="m"><span aria-hidden="true">√(200 × 0.3 × 0.7)</span><span class="sr">the square root of, open parenthesis 200 times 0 point 3 times 0 point 7 close parenthesis</span></span>?</legend>
+<label><input type="radio" name="mc15" value="a"> <span><span class="m"><span aria-hidden="true">sqrt(200)*0.3*0.7</span><span class="sr">s q r t of 200, close parenthesis, star 0 point 3 star 0 point 7</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">sqrt(200*0.3)*0.7</span><span class="sr">s q r t of 200 star 0 point 3, close parenthesis, star 0 point 7</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span><span class="m"><span aria-hidden="true">sqrt(200*0.7)*0.3</span><span class="sr">s q r t of 200 star 0 point 7, close parenthesis, star 0 point 3</span></span></span></label><label><input type="radio" name="mc15" value="d"> <span><span class="m"><span aria-hidden="true">sqrt(200*0.3*0.7)</span><span class="sr">s q r t of 200 star 0 point 3 star 0 point 7, close parenthesis</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The bar on the square root sign covers all three numbers. Which entry keeps all three inside the parentheses?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">sqrt(200*0.3*0.7)</span><span class="sr">s q r t of 200 star 0 point 3 star 0 point 7, close parenthesis</span></span></strong>, which is about <span class="m"><span aria-hidden="true">6.48</span><span class="sr">6 point 4 8</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="20.7" data-dp="1" data-miss="{&quot;20.8&quot;: &quot;That uses the rounded 4.6 in the middle step. Keep every digit: 30 − 2 × 4.6475800 = 20.70484, which rounds to 20.7.&quot;, &quot;130.1&quot;: &quot;That subtracts 30 − 2 first. Multiply first: 2 × 4.6475800 = 9.29516, then subtract from 30.&quot;, &quot;25.4&quot;: &quot;That subtracts the square root only once. The 2 in front means two of them: 30 − 9.29516 = 20.70484, which rounds to 20.7.&quot;, &quot;39.3&quot;: &quot;That adds. The sign here is a minus: 30 − 9.29516 = 20.70484, which rounds to 20.7.&quot;, &quot;~20.70484~0.0001&quot;: &quot;Round to one decimal place: keep one digit after the point. 20.7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 16.</b> In Practice 12, the calculator showed <span class="m"><span aria-hidden="true">√21.6</span><span class="sr">the square root of 21 point 6</span></span> as about <span class="m"><span aria-hidden="true">4.6475800</span><span class="sr">4 point 6 4 7 5 8 0 0</span></span>. Find <span class="m"><span aria-hidden="true">30 − 2 × √21.6</span><span class="sr">30 minus 2 times the square root of 21 point 6</span></span>. Keep every digit until the end, then round to one decimal place.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">2 × 4.6475800</span><span class="sr">2 times 4 point 6 4 7 5 8 0 0</span></span> first, using all the digits. Round only the final answer.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">20.7</span><span class="sr">20 point 7</span></span></strong>, because <span class="m"><span aria-hidden="true">30 − 9.29516 = 20.70484</span><span class="sr">30 minus 9 point 2 9 5 1 6 equals 20 point 7 0 4 8 4</span></span>. Using the rounded <span class="m"><span aria-hidden="true">4.6</span><span class="sr">4 point 6</span></span> would give <span class="m"><span aria-hidden="true">20.8</span><span class="sr">20 point 8</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 5.2</h3>
+<p>Item 2 (Parameters for the Binomial Distribution) on page 8 of the notes has a formula with a square root sign over a product, and the Example on page 9 uses it. Part D of that Example subtracts and adds 2 times an unrounded value, written like <span class="m"><span aria-hidden="true">195 − 2(10.90642013)</span><span class="sr">195 minus 2 times 10 point 9 0 6 4 2 0 1 3</span></span>. The Classroom Example 5.2.5 video (page 10) types a square root on one line.</p>
+<p><strong>Watch for this:</strong> what the square root sign covers, and the multiplication that comes before the subtraction or addition. Keep every digit until the last step.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Rounding to three or four decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the third and fourth decimal places, even when the number starts with zeros after the point.</li><li>Round to three or four decimal places.</li><li>Carry correctly when a 9 rounds up.</li><li>Keep a final zero when the directions ask for a set number of decimal places.</li></ul>
+</div>
+<h3>How to round to three or four decimal places</h3>
+<ol class="steps">
+<li>Count places to the right of the decimal point. Every digit counts, <strong>including zeros right after the point</strong>. In <span class="m"><span aria-hidden="true">0.0472816</span><span class="sr">0 point 0 4 7 2 8 1 6</span></span>, the first place is 0, the second is 4, the third is 7 and the fourth is 2.</li>
+<li>Find the last place you will keep: the third place for three decimal places, the fourth for four.</li>
+<li>Look at the single digit right after it. If it is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit. Keep any zeros up to the kept place, even at the end.</li>
+</ol>
+<h3>Four slips to watch for</h3>
+<ul>
+<li><strong>Skipping the zeros after the point.</strong> Three decimal places of <span class="m"><span aria-hidden="true">0.05917</span><span class="sr">0 point 0 5 9 1 7</span></span> is <span class="m"><span aria-hidden="true">0.059</span><span class="sr">0 point 0 5 9</span></span>. Writing <span class="m"><span aria-hidden="true">0.0592</span><span class="sr">0 point 0 5 9 2</span></span> counts three digits starting at the 5, which is four decimal places.</li>
+<li><strong>Chopping instead of rounding.</strong> <span class="m"><span aria-hidden="true">0.08367</span><span class="sr">0 point 0 8 3 6 7</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.084</span><span class="sr">0 point 0 8 4</span></span>, not <span class="m"><span aria-hidden="true">0.083</span><span class="sr">0 point 0 8 3</span></span>.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.3896</span><span class="sr">0 point 3 8 9 6</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.390</span><span class="sr">0 point 3 9 0</span></span>.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the one digit right after the kept digit matters. <span class="m"><span aria-hidden="true">0.21348</span><span class="sr">0 point 2 1 3 4 8</span></span> to three decimal places is <span class="m"><span aria-hidden="true">0.213</span><span class="sr">0 point 2 1 3</span></span>. Rounding to <span class="m"><span aria-hidden="true">0.2135</span><span class="sr">0 point 2 1 3 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.214</span><span class="sr">0 point 2 1 4</span></span> is a slip.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 0.0472816 two ways">
+<h3 style="margin-top:0">Worked example: Round 0.0472816 two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.0472816</span><span class="sr">0 point 0 4 7 2 8 1 6</span></span> to four decimal places, and then to three decimal places.</p><ol class="steps"><li><span class="work">Four decimal places: keep the 2, look at the 8</span><span class="say">The places are 0, 4, 7, 2. The 8 is 5 or more, so the 2 becomes 3: <span class="m"><span aria-hidden="true">0.0473</span><span class="sr">0 point 0 4 7 3</span></span>.</span></li><li><span class="work">Three decimal places: keep the 7, look at the 2</span><span class="say">The 2 is 4 or less, so the 7 stays: <span class="m"><span aria-hidden="true">0.047</span><span class="sr">0 point 0 4 7</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.0473</span><span class="sr">0 point 0 4 7 3</span></span> to four decimal places and <span class="m"><span aria-hidden="true">0.047</span><span class="sr">0 point 0 4 7</span></span> to three decimal places.</strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Round to four decimal places" means exactly four digits after the point, so a final zero stays: <span class="m"><span aria-hidden="true">0.2750</span><span class="sr">0 point 2 7 5 0</span></span>, not <span class="m"><span aria-hidden="true">0.275</span><span class="sr">0 point 2 7 5</span></span>. "Do not round" means type every digit the calculator shows.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.27496 to four decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.27496 to four decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.27496</span><span class="sr">0 point 2 7 4 9 6</span></span> to four decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 9 in the fourth place. Next digit: 6.</span><span class="say">The 6 is 5 or more, so the 9 goes up by 1. Next, think about what happens when a 9 goes up, and remember that four decimal places means four digits after the point.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.2750" data-dp="4" data-miss="{&quot;0.2749&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.2750.&quot;, &quot;0.2740&quot;: &quot;When the 9 goes up, it becomes 0 and adds 1 to the 4 on its left, so the 4 becomes 5: 0.2750.&quot;, &quot;0.27&quot;: &quot;That keeps only two decimal places. Four decimal places keeps four digits after the point: 0.2750.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.27496</span><span class="sr">0 point 2 7 4 9 6</span></span> rounded to four decimal places?</p>
+<details><summary>Hint</summary><p>When the 9 goes up, write 0 and add 1 to the 4. Then count four digits after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.2750</span><span class="sr">0 point 2 7 5 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.059" data-dp="3" data-miss="{&quot;0.0592&quot;: &quot;That counts three digits starting at the 5 and skips the 0 right after the point. The 0 is the first decimal place, so three places is 0.059.&quot;, &quot;0.06&quot;: &quot;That rounds to two decimal places. Three decimal places keeps three digits after the point: 0.059.&quot;, &quot;0.0591&quot;: &quot;That keeps four decimal places. Three decimal places keeps three digits after the point: 0.059.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Round <span class="m"><span aria-hidden="true">0.05917</span><span class="sr">0 point 0 5 9 1 7</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The places are 0, 5, 9. The kept digit is the 9. Look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.059</span><span class="sr">0 point 0 5 9</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.0084" data-dp="4" data-miss="{&quot;0.0083&quot;: &quot;That chops off the 6 instead of rounding. The digit after the 3 is 6, so the 3 goes up: 0.0084.&quot;, &quot;0.00836&quot;: &quot;That keeps five decimal places, counting from the 8 and skipping the zeros. The zeros count: four places is 0.0084.&quot;, &quot;0.008&quot;: &quot;That rounds to three decimal places. Four decimal places keeps four digits after the point: 0.0084.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Round <span class="m"><span aria-hidden="true">0.008362</span><span class="sr">0 point 0 0 8 3 6 2</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The places are 0, 0, 8, 3. The kept digit is the 3, and the next digit is 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0084</span><span class="sr">0 point 0 0 8 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.500" data-dp="3" data-miss="{&quot;0.499&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the last kept 9 goes up and the carries turn 0.499 into 0.500.&quot;, &quot;0.490&quot;: &quot;When the 9 goes up, it becomes 0 and carries to the left. That 9 also becomes 0 and carries, so the 4 becomes 5: 0.500.&quot;, &quot;0.4996&quot;: &quot;That keeps four decimal places. Three decimal places keeps three digits after the point: 0.500.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Round <span class="m"><span aria-hidden="true">0.49962</span><span class="sr">0 point 4 9 9 6 2</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the second 9. The next digit is 6, so it goes up. Follow the carries to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.500</span><span class="sr">0 point 5 0 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That rounds in steps from the right (0.14449 to 0.1445 to 0.145). Only the digit right after the third place counts, and it is 4.&quot;, &quot;c&quot;: &quot;That keeps four decimal places. Three decimal places keeps three digits after the point.&quot;, &quot;d&quot;: &quot;That keeps two decimal places. Three decimal places keeps three digits after the point.&quot;}" data-why="Correct. The kept digit is the 4 in the third place, and the next digit is 4, so it stays: 0.144.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 21.</b> Which is <span class="m"><span aria-hidden="true">0.14449</span><span class="sr">0 point 1 4 4 4 9</span></span> rounded to three decimal places?</legend>
+<label><input type="radio" name="mc21" value="a"> <span><span class="m"><span aria-hidden="true">0.144</span><span class="sr">0 point 1 4 4</span></span></span></label><label><input type="radio" name="mc21" value="b"> <span><span class="m"><span aria-hidden="true">0.145</span><span class="sr">0 point 1 4 5</span></span></span></label><label><input type="radio" name="mc21" value="c"> <span><span class="m"><span aria-hidden="true">0.1445</span><span class="sr">0 point 1 4 4 5</span></span></span></label><label><input type="radio" name="mc21" value="d"> <span><span class="m"><span aria-hidden="true">0.14</span><span class="sr">0 point 1 4</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The kept digit is the third digit after the point. Look only at the one digit right after it, and ignore the 9 at the end.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.144</span><span class="sr">0 point 1 4 4</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 5.2</h3>
+<p>Example 1 (pages 4 and 5) and Example 3 (pages 7 and 8) round to four decimal places, and Example 2 (pages 5 and 6) rounds to three. The Classroom Example 5.2.2 and 5.2.4 videos (pages 9 and 10) talk through roundings where a digit goes up.</p>
+<p><strong>Watch for this:</strong> zeros right after the point, which count as decimal places, and a final zero, which stays when the directions ask for four decimal places.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Inequality symbols and comparing decimals</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read each of the symbols <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span>, <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span>, <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span>, <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span> and = in words.</li><li>Tell whether the number next to the symbol is included.</li><li>List or count the whole numbers that make a statement true.</li><li>Compare decimals that have different numbers of digits.</li></ul>
+</div>
+<h3>Reading the symbols</h3>
+<p>The table reads each symbol and shows which whole numbers from 0 to 6 make the statement true when the number on the right is 3.</p>
+<div class="table-wrap" role="region" aria-label="Inequality symbols" tabindex="0">
+<table>
+<caption>Inequality symbols, using whole numbers from 0 to 6</caption>
+<thead><tr><th scope="col">Symbol</th><th scope="col">Read as</th><th scope="col">Is 3 included?</th><th scope="col">Whole numbers that work</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">x ≤ 3</span><span class="sr">x less than or equal to 3</span></span></th><td>less than or equal to</td><td>Yes</td><td>0, 1, 2, 3</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">x ≥ 3</span><span class="sr">x greater than or equal to 3</span></span></th><td>greater than or equal to</td><td>Yes</td><td>3, 4, 5, 6</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">x &lt; 3</span><span class="sr">x less than 3</span></span></th><td>less than</td><td>No</td><td>0, 1, 2</td></tr>
+<tr><th scope="row"><span class="m"><span aria-hidden="true">x &gt; 3</span><span class="sr">x greater than 3</span></span></th><td>greater than</td><td>No</td><td>4, 5, 6</td></tr>
+<tr><th scope="row">x = 3</th><td>equal to</td><td>Only 3</td><td>3</td></tr>
+</tbody>
+</table>
+</div>
+<p>A memory aid: the extra line under <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span> and <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span> is part of an equals sign, so the number itself is included.</p>
+<h3>Comparing decimals</h3>
+<p>To compare decimals, line up the points and give both numbers the same number of places by adding zeros at the end. Then compare them as you would whole numbers. A decimal with more digits is not automatically bigger: <span class="m"><span aria-hidden="true">0.0412</span><span class="sr">0 point 0 4 1 2</span></span> has more digits than <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>, but <span class="m"><span aria-hidden="true">0.0412 &lt; 0.0500</span><span class="sr">0 point 0 4 1 2 is less than 0 point 0 5 0 0</span></span>.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Including the number when it is not included.</strong> <span class="m"><span aria-hidden="true">x &lt; 3</span><span class="sr">x less than 3</span></span> does not include 3.</li>
+<li><strong>Forgetting 0.</strong> When the whole numbers start at 0, 0 counts too.</li>
+<li><strong>Thinking longer is larger.</strong> <span class="m"><span aria-hidden="true">0.0995</span><span class="sr">0 point 0 9 9 5</span></span> is less than <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span>, even though it has more digits.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Count and compare">
+<h3 style="margin-top:0">Worked example: Count and compare</h3>
+<p>Using whole numbers from 0 to 8, how many make <span class="m"><span aria-hidden="true">x ≤ 2</span><span class="sr">x less than or equal to 2</span></span> true? Then decide which is smaller, <span class="m"><span aria-hidden="true">0.0389</span><span class="sr">0 point 0 3 8 9</span></span> or <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</p><ol class="steps"><li><span class="work">0, 1, 2</span><span class="say">Less than or equal to includes 2 itself, and the list starts at 0. That is 3 whole numbers.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.0389</span><span class="sr">0 point 0 3 8 9</span></span> and <span class="m"><span aria-hidden="true">0.0500</span><span class="sr">0 point 0 5 0 0</span></span></span><span class="say">Give both numbers four decimal places. Now compare 389 ten-thousandths with 500 ten-thousandths.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.0389 &lt; 0.05</span><span class="sr">0 point 0 3 8 9 is less than 0 point 0 5</span></span></span><span class="say">389 is less than 500.</span></li></ol><p><strong>Answer: 3 whole numbers, and <span class="m"><span aria-hidden="true">0.0389</span><span class="sr">0 point 0 3 8 9</span></span> is smaller.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;5&quot;: &quot;That includes 6. Greater than 6 does not include 6, so the numbers are 7, 8, 9 and 10: 4 numbers.&quot;, &quot;7&quot;: &quot;That counts 0 to 6, the numbers that are 6 or less. Greater than 6 means 7, 8, 9 and 10: 4 numbers.&quot;, &quot;6&quot;: &quot;That counts 0 to 5, the numbers less than 6. Greater than 6 means 7, 8, 9 and 10: 4 numbers.&quot;, &quot;3&quot;: &quot;Check the top of the range: 10 counts. The numbers are 7, 8, 9 and 10: 4 numbers.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Using whole numbers from 0 to 10, how many make <span class="m"><span aria-hidden="true">x &gt; 6</span><span class="sr">x greater than 6</span></span> true?</p>
+<details><summary>Hint</summary><p>List them: start just above 6 and stop at 10.</p></details>
+<details><summary>Show answer</summary><p><strong>4</strong> (7, 8, 9 and 10)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That leaves out 4. The line under the symbol means 4 itself is included.&quot;, &quot;c&quot;: &quot;That list is greater than or equal to 4. Here x is on the small side of the symbol, so the list runs from 4 down to 0.&quot;, &quot;d&quot;: &quot;That list is greater than 4, the opposite direction, and it leaves out 4.&quot;}" data-why="Correct. Less than or equal to 4 includes 4 and every whole number below it, down to 0.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 23.</b> Using whole numbers from 0 to 12, which list makes <span class="m"><span aria-hidden="true">x ≤ 4</span><span class="sr">x less than or equal to 4</span></span> true?</legend>
+<label><input type="radio" name="mc23" value="a"> <span>0, 1, 2, 3, 4</span></label><label><input type="radio" name="mc23" value="b"> <span>0, 1, 2, 3</span></label><label><input type="radio" name="mc23" value="c"> <span>4, 5, 6, 7, 8, 9, 10, 11, 12</span></label><label><input type="radio" name="mc23" value="d"> <span>5, 6, 7, 8, 9, 10, 11, 12</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read it as "x is less than or equal to 4." Does 4 itself count?</p></details>
+<details><summary>Show answer</summary><p><strong>0, 1, 2, 3, 4</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;More digits does not mean bigger. With four places each, 0.0412 is less than 0.0500.&quot;, &quot;b&quot;: &quot;With two places each, 0.7 is 0.70, which is more than 0.65.&quot;, &quot;c&quot;: &quot;With two places each, 0.1 is 0.10, which is more than 0.09.&quot;}" data-why="Correct. With four places each, 0.0412 is less than 0.0500.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 24.</b> Which statement is true?</legend>
+<label><input type="radio" name="mc24" value="a"> <span><span class="m"><span aria-hidden="true">0.0412 &gt; 0.05</span><span class="sr">0 point 0 4 1 2 is greater than 0 point 0 5</span></span></span></label><label><input type="radio" name="mc24" value="b"> <span><span class="m"><span aria-hidden="true">0.7 &lt; 0.65</span><span class="sr">0 point 7 is less than 0 point 6 5</span></span></span></label><label><input type="radio" name="mc24" value="c"> <span><span class="m"><span aria-hidden="true">0.09 &gt; 0.1</span><span class="sr">0 point 0 9 is greater than 0 point 1</span></span></span></label><label><input type="radio" name="mc24" value="d"> <span><span class="m"><span aria-hidden="true">0.0412 &lt; 0.05</span><span class="sr">0 point 0 4 1 2 is less than 0 point 0 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Give both numbers in each statement the same number of decimal places, then compare.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0412 &lt; 0.05</span><span class="sr">0 point 0 4 1 2 is less than 0 point 0 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That orders the digits as if they were whole numbers (1, 9, 105, 995). Line up the points instead.&quot;, &quot;c&quot;: &quot;0.09 is 0.0900, which is less than 0.0995, so 0.09 comes first.&quot;, &quot;d&quot;: &quot;That is largest to smallest. The question asks for smallest first.&quot;}" data-why="Correct. With four places each: 0.0900, 0.0995, 0.1000, 0.1050.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 25.</b> Which list puts <span class="m"><span aria-hidden="true">0.09</span><span class="sr">0 point 0 9</span></span>, <span class="m"><span aria-hidden="true">0.105</span><span class="sr">0 point 1 0 5</span></span>, <span class="m"><span aria-hidden="true">0.1</span><span class="sr">0 point 1</span></span> and <span class="m"><span aria-hidden="true">0.0995</span><span class="sr">0 point 0 9 9 5</span></span> in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc25" value="a"> <span><span class="m"><span aria-hidden="true">0.1, 0.09, 0.105, 0.0995</span><span class="sr">0 point 1, 0 point 0 9, 0 point 1 0 5, 0 point 0 9 9 5</span></span></span></label><label><input type="radio" name="mc25" value="b"> <span><span class="m"><span aria-hidden="true">0.09, 0.0995, 0.1, 0.105</span><span class="sr">0 point 0 9, 0 point 0 9 9 5, 0 point 1, 0 point 1 0 5</span></span></span></label><label><input type="radio" name="mc25" value="c"> <span><span class="m"><span aria-hidden="true">0.0995, 0.09, 0.1, 0.105</span><span class="sr">0 point 0 9 9 5, 0 point 0 9, 0 point 1, 0 point 1 0 5</span></span></span></label><label><input type="radio" name="mc25" value="d"> <span><span class="m"><span aria-hidden="true">0.105, 0.1, 0.0995, 0.09</span><span class="sr">0 point 1 0 5, 0 point 1, 0 point 0 9 9 5, 0 point 0 9</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Write all four with four decimal places: <span class="m"><span aria-hidden="true">0.0900</span><span class="sr">0 point 0 9 0 0</span></span>, <span class="m"><span aria-hidden="true">0.1050</span><span class="sr">0 point 1 0 5 0</span></span>, <span class="m"><span aria-hidden="true">0.1000</span><span class="sr">0 point 1 0 0 0</span></span>, <span class="m"><span aria-hidden="true">0.0995</span><span class="sr">0 point 0 9 9 5</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.09, 0.0995, 0.1, 0.105</span><span class="sr">0 point 0 9, 0 point 0 9 9 5, 0 point 1, 0 point 1 0 5</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 5.2</h3>
+<p>Page 3 of the notes lists the five symbols <span class="m"><span aria-hidden="true">≤</span><span class="sr">less than or equal to</span></span>, <span class="m"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to</span></span>, <span class="m"><span aria-hidden="true">&lt;</span><span class="sr">less than</span></span>, <span class="m"><span aria-hidden="true">&gt;</span><span class="sr">greater than</span></span> and =, and Examples 1 to 3 (pages 4 to 8) and the Classroom Example 5.2.2 video (page 9) each use one of them. Part E of the Example on page 9 compares two numbers, and the Classroom Example 5.2.3 and 5.2.4 videos (page 10) compare a small decimal with <span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span>.</p>
+<p><strong>Watch for this:</strong> whether the number next to the symbol is included, and decimals with different numbers of digits.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="0.7197" data-dp="4" data-miss="{&quot;0.7196&quot;: &quot;That chops off the 8 instead of rounding. The 8 is 5 or more, so the 6 goes up: 0.7197.&quot;, &quot;0.720&quot;: &quot;That rounds to three decimal places. Four decimal places keeps four digits after the point: 0.7197.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Round <span class="m"><span aria-hidden="true">0.71968</span><span class="sr">0 point 7 1 9 6 8</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 6 in the fourth place. Look at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.7197</span><span class="sr">0 point 7 1 9 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That moves the point only one place. 0.35 is 35%.&quot;, &quot;c&quot;: &quot;That only drops the percent sign. Divide by 100 to change a percent to a decimal.&quot;, &quot;d&quot;: &quot;That moves the point three places. Two places left from 3.5 gives 0.035.&quot;}" data-why="Correct. Dividing 3.5 by 100 moves the point two places left: 0.035.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 27.</b> Which decimal is equal to <span class="m"><span aria-hidden="true">3.5%</span><span class="sr">3 point 5 percent</span></span>?</legend>
+<label><input type="radio" name="mc27" value="a"> <span><span class="m"><span aria-hidden="true">0.35</span><span class="sr">0 point 3 5</span></span></span></label><label><input type="radio" name="mc27" value="b"> <span><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span></span></label><label><input type="radio" name="mc27" value="c"> <span><span class="m"><span aria-hidden="true">3.5</span><span class="sr">3 point 5</span></span></span></label><label><input type="radio" name="mc27" value="d"> <span><span class="m"><span aria-hidden="true">0.0035</span><span class="sr">0 point 0 0 3 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Start at <span class="m"><span aria-hidden="true">3.5</span><span class="sr">3 point 5</span></span> and move the point two places to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.035</span><span class="sr">0 point 0 3 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="4" data-miss="{&quot;5&quot;: &quot;That includes 4. Less than 4 does not include 4, so the numbers are 0, 1, 2 and 3: 4 numbers.&quot;, &quot;3&quot;: &quot;That leaves out 0. The numbers are 0, 1, 2 and 3: 4 numbers.&quot;, &quot;11&quot;: &quot;That counts the numbers greater than 4. Less than 4 means 0, 1, 2 and 3.&quot;, &quot;12&quot;: &quot;That counts 4 and up. Less than 4 means 0, 1, 2 and 3.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 28.</b> Using whole numbers from 0 to 15, how many make <span class="m"><span aria-hidden="true">x &lt; 4</span><span class="sr">x less than 4</span></span> true?</p>
+<details><summary>Hint</summary><p>List them, starting at 0 and stopping just below 4.</p></details>
+<details><summary>Show answer</summary><p><strong>4</strong> (0, 1, 2 and 3)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="5.5" data-dp="1" data-miss="{&quot;30&quot;: &quot;That is the product under the square root sign. Take its square root, about 5.477, which rounds to 5.5.&quot;, &quot;2.4&quot;: &quot;That takes the square root of 160 only and then multiplies. The root covers the whole product.&quot;, &quot;5.48&quot;: &quot;That keeps two decimal places. One decimal place keeps one: 5.5.&quot;, &quot;5.4&quot;: &quot;That chops off the 7 instead of rounding. The digit after the 4 is 7, so the 4 goes up: 5.5.&quot;, &quot;~5.4772~0.001&quot;: &quot;Round to one decimal place: keep one digit after the point. 5.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> What is <span class="m"><span aria-hidden="true">√(160 × 0.25 × 0.75)</span><span class="sr">the square root of, open parenthesis 160 times 0 point 2 5 times 0 point 7 5 close parenthesis</span></span>? Round to one decimal place.</p>
+<details><summary>Hint</summary><p>Multiply first: <span class="m"><span aria-hidden="true">160 × 0.25 × 0.75</span><span class="sr">160 times 0 point 2 5 times 0 point 7 5</span></span>. Then take the square root.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5.5</span><span class="sr">5 point 5</span></span></strong>. The product is 30, and <span class="m"><span aria-hidden="true">√30</span><span class="sr">the square root of 30</span></span> is about <span class="m"><span aria-hidden="true">5.477</span><span class="sr">5 point 4 7 7</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.285" data-miss="{&quot;0.395&quot;: &quot;That subtracts each digit from 10. After borrowing, the tenths and hundredths have only 9 each: 1.000 − 0.715 = 0.285.&quot;, &quot;1.715&quot;: &quot;That brings the decimal part down instead of subtracting. Subtracting from 1 must give less than 1: 0.285.&quot;, &quot;0.715&quot;: &quot;That is the number being subtracted. Find what is left: 1.000 − 0.715 = 0.285.&quot;, &quot;0.385&quot;: &quot;Check by adding back: 0.385 + 0.715 is 1.1, not 1. Redo the borrowing: 0.285.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> What is <span class="m"><span aria-hidden="true">1 − 0.715</span><span class="sr">1 minus 0 point 7 1 5</span></span>?</p>
+<details><summary>Hint</summary><p>Write 1 as <span class="m"><span aria-hidden="true">1.000</span><span class="sr">1 point 0 0 0</span></span>. Check your answer by adding <span class="m"><span aria-hidden="true">0.715</span><span class="sr">0 point 7 1 5</span></span> back.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.285</span><span class="sr">0 point 2 8 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="45.4" data-miss="{&quot;352.8&quot;: &quot;That subtracts 58 − 2 first. Multiply first: 2 times 6.3 is 12.6, then 58 − 12.6 = 45.4.&quot;, &quot;51.7&quot;: &quot;That subtracts 6.3 once. The 2 in front means two of them: 12.6. Then 58 − 12.6 = 45.4.&quot;, &quot;70.6&quot;: &quot;That adds. The sign here is a minus: 58 − 12.6 = 45.4.&quot;, &quot;45&quot;: &quot;The directions say do not round. Keep every digit: 45.4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 31.</b> What is <span class="m"><span aria-hidden="true">58 − 2(6.3)</span><span class="sr">58 minus 2 times 6 point 3</span></span>? Do not round.</p>
+<details><summary>Hint</summary><p>Multiply first: <span class="m"><span aria-hidden="true">2 × 6.3</span><span class="sr">2 times 6 point 3</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">45.4</span><span class="sr">45 point 4</span></span></strong>, because <span class="m"><span aria-hidden="true">2 × 6.3 = 12.6</span><span class="sr">2 times 6 point 3 equals 12 point 6</span></span> and <span class="m"><span aria-hidden="true">58 − 12.6 = 45.4</span><span class="sr">58 minus 12 point 6 equals 45 point 4</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with percents as decimals, subtracting from 1, multiplying decimals, square roots and the order of operations, rounding to three or four decimal places, and inequality symbols. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec5.2-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  /* a question that asks for a decimal must be answered as a decimal */
+  if(q.dataset.form==='decimal'&&stu){ if(/%/.test(raw))return show(q,'almost','The question asks for a decimal, so leave off the percent sign. Divide the percent by 100 and type the decimal.'); if(stu.frac)return show(q,'almost','The question asks for a decimal. Type it with a decimal point, not as a fraction.'); }
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu)){
+      /* a rounding direction sets the number of digits after the point */
+      if(q.dataset.dp){ const want=Number(q.dataset.dp); const got=(s.split('.')[1]||'').length; if(got!==want){ const w=['zero','one','two','three','four'][want]; return show(q,'almost','That has the right value, but the directions ask for '+w+' decimal places, so type exactly '+w+' digits after the point, including any final zeros: '+a+'.'); } }
+      return show(q,'good',q.dataset.why||'Correct.'); } }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

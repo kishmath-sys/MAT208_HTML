@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 2.2 Corequisite: Histograms</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 2.2</div>
+<h1>Section 2.2 Corequisite: Histograms</h1>
+<p>Get ready for the Section 2.2 notes with practice reading lists of numbers, evenly spaced numbers, bar graphs and units of time. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Reading a list of numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Evenly spaced numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Reading a bar graph<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Units and amounts of time<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Count the values in a list and find the smallest and largest, including lists with repeats and decimals.</li><li>Find the step between evenly spaced numbers and continue the pattern from a starting number.</li><li>Read the scale on a bar graph and read the height of a bar, even between gridlines.</li><li>Work with seconds, minutes and hours, and find an amount of time between two clock times.</li></ul>
+</div>
+
+<p>Section 2.2 of the notes covers what a histogram shows, how to construct one in StatCrunch, and some common shapes a histogram can have.</p>
+<p>The notes expect you to already read lists of numbers, scales on graphs and units without trouble. This page gives those number and reading skills some practice first. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type numbers with digits and a period for decimals, such as <span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span>. Commas and extra spaces are fine. StatCrunch is the calculator for this course, and the Section 2.2 notes show how to use it to construct a histogram. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 2.2 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>When I copy a long list of numbers, I lose my place or skip the repeats.</strong><br><button type="button" data-go="s2">Reading a list of numbers</button></li>
+<li><strong>I am not sure how to find the gap between numbers like 40, 55, 70 and 85, or how to keep the pattern going.</strong><br><button type="button" data-go="s3">Evenly spaced numbers</button></li>
+<li><strong>I sometimes count gridlines instead of reading the numbers on a graph's scale.</strong><br><button type="button" data-go="s4">Reading a bar graph</button></li>
+<li><strong>Seconds, minutes and clock times trip me up, like how many minutes are between 10:30 AM and 1:15 PM.</strong><br><button type="button" data-go="s5">Units and amounts of time</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Reading a list of numbers</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Count how many values are in a list, counting every repeat.</li><li>Find the smallest and largest values, comparing place value and not just the first digit.</li><li>Compare decimals with different numbers of digits.</li><li>Check a copied list against the original, value by value.</li><li>Count values that meet a condition such as "at least 80."</li></ul>
+</div>
+<h3>Read a list one value at a time</h3>
+<p>Data often arrives as a list of numbers separated by commas. Three habits keep the reading accurate:</p>
+<ul>
+<li><strong>Count every value, repeats included.</strong> If 12 appears three times, it counts three times. Touch each value as you count, or count in groups of five.</li>
+<li><strong>Compare by place value.</strong> A three-digit whole number such as 108 is larger than any two-digit number such as 99, even though 9 is bigger than 1. For decimals, compare the whole-number parts first, then the tenths, then the hundredths. Writing <span class="m"><span aria-hidden="true">4.5</span><span class="sr">4 point 5</span></span> as <span class="m"><span aria-hidden="true">4.50</span><span class="sr">4 point 5 0</span></span> makes it easier to compare with <span class="m"><span aria-hidden="true">4.25</span><span class="sr">4 point 2 5</span></span>.</li>
+<li><strong>Check copies in the same order.</strong> Line up the copy with the original and compare position by position. Swapped digits, such as 71 typed as 17, are easy to miss on a quick look.</li>
+</ul>
+<p><strong>Words that set a condition.</strong> "At least 80" means 80 or more, so 80 itself counts. "More than 80" leaves 80 out. "Less than 30" leaves 30 out, and "at most 30" includes it.</p>
+<div class="worked" role="group" aria-label="Worked example: A list of 11 values">
+<h3 style="margin-top:0">Worked example: A list of 11 values</h3>
+<p>Eleven friends each reported how many text messages they sent during a movie: 4, 12, 0, 7, 12, 3, 25, 7, 9, 12, 1. How many values are there, and what are the smallest and largest?</p><ol class="steps"><li><span class="work">Count: 4, 12, 0, 7, 12 (five), 3, 25, 7, 9, 12 (ten), 1 (eleven)</span><span class="say">Count in groups of five. The three 12s and the two 7s each count every time they appear.</span></li><li><span class="work">Smallest: 0</span><span class="say">Zero is a real value in this list. One friend sent no texts, and that still counts as a value.</span></li><li><span class="work">Largest: 25</span><span class="say">Scan for the values with the most digits first: 12, 12, 25 and 12. Of those, 25 is largest.</span></li></ol><p><strong>Answer: 11 values. The smallest is 0 and the largest is 25.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Count a list with repeats">
+<h3 style="margin-top:0">Finish this one: Count a list with repeats</h3>
+<p>How many values are in this list? 12, 15, 15, 9, 20, 12, 18, 15, 22, 9, 30, 12, 17, 25, 15, 11</p><ol class="steps"><li><span class="work">First five: 12, 15, 15, 9, 20</span><span class="say">Count in groups of five and keep every repeat. Next, count the rest in fives.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="16" data-miss="{&quot;10&quot;: &quot;That counts each different number only once. Repeats count every time they appear: there are four 15s, three 12s and two 9s, so the list has 16 values.&quot;, &quot;15&quot;: &quot;One value was skipped. Count in groups of five: 12, 15, 15, 9, 20 / 12, 18, 15, 22, 9 / 30, 12, 17, 25, 15 / 11. That is 16.&quot;, &quot;17&quot;: &quot;One value was counted twice. Count in groups of five and mark each group: 5, 10, 15, then one more makes 16.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: how many values are in the list 12, 15, 15, 9, 20, 12, 18, 15, 22, 9, 30, 12, 17, 25, 15, 11?</p>
+<details><summary>Hint</summary><p>After three groups of five you have 15. Is anything left after the third group?</p></details>
+<details><summary>Show answer</summary><p><strong>16 values</strong>: three groups of five, plus the 11 at the end.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="180" data-miss="{&quot;99&quot;: &quot;That compares only the first digits, where 9 beats 1. Any three-digit number is larger than any two-digit number, so the largest is one of 108, 180 and 118. It is 180.&quot;, &quot;118&quot;: &quot;118 is larger than 108, but 180 has 8 tens, and 118 has only 1 ten. 180 is the largest.&quot;, &quot;108&quot;: &quot;108 and 180 use the same digits. Compare the tens: 180 has 8 tens and 108 has 0 tens, so 180 is larger.&quot;, &quot;96&quot;: &quot;Any three-digit number is larger than any two-digit number. Look at 108, 180 and 118 first.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> Which value in this list is the <strong>largest</strong>? 108, 96, 180, 99, 118, 81</p>
+<details><summary>Hint</summary><p>Three of the values have three digits. Only those can be the largest.</p></details>
+<details><summary>Show answer</summary><p><strong>180</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="4.05" data-miss="{&quot;4.5&quot;: &quot;4.5 is the largest, not the smallest. Reading the digits after the point as whole numbers (5 against 25) is a common slip. Write 4.5 as 4.50: 50 hundredths is more than 5 hundredths. The smallest is 4.05.&quot;, &quot;4.15&quot;: &quot;4.15 has 1 tenth, but 4.05 has 0 tenths, so 4.05 is smaller.&quot;, &quot;4.25&quot;: &quot;4.25 has 2 tenths. 4.05 has 0 tenths, so 4.05 is smaller.&quot;, &quot;4.4&quot;: &quot;4.4 has 4 tenths, which is more than 0 tenths. The smallest is 4.05.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 3.</b> Which value in this list is the <strong>smallest</strong>? <span class="m"><span aria-hidden="true">4.5</span><span class="sr">4 point 5</span></span>, <span class="m"><span aria-hidden="true">4.25</span><span class="sr">4 point 2 5</span></span>, <span class="m"><span aria-hidden="true">4.05</span><span class="sr">4 point 0 5</span></span>, <span class="m"><span aria-hidden="true">4.15</span><span class="sr">4 point 1 5</span></span>, <span class="m"><span aria-hidden="true">4.4</span><span class="sr">4 point 4</span></span></p>
+<details><summary>Hint</summary><p>Every value has 4 ones, so compare the tenths digit, the first digit after the point.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">4.05</span><span class="sr">4 point 0 5</span></span></strong>. In hundredths the values are 450, 425, 405, 415 and 440, so 405 hundredths is smallest.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;The second value is 45 in both lists. Compare the eighth values: 71 in the original, 17 in the copy.&quot;, &quot;b&quot;: &quot;The twelfth value is 90 in both lists. Look at the eighth value, where the digits were swapped.&quot;, &quot;c&quot;: &quot;The last value is 16 in both lists. Compare position by position until the lists differ.&quot;}" data-why="Correct. The original has 71 in eighth place, and the copy swapped the digits to 17.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 4.</b> The example on page 1 of the notes lists the ages of 15 students: 28, 45, 18, 18, 22, 55, 67, 71, 18, 19, 21, 90, 20, 21, 16. A student typed them as 28, 45, 18, 18, 22, 55, 67, 17, 18, 19, 21, 90, 20, 21, 16. Which typed value is wrong?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>45, the second value</span></label><label><input type="radio" name="mc4" value="b"> <span>90, the twelfth value</span></label><label><input type="radio" name="mc4" value="c"> <span>16, the last value</span></label><label><input type="radio" name="mc4" value="d"> <span>17, the eighth value</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Line the two lists up and compare them one position at a time.</p></details>
+<details><summary>Show answer</summary><p><strong>17, the eighth value.</strong> It should be 71.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="6" data-miss="{&quot;3&quot;: &quot;That counts only the scores more than 80 (91, 88 and 95). \&quot;At least 80\&quot; includes 80 itself, and 80 appears three times: 6 scores.&quot;, &quot;4&quot;: &quot;That counts 80 only once. It appears three times, and each one counts: 80, 91, 80, 88, 95, 80 is 6 scores.&quot;, &quot;7&quot;: &quot;One score below 80 was counted. 79 is less than 80, so it does not count. The scores are 80, 91, 80, 88, 95 and 80: 6.&quot;, &quot;5&quot;: &quot;One score was missed. Mark each score that is 80 or more: 80, 91, 80, 88, 95, 80. That is 6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> Ten quiz scores are 72, 80, 91, 65, 80, 88, 79, 95, 80, 70. How many scores are <strong>at least 80</strong>?</p>
+<details><summary>Hint</summary><p>"At least 80" means 80 or more. Check each score in order and keep a tally.</p></details>
+<details><summary>Show answer</summary><p><strong>6 scores</strong>: 80, 91, 80, 88, 95 and 80.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 2.2</h3>
+<p>The example on page 1 of the notes gives a list of 15 ages, and Classroom Example 2.2.1 on page 6 gives 45 drive-through service times. The Important Notes on page 2 say to scan typed data visually to spot major errors.</p><p><strong>Watch for this:</strong> repeated values, such as the three 18s in the ages list. Each one is a separate value to type and count.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Evenly spaced numbers</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the step between evenly spaced numbers by subtracting neighbors.</li><li>Subtract three-digit numbers, borrowing correctly.</li><li>Continue a pattern from a starting number, and find the 5th or 6th number.</li><li>Count how many numbers are in a list, not just how many steps.</li><li>Tell whether a list goes up by the same step every time.</li></ul>
+</div>
+<h3>Start, step and keep going</h3>
+<p>Scales on graphs and many tables use numbers that go up by the same amount each time, such as 40, 55, 70, 85. That amount is the <strong>step</strong>.</p>
+<ul>
+<li><strong>Find the step:</strong> subtract two neighbors, the larger minus the smaller. <span class="m"><span aria-hidden="true">55 − 40 = 15</span><span class="sr">55 minus 40 equals 15</span></span>. Check with another pair: <span class="m"><span aria-hidden="true">70 − 55 = 15</span><span class="sr">70 minus 55 equals 15</span></span>.</li>
+<li><strong>Keep going:</strong> add the step to the last number, again and again.</li>
+<li><strong>Count numbers, not gaps.</strong> A list always has one more number than it has steps, like fence posts and the gaps between them. From 40 to 85 by 15 there are 3 steps but 4 numbers.</li>
+</ul>
+<h3>Two slips to watch for</h3>
+<ul>
+<li><strong>Subtracting the first and last numbers.</strong> <span class="m"><span aria-hidden="true">85 − 40 = 45</span><span class="sr">85 minus 40 equals 45</span></span> covers three steps, not one.</li>
+<li><strong>Subtracting the smaller digit from the larger in every column.</strong> In <span class="m"><span aria-hidden="true">245 − 180</span><span class="sr">245 minus 180</span></span>, the tens column is 4 minus 8, which needs a borrow. Taking 8 minus 4 instead gives 145, which is wrong.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Continue 12, 19, 26, 33">
+<h3 style="margin-top:0">Worked example: Continue 12, 19, 26, 33</h3>
+<p>The list 12, 19, 26, 33 keeps going by the same step. Find the step and the next three numbers.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">19 − 12 = 7</span><span class="sr">19 minus 12 equals 7</span></span></span><span class="say">Subtract two neighbors to find the step.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">26 − 19 = 7</span><span class="sr">26 minus 19 equals 7</span></span></span><span class="say">Check with a second pair. The step is 7 both times.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">33 + 7 = 40, 40 + 7 = 47, 47 + 7 = 54</span><span class="sr">33 plus 7 equals 40, 40 plus 7 equals 47, 47 plus 7 equals 54</span></span></span><span class="say">Add the step to the last number, one at a time.</span></li></ol><p><strong>Answer: the step is 7, and the next three numbers are 40, 47 and 54.</strong> The full list 12, 19, 26, 33, 40, 47, 54 has 7 numbers and 6 steps.</p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Find the step for 40, 55, 70, 85">
+<h3 style="margin-top:0">Finish this one: Find the step for 40, 55, 70, 85</h3>
+<p>A scale is marked 40, 55, 70, 85. What is the step?</p><ol class="steps"><li><span class="work">Neighbors: 40 and 55</span><span class="say">Pick two numbers that sit next to each other. Next, subtract the smaller from the larger.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="15" data-miss="{&quot;45&quot;: &quot;That subtracts the first mark from the last, which covers three steps. Subtract neighbors: 55 minus 40 is 15.&quot;, &quot;40&quot;: &quot;That is the first mark, not the step. Subtract neighbors: 55 minus 40 is 15.&quot;, &quot;95&quot;: &quot;That adds the neighbors. The step is the difference: 55 minus 40 is 15.&quot;, &quot;55&quot;: &quot;That is the second mark. The step is how much it goes up: 55 minus 40 is 15.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: the scale is marked 40, 55, 70, 85. What is the step between marks?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">55 − 40</span><span class="sr">55 minus 40</span></span>. Check it with <span class="m"><span aria-hidden="true">70 − 55</span><span class="sr">70 minus 55</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>15</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="65" data-miss="{&quot;145&quot;: &quot;In the tens column, 4 minus 8 needs a borrow. Taking 8 minus 4 instead gives 145. Borrow 1 hundred: 14 tens minus 8 tens is 6 tens, and 1 hundred minus 1 hundred is 0. The step is 65.&quot;, &quot;425&quot;: &quot;That adds the two marks. The step is the difference: 245 minus 180 is 65.&quot;, &quot;165&quot;: &quot;The tens were borrowed from, but the hundreds digit was not lowered. After borrowing, 2 hundreds becomes 1 hundred, and 1 minus 1 is 0. The step is 65.&quot;, &quot;-65&quot;: &quot;Subtract the smaller from the larger: 245 minus 180 is 65.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Two neighboring marks on a scale are 180 and 245. What is the step between them?</p>
+<details><summary>Hint</summary><p>Subtract the smaller from the larger: <span class="m"><span aria-hidden="true">245 − 180</span><span class="sr">245 minus 180</span></span>. Check: does 180 plus your answer give 245?</p></details>
+<details><summary>Show answer</summary><p><strong>65</strong>, because <span class="m"><span aria-hidden="true">180 + 65 = 245</span><span class="sr">180 plus 65 equals 245</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="48" data-miss="{&quot;57&quot;: &quot;That adds the step 5 times, which gives the 6th number. The 1st number is 12, so the 5th number is only 4 steps later: 12 + 4 × 9 = 48.&quot;, &quot;45&quot;: &quot;That multiplies 5 by 9 without the starting number. Start at 12 and add 9 four times: 12, 21, 30, 39, 48.&quot;, &quot;39&quot;: &quot;That is the 4th number. Write them out: 12, 21, 30, 39, 48.&quot;, &quot;21&quot;: &quot;That is the 2nd number. Keep adding 9: 12, 21, 30, 39, 48.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> A list starts at 12 and goes up by 9 each time. What is the <strong>5th</strong> number in the list?</p>
+<details><summary>Hint</summary><p>Write the list out: 12 is the 1st number, 21 is the 2nd. Keep adding 9.</p></details>
+<details><summary>Show answer</summary><p><strong>48</strong>: the list is 12, 21, 30, 39, 48.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="6" data-miss="{&quot;5&quot;: &quot;That counts the steps. There are 5 steps of 12 from 30 to 90, and one more number than steps: 30, 42, 54, 66, 78, 90 is 6 numbers.&quot;, &quot;60&quot;: &quot;That is the distance from 30 to 90. Divide it by the step to get 5 steps, then add 1 for the starting number: 6.&quot;, &quot;7&quot;: &quot;Write them out: 30, 42, 54, 66, 78, 90. That is 6 numbers.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> A list starts at 30, goes up by 12 each time and stops at 90. How many numbers are in the list?</p>
+<details><summary>Hint</summary><p>Write the numbers out and count them, or count the steps and add 1.</p></details>
+<details><summary>Show answer</summary><p><strong>6 numbers</strong>: 30, 42, 54, 66, 78 and 90.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;The steps are 12, 10 and 14. They are not all the same.&quot;, &quot;c&quot;: &quot;The steps are 10, 12 and 14. They grow, so they are not all the same.&quot;, &quot;d&quot;: &quot;The steps are 6, 12 and 18. They grow, so they are not all the same.&quot;}" data-why="Correct. Each step is 12: 30 − 18, 42 − 30 and 54 − 42 are all 12.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Which list goes up by the <strong>same step</strong> every time?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>18, 30, 42, 54</span></label><label><input type="radio" name="mc10" value="b"> <span>18, 30, 40, 54</span></label><label><input type="radio" name="mc10" value="c"> <span>18, 28, 40, 54</span></label><label><input type="radio" name="mc10" value="d"> <span>18, 24, 36, 54</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Subtract each pair of neighbors in a list. All the differences must match.</p></details>
+<details><summary>Show answer</summary><p><strong>18, 30, 42, 54</strong>, where every step is 12.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3.6" data-miss="{&quot;4.2&quot;: &quot;That adds the step 4 times, which gives the 5th number. The 4th number is 3 steps after the start: 1.8, 2.4, 3.0, 3.6.&quot;, &quot;3&quot;: &quot;That is the 3rd number. Write them out: 1.8, 2.4, 3.0, 3.6.&quot;, &quot;2.4&quot;: &quot;That is the 2nd number. Keep adding 0.6: 1.8, 2.4, 3.0, 3.6.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> A list starts at <span class="m"><span aria-hidden="true">1.8</span><span class="sr">1 point 8</span></span> and goes up by <span class="m"><span aria-hidden="true">0.6</span><span class="sr">0 point 6</span></span> each time. What is the <strong>4th</strong> number?</p>
+<details><summary>Hint</summary><p>Write them out. <span class="m"><span aria-hidden="true">1.8 + 0.6 = 2.4</span><span class="sr">1 point 8 plus 0 point 6 equals 2 point 4</span></span>, which is the 2nd number.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">3.6</span><span class="sr">3 point 6</span></span></strong>: the list is <span class="m"><span aria-hidden="true">1.8</span><span class="sr">1 point 8</span></span>, <span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span>, <span class="m"><span aria-hidden="true">3.0</span><span class="sr">3 point 0</span></span>, <span class="m"><span aria-hidden="true">3.6</span><span class="sr">3 point 6</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 2.2</h3>
+<p>The histogram on page 3 of the notes has its horizontal axis marked 15, 31, 47, 63, 79 and 95. The StatCrunch steps on page 3 ask for a "Start at" number and a "Width" number, and the "Classroom Example 2.2.1" video subtracts 70 from 110 before typing in a number.</p><p><strong>Watch for this:</strong> which two numbers you subtract. Use neighbors, not the first and last.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Reading a bar graph</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Tell the horizontal axis (x-axis) from the vertical axis (y-axis).</li><li>Find the step on an axis scale.</li><li>Read the height of a bar, including a bar that ends between gridlines.</li><li>Use axis labels and the title to say what a bar means.</li><li>Compare two bars by subtracting their heights.</li></ul>
+</div>
+<h3>Axes, scales and labels</h3>
+<ul>
+<li>The <strong>horizontal axis</strong> runs left to right along the bottom. It is also called the <strong>x-axis</strong>.</li>
+<li>The <strong>vertical axis</strong> runs up and down the side. It is also called the <strong>y-axis</strong>.</li>
+<li>The numbers along an axis form its <strong>scale</strong>. Find the scale's step by subtracting two neighboring numbers, as in Section 3. The step is often 2, 5, 10, 50 or 100, not 1.</li>
+<li>The <strong>axis labels</strong> and the <strong>title</strong> say what is being counted or measured. Read them before reading any bar.</li>
+</ul>
+<p>To read a bar, follow its top straight across to the vertical scale. If it ends between two gridlines, find the step and decide how far up it is: halfway between 40 and 50 is 45.</p>
+<h3>Two slips to watch for</h3>
+<ul>
+<li><strong>Counting gridlines.</strong> A bar that reaches the 4th gridline on a scale of 0, 50, 100, 150, 200 shows 200, not 4.</li>
+<li><strong>Reading the wrong line.</strong> Use the line the bar's top actually touches, and not the line just above or below it.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Library books">
+<h3 style="margin-top:0">Worked example: Library books</h3>
+<figure class="axisfig"><svg viewBox="0 0 440 280" width="440" height="280" role="img" aria-labelledby="g-books" focusable="false"><title id="g-books">Bar graph of books checked out at a library branch each weekday</title><line x1="62" y1="228.0" x2="428" y2="228.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="232.0" text-anchor="end" font-size="13" fill="currentColor">0</text><line x1="62" y1="192.3" x2="428" y2="192.3" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="196.3" text-anchor="end" font-size="13" fill="currentColor">10</text><line x1="62" y1="156.7" x2="428" y2="156.7" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="160.7" text-anchor="end" font-size="13" fill="currentColor">20</text><line x1="62" y1="121.0" x2="428" y2="121.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="125.0" text-anchor="end" font-size="13" fill="currentColor">30</text><line x1="62" y1="85.3" x2="428" y2="85.3" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="89.3" text-anchor="end" font-size="13" fill="currentColor">40</text><line x1="62" y1="49.7" x2="428" y2="49.7" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="53.7" text-anchor="end" font-size="13" fill="currentColor">50</text><line x1="62" y1="14.0" x2="428" y2="14.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="18.0" text-anchor="end" font-size="13" fill="currentColor">60</text><rect x="76.6" y="121.0" width="43.9" height="107.0" style="fill:var(--accent)"/><text x="98.6" y="246" text-anchor="middle" font-size="13" fill="currentColor">Mon</text><rect x="149.8" y="67.5" width="43.9" height="160.5" style="fill:var(--accent)"/><text x="171.8" y="246" text-anchor="middle" font-size="13" fill="currentColor">Tue</text><rect x="223.0" y="103.2" width="43.9" height="124.8" style="fill:var(--accent)"/><text x="245.0" y="246" text-anchor="middle" font-size="13" fill="currentColor">Wed</text><rect x="296.2" y="49.7" width="43.9" height="178.3" style="fill:var(--accent)"/><text x="318.2" y="246" text-anchor="middle" font-size="13" fill="currentColor">Thu</text><rect x="369.4" y="156.7" width="43.9" height="71.3" style="fill:var(--accent)"/><text x="391.4" y="246" text-anchor="middle" font-size="13" fill="currentColor">Fri</text><line x1="62" y1="14" x2="62" y2="228" stroke="currentColor" stroke-width="1.5"/><line x1="62" y1="228" x2="428" y2="228" stroke="currentColor" stroke-width="1.5"/><text x="245.0" y="272" text-anchor="middle" font-size="13" fill="currentColor">Day of the week</text><text transform="translate(16 121.0) rotate(-90)" text-anchor="middle" font-size="13" fill="currentColor">Books checked out</text></svg><figcaption>Books checked out at a library branch, Monday to Friday. The vertical axis is marked 0 to 60 in steps of 10.</figcaption></figure><details><summary>Text version of the graph</summary>
+<div class="table-wrap" role="region" aria-label="Books checked out each weekday" tabindex="0">
+<table>
+<caption>Books checked out each weekday</caption>
+<thead><tr><th scope="col">Day</th><th scope="col">Books checked out</th></tr></thead>
+<tbody><tr><th scope="row">Mon</th><td>30</td></tr><tr><th scope="row">Tue</th><td>45</td></tr><tr><th scope="row">Wed</th><td>35</td></tr><tr><th scope="row">Thu</th><td>50</td></tr><tr><th scope="row">Fri</th><td>20</td></tr></tbody>
+</table>
+</div>
+</details>
+<p>How many books were checked out on Tuesday?</p><ol class="steps"><li><span class="work">Labels: vertical axis "Books checked out," horizontal axis "Day of the week"</span><span class="say">The height of each bar is a number of books.</span></li><li><span class="work">Scale step: <span class="m"><span aria-hidden="true">10 − 0 = 10</span><span class="sr">10 minus 0 equals 10</span></span></span><span class="say">Each gridline is 10 more books than the one below it.</span></li><li><span class="work">Tuesday bar: halfway between 40 and 50</span><span class="say">Halfway through a step of 10 is 5 more, so the bar shows 45.</span></li></ol><p><strong>Answer: 45 books</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<p>Practice 12 to 15 use this graph.</p>
+<figure class="axisfig"><svg viewBox="0 0 440 280" width="440" height="280" role="img" aria-labelledby="g-bike" focusable="false"><title id="g-bike">Bar graph of bike share rides in a small city each weekday</title><line x1="62" y1="228.0" x2="428" y2="228.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="232.0" text-anchor="end" font-size="13" fill="currentColor">0</text><line x1="62" y1="192.3" x2="428" y2="192.3" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="196.3" text-anchor="end" font-size="13" fill="currentColor">50</text><line x1="62" y1="156.7" x2="428" y2="156.7" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="160.7" text-anchor="end" font-size="13" fill="currentColor">100</text><line x1="62" y1="121.0" x2="428" y2="121.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="125.0" text-anchor="end" font-size="13" fill="currentColor">150</text><line x1="62" y1="85.3" x2="428" y2="85.3" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="89.3" text-anchor="end" font-size="13" fill="currentColor">200</text><line x1="62" y1="49.7" x2="428" y2="49.7" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="53.7" text-anchor="end" font-size="13" fill="currentColor">250</text><line x1="62" y1="14.0" x2="428" y2="14.0" style="stroke:var(--line)" stroke-width="1"/><text x="56" y="18.0" text-anchor="end" font-size="13" fill="currentColor">300</text><rect x="76.6" y="121.0" width="43.9" height="107.0" style="fill:var(--accent)"/><text x="98.6" y="246" text-anchor="middle" font-size="13" fill="currentColor">Mon</text><rect x="149.8" y="103.2" width="43.9" height="124.8" style="fill:var(--accent)"/><text x="171.8" y="246" text-anchor="middle" font-size="13" fill="currentColor">Tue</text><rect x="223.0" y="67.5" width="43.9" height="160.5" style="fill:var(--accent)"/><text x="245.0" y="246" text-anchor="middle" font-size="13" fill="currentColor">Wed</text><rect x="296.2" y="85.3" width="43.9" height="142.7" style="fill:var(--accent)"/><text x="318.2" y="246" text-anchor="middle" font-size="13" fill="currentColor">Thu</text><rect x="369.4" y="31.8" width="43.9" height="196.2" style="fill:var(--accent)"/><text x="391.4" y="246" text-anchor="middle" font-size="13" fill="currentColor">Fri</text><line x1="62" y1="14" x2="62" y2="228" stroke="currentColor" stroke-width="1.5"/><line x1="62" y1="228" x2="428" y2="228" stroke="currentColor" stroke-width="1.5"/><text x="245.0" y="272" text-anchor="middle" font-size="13" fill="currentColor">Day of the week</text><text transform="translate(16 121.0) rotate(-90)" text-anchor="middle" font-size="13" fill="currentColor">Number of rides</text></svg><figcaption>Bike share rides in a small city, Monday to Friday of one week.</figcaption></figure>
+<details><summary>Text version of the graph</summary>
+<div class="table-wrap" role="region" aria-label="Bike share rides each weekday" tabindex="0">
+<table>
+<caption>Bike share rides each weekday</caption>
+<thead><tr><th scope="col">Day</th><th scope="col">Number of rides</th></tr></thead>
+<tbody><tr><th scope="row">Mon</th><td>150</td></tr><tr><th scope="row">Tue</th><td>175</td></tr><tr><th scope="row">Wed</th><td>225</td></tr><tr><th scope="row">Thu</th><td>200</td></tr><tr><th scope="row">Fri</th><td>275</td></tr></tbody>
+</table>
+</div>
+</details>
+<div class="worked" role="group" aria-label="Guided example: The scale on the bike graph">
+<h3 style="margin-top:0">Finish this one: The scale on the bike graph</h3>
+<p>What is the step on the vertical axis of the bike graph?</p><ol class="steps"><li><span class="work">Neighboring marks: 0 and 50</span><span class="say">Read two marks that sit next to each other. Next, subtract them.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="50" data-miss="{&quot;1&quot;: &quot;That counts each gridline as 1. Read the numbers on the scale: 0, 50, 100. The step is 50 rides.&quot;, &quot;10&quot;: &quot;The scale does not go up by 10. Read the numbers on it: 0, 50, 100. The step is 50.&quot;, &quot;300&quot;: &quot;That is the top of the scale. The step is the gap between neighboring marks: 50.&quot;, &quot;6&quot;: &quot;That is the number of steps up to 300. The size of each step is 50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Finish it: what is the step on the vertical axis of the bike graph?</p>
+<details><summary>Hint</summary><p>Subtract <span class="m"><span aria-hidden="true">50 − 0</span><span class="sr">50 minus 0</span></span> or <span class="m"><span aria-hidden="true">100 − 50</span><span class="sr">100 minus 50</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>50 rides</strong> per gridline</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="175" data-miss="{&quot;150&quot;: &quot;That reads the gridline below the bar. The Tuesday bar ends halfway between 150 and 200, so it shows 175.&quot;, &quot;200&quot;: &quot;That reads the gridline above the bar. The bar ends halfway between 150 and 200: 175.&quot;, &quot;3.5&quot;: &quot;That counts gridlines. The bar is 3 and a half steps up, and each step is 50 rides: 175.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> How many rides does the Tuesday bar show?</p>
+<details><summary>Hint</summary><p>The bar ends halfway between two gridlines. What is half of the step?</p></details>
+<details><summary>Show answer</summary><p><strong>175 rides</strong>, halfway between 150 and 200.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The horizontal axis lists the days of the week. The number of rides is read on the vertical axis.&quot;, &quot;c&quot;: &quot;The title says what the graph is about, but it does not give a number for each day. Read the vertical axis.&quot;, &quot;d&quot;: &quot;All the bars have the same width. The height of a bar, read on the vertical axis, gives the number of rides.&quot;}" data-why="Correct. The vertical axis is labeled &quot;Number of rides,&quot; and each bar&#x27;s height is read on it.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> On the bike graph, which part shows the number of rides?</legend>
+<label><input type="radio" name="mc14" value="a"> <span>The horizontal axis (x-axis)</span></label><label><input type="radio" name="mc14" value="b"> <span>The vertical axis (y-axis)</span></label><label><input type="radio" name="mc14" value="c"> <span>The title above the graph</span></label><label><input type="radio" name="mc14" value="d"> <span>The width of each bar</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read the two axis labels. Which one says "Number of rides"?</p></details>
+<details><summary>Show answer</summary><p><strong>The vertical axis (y-axis)</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="125" data-miss="{&quot;425&quot;: &quot;That adds the two bars. \&quot;How many more\&quot; means subtract: 275 minus 150 is 125.&quot;, &quot;2.5&quot;: &quot;That counts gridlines between the bar tops. Each step is 50 rides, so 2 and a half steps is 125 rides.&quot;, &quot;275&quot;: &quot;That is the Friday bar alone. Subtract the Monday bar: 275 minus 150 is 125.&quot;, &quot;75&quot;: &quot;Check both readings. Friday ends halfway between 250 and 300, which is 275, and Monday is 150. 275 minus 150 is 125.&quot;, &quot;100&quot;: &quot;Friday is not 250. It ends halfway between 250 and 300, so it is 275. 275 minus 150 is 125.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> How many <strong>more</strong> rides were there on Friday than on Monday?</p>
+<details><summary>Hint</summary><p>Read Friday (halfway between 250 and 300) and Monday, then subtract.</p></details>
+<details><summary>Show answer</summary><p><strong>125 more rides</strong>, because <span class="m"><span aria-hidden="true">275 − 150 = 125</span><span class="sr">275 minus 150 equals 125</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That counts gridlines. Each step is 100, so 4 and three quarters steps is 475.&quot;, &quot;b&quot;: &quot;That is one quarter of the way up from 400. Three quarters of a step of 100 is 75, so the estimate is 475.&quot;, &quot;d&quot;: &quot;That starts from the 500 line. The bar is between 400 and 500, so its value is less than 500: 475.&quot;}" data-why="Correct. Three quarters of a step of 100 is 75, and 400 plus 75 is 475.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> On a different bar graph, the vertical axis is marked 0, 100, 200, 300, 400 and 500. One bar's top is three quarters of the way from the 400 line to the 500 line. Which is the best estimate of its value?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">4.75</span><span class="sr">4 point 7 5</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span>425</span></label><label><input type="radio" name="mc16" value="c"> <span>475</span></label><label><input type="radio" name="mc16" value="d"> <span>575</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The step is 100. What is three quarters of 100?</p></details>
+<details><summary>Show answer</summary><p><strong>475</strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 2.2</h3>
+<p>Item 1 on page 1 of the notes describes what a histogram's horizontal and vertical axes show and how to label them. The histograms on pages 3 to 5 have vertical scales that go up by 2, 10, 50 and 100.</p><p><strong>Watch for this:</strong> the step on each vertical scale before you read a bar. It changes from one graph to the next.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Units and amounts of time</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Notice the unit that goes with each number, such as years, seconds or minutes.</li><li>Change minutes and seconds to seconds, and seconds to minutes.</li><li>Write an amount of time as a decimal number of minutes.</li><li>Find how many minutes pass between two clock times, including across noon.</li></ul>
+</div>
+<h3>Time does not work in tens</h3>
+<p>One minute is 60 seconds, and one hour is 60 minutes. Because time groups by 60 and not by 10 or 100, the digits in a time cannot be read like a decimal.</p>
+<ul>
+<li><strong>Minutes and seconds to seconds:</strong> multiply the minutes by 60, then add the extra seconds.</li>
+<li><strong>Seconds to minutes and seconds:</strong> take out as many groups of 60 as fit, and the rest are seconds.</li>
+<li><strong>Seconds to decimal minutes:</strong> divide by 60. So 30 seconds is half a minute, <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>, not <span class="m"><span aria-hidden="true">0.30</span><span class="sr">0 point 3 0</span></span>.</li>
+<li><strong>Time between clock times:</strong> count up to the next full hour, then count whole hours, then the extra minutes. Do not subtract clock times as if they were decimals.</li>
+</ul>
+<p>Also keep a <strong>time of day</strong>, such as 11:00 AM, separate from an <strong>amount of time</strong>, such as 150 seconds.</p>
+<div class="worked" role="group" aria-label="Worked example: Seconds and clock times">
+<h3 style="margin-top:0">Worked example: Seconds and clock times</h3>
+<p>(a) Write 205 seconds in minutes and seconds. (b) How many minutes pass from 11:40 AM to 12:25 PM?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">205 − 60 − 60 − 60 = 25</span><span class="sr">205 minus 60 minus 60 minus 60 equals 25</span></span></span><span class="say">Three groups of 60 fit in 205, with 25 seconds left, so 205 seconds is 3 minutes 25 seconds.</span></li><li><span class="work">11:40 AM to 12:00 PM is 20 minutes</span><span class="say">Count up to the full hour first. 12:00 PM is noon.</span></li><li><span class="work">12:00 PM to 12:25 PM is 25 minutes</span><span class="say">Then count the extra minutes and add: 20 plus 25 is 45.</span></li></ol><p><strong>Answer: (a) 3 minutes 25 seconds. (b) 45 minutes.</strong> Subtracting 1140 from 1225 as plain numbers would give 85, which is wrong, because an hour has 60 minutes, not 100.</p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 4 minutes 10 seconds">
+<h3 style="margin-top:0">Finish this one: 4 minutes 10 seconds in seconds</h3>
+<p>How many seconds are in 4 minutes 10 seconds?</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">4 × 60 = 240</span><span class="sr">4 times 60 equals 240</span></span></span><span class="say">Change the whole minutes to seconds. Next, add the extra 10 seconds.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="250" data-miss="{&quot;410&quot;: &quot;That writes the 4 and the 10 side by side. Change the minutes to seconds first: 4 times 60 is 240, plus 10 is 250.&quot;, &quot;240&quot;: &quot;That is the 4 minutes alone. Add the extra 10 seconds: 250.&quot;, &quot;4.1&quot;: &quot;That treats the time like a decimal. A minute is 60 seconds: 4 times 60 plus 10 is 250.&quot;, &quot;14&quot;: &quot;That adds 4 and 10. Change the minutes to seconds first: 4 times 60 is 240, plus 10 is 250.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Finish it: how many seconds are in 4 minutes 10 seconds?</p>
+<details><summary>Hint</summary><p>240 seconds plus 10 more seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>250 seconds</strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="2.5" data-miss="{&quot;2.3&quot;: &quot;That writes 2 minutes 30 seconds as 2.30. But 30 seconds is half a minute, so 150 seconds is 2.5 minutes.&quot;, &quot;1.5&quot;: &quot;That treats a minute as 100 seconds. A minute is 60 seconds: 150 divided by 60 is 2.5.&quot;, &quot;9000&quot;: &quot;That multiplies by 60. Going from seconds to minutes, divide by 60: 2.5.&quot;, &quot;2&quot;: &quot;The directions say do not round. 150 seconds is 2 minutes and 30 more seconds, and 30 seconds is half a minute: 2.5.&quot;, &quot;3&quot;: &quot;The directions say do not round. 150 divided by 60 is 2.5.&quot;, &quot;0.4&quot;: &quot;That divides 60 by 150. Divide the seconds by 60: 150 divided by 60 is 2.5.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Write 150 seconds as a decimal number of minutes. Do not round.</p>
+<details><summary>Hint</summary><p>Divide by 60. Or: 120 seconds is 2 minutes, and the other 30 seconds is what part of a minute?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.5</span><span class="sr">2 point 5</span></span> minutes</strong>, because <span class="m"><span aria-hidden="true">150 ÷ 60 = 2.5</span><span class="sr">150 divided by 60 equals 2 point 5</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="165" data-miss="{&quot;285&quot;: &quot;That subtracts 1030 from 1315 as plain numbers, as if an hour had 100 minutes. Count up instead: 10:30 to 11:00 is 30 minutes, 11:00 to 1:00 is 120 minutes, and 1:00 to 1:15 is 15 minutes. That is 165.&quot;, &quot;245&quot;: &quot;That writes 2 hours 45 minutes as 245. Change the hours to minutes: 2 times 60 is 120, plus 45 is 165.&quot;, &quot;2.45&quot;: &quot;That writes 2 hours 45 minutes like a decimal. The question asks for minutes: 2 times 60 plus 45 is 165.&quot;, &quot;2.75&quot;: &quot;That is the number of hours. The question asks for minutes: 2.75 times 60 is 165.&quot;, &quot;195&quot;: &quot;That adds the extra 15 minutes after 10:30 to 1:30 instead of stopping at 1:15. 10:30 AM to 1:30 PM is 180 minutes, and 1:15 PM is 15 minutes earlier: 165.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> A store measured how long customers waited in line from 10:30 AM to 1:15 PM. How many <strong>minutes</strong> is that?</p>
+<details><summary>Hint</summary><p>Count up: 10:30 AM to 11:00 AM, then 11:00 AM to 1:00 PM, then 1:00 PM to 1:15 PM.</p></details>
+<details><summary>Show answer</summary><p><strong>165 minutes</strong>: 30 + 120 + 15. That is 2 hours 45 minutes.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That drops the zero and changes the unit. 60 seconds is 1 minute, so 90 seconds is 1 minute and 30 more seconds.&quot;, &quot;c&quot;: &quot;That reads 1 minute 30 seconds like a decimal. 30 seconds is half a minute, so 90 seconds is 1.5 minutes, not 1.3.&quot;, &quot;d&quot;: &quot;The unit is seconds, not minutes. 90 seconds is 1 minute 30 seconds.&quot;}" data-why="Correct. One group of 60 seconds fits in 90, with 30 seconds left.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 20.</b> A list of times is labeled "Wait time (in seconds)." One value is 90. Which amount is the same as 90 seconds?</legend>
+<label><input type="radio" name="mc20" value="a"> <span>9 minutes</span></label><label><input type="radio" name="mc20" value="b"> <span>1 minute 30 seconds</span></label><label><input type="radio" name="mc20" value="c"> <span><span class="m"><span aria-hidden="true">1.3</span><span class="sr">1 point 3</span></span> minutes</span></label><label><input type="radio" name="mc20" value="d"> <span>1 hour 30 minutes</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>How many groups of 60 fit in 90, and how many seconds are left?</p></details>
+<details><summary>Show answer</summary><p><strong>1 minute 30 seconds</strong> (which is also <span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span> minutes)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 2.2</h3>
+<p>The example on page 1 of the notes measures ages in years. In Classroom Example 2.2.1 on page 6, each service time runs from when a vehicle stops at the order window until it leaves the pickup window, and the "Classroom Example 2.2.1" video reads those times in seconds. The times of day in that example, 11:00 AM to 2:00 PM, say when the data were collected.</p><p><strong>Watch for this:</strong> the difference between an amount of time, such as 120 seconds, and a time of day, such as 11:00 AM.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="50" data-miss="{&quot;45&quot;: &quot;Halfway through a step of 20 is 10, not 5. Halfway between 40 and 60 is 50.&quot;, &quot;2.5&quot;: &quot;That counts gridlines. Each step is 20, so 2 and a half steps is 50.&quot;, &quot;40&quot;: &quot;That reads the line below the bar. Halfway between 40 and 60 is 50.&quot;, &quot;60&quot;: &quot;That reads the line above the bar. Halfway between 40 and 60 is 50.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> On a bar graph, the vertical axis is marked 0, 20, 40, 60, 80 and 100. A bar's top sits exactly halfway between the 40 line and the 60 line. What value does the bar show?</p>
+<details><summary>Hint</summary><p>The step is 20. Half a step is 10.</p></details>
+<details><summary>Show answer</summary><p><strong>50</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="104" data-miss="{&quot;112&quot;: &quot;That adds 8 six times, which gives the 7th mark. The 6th mark is 5 steps after the 1st: 64, 72, 80, 88, 96, 104.&quot;, &quot;48&quot;: &quot;That multiplies 6 by 8 without the starting number. Start at 64 and add 8 five times: 104.&quot;, &quot;96&quot;: &quot;That is the 5th mark. Write them out: 64, 72, 80, 88, 96, 104.&quot;, &quot;72&quot;: &quot;That is the 2nd mark. Keep adding 8: 64, 72, 80, 88, 96, 104.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> A scale starts at 64, and each mark is 8 more than the one before. What is the <strong>6th</strong> mark?</p>
+<details><summary>Hint</summary><p>The 1st mark is 64. Write the marks out until you reach the 6th.</p></details>
+<details><summary>Show answer</summary><p><strong>104</strong>: the marks are 64, 72, 80, 88, 96, 104.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="225" data-miss="{&quot;345&quot;: &quot;That writes the 3 and the 45 side by side. Change the minutes first: 3 times 60 is 180, plus 45 is 225.&quot;, &quot;180&quot;: &quot;That is the 3 minutes alone. Add the extra 45 seconds: 225.&quot;, &quot;3.45&quot;: &quot;That treats the time like a decimal. 3 times 60 plus 45 is 225 seconds.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> How many seconds are in 3 minutes 45 seconds?</p>
+<details><summary>Hint</summary><p>Multiply the minutes by 60, then add the seconds.</p></details>
+<details><summary>Show answer</summary><p><strong>225 seconds</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1050" data-miss="{&quot;998&quot;: &quot;That compares only the first digits, where 9 beats 1. Any four-digit number is larger than any three-digit number. Of 1,005, 1,050 and 1,009, the largest is 1,050.&quot;, &quot;989&quot;: &quot;Any four-digit number is larger than any three-digit number. Compare 1,005, 1,050 and 1,009.&quot;, &quot;1009&quot;: &quot;1,009 has 0 tens, but 1,050 has 5 tens. 1,050 is larger.&quot;, &quot;1005&quot;: &quot;1,005 has 0 tens, but 1,050 has 5 tens. 1,050 is larger.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Which value in this list is the <strong>largest</strong>? 1,005; 998; 1,050; 989; 1,009</p>
+<details><summary>Hint</summary><p>Three values have four digits. Compare their hundreds, then their tens.</p></details>
+<details><summary>Show answer</summary><p><strong>1,050</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="137" data-miss="{&quot;263&quot;: &quot;That takes the smaller digit from the larger in every column. Both the ones column (2 minus 5) and the tens column need a borrow. 312 minus 175 is 137.&quot;, &quot;247&quot;: &quot;That borrows but never lowers the digit borrowed from. After the ones borrow, 1 ten becomes 0 tens, and after the tens borrow, 3 hundreds becomes 2. 312 minus 175 is 137.&quot;, &quot;147&quot;: &quot;The ones column borrowed from the tens, but the tens digit was not lowered. After that borrow, 1 ten becomes 0 tens: 10 tens minus 7 tens is 3 tens. 312 minus 175 is 137.&quot;, &quot;487&quot;: &quot;That adds the two marks. The step is the difference: 312 minus 175 is 137.&quot;, &quot;-137&quot;: &quot;Subtract the smaller from the larger: 312 minus 175 is 137.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Two neighboring marks on a scale are 175 and 312. What is the step between them?</p>
+<details><summary>Hint</summary><p>Subtract <span class="m"><span aria-hidden="true">312 − 175</span><span class="sr">312 minus 175</span></span>. Check: does 175 plus your answer give 312?</p></details>
+<details><summary>Show answer</summary><p><strong>137</strong>, because <span class="m"><span aria-hidden="true">175 + 137 = 312</span><span class="sr">175 plus 137 equals 312</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;The horizontal axis only names the day. The height of the bar is read on the vertical axis, which counts customers.&quot;, &quot;b&quot;: &quot;The vertical axis counts customers, not percents. The bar shows 120 customers.&quot;, &quot;c&quot;: &quot;Nothing on the graph measures minutes. The vertical axis label says the bar counts customers.&quot;}" data-why="Correct. The vertical axis label says the height is a number of customers.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 26.</b> A bar graph has the vertical axis labeled "Number of customers" and the horizontal axis labeled "Day of the week." The Thursday bar reaches 120. Which statement is correct?</legend>
+<label><input type="radio" name="mc26" value="a"> <span>Thursday was the 120th day the store was open.</span></label><label><input type="radio" name="mc26" value="b"> <span>120% of the week's customers came on Thursday.</span></label><label><input type="radio" name="mc26" value="c"> <span>Each Thursday customer spent 120 minutes in the store.</span></label><label><input type="radio" name="mc26" value="d"> <span>The store had 120 customers on Thursday.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Read the vertical axis label. That is what the height of the bar counts.</p></details>
+<details><summary>Show answer</summary><p><strong>The store had 120 customers on Thursday.</strong></p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with lists of numbers, evenly spaced numbers, bar graph scales, and units of time. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec2.2-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check each number you used against the question, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu))return show(q,'good',q.dataset.why||'Correct.'); }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5. For times, type only the number the question asks for.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

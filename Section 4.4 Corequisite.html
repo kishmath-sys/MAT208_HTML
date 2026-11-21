@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 4.4 Corequisite: Counting</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+sup,sub{line-height:0} figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 4.4</div>
+<h1>Section 4.4 Corequisite: Counting</h1>
+<p>Get ready for the Section 4.4 notes with practice on the exponent, large number, fraction and rounding skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 6</span></label><br><progress id="overall" max="6" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Exponents and multiplying several numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Reading and typing large numbers<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Fractions with 1 on top, and simplifying<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Fractions to decimals, rounding to five places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Multiply several numbers, and work out an exponent such as <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span>.</li><li>Read, type and compare numbers in the thousands and millions.</li><li>Compare fractions that have 1 on top, and fully simplify a fraction.</li><li>Change a fraction to a decimal and round it to five decimal places, counting the zeros after the point.</li></ul>
+</div>
+<p>Section 4.4 of the notes introduces techniques to determine the total number of ways a situation can happen. It covers permutations, combinations, factorials and counting rules, and it uses StatCrunch for the computations.</p>
+<p>The notes and videos lean on a few number skills without stopping to review them: multiplying several numbers, exponents, very large numbers, fractions with 1 on top, simplified fractions, and rounding a small decimal to five decimal places. This page gives those skills practice. It does not teach any of the counting ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span>, and fractions with a slash, such as <span class="m"><span aria-hidden="true">1/7</span><span class="sr">1 over 7</span></span>. Commas and extra spaces are fine. Follow the directions in each question, such as "fully simplify" or "round to five decimal places." StatCrunch is the calculator for this course, and the Section 4.4 notes show how to use it. For practice on this page, any calculator or pencil and paper is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 4.4 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure whether <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span> means 3 times 4.</strong><br><button type="button" data-go="s2">Exponents and multiplying several numbers</button></li>
+<li><strong>Numbers in the millions are hard for me to read or type without losing a zero.</strong><br><button type="button" data-go="s3">Reading and typing large numbers</button></li>
+<li><strong>I am not sure which is bigger, <span class="m"><span aria-hidden="true">1/30</span><span class="sr">1 over 30</span></span> or <span class="m"><span aria-hidden="true">1/300</span><span class="sr">1 over 300</span></span>, or when a fraction is fully simplified.</strong><br><button type="button" data-go="s4">Fractions with 1 on top, and simplifying</button></li>
+<li><strong>I lose track of the zeros after the decimal point when I round.</strong><br><button type="button" data-go="s5">Fractions to decimals, rounding to five places</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Exponents and multiplying several numbers</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Multiply three or more numbers, in any order.</li><li>Read an exponent as repeated multiplication of the base.</li><li>Avoid the two common slips: multiplying the base by the exponent, and swapping the base and the exponent.</li><li>Work out powers such as <span class="m"><span aria-hidden="true">3<sup>5</sup></span><span class="sr">3 to the 5th power</span></span> and <span class="m"><span aria-hidden="true">4<sup>6</sup></span><span class="sr">4 to the 6th power</span></span>.</li></ul>
+</div>
+<h3>Multiplying several numbers</h3>
+<p>To multiply three or more numbers, multiply two of them, then multiply that result by the next number, and keep going. The order does not change the answer: <span class="m"><span aria-hidden="true">7 × 3 × 4 = 21 × 4</span><span class="sr">7 times 3 times 4 equals 21 times 4</span></span> and <span class="m"><span aria-hidden="true">4 × 7 × 3 = 28 × 3</span><span class="sr">4 times 7 times 3 equals 28 times 3</span></span> both give 84. A common slip is to add the numbers instead, which gives 14.</p>
+<h3>An exponent counts the factors</h3>
+<p>An exponent is shorthand for multiplying the same number by itself. In <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span>, the 3 is the <strong>base</strong> and the small raised 4 is the <strong>exponent</strong>. The exponent tells how many times the base appears as a factor:</p>
+<p class="work"><span class="m"><span aria-hidden="true">3<sup>4</sup> = 3 × 3 × 3 × 3 = 81</span><span class="sr">3 to the 4th power equals 3 times 3 times 3 times 3, which equals 81</span></span></p>
+<p>Typed on one line, an exponent is often written with a caret, so <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span> is typed <span class="m"><span aria-hidden="true">3^4</span><span class="sr">3 caret 4</span></span>. Spoken, it is "3 to the 4th power."</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Multiplying the base by the exponent.</strong> <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span> is not <span class="m"><span aria-hidden="true">3 × 4</span><span class="sr">3 times 4</span></span>. That slip gives 12 instead of 81.</li>
+<li><strong>Swapping the base and the exponent.</strong> <span class="m"><span aria-hidden="true">4<sup>3</sup></span><span class="sr">4 to the 3rd power</span></span> is <span class="m"><span aria-hidden="true">4 × 4 × 4</span><span class="sr">4 times 4 times 4</span></span>, which is 64, not 81. The order matters.</li>
+<li><strong>Writing one factor too few or too many.</strong> <span class="m"><span aria-hidden="true">3<sup>4</sup></span><span class="sr">3 to the 4th power</span></span> has exactly 4 threes. Count them before you multiply.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Work out 2 to the 5th power">
+<h3 style="margin-top:0">Worked example: Work out 2 to the 5th power</h3>
+<p>Work out <span class="m"><span aria-hidden="true">2<sup>5</sup></span><span class="sr">2 to the 5th power</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2 × 2 × 2 × 2 × 2</span><span class="sr">2 times 2 times 2 times 2 times 2</span></span></span><span class="say">The base is 2 and the exponent is 5, so write five 2s.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">4 × 2 × 2 × 2 → 8 × 2 × 2 → 16 × 2 → 32</span><span class="sr">4 times 2 times 2 times 2, then 8 times 2 times 2, then 16 times 2, then 32</span></span></span><span class="say">Multiply one factor at a time, keeping track of the running result.</span></li><li><span class="work">Check: not <span class="m"><span aria-hidden="true">2 × 5</span><span class="sr">2 times 5</span></span> and not <span class="m"><span aria-hidden="true">5<sup>2</sup></span><span class="sr">5 to the 2nd power</span></span></span><span class="say"><span class="m"><span aria-hidden="true">2 × 5</span><span class="sr">2 times 5</span></span> is 10 and <span class="m"><span aria-hidden="true">5<sup>2</sup></span><span class="sr">5 to the 2nd power</span></span> is 25. Neither one is the same as <span class="m"><span aria-hidden="true">2<sup>5</sup></span><span class="sr">2 to the 5th power</span></span>.</span></li></ol><p><strong>Answer: 32</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Work out 2 to the 6th power">
+<h3 style="margin-top:0">Finish this one: Work out 2 to the 6th power</h3>
+<p>Work out <span class="m"><span aria-hidden="true">2<sup>6</sup></span><span class="sr">2 to the 6th power</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">2 × 2 × 2 × 2 × 2 × 2</span><span class="sr">2 times 2 times 2 times 2 times 2 times 2</span></span></span><span class="say">The base 2 appears 6 times. Next, multiply them one at a time.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="64" data-miss="{&quot;12&quot;: &quot;That multiplies the base by the exponent, 2 times 6. The exponent means six 2s multiplied together: 64.&quot;, &quot;36&quot;: &quot;That swaps the base and the exponent: 6 to the 2nd power is 36. Here the base is 2, written 6 times: 64.&quot;, &quot;32&quot;: &quot;That has only five 2s, which is 2 to the 5th power. Count six 2s: 64.&quot;, &quot;128&quot;: &quot;That has seven 2s, which is 2 to the 7th power. Count six 2s: 64.&quot;, &quot;8&quot;: &quot;That adds the base and the exponent. Multiply six 2s together: 64.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: what is <span class="m"><span aria-hidden="true">2<sup>6</sup></span><span class="sr">2 to the 6th power</span></span>?</p>
+<details><summary>Hint</summary><p>Keep doubling: 2, 4, 8, 16, and so on, until you have used six 2s.</p></details>
+<details><summary>Show answer</summary><p><strong>64</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="84" data-miss="{&quot;14&quot;: &quot;That adds the three numbers. Multiply them instead: 7 times 3 is 21, and 21 times 4 is 84.&quot;, &quot;25&quot;: &quot;That multiplies 7 by 3 and then adds 4. Multiply all three: 21 times 4 is 84.&quot;, &quot;19&quot;: &quot;That adds 7 and then multiplies 3 by 4. Multiply all three: 84.&quot;, &quot;28&quot;: &quot;That multiplies only 7 and 4. The 3 is a factor too: 28 times 3 is 84.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> A storage box is 7 feet long, 3 feet wide and 4 feet tall. Its volume in cubic feet is <span class="m"><span aria-hidden="true">7 × 3 × 4</span><span class="sr">7 times 3 times 4</span></span>. What is the volume?</p>
+<details><summary>Hint</summary><p>Multiply two of the numbers first, such as <span class="m"><span aria-hidden="true">7 × 3 = 21</span><span class="sr">7 times 3 equals 21</span></span>, then multiply by the third.</p></details>
+<details><summary>Show answer</summary><p><strong>84 cubic feet</strong> (typing 84 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That multiplies the base by the exponent, which is 15, not 125. The exponent counts how many 5s are multiplied.&quot;, &quot;b&quot;: &quot;That swaps the base and the exponent. 3 to the 5th power would be five 3s. Here the base is 5.&quot;, &quot;d&quot;: &quot;That adds 5 three times, which is 15. An exponent means multiply, not add.&quot;}" data-why="Correct. The base 5 appears 3 times as a factor: 5 times 5 times 5 is 125.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 3.</b> Which of these is equal to <span class="m"><span aria-hidden="true">5<sup>3</sup></span><span class="sr">5 to the 3rd power</span></span>?</legend>
+<label><input type="radio" name="mc3" value="a"> <span><span class="m"><span aria-hidden="true">5 × 3</span><span class="sr">5 times 3</span></span></span></label><label><input type="radio" name="mc3" value="b"> <span><span class="m"><span aria-hidden="true">3 × 3 × 3 × 3 × 3</span><span class="sr">3 times 3 times 3 times 3 times 3</span></span></span></label><label><input type="radio" name="mc3" value="c"> <span><span class="m"><span aria-hidden="true">5 × 5 × 5</span><span class="sr">5 times 5 times 5</span></span></span></label><label><input type="radio" name="mc3" value="d"> <span><span class="m"><span aria-hidden="true">5 + 5 + 5</span><span class="sr">5 plus 5 plus 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The base is 5 and the exponent is 3. Which choice writes the base 3 times and multiplies?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5 × 5 × 5</span><span class="sr">5 times 5 times 5</span></span></strong>, which is 125.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="10000" data-miss="{&quot;40&quot;: &quot;That multiplies the base by the exponent, 10 times 4. Multiply four 10s together: 10,000.&quot;, &quot;1000&quot;: &quot;That has three 10s, which is 10 to the 3rd power. Four 10s give 10,000, a 1 followed by four zeros.&quot;, &quot;100000&quot;: &quot;That has five 10s. Four 10s give 10,000, a 1 followed by four zeros.&quot;, &quot;14&quot;: &quot;That adds the base and the exponent. Multiply four 10s together: 10,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> What is <span class="m"><span aria-hidden="true">10<sup>4</sup></span><span class="sr">10 to the 4th power</span></span>?</p>
+<details><summary>Hint</summary><p>Each factor of 10 adds one zero after the 1. Count the factors.</p></details>
+<details><summary>Show answer</summary><p><strong>10,000</strong> (typing 10000 is fine)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="243" data-miss="{&quot;15&quot;: &quot;That multiplies the base by the exponent, 3 times 5. Multiply five 3s together: 243.&quot;, &quot;125&quot;: &quot;That swaps the base and the exponent: 5 to the 3rd power is 125. Here the base is 3, written 5 times: 243.&quot;, &quot;81&quot;: &quot;That has only four 3s. Count five 3s: 81 times 3 is 243.&quot;, &quot;729&quot;: &quot;That has six 3s. Count five 3s: 243.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 5.</b> What is <span class="m"><span aria-hidden="true">3<sup>5</sup></span><span class="sr">3 to the 5th power</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">3 × 3 × 3 × 3 = 81</span><span class="sr">3 times 3 times 3 times 3 equals 81</span></span>. Multiply one more 3 onto that.</p></details>
+<details><summary>Show answer</summary><p><strong>243</strong>, because <span class="m"><span aria-hidden="true">3 × 3 × 3 × 3 × 3 = 243</span><span class="sr">3 times 3 times 3 times 3 times 3 equals 243</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;A bigger base does not always win. 10 to the 2nd power is only 100, while 2 to the 10th power is 1,024.&quot;, &quot;c&quot;: &quot;Swapping the base and the exponent changes the value. 100 and 1,024 are not equal.&quot;, &quot;d&quot;: &quot;Both can be worked out: 10 to the 2nd power is 100 and 2 to the 10th power is 1,024.&quot;}" data-why="Correct. 2 to the 10th power is 1,024, and 10 to the 2nd power is 100.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 6.</b> Which is larger, <span class="m"><span aria-hidden="true">2<sup>10</sup></span><span class="sr">2 to the 10th power</span></span> or <span class="m"><span aria-hidden="true">10<sup>2</sup></span><span class="sr">10 to the 2nd power</span></span>?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">10<sup>2</sup></span><span class="sr">10 to the 2nd power</span></span>, because its base is larger</span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">2<sup>10</sup></span><span class="sr">2 to the 10th power</span></span>, because it is 1,024</span></label><label><input type="radio" name="mc6" value="c"> <span>They are equal, because they use the same two numbers</span></label><label><input type="radio" name="mc6" value="d"> <span>There is no way to tell without a calculator</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Work each one out. <span class="m"><span aria-hidden="true">2<sup>10</sup></span><span class="sr">2 to the 10th power</span></span> is ten 2s multiplied together, so keep doubling from 2.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2<sup>10</sup></span><span class="sr">2 to the 10th power</span></span></strong>, which is 1,024. <span class="m"><span aria-hidden="true">10<sup>2</sup></span><span class="sr">10 to the 2nd power</span></span> is 100.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="4096" data-miss="{&quot;24&quot;: &quot;That multiplies the base by the exponent, 4 times 6. Multiply six 4s together: 4,096.&quot;, &quot;1296&quot;: &quot;That swaps the base and the exponent: 6 to the 4th power is 1,296. Here the base is 4, written 6 times: 4,096.&quot;, &quot;1024&quot;: &quot;That has only five 4s. Count six 4s: 1,024 times 4 is 4,096.&quot;, &quot;16384&quot;: &quot;That has seven 4s. Count six 4s: 4,096.&quot;, &quot;10&quot;: &quot;That adds the base and the exponent. Multiply six 4s together: 4,096.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> What is <span class="m"><span aria-hidden="true">4<sup>6</sup></span><span class="sr">4 to the 6th power</span></span>? (A calculator is fine.)</p>
+<details><summary>Hint</summary><p>Six 4s multiplied together. Work in steps: <span class="m"><span aria-hidden="true">4, 16, 64, 256, …</span><span class="sr">4, 16, 64, 256, and so on</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>4,096</strong> (typing 4096 is fine)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 4.4</h3>
+<p>Item 3 (Factorial) on page 1 and item 4 (Multiplication Counting Rule) on page 3 of the notes both multiply a string of whole numbers, and the item 4 example on page 3 multiplies three numbers. In the video "Classroom Example 4.4.1" on page 7, Matt writes a product of seven 4s as "4 to the 7th power."</p>
+<p><strong>Watch for this:</strong> the difference between <span class="m"><span aria-hidden="true">4<sup>7</sup></span><span class="sr">4 to the 7th power</span></span>, <span class="m"><span aria-hidden="true">4 × 7</span><span class="sr">4 times 7</span></span> and <span class="m"><span aria-hidden="true">7<sup>4</sup></span><span class="sr">7 to the 4th power</span></span>. They are three different numbers.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Reading and typing large numbers</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read a number in the millions in groups of three digits.</li><li>Type a large number with or without commas and keep every zero.</li><li>Change a number written in words, or as "3.2 million," into digits.</li><li>Compare and subtract large numbers by lining up place values.</li></ul>
+</div>
+<h3>Groups of three</h3>
+<p>Commas split a whole number into groups of three digits, starting from the right. Each group has a name: ones, thousands, millions. Read each group as a number from 1 to 999, then say the group name.</p>
+<div class="table-wrap" role="region" aria-label="Place value groups for 4,072,315" tabindex="0">
+<table>
+<caption>The number 4,072,315 split into groups</caption>
+<thead><tr><th scope="col">Group</th><th scope="col">Millions</th><th scope="col">Thousands</th><th scope="col">Ones</th></tr></thead>
+<tbody>
+<tr><th scope="row">Digits</th><td>4</td><td>072</td><td>315</td></tr>
+<tr><th scope="row">Read as</th><td>four million</td><td>seventy-two thousand</td><td>three hundred fifteen</td></tr>
+</tbody>
+</table>
+</div>
+<p>So 4,072,315 is read "four million, seventy-two thousand, three hundred fifteen." The zero in 072 holds the hundred thousands place. Leaving it out would give a different number.</p>
+<p><strong>Typing large numbers.</strong> Calculators and StatCrunch show results without commas, such as 4072315. To read one, count digits from the right and put a comma after every third digit.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Dropping a zero group.</strong> "Two million, forty thousand, six" needs every place filled: 2,040,006. Each group after the millions has exactly three digits.</li>
+<li><strong>Comparing by the first digit.</strong> 989,999 starts with a 9, but it is less than 1,002,000, which has more digits. Count digits first.</li>
+<li><strong>Lining up from the left.</strong> When subtracting, line up the ones digits on the right, not the first digits on the left.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 5.3 million in digits">
+<h3 style="margin-top:0">Worked example: Write 5.3 million in digits</h3>
+<p>Write <span class="m"><span aria-hidden="true">5.3</span><span class="sr">5 point 3</span></span> million as a whole number.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1 million = 1,000,000</span><span class="sr">1 million equals 1,000,000</span></span></span><span class="say">One million is a 1 followed by six zeros.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">5.3 × 1,000,000 = 5,300,000</span><span class="sr">5 point 3 times 1,000,000 equals 5,300,000</span></span></span><span class="say">Multiplying by 1,000,000 moves the decimal point six places to the right. The 3 lands in the hundred thousands place.</span></li></ol><p><strong>Answer: 5,300,000</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Two million, forty thousand, six">
+<h3 style="margin-top:0">Finish this one: Two million, forty thousand, six</h3>
+<p>Write "two million, forty thousand, six" in digits.</p><ol class="steps"><li><span class="work">Millions group: 2. Thousands group: 040. Ones group: 006.</span><span class="say">Every group after the millions has three digits, so fill empty places with zeros. Next, put the groups together.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="2040006" data-miss="{&quot;240006&quot;: &quot;That drops the zero in front of the 40, so the thousands group has only two digits. It should be 040: 2,040,006.&quot;, &quot;2406&quot;: &quot;That leaves out the zeros that hold empty places. Each group after the millions needs three digits: 2,040,006.&quot;, &quot;2400006&quot;: &quot;That writes the thousands group as 400 instead of 040. Forty thousand is 040 in the thousands group: 2,040,006.&quot;, &quot;2040060&quot;: &quot;That writes the ones group as 060, which is sixty. Six is 006: 2,040,006.&quot;, &quot;20406&quot;: &quot;That leaves out the zeros that hold empty places. Each group after the millions needs three digits: 2,040,006.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 8.</b> Finish it: write "two million, forty thousand, six" in digits.</p>
+<details><summary>Hint</summary><p>Put the three groups side by side: 2, then 040, then 006.</p></details>
+<details><summary>Show answer</summary><p><strong>2,040,006</strong> (typing 2040006 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;989,999 starts with a 9, but it has only six digits, so it is less than any of the seven-digit numbers.&quot;, &quot;b&quot;: &quot;998,700 has only six digits, so it is less than one million.&quot;, &quot;c&quot;: &quot;1,000,900 and 1,002,000 both have seven digits and start with 1,00. Compare the next group: 002 thousand is more than 000 thousand.&quot;}" data-why="Correct. The two seven-digit numbers are larger, and 1,002,000 has more thousands than 1,000,900.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 9.</b> Which number is the <strong>largest</strong>?</legend>
+<label><input type="radio" name="mc9" value="a"> <span>989,999</span></label><label><input type="radio" name="mc9" value="b"> <span>998,700</span></label><label><input type="radio" name="mc9" value="c"> <span>1,000,900</span></label><label><input type="radio" name="mc9" value="d"> <span>1,002,000</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Count the digits in each number first. Then compare the groups from left to right.</p></details>
+<details><summary>Show answer</summary><p><strong>1,002,000</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="3200000" data-miss="{&quot;32000000&quot;: &quot;That moves the decimal point seven places. Million means six places: 3,200,000.&quot;, &quot;320000&quot;: &quot;That moves the decimal point only five places. Million means six places: 3,200,000.&quot;, &quot;3000002&quot;: &quot;That writes the .2 at the end. The 2 in 3.2 is two tenths of a million, which is 200,000: 3,200,000.&quot;, &quot;3200&quot;: &quot;That is 3.2 thousand. A million has six zeros after the 1: 3,200,000.&quot;, &quot;32&quot;: &quot;That just removes the decimal point. Multiply 3.2 by 1,000,000: 3,200,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 10.</b> A news story says a stadium project will cost <span class="m"><span aria-hidden="true">3.2</span><span class="sr">3 point 2</span></span> million dollars. Write that amount as a whole number of dollars.</p>
+<details><summary>Hint</summary><p>Multiply <span class="m"><span aria-hidden="true">3.2</span><span class="sr">3 point 2</span></span> by 1,000,000, which moves the decimal point six places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong>3,200,000</strong> (typing 3200000 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;That reads the digits as one hundred fifty-five thousand, which would be 155,004. The comma splits 15 thousand from 504.&quot;, &quot;c&quot;: &quot;Fifteen thousand fifty-four would be 15,054. The group after the comma is 504, five hundred four.&quot;, &quot;d&quot;: &quot;That would need seven digits. 15,504 has five digits, so it is in the thousands.&quot;}" data-why="Correct. 15 thousands and 504 ones.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 11.</b> How is 15,504 read?</legend>
+<label><input type="radio" name="mc11" value="a"> <span>fifteen thousand, five hundred four</span></label><label><input type="radio" name="mc11" value="b"> <span>one hundred fifty-five thousand, four</span></label><label><input type="radio" name="mc11" value="c"> <span>fifteen thousand, fifty-four</span></label><label><input type="radio" name="mc11" value="d"> <span>one million, five hundred four</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The comma splits the number into 15 and 504. Read the 15, say "thousand," then read the 504.</p></details>
+<details><summary>Show answer</summary><p><strong>fifteen thousand, five hundred four</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1165000" data-miss="{&quot;400000&quot;: &quot;That lines up 85,000 under the first digits of 1,250,000, so it subtracts 850,000. Line up the ones digits: 1,250,000 minus 85,000 is 1,165,000.&quot;, &quot;1335000&quot;: &quot;That adds the two numbers. The question asks how many more, so subtract: 1,165,000.&quot;, &quot;1175000&quot;: &quot;That is a borrowing slip in the thousands. 250 thousand minus 85 thousand is 165 thousand: 1,165,000.&quot;, &quot;1165&quot;: &quot;That drops the last group of zeros. The answer is in the millions: 1,165,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> A city has 1,250,000 residents. A nearby town has 85,000 residents. How many more residents does the city have?</p>
+<details><summary>Hint</summary><p>Line up the numbers on the right: <span class="m"><span aria-hidden="true">1,250,000 − 85,000</span><span class="sr">1,250,000 minus 85,000</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>1,165,000</strong> (typing 1165000 is fine)</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 4.4</h3>
+<p>The counts in Section 4.4 get large fast. The Introduction on page 1 counts 4,960 committees, item 7 on page 5 counts 142,506 committees, and the StatCrunch screenshot on page 6 shows that same result as 142506, with no commas. The video "Classroom Example 4.4.3" on page 7 ends with a number in the millions.</p>
+<p><strong>Watch for this:</strong> every zero when you copy a long result from StatCrunch. Count the digits in groups of three.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Fractions with 1 on top, and simplifying</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Compare fractions that have 1 on top.</li><li>Put fractions with 1 on top in order from smallest to largest.</li><li>Fully simplify a fraction by dividing the top and bottom by a common factor.</li><li>Check that a fraction is fully simplified.</li></ul>
+</div>
+<h3>Fractions with 1 on top</h3>
+<p>A fraction such as <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">30</span></span></span><span class="sr">1 over 30</span></span> means 1 part when something is split into 30 equal parts. Splitting into more parts makes each part smaller. So with 1 on top, <strong>a bigger bottom number means a smaller fraction</strong>: <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">300</span></span></span><span class="sr">1 over 300</span></span> is smaller than <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">30</span></span></span><span class="sr">1 over 30</span></span>.</p>
+<p>This runs against how whole numbers work, where 300 is bigger than 30. It is a slip adults make too, so slow down when you compare fractions.</p>
+<h3>Fully simplifying a fraction</h3>
+<p>A fraction is <strong>fully simplified</strong> when the top and bottom have no common factor other than 1. To simplify, divide the top and the bottom by the same number. You can do it in one step with the largest common factor, or in several smaller steps. Either way, keep going until nothing but 1 divides both.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Stopping too soon.</strong> <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">6</span><span class="fb">45</span></span></span><span class="sr">6 over 45</span></span> is equal to <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">12</span><span class="fb">90</span></span></span><span class="sr">12 over 90</span></span>, but both 6 and 45 still divide by 3. It is not fully simplified yet.</li>
+<li><strong>Dividing only the top or only the bottom.</strong> Whatever you divide the top by, divide the bottom by the same number.</li>
+<li><strong>Flipping the fraction.</strong> <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">7</span></span></span><span class="sr">1 over 7</span></span> and <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">7</span><span class="fb">1</span></span></span><span class="sr">7 over 1</span></span> are very different numbers. Keep the top on top.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Simplify 12/90">
+<h3 style="margin-top:0">Worked example: Simplify 12/90</h3>
+<p>Fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">12</span><span class="fb">90</span></span></span><span class="sr">12 over 90</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">12 ÷ 2 = 6 and 90 ÷ 2 = 45</span><span class="sr">12 divided by 2 equals 6, and 90 divided by 2 equals 45</span></span></span><span class="say">Both numbers are even, so divide the top and bottom by 2. That gives 6 over 45.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">6 ÷ 3 = 2 and 45 ÷ 3 = 15</span><span class="sr">6 divided by 3 equals 2, and 45 divided by 3 equals 15</span></span></span><span class="say">Both 6 and 45 divide by 3, so keep going. That gives 2 over 15.</span></li><li><span class="work">Check 2 and 15</span><span class="say">Nothing but 1 divides both 2 and 15, so the fraction is fully simplified. Dividing by 6 at the start gets there in one step.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">2</span><span class="fb">15</span></span></span><span class="sr">2 over 15</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Simplify 8/56">
+<h3 style="margin-top:0">Finish this one: Simplify 8/56</h3>
+<p>Fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">8</span><span class="fb">56</span></span></span><span class="sr">8 over 56</span></span>.</p><ol class="steps"><li><span class="work">8 divides both: <span class="m"><span aria-hidden="true">8 ÷ 8 = 1</span><span class="sr">8 divided by 8 equals 1</span></span> and <span class="m"><span aria-hidden="true">56 ÷ 8 = 7</span><span class="sr">56 divided by 8 equals 7</span></span></span><span class="say">Divide the top and the bottom by 8. Next, write the new fraction.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="1/7" data-form="fraction" data-miss="{&quot;7/1&quot;: &quot;That fraction is flipped. 8 divided by 8 gives the top, 1, and 56 divided by 8 gives the bottom, 7: 1/7.&quot;, &quot;7&quot;: &quot;That is the bottom divided by the top, so the fraction is flipped. The answer is 1/7.&quot;, &quot;1/48&quot;: &quot;That subtracts 8 from the bottom instead of dividing. Divide the bottom by 8 too: 56 divided by 8 is 7.&quot;, &quot;8/7&quot;: &quot;That divides only the bottom. Divide the top by 8 as well: 1/7.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Finish it: fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">8</span><span class="fb">56</span></span></span><span class="sr">8 over 56</span></span>. Type a fraction, such as 2/3.</p>
+<details><summary>Hint</summary><p>Both 8 and 56 divide by 8. <span class="m"><span aria-hidden="true">56 ÷ 8 = 7</span><span class="sr">56 divided by 8 equals 7</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">7</span></span></span><span class="sr">1 over 7</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;1/36 has the smallest bottom number, so it is the largest of the four. A bigger bottom number means a smaller fraction.&quot;, &quot;b&quot;: &quot;1/48 is larger than 1/120 and 1/1,000, because 48 is the smaller bottom number.&quot;, &quot;d&quot;: &quot;1/120 is smaller than 1/36 and 1/48, but 1/1,000 has a bigger bottom number, so it is smaller still.&quot;}" data-why="Correct. With 1 on top, the biggest bottom number gives the smallest fraction.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 14.</b> Which fraction is the <strong>smallest</strong>?</legend>
+<label><input type="radio" name="mc14" value="a"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">36</span></span></span><span class="sr">1 over 36</span></span></span></label><label><input type="radio" name="mc14" value="b"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">48</span></span></span><span class="sr">1 over 48</span></span></span></label><label><input type="radio" name="mc14" value="c"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">1,000</span></span></span><span class="sr">1 over 1,000</span></span></span></label><label><input type="radio" name="mc14" value="d"> <span><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">120</span></span></span><span class="sr">1 over 120</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Each fraction is 1 part. The more parts the whole is split into, the smaller each part.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">1,000</span></span></span><span class="sr">1 over 1,000</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1/24" data-form="fraction" data-miss="{&quot;24/1&quot;: &quot;That fraction is flipped. 15 goes into 15 once, so the top is 1: 1/24.&quot;, &quot;24&quot;: &quot;That is the bottom divided by the top, so the fraction is flipped. The answer is 1/24.&quot;, &quot;1/345&quot;: &quot;That subtracts 15 from the bottom instead of dividing. 360 divided by 15 is 24: 1/24.&quot;, &quot;15/24&quot;: &quot;That divides only the bottom. Divide the top by 15 as well: 1/24.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 15.</b> Fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">15</span><span class="fb">360</span></span></span><span class="sr">15 over 360</span></span>. Type a fraction.</p>
+<details><summary>Hint</summary><p>Both numbers divide by 5, and both also divide by 3. Or divide both by 15 in one step.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">24</span></span></span><span class="sr">1 over 24</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That uses whole-number thinking: 250 is bigger than 25, but 1/250 splits the whole into more, smaller parts.&quot;, &quot;c&quot;: &quot;Having 1 on top does not make fractions equal. The bottom numbers are different, so the parts are different sizes.&quot;, &quot;d&quot;: &quot;1/250 is one tenth of 1/25, not 10 times as big. 10 times 1/250 is 1/25.&quot;}" data-why="Correct. 250 equal parts are smaller than 25 equal parts.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Which statement is true?</legend>
+<label><input type="radio" name="mc16" value="a"> <span><span class="m"><span aria-hidden="true">1/250</span><span class="sr">1 over 250</span></span> is larger than <span class="m"><span aria-hidden="true">1/25</span><span class="sr">1 over 25</span></span>, because 250 is larger than 25</span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">1/250</span><span class="sr">1 over 250</span></span> is smaller than <span class="m"><span aria-hidden="true">1/25</span><span class="sr">1 over 25</span></span>, because 250 parts are smaller than 25 parts</span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">1/250</span><span class="sr">1 over 250</span></span> and <span class="m"><span aria-hidden="true">1/25</span><span class="sr">1 over 25</span></span> are equal, because both have 1 on top</span></label><label><input type="radio" name="mc16" value="d"> <span><span class="m"><span aria-hidden="true">1/250</span><span class="sr">1 over 250</span></span> is 10 times as large as <span class="m"><span aria-hidden="true">1/25</span><span class="sr">1 over 25</span></span>, because 250 is 10 times 25</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture a pizza cut into 25 slices and another cut into 250 slices. Which slice is smaller?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1/250</span><span class="sr">1 over 250</span></span> is smaller than <span class="m"><span aria-hidden="true">1/25</span><span class="sr">1 over 25</span></span></strong>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1/23" data-form="fraction" data-miss="{&quot;23/1&quot;: &quot;That fraction is flipped. The top becomes 1 and the bottom becomes 23: 1/23.&quot;, &quot;23&quot;: &quot;That is the bottom divided by the top, so the fraction is flipped. The answer is 1/23.&quot;, &quot;1/990&quot;: &quot;That subtracts 45 from the bottom instead of dividing. 1,035 divided by 45 is 23: 1/23.&quot;, &quot;45/23&quot;: &quot;That divides only the bottom. Divide the top by 45 as well: 1/23.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 17.</b> Fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">45</span><span class="fb">1,035</span></span></span><span class="sr">45 over 1,035</span></span>. Type a fraction.</p>
+<details><summary>Hint</summary><p>Both numbers end in 5, so both divide by 5. After that, check whether both divide by 9.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">23</span></span></span><span class="sr">1 over 23</span></span></strong>, because <span class="m"><span aria-hidden="true">45 ÷ 45 = 1</span><span class="sr">45 divided by 45 equals 1</span></span> and <span class="m"><span aria-hidden="true">1,035 ÷ 45 = 23</span><span class="sr">1,035 divided by 45 equals 23</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 4.4</h3>
+<p>The videos for Classroom Examples 4.4.1 to 4.4.4 on page 7 and Classroom Example 4.4.5 on page 8 each end with a fraction that has 1 on top, and the "Classroom Example 4.4.4" video says the answer box asks for "an integer or simplified fraction."</p>
+<p><strong>Watch for this:</strong> how small a fraction gets when its bottom number is very large, and whether the answer asks for a simplified fraction or a decimal.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Fractions to decimals, rounding to five places</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Change a fraction to a decimal by dividing the top by the bottom.</li><li>Count decimal places, including the zeros right after the decimal point.</li><li>Round a small decimal to five decimal places.</li><li>Carry correctly when a 9 rounds up, and avoid rounding in steps.</li></ul>
+</div>
+<h3>Fraction to decimal</h3>
+<p>A fraction bar means divide: <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">8</span></span></span><span class="sr">1 over 8</span></span> means <span class="m"><span aria-hidden="true">1 ÷ 8</span><span class="sr">1 divided by 8</span></span>, which is <span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span>. Divide the top by the bottom, not the bottom by the top. When the top is smaller than the bottom, the decimal is less than 1.</p>
+<h3>Counting decimal places</h3>
+<p>Every digit after the decimal point is a decimal place, <strong>including zeros</strong>. In <span class="m"><span aria-hidden="true">0.01234</span><span class="sr">0 point 0 1 2 3 4</span></span>, the five decimal places are 0, 1, 2, 3 and 4. Rounding to five decimal places means keeping exactly five digits after the point.</p>
+<ol class="steps">
+<li>Count five digits after the point, zeros included. The fifth one is the kept digit.</li>
+<li>Look at the single digit right after it, the sixth digit.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit.</li>
+</ol>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Skipping the zeros.</strong> Starting the count at the first digit that is not zero keeps too many digits. In <span class="m"><span aria-hidden="true">0.000408</span><span class="sr">0 point 0 0 0 4 0 8</span></span>, the zeros after the point count as decimal places.</li>
+<li><strong>Rounding in steps from the right.</strong> Only the sixth digit decides. <span class="m"><span aria-hidden="true">0.0083449</span><span class="sr">0 point 0 0 8 3 4 4 9</span></span> rounds to <span class="m"><span aria-hidden="true">0.00834</span><span class="sr">0 point 0 0 8 3 4</span></span> at five places, because the sixth digit is 4. Rounding the last digits first and working left gives <span class="m"><span aria-hidden="true">0.00835</span><span class="sr">0 point 0 0 8 3 5</span></span>, which is a slip.</li>
+<li><strong>A 9 that rounds up.</strong> When a 9 goes up by 1, it becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.0299964</span><span class="sr">0 point 0 2 9 9 9 6 4</span></span> to five decimal places is <span class="m"><span aria-hidden="true">0.03000</span><span class="sr">0 point 0 3 0 0 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Write 1/70 as a decimal, rounded to five places">
+<h3 style="margin-top:0">Worked example: Write 1/70 as a decimal, rounded to five places</h3>
+<p>Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">70</span></span></span><span class="sr">1 over 70</span></span> as a decimal. Round to five decimal places.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1 ÷ 70 = 0.0142857…</span><span class="sr">1 divided by 70 equals 0 point 0 1 4 2 8 5 7, and it keeps going</span></span></span><span class="say">Divide the top by the bottom.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.01428 | 57…</span><span class="sr">0 point 0 1 4 2 8, then 5 7</span></span></span><span class="say">Count five digits after the point: 0, 1, 4, 2, 8. The kept digit is 8, and the sixth digit is 5.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">0.01429</span><span class="sr">0 point 0 1 4 2 9</span></span></span><span class="say">The 5 is 5 or more, so the 8 goes up to 9. Drop the rest.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.01429</span><span class="sr">0 point 0 1 4 2 9</span></span></strong></p>
+</div>
+<div class="note"><strong>Directions decide the answer.</strong> "Do not round" means type every digit. "Round to five decimal places" means exactly five digits after the point, zeros included.</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Write 1/36 rounded to five places">
+<h3 style="margin-top:0">Finish this one: Write 1/36 rounded to five places</h3>
+<p>Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">36</span></span></span><span class="sr">1 over 36</span></span> as a decimal. Round to five decimal places.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">1 ÷ 36 = 0.0277777…</span><span class="sr">1 divided by 36 equals 0 point 0 2 7 7 7 7 7, and it keeps going</span></span></span><span class="say">The digits after the point are 0, 2, 7, 7, 7, then more 7s. Next, find the fifth digit and look at the sixth.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.02778" data-form="decimal" data-miss="{&quot;0.02777&quot;: &quot;That chops off the extra digits instead of rounding. The sixth digit is 7, which is 5 or more, so the fifth digit goes up: 0.02778.&quot;, &quot;0.0278&quot;: &quot;That keeps only four decimal places. Five places, zeros included, gives 0.02778.&quot;, &quot;0.027778&quot;: &quot;That keeps six decimal places. Five places gives 0.02778.&quot;, &quot;0.27778&quot;: &quot;That drops the zero right after the decimal point, which makes the number ten times too big. 1 divided by 36 is 0.0277..., so the answer is 0.02778.&quot;, &quot;0.03&quot;: &quot;That rounds to two decimal places. Five places gives 0.02778.&quot;, &quot;36&quot;: &quot;That divides the bottom by the top. Divide 1 by 36 instead.&quot;, &quot;~0.0277778~0.0000003&quot;: &quot;That is not rounded yet. Keep exactly five digits after the point: 0.02778.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 18.</b> Finish it: what is <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">36</span></span></span><span class="sr">1 over 36</span></span> as a decimal, rounded to five decimal places?</p>
+<details><summary>Hint</summary><p>Five digits after the point: 0, 2, 7, 7, 7. The sixth digit is another 7.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.02778</span><span class="sr">0 point 0 2 7 7 8</span></span></strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.125" data-form="decimal" data-miss="{&quot;8&quot;: &quot;That divides the bottom by the top. A fraction bar means the top divided by the bottom: 1 divided by 8 is 0.125.&quot;, &quot;0.8&quot;: &quot;That puts the 8 after the decimal point. Divide 1 by 8 instead: 0.125.&quot;, &quot;1.8&quot;: &quot;That writes the two numbers with a point between them. Divide 1 by 8: 0.125.&quot;, &quot;0.18&quot;: &quot;That writes the two numbers after the point. Divide 1 by 8: 0.125.&quot;, &quot;0.13&quot;: &quot;The directions say do not round. Keep every digit: 0.125.&quot;, &quot;0.12&quot;: &quot;The directions say do not round. Keep every digit: 0.125.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 19.</b> Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">8</span></span></span><span class="sr">1 over 8</span></span> as a decimal. Do not round.</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">1 ÷ 8</span><span class="sr">1 divided by 8</span></span>. Half of a half of a half.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.125</span><span class="sr">0 point 1 2 5</span></span></strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.00041" data-form="decimal" data-miss="{&quot;0.00040&quot;: &quot;That chops off the extra digits. The sixth digit is 8, which is 5 or more, so the fifth digit goes from 0 to 1: 0.00041.&quot;, &quot;0.0004&quot;: &quot;That keeps only four decimal places. Five places, zeros included, gives 0.00041.&quot;, &quot;0.00040816&quot;: &quot;That keeps five digits starting from the first digit that is not zero. The zeros right after the point count as decimal places: 0.00041.&quot;, &quot;0.40816&quot;: &quot;That leaves out the zeros right after the decimal point, so the number is about a thousand times too big. 0.00041.&quot;, &quot;0.0041&quot;: &quot;That drops one of the zeros after the decimal point, which makes the number ten times too big. 0.00041.&quot;, &quot;2450&quot;: &quot;That divides the bottom by the top. Divide 1 by 2,450 instead.&quot;, &quot;~0.000408163~0.0000003&quot;: &quot;That is not rounded yet. Keep exactly five digits after the point: 0.00041.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">2,450</span></span></span><span class="sr">1 over 2,450</span></span> as a decimal. Round to five decimal places.</p>
+<details><summary>Hint</summary><p>A calculator shows <span class="m"><span aria-hidden="true">0.000408163</span><span class="sr">0 point 0 0 0 4 0 8 1 6 3</span></span>. Count five digits after the point: 0, 0, 0, 4, 0. The sixth digit is 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.00041</span><span class="sr">0 point 0 0 0 4 1</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;0.0083 keeps only four decimal places. Five places, zeros included, gives 0.00834.&quot;, &quot;b&quot;: &quot;0.00835 comes from rounding in steps from the right (0.0083449 to 0.008345 to 0.00835). Only the sixth digit counts, and it is 4.&quot;, &quot;c&quot;: &quot;0.0083449 keeps seven decimal places, starting the count at the first digit that is not zero. The zeros after the point count: 0.00834.&quot;}" data-why="Correct. The kept digit is 4, and the sixth digit is also 4, so the kept digit stays.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 21.</b> A calculator shows <span class="m"><span aria-hidden="true">0.0083449</span><span class="sr">0 point 0 0 8 3 4 4 9</span></span>. Which is this number rounded to five decimal places?</legend>
+<label><input type="radio" name="mc21" value="a"> <span><span class="m"><span aria-hidden="true">0.0083</span><span class="sr">0 point 0 0 8 3</span></span></span></label><label><input type="radio" name="mc21" value="b"> <span><span class="m"><span aria-hidden="true">0.00835</span><span class="sr">0 point 0 0 8 3 5</span></span></span></label><label><input type="radio" name="mc21" value="c"> <span><span class="m"><span aria-hidden="true">0.0083449</span><span class="sr">0 point 0 0 8 3 4 4 9</span></span></span></label><label><input type="radio" name="mc21" value="d"> <span><span class="m"><span aria-hidden="true">0.00834</span><span class="sr">0 point 0 0 8 3 4</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Count five digits after the point: 0, 0, 8, 3, 4. Then look only at the next digit.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.00834</span><span class="sr">0 point 0 0 8 3 4</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.03000" data-form="decimal" data-miss="{&quot;0.02999&quot;: &quot;That chops off the extra digits. The sixth digit is 6, so the fifth digit 9 goes up, becomes 0 and carries: 0.03000.&quot;, &quot;0.02990&quot;: &quot;When the 9 goes up, it becomes 0 and carries 1 to the left. Each 9 to its left also turns to 0 and carries, giving 0.03000.&quot;, &quot;0.0299964&quot;: &quot;That is the number you started with. Keep exactly five digits after the point.&quot;, &quot;0.30000&quot;: &quot;That drops the zero right after the decimal point, which makes the number ten times too big. 0.03000.&quot;, &quot;0.02900&quot;: &quot;Each 9 that goes up turns to 0 and carries to the left, so the 2 becomes 3: 0.03000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> Round <span class="m"><span aria-hidden="true">0.0299964</span><span class="sr">0 point 0 2 9 9 9 6 4</span></span> to five decimal places.</p>
+<details><summary>Hint</summary><p>The fifth digit is 9 and the sixth digit is 6. When the 9 goes up, follow the carries to the left.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.03000</span><span class="sr">0 point 0 3 0 0 0</span></span></strong> (typing <span class="m"><span aria-hidden="true">0.03</span><span class="sr">0 point 0 3</span></span> is accepted too)</p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.01111" data-form="decimal" data-miss="{&quot;0.0111&quot;: &quot;That keeps only four decimal places. Five places, zeros included, gives 0.01111.&quot;, &quot;0.01112&quot;: &quot;The sixth digit is 1, which is 4 or less, so the fifth digit stays 1: 0.01111.&quot;, &quot;0.11111&quot;: &quot;That drops the zero right after the decimal point, which makes the number ten times too big. 0.01111.&quot;, &quot;90&quot;: &quot;That divides the bottom by the top. Divide 1 by 90 instead.&quot;, &quot;0.01&quot;: &quot;That rounds to two decimal places. Five places gives 0.01111.&quot;, &quot;~0.0111111~0.0000002&quot;: &quot;That is not rounded yet. Keep exactly five digits after the point: 0.01111.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">90</span></span></span><span class="sr">1 over 90</span></span> as a decimal. Round to five decimal places.</p>
+<details><summary>Hint</summary><p>Divide 1 by 90. Count five digits after the point, starting with the 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.01111</span><span class="sr">0 point 0 1 1 1 1</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 4.4</h3>
+<p>In the video "Classroom Example 4.4.2" on page 7, Matt divides 1 by a whole number in StatCrunch, gets a repeating decimal, and the problem asks for it rounded to five decimal places.</p>
+<p><strong>Watch for this:</strong> the zeros right after the decimal point. They count as decimal places.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 5, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="625" data-miss="{&quot;20&quot;: &quot;That multiplies the base by the exponent, 5 times 4. Multiply four 5s together: 625.&quot;, &quot;1024&quot;: &quot;That swaps the base and the exponent: 4 to the 5th power is 1,024. Here the base is 5: 625.&quot;, &quot;125&quot;: &quot;That has only three 5s. Count four 5s: 125 times 5 is 625.&quot;, &quot;3125&quot;: &quot;That has five 5s. Count four 5s: 625.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> What is <span class="m"><span aria-hidden="true">5<sup>4</sup></span><span class="sr">5 to the 4th power</span></span>?</p>
+<details><summary>Hint</summary><p>Four 5s multiplied together. <span class="m"><span aria-hidden="true">5 × 5 = 25</span><span class="sr">5 times 5 equals 25</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong>625</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1/25" data-form="fraction" data-miss="{&quot;25/1&quot;: &quot;That fraction is flipped. Divide both by 14: the top is 1 and the bottom is 25.&quot;, &quot;25&quot;: &quot;That is the bottom divided by the top, so the fraction is flipped. The answer is 1/25.&quot;, &quot;1/336&quot;: &quot;That subtracts 14 from the bottom instead of dividing. 350 divided by 14 is 25: 1/25.&quot;, &quot;14/25&quot;: &quot;That divides only the bottom. Divide the top by 14 as well: 1/25.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 25.</b> Fully simplify <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">14</span><span class="fb">350</span></span></span><span class="sr">14 over 350</span></span>. Type a fraction.</p>
+<details><summary>Hint</summary><p>Both numbers are even, and both also divide by 7.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">25</span></span></span><span class="sr">1 over 25</span></span></strong></p></details>
+</div>
+<div class="q" data-nopct="1" data-mode="num" data-answer="0.01042" data-form="decimal" data-miss="{&quot;0.01041&quot;: &quot;That chops off the extra digits. The sixth digit is 6, so the fifth digit goes up: 0.01042.&quot;, &quot;0.0104&quot;: &quot;That keeps only four decimal places. Five places, zeros included, gives 0.01042.&quot;, &quot;0.010417&quot;: &quot;That keeps six decimal places. Five places gives 0.01042.&quot;, &quot;0.10417&quot;: &quot;That drops the zero right after the decimal point, which makes the number ten times too big. 0.01042.&quot;, &quot;96&quot;: &quot;That divides the bottom by the top. Divide 1 by 96 instead.&quot;, &quot;~0.01041667~0.0000003&quot;: &quot;That is not rounded yet. Keep exactly five digits after the point: 0.01042.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Write <span class="m"><span aria-hidden="true"><span class="frac"><span class="ft">1</span><span class="fb">96</span></span></span><span class="sr">1 over 96</span></span> as a decimal. Round to five decimal places.</p>
+<details><summary>Hint</summary><p>A calculator shows <span class="m"><span aria-hidden="true">0.0104166</span><span class="sr">0 point 0 1 0 4 1 6 6</span></span>. Count five digits after the point, starting with the 0.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.01042</span><span class="sr">0 point 0 1 0 4 2</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="6305000" data-miss="{&quot;630500&quot;: &quot;That leaves out a zero in the ones group. Each group after the millions has three digits: 6,305,000.&quot;, &quot;6350000&quot;: &quot;That writes the thousands group as 350. Three hundred five thousand is 305: 6,305,000.&quot;, &quot;63050000&quot;: &quot;That has an extra zero. Six million has seven digits in all: 6,305,000.&quot;, &quot;6305&quot;: &quot;That leaves out the ones group of zeros. The number is in the millions: 6,305,000.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Write "six million, three hundred five thousand" in digits.</p>
+<details><summary>Hint</summary><p>Millions group: 6. Thousands group: 305. Ones group: 000.</p></details>
+<details><summary>Show answer</summary><p><strong>6,305,000</strong> (typing 6305000 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;That orders the fractions by their bottom numbers as if they were whole numbers. With 1 on top, the biggest bottom number gives the smallest fraction.&quot;, &quot;c&quot;: &quot;1/200 is not the smallest. 1/1,500 has a bigger bottom number, so it is smaller still.&quot;, &quot;d&quot;: &quot;Having 1 on top does not make fractions equal. The bottom numbers are different, so the parts are different sizes.&quot;}" data-why="Correct. 1/1,500 is the smallest and 1/12 is the largest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 28.</b> Which list puts these fractions in order from <strong>smallest to largest</strong>?</legend>
+<label><input type="radio" name="mc28" value="a"> <span><span class="m"><span aria-hidden="true">1/12</span><span class="sr">1 over 12</span></span>, <span class="m"><span aria-hidden="true">1/200</span><span class="sr">1 over 200</span></span>, <span class="m"><span aria-hidden="true">1/1,500</span><span class="sr">1 over 1,500</span></span></span></label><label><input type="radio" name="mc28" value="b"> <span><span class="m"><span aria-hidden="true">1/1,500</span><span class="sr">1 over 1,500</span></span>, <span class="m"><span aria-hidden="true">1/200</span><span class="sr">1 over 200</span></span>, <span class="m"><span aria-hidden="true">1/12</span><span class="sr">1 over 12</span></span></span></label><label><input type="radio" name="mc28" value="c"> <span><span class="m"><span aria-hidden="true">1/200</span><span class="sr">1 over 200</span></span>, <span class="m"><span aria-hidden="true">1/12</span><span class="sr">1 over 12</span></span>, <span class="m"><span aria-hidden="true">1/1,500</span><span class="sr">1 over 1,500</span></span></span></label><label><input type="radio" name="mc28" value="d"> <span>They are all equal, because each has 1 on top</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>With 1 on top, a bigger bottom number means a smaller fraction.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1/1,500</span><span class="sr">1 over 1,500</span></span>, <span class="m"><span aria-hidden="true">1/200</span><span class="sr">1 over 200</span></span>, <span class="m"><span aria-hidden="true">1/12</span><span class="sr">1 over 12</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;6 times 5 is 30, which is only two numbers multiplied. The product has five 6s.&quot;, &quot;b&quot;: &quot;That swaps the base and the exponent. 5 to the 6th power would be six 5s. Here the base is 6.&quot;, &quot;d&quot;: &quot;6 plus 5 is 11. An exponent means repeated multiplication, not addition.&quot;}" data-why="Correct. The base 6 appears 5 times, so the exponent is 5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 29.</b> Which is equal to <span class="m"><span aria-hidden="true">6 × 6 × 6 × 6 × 6</span><span class="sr">6 times 6 times 6 times 6 times 6</span></span>?</legend>
+<label><input type="radio" name="mc29" value="a"> <span><span class="m"><span aria-hidden="true">6 × 5</span><span class="sr">6 times 5</span></span></span></label><label><input type="radio" name="mc29" value="b"> <span><span class="m"><span aria-hidden="true">5<sup>6</sup></span><span class="sr">5 to the 6th power</span></span></span></label><label><input type="radio" name="mc29" value="c"> <span><span class="m"><span aria-hidden="true">6<sup>5</sup></span><span class="sr">6 to the 5th power</span></span></span></label><label><input type="radio" name="mc29" value="d"> <span><span class="m"><span aria-hidden="true">6 + 5</span><span class="sr">6 plus 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>What number is repeated, and how many times does it appear?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">6<sup>5</sup></span><span class="sr">6 to the 5th power</span></span></strong>, which is 7,776.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with exponents and multiplying several numbers, large numbers, fractions with 1 on top, simplifying fractions, and rounding small decimals to five decimal places. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec4.4-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m){const r=R((m[1]?-1:1)*Number(m[2]),Number(m[3])); if(!r)return null; return Object.assign(r,{frac:true,g:gcd(Number(m[2]),Number(m[3]))});}
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){ if(k[0]!=='~'&&s===norm(k))return m[k]; }
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed, count the zeros, and check the rounding direction, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu)){
+      /* the question may ask for a specific form */
+      const form=q.dataset.form||'';
+      if(form==='fraction'&&!stu.frac&&key.d!==1)return show(q,'almost','That is the right value, but the question asks for a fraction. Type it with a slash, such as 1/7.');
+      if(form==='fraction'&&stu.frac&&stu.g>1)return show(q,'almost','That fraction is equal to the answer, but it is not fully simplified. The top and bottom still share a factor of '+stu.g+', so divide both by '+stu.g+'.');
+      if(form==='decimal'&&stu.frac)return show(q,'almost','That is the right value, but the question asks for a decimal. Divide the top by the bottom and type the decimal.');
+      return show(q,'good',q.dataset.why||'Correct.'); } }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  if(stu&&!stu.frac&&q.dataset.form==='fraction'&&answers(q).some(a=>{const k=toRat(a);return k&&Math.abs(val(k)-val(stu))<1e-6;}))return show(q,'almost','That decimal is close to the right value, but the question asks for a fraction. Type it with a slash, such as 1/7.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+<script>
+/* Decimal questions: a % sign is not a decimal answer */
+(function(){
+  function blocked(q){
+    if(!q||q.getAttribute('data-nopct')!=='1')return false;
+    var inp=q.querySelector('input[type=text]'); if(!inp||inp.value.indexOf('%')<0)return false;
+    var fb=q.querySelector('.feedback');
+    if(fb){fb.className='feedback wrong'; fb.textContent='Not quite. This question asks for a decimal, so leave off the % sign. A percent and its decimal are written differently, for example 25% is 0.25.';}
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.answer-row button'); if(!btn)return;
+    if(blocked(btn.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||!e.target.matches||!e.target.matches('.q input[type=text]'))return;
+    if(blocked(e.target.closest('.q'))){e.stopImmediatePropagation(); e.preventDefault();}
+  },true);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 6.4 Corequisite: The Central Limit Theorem</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+input[type=text]{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+input[type=radio]{width:1.5rem;height:1.5rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem} th,td{border:1px solid var(--line);padding:.45rem .85rem;text-align:center} th[scope=row]{text-align:left;background:var(--cool)} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.vocab dt{font-weight:700;margin-top:.6rem} .vocab dd{margin:0 0 .3rem 1rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+@media print{nav,.actions,.section-end,.answer-row,#theme{display:none!important} main>section,main>section[hidden]{display:block!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15rem} .frac .ft{border-bottom:2px solid currentColor;padding:0 .2rem} .frac .fb{padding:0 .2rem}
+figure.axisfig{margin:.75rem 0} .axisfig svg{color:var(--ink);max-width:100%;height:auto} .axisfig figcaption{font-size:.95rem;color:var(--soft)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">Corequisite support · MAT 048 / MAT 208 · Section 6.4</div>
+<h1>Section 6.4 Corequisite: The Central Limit Theorem</h1>
+<p>Get ready for the Section 6.4 notes with practice on the square root, rounding, inequality and division skills they count on. Untimed, ungraded and private.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 7</span></label><br><progress id="overall" max="7" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Page sections"><ol>
+<li><button type="button" data-target="s1">1. Start here<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Square roots<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. Dividing by a square root on one line<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Rounding to three or four decimal places<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Inequality symbols and number lines<span class="donemark sr"></span></button></li><li><button type="button" data-target="s6">6. Equal shares and decimals as percents<span class="donemark sr"></span></button></li><li><button type="button" data-target="s7">7. Final check-up<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. Start here</h2>
+<div class="goals" role="group" aria-labelledby="s1g">
+<h3 id="s1g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find square roots of perfect squares, and estimate and compute other square roots.</li><li>Divide a number by a square root, and write that division on one line.</li><li>Round to three or four decimal places, keeping any zero that is a kept digit.</li><li>Read inequality symbols and phrases such as "at least" and "exceeds," and place negative numbers and decimals on a number line.</li><li>Split a total into equal shares, and compare decimals with percents such as 50%.</li></ul>
+</div>
+<p>Section 6.4 of the notes moves from finding probabilities for individual values to finding probabilities for sample means, and introduces the Central Limit Theorem, with examples worked in StatCrunch.</p>
+<p>The notes and videos use square roots, division by a square root, rounding to three or four decimal places, and phrases such as "greater than," "between" and "exceeds" without stopping to review them, so they expect you to already know these skills. This page gives them more practice than the notes have room for. It does not teach any of the statistics ideas in the notes, and it does not show the StatCrunch steps. The notes and videos do that.</p>
+<div class="why"><strong>Before you begin.</strong> This page is ungraded and private. When an answer is off, the feedback tries to name the exact slip so you can fix it. The sections you mark complete are saved on this device.</div>
+<div class="note"><strong>Entering answers.</strong> Type decimals with a period, such as <span class="m"><span aria-hidden="true">0.375</span><span class="sr">0 point 3 7 5</span></span>. Commas, a percent sign and extra spaces are all fine. Follow the rounding direction in each question, and when it asks for a number of decimal places, type exactly that many digits after the point. StatCrunch is the calculator for this course, and the Section 6.4 notes show how to use it. For practice on this page, any calculator with a square root key, or pencil and paper, is fine.</div>
+<h3>Two ways to use this page</h3>
+<div class="doors">
+<div class="door">
+<p><strong>Way 1. Go in order.</strong> Each section has a short explanation, a worked example and a practice ladder that starts easy and gets harder. Each one ends by pointing to where the skill shows up in the Section 6.4 notes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Way 2. Pick one skill.</strong> Choose the statement that sounds like you.</p>
+<ul>
+<li><strong>I am not sure what the square root sign asks for, or I think <span class="m"><span aria-hidden="true">√36</span><span class="sr">the square root of 36</span></span> might be 18.</strong><br><button type="button" data-go="s2">Square roots</button></li>
+<li><strong>I am not sure how to divide by a square root, or how to type that on one line.</strong><br><button type="button" data-go="s3">Dividing by a square root on one line</button></li>
+<li><strong>I second-guess rounding to three or four decimal places, especially with 9s and zeros.</strong><br><button type="button" data-go="s4">Rounding to three or four decimal places</button></li>
+<li><strong>I mix up symbols such as &gt; and ≥, or where negative numbers go on a number line.</strong><br><button type="button" data-go="s5">Inequality symbols and number lines</button></li>
+<li><strong>I am not sure which number to divide by when a total is shared, or how a decimal compares with 50%.</strong><br><button type="button" data-go="s6">Equal shares and decimals as percents</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Square roots</h2>
+<div class="goals" role="group" aria-labelledby="s2g">
+<h3 id="s2g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Find the square root of a perfect square, such as <span class="m"><span aria-hidden="true">√49</span><span class="sr">the square root of 49</span></span>.</li><li>Estimate a square root that is not a whole number by finding the two whole numbers it falls between.</li><li>Use a calculator square root key and round the result.</li><li>Avoid the "divide by 2" slip and the "square it" slip.</li></ul>
+</div>
+<h3>Undoing a square</h3>
+<p>The square root of a number is the number that, multiplied by itself, gives that number. <span class="m"><span aria-hidden="true">√49</span><span class="sr">the square root of 49</span></span> is 7 because <span class="m"><span aria-hidden="true">7 × 7 = 49</span><span class="sr">7 times 7 equals 49</span></span>. The sign √ means "the square root of."</p>
+<p>A <strong>perfect square</strong> is a whole number times itself. Knowing the perfect squares up to 144 makes square roots quick to find and quick to estimate.</p>
+<div class="table-wrap" role="region" aria-label="Perfect squares from 4 to 144" tabindex="0">
+<table>
+<caption>Whole numbers and their perfect squares</caption>
+<thead><tr><th scope="col">Number</th><th scope="col">Number times itself</th></tr></thead>
+<tbody><tr><th scope="row">2</th><td>4</td></tr><tr><th scope="row">3</th><td>9</td></tr><tr><th scope="row">4</th><td>16</td></tr><tr><th scope="row">5</th><td>25</td></tr><tr><th scope="row">6</th><td>36</td></tr><tr><th scope="row">7</th><td>49</td></tr><tr><th scope="row">8</th><td>64</td></tr><tr><th scope="row">9</th><td>81</td></tr><tr><th scope="row">10</th><td>100</td></tr><tr><th scope="row">11</th><td>121</td></tr><tr><th scope="row">12</th><td>144</td></tr></tbody>
+</table>
+</div>
+<p>For a number that is not a perfect square, the square root falls between two whole numbers. <span class="m"><span aria-hidden="true">√12</span><span class="sr">the square root of 12</span></span> is between 3 and 4, because 12 is between 9 and 16. A calculator gives <span class="m"><span aria-hidden="true">3.4641</span><span class="sr">3 point 4 6 4 1</span></span> and more digits.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Dividing by 2.</strong> <span class="m"><span aria-hidden="true">√36</span><span class="sr">the square root of 36</span></span> is 6, not 18. Check by multiplying: <span class="m"><span aria-hidden="true">6 × 6 = 36</span><span class="sr">6 times 6 equals 36</span></span>, but <span class="m"><span aria-hidden="true">18 × 18 = 324</span><span class="sr">18 times 18 equals 324</span></span>.</li>
+<li><strong>Squaring instead.</strong> <span class="m"><span aria-hidden="true">√9</span><span class="sr">the square root of 9</span></span> is 3, not 81. The square root undoes squaring, so the answer is smaller than the number whenever the number is greater than 1.</li>
+<li><strong>Expecting the root to grow as fast as the number.</strong> <span class="m"><span aria-hidden="true">√16</span><span class="sr">the square root of 16</span></span> is 4, but <span class="m"><span aria-hidden="true">√64</span><span class="sr">the square root of 64</span></span> is 8, not 16. Multiplying the number by 4 only doubles its square root.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Estimate √40, then find it to two decimal places">
+<h3 style="margin-top:0">Worked example: Estimate √40, then find it to two decimal places</h3>
+<p>Estimate <span class="m"><span aria-hidden="true">√40</span><span class="sr">the square root of 40</span></span>, then find it to two decimal places.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">36 < 40 < 49</span><span class="sr">36 is less than 40, which is less than 49</span></span></span><span class="say">40 sits between the perfect squares 36 and 49, so the square root is between 6 and 7, and closer to 6.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">√40 = 6.32455…</span><span class="sr">the square root of 40 equals 6 point 3 2 4 5 5 and more digits</span></span></span><span class="say">A calculator gives the value. It fits the estimate.</span></li><li><span class="work">Two decimal places: keep the 2, look at the 4</span><span class="say">The 4 is 4 or less, so the 2 stays: <span class="m"><span aria-hidden="true">6.32</span><span class="sr">6 point 3 2</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">6.32</span><span class="sr">6 point 3 2</span></span></strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Find √64">
+<h3 style="margin-top:0">Finish this one: Find √64</h3>
+<p>Find <span class="m"><span aria-hidden="true">√64</span><span class="sr">the square root of 64</span></span>.</p><ol class="steps"><li><span class="work">Ask: what number times itself is 64?</span><span class="say">Try a number from the table. Next, check it by multiplying it by itself.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="8" data-miss="{&quot;32&quot;: &quot;That divides 64 by 2. A square root is the number that times itself gives 64, and 8 × 8 = 64.&quot;, &quot;4096&quot;: &quot;That squares 64 (64 × 64). The square root goes the other way: 8 × 8 = 64, so the answer is 8.&quot;, &quot;16&quot;: &quot;16 × 16 is 256, not 64. Find the number that times itself gives 64: 8.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 1.</b> Finish it: what is <span class="m"><span aria-hidden="true">√64</span><span class="sr">the square root of 64</span></span>?</p>
+<details><summary>Hint</summary><p>Look for 64 in the right column of the table.</p></details>
+<details><summary>Show answer</summary><p><strong>8</strong>, because <span class="m"><span aria-hidden="true">8 × 8 = 64</span><span class="sr">8 times 8 equals 64</span></span>.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="12" data-miss="{&quot;72&quot;: &quot;That divides 144 by 2. Find the number that times itself gives 144: 12 × 12 = 144.&quot;, &quot;20736&quot;: &quot;That squares 144. The square root goes the other way: 12 × 12 = 144.&quot;, &quot;14&quot;: &quot;14 × 14 is 196, which is too big. 12 × 12 = 144.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 2.</b> What is <span class="m"><span aria-hidden="true">√144</span><span class="sr">the square root of 144</span></span>?</p>
+<details><summary>Hint</summary><p>It is the last row of the table.</p></details>
+<details><summary>Show answer</summary><p><strong>12</strong>, because <span class="m"><span aria-hidden="true">12 × 12 = 144</span><span class="sr">12 times 12 equals 144</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;5 × 5 = 25 and 6 × 6 = 36, and both are well below 55. The first digit of 55 is not its square root.&quot;, &quot;b&quot;: &quot;That halves 55. A square root is not half: 27 × 27 is 729, far more than 55.&quot;, &quot;d&quot;: &quot;7 × 7 = 49, which is still less than 55, so the square root of 55 is more than 7.&quot;}" data-why="Correct. 55 is between the perfect squares 49 and 64, so its square root is between 7 and 8.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 3.</b> <span class="m"><span aria-hidden="true">√55</span><span class="sr">the square root of 55</span></span> is between which two whole numbers?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>5 and 6</span></label><label><input type="radio" name="mc3" value="b"> <span>27 and 28</span></label><label><input type="radio" name="mc3" value="c"> <span>7 and 8</span></label><label><input type="radio" name="mc3" value="d"> <span>6 and 7</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find the two perfect squares in the table that 55 falls between.</p></details>
+<details><summary>Show answer</summary><p><strong>7 and 8</strong>, because 55 is between 49 and 64. (A calculator gives about <span class="m"><span aria-hidden="true">7.42</span><span class="sr">7 point 4 2</span></span>.)</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="5.48" data-places="2" data-miss="{&quot;5.47&quot;: &quot;That chops off the digits instead of rounding. The calculator shows 5.4772…, and the digit after the 7 is 7, so the 7 goes up: 5.48.&quot;, &quot;15&quot;: &quot;That divides 30 by 2. Use the square root key: about 5.4772, which rounds to 5.48.&quot;, &quot;900&quot;: &quot;That squares 30. Use the square root key: about 5.4772, which rounds to 5.48.&quot;, &quot;5.5&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 5.48.&quot;, &quot;~5.4772~0.0001&quot;: &quot;That is the unrounded value. Round to two decimal places: 5.48.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 4.</b> Use a calculator to find <span class="m"><span aria-hidden="true">√30</span><span class="sr">the square root of 30</span></span>. Round to two decimal places.</p>
+<details><summary>Hint</summary><p>30 is between 25 and 36, so the answer is between 5 and 6. Round the calculator value: keep two digits after the point and look at the third.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">5.48</span><span class="sr">5 point 4 8</span></span></strong>. The calculator shows <span class="m"><span aria-hidden="true">5.4772…</span><span class="sr">5 point 4 7 7 2 and more digits</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;The square root of 50 is about 7.07, not 50. That is less than 7.2.&quot;, &quot;b&quot;: &quot;The square root of 36 is 6, the smallest of the four.&quot;, &quot;c&quot;: &quot;6.9 is less than 7.2.&quot;}" data-why="Correct. The square root of 50 is about 7.07 and the square root of 36 is 6, so 7.2 is the largest.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 5.</b> Which of these is the <strong>largest</strong>?</legend>
+<label><input type="radio" name="mc5" value="a"> <span><span class="m"><span aria-hidden="true">√50</span><span class="sr">the square root of 50</span></span></span></label><label><input type="radio" name="mc5" value="b"> <span><span class="m"><span aria-hidden="true">√36</span><span class="sr">the square root of 36</span></span></span></label><label><input type="radio" name="mc5" value="c"> <span><span class="m"><span aria-hidden="true">6.9</span><span class="sr">6 point 9</span></span></span></label><label><input type="radio" name="mc5" value="d"> <span><span class="m"><span aria-hidden="true">7.2</span><span class="sr">7 point 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change each square root to a decimal first. 50 is between 49 and 64.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.2</span><span class="sr">7 point 2</span></span></strong>. The others are about <span class="m"><span aria-hidden="true">7.07</span><span class="sr">7 point 0 7</span></span>, 6 and <span class="m"><span aria-hidden="true">6.9</span><span class="sr">6 point 9</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">Where you will use this in Section 6.4</h3>
+<p>The Notation in item 1 on page 1 of the notes includes a square root of <em>n</em>, and Example 2 on page 3 uses the square root of 20. The "Classroom Example 6.4.1" video takes the square root of 4, and the "Classroom Example 6.4.2" video takes the square roots of 25 and 20 (both on page 4).</p>
+<p><strong>Watch for this:</strong> a square root is not half the number. Check by multiplying the root by itself.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. Dividing by a square root on one line</h2>
+<div class="goals" role="group" aria-labelledby="s3g">
+<h3 id="s3g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Divide a number by a square root by finding the square root first.</li><li>Write a fraction with a square root on the bottom as a one-line expression.</li><li>Keep the square root exact until the last step, and round only the final answer.</li><li>Spot an answer that took the square root of the whole fraction by mistake.</li></ul>
+</div>
+<h3>The square root covers only the bottom</h3>
+<p>In <span class="m"><span aria-hidden="true" class="frac"><span class="ft">24</span><span class="fb">√9</span></span><span class="sr">24 divided by the square root of 9</span></span>, the square root sign covers only the 9. Find <span class="m"><span aria-hidden="true">√9 = 3</span><span class="sr">the square root of 9 equals 3</span></span> first, then divide: <span class="m"><span aria-hidden="true">24 ÷ 3 = 8</span><span class="sr">24 divided by 3 equals 8</span></span>.</p>
+<p>On one line, many calculators write the square root as <code>sqrt( )</code> with the number inside the parentheses. So <span class="m"><span aria-hidden="true" class="frac"><span class="ft">24</span><span class="fb">√9</span></span><span class="sr">24 divided by the square root of 9</span></span> becomes <span class="m"><span aria-hidden="true">24/sqrt(9)</span><span class="sr">24 slash square root of 9</span></span>. The parentheses after sqrt hold only the number under the root sign.</p>
+<h3>Let the calculator keep every digit</h3>
+<p>When the square root is not a whole number, rounding it before you divide can change the final digits. <span class="m"><span aria-hidden="true" class="frac"><span class="ft">30</span><span class="fb">√7</span></span><span class="sr">30 divided by the square root of 7</span></span> is <span class="m"><span aria-hidden="true">11.3389</span><span class="sr">11 point 3 3 8 9</span></span> to four decimal places. If you round <span class="m"><span aria-hidden="true">√7</span><span class="sr">the square root of 7</span></span> to <span class="m"><span aria-hidden="true">2.6</span><span class="sr">2 point 6</span></span> first, <span class="m"><span aria-hidden="true">30 ÷ 2.6</span><span class="sr">30 divided by 2 point 6</span></span> gives <span class="m"><span aria-hidden="true">11.5385</span><span class="sr">11 point 5 3 8 5</span></span>, which is off. Do the whole calculation, then round once at the end.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Taking the square root of the whole fraction.</strong> <span class="m"><span aria-hidden="true">sqrt(24/9)</span><span class="sr">square root of, open parenthesis 24 slash 9 close parenthesis</span></span> is about <span class="m"><span aria-hidden="true">1.63</span><span class="sr">1 point 6 3</span></span>, not 8.</li>
+<li><strong>Forgetting the square root.</strong> <span class="m"><span aria-hidden="true">24 ÷ 9</span><span class="sr">24 divided by 9</span></span> is about <span class="m"><span aria-hidden="true">2.67</span><span class="sr">2 point 6 7</span></span>, not 8.</li>
+<li><strong>Rounding the square root first.</strong> Round only the final answer.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: 42 divided by √49">
+<h3 style="margin-top:0">Worked example: 42 divided by √49</h3>
+<p>Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">42</span><span class="fb">√49</span></span><span class="sr">42 divided by the square root of 49</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">√49 = 7</span><span class="sr">the square root of 49 equals 7</span></span></span><span class="say">Find the square root of the bottom first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">42 ÷ 7 = 6</span><span class="sr">42 divided by 7 equals 6</span></span></span><span class="say">Then divide.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">42/sqrt(49)</span><span class="sr">42 slash square root of 49</span></span></span><span class="say">On one line, the same calculation looks like this. It also gives 6.</span></li></ol><p><strong>Answer: 6</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: 36 divided by √16">
+<h3 style="margin-top:0">Finish this one: 36 divided by √16</h3>
+<p>Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">√16</span></span><span class="sr">36 divided by the square root of 16</span></span>.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">√16 = 4</span><span class="sr">the square root of 16 equals 4</span></span></span><span class="say">The square root of the bottom comes first. Next, divide 36 by it.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="9" data-miss="{&quot;2.25&quot;: &quot;That divides 36 by 16 and skips the square root. Divide by the square root of 16, which is 4: 9.&quot;, &quot;1.5&quot;: &quot;That takes the square root of the whole fraction. The root covers only the 16: 36 divided by 4 is 9.&quot;, &quot;4.5&quot;: &quot;That divides by 8, which is half of 16. The square root of 16 is 4, so 36 divided by 4 is 9.&quot;, &quot;~0.1111~0.0006&quot;: &quot;The division is flipped: that is 4 divided by 36. Divide the top, 36, by the bottom, 4: 9.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 6.</b> Finish it: what is <span class="m"><span aria-hidden="true" class="frac"><span class="ft">36</span><span class="fb">√16</span></span><span class="sr">36 divided by the square root of 16</span></span>?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">36 ÷ 4</span><span class="sr">36 divided by 4</span></span> is the last step.</p></details>
+<details><summary>Show answer</summary><p><strong>9</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="10.4" data-miss="{&quot;2.08&quot;: &quot;That divides 52 by 25 and skips the square root. The square root of 25 is 5, and 52 divided by 5 is 10.4.&quot;, &quot;~1.4422~0.0006&quot;: &quot;That takes the square root of the whole fraction. The root covers only the 25: 52 divided by 5 is 10.4.&quot;, &quot;4.16&quot;: &quot;That divides by 12.5, which is half of 25. The square root of 25 is 5: 10.4.&quot;, &quot;~0.09615~0.0006&quot;: &quot;The division is flipped: that is 5 divided by 52. Divide 52 by 5: 10.4.&quot;, &quot;10&quot;: &quot;The directions say do not round. Keep every digit: 10.4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 7.</b> Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">52</span><span class="fb">√25</span></span><span class="sr">52 divided by the square root of 25</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>The square root of 25 is 5. Then divide 52 by 5.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">10.4</span><span class="sr">10 point 4</span></span></strong>, because <span class="m"><span aria-hidden="true">52 ÷ 5 = 10.4</span><span class="sr">52 divided by 5 equals 10 point 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;This puts the whole fraction under the square root. Its value is about 0.71, not 3.&quot;, &quot;c&quot;: &quot;This moves the square root to the top. Its value is about 0.12, not 3.&quot;, &quot;d&quot;: &quot;This replaces the square root with half of 36. Its value is 1, not 3.&quot;}" data-why="Correct. Only the 36 is under the square root, so the value is 18 divided by 6, which is 3.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 8.</b> Which one-line expression has the same value as <span class="m"><span aria-hidden="true" class="frac"><span class="ft">18</span><span class="fb">√36</span></span><span class="sr">18 divided by the square root of 36</span></span>?</legend>
+<label><input type="radio" name="mc8" value="a"> <span><span class="m"><span aria-hidden="true">18/sqrt(36)</span><span class="sr">18 slash square root of 36</span></span></span></label><label><input type="radio" name="mc8" value="b"> <span><span class="m"><span aria-hidden="true">sqrt(18/36)</span><span class="sr">square root of, open parenthesis 18 slash 36 close parenthesis</span></span></span></label><label><input type="radio" name="mc8" value="c"> <span><span class="m"><span aria-hidden="true">sqrt(18)/36</span><span class="sr">square root of 18, slash 36</span></span></span></label><label><input type="radio" name="mc8" value="d"> <span><span class="m"><span aria-hidden="true">18/(36/2)</span><span class="sr">18 slash, open parenthesis 36 slash 2 close parenthesis</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>The square root sign in the fraction covers only the bottom number, 36.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">18/sqrt(36)</span><span class="sr">18 slash square root of 36</span></span></strong>, which equals 3.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="9.59" data-places="2" data-miss="{&quot;9.57&quot;: &quot;That rounds the square root of 22 to 4.7 before dividing. Keep every digit: 45 divided by 4.6904… is 9.594…, which rounds to 9.59.&quot;, &quot;~2.045~0.006&quot;: &quot;That divides 45 by 22 and skips the square root. Divide by the square root of 22, about 4.69.&quot;, &quot;1.43&quot;: &quot;That takes the square root of the whole fraction. The root covers only the 22.&quot;, &quot;~4.09~0.006&quot;: &quot;That divides by 11, which is half of 22. Use the square root of 22, about 4.69.&quot;, &quot;~9.594~0.0006&quot;: &quot;That is the unrounded value. Round to two decimal places: 9.59.&quot;, &quot;9.6&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 9.59.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 9.</b> Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">45</span><span class="fb">√22</span></span><span class="sr">45 divided by the square root of 22</span></span>. Keep every digit until the end, then round to two decimal places.</p>
+<details><summary>Hint</summary><p>22 is between 16 and 25, so its square root is between 4 and 5. On one line: <span class="m"><span aria-hidden="true">45/sqrt(22)</span><span class="sr">45 slash square root of 22</span></span>.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">9.59</span><span class="sr">9 point 5 9</span></span></strong>. The calculator shows <span class="m"><span aria-hidden="true">9.59403…</span><span class="sr">9 point 5 9 4 0 3 and more digits</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;Close is not enough. 3.3 is a little off from 3.3166…, and dividing 50 by it moves the answer from 15.08 to 15.15.&quot;, &quot;c&quot;: &quot;The two answers are different, so they cannot both be right. Round only once, at the end.&quot;, &quot;d&quot;: &quot;50 divided by 11 skips the square root. The bottom of the fraction is the square root of 11.&quot;}" data-why="Correct. 50 divided by 3.3166… is 15.0756…, which rounds to 15.08. Rounding the square root first gave 15.15.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 10.</b> Two students find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">50</span><span class="fb">√11</span></span><span class="sr">50 divided by the square root of 11</span></span> to two decimal places. Student A keeps every digit and gets <span class="m"><span aria-hidden="true">15.08</span><span class="sr">15 point 0 8</span></span>. Student B rounds <span class="m"><span aria-hidden="true">√11</span><span class="sr">the square root of 11</span></span> to <span class="m"><span aria-hidden="true">3.3</span><span class="sr">3 point 3</span></span> first and gets <span class="m"><span aria-hidden="true">15.15</span><span class="sr">15 point 1 5</span></span>. Which statement is correct?</legend>
+<label><input type="radio" name="mc10" value="a"> <span>Student B, because <span class="m"><span aria-hidden="true">3.3</span><span class="sr">3 point 3</span></span> is close to the square root of 11.</span></label><label><input type="radio" name="mc10" value="b"> <span>Student A, because rounding the square root first changed the final digits.</span></label><label><input type="radio" name="mc10" value="c"> <span>Both, because rounding is allowed at any step.</span></label><label><input type="radio" name="mc10" value="d"> <span>Neither, because the answer is <span class="m"><span aria-hidden="true">50 ÷ 11 = 4.55</span><span class="sr">50 divided by 11 equals 4 point 5 5</span></span>.</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Find the square root of 11 with every digit, divide, and compare with the two answers.</p></details>
+<details><summary>Show answer</summary><p><strong>Student A</strong>. Rounding <span class="m"><span aria-hidden="true">√11</span><span class="sr">the square root of 11</span></span> to <span class="m"><span aria-hidden="true">3.3</span><span class="sr">3 point 3</span></span> first gives <span class="m"><span aria-hidden="true">15.15</span><span class="sr">15 point 1 5</span></span>, which is off.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">Where you will use this in Section 6.4</h3>
+<p>Example 2 on page 3 of the notes divides a number by a square root and says to type it into StatCrunch as it is, without a decimal approximation. The "Classroom Example 6.4.1" and "Classroom Example 6.4.2" videos (page 4) each type a division by a square root on one line.</p>
+<p><strong>Watch for this:</strong> the square root covers only the bottom number, and the square root stays exact until the final answer.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Rounding to three or four decimal places</h2>
+<div class="goals" role="group" aria-labelledby="s4g">
+<h3 id="s4g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Round to three or four decimal places.</li><li>Look at only the one digit right after the last kept digit.</li><li>Carry when a 9 rounds up, even all the way into the ones place.</li><li>Keep a zero at the end when it is one of the kept digits.</li></ul>
+</div>
+<h3>Places after the decimal point</h3>
+<div class="table-wrap" role="region" aria-label="Place values after the decimal point" tabindex="0">
+<table>
+<caption>The places after the decimal point in <span class="m"><span aria-hidden="true">0.5183</span><span class="sr">0 point 5 1 8 3</span></span></caption>
+<thead><tr><th scope="col">Place</th><th scope="col">Digit</th></tr></thead>
+<tbody><tr><th scope="row">Tenths (1st place)</th><td>5</td></tr><tr><th scope="row">Hundredths (2nd place)</th><td>1</td></tr><tr><th scope="row">Thousandths (3rd place)</th><td>8</td></tr><tr><th scope="row">Ten-thousandths (4th place)</th><td>3</td></tr></tbody>
+</table>
+</div>
+<p>"Three decimal places" means three digits after the point. "Four decimal places" means four.</p>
+<h3>How to round</h3>
+<ol class="steps">
+<li>Find the last digit you will keep: the 3rd digit after the point for three places, the 4th for four places.</li>
+<li>Look at the single digit right after it.</li>
+<li>If that digit is 5 or more, add 1 to the kept digit. If it is 4 or less, leave the kept digit alone.</li>
+<li>Drop every digit after the kept digit, but keep every kept digit, even a zero at the end.</li>
+</ol>
+<h3>Four slips to watch for</h3>
+<ul>
+<li><strong>Rounding in steps from the right.</strong> <span class="m"><span aria-hidden="true">0.27449</span><span class="sr">0 point 2 7 4 4 9</span></span> to three places is <span class="m"><span aria-hidden="true">0.274</span><span class="sr">0 point 2 7 4</span></span>. Only the 4 right after the kept digit matters. Rounding to <span class="m"><span aria-hidden="true">0.2745</span><span class="sr">0 point 2 7 4 5</span></span> first and then to <span class="m"><span aria-hidden="true">0.275</span><span class="sr">0 point 2 7 5</span></span> is a slip.</li>
+<li><strong>Chopping instead of rounding.</strong> <span class="m"><span aria-hidden="true">0.6138</span><span class="sr">0 point 6 1 3 8</span></span> to three places is <span class="m"><span aria-hidden="true">0.614</span><span class="sr">0 point 6 1 4</span></span>, not <span class="m"><span aria-hidden="true">0.613</span><span class="sr">0 point 6 1 3</span></span>.</li>
+<li><strong>A 9 that rounds up.</strong> A 9 that goes up by 1 becomes 0 and adds 1 to the digit on its left. <span class="m"><span aria-hidden="true">0.29997</span><span class="sr">0 point 2 9 9 9 7</span></span> to four places is <span class="m"><span aria-hidden="true">0.3000</span><span class="sr">0 point 3 0 0 0</span></span>.</li>
+<li><strong>Dropping a kept zero.</strong> <span class="m"><span aria-hidden="true">0.3000</span><span class="sr">0 point 3 0 0 0</span></span> and <span class="m"><span aria-hidden="true">0.3</span><span class="sr">0 point 3</span></span> have the same value, but when the directions say four decimal places, write all four digits: <span class="m"><span aria-hidden="true">0.3000</span><span class="sr">0 point 3 0 0 0</span></span>.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Round 0.38461923 two ways">
+<h3 style="margin-top:0">Worked example: Round 0.38461923 two ways</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.38461923</span><span class="sr">0 point 3 8 4 6 1 9 2 3</span></span> to three decimal places, and then to four decimal places.</p><ol class="steps"><li><span class="work">Three places: keep the 4, look at the 6</span><span class="say">The 6 is 5 or more, so the 4 becomes 5: <span class="m"><span aria-hidden="true">0.385</span><span class="sr">0 point 3 8 5</span></span>.</span></li><li><span class="work">Four places: keep the 6, look at the 1</span><span class="say">The 1 is 4 or less, so the 6 stays: <span class="m"><span aria-hidden="true">0.3846</span><span class="sr">0 point 3 8 4 6</span></span>.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">0.385</span><span class="sr">0 point 3 8 5</span></span> to three decimal places and <span class="m"><span aria-hidden="true">0.3846</span><span class="sr">0 point 3 8 4 6</span></span> to four decimal places.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Round 0.52049 to four decimal places">
+<h3 style="margin-top:0">Finish this one: Round 0.52049 to four decimal places</h3>
+<p>Round <span class="m"><span aria-hidden="true">0.52049</span><span class="sr">0 point 5 2 0 4 9</span></span> to four decimal places.</p><ol class="steps"><li><span class="work">Kept digit: the 4 in the 4th place. Next digit: 9.</span><span class="say">The 9 is 5 or more, so the kept digit goes up by 1. Next, write the four kept digits.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="0.5205" data-places="4" data-miss="{&quot;0.5204&quot;: &quot;That chops off the 9 instead of rounding. The 9 is 5 or more, so the 4 goes up: 0.5205.&quot;, &quot;0.521&quot;: &quot;That is three decimal places. Four places keeps four digits after the point: 0.5205.&quot;, &quot;0.52049&quot;: &quot;That is the number you started with. Keep only four digits after the point.&quot;, &quot;0.52&quot;: &quot;That is two decimal places. Four places keeps four digits after the point: 0.5205.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 11.</b> Finish it: what is <span class="m"><span aria-hidden="true">0.52049</span><span class="sr">0 point 5 2 0 4 9</span></span> rounded to four decimal places?</p>
+<details><summary>Hint</summary><p>The 4 becomes 5. The digits before it stay the same.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.5205</span><span class="sr">0 point 5 2 0 5</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.183" data-places="3" data-miss="{&quot;0.184&quot;: &quot;That rounds in steps from the right (0.18346 to 0.1835 to 0.184). Only the digit right after the 3rd place counts, and it is 4: 0.183.&quot;, &quot;0.1835&quot;: &quot;That is four decimal places. Three places keeps three digits after the point: 0.183.&quot;, &quot;0.18&quot;: &quot;That is two decimal places. Three places keeps three digits after the point: 0.183.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 12.</b> Round <span class="m"><span aria-hidden="true">0.18346</span><span class="sr">0 point 1 8 3 4 6</span></span> to three decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 3 in the 3rd place. Look only at the very next digit, the 4. Ignore the 6 at the end.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.183</span><span class="sr">0 point 1 8 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="0.7500" data-places="4" data-miss="{&quot;0.7499&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so the last 9 goes up, becomes 0 and carries. The carries end at the 4, which becomes 5: 0.7500.&quot;, &quot;0.74996&quot;: &quot;That is the number you started with. Keep only four digits after the point.&quot;, &quot;0.749&quot;: &quot;That chops to three places. Round to four: the 6 makes the 9s carry, giving 0.7500.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 13.</b> Round <span class="m"><span aria-hidden="true">0.74996</span><span class="sr">0 point 7 4 9 9 6</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The 6 rounds the last 9 up. Each 9 becomes 0 and carries 1 to the left until it reaches the 4.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.7500</span><span class="sr">0 point 7 5 0 0</span></span></strong>. The kept zeros stay, so it has four digits after the point.</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="1.0000" data-places="4" data-miss="{&quot;0.9999&quot;: &quot;That chops off the 6 instead of rounding. The 6 is 5 or more, so every 9 carries, and the carry reaches the ones place: 1.0000.&quot;, &quot;0.99996&quot;: &quot;That rounds to five decimal places. Four places keeps four digits after the point: 1.0000.&quot;, &quot;0.1&quot;: &quot;The carry from the tenths place goes into the ones place, to the left of the point: 1.0000.&quot;, &quot;~0.999962~0.0000001&quot;: &quot;That is the number you started with. Keep only four digits after the point.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 14.</b> Round <span class="m"><span aria-hidden="true">0.999962</span><span class="sr">0 point 9 9 9 9 6 2</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>Every 9 turns into 0 and carries 1 to the left. The last carry goes into the ones place.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">1.0000</span><span class="sr">1 point 0 0 0 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;That rounds in steps from the right, ending at 0.0465 and then 0.047. Only the digit right after the 3rd place counts, and it is 4.&quot;, &quot;b&quot;: &quot;That keeps three digits starting from the first nonzero digit. Three decimal places means three digits right after the point, zeros included.&quot;, &quot;d&quot;: &quot;That is two decimal places. Three places keeps three digits after the point.&quot;}" data-why="Correct. The 3rd digit after the point is 6, and the next digit is 4, so the 6 stays: 0.046.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 15.</b> Which shows <span class="m"><span aria-hidden="true">0.0464851</span><span class="sr">0 point 0 4 6 4 8 5 1</span></span> rounded to three decimal places?</legend>
+<label><input type="radio" name="mc15" value="a"> <span><span class="m"><span aria-hidden="true">0.047</span><span class="sr">0 point 0 4 7</span></span></span></label><label><input type="radio" name="mc15" value="b"> <span><span class="m"><span aria-hidden="true">0.0465</span><span class="sr">0 point 0 4 6 5</span></span></span></label><label><input type="radio" name="mc15" value="c"> <span><span class="m"><span aria-hidden="true">0.046</span><span class="sr">0 point 0 4 6</span></span></span></label><label><input type="radio" name="mc15" value="d"> <span><span class="m"><span aria-hidden="true">0.05</span><span class="sr">0 point 0 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Count three digits right after the point, including the 0. The kept digit is the 6.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.046</span><span class="sr">0 point 0 4 6</span></span></strong></p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">Where you will use this in Section 6.4</h3>
+<p>Examples 1 and 2 on pages 2 and 3 of the notes give their answers to three decimal places. The "Classroom Example 6.4.1" and "Classroom Example 6.4.2" videos (page 4) round to four decimal places, and one answer in the "Classroom Example 6.4.2" video, <span class="m"><span aria-hidden="true">0.9560</span><span class="sr">0 point 9 5 6 0</span></span>, keeps a zero at the end.</p>
+<p><strong>Watch for this:</strong> the rounding direction in each problem, and any 9 that rounds up and carries.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Next section</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Inequality symbols and number lines</h2>
+<div class="goals" role="group" aria-labelledby="s5g">
+<h3 id="s5g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Read the symbols &lt;, &gt;, ≤ and ≥.</li><li>Match phrases such as "more than," "exceeds," "at least" and "no more than" to a symbol.</li><li>Decide whether the number on the edge of a statement is included.</li><li>Place negative numbers and decimals on a number line, and pick out the numbers between two values.</li></ul>
+</div>
+<h3>Symbols and the words that go with them</h3>
+<div class="table-wrap" role="region" aria-label="Inequality symbols and phrases" tabindex="0">
+<table>
+<caption>Inequality symbols, how to read them, and whether the edge number is included</caption>
+<thead><tr><th scope="col">Symbol</th><th scope="col">Phrases that mean it</th><th scope="col">Is the edge number included?</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span aria-hidden="true">&lt;</span><span class="sr">less than symbol</span></th><td>less than, fewer than, below</td><td>No</td></tr>
+<tr><th scope="row"><span aria-hidden="true">&gt;</span><span class="sr">greater than symbol</span></th><td>greater than, more than, exceeds, above</td><td>No</td></tr>
+<tr><th scope="row"><span aria-hidden="true">≤</span><span class="sr">less than or equal to symbol</span></th><td>at most, no more than, does not exceed</td><td>Yes</td></tr>
+<tr><th scope="row"><span aria-hidden="true">≥</span><span class="sr">greater than or equal to symbol</span></th><td>at least, no less than, or more</td><td>Yes</td></tr>
+</tbody>
+</table>
+</div>
+<p>The symbol always opens toward the larger side. <span class="m"><span aria-hidden="true">t > 18</span><span class="sr">t is greater than 18</span></span> says t is the larger side, so 18 itself does not count, but <span class="m"><span aria-hidden="true">18.1</span><span class="sr">18 point 1</span></span> does.</p>
+<h3>The number line</h3>
+<p>Numbers increase from left to right. Every negative number is to the left of 0, and among negative numbers, the one farther from 0 is smaller. So <span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span> is less than <span class="m"><span aria-hidden="true">−1.8</span><span class="sr">negative 1 point 8</span></span>, even though 3.2 is more than 1.8.</p>
+<figure class="axisfig"><svg viewBox="0 0 640 110" width="640" role="img" aria-labelledby="nl-title"><title id="nl-title">Number line from negative 4 to 4 with points at negative 3 point 2, negative 1 point 8 and 1 point 1, in that order from left to right</title><line x1="20" y1="60" x2="620" y2="60" stroke="currentColor" stroke-width="2"/><line x1="40" y1="52" x2="40" y2="68" stroke="currentColor" stroke-width="2"/><text x="40" y="90" font-size="16" text-anchor="middle" fill="currentColor">−4</text><line x1="110" y1="52" x2="110" y2="68" stroke="currentColor" stroke-width="2"/><text x="110" y="90" font-size="16" text-anchor="middle" fill="currentColor">−3</text><line x1="180" y1="52" x2="180" y2="68" stroke="currentColor" stroke-width="2"/><text x="180" y="90" font-size="16" text-anchor="middle" fill="currentColor">−2</text><line x1="250" y1="52" x2="250" y2="68" stroke="currentColor" stroke-width="2"/><text x="250" y="90" font-size="16" text-anchor="middle" fill="currentColor">−1</text><line x1="320" y1="52" x2="320" y2="68" stroke="currentColor" stroke-width="2"/><text x="320" y="90" font-size="16" text-anchor="middle" fill="currentColor">0</text><line x1="390" y1="52" x2="390" y2="68" stroke="currentColor" stroke-width="2"/><text x="390" y="90" font-size="16" text-anchor="middle" fill="currentColor">1</text><line x1="460" y1="52" x2="460" y2="68" stroke="currentColor" stroke-width="2"/><text x="460" y="90" font-size="16" text-anchor="middle" fill="currentColor">2</text><line x1="530" y1="52" x2="530" y2="68" stroke="currentColor" stroke-width="2"/><text x="530" y="90" font-size="16" text-anchor="middle" fill="currentColor">3</text><line x1="600" y1="52" x2="600" y2="68" stroke="currentColor" stroke-width="2"/><text x="600" y="90" font-size="16" text-anchor="middle" fill="currentColor">4</text><circle cx="95.99999999999999" cy="60" r="7" fill="currentColor"/><text x="95.99999999999999" y="36" font-size="16" text-anchor="middle" fill="currentColor">−3.2</text><circle cx="194.0" cy="60" r="7" fill="currentColor"/><text x="194.0" y="36" font-size="16" text-anchor="middle" fill="currentColor">−1.8</text><circle cx="397.0" cy="60" r="7" fill="currentColor"/><text x="397.0" y="36" font-size="16" text-anchor="middle" fill="currentColor">1.1</text></svg><figcaption>Points at <span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span>, <span class="m"><span aria-hidden="true">−1.8</span><span class="sr">negative 1 point 8</span></span> and <span class="m"><span aria-hidden="true">1.1</span><span class="sr">1 point 1</span></span>, from left to right.</figcaption></figure>
+<p>"Between 2 and 5" means greater than 2 and less than 5. On a number line, it is the stretch from 2 to 5.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Including the edge for &lt; or &gt;.</strong> <span class="m"><span aria-hidden="true">t > 18</span><span class="sr">t is greater than 18</span></span> does not include 18.</li>
+<li><strong>Ordering negatives by their digits.</strong> <span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span> is less than <span class="m"><span aria-hidden="true">−1.8</span><span class="sr">negative 1 point 8</span></span>, not more.</li>
+<li><strong>Flipping the symbol.</strong> "Exceeds 58" means more than 58, so the symbol is &gt;, not &lt;.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: A trail age rule">
+<h3 style="margin-top:0">Worked example: A trail age rule</h3>
+<p>A trail is open to hikers who are at least 12 years old. Write the rule with <em>a</em> for age, and decide whether a 12-year-old can go.</p><ol class="steps"><li><span class="work"><span class="m"><span aria-hidden="true">a ≥ 12</span><span class="sr">a is greater than or equal to 12</span></span></span><span class="say">"At least 12" means 12 or more, so the symbol includes the edge.</span></li><li><span class="work">12 ≥ 12 is true</span><span class="say">The edge number is included, so a 12-year-old can go.</span></li></ol><p><strong>Answer: <span class="m"><span aria-hidden="true">a ≥ 12</span><span class="sr">a is greater than or equal to 12</span></span>, and yes, a 12-year-old can go.</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: Which values fit t &gt; 18?">
+<h3 style="margin-top:0">Finish this one: Which values fit t > 18?</h3>
+<p>Which of <span class="m"><span aria-hidden="true">17.9</span><span class="sr">17 point 9</span></span>, 18 and <span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span> make <span class="m"><span aria-hidden="true">t > 18</span><span class="sr">t greater than 18</span></span> true?</p><ol class="steps"><li><span class="work">The symbol &gt; does not include 18 itself.</span><span class="say">Next, check each number: is it larger than 18?</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;The symbol &gt; does not include the edge, so 18 does not count.&quot;, &quot;c&quot;: &quot;17.9 is less than 18, and 18 is the edge, which &gt; does not include.&quot;, &quot;d&quot;: &quot;That flips the symbol. t &gt; 18 needs numbers larger than 18.&quot;}" data-why="Correct. Only 18.5 is larger than 18. The edge, 18, is not included.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 16.</b> Finish it: which of <span class="m"><span aria-hidden="true">17.9</span><span class="sr">17 point 9</span></span>, 18 and <span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span> make <span class="m"><span aria-hidden="true">t > 18</span><span class="sr">t greater than 18</span></span> true?</legend>
+<label><input type="radio" name="mc16" value="a"> <span>18 and <span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span></span></label><label><input type="radio" name="mc16" value="b"> <span><span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span> only</span></label><label><input type="radio" name="mc16" value="c"> <span><span class="m"><span aria-hidden="true">17.9</span><span class="sr">17 point 9</span></span>, 18 and <span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span></span></label><label><input type="radio" name="mc16" value="d"> <span><span class="m"><span aria-hidden="true">17.9</span><span class="sr">17 point 9</span></span> only</span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Ask of each number: is it larger than 18? Being equal to 18 is not enough.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">18.5</span><span class="sr">18 point 5</span></span> only</strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;\&quot;Exceeds\&quot; means more than, so 58 itself is not included. That calls for &gt;, not ≥.&quot;, &quot;b&quot;: &quot;That flips the direction. \&quot;Exceeds 58\&quot; means more than 58.&quot;, &quot;c&quot;: &quot;That flips the direction and includes the edge. \&quot;Exceeds 58\&quot; means more than 58.&quot;}" data-why="Correct. &quot;Exceeds&quot; means &quot;is more than,&quot; and the edge number is not included.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 17.</b> A storm warning is issued when the wind speed <em>w</em> <strong>exceeds</strong> 58 miles per hour. Which statement matches?</legend>
+<label><input type="radio" name="mc17" value="a"> <span><span class="m"><span aria-hidden="true">w ≥ 58</span><span class="sr">w is greater than or equal to 58</span></span></span></label><label><input type="radio" name="mc17" value="b"> <span><span class="m"><span aria-hidden="true">w < 58</span><span class="sr">w is less than 58</span></span></span></label><label><input type="radio" name="mc17" value="c"> <span><span class="m"><span aria-hidden="true">w ≤ 58</span><span class="sr">w is less than or equal to 58</span></span></span></label><label><input type="radio" name="mc17" value="d"> <span><span class="m"><span aria-hidden="true">w > 58</span><span class="sr">w is greater than 58</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Look up "exceeds" in the table.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">w > 58</span><span class="sr">w is greater than 58</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;−2.5 is farther from 0 than −2, so it is to the left of −2 and less than it.&quot;, &quot;c&quot;: &quot;1.6 is a little more than 1.5, so it is just past the right end.&quot;, &quot;d&quot;: &quot;−3.4 is to the left of −2 on the number line, so it is less than −2.&quot;}" data-why="Correct. −1.3 is to the right of −2 and to the left of 1.5.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 18.</b> Which number is between <span class="m"><span aria-hidden="true">−2</span><span class="sr">negative 2</span></span> and <span class="m"><span aria-hidden="true">1.5</span><span class="sr">1 point 5</span></span>?</legend>
+<label><input type="radio" name="mc18" value="a"> <span><span class="m"><span aria-hidden="true">−1.3</span><span class="sr">negative 1 point 3</span></span></span></label><label><input type="radio" name="mc18" value="b"> <span><span class="m"><span aria-hidden="true">−2.5</span><span class="sr">negative 2 point 5</span></span></span></label><label><input type="radio" name="mc18" value="c"> <span><span class="m"><span aria-hidden="true">1.6</span><span class="sr">1 point 6</span></span></span></label><label><input type="radio" name="mc18" value="d"> <span><span class="m"><span aria-hidden="true">−3.4</span><span class="sr">negative 3 point 4</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Picture the number line. Which number lands to the right of −2 but to the left of 1.5?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−1.3</span><span class="sr">negative 1 point 3</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="c" data-miss="{&quot;a&quot;: &quot;−1.8 is to the right of −3.2 on the number line, so it is higher.&quot;, &quot;b&quot;: &quot;−0.9 is the closest negative to 0, so it is the highest of the three negatives.&quot;, &quot;d&quot;: &quot;0.5 is the only positive number, so it is the highest, not the lowest.&quot;}" data-why="Correct. −3.2 is farthest to the left on the number line.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 19.</b> The overnight lows for four nights were <span class="m"><span aria-hidden="true">−1.8</span><span class="sr">negative 1 point 8</span></span>, <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span>, <span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span> and <span class="m"><span aria-hidden="true">−0.9</span><span class="sr">negative 0 point 9</span></span> degrees Celsius. Which was the <strong>lowest</strong>?</legend>
+<label><input type="radio" name="mc19" value="a"> <span><span class="m"><span aria-hidden="true">−1.8</span><span class="sr">negative 1 point 8</span></span></span></label><label><input type="radio" name="mc19" value="b"> <span><span class="m"><span aria-hidden="true">−0.9</span><span class="sr">negative 0 point 9</span></span></span></label><label><input type="radio" name="mc19" value="c"> <span><span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span></span></label><label><input type="radio" name="mc19" value="d"> <span><span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Among negative numbers, the one farther from 0 is lower.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">−3.2</span><span class="sr">negative 3 point 2</span></span></strong> degrees Celsius</p></details>
+</div>
+<div class="q" data-mode="num" data-answer="5" data-miss="{&quot;6&quot;: &quot;That includes 4, but 4 &lt; w leaves 4 out. The numbers are 5, 6, 7, 8 and 9.&quot;, &quot;4&quot;: &quot;That leaves out 9, but w ≤ 9 includes 9. The numbers are 5, 6, 7, 8 and 9.&quot;, &quot;9&quot;: &quot;That counts the numbers up to 9 starting from 1. The numbers must also be greater than 4: 5, 6, 7, 8 and 9.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 20.</b> How many whole numbers <em>w</em> make <span class="m"><span aria-hidden="true">4 < w ≤ 9</span><span class="sr">4 is less than w, and w is less than or equal to 9</span></span> true?</p>
+<details><summary>Hint</summary><p>The left side leaves out 4. The right side includes 9. List the whole numbers in between.</p></details>
+<details><summary>Show answer</summary><p><strong>5</strong>: the numbers 5, 6, 7, 8 and 9.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s5">
+<h3 id="br-s5" style="margin-top:0">Where you will use this in Section 6.4</h3>
+<p>The Requirements in item 1 on page 1 of the notes use the symbol &gt;. Example 1 on page 2 and Example 2 on page 3 use the phrase "greater than," and the "Classroom Example 6.4.1" and "Classroom Example 6.4.2" videos (page 4) use "between" and "exceeds" and place numbers such as 0 and 3 to the left or right of 1.1.</p>
+<p><strong>Watch for this:</strong> which way the symbol opens, and where a negative number or a decimal falls on the number line.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><button type="button" class="primary" data-go="s6">Next section</button></div>
+</div>
+</section>
+
+<section id="s6" aria-labelledby="s6h">
+<h2 id="s6h" tabindex="-1">6. Equal shares and decimals as percents</h2>
+<div class="goals" role="group" aria-labelledby="s6g">
+<h3 id="s6g" style="margin-top:0">What you will be able to do</h3>
+<ul><li>Split a total into equal shares by dividing.</li><li>Pick out the total and the number of shares in a sentence.</li><li>See how each share changes when the number of shares changes.</li><li>Change a decimal to a percent and compare it with 50%.</li></ul>
+</div>
+<h3>Equal shares</h3>
+<p>When a total is split equally, divide the total by the number of shares.</p>
+<p class="work"><span class="m"><span aria-hidden="true">each share = total ÷ number of shares</span><span class="sr">each share equals total divided by number of shares</span></span></p>
+<ul>
+<li>The <strong>total</strong> is the whole amount, such as pounds, dollars or milliliters.</li>
+<li>The <strong>number of shares</strong> is how many people or items split it.</li>
+<li>Fewer shares means each share is bigger. More shares means each share is smaller.</li>
+</ul>
+<h3>Decimals as percents</h3>
+<p>To change a decimal to a percent, multiply by 100, which moves the decimal point two places to the right. <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> is 50%, so any decimal above <span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span> is more than half, and any decimal below it is less than half.</p>
+<h3>Three slips to watch for</h3>
+<ul>
+<li><strong>Dividing the wrong way.</strong> <span class="m"><span aria-hidden="true">30 ÷ 2,400</span><span class="sr">30 divided by 2,400</span></span> gives a tiny number. The total goes first.</li>
+<li><strong>Multiplying instead of dividing.</strong> Sharing a total makes each share smaller than the total, never bigger.</li>
+<li><strong>Moving the point only one place.</strong> <span class="m"><span aria-hidden="true">0.08</span><span class="sr">0 point 0 8</span></span> is 8%, not 80%.</li>
+</ul>
+<div class="worked" role="group" aria-label="Worked example: Boxes in a van">
+<h3 style="margin-top:0">Worked example: Boxes in a van</h3>
+<p>A delivery van can carry 2,400 pounds of cargo. It is loaded with 30 boxes that all weigh the same. What is the heaviest each box can be?</p><ol class="steps"><li><span class="work">Total: 2,400 pounds. Shares: 30 boxes.</span><span class="say">Label both numbers first.</span></li><li><span class="work"><span class="m"><span aria-hidden="true">2,400 ÷ 30 = 80</span><span class="sr">2,400 divided by 30 equals 80</span></span></span><span class="say">Divide the total by the number of shares.</span></li></ol><p><strong>Answer: 80 pounds per box</strong></p>
+</div>
+<h3>Practice ladder</h3>
+<div class="worked" role="group" aria-label="Guided example: A pitcher of lemonade">
+<h3 style="margin-top:0">Finish this one: A pitcher of lemonade</h3>
+<p>A pitcher holds 1,260 milliliters of lemonade, poured equally into 9 glasses. How much goes in each glass?</p><ol class="steps"><li><span class="work">Total: 1,260 milliliters. Shares: 9 glasses.</span><span class="say">Next, divide the total by the number of shares.</span></li></ol>
+<p>The first step is done for you. You finish it in the next practice question.</p>
+</div>
+<div class="q" data-mode="num" data-answer="140" data-miss="{&quot;11340&quot;: &quot;That multiplies. Sharing a total means dividing: 1,260 divided by 9 is 140.&quot;, &quot;~0.00714~0.00005&quot;: &quot;The division is flipped: that is 9 divided by 1,260. Divide the total by the number of glasses: 140.&quot;, &quot;1251&quot;: &quot;That subtracts 9. Divide the total by the number of glasses: 140.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 21.</b> Finish it: how many milliliters go in each glass?</p>
+<details><summary>Hint</summary><p><span class="m"><span aria-hidden="true">1,260 ÷ 9</span><span class="sr">1,260 divided by 9</span></span>. A check: 9 glasses of 140 is 1,260.</p></details>
+<details><summary>Show answer</summary><p><strong>140 milliliters</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="160" data-miss="{&quot;51840&quot;: &quot;That multiplies. Sharing the limit means dividing: 2,880 divided by 18 is 160.&quot;, &quot;~0.00625~0.00005&quot;: &quot;The division is flipped: that is 18 divided by 2,880. Divide the total by the number of riders: 160.&quot;, &quot;2862&quot;: &quot;That subtracts 18. Divide the total by the number of riders: 160.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 22.</b> An elevator is rated for 2,880 pounds. If the limit is shared equally by 18 riders, how many pounds is each rider's share?</p>
+<details><summary>Hint</summary><p>Total: 2,880 pounds. Shares: 18 riders.</p></details>
+<details><summary>Show answer</summary><p><strong>160 pounds</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="180" data-miss="{&quot;160&quot;: &quot;That is the share for 18 riders. With 16 riders, divide 2,880 by 16: 180.&quot;, &quot;46080&quot;: &quot;That multiplies. Divide the total by the number of riders: 180.&quot;, &quot;~0.005556~0.00005&quot;: &quot;The division is flipped: that is 16 divided by 2,880. Divide 2,880 by 16: 180.&quot;, &quot;2864&quot;: &quot;That subtracts 16. Divide the total by the number of riders: 180.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 23.</b> The same elevator, rated for 2,880 pounds, now carries 16 riders. If the limit is shared equally, how many pounds is each rider's share?</p>
+<details><summary>Hint</summary><p>Fewer riders means a bigger share. Divide 2,880 by 16.</p></details>
+<details><summary>Show answer</summary><p><strong>180 pounds</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="87.43" data-miss="{&quot;8.743&quot;: &quot;That moves the point only one place. Multiply by 100 to move it two places: 87.43%.&quot;, &quot;0.8743&quot;: &quot;That adds a percent sign without converting. Multiply by 100: 87.43%.&quot;, &quot;874.3&quot;: &quot;That moves the point three places. Multiplying by 100 moves it two places: 87.43%.&quot;, &quot;87&quot;: &quot;The directions say do not round. Keep every digit: 87.43.&quot;, &quot;~0.008743~0.0000001&quot;: &quot;That divides by 100. Going from a decimal to a percent, multiply by 100 instead.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 24.</b> Write <span class="m"><span aria-hidden="true">0.8743</span><span class="sr">0 point 8 7 4 3</span></span> as a percent. Do not round.</p>
+<details><summary>Hint</summary><p>Move the decimal point two places to the right.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">87.43%</span><span class="sr">87 point 4 3 percent</span></span></strong> (typing 87.43 is fine)</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="d" data-miss="{&quot;a&quot;: &quot;0.48 is 48%, which is less than 50%.&quot;, &quot;b&quot;: &quot;49% is just under 50%.&quot;, &quot;c&quot;: &quot;5 divided by 11 is about 0.4545, which is about 45%.&quot;}" data-why="Correct. 0.512 is 51.2%, which is more than 50%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 25.</b> Which of these is <strong>more than half</strong>?</legend>
+<label><input type="radio" name="mc25" value="a"> <span><span class="m"><span aria-hidden="true">0.48</span><span class="sr">0 point 4 8</span></span></span></label><label><input type="radio" name="mc25" value="b"> <span>49%</span></label><label><input type="radio" name="mc25" value="c"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">5</span><span class="fb">11</span></span><span class="sr">5 over 11</span></span></span></label><label><input type="radio" name="mc25" value="d"> <span><span class="m"><span aria-hidden="true">0.512</span><span class="sr">0 point 5 1 2</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change each one to a percent and compare it with 50%.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.512</span><span class="sr">0 point 5 1 2</span></span></strong>, which is <span class="m"><span aria-hidden="true">51.2%</span><span class="sr">51 point 2 percent</span></span>.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s6">
+<h3 id="br-s6" style="margin-top:0">Where you will use this in Section 6.4</h3>
+<p>Part (a) of the "Classroom Example 6.4.2" video (page 4 of the notes) splits a load limit equally among the passengers, and part (d) compares a result with 50%.</p>
+<p><strong>Watch for this:</strong> which number is the total and which is the number of shares, and how many places the decimal point moves.</p>
+<p>This page stops here on purpose. The notes and videos take it the rest of the way.</p>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s6" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s5">Previous section</button><button type="button" class="primary" data-go="s7">Next section</button></div>
+</div>
+</section>
+
+<section id="s7" aria-labelledby="s7h">
+<h2 id="s7h" tabindex="-1">7. Final check-up</h2>
+<p>These six questions mix the skills from Sections 2 to 6, and no two in a row use the same skill, so each one starts with deciding what kind of problem it is. Nothing is graded.</p>
+<div class="q" data-mode="num" data-answer="0.6340" data-places="4" data-miss="{&quot;0.6339&quot;: &quot;That chops off the 8 instead of rounding. The 8 is 5 or more, so the 9 goes up, becomes 0 and carries: 0.6340.&quot;, &quot;0.63&quot;: &quot;That is two decimal places. Four places keeps four digits after the point: 0.6340.&quot;, &quot;0.63399&quot;: &quot;That keeps five digits after the point. Four places keeps four: 0.6340.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 26.</b> Round <span class="m"><span aria-hidden="true">0.6339852</span><span class="sr">0 point 6 3 3 9 8 5 2</span></span> to four decimal places.</p>
+<details><summary>Hint</summary><p>The kept digit is the 9 in the 4th place. The next digit is 8.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.6340</span><span class="sr">0 point 6 3 4 0</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="2.4" data-miss="{&quot;0.6&quot;: &quot;That divides 9.6 by 16 and skips the square root. The square root of 16 is 4: 2.4.&quot;, &quot;~0.7746~0.0006&quot;: &quot;That takes the square root of the whole fraction. The root covers only the 16: 9.6 divided by 4 is 2.4.&quot;, &quot;1.2&quot;: &quot;That divides by 8, which is half of 16. The square root of 16 is 4: 2.4.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 27.</b> Find <span class="m"><span aria-hidden="true" class="frac"><span class="ft">9.6</span><span class="fb">√16</span></span><span class="sr">9 point 6 divided by the square root of 16</span></span>. Do not round.</p>
+<details><summary>Hint</summary><p>Find the square root of the bottom first.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">2.4</span><span class="sr">2 point 4</span></span></strong>, because <span class="m"><span aria-hidden="true">9.6 ÷ 4 = 2.4</span><span class="sr">9 point 6 divided by 4 equals 2 point 4</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="b" data-miss="{&quot;a&quot;: &quot;\&quot;At most 12\&quot; includes 12 itself, so the symbol needs the line under it: ≤.&quot;, &quot;c&quot;: &quot;That flips the direction. \&quot;At most\&quot; sets an upper limit.&quot;, &quot;d&quot;: &quot;That flips the direction and leaves out 12. \&quot;At most 12\&quot; means 12 or fewer.&quot;}" data-why="Correct. &quot;At most 12&quot; means 12 or fewer, so 12 is included.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 28.</b> A van can carry <strong>at most</strong> 12 passengers. With <em>p</em> for the number of passengers, which statement matches?</legend>
+<label><input type="radio" name="mc28" value="a"> <span><span class="m"><span aria-hidden="true">p < 12</span><span class="sr">p is less than 12</span></span></span></label><label><input type="radio" name="mc28" value="b"> <span><span class="m"><span aria-hidden="true">p ≤ 12</span><span class="sr">p is less than or equal to 12</span></span></span></label><label><input type="radio" name="mc28" value="c"> <span><span class="m"><span aria-hidden="true">p ≥ 12</span><span class="sr">p is greater than or equal to 12</span></span></span></label><label><input type="radio" name="mc28" value="d"> <span><span class="m"><span aria-hidden="true">p > 12</span><span class="sr">p is greater than 12</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Does "at most 12" allow exactly 12 passengers?</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">p ≤ 12</span><span class="sr">p is less than or equal to 12</span></span></strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="165" data-miss="{&quot;95040&quot;: &quot;That multiplies. Sharing the limit means dividing: 3,960 divided by 24 is 165.&quot;, &quot;~0.00606~0.00005&quot;: &quot;The division is flipped: that is 24 divided by 3,960. Divide the total by the number of passengers: 165.&quot;, &quot;3936&quot;: &quot;That subtracts 24. Divide the total by the number of passengers: 165.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 29.</b> A small boat is rated for 3,960 pounds. If the limit is shared equally by 24 passengers, how many pounds is each passenger's share?</p>
+<details><summary>Hint</summary><p>Total: 3,960 pounds. Shares: 24 passengers.</p></details>
+<details><summary>Show answer</summary><p><strong>165 pounds</strong></p></details>
+</div>
+<div class="q" data-mode="num" data-answer="9.49" data-places="2" data-miss="{&quot;9.48&quot;: &quot;That chops off the digits instead of rounding. The calculator shows 9.4868…, and the digit after the 8 is 6, so the 8 goes up: 9.49.&quot;, &quot;45&quot;: &quot;That divides 90 by 2. Use the square root key: about 9.4868.&quot;, &quot;8100&quot;: &quot;That squares 90. Use the square root key: about 9.4868.&quot;, &quot;9.5&quot;: &quot;That is one decimal place. Two decimal places keeps two digits after the point: 9.49.&quot;, &quot;~9.4868~0.0001&quot;: &quot;That is the unrounded value. Round to two decimal places: 9.49.&quot;}">
+<p class="prompt"><b class="qlabel">Practice 30.</b> Use a calculator to find <span class="m"><span aria-hidden="true">√90</span><span class="sr">the square root of 90</span></span>. Round to two decimal places.</p>
+<details><summary>Hint</summary><p>90 is between 81 and 100, so the answer is between 9 and 10.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">9.49</span><span class="sr">9 point 4 9</span></span></strong>. The calculator shows <span class="m"><span aria-hidden="true">9.4868…</span><span class="sr">9 point 4 8 6 8 and more digits</span></span>.</p></details>
+</div>
+<div class="q" data-mode="mc" data-answer="a" data-miss="{&quot;b&quot;: &quot;1 divided by 19 is about 0.0526, which is about 5.26%, a little more than 5%.&quot;, &quot;c&quot;: &quot;0.052 is 5.2%, a little more than 5%.&quot;, &quot;d&quot;: &quot;0.5 is 50%, not 5%.&quot;}" data-why="Correct. 0.0485 is 4.85%, which is less than 5%.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Practice 31.</b> Which of these is <strong>less than 5%</strong>?</legend>
+<label><input type="radio" name="mc31" value="a"> <span><span class="m"><span aria-hidden="true">0.0485</span><span class="sr">0 point 0 4 8 5</span></span></span></label><label><input type="radio" name="mc31" value="b"> <span><span class="m"><span aria-hidden="true" class="frac"><span class="ft">1</span><span class="fb">19</span></span><span class="sr">1 over 19</span></span></span></label><label><input type="radio" name="mc31" value="c"> <span><span class="m"><span aria-hidden="true">0.052</span><span class="sr">0 point 0 5 2</span></span></span></label><label><input type="radio" name="mc31" value="d"> <span><span class="m"><span aria-hidden="true">0.5</span><span class="sr">0 point 5</span></span></span></label>
+</fieldset>
+<details><summary>Hint</summary><p>Change each one to a percent: multiply the decimal by 100.</p></details>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0485</span><span class="sr">0 point 0 4 8 5</span></span></strong>, which is <span class="m"><span aria-hidden="true">4.85%</span><span class="sr">4 point 8 5 percent</span></span>.</p></details>
+</div>
+<div class="why">That is the end of the practice. You have worked with square roots, dividing by a square root, rounding to three or four decimal places, inequality symbols and number lines, and equal shares and percents. Come back to any section when you want another look.</div>
+<p>Questions about any of this? Email your instructor, Matt Read, at <a href="mailto:mread@kish.edu">mread@kish.edu</a>.</p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s7" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s6">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec6.4-getready-corequisite-2026b'; let store={done:[],theme:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object'){if(Array.isArray(x.done))store.done=x.done.filter(v=>typeof v==='string'); if(x.theme==='dark'||x.theme==='light')store.theme=x.theme;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$]/g,'').replace(/\s+/g,'');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function R(n,d){if(d===0)return null; if(d<0){n=-n;d=-d;} const g=gcd(n,d); return {n:n/g,d:d/g};}
+function toRat(s){
+  s=norm(s).replace(/^\+/,'');
+  let m=s.match(/^(-?)(\d+)\/(\d+)$/); if(m)return Object.assign(R((m[1]?-1:1)*Number(m[2]),Number(m[3]))||{n:0,d:1},{frac:true});
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m&&(m[2]||m[3])){const den=Math.pow(10,m[3].length);return Object.assign(R((m[1]?-1:1)*Number((m[2]||'0')+m[3]),den),{dec:true});}
+  m=s.match(/^(-?)(\d+)\.$/); if(m)return R((m[1]?-1:1)*Number(m[2]),1);
+  m=s.match(/^-?\d+$/); if(m)return R(Number(s),1);
+  return null;
+}
+const val=r=>r?r.n/r.d:NaN;
+function sameRat(a,b){return a&&b&&a.n===b.n&&a.d===b.d;}
+function show(q,state,msg){const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg.trim(); q.dataset.ok=state==='good'?'1':'';}
+function clearFb(q){if(q._fb.textContent){q._fb.textContent=''; q._fb.className='feedback'; q.dataset.ok='';}}
+const answers=q=>String(q.dataset.answer).split('|');
+function missFor(q,raw){
+  let m=null; try{m=JSON.parse(q.dataset.miss||'null');}catch(e){}
+  if(!m)return null; const s=norm(raw), stu=toRat(s);
+  /* exact matches first, then windows written as ~center~tolerance */
+  for(const k of Object.keys(m)){
+    if(k[0]==='~')continue;
+    if(s===norm(k))return m[k];
+    const kr=toRat(k); if(stu&&kr&&sameRat(stu,kr))return m[k];
+  }
+  if(stu){for(const k of Object.keys(m)){ if(k[0]!=='~')continue; const p=k.split('~'); if(Math.abs(val(stu)-Number(p[1]))<=Number(p[2])+1e-9)return m[k]; }}
+  return null;
+}
+const GENERIC=['Not quite. That is not one of the usual slips for this question, so rework it one step at a time. The hint is there if you want it.','Not yet. Compare each step with the worked example in this section, or open the hint.','Not quite. Check where the decimal point landed and whether the rounding direction was followed, then try again.','Not yet. Read the question once more for what it asks, then try a different first step or open the hint.'];
+let lastG=-1; function generic(){let i; do{i=Math.floor(Math.random()*GENERIC.length);}while(i===lastG&&GENERIC.length>1); lastG=i; return GENERIC[i];}
+function judgeNum(q,raw){
+  const s=norm(raw); const stu=toRat(s);
+  for(const a of answers(q)){
+    const key=toRat(a);
+    if(key&&stu){ if(sameRat(key,stu)){ const pl=q.dataset.places; if(pl){ const dp=(s.split('.')[1]||'').length; if(dp!==Number(pl))return show(q,'almost','That is the right value, but the directions ask for '+pl+' decimal places. Write exactly '+pl+' digits after the point: '+a+'.'); } return show(q,'good',q.dataset.why||'Correct.'); } }
+    else if(s===norm(a)) return show(q,'good',q.dataset.why||'Correct.');
+  }
+  if(!stu&&s)return show(q,'info','Enter your answer as a number, using digits and a decimal point, like 12.5.');
+  show(q,'wrong',missFor(q,raw)||generic());
+}
+function judgeMC(q){const c=$('input[type=radio]:checked',q); if(!c)return show(q,'info','Select an option first.'); if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.'); let mm=null; try{mm=JSON.parse(q.dataset.miss||'null');}catch(e){} show(q,'wrong',(mm&&mm[c.value])||generic());}
+$$('.q').forEach((q,k)=>{
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  const run=()=>{ if(q.dataset.mode==='mc')return judgeMC(q); if(!input.value.trim())return show(q,'info','Type an answer first.'); judgeNum(q,input.value);};
+  if(q.dataset.mode==='mc'){ row.innerHTML='<button type="button" class="primary">Check</button>'; $('fieldset',q).after(row);$$('input[type=radio]',q).forEach(r=>r.addEventListener('change',()=>clearFb(q)));}
+  else{ const id='ans'+k; row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>'; const anchor=$('figure',q)||$('.table-wrap',q)||$('.prompt',q); anchor.after(row); input=$('input',row); input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}}); input.addEventListener('input',()=>clearFb(q));}
+  row.after(fb); $('button',row).addEventListener('click',run); });
+/* ---------- section navigation and progress ---------- */
+const secs=$$('main > section'); const navBtns=$$('nav button[data-target]');
+const total=secs.length; const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){const n=store.done.filter(id=>secs.some(s=>s.id===id)).length; if(overall){overall.max=total; overall.value=n;} if(overallText)overallText.textContent=n+' of '+total;
+  $$('.mark').forEach(b=>{const done=store.done.includes(b.dataset.sec); b.textContent=done?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',done?'true':'false');});
+  navBtns.forEach(b=>{const done=store.done.includes(b.dataset.target); const m=$('.donemark',b); if(m)m.textContent=done?' (complete)':'';});}
+function go(id,focus){secs.forEach(s=>{s.hidden=s.id!==id;}); navBtns.forEach(b=>{if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');});
+  const s=document.getElementById(id); if(s&&focus){const h=$('h2',s); if(h){h.setAttribute('tabindex','-1'); h.focus();} window.scrollTo(0,0);} }
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>{b.addEventListener('click',()=>{const id=b.dataset.sec; const i=store.done.indexOf(id); if(i>=0)store.done.splice(i,1); else store.done.push(id); save(); updateProgress();});});
+if(secs.length)go(secs[0].id,false); updateProgress();
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches); root.dataset.theme=dark?'dark':'light'; if(themeBtn){themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';}}
+if(themeBtn)themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();}); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;});});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 5.2 Exit Ticket: Binomial Probability Distributions</title>
+<style>
+/* Core CSS */
+:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--soft:#374151;--accent:#1d4ed8;--on-accent:#fff;--warm:#fff8e9;--cool:#f1f5fb;--line:#64748b;--good:#166534;--warn:#854d0e;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101827;--ink:#f1f5f9;--soft:#cbd5e1;--accent:#93c5fd;--on-accent:#101827;--warm:#29251e;--cool:#1e293b;--line:#94a3b8;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box} html{scroll-padding-top:1rem} body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.6 system-ui,sans-serif;overflow-wrap:break-word}
+a{color:var(--accent)} .skip{position:absolute;left:-10000px;top:0} .skip:focus{left:1rem;top:1rem;z-index:10;padding:.75rem 1rem;background:var(--bg);color:var(--accent);border:2px solid var(--accent)}
+header{padding:1.5rem max(1rem,calc((100% - 76rem)/2));background:var(--cool);border-bottom:1px solid var(--line)}
+.tag{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:.4rem 0 .6rem;max-width:34ch} h2{font-size:1.75rem;line-height:1.25;margin:.5rem 0 1rem} h3{font-size:1.3rem;line-height:1.3;margin:2rem 0 .75rem}
+button,input,select,textarea{font:inherit;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:.45rem;background:var(--bg);color:var(--ink)} button{cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:650}
+button.danger{border-color:var(--bad);color:var(--bad);font-weight:600}
+input[type=text],textarea{width:100%;min-width:0;min-height:48px;padding:.5rem;border:1px solid var(--line);border-radius:.35rem;background:var(--bg);color:var(--ink)}
+textarea{min-height:7rem;line-height:1.5;resize:vertical}
+input[type=radio],input[type=checkbox]{width:1.4rem;height:1.4rem;margin:0 .6rem 0 0;flex:none;accent-color:var(--accent)}
+:focus-visible,h2:focus,main:focus{outline:3px solid var(--accent);outline-offset:3px}
+fieldset{border:1px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;margin:0} legend{font-weight:600;padding:0 .25rem} fieldset label{display:flex;align-items:center;min-height:44px;padding:.25rem 0;cursor:pointer}
+.layout{max-width:76rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)} nav{padding:.75rem 1rem;border-bottom:1px solid var(--line)} nav ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+nav button{display:block;width:100%;text-align:left;background:transparent;border-color:transparent;color:var(--accent);text-decoration:underline} nav button[aria-current]{background:var(--accent);color:var(--on-accent);font-weight:650;text-decoration:none}
+main{min-width:0;padding:1rem;max-width:78ch}
+@media(min-width:62rem){html.js .layout{grid-template-columns:minmax(18rem,20rem) minmax(0,1fr)} nav{border-bottom:0;border-right:1px solid var(--line)} nav ol{display:block;position:sticky;top:1rem} main{padding:1.5rem 2rem}}
+.goals,.worked,.q,.tool,.conf-box{border:1px solid var(--line);border-radius:.6rem;padding:1rem;margin:1rem 0;background:var(--bg)} .goals{background:var(--bg)} .worked{background:var(--warm)} .q{background:var(--cool)} .tool{border-width:2px}
+.conf-box{background:var(--warm);border-width:2px}
+.why{border-left:4px solid var(--accent);background:var(--cool);padding:.75rem 1rem;margin:1rem 0} .note{border-left:4px solid var(--warn);padding:.6rem 1rem;margin:1rem 0;background:var(--warm)}
+.steps{padding-left:1.6rem;margin:.5rem 0} .steps li{margin:.7rem 0} .work{display:block;font-family:ui-serif,Georgia,serif;font-size:1.15em} .say{display:block;font-size:1rem;color:var(--soft)}
+.qlabel{font-weight:700;margin-right:.35rem} .inline{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center} .help{font-size:.95rem;margin:.25rem 0;color:var(--soft)}
+.feedback{margin:.5rem 0} .feedback:empty{margin:0} .feedback.good,.feedback.almost,.feedback.wrong,.feedback.info{border-left:5px solid var(--line);padding:.5rem .8rem;background:var(--bg)} .feedback.good{border-color:var(--good)} .feedback.almost{border-color:var(--warn)} .feedback.wrong{border-color:var(--bad)}
+details{margin:.3rem 0} summary{display:list-item;cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:600;color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0} .section-end{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem} .pager{display:flex;justify-content:space-between;gap:.5rem;margin-top:.75rem}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0} [hidden]{display:none!important}
+.table-wrap{overflow-x:auto;margin:.75rem 0} table{border-collapse:collapse;min-width:16rem;width:100%} th,td{border:1px solid var(--line);padding:.5rem .8rem;text-align:left;vertical-align:top} thead th{background:var(--cool)} caption{text-align:left;font-weight:600;padding-bottom:.3rem}
+.answer-row{margin:.5rem 0}
+.bridge{border:2px solid var(--accent);border-radius:.6rem;padding:1rem;margin:2rem 0 1rem;background:var(--bg)}
+.doors{display:grid;gap:1rem;margin:1rem 0} .door{border:1px solid var(--line);border-radius:.6rem;padding:1rem;background:var(--cool)}
+.door ul{padding-left:1.2rem} .door li{margin:.6rem 0} .door button{margin:.2rem .3rem .2rem 0}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:.35rem;font-size:.9rem;font-weight:650;border:1px solid var(--line);background:var(--bg)}
+.badge.good{border-color:var(--good);color:var(--good)}
+.badge.warn{border-color:var(--warn);color:var(--warn)}
+.badge.bad{border-color:var(--bad);color:var(--bad)}
+.outreach-box{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.98rem;background:var(--cool);min-height:14rem}
+.lesson>h3:first-child{margin-top:1rem}
+html:not(.js) .js-only{display:none!important}
+th[scope=row]{background:var(--bg);font-weight:600}
+.ptr{font-size:1rem;margin:.4rem 0 0;color:var(--soft)}
+.edited-note{font-size:.95rem;color:var(--soft)}
+@media print{nav,.actions,.section-end,.answer-row button,#theme,.skip{display:none!important} main>section,main>section[hidden]{display:block!important} .q,.bridge,.tool{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.answer-row label{font-weight:600}
+
+.linkish{background:none;border:none;padding:0;min-height:auto;color:var(--link,inherit);text-decoration:underline;cursor:pointer;font:inherit}
+#review-list li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<div class="tag">MAT 048 / MAT 208 · Section 5.2 Exit Ticket</div>
+<h1>Section 5.2 Exit Ticket: Binomial Probability Distributions</h1>
+<p>A short, ungraded check to use after the Section 5.2 notes and videos.</p>
+<div class="actions"><button type="button" id="theme" class="js-only" aria-pressed="false">Dark mode</button></div>
+<div class="js-only"><label for="overall">Sections marked complete: <span id="overall-text">0 of 5</span></label><br><progress id="overall" max="5" value="0"></progress></div>
+</header>
+<div class="layout">
+<nav class="js-only" aria-label="Exit ticket sections"><ol>
+<li><button type="button" data-target="s1">1. How this works<span class="donemark sr"></span></button></li><li><button type="button" data-target="s2">2. Binomial Probability Distributions<span class="donemark sr"></span></button></li><li><button type="button" data-target="s3">3. StatCrunch check: binomial probabilities<span class="donemark sr"></span></button></li><li><button type="button" data-target="s4">4. Parameters for the Binomial Distribution<span class="donemark sr"></span></button></li><li><button type="button" data-target="s5">5. Your results and help from Matt<span class="donemark sr"></span></button></li>
+</ol></nav>
+<main id="main" tabindex="-1">
+
+<section id="s1" aria-labelledby="s1h">
+<h2 id="s1h" tabindex="-1">1. How this works</h2>
+<div class="why">This exit ticket is ungraded and private. No one sees your answers unless you choose to send them to your instructor, Matt Read. It has 17 short checks and takes about 10 to 15 minutes.</div>
+<ul>
+<li>Do it <strong>after</strong> you have gone through the Section 5.2 notes and videos.</li>
+<li>Each check tells you right away whether you have it. If not, it names the item, page and video to go back to.</li>
+<li>Have StatCrunch open for Sections 3 and 4.</li>
+<li>Section 5 gives you a summary and a short message you can send to Matt.</li>
+<li>Your answers save on this device, so you can stop and pick up later.</li>
+</ul>
+<div class="doors">
+<div class="door">
+<p><strong>Go in order.</strong> About 10 to 15 minutes.</p>
+<button type="button" class="primary" data-go="s2">Start with Section 2</button>
+</div>
+<div class="door">
+<p><strong>Go to one part.</strong></p>
+<ul>
+<li><button type="button" data-go="s2">Binomial Probability Distributions</button></li>
+<li><button type="button" data-go="s3">StatCrunch check: binomial probabilities</button></li>
+<li><button type="button" data-go="s4">Parameters for the Binomial Distribution</button></li>
+<li><button type="button" data-go="s5">Your results and help from Matt</button></li>
+</ul>
+</div>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s1" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><span></span><button type="button" class="primary" data-go="s2">Next section</button></div>
+</div>
+</section>
+
+<section id="s2" aria-labelledby="s2h">
+<h2 id="s2h" tabindex="-1">2. Binomial Probability Distributions</h2>
+<p>These checks cover item 1 on page 1 of the Section 5.2 notes and the Classroom Example 5.2.1 video on page 9.</p>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. There are 15 trials, each with two outcomes and the same probability of success." data-miss="{&quot;a&quot;: &quot;Not quite. The rolls stop when a six comes up, so the number of trials is not fixed ahead of time. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. A temperature can be many values, so each trial does not end in just a success or a failure. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The cards are not put back, so the probability of drawing a winner changes from draw to draw. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;}" data-review="item 1 (Binomial Probability Distributions) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 1 (Requirements).</b> Which situation meets all four requirements for a binomial probability distribution listed in item 1?</legend>
+<label><input type="radio" name="mc1" value="a"> <span>A player rolls a die until a six comes up, and counts the number of rolls.</span></label><label><input type="radio" name="mc1" value="b"> <span>A nurse records the exact body temperature of each of 20 randomly selected patients.</span></label><label><input type="radio" name="mc1" value="c"> <span>15 randomly selected adults are each asked if they own an electric car, and each has a 0.08 probability of saying yes.</span></label><label><input type="radio" name="mc1" value="d"> <span>A student draws 3 cards, one at a time and without putting them back, from 6 cards that include 2 winners.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>15 randomly selected adults are each asked if they own an electric car, and each has a 0.08 probability of saying yes.</strong></p><p class="ptr">Where this is: Item 1 (Binomial Probability Distributions) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="a" data-why="Correct. She keeps shooting until a miss, so the number of trials is not set ahead of time." data-miss="{&quot;b&quot;: &quot;Not quite. Each shot is either made or missed, which gives exactly two outcomes. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. Every shot has the same 0.8 probability, so the probability stays constant. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. Nothing in the situation says that one shot changes the chances for the next. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes.&quot;}" data-review="item 1 (Binomial Probability Distributions) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 2 (Requirements).</b> A basketball player shoots free throws until she misses one. Each shot has a 0.8 probability of going in. Which requirement from item 1 does this situation fail?</legend>
+<label><input type="radio" name="mc2" value="a"> <span>Fixed Number of Trials</span></label><label><input type="radio" name="mc2" value="b"> <span>Two Possible Outcomes</span></label><label><input type="radio" name="mc2" value="c"> <span>Constant Probability of Success</span></label><label><input type="radio" name="mc2" value="d"> <span>Independence</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Fixed Number of Trials</strong></p><p class="ptr">Where this is: Item 1 (Binomial Probability Distributions) on page 1 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="d" data-why="Correct. The note says the 5% guideline can allow dependent trials to be treated as independent." data-miss="{&quot;a&quot;: &quot;Not quite. The note in item 1 says dependent trials can sometimes be treated as independent. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes, including the note under Independence.&quot;, &quot;b&quot;: &quot;Not quite. Independence is one of the four requirements listed in item 1. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes, including the note under Independence.&quot;, &quot;c&quot;: &quot;Not quite. Having two outcomes is a separate requirement and does not make the selections independent. Review: item 1 (Binomial Probability Distributions) on page 1 of the notes, including the note under Independence.&quot;}" data-review="item 1 (Binomial Probability Distributions) on page 1 of the notes, including the note under Independence.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 3 (Independence).</b> A polling company randomly selects 1,200 adults, without replacement, from a city of 2 million adults. Strictly speaking, the selections are dependent. Which statement matches the note under Independence in item 1?</legend>
+<label><input type="radio" name="mc3" value="a"> <span>The situation can never be binomial, because the selections are dependent.</span></label><label><input type="radio" name="mc3" value="b"> <span>Independence is not one of the requirements, so dependence does not matter.</span></label><label><input type="radio" name="mc3" value="c"> <span>The selections are independent because each adult gives a yes or a no.</span></label><label><input type="radio" name="mc3" value="d"> <span>The 5% guideline can allow us to treat the selections as independent.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The 5% guideline can allow us to treat the selections as independent.</strong></p><p class="ptr">Where this is: Item 1 (Binomial Probability Distributions) on page 1 of the notes, including the note under Independence.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="b" data-why="Correct. Six adults are the trials, four is the number of successes, and p is 28% as a decimal." data-miss="{&quot;a&quot;: &quot;Not quite. This swaps n and x: the six adults selected are the trials, and four is the number of successes. Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes, and the video \&quot;Classroom Example 5.2.1\&quot; on page 9.&quot;, &quot;c&quot;: &quot;Not quite. This leaves p and q as percents, but they are probabilities written as decimals. Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes, and the video \&quot;Classroom Example 5.2.1\&quot; on page 9.&quot;, &quot;d&quot;: &quot;Not quite. This swaps p and q: 28% is the probability of success given in the problem. Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes, and the video \&quot;Classroom Example 5.2.1\&quot; on page 9.&quot;}" data-review="item 1 (Notation for Binomial Probabilities) on page 1 of the notes, and the video &quot;Classroom Example 5.2.1&quot; on page 9.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 4 (Notation).</b> Based on a survey, assume that 28% of adults use a library app. Six adults are randomly selected, and we want the probability that exactly four of them use the app. Which values match the notation in item 1?</legend>
+<label><input type="radio" name="mc4" value="a"> <span>n = 4, x = 6, p = 0.28, q = 0.72</span></label><label><input type="radio" name="mc4" value="b"> <span>n = 6, x = 4, p = 0.28, q = 0.72</span></label><label><input type="radio" name="mc4" value="c"> <span>n = 6, x = 4, p = 28, q = 72</span></label><label><input type="radio" name="mc4" value="d"> <span>n = 6, x = 4, p = 0.72, q = 0.28</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>n = 6, x = 4, p = 0.28, q = 0.72</strong></p><p class="ptr">Where this is: Item 1 (Notation for Binomial Probabilities) on page 1 of the notes, and the video "Classroom Example 5.2.1" on page 9.</p></details>
+</div>
+<div class="q" data-topic="s2" data-mode="mc" data-answer="c" data-why="Correct. P(x) is the probability of exactly x successes in n trials." data-miss="{&quot;a&quot;: &quot;Not quite. That describes x itself, not the probability P(x). Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. That is q, the probability of failure. Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. P(x) is for exactly x successes, not x or more. Review: item 1 (Notation for Binomial Probabilities) on page 1 of the notes.&quot;}" data-review="item 1 (Notation for Binomial Probabilities) on page 1 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 5 (Notation).</b> In the notation of item 1, what does P(x) stand for?</legend>
+<label><input type="radio" name="mc5" value="a"> <span>The number of successes in n trials</span></label><label><input type="radio" name="mc5" value="b"> <span>The probability of failure, 1 − p</span></label><label><input type="radio" name="mc5" value="c"> <span>The probability of exactly x successes in n trials</span></label><label><input type="radio" name="mc5" value="d"> <span>The probability of at least x successes in n trials</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>The probability of exactly x successes in n trials</strong></p><p class="ptr">Where this is: Item 1 (Notation for Binomial Probabilities) on page 1 of the notes.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s2">
+<h3 id="br-s2" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Requirements for a binomial probability distribution: item 1, page 1 (and the note under Independence)</li><li>Notation for Binomial Probabilities: item 1, page 1</li><li>Video: "Classroom Example 5.2.1", page 9</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s2" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s1">Previous section</button><button type="button" class="primary" data-go="s3">Next section</button></div>
+</div>
+</section>
+
+<section id="s3" aria-labelledby="s3h">
+<h2 id="s3h" tabindex="-1">3. StatCrunch check: binomial probabilities</h2>
+<p>These checks cover the StatCrunch steps and Examples 1 to 3 in item 1 on pages 1 to 8 of the notes, the four StatCrunch videos for item 1, and the Classroom Example 5.2.2, 5.2.3 and 5.2.4 videos on pages 9 and 10.</p>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="d" data-why="Correct. Fewer than 4 does not include 4, so the sign is less than." data-miss="{&quot;a&quot;: &quot;Not quite. Less than or equal to includes 4, and fewer than 4 does not. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;b&quot;: &quot;Not quite. Greater than or equal to counts 4 and up, the opposite direction. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;c&quot;: &quot;Not quite. Greater than counts 5 and up, the opposite direction. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;}" data-review="page 3 of the notes (the inequality signs), and the video &quot;Classroom Example 5.2.2&quot; on page 9.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 6 (Inequality Sign).</b> A problem asks for the probability that <strong>fewer than 4</strong> of the selected adults agree. Which entry in the StatCrunch binomial calculator matches?</legend>
+<label><input type="radio" name="mc6" value="a"> <span><span class="m"><span aria-hidden="true">P(X ≤ 4)</span><span class="sr">P of X less than or equal to 4</span></span></span></label><label><input type="radio" name="mc6" value="b"> <span><span class="m"><span aria-hidden="true">P(X ≥ 4)</span><span class="sr">P of X greater than or equal to 4</span></span></span></label><label><input type="radio" name="mc6" value="c"> <span><span class="m"><span aria-hidden="true">P(X &gt; 4)</span><span class="sr">P of X greater than 4</span></span></span></label><label><input type="radio" name="mc6" value="d"> <span><span class="m"><span aria-hidden="true">P(X &lt; 4)</span><span class="sr">P of X less than 4</span></span></span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">P(X &lt; 4)</span><span class="sr">P of X less than 4</span></span></strong></p><p class="ptr">Where this is: Page 3 of the notes (the inequality signs), and the video "Classroom Example 5.2.2" on page 9.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.1937" data-dp="4" data-why="Correct. StatCrunch shows about 0.19374, which rounds to 0.1937." data-miss="{&quot;0.8507&quot;: &quot;Not quite. This is the probability of 4 or fewer, so the sign was set to less than or equal to instead of equal to. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;, &quot;0.3430&quot;: &quot;Not quite. This is the probability of 4 or more, so the sign was set to greater than or equal to instead of equal to. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;, &quot;0.6570&quot;: &quot;Not quite. This is the probability of fewer than 4, so the sign was set to less than instead of equal to. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;, &quot;0.1493&quot;: &quot;Not quite. This is the probability of more than 4, so the sign was set to greater than instead of equal to. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;, &quot;0.194&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;, &quot;0.0001&quot;: &quot;Not quite. This comes from entering p as 0.027, but 27% as a decimal is 0.27. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes\&quot; on page 4.&quot;}" data-review="Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video &quot;Using StatCrunch to Find Binomial Probabilities Exactly x Successes&quot; on page 4.">
+<p class="prompt"><b class="qlabel">Check 7 (Exactly x Successes).</b> A store finds that 27% of its customers pay with a phone app. If 11 customers are randomly selected, find the probability that exactly 4 pay with a phone app. Set this up in StatCrunch yourself. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.1937</span><span class="sr">0 point 1 9 3 7</span></span></strong></p><p class="ptr">Where this is: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video "Using StatCrunch to Find Binomial Probabilities Exactly x Successes" on page 4.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.346" data-dp="3" data-why="Correct. StatCrunch shows about 0.34613, which rounds to 0.346." data-miss="{&quot;0.196&quot;: &quot;Not quite. This is the probability of fewer than 7, which leaves out exactly 7. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;0.150&quot;: &quot;Not quite. This is the probability of exactly 7, so the sign was set to equal to. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;0.804&quot;: &quot;Not quite. This is the probability of 7 or more, the opposite direction. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;0.654&quot;: &quot;Not quite. This is the probability of more than 7, the opposite direction. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;0.3461&quot;: &quot;Not quite. This is rounded to four decimal places, and the directions ask for three. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;0.35&quot;: &quot;Not quite. This is rounded to two decimal places, and the directions ask for three. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;, &quot;1&quot;: &quot;Not quite. This comes from entering p as 0.042, but 42% as a decimal is 0.42. Review: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes\&quot; on page 5.&quot;}" data-review="Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video &quot;Using StatCrunch to Find Binomial Probabilities At Most x Successes&quot; on page 5.">
+<p class="prompt"><b class="qlabel">Check 8 (At Most x Successes).</b> In a large city, 42% of households have a pet. If 20 households are randomly selected, find the probability that at most 7 have a pet. Use StatCrunch. Round to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.346</span><span class="sr">0 point 3 4 6</span></span></strong></p><p class="ptr">Where this is: Example 2 (Finding At Most x Successes) on pages 5 and 6 of the notes, and the video "Using StatCrunch to Find Binomial Probabilities At Most x Successes" on page 5.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.2351" data-dp="4" data-why="Correct. StatCrunch shows about 0.23513, which rounds to 0.2351." data-miss="{&quot;0.0907&quot;: &quot;Not quite. This is the probability of more than 4, which leaves out exactly 4. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;, &quot;0.1444&quot;: &quot;Not quite. This is the probability of exactly 4, so the sign was set to equal to. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;, &quot;0.9093&quot;: &quot;Not quite. This is the probability of 4 or fewer, the opposite direction. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;, &quot;0.7649&quot;: &quot;Not quite. This is the probability of fewer than 4, the opposite direction. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;, &quot;0.235&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;, &quot;0.0001&quot;: &quot;Not quite. This comes from entering p as 0.018, but 18% as a decimal is 0.18. Review: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video \&quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes\&quot; on page 7.&quot;}" data-review="Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video &quot;Using StatCrunch to Find Binomial Probabilities At Least x Successes&quot; on page 7.">
+<p class="prompt"><b class="qlabel">Check 9 (At Least x Successes).</b> A hospital reports that 18% of its patients arrive by ambulance. If 14 patients are randomly selected, find the probability that at least 4 arrive by ambulance. Use StatCrunch. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.2351</span><span class="sr">0 point 2 3 5 1</span></span></strong></p><p class="ptr">Where this is: Example 3 (Finding At Least x Successes) on pages 7 and 8 of the notes, and the video "Using StatCrunch to Find Binomial Probabilities At Least x Successes" on page 7.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.326" data-dp="3" data-why="Correct. StatCrunch shows about 0.32574, which rounds to 0.326." data-miss="{&quot;0.596&quot;: &quot;Not quite. This is the probability of 3 or fewer, but fewer than 3 does not include 3. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.271&quot;: &quot;Not quite. This is the probability of exactly 3, so the sign was set to equal to. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.674&quot;: &quot;Not quite. This is the probability of 3 or more, the opposite direction. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.404&quot;: &quot;Not quite. This is the probability of more than 3, the opposite direction. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.997&quot;: &quot;Not quite. This comes from entering p as 0.0355, but 35.5% as a decimal is 0.355. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.3257&quot;: &quot;Not quite. This is rounded to four decimal places, and the directions ask for three. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;, &quot;0.325&quot;: &quot;Not quite. This cuts off the digits instead of rounding, and the next digit is 7. Review: page 3 of the notes (the inequality signs), and the video \&quot;Classroom Example 5.2.2\&quot; on page 9.&quot;}" data-review="page 3 of the notes (the inequality signs), and the video &quot;Classroom Example 5.2.2&quot; on page 9.">
+<p class="prompt"><b class="qlabel">Check 10 (Fewer Than x Successes).</b> A survey found that <span class="m"><span aria-hidden="true">35.5%</span><span class="sr">35 point 5 percent</span></span> of drivers would consider an electric car. If 9 drivers are randomly selected, find the probability that fewer than 3 would consider one. Use StatCrunch. Round to three decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.326</span><span class="sr">0 point 3 2 6</span></span></strong></p><p class="ptr">Where this is: Page 3 of the notes (the inequality signs), and the video "Classroom Example 5.2.2" on page 9.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="num" data-nonneg="1" data-answer="0.0834" data-dp="4" data-why="Correct. None means exactly 0, and StatCrunch shows about 0.08336." data-miss="{&quot;0.9166&quot;: &quot;Not quite. This is the probability of more than 0, which is the opposite of none. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;, &quot;1&quot;: &quot;Not quite. This is the probability of 0 or more, which includes every possible result. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;, &quot;0.2351&quot;: &quot;Not quite. This is the probability of exactly 1, but none means exactly 0. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;, &quot;0.3185&quot;: &quot;Not quite. This is the probability of 1 or fewer, but none means exactly 0. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;, &quot;0.0833&quot;: &quot;Not quite. This cuts off the digits instead of rounding, and the next digit is 5. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;, &quot;0.083&quot;: &quot;Not quite. This is rounded to three decimal places, and the directions ask for four. Review: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video \&quot;Classroom Example 5.2.4\&quot; on page 10.&quot;}" data-review="Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video &quot;Classroom Example 5.2.4&quot; on page 10.">
+<p class="prompt"><b class="qlabel">Check 11 (None of the Selected).</b> Assume 22% of adults have a gym membership. If 10 adults are randomly selected, find the probability that none of them have a gym membership. Use StatCrunch. Round to four decimal places.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">0.0834</span><span class="sr">0 point 0 8 3 4</span></span></strong></p><p class="ptr">Where this is: Example 1 (Finding Exactly x Successes) on pages 4 and 5 of the notes, and the video "Classroom Example 5.2.4" on page 10.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="a" data-why="Correct. The probability of 13 or more is small, below 0.05." data-miss="{&quot;b&quot;: &quot;Not quite. The video uses the probability of the value or more, not the probability of exactly that value. Review: the video \&quot;Classroom Example 5.2.3\&quot; on page 10 of the notes.&quot;, &quot;c&quot;: &quot;Not quite. For a significantly high value, the video looks at that value or more, not that value or fewer. Review: the video \&quot;Classroom Example 5.2.3\&quot; on page 10 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The video decides with a probability from StatCrunch, not by comparing 13 with half of 30. Review: the video \&quot;Classroom Example 5.2.3\&quot; on page 10 of the notes.&quot;}" data-review="the video &quot;Classroom Example 5.2.3&quot; on page 10 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 12 (Significantly High).</b> Suppose 25% of job applicants at a company are referred by an employee. If 30 applicants are randomly selected, would 13 be a significantly high number of referred applicants? Use StatCrunch, then choose the answer that matches the reasoning in the Classroom Example 5.2.3 video.</legend>
+<label><input type="radio" name="mc12" value="a"> <span>Yes, because the probability of 13 or more is about 0.0216, which is less than 0.05.</span></label><label><input type="radio" name="mc12" value="b"> <span>Yes, because the probability of exactly 13 is about 0.0134, which is less than 0.05.</span></label><label><input type="radio" name="mc12" value="c"> <span>No, because the probability of 13 or fewer is about 0.9918, which is more than 0.05.</span></label><label><input type="radio" name="mc12" value="d"> <span>No, because 13 is less than half of the 30 applicants who were selected.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes, because the probability of 13 or more is about 0.0216, which is less than 0.05.</strong></p><p class="ptr">Where this is: The video "Classroom Example 5.2.3" on page 10 of the notes.</p></details>
+</div>
+<div class="q" data-topic="s3" data-mode="mc" data-answer="c" data-why="Correct. The probability of 1 or fewer is above 0.05, so 1 is not significantly low." data-miss="{&quot;a&quot;: &quot;Not quite. Fewer than 1 leaves out 1 itself, and the video uses at most one, which includes 1. Review: the video \&quot;Classroom Example 5.2.4\&quot; on page 10 of the notes.&quot;, &quot;b&quot;: &quot;Not quite. The video uses the probability of 1 or fewer, not the probability of exactly 1. Review: the video \&quot;Classroom Example 5.2.4\&quot; on page 10 of the notes.&quot;, &quot;d&quot;: &quot;Not quite. The video decides with a probability from StatCrunch, not by comparing 1 with 3.6. Review: the video \&quot;Classroom Example 5.2.4\&quot; on page 10 of the notes.&quot;}" data-review="the video &quot;Classroom Example 5.2.4&quot; on page 10 of the notes.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 13 (Significantly Low).</b> Suppose 30% of a store's customers use a coupon. If 12 customers are randomly selected, would 1 be a significantly low number of coupon users? Use StatCrunch, then choose the answer that matches the reasoning in the Classroom Example 5.2.4 video.</legend>
+<label><input type="radio" name="mc13" value="a"> <span>Yes, because the probability of fewer than 1 is about 0.0138, which is less than 0.05.</span></label><label><input type="radio" name="mc13" value="b"> <span>No, because the probability of exactly 1 is about 0.0712, which is more than 0.05.</span></label><label><input type="radio" name="mc13" value="c"> <span>No, because the probability of 1 or fewer is about 0.0850, which is more than 0.05.</span></label><label><input type="radio" name="mc13" value="d"> <span>Yes, because 1 is well below 3.6, which is 30% of the 12 customers.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>No, because the probability of 1 or fewer is about 0.0850, which is more than 0.05.</strong></p><p class="ptr">Where this is: The video "Classroom Example 5.2.4" on page 10 of the notes.</p></details>
+</div>
+<div class="tool" role="region" aria-labelledby="sc-trouble-h">
+<h3 id="sc-trouble-h" style="margin-top:0">Troubleshooting checklist</h3>
+<p>Check anything you ran into. A quick fix appears for each one.</p>
+<fieldset>
+<legend><strong>StatCrunch problems I had:</strong></legend>
+<label><input type="checkbox" class="sc-issue" data-tip="In MyLab, choose Get More Help, then StatCrunch. The Classroom Example 5.2.3 and 5.2.5 videos show this." value="I could not get StatCrunch to open from MyLab."> I could not get StatCrunch to open from MyLab.</label><label><input type="checkbox" class="sc-issue" data-tip="Choose Stat, then Calculators, then Binomial. Binomial is the second choice in the list. Page 2 of the notes has a screenshot, and the video &quot;Using StatCrunch to Find Binomial Probabilities An Explanation of the Feature&quot; shows it." value="I could not find the binomial calculator."> I could not find the binomial calculator.</label><label><input type="checkbox" class="sc-issue" data-tip="Type the probability as a decimal, such as 0.396 for 39.6%. The Classroom Example 5.2.2 video shows this." value="I was not sure what to type for the probability of success."> I was not sure what to type for the probability of success.</label><label><input type="checkbox" class="sc-issue" data-tip="Page 3 of the notes lists the five signs. Examples 1, 2 and 3 on pages 4 to 8 use =, ≤ and ≥, and the Classroom Example 5.2.2 video uses &lt; for fewer than 3." value="I was not sure which inequality sign to choose."> I was not sure which inequality sign to choose.</label><label><input type="checkbox" class="sc-issue" data-tip="Click Compute after you change n, p, the sign or the number of successes. The screenshots on pages 4, 6 and 7 of the notes show the message &quot;Press Enter or Compute to update.&quot;" value="The answer box was blank or did not change."> The answer box was blank or did not change.</label><label><input type="checkbox" class="sc-issue" data-tip="Follow the direction in the question, such as &quot;Round to four decimal places,&quot; and keep a final zero, like 0.0820 in Example 3 on page 8." value="I was not sure how to round the result."> I was not sure how to round the result.</label><label><input type="checkbox" class="sc-issue" data-tip="Choose Data, then Compute, then Expression, and type sqrt( ) with the whole product inside the parentheses, using * to multiply. The Classroom Example 5.2.5 video shows this." value="I could not type the square root for the standard deviation."> I could not type the square root for the standard deviation.</label>
+</fieldset>
+<div id="sc-diag-box" class="why" role="status" aria-live="polite" hidden></div>
+<p>Matt can look at a StatCrunch error with you. Anything you check here is added to your message in Section 5.</p>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s3">
+<h3 id="br-s3" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>The binomial calculator and its inequality signs: item 1, pages 1 to 3, video "Using StatCrunch to Find Binomial Probabilities An Explanation of the Feature"</li><li>Exactly: Example 1, pages 4 and 5, video "Using StatCrunch to Find Binomial Probabilities Exactly x Successes"</li><li>At most: Example 2, pages 5 and 6, video "Using StatCrunch to Find Binomial Probabilities At Most x Successes"</li><li>At least: Example 3, pages 7 and 8, video "Using StatCrunch to Find Binomial Probabilities At Least x Successes"</li><li>Fewer than, none, and significantly high or low: videos "Classroom Example 5.2.2" (page 9), "Classroom Example 5.2.3" and "Classroom Example 5.2.4" (page 10)</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s3" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s2">Previous section</button><button type="button" class="primary" data-go="s4">Next section</button></div>
+</div>
+</section>
+
+<section id="s4" aria-labelledby="s4h">
+<h2 id="s4h" tabindex="-1">4. Parameters for the Binomial Distribution</h2>
+<p>These checks cover item 2 on page 8 of the notes, the Example on page 9 and the Classroom Example 5.2.5 video on page 10.</p>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="77" data-why="Correct. 350 times 0.22 is 77 adults." data-miss="{&quot;7700&quot;: &quot;Not quite. This uses 22 instead of 0.22 for p. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;273&quot;: &quot;Not quite. This uses q, 0.78, instead of p, 0.22. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;~1590.909~0.01&quot;: &quot;Not quite. This divides 350 by 0.22 instead of multiplying. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;0.22&quot;: &quot;Not quite. This is p itself, not the mean number of adults. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;}" data-review="item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video &quot;Classroom Example 5.2.5&quot; on page 10.">
+<p class="prompt"><b class="qlabel">Check 14 (Mean).</b> Assume 22% of adults in a state have taken an online course, and 350 adults are randomly selected. Checks 14 to 17 all use this situation. Find the mean number of adults in the group of 350 who have taken an online course. Do not round.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">77</span><span class="sr">77</span></span></strong></p><p class="ptr">Where this is: Item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part A of the Example on page 9, and the video "Classroom Example 5.2.5" on page 10.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="7.7" data-dp="1" data-why="Correct. The square root of 60.06 is about 7.7498, which rounds to 7.7." data-miss="{&quot;60.1&quot;: &quot;Not quite. This is n times p times q without the square root. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;4.1&quot;: &quot;Not quite. This uses p twice instead of p and q. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;3.2&quot;: &quot;Not quite. This takes the square root of 350 only, then multiplies by p and q. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;8.8&quot;: &quot;Not quite. This leaves q out of the product under the square root. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;7.75&quot;: &quot;Not quite. This is rounded to two decimal places, and the directions ask for one. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;~7.7498~0.0001&quot;: &quot;Not quite. This is not rounded, and the directions ask for one decimal place. Review: item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;}" data-review="item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video &quot;Classroom Example 5.2.5&quot; on page 10.">
+<p class="prompt"><b class="qlabel">Check 15 (Standard Deviation).</b> Using the situation in Check 14, find the standard deviation for the group of 350 adults. Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">7.7</span><span class="sr">7 point 7</span></span></strong></p><p class="ptr">Where this is: Item 2 (Parameters for the Binomial Distribution) on page 8 of the notes, part B of the Example on page 9, and the video "Classroom Example 5.2.5" on page 10.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="num" data-nonneg="1" data-answer="61.5" data-dp="1" data-why="Correct. 77 minus 2 times 7.7498 is about 61.50, which rounds to 61.5." data-miss="{&quot;61.6&quot;: &quot;Not quite. This uses the rounded standard deviation 7.7, while the Example on page 9 uses the unrounded value. Review: the Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;~581.24~0.06&quot;: &quot;Not quite. This subtracts 77 minus 2 before multiplying by the standard deviation. Review: the Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;69.3&quot;: &quot;Not quite. This subtracts one standard deviation instead of two. Review: the Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;92.5&quot;: &quot;Not quite. This is the maximum usual value, which adds two standard deviations. Review: the Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;}" data-review="the Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video &quot;Classroom Example 5.2.5&quot; on page 10.">
+<p class="prompt"><b class="qlabel">Check 16 (Minimum Usual Value).</b> Using the situation in Check 14, use the Range Rule of Thumb to find the minimum usual value for the group of 350 adults. Round to one decimal place.</p>
+<details><summary>Show answer</summary><p><strong><span class="m"><span aria-hidden="true">61.5</span><span class="sr">61 point 5</span></span></strong></p><p class="ptr">Where this is: The Range Rule of Thumb Reminder on page 8 of the notes, part D of the Example on page 9, and the video "Classroom Example 5.2.5" on page 10.</p></details>
+</div>
+<div class="q" data-topic="s4" data-mode="mc" data-answer="b" data-why="Correct. 95 is above the maximum usual value of 92.5." data-miss="{&quot;a&quot;: &quot;Not quite. The comparison in the notes is with the minimum and maximum usual values, not with the group size. Review: part E of the Example on page 9 of the notes, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;c&quot;: &quot;Not quite. A value above the maximum usual value is unusually high, not unusually low. Review: part E of the Example on page 9 of the notes, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;, &quot;d&quot;: &quot;Not quite. The notes compare the value with the maximum usual value of 92.5, and 95 is above it. Review: part E of the Example on page 9 of the notes, and the video \&quot;Classroom Example 5.2.5\&quot; on page 10.&quot;}" data-review="part E of the Example on page 9 of the notes, and the video &quot;Classroom Example 5.2.5&quot; on page 10.">
+<fieldset>
+<legend class="prompt"><b class="qlabel">Check 17 (Unusual Values).</b> In the situation from Check 14, the maximum usual value is 92.5. Is it unusual for 95 adults in a group of 350 to have taken an online course?</legend>
+<label><input type="radio" name="mc17" value="a"> <span>No, because 95 is far less than the 350 adults in the group.</span></label><label><input type="radio" name="mc17" value="b"> <span>Yes, it is unusually high, because 95 is greater than 92.5.</span></label><label><input type="radio" name="mc17" value="c"> <span>Yes, it is unusually low, because 95 is greater than 92.5.</span></label><label><input type="radio" name="mc17" value="d"> <span>No, because 95 is close to the mean of 77 adults.</span></label>
+</fieldset>
+<details><summary>Show answer</summary><p><strong>Yes, it is unusually high, because 95 is greater than 92.5.</strong></p><p class="ptr">Where this is: Part E of the Example on page 9 of the notes, and the video "Classroom Example 5.2.5" on page 10.</p></details>
+</div>
+<div class="bridge" role="group" aria-labelledby="br-s4">
+<h3 id="br-s4" style="margin-top:0">If any of these felt shaky</h3>
+<ul><li>Mean and standard deviation: item 2, page 8, and parts A and B of the Example on page 9</li><li>Range Rule of Thumb Reminder: page 8, and part D of the Example on page 9</li><li>Unusual values: part E of the Example on page 9</li><li>Video: "Classroom Example 5.2.5", page 10</li></ul>
+</div>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s4" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s3">Previous section</button><button type="button" class="primary" data-go="s5">Your results and help from Matt</button></div>
+</div>
+</section>
+
+<section id="s5" aria-labelledby="s5h">
+<h2 id="s5h" tabindex="-1">5. Your results and help from Matt</h2>
+<p id="result-line" class="why"></p>
+<div id="review-box">
+<h3 id="review-h">Go back to</h3>
+<ul id="review-list" aria-labelledby="review-h"></ul>
+</div>
+<p id="todo-line" class="help"></p>
+
+<div class="tool" role="region" aria-labelledby="help-h">
+<h3 id="help-h" style="margin-top:0">Would you like help from Matt?</h3>
+<p>Start with the "Go back to" list above. If something still does not make sense after that, Matt would rather hear from you now than after the homework.</p>
+<fieldset style="margin-bottom:1rem">
+<legend class="sr">Kind of help</legend>
+<label><input type="radio" name="help" value="none"> No thanks, I am just sharing my results</label>
+<label><input type="radio" name="help" value="question"> I went back to the notes and still have a specific question</label>
+<label><input type="radio" name="help" value="zoom"> A quick 10 to 15 minute Zoom meeting</label>
+</fieldset>
+<div style="margin-bottom:1rem">
+<label for="stu-name"><strong>Your name</strong></label>
+<input type="text" id="stu-name" autocomplete="name">
+</div>
+<div style="margin-bottom:1rem">
+<label for="stu-question"><strong>Your question, or a few times that work for Zoom</strong></label>
+<p id="q-hint" class="help">Name the check and say what part is unclear. For example: "Check 10: I am not sure whether fewer than 3 should be &lt; or ≤ in StatCrunch."</p>
+<textarea id="stu-question" aria-describedby="q-hint"></textarea>
+</div>
+<div class="actions">
+<button type="button" id="mailto-btn" class="primary">Email Matt</button>
+<button type="button" id="copy-btn">Copy message</button>
+</div>
+<p id="copy-status" class="feedback" role="status" aria-live="polite"></p>
+<p class="help">If Email Matt does not open your email, choose Copy message and paste it into an email to <a href="mailto:mread@kish.edu">mread@kish.edu</a> or a D2L message to Matt.</p>
+<details><summary>See the message</summary>
+<label for="outreach-text" class="sr">Message to Matt</label>
+<textarea id="outreach-text" class="outreach-box" readonly></textarea>
+</details>
+</div>
+<p class="help"><button type="button" id="print-btn" class="linkish">Print or save as PDF</button> · <button type="button" id="reset-btn" class="linkish">Start over</button></p>
+<div class="section-end">
+<button type="button" class="mark" data-sec="s5" aria-pressed="false">Mark this section complete</button>
+<div class="pager"><button type="button" data-go="s4">Previous section</button><span></span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script>
+'use strict';
+(function(){
+const root=document.documentElement; root.classList.add('js');
+const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const KEY='mat208-sec5.2-exitticket-2026b';
+const blank=()=>({done:[],theme:null,ans:{},ok:{},scIssues:[],help:'',stuName:'',stuQuestion:''});
+let store=blank();
+try{
+  const x=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(x&&typeof x==='object'){
+    const b=blank();
+    for(const k of Object.keys(b)){ if(x[k]!==undefined&&x[k]!==null&&typeof x[k]===typeof b[k]&&Array.isArray(x[k])===Array.isArray(b[k]))store[k]=x[k]; }
+    store.theme=(x.theme==='dark'||x.theme==='light')?x.theme:null;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+let ready=false; /* the summary waits until everything below is set up */
+
+/* ---------- topics ---------- */
+const TOPICS=[{"id": "s2", "name": "Binomial Probability Distributions", "resource": "Item 1 on page 1 of the Section 5.2 notes, and the video \"Classroom Example 5.2.1\" on page 9."}, {"id": "s3", "name": "StatCrunch", "resource": "Item 1 and Examples 1 to 3 on pages 1 to 8 of the notes, the four StatCrunch videos for item 1 on pages 1, 4, 5 and 7, and the videos \"Classroom Example 5.2.2\" on page 9 and \"Classroom Example 5.2.3\" and \"Classroom Example 5.2.4\" on page 10."}, {"id": "s4", "name": "Parameters for the Binomial Distribution", "resource": "Item 2 on page 8 and the Example on page 9 of the notes, and the video \"Classroom Example 5.2.5\" on page 10."}];
+TOPICS.forEach(t=>{
+  const nums=$$('.q[data-topic="'+t.id+'"] .qlabel').map(b=>parseInt(b.textContent.replace(/\D+/g,' ').trim(),10));
+  t.checks=nums.length?(nums.length===1?'Check '+nums[0]:'Checks '+nums[0]+' to '+nums[nums.length-1]):'';
+});
+
+/* ---------- answer checking ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/[,%$\s]/g,'');
+function toNum(s){ s=norm(s); return /^-?(\d+\.?\d*|\.\d+)$/.test(s)?Number(s):null; }
+function show(q,state,msg,record){
+  const fb=q._fb; fb.className='feedback '+state; fb.textContent=msg;
+  if(record){ store.ok[q._qid]=state==='good'?1:0; save(); updateDashboard(); }
+}
+function clearFb(q){
+  q._fb.textContent=''; q._fb.className='feedback';
+  if(store.ans[q._qid]!==undefined||store.ok[q._qid]!==undefined){ delete store.ans[q._qid]; delete store.ok[q._qid]; save(); updateDashboard(); }
+}
+function misses(q){ let mm={}; try{mm=JSON.parse(q.dataset.miss||'{}');}catch(e){} return mm; }
+function judgeNum(q,raw,record){
+  const stu=toNum(raw);
+  if(stu===null)return show(q,'info','Enter a number using digits and a decimal point, such as 24.5.',false);
+  if(q.dataset.answer.split('|').some(a=>Math.abs(Number(a)-stu)<1e-9)){
+    /* a rounding direction sets the number of digits after the point */
+    if(q.dataset.dp){ const want=Number(q.dataset.dp); const got=(norm(raw).split('.')[1]||'').length; if(got!==want){ const w=['zero','one','two','three','four'][want]; return show(q,'wrong','Not quite. The value is right, but the directions ask for '+w+' decimal places, so type exactly '+w+' digits after the point. Review: '+q.dataset.review,record); } }
+    return show(q,'good',q.dataset.why||'Correct.',record);
+  }
+  const mm=misses(q); const keys=Object.keys(mm);
+  /* exact wrong answers first, then windows written as ~center~tolerance */
+  let hit=keys.find(k=>k[0]!=='~'&&Math.abs(Number(k)-stu)<1e-9);
+  if(!hit)hit=keys.find(k=>{ if(k[0]!=='~')return false; const p=k.split('~'); return Math.abs(stu-Number(p[1]))<=Number(p[2])+1e-9; });
+  show(q,'wrong',hit?mm[hit]:'Not quite. That value does not match the expected result. Review: '+q.dataset.review,record);
+}
+function judgeMC(q,record){
+  const c=$('input[type=radio]:checked',q);
+  if(!c)return show(q,'info','Select an answer first.',false);
+  if(c.value===q.dataset.answer)return show(q,'good',q.dataset.why||'Correct.',record);
+  const mm=misses(q);
+  show(q,'wrong',mm[c.value]||('Not quite. Review: '+q.dataset.review),record);
+}
+
+$$('.q').forEach((q,k)=>{
+  const qid='q'+(k+1); q._qid=qid;
+  const fb=document.createElement('p'); fb.className='feedback'; fb.setAttribute('role','status'); fb.setAttribute('aria-live','polite'); q._fb=fb;
+  const row=document.createElement('div'); row.className='answer-row';
+  let input=null;
+  if(q.dataset.mode==='mc'){
+    row.innerHTML='<button type="button" class="primary">Check</button>';
+    $('fieldset',q).after(row);
+    $$('input[type=radio]',q).forEach(r=>{
+      if(store.ans[qid]===r.value)r.checked=true;
+      r.addEventListener('change',()=>clearFb(q));
+    });
+  } else {
+    const id='ans'+k;
+    /* inputmode="decimal" only where the answer can never be negative */
+    const im=q.dataset.nonneg==='1'?' inputmode="decimal"':'';
+    row.innerHTML='<div class="inline"><label for="'+id+'">Your answer</label><input type="text" id="'+id+'"'+im+' autocomplete="off" spellcheck="false" style="max-width:12rem"><button type="button" class="primary">Check</button></div>';
+    $('.prompt',q).after(row);
+    input=$('input',row);
+    if(typeof store.ans[qid]==='string')input.value=store.ans[qid];
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run();}});
+    input.addEventListener('input',()=>clearFb(q));
+  }
+  row.after(fb);
+  function run(){
+    if(q.dataset.mode==='mc'){
+      const c=$('input[type=radio]:checked',q);
+      if(c){store.ans[qid]=c.value; save();}
+      return judgeMC(q,!!c);
+    }
+    const v=input.value.trim();
+    if(!v)return show(q,'info','Type an answer first.',false);
+    if(toNum(v)===null)return judgeNum(q,v,false);
+    store.ans[qid]=v; save(); judgeNum(q,v,true);
+  }
+  $('button',row).addEventListener('click',run);
+  /* restore earlier feedback without saving again */
+  if(store.ans[qid]!==undefined){ q.dataset.mode==='mc'?judgeMC(q,false):judgeNum(q,String(store.ans[qid]),false); }
+});
+
+/* ---------- StatCrunch issues ---------- */
+const scDiagBox=$('#sc-diag-box'); const scBoxes=$$('.sc-issue');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function updateScDiag(persist){
+  const checked=scBoxes.filter(cb=>cb.checked);
+  if(persist){store.scIssues=checked.map(cb=>cb.value); save();}
+  if(!checked.length){scDiagBox.hidden=true; scDiagBox.innerHTML=''; return;}
+  scDiagBox.hidden=false;
+  scDiagBox.innerHTML='<strong>Quick fixes:</strong><ul style="margin:.5rem 0">'+checked.map(cb=>'<li>'+esc(cb.dataset.tip)+'</li>').join('')+'</ul>';
+}
+scBoxes.forEach(cb=>{ cb.checked=store.scIssues.includes(cb.value); cb.addEventListener('change',()=>{updateScDiag(true); updateDashboard();}); });
+updateScDiag(false);
+
+/* ---------- results and message ---------- */
+const resultLine=$('#result-line'), reviewBox=$('#review-box'), reviewList=$('#review-list'), todoLine=$('#todo-line');
+const stuName=$('#stu-name'), stuQuestion=$('#stu-question'), outreachText=$('#outreach-text'), copyStatus=$('#copy-status');
+const helpRadios=$$('input[name=help]');
+const SEC='5.2';
+stuName.value=store.stuName; stuQuestion.value=store.stuQuestion;
+helpRadios.forEach(r=>{ r.checked=store.help===r.value; r.addEventListener('change',()=>{store.help=r.value; save(); updateDashboard();}); });
+stuName.addEventListener('input',()=>{store.stuName=stuName.value; save(); updateDashboard();});
+stuQuestion.addEventListener('input',()=>{store.stuQuestion=stuQuestion.value; save(); updateDashboard();});
+function checkLabel(q){ return q.querySelector('.qlabel').textContent.replace(/\.\s*$/,'').trim(); }
+function cap(t){ t=String(t).trim(); return t.charAt(0).toUpperCase()+t.slice(1); }
+
+function updateDashboard(){
+  if(!ready)return;
+  const qs=$$('.q'); let att=0, corr=0; const missed=[], todo=[];
+  qs.forEach(q=>{
+    const done=store.ans[q._qid]!==undefined&&store.ok[q._qid]!==undefined;
+    if(!done){ todo.push(q.querySelector('.qlabel').textContent.match(/\d+/)[0]); return; }
+    att++; if(store.ok[q._qid]===1)corr++; else missed.push(q);
+  });
+  const total=qs.length;
+  if(att===0) resultLine.innerHTML='<strong>Your results will show here</strong> as you answer the checks.';
+  else if(att===total&&!missed.length) resultLine.innerHTML='<strong>You answered all '+total+' checks and got every one right.</strong> You are ready for the Section '+SEC+' homework.';
+  else resultLine.innerHTML='<strong>You answered '+att+' of '+total+' checks. '+corr+' '+(corr===1?'was':'were')+' correct.</strong>'+(missed.length?' Needing a second look is normal. Start with the list below.':'');
+  reviewList.innerHTML='';
+  missed.forEach(q=>{ const li=document.createElement('li'); li.innerHTML='<strong>'+esc(checkLabel(q))+':</strong> '+esc(cap(q.dataset.review||'')); reviewList.appendChild(li); });
+  reviewBox.hidden=!missed.length;
+  todoLine.textContent=todo.length&&att>0?('Not answered yet: Check'+(todo.length>1?'s ':' ')+todo.join(', ')+'.'):'';
+
+  const msg=['Hi Matt,','','My Section '+SEC+' exit ticket: '+att+' of '+total+' checks answered, '+corr+' correct.'];
+  if(missed.length){ msg.push('','Checks I missed:'); missed.forEach(q=>msg.push('- '+checkLabel(q))); }
+  if(store.scIssues&&store.scIssues.length){ msg.push('','StatCrunch issues I ran into:'); store.scIssues.forEach(x=>msg.push('- '+x)); }
+  const h=store.help;
+  if(h==='question') msg.push('','I went back to the notes and still have a question:');
+  else if(h==='zoom') msg.push('','Could we set up a quick 10 to 15 minute Zoom meeting?');
+  else if(h==='none') msg.push('','No help needed right now. I am just sharing my results.');
+  const qt=stuQuestion.value.trim();
+  if(qt) msg.push(h==='question'?'':'',qt);
+  else if(h==='question') msg.push('[Type your question in the box above]');
+  msg.push('','Thank you,',stuName.value.trim()||'[Your name]');
+  outreachText.value=msg.join('\n');
+}
+
+function status(cls,text){copyStatus.className='feedback '+cls; copyStatus.textContent=text;}
+$('#copy-btn').addEventListener('click',async()=>{
+  updateDashboard(); if(needsQuestion())return; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(outreachText.value); ok=true;} }catch(e){}
+  if(!ok){ try{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); ok=document.execCommand('copy');}catch(e){ok=false;} }
+  if(ok)status('good','Copied. Paste it into an email to mread@kish.edu or a D2L message to Matt.');
+  else{ const d=outreachText.closest('details'); if(d)d.open=true; outreachText.focus(); outreachText.select(); status('almost','Your browser blocked copying. The message is selected below, so press Ctrl+C (Cmd+C on a Mac) to copy it.'); }
+});
+function needsQuestion(){ if(store.help==='question'&&!stuQuestion.value.trim()){ status('almost','Type your question in the box first, so Matt knows exactly what to help with.'); stuQuestion.focus(); return true; } return false; }
+$('#mailto-btn').addEventListener('click',()=>{
+  updateDashboard(); if(needsQuestion())return;
+  const href='mailto:mread@kish.edu?subject='+encodeURIComponent('MAT 208 Section '+SEC+' exit ticket')+'&body='+encodeURIComponent(outreachText.value);
+  status('info','Opening your email app. If nothing happens in a few seconds, choose Copy message instead.');
+  window.location.href=href;
+});
+$('#print-btn').addEventListener('click',()=>window.print());
+let resetPending=false; const resetBtn=$('#reset-btn');
+resetBtn.addEventListener('click',()=>{
+  if(!resetPending){resetPending=true; resetBtn.textContent='Click again to clear every answer'; return;}
+  resetPending=false; resetBtn.textContent='Start over';
+  const theme=store.theme; store=blank(); store.theme=theme; save();
+  $$('.q').forEach(q=>{ $$('input',q).forEach(i=>{if(i.type==='radio')i.checked=false; else i.value='';}); q._fb.textContent=''; q._fb.className='feedback'; });
+  if(typeof scBoxes!=='undefined')scBoxes.forEach(cb=>{cb.checked=false;}); helpRadios.forEach(r=>{r.checked=false;});
+  stuName.value=''; stuQuestion.value='';
+  if(typeof updateScDiag==='function')updateScDiag(); updateProgress(); updateDashboard();
+  status('info','Cleared. You can start again from Section 2.');
+});
+resetBtn.addEventListener('blur',()=>{ if(resetPending){ resetPending=false; resetBtn.textContent='Start over'; } });
+
+/* ---------- navigation and progress ---------- */
+const secs=$$('main > section'), navBtns=$$('nav button[data-target]');
+const overall=$('#overall'), overallText=$('#overall-text');
+function updateProgress(){
+  const n=store.done.filter(id=>secs.some(s=>s.id===id)).length;
+  overall.max=secs.length; overall.value=n; overallText.textContent=n+' of '+secs.length;
+  $$('.mark').forEach(b=>{const d=store.done.includes(b.dataset.sec); b.textContent=d?'✓ Marked complete. Click to undo.':'Mark this section complete'; b.setAttribute('aria-pressed',d?'true':'false');});
+  navBtns.forEach(b=>{const m=$('.donemark',b); if(m)m.textContent=store.done.includes(b.dataset.target)?' (complete)':'';});
+}
+function go(id,focus){
+  secs.forEach(s=>{s.hidden=s.id!==id;});
+  navBtns.forEach(b=>{ if(b.dataset.target===id)b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  if(id==='s5')updateDashboard();
+  if(focus){ const h=$('#'+id+' h2'); if(h)h.focus(); window.scrollTo(0,0); }
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.target,true)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,true)));
+$$('.mark').forEach(b=>b.addEventListener('click',()=>{const i=store.done.indexOf(b.dataset.sec); if(i>=0)store.done.splice(i,1); else store.done.push(b.dataset.sec); save(); updateProgress();}));
+
+/* ---------- theme ---------- */
+const themeBtn=$('#theme');
+function applyTheme(){
+  const dark=store.theme?store.theme==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=dark?'dark':'light';
+  themeBtn.setAttribute('aria-pressed',dark?'true':'false'); themeBtn.textContent='Dark mode';
+}
+themeBtn.addEventListener('click',()=>{store.theme=root.dataset.theme==='dark'?'light':'dark'; save(); applyTheme();});
+
+ready=true;
+go(secs[0].id,false); updateProgress(); updateDashboard(); applyTheme();
+window.addEventListener('beforeprint',()=>{secs.forEach(s=>{s.hidden=false;}); updateDashboard();});
+window.addEventListener('afterprint',()=>{const cur=navBtns.find(b=>b.hasAttribute('aria-current')); go(cur?cur.dataset.target:'s1',false);});
+})();
+</script>
+</body>
+</html>
